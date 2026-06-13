@@ -1,0 +1,93 @@
+{
+  "feeds": ["quant-ph"],
+
+  "include_replacements": false,
+
+  "cross_allow_primary": [
+    "quant-ph",
+    "cs.IT",
+    "cs.CR",
+    "cs.CC",
+    "cs.ET",
+    "cs.DS",
+    "cs.LG",
+    "math.QA",
+    "math-ph"
+  ],
+
+  "translators": ["gemini", "deepl", "google"],
+  "classify_with_llm": true,
+  "gemini_model": "gemini-2.5-flash",
+  "gemini_min_interval_sec": 7,
+  "gemini_max_retries": 4,
+  "translate_batch_size": 5,
+  "max_translate_chars": 2000,
+  "translate_only_matched": false,
+  "require_translation": true,
+  "show_original_abstract": false,
+
+  "genres": [
+    {
+      "id": "qec",
+      "name": "誤り訂正・FT",
+      "description": "量子誤り訂正符号、フォールトトレラント量子計算、デコーダ、安定化符号、表面符号、マジックステート、論理量子ビット、しきい値定理などに関する研究。",
+      "webhook_env": "DISCORD_WEBHOOK_QEC",
+      "keywords": [
+        "error correction", "error-correct", "fault-tolerant",
+        "fault tolerance", "surface code", "stabilizer", "magic state",
+        "decoder", "decoding", "qec", "ldpc code", "logical qubit",
+        "code distance", "transversal"
+      ]
+    },
+    {
+      "id": "network",
+      "name": "量子ネットワーク・通信",
+      "description": "量子ネットワーク、量子インターネット、量子中継器(repeater)、エンタングルメント分配・スワッピング・純粋化、量子テレポーテーション、量子通信路容量、量子メモリのネットワーク応用などに関する研究。",
+      "webhook_env": "DISCORD_WEBHOOK_NETWORK",
+      "keywords": [
+        "quantum network", "quantum internet", "repeater",
+        "entanglement distribution", "entanglement swapping",
+        "teleportation", "quantum communication", "quantum channel capacity",
+        "entanglement purification", "memory node", "link layer"
+      ]
+    },
+    {
+      "id": "algo",
+      "name": "アルゴリズム・複雑性",
+      "description": "量子アルゴリズム、量子計算複雑性、量子優位性・高速化、ハミルトニアンシミュレーション、変分量子アルゴリズム(VQE/QAOA)、量子機械学習、ゲート分解・回路合成・回路コンパイル(gate/circuit synthesis, compilation)、Clifford+T分解などに関する研究。",
+      "webhook_env": "DISCORD_WEBHOOK_ALGO",
+      "keywords": [
+        "quantum algorithm", "query complexity", "computational complexity",
+        "quantum speedup", "quantum advantage", "hamiltonian simulation",
+        "variational quantum", "qaoa", "vqe", "quantum machine learning",
+        "sampling", "bqp", "qma", "oracle separation", "grover", "shor",
+        "gate decomposition", "gate synthesis", "circuit compilation",
+        "clifford+t", "t-count", "circuit synthesis"
+      ]
+    },
+    {
+      "id": "crypto",
+      "name": "暗号・セキュリティ",
+      "description": "量子鍵配送(QKD)、耐量子計算機暗号(post-quantum cryptography)、量子暗号プロトコル、デバイス非依存、ゼロ知識証明、その他の暗号要素(乱数増幅、ビットコミットメント、量子マネー、位置検証など)に関する研究。",
+      "webhook_env": "DISCORD_WEBHOOK_CRYPTO",
+      "keywords": [
+        "key distribution", "qkd", "post-quantum", "cryptograph",
+        "device-independent", "zero-knowledge", "randomness expansion",
+        "oblivious transfer", "secure multiparty", "bit commitment",
+        "quantum money", "position verification", "lattice-based"
+      ]
+    },
+    {
+      "id": "hardware",
+      "name": "ハードウェア・実装",
+      "description": "量子ビットの物理実装(超伝導、イオントラップ、中性原子、光子、スピン/シリコン量子ビット)、キャビティ/回路QED、ゲート忠実度、較正、クロストークなど、量子計算の物理的・実験的実装に関する研究。",
+      "webhook_env": "DISCORD_WEBHOOK_HARDWARE",
+      "keywords": [
+        "superconducting qubit", "transmon", "trapped ion", "neutral atom",
+        "photonic quantum", "spin qubit", "silicon qubit", "cavity qed",
+        "circuit qed", "quantum dot qubit", "crosstalk", "calibration",
+        "two-qubit gate fidelity"
+      ]
+    }
+  ]
+}

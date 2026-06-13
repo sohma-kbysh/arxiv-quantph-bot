@@ -1,0 +1,46 @@
+name: arXiv quant-ph notifier
+
+on:
+  schedule:
+    # arXivの新着アナウンスは平日 00:00 UTC 頃(米東部20:00)。
+    # 余裕をみて 02:30 UTC (JST 11:30)、火〜土に実行する。
+    - cron: "30 2 * * 2-6"
+  workflow_dispatch: {}   # 手動実行用
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arxiv-notifier
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run notifier
+        env:
+          DISCORD_WEBHOOK_GENERAL: ${{ secrets.DISCORD_WEBHOOK_GENERAL }}
+          DISCORD_WEBHOOK_QEC: ${{ secrets.DISCORD_WEBHOOK_QEC }}
+          DISCORD_WEBHOOK_NETWORK: ${{ secrets.DISCORD_WEBHOOK_NETWORK }}
+          DISCORD_WEBHOOK_ALGO: ${{ secrets.DISCORD_WEBHOOK_ALGO }}
+          DISCORD_WEBHOOK_CRYPTO: ${{ secrets.DISCORD_WEBHOOK_CRYPTO }}
+          DISCORD_WEBHOOK_HARDWARE: ${{ secrets.DISCORD_WEBHOOK_HARDWARE }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          GOOGLE_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
+        run: python arxiv_bot.py
+
+      - name: Commit state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add seen_ids.json
+          git diff --cached --quiet || git commit -m "update seen_ids [skip ci]"
+          git push

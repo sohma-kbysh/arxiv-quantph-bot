@@ -126,10 +126,19 @@ def should_post(paper: dict, cfg: dict) -> bool:
     if at.startswith("replace"):
         return cfg.get("include_replacements", False)
     if at == "new":
+        # primary is quant-ph: always a genuine quant-ph paper.
         return True
     if at == "cross":
-        return category_matches(paper["primary"],
-                                cfg.get("cross_allow_primary", []))
+        # Recall-first policy: a cross-listed paper is DROPPED only when its
+        # primary category is on the explicit denylist of fields judged
+        # unrelated to quantum information. Everything else passes, so a
+        # field we simply forgot to enumerate is kept (favoring recall over
+        # precision, as requested). An optional allowlist can override the
+        # denylist to force-keep specific primaries.
+        primary = paper["primary"]
+        if category_matches(primary, cfg.get("cross_allow_primary", [])):
+            return True  # explicit keep
+        return not category_matches(primary, cfg.get("cross_deny_primary", []))
     return True
 
 
@@ -157,7 +166,8 @@ def genre_by_id(genre_id: str | None, genres: list[dict]) -> dict | None:
 # ------------------------------------------------------------- translation
 
 _last_gemini_call = 0.0
-_gemini_dead = False        # set True when the daily quota is exhausted
+_gemini_dead = False        # True when Gemini is given up for this run
+_gemini_fail_streak = 0     # consecutive post-backoff overload failures
 
 BATCH_TAG = re.compile(r"<<<(\d+)>>>")
 # Tag form for the combined translate+classify call: <<<k|genre_id>>>
@@ -165,8 +175,9 @@ BATCH_TAG_CLS = re.compile(r"<<<(\d+)\s*\|\s*([A-Za-z0-9_]+)>>>")
 
 
 def _gemini_request(prompt: str, cfg: dict) -> str | None:
-    """One paced, retried Gemini call. Sets _gemini_dead on persistent 429."""
-    global _last_gemini_call, _gemini_dead
+    """One paced, retried Gemini call. Sets _gemini_dead on persistent
+    quota exhaustion (429) or sustained server overload (500/503)."""
+    global _last_gemini_call, _gemini_dead, _gemini_fail_streak
     if _gemini_dead:
         return None
     key = os.environ.get("GEMINI_API_KEY", "")
@@ -187,6 +198,7 @@ def _gemini_request(prompt: str, cfg: dict) -> str | None:
         status, body = http_post_json(
             url, {"contents": [{"parts": [{"text": prompt}]}]})
         if status == 200:
+            _gemini_fail_streak = 0
             try:
                 data = json.loads(body)
                 return (data["candidates"][0]["content"]["parts"][0]["text"]
@@ -199,13 +211,25 @@ def _gemini_request(prompt: str, cfg: dict) -> str | None:
                   f"({attempt + 1}/{max_retries})", file=sys.stderr)
             time.sleep(backoff)
             continue
+        # Full backoff exhausted (or a non-retryable status).
         if status == 429:
-            # Survived the full backoff: almost certainly the daily quota
-            # (requests per day) is exhausted. Stop trying for this run.
+            # Daily quota (requests per day) exhausted: never recovers today.
             print("[warn] Gemini daily quota appears exhausted; "
-                  "skipping Gemini for the rest of this run.",
-                  file=sys.stderr)
+                  "skipping Gemini for the rest of this run.", file=sys.stderr)
             _gemini_dead = True
+        elif status in (500, 503):
+            # Server overload. One request surviving full backoff is bad
+            # enough; if it keeps happening, stop hammering Gemini for this
+            # run and let the translator chain fall through to DeepL/Google.
+            _gemini_fail_streak += 1
+            print(f"[warn] Gemini HTTP {status} after full backoff "
+                  f"(streak {_gemini_fail_streak}/"
+                  f"{cfg.get('gemini_overload_giveup', 2)})", file=sys.stderr)
+            if _gemini_fail_streak >= cfg.get("gemini_overload_giveup", 2):
+                print("[warn] Gemini appears overloaded; skipping Gemini for "
+                      "the rest of this run (falling back to next translator).",
+                      file=sys.stderr)
+                _gemini_dead = True
         else:
             print(f"[warn] Gemini HTTP {status}: {body[:200]!r}",
                   file=sys.stderr)

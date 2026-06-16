@@ -5,21 +5,34 @@
 
   "cross_allow_primary": [
     "quant-ph",
-    "cs.IT",
-    "cs.CR",
-    "cs.CC",
-    "cs.ET",
-    "cs.DS",
-    "cs.LG",
-    "math.QA",
-    "math-ph"
+    "cs.IT", "cs.CR", "cs.CC", "cs.ET", "cs.DS", "cs.LG",
+    "cs.AR", "cs.PL", "cs.LO", "cs.DC",
+    "math.QA", "math-ph", "math.OA", "math.IT", "math.PR",
+    "math.CO", "math.RT", "math.NA",
+    "physics.atom-ph", "physics.optics", "physics.app-ph",
+    "cond-mat.mes-hall", "cond-mat.supr-con", "cond-mat.quant-gas",
+    "eess.SP", "stat.ML"
+  ],
+
+  "cross_deny_primary": [
+    "astro-ph.*",
+    "gr-qc",
+    "hep-ph", "hep-ex", "hep-lat", "hep-th",
+    "nucl-th", "nucl-ex",
+    "cond-mat.str-el", "cond-mat.stat-mech", "cond-mat.soft",
+    "cond-mat.dis-nn", "cond-mat.mtrl-sci", "cond-mat.other",
+    "physics.bio-ph", "physics.chem-ph", "physics.flu-dyn",
+    "physics.geo-ph", "physics.plasm-ph", "physics.space-ph",
+    "physics.ao-ph", "physics.med-ph",
+    "q-bio.*", "q-fin.*", "econ.*"
   ],
 
   "translators": ["gemini", "deepl", "google"],
   "classify_with_llm": true,
-  "gemini_model": "gemini-2.5-flash",
+  "gemini_model": "gemini-2.0-flash",
   "gemini_min_interval_sec": 7,
   "gemini_max_retries": 4,
+  "gemini_overload_giveup": 2,
   "translate_batch_size": 5,
   "max_translate_chars": 2000,
   "translate_only_matched": false,

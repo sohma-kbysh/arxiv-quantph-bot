@@ -2,10 +2,14 @@ name: arXiv quant-ph notifier
 
 on:
   schedule:
-    # arXivの新着アナウンスは平日 00:00 UTC 頃(米東部20:00)。
-    # 余裕をみて 02:30 UTC (JST 11:30)、火〜土に実行する。
-    - cron: "30 2 * * 2-6"
+    # arXivの新着アナウンスは平日 00:00 UTC 頃(米東部20:00, JST 09:00頃)。
+    # アナウンス直後と日中に複数回実行し、取りこぼしと遅延を緩和する。
+    # seen_ids.json により新着のみ投稿されるため、重複は発生しない。
+    - cron: "5 1 * * 2-6"    # UTC 01:05 = JST 10:05 (アナウンス直後)
+    - cron: "0 4 * * 2-6"    # UTC 04:00 = JST 13:00
+    - cron: "0 7 * * 2-6"    # UTC 07:00 = JST 16:00
   workflow_dispatch: {}   # 手動実行用
+
 
 permissions:
   contents: write

@@ -155,11 +155,17 @@ def classify(paper: dict, genres: list[dict]) -> dict | None:
 
 
 def genre_by_id(genre_id: str | None, genres: list[dict]) -> dict | None:
-    """Map an LLM-returned genre id to its genre dict ('general' -> None)."""
-    if not genre_id or genre_id == "general":
-        return None
+    """Map an LLM-returned genre id to its genre dict.
+
+    Unknown or missing ids fall back to the 'other' genre if defined,
+    so DISCORD_WEBHOOK_GENERAL is only a last-resort safety net.
+    """
+    if genre_id:
+        for g in genres:
+            if g.get("id") == genre_id:
+                return g
     for g in genres:
-        if g.get("id") == genre_id:
+        if g.get("id") == "other":
             return g
     return None
 
@@ -272,7 +278,6 @@ def _genre_menu(genres: list[dict]) -> str:
     lines = []
     for g in genres:
         lines.append(f"- {g['id']}: {g.get('description', g['name'])}")
-    lines.append("- general: 上記のいずれにも明確に該当しない場合")
     return "\n".join(lines)
 
 

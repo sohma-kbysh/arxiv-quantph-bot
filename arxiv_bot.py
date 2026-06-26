@@ -525,9 +525,11 @@ def resolve_webhook(genre: dict | None) -> tuple[str, str]:
 # -------------------------------------------------------------------- main
 
 def main() -> None:
+    dry_run = "--dry-run" in sys.argv
+
     cfg = load_json(CONFIG_PATH, {})
     state = load_json(STATE_PATH, {"seen": []})
-    seen = set(state["seen"])
+    seen = set() if dry_run else set(state["seen"])
     log: list[dict] = load_json(LOG_PATH, [])
     genres = cfg.get("genres", [])
 
@@ -538,7 +540,8 @@ def main() -> None:
                 papers.setdefault(p["id"], p)
         except Exception as e:  # noqa: BLE001
             print(f"[warn] feed {cat} failed: {e}", file=sys.stderr)
-        time.sleep(3)  # be polite to arXiv
+        if not dry_run:
+            time.sleep(3)  # be polite to arXiv
 
     # ---- determine which papers to post (filtering only) ------------------
     pending = []  # papers passing should_post, not yet seen
@@ -559,7 +562,7 @@ def main() -> None:
     # ---- primary path: Gemini translate + classify in one request ---------
     # Only attempted when Gemini heads the translator chain; otherwise we go
     # straight to keyword classification + the translator chain.
-    if llm_first:
+    if llm_first and not dry_run:
         for i in range(0, len(entries), batch_size):
             chunk = entries[i: i + batch_size]
             limit = cfg.get("max_translate_chars", 2000)
@@ -577,17 +580,31 @@ def main() -> None:
     # ---- fallback path: keyword classify + translator chain ---------------
     # Applies to papers the LLM step did not fully handle (Gemini skipped,
     # quota-exhausted, or an entry the model omitted/failed to translate).
+    # In dry-run mode all papers take this path (translation skipped).
     leftover = [e for e in entries if not e.get("llm_done")]
     for e in leftover:
-        # Keyword-based genre as a stand-in for LLM classification.
         e["genre"] = classify(e["paper"], genres, cfg) or genre_by_id(None, genres)
-    to_tr = [e for e in leftover if e["need_tr"] and e["jp"] is None and (
-        e["genre"] is not None or not cfg.get("translate_only_matched", False))]
-    for i in range(0, len(to_tr), batch_size):
-        chunk = to_tr[i: i + batch_size]
-        abstracts = [e["paper"]["abstract"] for e in chunk]
-        for e, jp in zip(chunk, translate_batch(abstracts, cfg)):
-            e["jp"] = jp
+    if not dry_run:
+        to_tr = [e for e in leftover if e["need_tr"] and e["jp"] is None and (
+            e["genre"] is not None or not cfg.get("translate_only_matched", False))]
+        for i in range(0, len(to_tr), batch_size):
+            chunk = to_tr[i: i + batch_size]
+            abstracts = [e["paper"]["abstract"] for e in chunk]
+            for e, jp in zip(chunk, translate_batch(abstracts, cfg)):
+                e["jp"] = jp
+
+    # ---- dry-run: print classification results and exit --------------------
+    if dry_run:
+        print(f"[dry-run] {len(entries)} papers from feed (seen_ids ignored)\n")
+        genre_width = max((len(e["genre"]["name"]) if e["genre"] else 7
+                           for e in entries), default=7)
+        for e in entries:
+            genre_name = e["genre"]["name"] if e["genre"] else "general"
+            cats = ", ".join(e["paper"]["categories"][:3])
+            title = e["paper"]["title"][:72]
+            print(f"  [{genre_name:<{genre_width}}]  {title}")
+            print(f"  {'':>{genre_width+2}}  cats={cats}  id={e['paper']['id']}")
+        return
 
     # ---- post ---------------------------------------------------------------
     require_tr = cfg.get("require_translation", True)

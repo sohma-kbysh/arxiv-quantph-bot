@@ -522,7 +522,7 @@ def main() -> None:
     leftover = [e for e in entries if not e.get("llm_done")]
     for e in leftover:
         # Keyword-based genre as a stand-in for LLM classification.
-        e["genre"] = classify(e["paper"], genres)
+        e["genre"] = classify(e["paper"], genres) or genre_by_id(None, genres)
     to_tr = [e for e in leftover if e["need_tr"] and e["jp"] is None and (
         e["genre"] is not None or not cfg.get("translate_only_matched", False))]
     for i in range(0, len(to_tr), batch_size):

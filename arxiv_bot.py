@@ -201,13 +201,19 @@ def classify(paper: dict, genres: list[dict], cfg: dict | None = None) -> dict |
         scores[gid] = dot / (norm_p * norm_g)
 
     if cfg:
+        hints = cfg.get("category_genre_hints", {})
+        strong_other = set(cfg.get("category_other_overrides", []))
         for cat in paper.get("categories", []):
-            gid = cfg.get("category_genre_hints", {}).get(cat)
-            if gid and gid in scores:
-                scores[gid] += 0.15  # category hint: ~15% cosine bonus
+            if cat in strong_other and "other" in scores:
+                scores["other"] += 1.0  # overrides TF-IDF; clearly non-QI field
+            else:
+                gid = hints.get(cat)
+                if gid and gid in scores:
+                    scores[gid] += 0.15
 
     best_id = max(scores, key=lambda k: scores[k]) if scores else None
-    if best_id and scores.get(best_id, 0) > 0:
+    min_score = cfg.get("classify_min_score", 0.05) if cfg else 0.05
+    if best_id and scores.get(best_id, 0) >= min_score:
         return genre_map.get(best_id)
     return None
 

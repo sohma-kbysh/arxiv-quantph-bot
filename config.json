@@ -36,8 +36,26 @@
     "cond-mat.mes-hall": "hardware",
     "cond-mat.supr-con": "hardware",
     "cond-mat.quant-gas": "hardware",
+    "cond-mat.stat-mech": "other",
+    "cond-mat.str-el": "other",
+    "cond-mat.dis-nn": "other",
+    "cond-mat.soft": "other",
+    "cond-mat.mtrl-sci": "other",
     "eess.SP": "sensing"
   },
+
+  "category_other_overrides": [
+    "hep-ph", "hep-th", "hep-ex", "hep-lat",
+    "gr-qc",
+    "nucl-th", "nucl-ex",
+    "astro-ph.CO", "astro-ph.GA", "astro-ph.HE", "astro-ph.IM", "astro-ph.SR",
+    "physics.ed-ph", "physics.ins-det",
+    "q-bio.BM", "q-bio.GN", "q-bio.MN", "q-bio.NC", "q-bio.PE", "q-bio.QM",
+    "q-fin.CP", "q-fin.EC", "q-fin.GN", "q-fin.MF", "q-fin.PM", "q-fin.PR",
+    "econ.EM", "econ.GN", "econ.TH"
+  ],
+
+  "classify_min_score": 0.05,
 
   "translators": ["gemini", "deepl", "google"],
   "classify_with_llm": true,

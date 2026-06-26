@@ -18,6 +18,7 @@ Standard library only. Designed to run once per day on GitHub Actions.
 """
 
 import json
+import math
 import os
 import re
 import sys
@@ -25,6 +26,7 @@ import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from collections import Counter
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -143,28 +145,69 @@ def should_post(paper: dict, cfg: dict) -> bool:
     return True
 
 
-def classify(paper: dict, genres: list[dict], cfg: dict | None = None) -> dict | None:
-    """Return the best-matching genre using keyword hits + arXiv category hints.
+_STOPWORDS = frozenset(
+    "a an the of in for to and or with on at by as is are was be been "
+    "we our this that these which its it also can show based using used "
+    "such via from have has had not do does did will would could may "
+    "must both only even more most some any all one two new no".split()
+)
+_classifier_cache = None  # (genre_tf, idf) precomputed once per run
 
-    Category hints (config key 'category_genre_hints') are worth 3 keyword
-    hits each, giving strong prior signal when keywords alone are sparse.
+
+def _tokenize(text: str) -> list[str]:
+    return [w for w in re.findall(r"[a-z][a-z0-9]*", text.lower())
+            if w not in _STOPWORDS and len(w) > 2]
+
+
+def _build_tfidf(genres: list[dict]) -> tuple[dict, dict]:
+    """Build TF vectors and IDF weights from genre descriptions + keywords.
+
+    Terms appearing in all genres get IDF=0 (e.g. "quantum"), so only
+    discriminative vocabulary contributes to similarity scores.
     """
-    text = f"{paper['title']} {paper['abstract']}".lower()
-    genre_map = {g["id"]: g for g in genres}
-    scores: dict[str, int] = {g["id"]: 0 for g in genres}
-
+    tf: dict[str, Counter] = {}
     for g in genres:
-        scores[g["id"]] = sum(1 for kw in g.get("keywords", []) if kw.lower() in text)
+        words = _tokenize(
+            f"{g.get('description', '')} {' '.join(g.get('keywords', []))}"
+        )
+        tf[g["id"]] = Counter(words)
+    N = len(tf)
+    df: dict[str, int] = {}
+    for vec in tf.values():
+        for term in vec:
+            df[term] = df.get(term, 0) + 1
+    idf = {t: math.log(N / d) for t, d in df.items() if d < N}
+    return tf, idf
+
+
+def classify(paper: dict, genres: list[dict], cfg: dict | None = None) -> dict | None:
+    """TF-IDF cosine similarity classifier with arXiv category hints."""
+    global _classifier_cache
+    if _classifier_cache is None:
+        _classifier_cache = _build_tfidf(genres)
+    genre_tf, idf = _classifier_cache
+
+    genre_map = {g["id"]: g for g in genres}
+    paper_vec = {k: v * idf.get(k, 0.0)
+                 for k, v in Counter(_tokenize(
+                     f"{paper['title']} {paper['abstract']}")).items()}
+    norm_p = math.sqrt(sum(v ** 2 for v in paper_vec.values())) or 1.0
+
+    scores: dict[str, float] = {}
+    for gid, gtf in genre_tf.items():
+        gvec = {k: v * idf.get(k, 0.0) for k, v in gtf.items()}
+        dot = sum(paper_vec.get(k, 0.0) * v for k, v in gvec.items())
+        norm_g = math.sqrt(sum(v ** 2 for v in gvec.values())) or 1.0
+        scores[gid] = dot / (norm_p * norm_g)
 
     if cfg:
-        hints: dict[str, str] = cfg.get("category_genre_hints", {})
         for cat in paper.get("categories", []):
-            gid = hints.get(cat)
+            gid = cfg.get("category_genre_hints", {}).get(cat)
             if gid and gid in scores:
-                scores[gid] += 3
+                scores[gid] += 0.15  # category hint: ~15% cosine bonus
 
     best_id = max(scores, key=lambda k: scores[k]) if scores else None
-    if best_id and scores[best_id] > 0:
+    if best_id and scores.get(best_id, 0) > 0:
         return genre_map.get(best_id)
     return None
 

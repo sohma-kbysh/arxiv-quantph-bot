@@ -30,6 +30,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 CONFIG_PATH = BASE_DIR / "config.json"
 STATE_PATH = BASE_DIR / "seen_ids.json"
+LOG_PATH = BASE_DIR / "posted_log.json"
 
 RSS_NS = {
     "dc": "http://purl.org/dc/elements/1.1/",
@@ -464,6 +465,7 @@ def main() -> None:
     cfg = load_json(CONFIG_PATH, {})
     state = load_json(STATE_PATH, {"seen": []})
     seen = set(state["seen"])
+    log: list[dict] = load_json(LOG_PATH, [])
     genres = cfg.get("genres", [])
 
     papers: dict[str, dict] = {}
@@ -498,7 +500,10 @@ def main() -> None:
         for i in range(0, len(entries), batch_size):
             chunk = entries[i: i + batch_size]
             limit = cfg.get("max_translate_chars", 2000)
-            abstracts = [e["paper"]["abstract"][:limit] for e in chunk]
+            abstracts = [
+                f"Title: {e['paper']['title']}\n\nAbstract: {e['paper']['abstract'][:limit]}"
+                for e in chunk
+            ]
             pairs = translate_classify_gemini_batch(abstracts, cfg, genres)
             for e, (jp, gid) in zip(chunk, pairs):
                 if jp:
@@ -535,11 +540,27 @@ def main() -> None:
         if post_to_discord(webhook, e["paper"], genre_name, e["jp"], cfg):
             seen.add(e["paper"]["id"])
             posted += 1
+            log.append({
+                "id": e["paper"]["id"],
+                "posted_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                "title": e["paper"]["title"],
+                "authors": e["paper"]["authors"],
+                "link": e["paper"]["link"],
+                "primary": e["paper"]["primary"],
+                "announce_type": e["paper"]["announce_type"],
+                "genre_id": e["genre"]["id"] if e["genre"] else "general",
+                "genre_name": genre_name,
+                "abstract_en": e["paper"]["abstract"],
+                "abstract_ja": e["jp"],
+            })
         time.sleep(1.2)  # Discord webhook rate limit headroom
 
     # Keep the state file bounded.
     state["seen"] = sorted(seen)[-3000:]
     STATE_PATH.write_text(json.dumps(state, indent=1), encoding="utf-8")
+    LOG_PATH.write_text(
+        json.dumps(log[-5000:], indent=1, ensure_ascii=False), encoding="utf-8"
+    )
     print(f"posted {posted} papers ({len(papers)} fetched, "
           f"{deferred} deferred for retry)")
 

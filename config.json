@@ -14,18 +14,7 @@
     "eess.SP", "stat.ML"
   ],
 
-  "cross_deny_primary": [
-    "astro-ph.*",
-    "gr-qc",
-    "hep-ph", "hep-ex", "hep-lat", "hep-th",
-    "nucl-th", "nucl-ex",
-    "cond-mat.str-el", "cond-mat.stat-mech", "cond-mat.soft",
-    "cond-mat.dis-nn", "cond-mat.mtrl-sci", "cond-mat.other",
-    "physics.bio-ph", "physics.chem-ph", "physics.flu-dyn",
-    "physics.geo-ph", "physics.plasm-ph", "physics.space-ph",
-    "physics.ao-ph", "physics.med-ph",
-    "q-bio.*", "q-fin.*", "econ.*"
-  ],
+  "cross_deny_primary": [],
 
   "translators": ["gemini", "deepl", "google"],
   "classify_with_llm": true,
@@ -101,6 +90,13 @@
         "circuit qed", "quantum dot qubit", "crosstalk", "calibration",
         "two-qubit gate fidelity"
       ]
+    },
+    {
+      "id": "other",
+      "name": "その他・異分野",
+      "description": "量子的手法・概念を用いるが、主分野が素粒子物理学(hep-*)、重力・量子重力(gr-qc)、原子核物理学(nucl-*)、天体物理学(astro-ph)、物性物理学の一般理論(cond-mat.str-el, cond-mat.stat-mechなど)、生物・化学・流体などである研究。quant-ph以外が主分野のcross-list論文が典型。",
+      "webhook_env": "DISCORD_WEBHOOK_OTHER",
+      "keywords": []
     }
   ]
 }

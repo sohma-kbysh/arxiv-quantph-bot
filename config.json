@@ -16,6 +16,29 @@
 
   "cross_deny_primary": [],
 
+  "category_genre_hints": {
+    "cs.CC": "complexity",
+    "cs.CR": "crypto",
+    "cs.LG": "qml",
+    "stat.ML": "qml",
+    "cs.IT": "qit",
+    "cs.DS": "algo",
+    "cs.DC": "network",
+    "math-ph": "qit",
+    "math.QA": "qit",
+    "math.OA": "qit",
+    "math.IT": "qit",
+    "math.PR": "qit",
+    "math.CO": "complexity",
+    "physics.atom-ph": "hardware",
+    "physics.optics": "hardware",
+    "physics.app-ph": "sensing",
+    "cond-mat.mes-hall": "hardware",
+    "cond-mat.supr-con": "hardware",
+    "cond-mat.quant-gas": "hardware",
+    "eess.SP": "sensing"
+  },
+
   "translators": ["gemini", "deepl", "google"],
   "classify_with_llm": true,
   "gemini_model": "gemini-2.0-flash",

@@ -143,15 +143,30 @@ def should_post(paper: dict, cfg: dict) -> bool:
     return True
 
 
-def classify(paper: dict, genres: list[dict]) -> dict | None:
-    """Return the genre with the most keyword hits in title+abstract."""
+def classify(paper: dict, genres: list[dict], cfg: dict | None = None) -> dict | None:
+    """Return the best-matching genre using keyword hits + arXiv category hints.
+
+    Category hints (config key 'category_genre_hints') are worth 3 keyword
+    hits each, giving strong prior signal when keywords alone are sparse.
+    """
     text = f"{paper['title']} {paper['abstract']}".lower()
-    best, best_score = None, 0
+    genre_map = {g["id"]: g for g in genres}
+    scores: dict[str, int] = {g["id"]: 0 for g in genres}
+
     for g in genres:
-        score = sum(1 for kw in g["keywords"] if kw.lower() in text)
-        if score > best_score:
-            best, best_score = g, score
-    return best  # None => uncategorized ("general")
+        scores[g["id"]] = sum(1 for kw in g.get("keywords", []) if kw.lower() in text)
+
+    if cfg:
+        hints: dict[str, str] = cfg.get("category_genre_hints", {})
+        for cat in paper.get("categories", []):
+            gid = hints.get(cat)
+            if gid and gid in scores:
+                scores[gid] += 3
+
+    best_id = max(scores, key=lambda k: scores[k]) if scores else None
+    if best_id and scores[best_id] > 0:
+        return genre_map.get(best_id)
+    return None
 
 
 def genre_by_id(genre_id: str | None, genres: list[dict]) -> dict | None:
@@ -522,7 +537,7 @@ def main() -> None:
     leftover = [e for e in entries if not e.get("llm_done")]
     for e in leftover:
         # Keyword-based genre as a stand-in for LLM classification.
-        e["genre"] = classify(e["paper"], genres) or genre_by_id(None, genres)
+        e["genre"] = classify(e["paper"], genres, cfg) or genre_by_id(None, genres)
     to_tr = [e for e in leftover if e["need_tr"] and e["jp"] is None and (
         e["genre"] is not None or not cfg.get("translate_only_matched", False))]
     for i in range(0, len(to_tr), batch_size):

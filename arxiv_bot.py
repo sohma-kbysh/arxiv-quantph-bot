@@ -180,14 +180,14 @@ def _build_tfidf(genres: list[dict]) -> tuple[dict, dict]:
     return tf, idf
 
 
-def classify(paper: dict, genres: list[dict], cfg: dict | None = None) -> dict | None:
-    """TF-IDF cosine similarity classifier with arXiv category hints."""
+def _score_genres(paper: dict, genres: list[dict],
+                  cfg: dict | None = None) -> dict[str, float]:
+    """Compute TF-IDF cosine similarity + category hint scores for each genre."""
     global _classifier_cache
     if _classifier_cache is None:
         _classifier_cache = _build_tfidf(genres)
     genre_tf, idf = _classifier_cache
 
-    genre_map = {g["id"]: g for g in genres}
     paper_vec = {k: v * idf.get(k, 0.0)
                  for k, v in Counter(_tokenize(
                      f"{paper['title']} {paper['abstract']}")).items()}
@@ -205,17 +205,59 @@ def classify(paper: dict, genres: list[dict], cfg: dict | None = None) -> dict |
         strong_other = set(cfg.get("category_other_overrides", []))
         for cat in paper.get("categories", []):
             if cat in strong_other and "other" in scores:
-                scores["other"] += 1.0  # overrides TF-IDF; clearly non-QI field
+                scores["other"] += 1.0
             else:
                 gid = hints.get(cat)
                 if gid and gid in scores:
                     scores[gid] += 0.15
 
-    best_id = max(scores, key=lambda k: scores[k]) if scores else None
+    return scores
+
+
+def classify(paper: dict, genres: list[dict], cfg: dict | None = None) -> dict | None:
+    """Return single best-matching genre, or None if below threshold."""
+    scores = _score_genres(paper, genres, cfg)
+    genre_map = {g["id"]: g for g in genres}
     min_score = cfg.get("classify_min_score", 0.05) if cfg else 0.05
+    best_id = max(scores, key=lambda k: scores[k]) if scores else None
     if best_id and scores.get(best_id, 0) >= min_score:
         return genre_map.get(best_id)
     return None
+
+
+def classify_multi(paper: dict, genres: list[dict],
+                   cfg: dict | None = None) -> list[dict]:
+    """Return up to classify_max_genres genres, score-ordered.
+
+    The primary genre must exceed classify_min_score.
+    Each additional genre must also exceed min_score AND be at least
+    classify_secondary_ratio (default 0.7) times the primary score,
+    ensuring only genuinely multi-topic papers get multiple genres.
+    Falls back to ['other'] when nothing scores high enough.
+    """
+    scores = _score_genres(paper, genres, cfg)
+    genre_map = {g["id"]: g for g in genres}
+    min_score = cfg.get("classify_min_score", 0.05) if cfg else 0.05
+    max_genres = cfg.get("classify_max_genres", 2) if cfg else 2
+    sec_ratio = cfg.get("classify_secondary_ratio", 0.7) if cfg else 0.7
+
+    ranked = sorted(
+        [gid for gid, s in scores.items() if s >= min_score],
+        key=lambda gid: -scores[gid],
+    )
+    fallback = genre_by_id(None, genres)
+    if not ranked:
+        return [fallback] if fallback else []
+
+    best_score = scores[ranked[0]]
+    result = []
+    for gid in ranked[:max_genres]:
+        if gid not in genre_map:
+            continue
+        if result and scores[gid] < best_score * sec_ratio:
+            break
+        result.append(genre_map[gid])
+    return result if result else ([fallback] if fallback else [])
 
 
 def genre_by_id(genre_id: str | None, genres: list[dict]) -> dict | None:
@@ -241,8 +283,8 @@ _gemini_dead = False        # True when Gemini is given up for this run
 _gemini_fail_streak = 0     # consecutive post-backoff overload failures
 
 BATCH_TAG = re.compile(r"<<<(\d+)>>>")
-# Tag form for the combined translate+classify call: <<<k|genre_id>>>
-BATCH_TAG_CLS = re.compile(r"<<<(\d+)\s*\|\s*([A-Za-z0-9_]+)>>>")
+# Tag form for the combined translate+classify call: <<<k|genre_id>>> or <<<k|id1,id2>>>
+BATCH_TAG_CLS = re.compile(r"<<<(\d+)\s*\|\s*([A-Za-z0-9_,\s]+?)>>>")
 
 
 def _gemini_request(prompt: str, cfg: dict) -> str | None:
@@ -347,45 +389,51 @@ def _genre_menu(genres: list[dict]) -> str:
 
 def translate_classify_gemini_batch(
         texts: list[str], cfg: dict,
-        genres: list[dict]) -> list[tuple[str | None, str | None]]:
+        genres: list[dict]) -> list[tuple[str | None, list[str]]]:
     """Translate AND classify several abstracts in a single Gemini request.
 
-    Returns a list of (japanese_text, genre_id) tuples, each element None
-    when unavailable (e.g. the model omitted that entry).
+    Returns a list of (japanese_text, genre_ids) tuples.
+    genre_ids is a list of 1-N valid genre id strings (empty on failure).
     """
     numbered = "\n\n".join(
         f"<<<{i + 1}>>>\n{t}" for i, t in enumerate(texts))
-    valid_ids = {g["id"] for g in genres} | {"general"}
+    valid_ids = {g["id"] for g in genres}
+    max_genres = cfg.get("classify_max_genres", 2)
     prompt = (
-        f"以下に{len(texts)}件の量子情報科学分野のarXiv論文abstract(英語)を示す。"
-        "各abstractについて次の2つを行え。\n"
-        "(1) 内容を最もよく表すジャンルIDを下記の一覧から厳密に1つ選ぶ。\n"
+        f"以下に{len(texts)}件の量子情報科学分野のarXiv論文のタイトルとabstract(英語)を示す。"
+        "各論文について次の2つを行え。\n"
+        f"(1) 各ジャンルの説明文を精読し、論文の主要な貢献を最もよく表すジャンルIDを"
+        "下記の一覧から選ぶ。\n"
+        "    - 1つのジャンルに明確に帰属する場合は1つのみ選ぶ。\n"
+        f"    - 複数ジャンルにまたがり両方が主要な貢献である場合のみ、"
+        f"優先度順に最大{max_genres}個までカンマ区切りで選ぶ(例: qec,ft)。\n"
+        "    - 迷う場合は1つに絞ること。説明文に合致しない場合はotherを選ぶ。\n"
         "(2) abstractを、専門用語は標準的な訳語(必要なら英語併記)を用いて"
         "学術的な日本語に翻訳する。\n\n"
         "[ジャンル一覧]\n"
         + _genre_menu(genres)
         + "\n\n[出力形式]\n"
-        "各エントリの訳文の直前に、対応する入力番号kと選んだジャンルIDを"
-        "<<<k|genre_id>>> の形式で付すこと(例: <<<1|qec>>>)。"
-        "genre_idは一覧のIDをそのまま用い、タグと訳文以外の文字列"
-        "(前置き・後書き・見出し)を一切含めないこと。\n\n"
+        "各エントリの訳文の直前に <<<k|genre_id>>> を付すこと。"
+        "複数ジャンルの場合は <<<k|id1,id2>>> 形式(例: <<<1|qec,ft>>>)。"
+        "タグと訳文以外の文字列(前置き・後書き・見出し)を一切含めないこと。\n\n"
         + numbered
     )
     out = _gemini_request(prompt, cfg)
-    results: list[tuple[str | None, str | None]] = [(None, None)] * len(texts)
+    results: list[tuple[str | None, list[str]]] = [(None, [])] * len(texts)
     if not out:
         return results
     parts = BATCH_TAG_CLS.split(out)
-    # parts = [preamble, '1', 'qec', text1, '2', 'algo', text2, ...]
-    for k_str, gid, body in zip(parts[1::3], parts[2::3], parts[3::3]):
+    # parts = [preamble, '1', 'qec,ft', text1, '2', 'algo', text2, ...]
+    for k_str, gids_str, body in zip(parts[1::3], parts[2::3], parts[3::3]):
         try:
             k = int(k_str) - 1
         except ValueError:
             continue
         if 0 <= k < len(texts):
             t = body.strip()
-            genre_id = gid if gid in valid_ids else None
-            results[k] = (t or None, genre_id)
+            gids = [g.strip() for g in gids_str.split(",")]
+            gids = [g for g in gids if g in valid_ids]
+            results[k] = (t or None, gids)
     return results
 
 
@@ -556,18 +604,18 @@ def main() -> None:
             continue
         pending.append(paper)
 
-    # Each entry carries the paper plus its resolved genre + translation.
-    entries = [{"paper": p, "genre": None, "jp": None, "need_tr":
+    # Each entry carries the paper plus its resolved genres + translation.
+    # genres is always a non-empty list; fallback genre is "other".
+    entries = [{"paper": p, "genres": [], "jp": None, "need_tr":
                 bool(p["abstract"])} for p in pending]
 
     batch_size = max(1, cfg.get("translate_batch_size", 5))
     use_llm_cls = cfg.get("classify_with_llm", True)
     chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
     llm_first = use_llm_cls and chain and chain[0] == "gemini"
+    genre_map = {g["id"]: g for g in genres}
 
     # ---- primary path: Gemini translate + classify in one request ---------
-    # Only attempted when Gemini heads the translator chain; otherwise we go
-    # straight to keyword classification + the translator chain.
     if llm_first and not dry_run:
         for i in range(0, len(entries), batch_size):
             chunk = entries[i: i + batch_size]
@@ -577,22 +625,20 @@ def main() -> None:
                 for e in chunk
             ]
             pairs = translate_classify_gemini_batch(abstracts, cfg, genres)
-            for e, (jp, gid) in zip(chunk, pairs):
+            for e, (jp, gids) in zip(chunk, pairs):
                 if jp:
                     e["jp"] = jp
-                    e["genre"] = genre_by_id(gid, genres)
+                    gs = [genre_map[g] for g in gids if g in genre_map]
+                    e["genres"] = gs if gs else [genre_by_id(None, genres)]
                     e["llm_done"] = True
 
-    # ---- fallback path: keyword classify + translator chain ---------------
-    # Applies to papers the LLM step did not fully handle (Gemini skipped,
-    # quota-exhausted, or an entry the model omitted/failed to translate).
-    # In dry-run mode all papers take this path (translation skipped).
+    # ---- fallback path: TF-IDF classify + translator chain ---------------
     leftover = [e for e in entries if not e.get("llm_done")]
     for e in leftover:
-        e["genre"] = classify(e["paper"], genres, cfg) or genre_by_id(None, genres)
+        e["genres"] = classify_multi(e["paper"], genres, cfg)
     if not dry_run:
         to_tr = [e for e in leftover if e["need_tr"] and e["jp"] is None and (
-            e["genre"] is not None or not cfg.get("translate_only_matched", False))]
+            e["genres"] or not cfg.get("translate_only_matched", False))]
         for i in range(0, len(to_tr), batch_size):
             chunk = to_tr[i: i + batch_size]
             abstracts = [e["paper"]["abstract"] for e in chunk]
@@ -602,44 +648,53 @@ def main() -> None:
     # ---- dry-run: print classification results and exit --------------------
     if dry_run:
         print(f"[dry-run] {len(entries)} papers from feed (seen_ids ignored)\n")
-        genre_width = max((len(e["genre"]["name"]) if e["genre"] else 7
-                           for e in entries), default=7)
+        label_width = max(
+            (sum(len(g["name"]) for g in e["genres"]) + len(e["genres"]) - 1
+             for e in entries if e["genres"]),
+            default=7,
+        )
         for e in entries:
-            genre_name = e["genre"]["name"] if e["genre"] else "general"
+            label = ", ".join(g["name"] for g in e["genres"]) or "other"
             cats = ", ".join(e["paper"]["categories"][:3])
             title = e["paper"]["title"][:72]
-            print(f"  [{genre_name:<{genre_width}}]  {title}")
-            print(f"  {'':>{genre_width+2}}  cats={cats}  id={e['paper']['id']}")
+            print(f"  [{label:<{label_width}}]  {title}")
+            print(f"  {'':>{label_width+2}}  cats={cats}  id={e['paper']['id']}")
         return
 
     # ---- post ---------------------------------------------------------------
     require_tr = cfg.get("require_translation", True)
     posted = deferred = 0
     for e in entries:
-        webhook, genre_name = resolve_webhook(e["genre"])
-        if not webhook:
-            print("[error] no webhook configured", file=sys.stderr)
-            sys.exit(1)
         if e["need_tr"] and e["jp"] is None and require_tr:
-            deferred += 1   # not marked seen -> retried on the next run
+            deferred += 1
             continue
-        if post_to_discord(webhook, e["paper"], genre_name, e["jp"], cfg):
-            seen.add(e["paper"]["id"])
-            posted += 1
-            log.append({
-                "id": e["paper"]["id"],
-                "posted_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                "title": e["paper"]["title"],
-                "authors": e["paper"]["authors"],
-                "link": e["paper"]["link"],
-                "primary": e["paper"]["primary"],
-                "announce_type": e["paper"]["announce_type"],
-                "genre_id": e["genre"]["id"] if e["genre"] else "general",
-                "genre_name": genre_name,
-                "abstract_en": e["paper"]["abstract"],
-                "abstract_ja": e["jp"],
-            })
-        time.sleep(1.2)  # Discord webhook rate limit headroom
+        posted_webhooks: set[str] = set()
+        paper_logged = False
+        for genre in e["genres"]:
+            webhook, genre_name = resolve_webhook(genre)
+            if not webhook or webhook in posted_webhooks:
+                continue
+            if post_to_discord(webhook, e["paper"], genre_name, e["jp"], cfg):
+                posted_webhooks.add(webhook)
+                if not paper_logged:
+                    seen.add(e["paper"]["id"])
+                    log.append({
+                        "id": e["paper"]["id"],
+                        "posted_at": time.strftime("%Y-%m-%dT%H:%M:%SZ",
+                                                   time.gmtime()),
+                        "title": e["paper"]["title"],
+                        "authors": e["paper"]["authors"],
+                        "link": e["paper"]["link"],
+                        "primary": e["paper"]["primary"],
+                        "announce_type": e["paper"]["announce_type"],
+                        "genre_ids": [g["id"] for g in e["genres"]],
+                        "genre_names": [g["name"] for g in e["genres"]],
+                        "abstract_en": e["paper"]["abstract"],
+                        "abstract_ja": e["jp"],
+                    })
+                    paper_logged = True
+                posted += 1
+            time.sleep(1.2)  # Discord webhook rate limit headroom
 
     # Keep the state file bounded.
     state["seen"] = sorted(seen)[-3000:]

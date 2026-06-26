@@ -31,14 +31,103 @@
   "genres": [
     {
       "id": "qec",
-      "name": "誤り訂正・FT",
-      "description": "量子誤り訂正符号、フォールトトレラント量子計算、デコーダ、安定化符号、表面符号、マジックステート、論理量子ビット、しきい値定理などに関する研究。",
+      "name": "誤り訂正・符号理論",
+      "description": "量子誤り訂正符号の設計・解析。安定化符号、表面符号、トーリック符号、カラー符号、LDPC符号、ボゾン符号、CSS構成。デコーダの設計・解析・閾値定理。符号距離・論理演算子の最適化など。フォールトトレラント実装は ft へ。",
       "webhook_env": "DISCORD_WEBHOOK_QEC",
       "keywords": [
-        "error correction", "error-correct", "fault-tolerant",
-        "fault tolerance", "surface code", "stabilizer", "magic state",
-        "decoder", "decoding", "qec", "ldpc code", "logical qubit",
-        "code distance", "transversal"
+        "error correction", "error-correct", "stabilizer code", "surface code",
+        "toric code", "color code", "ldpc code", "qec", "repetition code",
+        "bosonic code", "css code", "quantum code", "decoder", "decoding",
+        "code distance", "threshold theorem", "minimum distance"
+      ]
+    },
+    {
+      "id": "ft",
+      "name": "フォールトトレラント計算",
+      "description": "フォールトトレラント量子計算の理論と方式。マジックステート蒸留・注入、論理ゲートの実装(transversal gate, code switching, lattice surgery)、ユニバーサルゲートセット、資源推定、concatenated符号によるFT。誤り訂正符号自体の設計は qec へ。",
+      "webhook_env": "DISCORD_WEBHOOK_FT",
+      "keywords": [
+        "fault-tolerant", "fault tolerance", "magic state", "magic state distillation",
+        "logical qubit", "logical gate", "transversal gate", "lattice surgery",
+        "code switching", "resource estimation", "universal fault-tolerant",
+        "flag qubit", "concatenated code", "magic state injection"
+      ]
+    },
+    {
+      "id": "algo",
+      "name": "量子アルゴリズム",
+      "description": "具体的な量子アルゴリズムの設計・解析・改善。Grover探索、Shorの素因数分解、量子ウォーク、量子フーリエ変換、位相推定、HHL、振幅増幅、量子サンプリング、線形代数アルゴリズムなど。複雑性クラスや下界の理論は complexity へ。変分系は nisq へ。",
+      "webhook_env": "DISCORD_WEBHOOK_ALGO",
+      "keywords": [
+        "quantum algorithm", "grover", "shor", "quantum walk", "quantum speedup",
+        "quantum advantage", "amplitude amplification", "quantum phase estimation",
+        "hhl", "quantum fourier transform", "quantum sampling", "quantum search",
+        "quantum linear system", "quantum signal processing", "qubitization"
+      ]
+    },
+    {
+      "id": "complexity",
+      "name": "量子複雑性理論",
+      "description": "量子計算複雑性の理論的研究。BQP・QMA・QIP・MQIPなどの複雑性クラスの解析、オラクル分離、クエリ複雑性の下界、量子PCP定理、局所ハミルトニアン問題、対話型証明、量子回路の複雑性など。",
+      "webhook_env": "DISCORD_WEBHOOK_COMPLEXITY",
+      "keywords": [
+        "computational complexity", "bqp", "qma", "quantum complexity",
+        "oracle separation", "complexity class", "query complexity",
+        "quantum pcp", "local hamiltonian", "quantum interactive proof",
+        "qip", "polynomial hierarchy", "quantum circuit complexity",
+        "lower bound", "decision tree complexity"
+      ]
+    },
+    {
+      "id": "nisq",
+      "name": "変分・NISQアルゴリズム",
+      "description": "NISQ(ノイズあり中規模量子)デバイスを対象とした研究。変分量子固有値ソルバ(VQE)、QAOA、パラメータ化量子回路の最適化、バレンプラトー問題、エラー緩和(零ノイズ外挿・確率的エラーキャンセル)、量子ベンチマーキング(RB, XEB)など。",
+      "webhook_env": "DISCORD_WEBHOOK_NISQ",
+      "keywords": [
+        "variational quantum", "vqe", "qaoa", "nisq", "noisy intermediate-scale",
+        "error mitigation", "zero-noise extrapolation", "probabilistic error cancellation",
+        "variational eigensolver", "barren plateau", "parameterized quantum circuit",
+        "quantum approximate optimization", "quantum natural gradient",
+        "randomized benchmarking", "cross-entropy benchmarking"
+      ]
+    },
+    {
+      "id": "sim",
+      "name": "量子シミュレーション",
+      "description": "量子コンピュータによる物理系のシミュレーション。ハミルトニアンシミュレーション(Trotter分解、LCU、量子信号処理)、格子ゲージ理論のデジタルシミュレーション、アナログ量子シミュレータ、量子化学の第一原理計算(VQE除く)、多体系の時間発展など。",
+      "webhook_env": "DISCORD_WEBHOOK_SIM",
+      "keywords": [
+        "hamiltonian simulation", "quantum simulation", "analog simulation",
+        "trotter", "suzuki-trotter", "product formula", "time evolution",
+        "lattice gauge simulation", "digital quantum simulation",
+        "quantum chemistry", "many-body simulation", "lcu", "sparse simulation"
+      ]
+    },
+    {
+      "id": "qml",
+      "name": "量子機械学習",
+      "description": "量子コンピュータと機械学習の融合。量子ニューラルネットワーク(QNN)、量子カーネル法、量子サポートベクタマシン、量子生成モデル、量子強化学習、量子データの学習・分類、古典機械学習の量子加速、脱量子化(dequantization)の研究なども含む。",
+      "webhook_env": "DISCORD_WEBHOOK_QML",
+      "keywords": [
+        "quantum machine learning", "quantum neural network", "quantum kernel",
+        "quantum support vector", "qnn", "quantum generative", "quantum data",
+        "quantum feature map", "quantum reinforcement learning",
+        "quantum boltzmann", "dequantization", "quantum classif",
+        "quantum learning theory", "quantum transfer learning"
+      ]
+    },
+    {
+      "id": "qit",
+      "name": "量子情報理論",
+      "description": "量子情報の数理的基礎理論。エンタングルメント理論・尺度、資源理論(コヒーレンス・マジック・非対称性など)、量子通信路容量(量子容量・古典容量・絡み合い支援容量)、量子シャノン理論、一回使用情報理論、量子エントロピー、量子相互情報量など。",
+      "webhook_env": "DISCORD_WEBHOOK_QIT",
+      "keywords": [
+        "entanglement theory", "resource theory", "quantum channel capacity",
+        "quantum shannon", "quantum entropy", "von neumann entropy",
+        "quantum mutual information", "entanglement distillation",
+        "entanglement measure", "quantum capacity", "coherence theory",
+        "one-shot information", "quantum typicality", "quantum relative entropy",
+        "entanglement of formation", "squashed entanglement"
       ]
     },
     {
@@ -49,46 +138,75 @@
       "keywords": [
         "quantum network", "quantum internet", "repeater",
         "entanglement distribution", "entanglement swapping",
-        "teleportation", "quantum communication", "quantum channel capacity",
-        "entanglement purification", "memory node", "link layer"
-      ]
-    },
-    {
-      "id": "algo",
-      "name": "アルゴリズム・複雑性",
-      "description": "量子アルゴリズム、量子計算複雑性、量子優位性・高速化、ハミルトニアンシミュレーション、変分量子アルゴリズム(VQE/QAOA)、量子機械学習、ゲート分解・回路合成・回路コンパイル(gate/circuit synthesis, compilation)、Clifford+T分解などに関する研究。",
-      "webhook_env": "DISCORD_WEBHOOK_ALGO",
-      "keywords": [
-        "quantum algorithm", "query complexity", "computational complexity",
-        "quantum speedup", "quantum advantage", "hamiltonian simulation",
-        "variational quantum", "qaoa", "vqe", "quantum machine learning",
-        "sampling", "bqp", "qma", "oracle separation", "grover", "shor",
-        "gate decomposition", "gate synthesis", "circuit compilation",
-        "clifford+t", "t-count", "circuit synthesis"
+        "teleportation", "quantum communication", "memory node",
+        "link layer", "entanglement purification", "quantum router",
+        "quantum relay", "quantum bus", "quantum metropolitan"
       ]
     },
     {
       "id": "crypto",
-      "name": "暗号・セキュリティ",
-      "description": "量子鍵配送(QKD)、耐量子計算機暗号(post-quantum cryptography)、量子暗号プロトコル、デバイス非依存、ゼロ知識証明、その他の暗号要素(乱数増幅、ビットコミットメント、量子マネー、位置検証など)に関する研究。",
+      "name": "量子暗号・QKD",
+      "description": "量子鍵配送(QKD)とその安全性証明、デバイス非依存(DI-QKD, MDI-QKD, TF-QKD)、連続変数QKD、量子乱数生成・増幅、量子秘密分散、量子ビットコミットメント、量子マネー、位置検証、量子認証など。古典系の耐量子暗号は pqc へ。",
       "webhook_env": "DISCORD_WEBHOOK_CRYPTO",
       "keywords": [
-        "key distribution", "qkd", "post-quantum", "cryptograph",
-        "device-independent", "zero-knowledge", "randomness expansion",
-        "oblivious transfer", "secure multiparty", "bit commitment",
-        "quantum money", "position verification", "lattice-based"
+        "key distribution", "qkd", "quantum key", "device-independent",
+        "mdiqkd", "twin-field", "continuous-variable qkd",
+        "quantum secret sharing", "bit commitment", "quantum money",
+        "position verification", "randomness expansion",
+        "quantum random number", "quantum authentication"
+      ]
+    },
+    {
+      "id": "pqc",
+      "name": "耐量子計算機暗号",
+      "description": "量子コンピュータに対して安全な古典暗号の研究。格子暗号(LWE, RLWE, NTRU, Kyber, Dilithium)、符号暗号、ハッシュ暗号、同種写像暗号、多変数暗号、NIST PQC標準化、古典ゼロ知識証明の耐量子化など。",
+      "webhook_env": "DISCORD_WEBHOOK_PQC",
+      "keywords": [
+        "post-quantum", "lattice-based", "code-based", "hash-based",
+        "nist post-quantum", "kyber", "dilithium", "ntru",
+        "learning with errors", "lwe", "rlwe", "isogeny-based",
+        "multivariate cryptography", "post-quantum cryptography",
+        "quantum-safe", "falcon", "crystals"
       ]
     },
     {
       "id": "hardware",
-      "name": "ハードウェア・実装",
-      "description": "量子ビットの物理実装(超伝導、イオントラップ、中性原子、光子、スピン/シリコン量子ビット)、キャビティ/回路QED、ゲート忠実度、較正、クロストークなど、量子計算の物理的・実験的実装に関する研究。",
+      "name": "量子ハードウェア・実装",
+      "description": "量子ビットの物理実装と実験。超伝導量子ビット(transmon, flux qubit)、イオントラップ、中性原子(Rydberg)、光量子(フォトニック)、スピン量子ビット(シリコン、量子ドット)、キャビティ/回路QED、ゲート忠実度、読み出し、クロストーク、較正など。",
       "webhook_env": "DISCORD_WEBHOOK_HARDWARE",
       "keywords": [
         "superconducting qubit", "transmon", "trapped ion", "neutral atom",
         "photonic quantum", "spin qubit", "silicon qubit", "cavity qed",
-        "circuit qed", "quantum dot qubit", "crosstalk", "calibration",
-        "two-qubit gate fidelity"
+        "circuit qed", "quantum dot", "crosstalk", "calibration",
+        "gate fidelity", "two-qubit gate", "readout fidelity",
+        "qubit coherence", "rydberg", "josephson junction", "flux qubit"
+      ]
+    },
+    {
+      "id": "sensing",
+      "name": "量子センシング・計測",
+      "description": "量子効果を利用した精密計測・センシング。量子計測論(ハイゼンベルク限界、標準量子限界)、量子フィッシャー情報、スピンスクイージング、絡み合い強化センシング、原子時計、量子磁力計、量子重力波検出、Ramsey分光、量子イメージングなど。",
+      "webhook_env": "DISCORD_WEBHOOK_SENSING",
+      "keywords": [
+        "quantum sensing", "quantum metrology", "quantum imaging",
+        "heisenberg limit", "standard quantum limit", "quantum fisher information",
+        "ramsey spectroscopy", "spin squeezing", "entanglement-enhanced sensing",
+        "atomic clock", "quantum magnetometer", "quantum gyroscope",
+        "quantum illumination", "quantum radar"
+      ]
+    },
+    {
+      "id": "foundations",
+      "name": "量子基礎・測定理論",
+      "description": "量子力学の基礎的・概念的研究。Bell不等式・Bell検定・非局所性、文脈性、量子測定理論(弱測定、POVMなど)、デコヒーレンス、開放量子系(Lindblad方程式)、量子熱力学、量子参照枠、量子ダーウィニズム、量子解釈(多世界、パイロット波など)。",
+      "webhook_env": "DISCORD_WEBHOOK_FOUNDATIONS",
+      "keywords": [
+        "quantum foundations", "bell inequality", "bell test", "nonlocality",
+        "contextuality", "quantum measurement", "weak measurement",
+        "quantum zeno", "decoherence", "open quantum system", "lindblad",
+        "quantum master equation", "quantum thermodynamics",
+        "quantum darwinism", "wigner's friend", "quantum reference frame",
+        "quantum discord", "macrorealism"
       ]
     },
     {

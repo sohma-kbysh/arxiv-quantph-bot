@@ -1402,5 +1402,260 @@
   "genre_name": "その他・異分野",
   "abstract_en": "The dynamics of local subsystems in a thermodynamically large quantum many-body system can be understood as effectively open as the system produces its own effective bath. The action of this bath can be characterised in terms of the so-called influence matrices. In generic situations, the complexity of these objects grows unfavourably with time, however, there exist solvable cases where influence matrices can be characterised exactly even in the presence of non-trivial interactions. Here we show that Rule 201, a deterministic version of the Floquet-PXP model, is one of these solvable instances. Indeed, it admits influence matrices given by a finite-dimensional matrix-product operator (MPO) that solves a finite set of algebraic conditions. We provide the solution, and characterise multi-time autocorrelation functions.",
   "abstract_ja": "熱力学的に大きな量子多体系における局所サブシステムのダイナミクスは、システムが独自の有効浴を生成するため、実質的に開放系として理解できます。この浴の作用は、いわゆる影響行列によって特徴付けられます。一般的な状況では、これらのオブジェクトの複雑さは時間とともに好ましくない方向に増加しますが、非自明な相互作用が存在する場合でも影響行列を正確に特徴付けることができる解けるケースが存在します。ここでは、Floquet-PXP モデルの決定論的バージョンであるルール 201 が、このような解けるインスタンスの 1 つであることを示します。実際、このルールは、有限個の代数条件を満たす有限次元行列積演算子 (MPO) によって与えられる影響行列を許容します。私たちはその解を示し、多時間自己相関関数を特徴付けます。"
+ },
+ {
+  "id": "2606.99001",
+  "posted_at": "2026-06-27T06:35:48Z",
+  "title": "[TEST/qec] A high-threshold decoder for surface codes under biased noise",
+  "authors": "Alice Researcher, Bob Collaborator",
+  "link": "https://arxiv.org/abs/2606.99001",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: qec (誤り訂正・符号理論) We present a fault-tolerant decoding scheme for the surface code tailored to biased Pauli noise. Our decoder improves the code distance threshold and reduces the logical error rate compared with standard minimum-weight perfect matching, demonstrating improved performance for practical stabilizer codes under asymmetric noise models.",
+  "abstract_ja": "【テスト用データ・存在しない論文】期待分類: qec (誤り訂正・記号理論) 偏ったパウリノイズに合わせた表面コードのフォールトトレラントな復号スキームを提案します。当社のデコーダは、標準の最小重み完全マッチングと比較してコード距離しきい値を改善し、論理エラー率を低減し、非対称ノイズ モデルの下で実際のスタビライザー コードのパフォーマンスが向上していることを実証します。"
+ },
+ {
+  "id": "2606.99002",
+  "posted_at": "2026-06-27T06:35:50Z",
+  "title": "[TEST/ft] Magic state distillation protocols with reduced overhead",
+  "authors": "Carol Faulttolerant",
+  "link": "https://arxiv.org/abs/2606.99002",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "ft"
+  ],
+  "genre_names": [
+   "フォールトトレラント計算"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: ft (フォールトトレラント計算) We introduce improved magic state distillation protocols that achieve reduced resource overhead for universal fault-tolerant quantum computation. Our lattice surgery based implementation performs logical gate sequences via code switching, significantly lowering the cost of magic state injection and improving the threshold for the concatenated code architecture.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: ft (フォールトトレラント計算) ユニバーサルフォールトトレラント量子計算のためのリソースオーバーヘッドの削減を達成する、改良されたマジック状態蒸留プロトコルを紹介します。当社の格子手術ベースの実装は、コード スイッチングを介して論理ゲート シーケンスを実行し、マジック ステート インジェクションのコストを大幅に削減し、連結コード アーキテクチャのしきい値を向上させます。"
+ },
+ {
+  "id": "2606.99003",
+  "posted_at": "2026-06-27T06:35:51Z",
+  "title": "[TEST/algo] Geometric Algebra Quantum Gate Decomposition via Qubitization",
+  "authors": "Dan Algorithm, Eve Speedup",
+  "link": "https://arxiv.org/abs/2606.99003",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "algo"
+  ],
+  "genre_names": [
+   "量子アルゴリズム"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: algo (量子アルゴリズム) We formulate the Pauli and Clifford groups within the complex Geometric Algebra (GA) framework and introduce a greedy Pauli rotor decomposition algorithm. Using quantum signal processing and qubitization, we achieve Clifford+T universality with unexpectedly compact decompositions. We further demonstrate quantum speedup over classical algorithms for the decomposition problem via amplitude amplification.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: algo (量子アルゴリズム) 複雑な幾何代数 (GA) フレームワーク内でパウリ群とクリフォード群を定式化し、貪欲なパウリ ローター分解アルゴリズムを導入します。量子信号処理と量子化を使用することで、予想外にコンパクトな分解で Clifford+T の普遍性を実現します。さらに、振幅増幅による分解問題の古典的なアルゴリズムを上回る量子の高速化を実証します。"
+ },
+ {
+  "id": "2606.99004",
+  "posted_at": "2026-06-27T06:35:53Z",
+  "title": "[TEST/complexity] QMA-hardness of the k-local Hamiltonian problem with improved parameters",
+  "authors": "Frank Complexity",
+  "link": "https://arxiv.org/abs/2606.99004",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "complexity"
+  ],
+  "genre_names": [
+   "量子複雑性理論"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: complexity (量子複雑性理論) We prove improved QMA-hardness results for the local Hamiltonian problem, tightening the promise gap and extending the result to new complexity classes. Our oracle separation shows BQP is strictly contained in QMA under plausible query complexity assumptions. We further analyze the quantum PCP conjecture and establish new lower bounds on quantum circuit complexity.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: complexity (量子複雑性理論) 局所ハミルトニアン問題に対する QMA 硬度の改善結果を証明し、約束のギャップを狭め、結果を新しい複雑度クラスに拡張します。私たちのオラクル分離は、クエリの複雑さの妥当な仮定の下で、BQP が厳密に QMA に含まれていることを示しています。量子 PCP 予想をさらに分析し、量子回路の複雑さの新しい下限を確立します。"
+ },
+ {
+  "id": "2606.99005",
+  "posted_at": "2026-06-27T06:35:54Z",
+  "title": "[TEST/nisq] Barren plateau mitigation in variational quantum eigensolvers",
+  "authors": "Grace NISQ, Hank Variational",
+  "link": "https://arxiv.org/abs/2606.99005",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "nisq"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: nisq (変分・NISQアルゴリズム) We analyze the barren plateau phenomenon in parameterized quantum circuits used for VQE and QAOA on noisy intermediate-scale quantum devices. We propose an error mitigation strategy combining zero-noise extrapolation with quantum natural gradient optimization to overcome vanishing gradients, demonstrating improved convergence on benchmark Hamiltonians.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: nisq (変分・NISQ アルゴリズム) ノイズの多い中規模量子デバイス上の VQE および QAOA に使用されるパラメータ化された量子回路における不毛なプラトー現象を解析します。ゼロノイズ外挿と量子自然勾配最適化を組み合わせて勾配消失を克服するエラー軽減戦略を提案し、ベンチマークハミルトニアンの収束性の向上を実証します。"
+ },
+ {
+  "id": "2606.99006",
+  "posted_at": "2026-06-27T06:35:55Z",
+  "title": "[TEST/sim] Trotter error bounds for digital Hamiltonian simulation of lattice gauge theories",
+  "authors": "Ivan Simulator",
+  "link": "https://arxiv.org/abs/2606.99006",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim"
+  ],
+  "genre_names": [
+   "量子シミュレーション"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: sim (量子シミュレーション) We derive tight Trotter error bounds for the digital quantum simulation of lattice gauge theories using product formula decompositions. Our LCU-based approach achieves near-optimal query complexity for time evolution of many-body systems, with direct applications to quantum chemistry first-principles calculations beyond the variational eigensolver paradigm.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: sim (量子シミュレーション) 積公式分解を使用して、格子ゲージ理論のデジタル量子シミュレーションのための厳密なトロッター誤差限界を導出します。当社の LCU ベースのアプローチは、変分固有ソルバー パラダイムを超えた量子化学の第一原理計算への直接適用により、多体系の時間発展に対して最適に近いクエリの複雑さを実現します。"
+ },
+ {
+  "id": "2606.99007",
+  "posted_at": "2026-06-27T06:35:57Z",
+  "title": "[TEST/qml] Quantum kernel methods for classification with provable dequantization bounds",
+  "authors": "Jane QML, Karl Learning",
+  "link": "https://arxiv.org/abs/2606.99007",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml"
+  ],
+  "genre_names": [
+   "量子機械学習"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: qml (量子機械学習) We study quantum neural networks and quantum kernel methods for supervised classification tasks. We establish learning-theoretic bounds for quantum support vector machines on quantum data and analyze conditions under which dequantization is possible. Our quantum feature map construction demonstrates advantages over classical kernel methods on structured datasets.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: qml (量子機械学習) 教師あり分類タスクのための量子ニューラルネットワークと量子カーネル法を研究します。量子データ上で量子サポート ベクター マシンの学習理論的境界を確立し、逆量子化が可能となる条件を分析します。私たちの量子特徴マップ構築は、構造化データセットに対する古典的なカーネル手法よりも優れていることを示しています。"
+ },
+ {
+  "id": "2606.99008",
+  "posted_at": "2026-06-27T06:35:58Z",
+  "title": "[TEST/qit] One-shot quantum channel capacity via resource theory of coherence",
+  "authors": "Laura QIT",
+  "link": "https://arxiv.org/abs/2606.99008",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: qit (量子情報理論) We derive one-shot bounds on quantum channel capacity and entanglement-assisted classical capacity using resource theory methods. Our approach connects squashed entanglement and von Neumann entropy through quantum relative entropy, yielding tight achievability and converse results for quantum Shannon theory beyond the i.i.d. regime.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: qit (量子情報理論) リソース理論手法を使用して、量子チャネル容量ともつれ支援古典容量のワンショット限界を導出します。私たちのアプローチは、量子相対エントロピーを通じて押しつぶされたもつれとフォン・ノイマン・エントロピーを結び付け、i.i.d.を超えた量子シャノン理論の厳密な達成可能性と逆の結果をもたらします。政権。"
+ },
+ {
+  "id": "2606.99009",
+  "posted_at": "2026-06-27T06:36:00Z",
+  "title": "[TEST/network] Entanglement distribution rates over lossy quantum repeater networks",
+  "authors": "Mike Network",
+  "link": "https://arxiv.org/abs/2606.99009",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "network"
+  ],
+  "genre_names": [
+   "量子ネットワーク・通信"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: network (量子ネットワーク・通信) We analyze entanglement distribution across a chain of quantum repeaters in a quantum internet setting. Using entanglement swapping and purification at memory nodes, we derive achievable rates for the quantum network and compare link-layer scheduling protocols for entanglement distribution across metropolitan-scale quantum routers.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: ネットワーク (量子ネットワーク・通信) 量子インターネット環境における量子中継器のチェーンにわたるエンタングルメント分布を解析します。メモリノードでのもつれのスワッピングと精製を使用して、量子ネットワークの達成可能なレートを導き出し、都市規模の量子ルーター全体でのもつれの分散に関するリンク層スケジューリングプロトコルを比較します。"
+ },
+ {
+  "id": "2606.99010",
+  "posted_at": "2026-06-27T06:36:01Z",
+  "title": "[TEST/crypto] Device-independent QKD with improved noise tolerance via randomness expansion",
+  "authors": "Nancy Crypto, Oscar QKD",
+  "link": "https://arxiv.org/abs/2606.99010",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "crypto"
+  ],
+  "genre_names": [
+   "量子暗号・QKD"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: crypto (量子暗号・QKD) We propose a device-independent QKD protocol that tolerates higher noise via randomness expansion. Security is proved against general attacks using the entropy accumulation theorem. We further discuss quantum random number generation and quantum secret sharing as extensions, comparing our protocol with MDI-QKD and twin-field QKD in practical settings.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: crypto (量子暗号・QKD) ランダム性拡張によるより高いノイズを許容する、デバイスに依存しない QKD プロトコルを提案します。一般的な攻撃に対する安全性はエントロピー蓄積定理を用いて証明されています。さらに、拡張としての量子乱数生成と量子秘密共有について説明し、実際の設定でのプロトコルを MDI-QKD およびツインフィールド QKD と比較します。"
+ },
+ {
+  "id": "2606.99011",
+  "posted_at": "2026-06-27T06:36:03Z",
+  "title": "[TEST/pqc] Tighter security proofs for CRYSTALS-Kyber under quantum random oracle model",
+  "authors": "Paul PQC",
+  "link": "https://arxiv.org/abs/2606.99011",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: pqc (耐量子計算機暗号) We provide tighter security reductions for the CRYSTALS-Kyber post-quantum KEM based on the module learning with errors (MLWE) problem. Our analysis in the quantum random oracle model improves the concrete security estimates for NIST post-quantum standardization candidates including Dilithium and NTRU, contributing to quantum-safe cryptographic infrastructure.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: pqc (耐量子計算機暗号) エラーありモジュール学習 (MLWE) 問題に基づいて、CRYSTALS-Kyber ポスト量子 KEM に対して、より厳格なセキュリティ削減を提供します。量子ランダムオラクルモデルにおける当社の分析は、ダイリチウムやNTRUを含むNISTポスト量子標準化候補の具体的なセキュリティ推定を改善し、量子安全な暗号インフラストラクチャに貢献します。"
+ },
+ {
+  "id": "2606.99012",
+  "posted_at": "2026-06-27T06:36:04Z",
+  "title": "[TEST/hardware] Benchmarking two-qubit gate fidelity in superconducting transmon processors",
+  "authors": "Quinn Hardware",
+  "link": "https://arxiv.org/abs/2606.99012",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "hardware"
+  ],
+  "genre_names": [
+   "量子ハードウェア・実装"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: hardware (量子ハードウェア・実装) We report calibration and crosstalk mitigation techniques that improve two-qubit gate fidelity in a superconducting transmon quantum processor. Randomized benchmarking and cross-entropy benchmarking confirm improved readout fidelity and reduced Josephson junction noise. Our results provide a pathway toward fault-tolerant implementation in solid-state quantum computing hardware.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: ハードウェア (量子ハードウェア・実装) 超伝導トランスモン量子プロセッサにおける 2 量子ビットのゲート忠実度を向上させるキャリブレーションおよびクロストーク軽減技術を報告します。ランダム化ベンチマークとクロスエントロピーベンチマークにより、読み出し忠実度の向上とジョセフソン接合ノイズの低減が確認されました。私たちの結果は、ソリッドステート量子コンピューティング ハードウェアにおけるフォールト トレラント実装への道を提供します。"
+ },
+ {
+  "id": "2606.99013",
+  "posted_at": "2026-06-27T06:36:05Z",
+  "title": "[TEST/sensing] Heisenberg-limited quantum metrology with spin-squeezed atomic clocks",
+  "authors": "Rachel Sensing",
+  "link": "https://arxiv.org/abs/2606.99013",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sensing"
+  ],
+  "genre_names": [
+   "量子センシング・計測"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: sensing (量子センシング・計測) We demonstrate entanglement-enhanced sensing beyond the standard quantum limit using spin squeezing in optical atomic clocks. Our protocol exploits quantum Fisher information to approach the Heisenberg limit in Ramsey spectroscopy, with applications to quantum magnetometry and quantum gyroscope development for inertial navigation.",
+  "abstract_ja": "【テスト用データ・実在しない論文】期待分類: センシング (量子センシング・計測) 光原子時計のスピンスクイーズを用いて、標準量子の限界を超えるエンタングルメント強化センシングを実証します。私たちのプロトコルは、量子フィッシャー情報を利用してラムゼイ分光法のハイゼンベルグ限界に近づき、慣性航法のための量子磁力測定や量子ジャイロスコープの開発に応用します。"
+ },
+ {
+  "id": "2606.99014",
+  "posted_at": "2026-06-27T06:36:07Z",
+  "title": "[TEST/foundations] Bell inequality violations and contextuality in weak measurement scenarios",
+  "authors": "Sam Foundations",
+  "link": "https://arxiv.org/abs/2606.99014",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: foundations (量子基礎・測定理論) We investigate Bell inequality violations under decoherence using weak measurement and quantum Zeno dynamics. Our analysis of the Lindblad master equation for open quantum systems reveals the relationship between contextuality and macrorealism, with implications for quantum thermodynamics and the Wigner's friend thought experiment in the quantum reference frame formalism.",
+  "abstract_ja": "【テスト用データ・存在しない論文】期待分類: 基礎 (量子基礎・測定理論) 弱い測定と量子ゼノ力学を使用して、デコヒーレンス下でのベル不等式違反を調査します。開いた量子系のリンドブラッドマスター方程式の分析は、量子熱力学と量子参照系フォーマリズムにおけるウィグナーの友人の思考実験への影響とともに、文脈性とマクロ現実主義の関係を明らかにしました。"
+ },
+ {
+  "id": "2606.99015",
+  "posted_at": "2026-06-27T06:36:09Z",
+  "title": "[TEST/other] Strongly correlated electrons in twisted bilayer systems",
+  "authors": "Tom Condensed",
+  "link": "https://arxiv.org/abs/2606.99015",
+  "primary": "cond-mat.str-el",
+  "announce_type": "cross",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "abstract_en": "【テスト用データ・実在しない論文】期待分類: other (その他・異分野) — cond-mat.str-el が primary This condensed-matter paper studies strongly correlated electrons and superconductivity in twisted bilayer materials. It is cross-listed to quant-ph only tangentially. The primary category cond-mat.str-el should trigger category_other_overrides and route this paper to the other channel.",
+  "abstract_ja": "【テスト用データ・存在しない論文】 期待分類: その他 (その他・異分野) — cond-mat.str-el が main この凝縮系論文は、ねじれ二重層材料における強相関電子と超伝導を研究しています。 quant-ph とは接線的にのみクロスリストされています。プライマリ カテゴリ cond-mat.str-el は category_other_overrides をトリガーし、このペーパーを他のチャネルにルーティングする必要があります。"
  }
 ]

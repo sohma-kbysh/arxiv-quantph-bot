@@ -8,7 +8,12 @@ on:
     - cron: "5 1 * * 1-6"    # UTC 01:05 = JST 10:05 (アナウンス直後)
     - cron: "0 4 * * 1-6"    # UTC 04:00 = JST 13:00
     - cron: "0 7 * * 1-6"    # UTC 07:00 = JST 16:00
-  workflow_dispatch: {}   # 手動実行用
+  workflow_dispatch:
+    inputs:
+      use_test_feed:
+        description: "test_feed.xml を使う (本番RSSの代わり)"
+        type: boolean
+        default: false
 
 
 permissions:
@@ -49,6 +54,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
           GOOGLE_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
+          ARXIV_TEST_FEED: ${{ inputs.use_test_feed == true && 'test_feed.xml' || '' }}
         run: python arxiv_bot.py
 
       - name: Commit state

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ================================================================
-  TEST FEED — 実在しない架空の論文データです
-  本番RSSの代替として使用します。Discord に投稿されます。
+  TEST FEED: 実在しない架空の論文データです。
   使い方:
     ARXIV_TEST_FEED=test_feed.xml python3 arxiv_bot.py
-    ARXIV_TEST_FEED=test_feed.xml python3 arxiv_bot.py --dry-run
-  ================================================================
+    ARXIV_TEST_FEED=test_feed.xml python3 arxiv_bot.py -dry-run
 -->
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:arxiv="http://arxiv.org/schemas/atom"

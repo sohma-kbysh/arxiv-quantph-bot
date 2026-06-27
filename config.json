@@ -59,7 +59,7 @@
 
   "translators": ["gemini", "deepl", "google"],
   "classify_with_llm": true,
-  "gemini_model": "gemini-2.0-flash",
+  "gemini_model": "gemini-2.5-flash-lite",
   "gemini_min_interval_sec": 7,
   "gemini_max_retries": 4,
   "gemini_overload_giveup": 2,

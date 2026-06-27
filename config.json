@@ -57,7 +57,7 @@
 
   "classify_min_score": 0.05,
 
-  "translators": ["gemini", "deepl", "google"],
+  "translators": ["deepl", "google"],
   "classify_with_llm": true,
   "gemini_model": "gemini-2.5-flash-lite",
   "gemini_min_interval_sec": 7,

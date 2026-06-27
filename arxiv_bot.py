@@ -437,6 +437,53 @@ def translate_classify_gemini_batch(
     return results
 
 
+def classify_gemini_batch(
+        texts: list[str], cfg: dict,
+        genres: list[dict]) -> list[list[str]]:
+    """Classify papers using Gemini without translating (classification only).
+
+    Output tokens are minimal (just genre IDs), so quota consumption is
+    roughly 1/50 of the combined translate+classify request. Use this when
+    translation is handled by DeepL or Google Cloud Translation instead.
+
+    Returns a list of genre ID lists (empty list when Gemini fails for that entry).
+    """
+    numbered = "\n\n".join(
+        f"<<<{i + 1}>>>\n{t}" for i, t in enumerate(texts))
+    valid_ids = {g["id"] for g in genres}
+    max_genres = cfg.get("classify_max_genres", 2)
+    prompt = (
+        f"以下に{len(texts)}件の量子情報科学分野のarXiv論文のタイトルとabstract(英語)を示す。"
+        "各論文について次を行え。\n"
+        f"各ジャンルの説明文を精読し、論文の主要な貢献を最もよく表すジャンルIDを"
+        "下記の一覧から選ぶ。\n"
+        "    - 1つのジャンルに明確に帰属する場合は1つのみ選ぶ。\n"
+        f"    - 複数ジャンルにまたがり両方が主要な貢献である場合のみ、"
+        f"優先度順に最大{max_genres}個までカンマ区切りで選ぶ(例: qec,ft)。\n"
+        "    - 迷う場合は1つに絞ること。説明文に合致しない場合はotherを選ぶ。\n\n"
+        "[ジャンル一覧]\n"
+        + _genre_menu(genres)
+        + "\n\n[出力形式]\n"
+        "各エントリについて <<<k>>> の直後にジャンルIDのみを出力すること。"
+        "複数の場合はカンマ区切り(例: <<<1>>> qec,ft)。"
+        "ジャンルID・タグ・改行以外の文字列を一切含めないこと。\n\n"
+        + numbered
+    )
+    out = _gemini_request(prompt, cfg)
+    results: list[list[str]] = [[] for _ in range(len(texts))]
+    if not out:
+        return results
+    for match in re.finditer(r"<<<(\d+)>>>\s*([A-Za-z0-9_][A-Za-z0-9_,\s]*)", out):
+        try:
+            k = int(match.group(1)) - 1
+        except ValueError:
+            continue
+        if 0 <= k < len(texts):
+            gids = [g.strip() for g in match.group(2).split(",")]
+            results[k] = [g for g in gids if g in valid_ids]
+    return results
+
+
 _deepl_dead = False
 _google_dead = False
 
@@ -613,9 +660,11 @@ def main() -> None:
     use_llm_cls = cfg.get("classify_with_llm", True)
     chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
     llm_first = use_llm_cls and chain and chain[0] == "gemini"
+    llm_classify_only = use_llm_cls and not llm_first
     genre_map = {g["id"]: g for g in genres}
 
-    # ---- primary path: Gemini translate + classify in one request ---------
+    # ---- path A: Gemini translate + classify in one request ---------------
+    # Used when "gemini" is first in the translators chain.
     if llm_first and not dry_run:
         for i in range(0, len(entries), batch_size):
             chunk = entries[i: i + batch_size]
@@ -632,12 +681,34 @@ def main() -> None:
                     e["genres"] = gs if gs else [genre_by_id(None, genres)]
                     e["llm_done"] = True
 
-    # ---- fallback path: TF-IDF classify + translator chain ---------------
+    # ---- path B: Gemini classify only, translate via DeepL/Google ---------
+    # Used when classify_with_llm=true but "gemini" is NOT in translators.
+    # Gemini output is ~genre IDs only, so quota usage is 1/50 of path A.
+    elif llm_classify_only and not dry_run:
+        for i in range(0, len(entries), batch_size):
+            chunk = entries[i: i + batch_size]
+            limit = cfg.get("max_translate_chars", 2000)
+            abstracts = [
+                f"Title: {e['paper']['title']}\n\nAbstract: {e['paper']['abstract'][:limit]}"
+                for e in chunk
+            ]
+            gid_lists = classify_gemini_batch(abstracts, cfg, genres)
+            for e, gids in zip(chunk, gid_lists):
+                if gids:
+                    gs = [genre_map[g] for g in gids if g in genre_map]
+                    e["genres"] = gs if gs else [genre_by_id(None, genres)]
+                    e["llm_done"] = True
+
+    # ---- fallback: TF-IDF classify (papers not yet classified) ------------
     leftover = [e for e in entries if not e.get("llm_done")]
     for e in leftover:
         e["genres"] = classify_multi(e["paper"], genres, cfg)
+
+    # ---- translation via chain (all papers without jp) --------------------
+    # Covers path B (Gemini classify-only) and TF-IDF fallback papers.
+    # Also covers path A papers where Gemini failed to return a translation.
     if not dry_run:
-        to_tr = [e for e in leftover if e["need_tr"] and e["jp"] is None and (
+        to_tr = [e for e in entries if e["need_tr"] and e["jp"] is None and (
             e["genres"] or not cfg.get("translate_only_matched", False))]
         for i in range(0, len(to_tr), batch_size):
             chunk = to_tr[i: i + batch_size]

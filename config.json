@@ -56,6 +56,17 @@
   ],
 
   "classify_min_score": 0.05,
+  "force_genre_keywords": {
+    "crypto": [
+      "blind",
+      "blindness",
+      "verifiable",
+      "verifiability",
+      "secure",
+      "securely",
+      "security"
+    ]
+  },
 
   "translators": ["deepl", "google"],
   "classify_with_llm": true,
@@ -186,14 +197,17 @@
     },
     {
       "id": "crypto",
-      "name": "量子暗号・QKD",
-      "description": "量子鍵配送(QKD)とその安全性証明、デバイス非依存(DI-QKD, MDI-QKD, TF-QKD)、連続変数QKD、量子乱数生成・増幅、量子秘密分散、量子ビットコミットメント、量子マネー、位置検証、量子認証など。古典系の耐量子暗号は pqc へ。",
+      "name": "暗号・セキュリティ",
+      "description": "量子鍵配送(QKD)とその安全性証明、デバイス非依存(DI-QKD, MDI-QKD, TF-QKD)、連続変数QKD、量子乱数生成・増幅、量子秘密分散、セキュアマルチパーティ計算(SMC)、量子オークション、secure summation、量子ビットコミットメント、量子マネー、位置検証、量子認証など。古典系の耐量子暗号は pqc へ。",
       "webhook_env": "DISCORD_WEBHOOK_CRYPTO",
       "keywords": [
         "key distribution", "qkd", "quantum key", "device-independent",
         "mdiqkd", "twin-field", "continuous-variable qkd",
-        "quantum secret sharing", "bit commitment", "quantum money",
-        "position verification", "randomness expansion",
+        "quantum secret sharing", "secure multi-party computation",
+        "secure multiparty computation", "smc", "quantum auction",
+        "sealed-bid auction", "secure summation", "private inputs",
+        "bit commitment", "quantum money", "position verification",
+        "randomness expansion",
         "quantum random number", "quantum authentication"
       ]
     },

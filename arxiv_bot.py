@@ -28,6 +28,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
+from typing import Any
 
 BASE_DIR = Path(__file__).resolve().parent
 CONFIG_PATH = BASE_DIR / "config.json"
@@ -62,6 +63,12 @@ def http_post_json(url: str, payload: dict, headers: dict | None = None,
             return resp.status, resp.read()
     except urllib.error.HTTPError as e:
         return e.code, e.read()
+    except urllib.error.URLError as e:
+        print(f"[warn] Connection error for {url}: {e.reason}", file=sys.stderr)
+        return 0, b""
+    except Exception as e:
+        print(f"[warn] Unexpected request error for {url}: {e}", file=sys.stderr)
+        return 0, b""
 
 
 def load_json(path: Path, default):
@@ -250,14 +257,39 @@ def classify_multi(paper: dict, genres: list[dict],
         return [fallback] if fallback else []
 
     best_score = scores[ranked[0]]
-    result = []
+    result: list[dict] = []
     for gid in ranked[:max_genres]:
         if gid not in genre_map:
             continue
         if result and scores[gid] < best_score * sec_ratio:
             break
         result.append(genre_map[gid])
-    return result if result else ([fallback] if fallback else [])
+    result = result if result else ([fallback] if fallback else [])
+    return apply_forced_genres(paper, result, genres, cfg)
+
+
+def apply_forced_genres(paper: dict, selected: list[dict | None],
+                        genres: list[dict], cfg: dict | None = None) -> list[dict]:
+    """Add configured genres when high-signal keywords appear in title/abstract."""
+    result = [g for g in selected if g]
+    if not cfg:
+        return result
+
+    genre_map = {g["id"]: g for g in genres}
+    selected_ids = {g["id"] for g in result}
+    text = f"{paper.get('title', '')} {paper.get('abstract', '')}".lower()
+    for gid, keywords in cfg.get("force_genre_keywords", {}).items():
+        if gid in selected_ids or gid not in genre_map:
+            continue
+        for keyword in keywords:
+            pattern = r"\b" + re.escape(str(keyword).lower()) + r"\w*\b"
+            if re.search(pattern, text):
+                fallback_ids = {"other"}
+                result = [g for g in result if g.get("id") not in fallback_ids]
+                result.append(genre_map[gid])
+                selected_ids.add(gid)
+                break
+    return result
 
 
 def genre_by_id(genre_id: str | None, genres: list[dict]) -> dict | None:
@@ -473,7 +505,7 @@ def classify_gemini_batch(
     results: list[list[str]] = [[] for _ in range(len(texts))]
     if not out:
         return results
-    for match in re.finditer(r"<<<(\d+)>>>\s*([A-Za-z0-9_][A-Za-z0-9_,\s]*)", out):
+    for match in re.finditer(r"<<<(\d+)>>>[\s:-]*([A-Za-z0-9_][A-Za-z0-9_,\s]*)", out):
         try:
             k = int(match.group(1)) - 1
         except ValueError:
@@ -639,8 +671,8 @@ def main() -> None:
         try:
             for p in fetch_feed(cat):
                 papers.setdefault(p["id"], p)
-        except Exception as e:  # noqa: BLE001
-            print(f"[warn] feed {cat} failed: {e}", file=sys.stderr)
+        except Exception as err:  # noqa: BLE001
+            print(f"[warn] feed {cat} failed: {err}", file=sys.stderr)
         if not dry_run:
             time.sleep(3)  # be polite to arXiv
 
@@ -653,8 +685,8 @@ def main() -> None:
 
     # Each entry carries the paper plus its resolved genres + translation.
     # genres is always a non-empty list; fallback genre is "other".
-    entries = [{"paper": p, "genres": [], "jp": None, "need_tr":
-                bool(p["abstract"])} for p in pending]
+    entries: list[dict[str, Any]] = [{"paper": p, "genres": [], "jp": None, "need_tr":
+                                     bool(p["abstract"])} for p in pending]
 
     batch_size = max(1, cfg.get("translate_batch_size", 5))
     use_llm_cls = cfg.get("classify_with_llm", True)
@@ -662,10 +694,27 @@ def main() -> None:
     llm_first = use_llm_cls and chain and chain[0] == "gemini"
     llm_classify_only = use_llm_cls and not llm_first
     genre_map = {g["id"]: g for g in genres}
+    gemini_stats = {
+        "mode": "disabled",
+        "model": cfg.get("gemini_model", "gemini-2.5-flash"),
+        "key_present": bool(os.environ.get("GEMINI_API_KEY", "")),
+        "requests": 0,
+        "entries_attempted": 0,
+        "entries_classified": 0,
+        "entries_translated": 0,
+    }
+    if dry_run:
+        gemini_stats["mode"] = "dry-run"
+    elif not use_llm_cls:
+        gemini_stats["mode"] = "disabled-by-config"
+    elif llm_first:
+        gemini_stats["mode"] = "translate-and-classify"
+    elif llm_classify_only:
+        gemini_stats["mode"] = "classify-only"
 
     # ---- path A: Gemini translate + classify in one request ---------------
     # Used when "gemini" is first in the translators chain.
-    if llm_first and not dry_run:
+    if llm_first and not dry_run and gemini_stats["key_present"]:
         for i in range(0, len(entries), batch_size):
             chunk = entries[i: i + batch_size]
             limit = cfg.get("max_translate_chars", 2000)
@@ -673,18 +722,24 @@ def main() -> None:
                 f"Title: {e['paper']['title']}\n\nAbstract: {e['paper']['abstract'][:limit]}"
                 for e in chunk
             ]
+            gemini_stats["requests"] += 1
+            gemini_stats["entries_attempted"] += len(chunk)
             pairs = translate_classify_gemini_batch(abstracts, cfg, genres)
             for e, (jp, gids) in zip(chunk, pairs):
                 if jp:
                     e["jp"] = jp
+                    gemini_stats["entries_translated"] += 1
                     gs = [genre_map[g] for g in gids if g in genre_map]
                     e["genres"] = gs if gs else [genre_by_id(None, genres)]
+                    e["genres"] = apply_forced_genres(
+                        e["paper"], e["genres"], genres, cfg)
                     e["llm_done"] = True
+                    gemini_stats["entries_classified"] += 1
 
     # ---- path B: Gemini classify only, translate via DeepL/Google ---------
     # Used when classify_with_llm=true but "gemini" is NOT in translators.
     # Gemini output is ~genre IDs only, so quota usage is 1/50 of path A.
-    elif llm_classify_only and not dry_run:
+    elif llm_classify_only and not dry_run and gemini_stats["key_present"]:
         for i in range(0, len(entries), batch_size):
             chunk = entries[i: i + batch_size]
             limit = cfg.get("max_translate_chars", 2000)
@@ -692,17 +747,46 @@ def main() -> None:
                 f"Title: {e['paper']['title']}\n\nAbstract: {e['paper']['abstract'][:limit]}"
                 for e in chunk
             ]
+            gemini_stats["requests"] += 1
+            gemini_stats["entries_attempted"] += len(chunk)
             gid_lists = classify_gemini_batch(abstracts, cfg, genres)
             for e, gids in zip(chunk, gid_lists):
                 if gids:
                     gs = [genre_map[g] for g in gids if g in genre_map]
                     e["genres"] = gs if gs else [genre_by_id(None, genres)]
+                    e["genres"] = apply_forced_genres(
+                        e["paper"], e["genres"], genres, cfg)
                     e["llm_done"] = True
+                    gemini_stats["entries_classified"] += 1
 
     # ---- fallback: TF-IDF classify (papers not yet classified) ------------
     leftover = [e for e in entries if not e.get("llm_done")]
     for e in leftover:
         e["genres"] = classify_multi(e["paper"], genres, cfg)
+    gemini_fallback = len(leftover)
+
+    if dry_run:
+        print("[info] Gemini usage: skipped (dry-run; TF-IDF only)")
+    elif not use_llm_cls:
+        print("[info] Gemini usage: skipped (classify_with_llm=false)")
+    elif not gemini_stats["key_present"]:
+        print("[info] Gemini usage: skipped (GEMINI_API_KEY missing); "
+              f"TF-IDF fallback={gemini_fallback}")
+    else:
+        translated = ""
+        if gemini_stats["mode"] == "translate-and-classify":
+            translated = f", translated={gemini_stats['entries_translated']}"
+        print(
+            "[info] Gemini usage: "
+            f"mode={gemini_stats['mode']}, "
+            f"model={gemini_stats['model']}, "
+            f"requests={gemini_stats['requests']}, "
+            f"classified={gemini_stats['entries_classified']}/"
+            f"{gemini_stats['entries_attempted']}"
+            f"{translated}, "
+            f"tfidf_fallback={gemini_fallback}, "
+            f"disabled_for_run={_gemini_dead}"
+        )
 
     # ---- translation via chain (all papers without jp) --------------------
     # Covers path B (Gemini classify-only) and TF-IDF fallback papers.
@@ -720,12 +804,12 @@ def main() -> None:
     if dry_run:
         print(f"[dry-run] {len(entries)} papers from feed (seen_ids ignored)\n")
         label_width = max(
-            (sum(len(g["name"]) for g in e["genres"]) + len(e["genres"]) - 1
-             for e in entries if e["genres"]),
+            (sum(len(g["name"]) for g in e["genres"] if g) + len(e["genres"]) - 1
+             for e in entries if e.get("genres")),
             default=7,
         )
         for e in entries:
-            label = ", ".join(g["name"] for g in e["genres"]) or "other"
+            label = ", ".join(g["name"] for g in e["genres"] if g) or "other"
             cats = ", ".join(e["paper"]["categories"][:3])
             title = e["paper"]["title"][:72]
             print(f"  [{label:<{label_width}}]  {title}")
@@ -758,8 +842,8 @@ def main() -> None:
                         "link": e["paper"]["link"],
                         "primary": e["paper"]["primary"],
                         "announce_type": e["paper"]["announce_type"],
-                        "genre_ids": [g["id"] for g in e["genres"]],
-                        "genre_names": [g["name"] for g in e["genres"]],
+                        "genre_ids": [g["id"] for g in e["genres"] if g],
+                        "genre_names": [g["name"] for g in e["genres"] if g],
                         "abstract_en": e["paper"]["abstract"],
                         "abstract_ja": e["jp"],
                     })

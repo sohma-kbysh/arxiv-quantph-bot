@@ -127,6 +127,28 @@ Abstract: We construct a two-party protocol for generating a shared secret key i
       <arxiv:announce_type>new</arxiv:announce_type>
     </item>
 
+    <!-- 期待分類: crypto -->
+    <item>
+      <title>[TEST] Verifiable blind quantum computation with a secure classical client</title>
+      <link>https://arxiv.org/abs/2606.99017</link>
+      <description>arXiv:2606.99017 Announce Type: new
+Abstract: We study verifiable blind quantum computing protocols that allow a client to securely delegate a quantum computation to an untrusted server. The protocol provides blindness of the input and computation, verifiability of the returned outcome, and a composable security proof against malicious servers, while keeping the client nearly classical.</description>
+      <dc:creator>Vera Blind, Calvin Secure</dc:creator>
+      <category>quant-ph</category>
+      <arxiv:announce_type>new</arxiv:announce_type>
+    </item>
+
+    <!-- 期待分類: crypto -->
+    <item>
+      <title>[TEST] Generic structures of quantum auction and secure summation protocols</title>
+      <link>https://arxiv.org/abs/2606.99016</link>
+      <description>arXiv:2606.99016 Announce Type: new
+Abstract: Secure multi-party computation addresses the problem of jointly computing functions of private inputs while revealing minimal information about individual data. We identify structural symmetries between quantum sealed-bid auction protocols and secure multi-party summation, showing that auction primitives such as revenue estimation and winner determination reduce to repeated invocations of a secure summation oracle. The framework is protocol-agnostic and applies to gate-based and photonic implementations.</description>
+      <dc:creator>Alice Auction, Sam Summation</dc:creator>
+      <category>quant-ph</category>
+      <arxiv:announce_type>new</arxiv:announce_type>
+    </item>
+
     <!-- 期待分類: pqc -->
     <item>
       <title>[TEST] Concrete security of module lattice-based KEMs in the QROM</title>

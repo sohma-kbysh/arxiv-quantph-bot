@@ -2691,5 +2691,41 @@
   ],
   "abstract_en": "Quantum estimation theory provides ultimate precision bounds on parameter estimation, independent of experimental setups. In this article, we apply this theoretical framework to neutrino oscillations, aiming to clarify some subtle issues and reveal the maximum achievable precision of oscillation parameters. First, taking the example of two-flavor oscillations, we clarify how the quantum Fisher information (QFI) depends on the choice of bases when the basis transformation itself involves the parameters in question. Then, for three-flavor oscillations, we compute the QFI matrix for electron and muon neutrino states in the flavor basis and derive analytical expressions and numerical results for both diagonal and off-diagonal elements. The implications of off-diagonal correlations for multiparameter estimation are discussed, and the quantum Cram\\'{e}r-Rao bounds on the precision of oscillation parameters for typical reactor and long-baseline accelerator neutrino experiments are obtained. Our results establish a theoretical benchmark for the ultimate precision achievable in future neutrino oscillation experiments.",
   "abstract_ja": "量子推定理論は、実験装置に依存せず、パラメータ推定の究極的な精度限界を提供する。本稿では、この理論的枠組みをニュートリノ振動に適用し、いくつかの微妙な問題を解明し、振動パラメータの最大達成精度を明らかにすることを目的とする。まず、2フレーバー振動を例にとり、基底変換自体が問題のパラメータを含む場合、量子フィッシャー情報（QFI）が基底の選択にどのように依存するかを明らかにする。次に、3フレーバー振動について、フレーバー基底における電子ニュートリノ状態とミューニュートリノ状態のQFI行列を計算し、対角要素と非対角要素の両方について解析的表現と数値結果を導出する。多パラメータ推定における非対角相関の影響について議論し、典型的な原子炉および長基線加速器ニュートリノ実験における振動パラメータの精度に関する量子クラメール・ラオ限界を得る。我々の結果は、将来のニュートリノ振動実験で達成可能な究極的な精度の理論的ベンチマークを確立する。"
+ },
+ {
+  "id": "2606.27693",
+  "posted_at": "2026-06-29T06:37:19Z",
+  "title": "On the generic structures of the protocols for quantum auction and quantum summation and their relation",
+  "authors": "Kabir Sandhu, Sandeep Mishra, Anirban Pathak",
+  "link": "https://arxiv.org/abs/2606.27693",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "crypto"
+  ],
+  "genre_names": [
+   "暗号・セキュリティ"
+  ],
+  "abstract_en": "Secure multi-party computation (SMC) addresses the problem of jointly computing global functions of private inputs while revealing minimal information about individual data. Two prominent examples of SMC tasks are sealed-bid auction and secure multi-party summation. Existing schemes for quantum auction and quantum summation have largely been developed independently, motivated by distinct applications and employing different computational primitives. In this work, structural symmetries in existing protocols for quantum auction and quantum summation are identified. In particular, it is established that the core auction primitives including revenue estimation, maximum bid identification, and winner determination can be reduced to repeated invocations of a summation oracle acting on suitably defined indicator functions. Conversely, summation protocols can be naturally embedded as auxiliary subroutines within auction frameworks, establishing summation as a unifying primitive underlying a broad class of auction mechanisms. Further, computational, communication and memory costs of these reductions are analyzed and compared with some of the representative existing protocols. The analysis has revealed that the process of implementing summation tasks through currently known auction protocols leads to additional overhead associated with bid-space exploration and winner determination. The proposed framework is protocol-agnostic and applicable across diverse computational models, including gate-based and photonic implementations. Finally, a proof-of-concept experimental realization (numerical validation) of a two-bidder sealed-bid auction using IBM (optical quantum) hardware is demonstrated to establish that the claimed equivalence is not merely formal but experimentally verifiable with the available hardware.",
+  "abstract_ja": "セキュアマルチパーティ計算（SMC）は、個々のデータに関する情報を最小限に抑えつつ、プライベート入力のグローバル関数を共同で計算するという課題に取り組んでいます。SMCタスクの代表的な例として、封印入札オークションとセキュアマルチパーティ加算が挙げられます。量子オークションと量子加算の既存のスキームは、それぞれ異なるアプリケーションを動機とし、異なる計算プリミティブを採用して、ほぼ独立して開発されてきました。本研究では、量子オークションと量子加算の既存プロトコルにおける構造的対称性を明らかにします。特に、収益推定、最大入札額の特定、落札者決定といったコアオークションプリミティブは、適切に定義された指標関数に作用する加算オラクルの繰り返し呼び出しに還元できることを示します。逆に、加算プロトコルはオークションフレームワーク内の補助サブルーチンとして自然に組み込むことができ、加算を幅広いオークションメカニズムの基盤となる統一的なプリミティブとして確立します。さらに、これらの還元における計算コスト、通信コスト、メモリコストを分析し、代表的な既存プロトコルと比較します。分析の結果、現在知られているオークションプロトコルを用いて加算タスクを実行すると、入札空間の探索と落札者の決定に伴う追加のオーバーヘッドが発生することが明らかになった。提案するフレームワークはプロトコルに依存せず、ゲートベースやフォトニック実装など、多様な計算モデルに適用可能である。最後に、IBM（光量子）ハードウェアを用いた2入札者による封印入札オークションの概念実証実験（数値検証）を行い、主張する等価性が形式的なものではなく、既存のハードウェアで実験的に検証可能であることを示す。"
+ },
+ {
+  "id": "2606.28139",
+  "posted_at": "2026-06-29T06:37:21Z",
+  "title": "Optimizing Resource Costs: A Practical Guide to Achieving Target Security in Verifiable Blind Quantum Computing",
+  "authors": "Janice van Dam, Micha{\\l} van Hooft, Stephanie D. C. Wehner",
+  "link": "https://arxiv.org/abs/2606.28139",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "ft",
+   "crypto"
+  ],
+  "genre_names": [
+   "フォールトトレラント計算",
+   "暗号・セキュリティ"
+  ],
+  "abstract_en": "Verifiable blind quantum computing (VBQC) enables a resource-limited client to securely delegate computations to an untrusted quantum server while maintaining privacy and detecting deviations from the prescribed computation. The noise-robust VBQC protocol of Leichtle et al. achieves this through a round-based structure: the client delegates multiple computation rounds and test rounds, using the test outcomes to detect cheating while tolerating honest hardware noise. The protocol's security proof involves numerous interdependent parameters, making it non-trivial to find a valid parameter set for a given hardware noise level and security target. We formalize this as a constrained optimization problem and develop a practical framework to solve it. The framework yields the protocol parameters that minimize the number of rounds for any given setup. We derive a heuristic formula for the minimal number of rounds to help understand the scaling with noise and security targets and to provide rapid resource estimation. Since the number of rounds depends on noise while the time per round depends on hardware rate, the framework also enables optimization of rate-fidelity trade-offs to minimize end-to-end runtime. We demonstrate both applications through a case study of a trapped-ion server with a measurement-only client, showing how the client's polarization control hardware specifications translate into protocol parameters and runtime estimates, providing concrete guidance for near-term implementations.",
+  "abstract_ja": "検証可能なブラインド量子コンピューティング（VBQC）は、リソースが限られたクライアントが、プライバシーを維持し、規定された計算からの逸脱を検出しながら、信頼できない量子サーバーに計算を安全に委任することを可能にします。Leichtleらによるノイズ耐性VBQCプロトコルは、ラウンドベースの構造によってこれを実現します。クライアントは複数の計算ラウンドとテストラウンドを委任し、テスト結果を使用して不正行為を検出しつつ、ハードウェアノイズを許容します。このプロトコルのセキュリティ証明には多数の相互依存するパラメータが含まれるため、特定のハードウェアノイズレベルとセキュリティ目標に対して有効なパラメータセットを見つけることは容易ではありません。私たちはこれを制約付き最適化問題として定式化し、それを解決するための実用的なフレームワークを開発しました。このフレームワークは、任意の設定に対してラウンド数を最小化するプロトコルパラメータを生成します。ノイズとセキュリティ目標によるスケーリングを理解し、迅速なリソース推定を提供するために、最小ラウンド数に対するヒューリスティックな公式を導出します。ラウンド数はノイズに依存し、1ラウンドあたりの時間はハードウェアの速度に依存するため、このフレームワークは、エンドツーエンドの実行時間を最小限に抑えるための速度と忠実度のトレードオフの最適化も可能にします。本稿では、測定専用クライアントを備えたトラップイオンサーバのケーススタディを通して、これらの両方の応用例を示します。クライアントの偏極制御ハードウェア仕様がプロトコルパラメータと実行時間推定値にどのように変換されるかを示し、近未来の実装に向けた具体的な指針を提供します。"
  }
 ]

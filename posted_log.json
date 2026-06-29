@@ -1657,5 +1657,1039 @@
   ],
   "abstract_en": "【テスト用データ・実在しない論文】期待分類: other (その他・異分野) — cond-mat.str-el が primary This condensed-matter paper studies strongly correlated electrons and superconductivity in twisted bilayer materials. It is cross-listed to quant-ph only tangentially. The primary category cond-mat.str-el should trigger category_other_overrides and route this paper to the other channel.",
   "abstract_ja": "【テスト用データ・存在しない論文】 期待分類: その他 (その他・異分野) — cond-mat.str-el が main この凝縮系論文は、ねじれ二重層材料における強相関電子と超伝導を研究しています。 quant-ph とは接線的にのみクロスリストされています。プライマリ カテゴリ cond-mat.str-el は category_other_overrides をトリガーし、このペーパーを他のチャネルにルーティングする必要があります。"
+ },
+ {
+  "id": "2606.27402",
+  "posted_at": "2026-06-29T06:01:29Z",
+  "title": "Quantum typicality survives non-Abelian gauge constraints: exact analytical prediction confirmed in $SU(2)$ lattice gauge theory",
+  "authors": "Zhi-Wei Wang, Samuel L. Braunstein",
+  "link": "https://arxiv.org/abs/2606.27402",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "abstract_en": "Arguments for emergent spacetime require that quantum typicality, the generic absence of inter-subsystem correlations, persists on the physical Hilbert space of a gauge theory, where non-Abelian constraints could in principle inject geometry-supporting entanglement. Using $SU(2)$ lattice gauge theory on two-dimensional tori ($d_{\\mathrm{phys}}$ up to $4{,}193$), we show that it does: the typical mutual information between strictly disjoint links matches an exact parameter-free analytical prediction combining a microcanonical baseline with Haar-random fluctuations. The Kogut-Susskind Hamiltonian generates correlations from states of definite geometry (such as the electric vacuum), while generic states show only regression to the mean, establishing that the arrow of correlation growth requires a non-generic initial condition.",
+  "abstract_ja": "創発的時空の議論では、量子典型性、すなわちサブシステム間の相関の一般的な不在が、非アーベル制約によって原理的に幾何学的エンタングルメントを注入できるゲージ理論の物理的ヒルベルト空間上で持続することが必要である。2次元トーラス上のSU(2)格子ゲージ理論（$d_{\\mathrm{phys}}$ は $4{,}193$ まで）を用いて、それが持続することを示す。厳密に分離したリンク間の典型的な相互情報量は、ミクロカノニカルベースラインとハールランダムゆらぎを組み合わせた正確なパラメータフリー解析予測と一致する。コグット・サスキンド・ハミルトニアンは、明確な幾何学的状態（電気真空など）から相関を生成するが、一般的な状態は平均への回帰のみを示し、相関成長の矢印には非一般的な初期条件が必要であることを確立する。"
+ },
+ {
+  "id": "2606.27403",
+  "posted_at": "2026-06-29T06:01:30Z",
+  "title": "Reservoir-independent lossless charging and protected storage of an open quantum battery",
+  "authors": "Asad Ali, H. Kuniyil, M. I Hussain, M. T Rahim, Saif Al-Kuwari, James Q. Quach",
+  "link": "https://arxiv.org/abs/2606.27403",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations",
+   "sim"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論",
+   "量子シミュレーション"
+  ],
+  "abstract_en": "A quantum battery charged through a lossy intermediate state faces a structural trade-off between charging speed and dissipation. We show that an exact algebraic cancellation removes it in a driven three-level cell: the radiatively decaying state is fed by a single bright amplitude, and a counterdiabatic field annuls the lone residual source that drives it, holding the lossy state identically empty. Charging is then lossless -- not one photon is emitted through the bridge -- at any one-photon detuning, coupling, linewidth, and speed down to the rotating-wave limit, with no adiabatic elimination, so the charging power is bounded by the drive amplitude (a quantum speed limit) rather than by dissipation. Crucially, this losslessness is independent of the reservoir: because the dark sector never engages the system-bath coupling, the emission vanishes exactly for an arbitrary spectral density, Markovian or not, as an exact damped-pseudomode treatment confirms to machine precision across all memory times. The entire non-Hermitian structure -- a Markovian second-order exceptional point that reservoir memory promotes to a third-order one, and the attendant dissipation phase diagram -- lives in the bright sector, from which the protocol is by construction exempt. This inverts dissipation-engineered charging, where an exceptional point or reservoir memory is a resource; here the lossy sector is never populated at all. The same dark-state structure protects the stored charge, converting fast radiative self-discharge into the slow metastable lifetime, with residuals quadratic in the control error. We detail experimental requirements and representative parameters for neutral alkaline-earth atoms, trapped ions, transmons, and defect centers.",
+  "abstract_ja": "損失のある中間状態を介して充電される量子バッテリーは、充電速度と散逸の間に構造的なトレードオフを抱えています。本稿では、駆動型3準位セルにおいて、厳密な代数的相殺によってこのトレードオフが解消されることを示します。放射崩壊状態は単一の明るい振幅によって供給され、反断熱場がそれを駆動する唯一の残留源を相殺し、損失のある状態を常に空の状態に保ちます。その結果、充電は損失がなく、ブリッジを通して光子が1つも放出されません。これは、あらゆる1光子デチューニング、結合、線幅、回転波限界までの速度において、断熱的消去がないため、充電電力は散逸ではなく駆動振幅（量子速度限界）によって制限されます。重要なのは、この損失のなさがリザーバーに依存しないことです。ダークセクターはシステムと浴の結合に関与しないため、放出は任意のスペクトル密度（マルコフ的か否かを問わず）に対して正確に消滅します。これは、厳密な減衰擬似モード処理によって、すべてのメモリ時間にわたってマシン精度で確認されています。非エルミート構造全体（リザーバーメモリが三次マルコフ例外点に昇格するマルコフ二次例外点と、それに伴う散逸相図）は明るいセクターに存在し、プロトコルは構成上このセクターから除外されている。これは、例外点またはリザーバーメモリがリソースとなる散逸エンジニアリング充電とは逆であり、ここでは損失セクターは全く占有されない。同じ暗状態構造が蓄積された電荷を保護し、高速放射自己放電を遅い準安定寿命に変換し、残差は制御誤差の二乗となる。中性アルカリ土類原子、トラップされたイオン、トランスモン、および欠陥中心の実験要件と代表的なパラメータを詳述する。"
+ },
+ {
+  "id": "2606.27411",
+  "posted_at": "2026-06-29T06:01:34Z",
+  "title": "Compression-Driven Anomaly Detection in Brain MRI Using an Interpretable Quantum Autoencoder",
+  "authors": "Santanu Ganguly, Xing Liang, Dimitrios Makris",
+  "link": "https://arxiv.org/abs/2606.27411",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml"
+  ],
+  "genre_names": [
+   "量子機械学習"
+  ],
+  "abstract_en": "We study a quantum autoencoder (QAE) for compression-driven anomaly detection in brain MRI data. The approach leverages angle encoding to map image patches into quantum states, followed by a variational encoder-decoder architecture trained to discard information via auxiliary trash qubits. Anomaly scores reflect the degree to which inputs resist compression relative to normal data, with higher scores corresponding to deviations from the learned normal manifold. Evaluated on publicly available brain MRI DICOM datasets, the method achieves a slice-level ROC-AUC of approximately 0.95 and a patch-level ROC-AUC of approximately 0.813, outperforming classical autoencoder and PCA baselines. Analysis of the learned parameters reveals a pronounced encoder-decoder asymmetry, where effective anomaly detection arises from structured information compression within the encoder rather than increased parameter magnitude or decoder expressivity. This results in a controlled compression-reconstruction trade-off with a clear operating regime that supports principled threshold selection. Qualitative evaluation further shows that the QAE produces spatially localized anomaly heatmaps aligned with tumorous regions. The results, supported by promising baseline performances, demonstrate that quantum autoencoders provide an interpretable and controllable mechanism for anomaly detection based on incompressibility with respect to a learned latent representation. This work highlights the potential of quantum autoencoders as a principled tool for studying compression dynamics in quantum machine learning, with promising implications for decision support in medical imaging workflows.",
+  "abstract_ja": "本研究では、脳MRIデータにおける圧縮駆動型異常検出のための量子オートエンコーダ（QAE）を研究する。この手法は、角度符号化を利用して画像パッチを量子状態にマッピングし、その後、補助的なゴミ量子ビットを介して情報を破棄するように学習された変分エンコーダ・デコーダアーキテクチャを用いる。異常スコアは、入力が正常データと比較してどの程度圧縮に抵抗するかを示し、スコアが高いほど学習された正常多様体からの逸脱が大きいことを意味する。公開されている脳MRI DICOMデータセットで評価した結果、この手法はスライスレベルで約0.95、パッチレベルで約0.813のROC-AUCを達成し、従来のオートエンコーダおよびPCAベースラインを上回る性能を示した。学習されたパラメータの分析から、エンコーダ・デコーダ間の顕著な非対称性が明らかになり、効果的な異常検出は、パラメータの大きさやデコーダの表現力の増加ではなく、エンコーダ内部の構造化された情報圧縮によって生じることが分かった。これにより、明確な動作領域を持つ制御された圧縮・再構成のトレードオフが実現し、原理に基づいた閾値選択が可能となる。定性的な評価では、QAEが腫瘍領域に一致する空間的に局所化された異常ヒートマップを生成することがさらに明らかになった。有望なベースライン性能に裏付けられたこの結果は、量子オートエンコーダが、学習された潜在表現に対する非圧縮性に基づく異常検出のための解釈可能かつ制御可能なメカニズムを提供することを示している。本研究は、量子オートエンコーダが量子機械学習における圧縮ダイナミクスの研究のための原理に基づいたツールとして持つ可能性を強調しており、医用画像処理ワークフローにおける意思決定支援に有望な示唆を与えるものである。"
+ },
+ {
+  "id": "2606.27424",
+  "posted_at": "2026-06-29T06:01:35Z",
+  "title": "Engineering of non-Hermitian interactions in digital qudit quantum simulators",
+  "authors": "Matteo M. Wauters, Paolo Boschetto, Edoardo Ballini, Alberto Biella, Philipp Hauke",
+  "link": "https://arxiv.org/abs/2606.27424",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim"
+  ],
+  "genre_names": [
+   "量子シミュレーション"
+  ],
+  "abstract_en": "Non-Hermitian Hamiltonians are a fascinating class of many-body models that describe the effective dynamics of quantum systems interacting with the environment through particle, energy, or information exchange. Although their theoretical framework is well established, the controlled engineering of such Hamiltonians in the context of quantum simulations remains challenging, even more so when the non-Hermitian part describes a $k$-body interaction. Qudit quantum simulators offer a compelling framework to implement such models. We theoretically investigate the dynamics of a one-dimensional chain of qudits undergoing hybrid unitary-projective evolution, where suitably designed measurements constrain the dynamics to a Zeno subspace. As we illustrate for the case of qutrits, within the Zeno subspace the dynamics is governed by an effective non-Hermitian Hamiltonian for an ensemble of pseudo-spins $1/2$, which can inherit non-Hermitian two-body interactions with the same connectivity as the full qutrit chain. We derive an analytical relation linking the monitored qutrits' evolution to a desired target non-Hermitian Hamiltonian and validate the effective description through numerical simulations of a representative model. Our scheme provides a constructive route for the realization of a large class of interacting non-Hermitian many-body Hamiltonians in experimentally relevant multilevel quantum platforms, including trapped ions and superconducting circuits.",
+  "abstract_ja": "非エルミートハミルトニアンは、粒子、エネルギー、または情報の交換を通じて環境と相互作用する量子システムの有効なダイナミクスを記述する、魅力的な多体モデルのクラスです。その理論的枠組みは確立されていますが、量子シミュレーションの文脈でそのようなハミルトニアンを制御することは依然として困難であり、非エルミート部分がk体相互作用を記述する場合はさらに困難です。Qudit量子シミュレータは、そのようなモデルを実装するための魅力的なフレームワークを提供します。我々は、適切に設計された測定によってダイナミクスがゼノ部分空間に制限される、ハイブリッドユニタリ射影進化を受ける1次元qudit鎖のダイナミクスを理論的に調査します。qutritの場合で示すように、ゼノ部分空間内では、ダイナミクスは擬スピン$1/2$のアンサンブルに対する有効な非エルミートハミルトニアンによって支配され、完全なqutrit鎖と同じ接続性で非エルミート2体相互作用を継承することができます。我々は、監視対象のキュートリットの進化と目標とする非エルミートハミルトニアンを結びつける解析的関係式を導出し、代表的なモデルの数値シミュレーションを通してその有効性を検証する。我々の手法は、トラップイオンや超伝導回路など、実験的に関連性の高い多準位量子プラットフォームにおいて、相互作用する非エルミート多体ハミルトニアンの幅広いクラスを実現するための建設的な道筋を提供する。"
+ },
+ {
+  "id": "2606.27428",
+  "posted_at": "2026-06-29T06:01:36Z",
+  "title": "Multi-parameter two-photon polarimetry at the quantum limit",
+  "authors": "Joseph Niblo, Luca Maggio, Russell M. J. Brooks, Joseph Ho, Vincenzo Tamma, Alessandro Fedrizzi",
+  "link": "https://arxiv.org/abs/2606.27428",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sensing"
+  ],
+  "genre_names": [
+   "量子センシング・計測"
+  ],
+  "abstract_en": "Photonic quantum metrology has demonstrated advantages in precision and resource efficiency for a wide range of applications, with several schemes approaching the fundamental quantum Cram\\'er-Rao precision bound (QCRB). However, the intrinsic incompatibility of quantum measurements represents a hurdle in extending these advantages to the simultaneous estimation of multiple parameters. In this paper, we present an experimental protocol approaching the QCRB simultaneously in two polarisation parameters, across a wide range of the parameter space, with as few as $\\sim 200$ photon pairs, offering advantages for polarimetric sensing for dim sources such as in X-ray astronomy or photosensitive samples.",
+  "abstract_ja": "光子量子計測は、幅広い用途において精度とリソース効率の面で優位性を示しており、いくつかの方式は基本的な量子クラメール・ラオ精度限界（QCRB）に近づいています。しかし、量子計測の本質的な非互換性は、これらの利点を複数のパラメータの同時推定に拡張する際の障害となっています。本論文では、2つの偏光パラメータにおいて、パラメータ空間の広い範囲にわたって、わずか約200個の光子ペアで同時にQCRBに近づく実験プロトコルを提示します。これは、X線天文学や感光性サンプルなどの暗い光源の偏光センシングに利点をもたらします。"
+ },
+ {
+  "id": "2606.27508",
+  "posted_at": "2026-06-29T06:01:38Z",
+  "title": "I-QMapper: Error-Aware Layout Optimization and Device Diagnostics for NISQ Hardware",
+  "authors": "Milana Bazayeva, Kenneth Merz",
+  "link": "https://arxiv.org/abs/2606.27508",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "nisq"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム"
+  ],
+  "abstract_en": "Achieving high-fidelity execution on noisy intermediate-scale quantum (NISQ) hardware requires careful selection of physical qubit layouts, as gate errors, readout errors, and coherence times vary across the device and drift over time. Currently, qubit mapping is performed either through manual inspection of device calibration data or through automated layout pipelines, neither of which provides integrated, interactive layout visualization combined with calibration analytics. In this work, we present the Interactive Quantum Mapper (I-QMapper), a Jupyter-based, open-source tool for noise-aware layout selection, visualization, and analysis on superconducting quantum hardware. I-QMapper offers two operating modes: a general-purpose mode for arbitrary circuits, and a dedicated mode for quantum-chemistry applications, specifically tailored to the Local Unitary Cluster Jastrow (LUCJ) ansatz. Within each mode, a Design panel supports interactive layout construction, while an Error panel provides calibration analytics through four temporal viewing modes (Live, Snapshot, Intraday, and Multi-day range) together with threshold filtering and delta-mode comparison for drift identification. Each layout receives a Layout-Quality Score (LQS) that aggregates the readout and two-qubit gate errors of the layout into a single quality value. Starting from the automatic LUCJ circuit-generation provided by IBM Quantum, we extend it to a multi-programming setting in which multiple circuits are mapped onto a single quantum processing unit (QPU). I-QMapper further supports side-by-side visualization of two quantum backends and layout comparison, and session export for experimental reproducibility. By combining interactive exploration with calibration analytics, I-QMapper aims to support both rapid layout prototyping and informed noise-aware experimental design on NISQ devices.",
+  "abstract_ja": "ノイズの多い中間規模量子 (NISQ) ハードウェアで高忠実度の実行を実現するには、ゲートエラー、読み出しエラー、コヒーレンス時間がデバイス全体で変動し、時間とともにドリフトするため、物理的な量子ビットのレイアウトを慎重に選択する必要があります。現在、量子ビットのマッピングは、デバイスのキャリブレーション データの手動検査または自動レイアウト パイプラインによって行われますが、どちらも統合された対話型のレイアウト可視化とキャリブレーション分析を組み合わせた機能を提供していません。本研究では、超伝導量子ハードウェア上でノイズを考慮したレイアウトの選択、可視化、分析を行う Jupyter ベースのオープンソース ツールである Interactive Quantum Mapper (I-QMapper) を紹介します。I-QMapper は、任意の回路に対応する汎用モードと、量子化学アプリケーション専用のモードの 2 つの動作モードを提供します。専用モードは、特にローカル ユニタリ クラスター Jastrow (LUCJ) アンザッツに合わせて調整されています。各モード内で、デザイン パネルはインタラクティブなレイアウト構築をサポートし、エラー パネルは、4 つの時間的表示モード (ライブ、スナップショット、日内、複数日範囲) によるキャリブレーション分析と、ドリフト識別のための閾値フィルタリングおよびデルタ モード比較を提供します。各レイアウトには、レイアウトの読み出しと 2 量子ビット ゲート エラーを単一の品質値に集約したレイアウト品質スコア (LQS) が付与されます。IBM Quantum が提供する自動 LUCJ 回路生成から始めて、複数の回路が単一の量子処理ユニット (QPU) にマッピングされるマルチ プログラミング設定に拡張します。I-QMapper はさらに、2 つの量子バックエンドの並列表示とレイアウト比較、および実験の再現性のためのセッション エクスポートをサポートします。インタラクティブな探索とキャリブレーション分析を組み合わせることで、I-QMapper は、NISQ デバイス上での迅速なレイアウト プロトタイピングと情報に基づいたノイズを考慮した実験設計の両方をサポートすることを目指しています。"
+ },
+ {
+  "id": "2606.27555",
+  "posted_at": "2026-06-29T06:01:40Z",
+  "title": "Photon avalanche triggered by a single photon in a bistable nonlinear optical cavity",
+  "authors": "Asian Selvakumaran, Anna Minguzzi, Iacopo Carusotto, Maxime Richard",
+  "link": "https://arxiv.org/abs/2606.27555",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim",
+   "foundations"
+  ],
+  "genre_names": [
+   "量子シミュレーション",
+   "量子基礎・測定理論"
+  ],
+  "abstract_en": "We theoretically investigate the response of a coherently-driven nonlinear optical cavity to an additional incident single photon. Using a quantum description of the nonlinear dynamics that fully accounts for the quantum fluctuations of the cavity field and for the discrete nature of the incident photon, we characterize the quantum dynamics of single-photon-stimulated jumps from the low-photon-number to the high-photon-number state of the optical bistability loop. We find that the system can exhibit a giant response to this single quantum of excitation, rooted in the phase-transition picture of optical bistability. In addition to shedding light on the role of quantum fluctuations in the non-equilibrium dynamics of a nonlinear optical cavity, our results suggest a strategy for an all-optical single-photon avalanche detector.",
+  "abstract_ja": "本研究では、コヒーレント駆動された非線形光共振器が、追加の単一光子入射に対して示す応答を理論的に調査する。共振器場の量子ゆらぎと入射光子の離散性を完全に考慮した非線形ダイナミクスの量子記述を用いて、光双安定性ループの低光子数状態から高光子数状態への単一光子励起ジャンプの量子ダイナミクスを特徴づける。その結果、光双安定性の相転移描像に基づき、この単一量子励起に対してシステムが巨大な応答を示すことがわかった。本研究の結果は、非線形光共振器の非平衡ダイナミクスにおける量子ゆらぎの役割を明らかにするだけでなく、全光単一光子アバランシェ検出器の実現戦略を示唆するものである。"
+ },
+ {
+  "id": "2606.27569",
+  "posted_at": "2026-06-29T06:01:42Z",
+  "title": "Vector Representation of Exact Soliton Dynamics in Multi-component Nonlinear Schr\\\"odinger Systems",
+  "authors": "Maxime Foucher, Laurent Delisle, Amine Jaouadi",
+  "link": "https://arxiv.org/abs/2606.27569",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim"
+  ],
+  "genre_names": [
+   "量子シミュレーション"
+  ],
+  "abstract_en": "Multicomponent nonlinear Schr\\\"odinger equations constitute fundamental models for coherent matter waves in multicomponent Bose--Einstein condensates, spinor quantum fluids, and vector nonlinear optical systems. We develop a vector formulation of the Hirota bilinear formalism for the completely integrable Manakov system that treats the coupled nonlinear Schr\\\"odinger equations directly at the vector level rather than through the conventional component-wise decomposition. This framework naturally retains the intrinsic multicomponent representation of the model while providing compact analytical expressions for exact vector soliton solutions. Within this approach, we systematically construct bright, dark, and mixed one-, two-, and three-soliton solutions and show how the underlying vector structure provides a unified description of their nonlinear interactions. In particular, the proposed formalism makes the coupling between the different components explicit while preserving the geometric organization of the vector system throughout the bilinearization procedure. Beyond its analytical simplicity, the framework offers a natural perspective for the study of coherent multicomponent nonlinear excitations and provides a foundation for extending vector Hirota methods to other classes of exact solutions, including rogue waves, periodic waves, and rational solutions.",
+  "abstract_ja": "多成分非線形シュレーディンガー方程式は、多成分ボーズ・アインシュタイン凝縮体、スピノル量子流体、およびベクトル非線形光学系におけるコヒーレント物質波の基本モデルを構成します。本稿では、完全積分可能なマナコフ系に対する広田双線形形式のベクトル定式化を開発します。この形式では、従来の成分ごとの分解ではなく、ベクトルレベルで結合非線形シュレーディンガー方程式を直接扱います。このフレームワークは、モデルの本質的な多成分表現を自然に保持しつつ、正確なベクトルソリトン解に対する簡潔な解析的表現を提供します。このアプローチを用いて、明るい、暗い、および混合の1、2、および3ソリトン解を体系的に構築し、基礎となるベクトル構造がそれらの非線形相互作用の統一的な記述を提供することを示します。特に、提案する形式は、双線形化手順全体を通してベクトル系の幾何学的構成を維持しながら、異なる成分間の結合を明示的にします。その解析的な単純さに加えて、この枠組みは、コヒーレントな多成分非線形励起の研究に自然な視点を提供し、ベクトル広田法を異常波、周期波、有理解などの他の種類の厳密解に拡張するための基礎を提供する。"
+ },
+ {
+  "id": "2606.27589",
+  "posted_at": "2026-06-29T06:01:44Z",
+  "title": "su(1,1) Symmetry and Exact Solutions of the Dunkl-Klein-Gordon Equation in Higher Dimensions",
+  "authors": "M. Salazar-Ram\\'irez, B. C. L\\\"utf\\\"uo\\u{g}lu, Jes\\'us Alfredo Mart\\'inez-Nu\\~no",
+  "link": "https://arxiv.org/abs/2606.27589",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "abstract_en": "We investigate the $d$-dimensional Dunkl--Klein--Gordon equation for a scalar particle within an algebraic framework. By employing Schr\\\"odinger factorization, we construct the generators of the $\\mathfrak{su}(1,1)$ algebra and establish the associated symmetry of the radial sector. The energy spectrum is derived using irreducible unitary representations, and the corresponding Sturmian radial basis is obtained analytically. We analyze the $d$-dimensional Dunkl--Klein--Gordon oscillator and the bound-state sector of the $d$-dimensional Dunkl--Klein--Gordon equation with a Dunkl--Coulomb-like potential. Furthermore, $\\mathrm{SU}(1,1)$ coherent states are constructed and their time evolution is analyzed, revealing a characteristic radial oscillation behavior. The results show that the Dunkl deformation introduces parity-dependent modifications in the spatial structure of the system while preserving its underlying algebraic dynamics.",
+  "abstract_ja": "我々は、代数的な枠組みの中で、スカラー粒子に対するd次元ダンクル・クライン・ゴルドン方程式を研究する。シュレーディンガー分解を用いることで、$\\mathfrak{su}(1,1)$代数の生成子を構築し、関連する動径セクターの対称性を確立します。エネルギー スペクトルは既約ユニタリ表現を用いて導出され、対応するシュトゥルム動径基底が解析的に得られます。d次元ダンクル-クライン-ゴルドン振動子と、ダンクル-クーロン型ポテンシャルを持つd次元ダンクル-クライン-ゴルドン方程式の束縛状態セクターを解析します。さらに、$\\mathrm{SU}(1,1)$コヒーレント状態を構築し、その時間発展を解析して、特徴的な動径振動挙動を明らかにします。結果は、ダンクル変形が、その根底にある代数的ダイナミクスを維持しながら、システムの空間構造にパリティ依存の変更を導入することを示しています。"
+ },
+ {
+  "id": "2606.27630",
+  "posted_at": "2026-06-29T06:01:45Z",
+  "title": "Scalable Acceleration of Many-Body Quantum Dynamics via Time-Rescaling",
+  "authors": "Edson B. de Almeida Filho, \\^Angelo F. da Silva Fran\\c{c}a, Bert\\'ulio de Lima Bernardo",
+  "link": "https://arxiv.org/abs/2606.27630",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim",
+   "nisq"
+  ],
+  "genre_names": [
+   "量子シミュレーション",
+   "変分・NISQアルゴリズム"
+  ],
+  "abstract_en": "Fast quantum control is essential to overcome decoherence in contemporary quantum platforms, yet achieving this in many-body systems remains a major challenge. We show that the time-rescaling (TR) method enables efficient acceleration of closed many-body quantum dynamics, extending its applicability beyond previously studied regimes. Applying TR to the transverse-field Ising model with a longitudinal field, we demonstrate a significant enhancement of quantum annealing performance, maintaining high ground-state fidelity at evolution times where standard adiabatic dynamics breaks down, with only weak dependence on system size. We further demonstrate high-fidelity preparation of Greenberger-Horne-Zeilinger states in many-body systems, where TR extends the accessible system sizes within fixed evolution times. We additionally show that the Mandelstam-Tamm quantum speed limit does not fundamentally limit the acceleration achievable through TR, as the reduction in evolution time is exactly compensated by increased energy fluctuations. These results establish TR as a scalable and experimentally viable approach to fast quantum control in many-body systems.",
+  "abstract_ja": "高速量子制御は、現代の量子プラットフォームにおけるデコヒーレンスを克服するために不可欠ですが、多体システムでこれを実現することは依然として大きな課題です。本稿では、時間再スケーリング（TR）法が、閉じた多体量子ダイナミクスの効率的な加速を可能にし、その適用範囲をこれまで研究されてきた領域を超えて拡張することを示します。縦方向磁場を持つ横方向磁場イジングモデルにTRを適用することで、量子アニーリング性能が大幅に向上し、標準的な断熱ダイナミクスが破綻する進化時間においても高い基底状態忠実度を維持し、システムサイズへの依存性は弱いことを実証します。さらに、TRによって固定された進化時間内でアクセス可能なシステムサイズが拡張される多体システムにおいて、グリーンバーガー・ホーン・ツァイリンガー状態を高忠実度で準備できることを実証します。加えて、進化時間の短縮がエネルギーゆらぎの増加によって正確に相殺されるため、マンデルスタム・タム量子速度限界はTRによって達成可能な加速を根本的に制限しないことを示します。これらの結果は、TRが多体システムにおける高速量子制御のためのスケーラブルで実験的に実行可能なアプローチであることを確立します。"
+ },
+ {
+  "id": "2606.27633",
+  "posted_at": "2026-06-29T06:01:48Z",
+  "title": "Enhancing Quantum Metrology with High-order Fisher Information and Experiments",
+  "authors": "Xin-Zhu Liu, Jun-Li Jiang, Yan-Han Yang, Li-Ming Zhao, Xue Yang, Shao-Ming Fei, Ming-Xing Luo",
+  "link": "https://arxiv.org/abs/2606.27633",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sensing"
+  ],
+  "genre_names": [
+   "量子センシング・計測"
+  ],
+  "abstract_en": "Fisher information plays a central role in statistics and quantum metrology, providing the basis for the celebrated Cram\\'{e}r-Rao bound. In this work, we introduce a new information measure based on higher-order Fisher information and show that it naturally leads to a generalized uncertainty relation for parameter estimation, which can be regarded as an extension of the Cram\\'er-Rao bound. As an application, we analyze the case of quantum phase estimation with a single qubit and compare our theoretical bounds with the well-known established hierarchical bounds. Finally, we experimentally validate the proposed framework using a photonic platform.",
+  "abstract_ja": "フィッシャー情報は統計学および量子計測学において中心的な役割を果たし、有名なクラメール・ラオ限界の基礎となっています。本研究では、高次のフィッシャー情報に基づく新しい情報尺度を導入し、それがパラメータ推定のための一般化された不確定性関係に自然に導かれることを示します。この不確定性関係は、クラメール・ラオ限界の拡張とみなすことができます。応用例として、単一量子ビットによる量子位相推定のケースを分析し、我々の理論的限界を既知の階層的限界と比較します。最後に、フォトニックプラットフォームを用いて提案するフレームワークを実験的に検証します。"
+ },
+ {
+  "id": "2606.27648",
+  "posted_at": "2026-06-29T06:01:50Z",
+  "title": "Memory and thermal amplification in spin--cavity squared commutators",
+  "authors": "Yong-Hong Ma, Hui-Hui Xu, Jian-Zhuang Wu, Quan-Zhen Ding, Wu-Ming Liu, Xin-Yu Zhao, E Wu",
+  "link": "https://arxiv.org/abs/2606.27648",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "abstract_en": "Squared commutators in the Holstein--Primakoff limit of a spin--cavity system provide a compact way to separate propagation from covariance growth in a finite-temperature reservoir with memory. In the finite-temperature NMQSD construction, the linear quadrature commutator is fixed by the retarded spin--cavity propagator, whereas a quadratic commutator carries the same retarded factor together with a covariance factor. For a zero-mean Gaussian state, \\(C_{R_i^2,R_j}(t)=4|\\kappa_{ij}(t)|^2V_{ii}(t)\\); the symmetrized expression gives the spin-side and mixed channels. Since \\(\\bar n\\) enters the covariance sector but not the homogeneous retarded kernel, raising \\(\\bar n\\) from 0 to 1 leaves the linear transfer unchanged while increasing the quadratic signal. Varying the bath-memory rate and the counter-rotating coupling within the stable HP region then shows how stored cavity history changes both the transfer weight and its distribution in time. The calculation separates memory-dependent propagation from thermal covariance growth in collective spin--cavity dynamics.",
+  "abstract_ja": "スピン・キャビティ系のホルスタイン・プリマコフ極限における二乗交換子は、記憶を持つ有限温度リザーバーにおける伝搬と共分散成長を分離するコンパクトな方法を提供する。有限温度NMQSD構成では、線形直交交換子は遅延スピン・キャビティ伝搬子によって固定されるが、二次交換子は同じ遅延因子と共分散因子を併せ持つ。平均ゼロのガウス状態の場合、\\(C_{R_i^2,R_j}(t)=4|\\kappa_{ij}(t)|^2V_{ii}(t)\\)となる。対称化された式はスピン側と混合チャネルを与える。\\(\\bar n\\)は共分散セクターに入るが均質遅延カーネルには入らないため、\\(\\bar n\\)を0から1に上げると、線形転送は変化しないが二次信号が増加する。安定なHP領域内で浴記憶率と逆回転結合を変化させることで、蓄積されたキャビティ履歴が伝達重みとその時間的分布をどのように変化させるかが明らかになる。この計算により、集団スピン・キャビティダイナミクスにおける記憶依存伝播と熱共分散成長が分離される。"
+ },
+ {
+  "id": "2606.27693",
+  "posted_at": "2026-06-29T06:01:51Z",
+  "title": "On the generic structures of the protocols for quantum auction and quantum summation and their relation",
+  "authors": "Kabir Sandhu, Sandeep Mishra, Anirban Pathak",
+  "link": "https://arxiv.org/abs/2606.27693",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "crypto",
+   "algo"
+  ],
+  "genre_names": [
+   "量子暗号・QKD",
+   "量子アルゴリズム"
+  ],
+  "abstract_en": "Secure multi-party computation (SMC) addresses the problem of jointly computing global functions of private inputs while revealing minimal information about individual data. Two prominent examples of SMC tasks are sealed-bid auction and secure multi-party summation. Existing schemes for quantum auction and quantum summation have largely been developed independently, motivated by distinct applications and employing different computational primitives. In this work, structural symmetries in existing protocols for quantum auction and quantum summation are identified. In particular, it is established that the core auction primitives including revenue estimation, maximum bid identification, and winner determination can be reduced to repeated invocations of a summation oracle acting on suitably defined indicator functions. Conversely, summation protocols can be naturally embedded as auxiliary subroutines within auction frameworks, establishing summation as a unifying primitive underlying a broad class of auction mechanisms. Further, computational, communication and memory costs of these reductions are analyzed and compared with some of the representative existing protocols. The analysis has revealed that the process of implementing summation tasks through currently known auction protocols leads to additional overhead associated with bid-space exploration and winner determination. The proposed framework is protocol-agnostic and applicable across diverse computational models, including gate-based and photonic implementations. Finally, a proof-of-concept experimental realization (numerical validation) of a two-bidder sealed-bid auction using IBM (optical quantum) hardware is demonstrated to establish that the claimed equivalence is not merely formal but experimentally verifiable with the available hardware.",
+  "abstract_ja": "セキュアマルチパーティ計算（SMC）は、個々のデータに関する情報を最小限に抑えつつ、プライベート入力のグローバル関数を共同で計算するという課題に取り組んでいます。SMCタスクの代表的な例として、封印入札オークションとセキュアマルチパーティ加算が挙げられます。量子オークションと量子加算の既存のスキームは、それぞれ異なるアプリケーションを動機とし、異なる計算プリミティブを採用して、ほぼ独立して開発されてきました。本研究では、量子オークションと量子加算の既存プロトコルにおける構造的対称性を明らかにします。特に、収益推定、最大入札額の特定、落札者決定といったコアオークションプリミティブは、適切に定義された指標関数に作用する加算オラクルの繰り返し呼び出しに還元できることを示します。逆に、加算プロトコルはオークションフレームワーク内の補助サブルーチンとして自然に組み込むことができ、加算を幅広いオークションメカニズムの基盤となる統一的なプリミティブとして確立します。さらに、これらの還元における計算コスト、通信コスト、メモリコストを分析し、代表的な既存プロトコルと比較します。分析の結果、現在知られているオークションプロトコルを用いて加算タスクを実行すると、入札空間の探索と落札者の決定に伴う追加のオーバーヘッドが発生することが明らかになった。提案するフレームワークはプロトコルに依存せず、ゲートベースやフォトニック実装など、多様な計算モデルに適用可能である。最後に、IBM（光量子）ハードウェアを用いた2入札者による封印入札オークションの概念実証実験（数値検証）を行い、主張する等価性が形式的なものではなく、既存のハードウェアで実験的に検証可能であることを示す。"
+ },
+ {
+  "id": "2606.27734",
+  "posted_at": "2026-06-29T06:01:54Z",
+  "title": "Fault tolerant computation of the static structure factor and finite size effects",
+  "authors": "Rishabh Bhardwaj, Alexander Reed Mu\\~noz, Travis E. Jones, John Golden",
+  "link": "https://arxiv.org/abs/2606.27734",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim",
+   "ft"
+  ],
+  "genre_names": [
+   "量子シミュレーション",
+   "フォールトトレラント計算"
+  ],
+  "abstract_en": "Fault-tolerant quantum algorithms offer a promising pathway for estimating the ground-state energies of periodic materials that are beyond the practical reach of classical electronic-structure methods. A remaining challenge is finite-size mitigation: quantum algorithms evaluate a finite supercell or finite Brillouin-zone mesh, while materials properties are defined in the thermodynamic limit. In this work we develop a quantum post-processing strategy for the leading two-body finite-size correction. After one-body shell effects are reduced by twist averaging, the dominant residual error is controlled by long-wavelength density fluctuations, which are encoded in the small-momentum static structure factor $S(q)$. We formulate the corresponding operator in a Bloch-orbital basis, construct its block encoding through the density operator, and estimate its ground-state expectation value using an amplified Hadamard test. We also introduce adaptive global and local binary search procedures for identifying the infrared fitting window used to reconstruct the two-body finite size error correction. The resulting cost remains subleading relative to the main ground-state energy estimation routine: the structure-factor correction has leading $\\tilde{O}(N_bN_k)^3$ dependence on the Bloch-orbital basis size, avoids the large plane-wave prefactor of full Hamiltonian simulation, and requires only $\\tilde{O}(N_bN_k)$ logical qubits. This provides a fault-tolerant alternative to down-sampling, replacing repeated energy calculations on larger cells with targeted measurements of the infrared density correlations that control the finite-size effects.",
+  "abstract_ja": "耐障害性量子アルゴリズムは、古典的な電子構造計算手法では実用的に不可能な周期性物質の基底状態エネルギーを推定するための有望な手段となる。残された課題は有限サイズ補正である。量子アルゴリズムは有限の超格子または有限のブリルアンゾーンメッシュを評価するが、物質の特性は熱力学的極限で定義される。本研究では、主要な2体有限サイズ補正のための量子後処理戦略を開発する。1体シェル効果をツイスト平均化によって低減した後、支配的な残差誤差は長波長密度ゆらぎによって制御され、これは小運動量静的構造因子$S(q)$に符号化される。我々は対応する演算子をブロッホ軌道基底で定式化し、密度演算子を介してそのブロック符号化を構築し、増幅されたアダマール検定を用いてその基底状態期待値を推定する。また、2体有限サイズ誤差補正を再構成するために使用される赤外線フィッティングウィンドウを特定するための適応的なグローバルおよびローカル二分探索手順も導入する。その結果得られるコストは、主要な基底状態エネルギー推定ルーチンに比べて依然として低いままです。構造因子補正は、ブロッホ軌道基底のサイズに対して$\\tilde{O}(N_bN_k)^3$という高い依存性を持ち、完全なハミルトニアンシミュレーションにおける大きな平面波係数を回避し、$\\tilde{O}(N_bN_k)$個の論理量子ビットしか必要としません。これにより、ダウンサンプリングに代わる耐障害性の高い方法が提供され、より大きなセルでのエネルギー計算の繰り返しを、有限サイズ効果を制御する赤外線密度相関のターゲット測定に置き換えます。"
+ },
+ {
+  "id": "2606.27756",
+  "posted_at": "2026-06-29T06:01:57Z",
+  "title": "No Cloning of Quantum Ensembles",
+  "authors": "Zhenyu Du, Siyuan Cheng, Qi Zhao, Xiongfeng Ma, Xiao Yuan",
+  "link": "https://arxiv.org/abs/2606.27756",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "abstract_en": "Modern quantum physics now enables control of quantum systems at the level of individual trajectories, opening a new frontier that links quantum information theory, quantum many-body physics, and quantum thermodynamics, and uncovers novel non-equilibrium phenomena such as deep thermalization and measurement-induced entanglement. However, a central challenge remains: their characterization relies on measuring nonlinear properties of individual quantum states, a task tantamount to fine-grained cloning of a quantum ensemble. Here, the fundamental laws governing the cloning of quantum ensembles are investigated. First, a general no-cloning theorem for arbitrary ensembles is established from an information-theoretic perspective, even assuming multiple copies of the ensemble's purification. It is then shown that this barrier can be unexpectedly circumvented for physical ensembles generated by finite-time evolutions. Nevertheless, these tasks are proven to remain computationally intractable, even when the full circuit description of state preparation is known. This stands in sharp contrast to the conventional no-cloning theorem, which relies on the state being unknown. Together, these results establish new fundamental principles of quantum mechanics, reveal intrinsic trade-offs among sample complexity, computational complexity, and quantum measurements, and highlight the necessity of problem-specific strategies for probing measurement-induced quantum phenomena.",
+  "abstract_ja": "現代の量子物理学は、個々の軌道レベルでの量子システムの制御を可能にし、量子情報理論、量子多体物理学、量子熱力学を結びつける新たなフロンティアを切り開き、深熱化や測定誘起エンタングルメントといった新たな非平衡現象を明らかにしています。しかし、中心的な課題は依然として残っています。これらの現象の特性評価は、個々の量子状態の非線形特性の測定に依存しており、これは量子アンサンブルの微細なクローニングに等しい作業です。本稿では、量子アンサンブルのクローニングを支配する基本法則を調査します。まず、情報理論的観点から、アンサンブルの精製の複数コピーを仮定した場合でも、任意のアンサンブルに対する一般的な非クローニング定理を確立します。次に、有限時間発展によって生成された物理的アンサンブルの場合、この障壁が予期せず回避されることを示します。それにもかかわらず、状態準備の完全な回路記述がわかっている場合でも、これらの作業は計算上困難であることが証明されます。これは、状態が未知であることを前提とする従来のクローン禁止定理とは大きく異なる。これらの結果は、量子力学の新たな基本原理を確立し、サンプルの複雑さ、計算の複雑さ、量子測定の間に存在する本質的なトレードオフを明らかにし、測定によって引き起こされる量子現象を調査するための問題固有の戦略の必要性を強調するものである。"
+ },
+ {
+  "id": "2606.27787",
+  "posted_at": "2026-06-29T06:01:58Z",
+  "title": "Industry-ready spin-photon interfaces for hybrid photonic quantum computing",
+  "authors": "H\\^elio Huet, Hubert Lam, Thibaut Pollet, Petr Steindl, Alice Bernard, Albert Adiyatullin, Petr Stepanov, William Hease, Victor Guilloux, Nico Margaria, Joris Verstraten, Raksha Singla, Samuel T. Mister, Anton Pishchagin, Lara Couronn\\'e, Samuel Huber, David Sebastian, Duc Duy Tran, Thi Hao Nhi Nguyen, Thi Phuong Do, Joseph Sulpizio, Yann Portella, Kiarn T. Laverick, Thinhinane Bennour, Tomas Alexandre De Sousa, Davide Stefani, Mathias Pont, Maxime Descampeaux, Bianca Scaparra, Martin A. Jacobsen, Klaus D. J\\\"ons, Rinaldo Trotta, Aristide Lema\\^itre, Martina Morassi, Olivier Krebs, Lo\\\"ic Lanco, Niels Gregersen, Alexia Auff\\`eves, Maria Maffei, Shane Mansfield, Jean Senellart, Thomas Volz, Viviana Villafa\\~ne, Stephen C. Wein, Dario A. Fioretto, Sebastien Boissier, Thi Huong Au, Pascale Senellart",
+  "link": "https://arxiv.org/abs/2606.27787",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "hardware",
+   "ft"
+  ],
+  "genre_names": [
+   "量子ハードウェア・実装",
+   "フォールトトレラント計算"
+  ],
+  "abstract_en": "Hybrid photonic quantum computers, combining stationary matter qubits and flying photonic qubits, offer an intrinsically networked and resource-efficient route to large-scale, error-corrected quantum computation. Their core components are cavity-coupled matter qubits that act as light--matter interfaces, enabling: high-efficiency on-demand single-photon generation, stable near-unity photon indistinguishability and spin--multi-photon entanglement. Semiconductor quantum dots in microcavities are a leading platform for realizing such devices. Yet reaching the performance, reproducibility and spin-coherence thresholds for large-scale error correction remains a major challenge requiring industrial fabrication and control. Here we report thousands of monolithic semiconductor quantum-dot devices fabricated using a III--V pilot production-line process compatible with large-scale deployment. Systematic control of source parameters yields state-of-the-art efficiency and supports a path to optical losses below fault-tolerance thresholds. Using field-quadrature state reconstruction as a stringent joint test of efficiency and indistinguishability, we observe near-unity photon quantum purity stable over tens of minutes and a record single-photon Wigner-function negativity. We further demonstrate seven-partite spin--multi-photon entanglement and spin coherence extendable to microsecond timescales in the low-magnetic-field regime. Finally, photons from distant sources are as indistinguishable as photons emitted successively by a single source. These results establish foundry-compatible III--V quantum dots as a scalable platform for hybrid photonic quantum computing.",
+  "abstract_ja": "静止した物質量子ビットと飛行する光子量子ビットを組み合わせたハイブリッド光子量子コンピュータは、本質的にネットワーク化され、リソース効率の高い、大規模な誤り訂正量子計算への道筋を提供する。そのコアコンポーネントは、光と物質のインターフェースとして機能するキャビティ結合物質量子ビットであり、高効率のオンデマンド単一光子生成、安定したほぼ100%の光子不可弁別性、およびスピン多光子エンタングルメントを可能にする。マイクロキャビティ内の半導体量子ドットは、このようなデバイスを実現するための主要なプラットフォームである。しかし、大規模な誤り訂正に必要な性能、再現性、およびスピンコヒーレンスの閾値に到達することは、産業的な製造と制御を必要とする大きな課題である。本稿では、大規模展開と互換性のあるIII-V族パイロット生産ラインプロセスを使用して製造された数千個のモノリシック半導体量子ドットデバイスについて報告する。光源パラメータの体系的な制御により、最先端の効率が得られ、耐故障閾値以下の光損失への道筋がサポートされる。磁場直交位相状態再構成を効率と不可弁別性の厳密な共同テストとして用いることで、数十分にわたってほぼ100%の光子量子純度と、記録的な単一光子ウィグナー関数負性を観測しました。さらに、低磁場領域において、7粒子スピン多光子エンタングルメントと、マイクロ秒スケールまで拡張可能なスピンコヒーレンスを実証しました。最後に、遠方光源からの光子は、単一光源から連続的に放出される光子と同様に不可弁別であることが分かりました。これらの結果は、ファウンドリ互換のIII-V族量子ドットが、ハイブリッド光子量子コンピューティングのためのスケーラブルなプラットフォームであることを確立するものです。"
+ },
+ {
+  "id": "2606.27792",
+  "posted_at": "2026-06-29T06:02:01Z",
+  "title": "Single-sideband-interference twin-field quantum key distribution without global phase locking",
+  "authors": "Xingjian Li, Bingkun Wang, Jianyong Hu, Jianqiang Liu, Shuxiao Wu, Guosheng Feng, Zhixing Qiao, Changgang Yang, Ruiyun Chen, Chengbing Qin, Guofeng Zhang, Liantuan Xiao, Suotang Jia",
+  "link": "https://arxiv.org/abs/2606.27792",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "crypto",
+   "network"
+  ],
+  "genre_names": [
+   "量子暗号・QKD",
+   "量子ネットワーク・通信"
+  ],
+  "abstract_en": "Twin-field quantum key distribution (TF QKD) can overcome the fundamental rate loss limit of repeaterless quantum links, but its practical deployment has long been hindered by the requirement of global phase locking between two independent lasers. By revisiting the fundamental principles of optical interference, this work reveals that interference in TF QKD inherently relies only on the instantaneous phase alignment of two independent optical pulses at the moment they temporally overlap, rather than on continuous global phase synchronization. Guided by this insight, we propose and demonstrate a single-sideband-interference TF-QKD protocol that eliminates global phase locking. Each user employs an IQ modulator to generate a weak single sideband as the quantum signal, while the intrinsically phase-correlated optical carrier propagates as a real-time phase reference. Carrier interference at the receiver enables real-time phase extraction and feedback compensation for the sidebands. Unlike prior no phase locking approaches requiring second- or microsecond-level coherence, in principle, our scheme reduces this requirement to nanoseconds. We achieve 98% interference visibility over 100.8 km fibre and secure key rates surpassing the PLOB bound in the high-loss regime, providing a simpler route towards practical long-distance quantum communication networks.",
+  "abstract_ja": "ツインフィールド量子鍵配送（TF QKD）は、リピーターレス量子リンクの基本的なレート損失限界を克服できますが、2つの独立したレーザー間のグローバル位相ロックの要件により、その実用化は長らく妨げられてきました。本研究では、光干渉の基本原理を再検討することで、TF QKDにおける干渉は、連続的なグローバル位相同期ではなく、2つの独立した光パルスが時間的に重なる瞬間の瞬時位相整合のみに本質的に依存していることを明らかにしました。この知見に基づき、グローバル位相ロックを不要とするシングルサイドバンド干渉TF-QKDプロトコルを提案し、実証しました。各ユーザーはIQ変調器を用いて弱いシングルサイドバンドを量子信号として生成し、本質的に位相相関のある光キャリアはリアルタイム位相基準として伝搬します。受信側でのキャリア干渉により、サイドバンドのリアルタイム位相抽出とフィードバック補償が可能になります。従来の位相ロック不要のアプローチでは秒またはマイクロ秒レベルのコヒーレンスが必要でしたが、本方式では原理的にこの要件をナノ秒にまで低減できます。我々は、100.8kmの光ファイバー上で98%の干渉可視性を達成し、高損失領域においてPLOB限界を超える鍵レートを確保することで、実用的な長距離量子通信ネットワークへのよりシンプルな道筋を提供する。"
+ },
+ {
+  "id": "2606.27815",
+  "posted_at": "2026-06-29T06:02:04Z",
+  "title": "Quantum Dynamic Time Warping for Multivariate Time Series Classification",
+  "authors": "Diego Alvarez-Estevez, Alejandro Mayorga-Redondo, Eduardo Mosqueira-Rey",
+  "link": "https://arxiv.org/abs/2606.27815",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml",
+   "algo"
+  ],
+  "genre_names": [
+   "量子機械学習",
+   "量子アルゴリズム"
+  ],
+  "abstract_en": "Dynamic Time Warping (DTW) is a cornerstone for time series classification, but its reliance on Euclidean distances fails to capture latent cross-channel correlations in complex multivariate data. We propose a hybrid Quantum Dynamic Time Warping (qDTW) architecture, replacing the classical distance metric with the parameterized geometry of a quantum Hilbert space. Through structural ablation on benchmarks up to $C=8$ spatial dimensions, we establish fundamental topological rules for quantum sequence alignment. We introduce a Unified Pre-Embedding Adjoint Ansatz that decouples trainable entanglement from classical data, eliminating the severe phase-scrambling and information bottlenecks inherent to traditional measurements. We demonstrate this decoupled architecture allows untrained quantum kernels to act as highly expressive baselines, while parameterized training effectively untangles deeply overlapping hyper-dimensional data. Furthermore, we identify a strict spatial-temporal expressivity tradeoff: temporal depth (data re-uploading) is necessary for dimensionally restricted univariate circuits, but applying it to wide multi-qubit registers triggers chaotic frequency-spectrum explosions and representation collapse. By navigating these topological hazards, our multivariate quantum architecture outperforms classical baselines, setting a new standard for integrating parameterized quantum circuits with dynamic programming",
+  "abstract_ja": "動的時間伸縮法 (DTW) は時系列分類の基盤となる手法ですが、ユークリッド距離に依存しているため、複雑な多変量データにおける潜在的なクロスチャネル相関を捉えることができません。そこで、古典的な距離尺度を量子ヒルベルト空間のパラメータ化された幾何学に置き換えたハイブリッド量子動的時間伸縮法 (qDTW) アーキテクチャを提案します。空間次元が $C=8$ までのベンチマークに対する構造的アブレーションを通して、量子シーケンスアライメントの基本的なトポロジー規則を確立します。また、学習可能なエンタングルメントを古典データから分離し、従来の測定に内在する深刻な位相スクランブリングと情報ボトルネックを解消する統一事前埋め込み随伴仮説を導入します。この分離アーキテクチャにより、未学習の量子カーネルが非常に表現力の高いベースラインとして機能し、パラメータ化された学習によって深く重なり合う超次元データを効果的に分離できることを実証します。さらに、厳密な時空間表現力のトレードオフを特定しました。時間的深度（データ再アップロード）は次元制限のある単変数回路には必要ですが、それを広い多量子ビットレジスタに適用すると、カオス的な周波数スペクトル爆発と表現崩壊を引き起こします。これらのトポロジー上の危険を回避することで、私たちの多変数量子アーキテクチャは古典的なベースラインを凌駕し、パラメータ化された量子回路と動的計画法を統合するための新しい標準を確立します。"
+ },
+ {
+  "id": "2606.27817",
+  "posted_at": "2026-06-29T06:02:07Z",
+  "title": "Detector-Conditioned Source-Space Nulls and Null-Mask Loss in a Programmable Two-Slit Interferometer",
+  "authors": "Jianming Wen",
+  "link": "https://arxiv.org/abs/2606.27817",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "abstract_en": "Afshar's double-slit experiment probes wave--particle complementarity by placing a wire grid at the dark fringes of a downstream interference pattern while retaining an imaging basis that appears to preserve which-path information. Here we propose and analyze a time-reversed Young--Afshar configuration in which the corresponding null test is transferred from the downstream field plane to the source-label plane of a time-reversed Young interferometer. In this reciprocal geometry, a point-addressable source illuminates a double slit, while the detector remains fixed. The observed fringe is therefore not a single-shot spatial intensity pattern, but a detector-conditioned response reconstructed by scanning the source coordinate. Consequently, a null in this pattern is not a node of a freely propagating field; it is a source label for which the coherent two-slit transfer amplitude to the selected detector vanishes. A mask placed at such source-plane labels is invisible to that detector when both slits are open, yet becomes visible when either slit is opened alone. We develop the scalar Fresnel model, derive the source-space null condition, introduce a detector-conditioned null-mask loss, and examine how this loss evolves under a tunable which-path marker. The source-space visibility and path distinguishability satisfy the standard duality relation, so no violation of complementarity is implied. The essential new feature is instead a reciprocal, detector-conditioned form of complementarity: Afshar's field-space transparency is replaced by response-function transparency in a reconstructed source basis.",
+  "abstract_ja": "アフシャールの二重スリット実験は、下流干渉パターンの暗い縁にワイヤーグリッドを配置し、経路情報を保持しているように見えるイメージング基底を維持することで、波動と粒子の相補性を調べます。ここでは、対応するヌルテストを下流フィールド面から時間反転ヤング干渉計のソースラベル面に転送する、時間反転ヤング-アフシャール構成を提案し、解析します。この相互幾何学では、点アドレス可能なソースが二重スリットを照射し、検出器は固定されたままです。したがって、観測されるフリンジは、単一ショットの空間強度パターンではなく、ソース座標を走査することによって再構成された検出器条件付き応答です。結果として、このパターンのヌルは、自由伝搬場の節ではなく、選択された検出器へのコヒーレントな二重スリット転送振幅がゼロになるソースラベルです。このようなソース面ラベルに配置されたマスクは、両方のスリットが開いているときはその検出器には見えませんが、いずれかのスリットだけが開いているときは見えるようになります。我々はスカラーフレネルモデルを開発し、光源空間のヌル条件を導出し、検出器条件付きヌルマスク損失を導入し、調整可能な経路マーカーの下でこの損失がどのように変化するかを調べます。光源空間の可視性と経路識別可能性は標準的な双対性関係を満たすため、相補性の違反は示唆されません。本質的な新しい特徴は、相補性の相互的な検出器条件付き形式です。Afsharの場空間の透明性は、再構成された光源基底における応答関数の透明性に置き換えられます。"
+ },
+ {
+  "id": "2606.27821",
+  "posted_at": "2026-06-29T06:02:08Z",
+  "title": "Parameter-Efficient Quantum-Inspired Fast Weight Programmers for Traffic-Matrix Forecasting",
+  "authors": "Kuo-Chung Peng, Jiun-Cheng Jiang, Chun-Hua Lin, Tai-Yue Li, Nan-Yow Chen, Samuel Yen-Chi Chen",
+  "link": "https://arxiv.org/abs/2606.27821",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml",
+   "algo"
+  ],
+  "genre_names": [
+   "量子機械学習",
+   "量子アルゴリズム"
+  ],
+  "abstract_en": "Traffic matrices (TMs) capture network-wide origin-destination demand and are central to traffic engineering, yet accurate whole-matrix forecasting remains challenging when prediction must be performed under the memory, update, and training-budget constraints of online network control. This paper investigates whether compact quantum-inspired recurrent models can provide effective TM forecasts without relying on dedicated graph, transformer, or diffusion modules. We adapt gated quantum-inspired Kolmogorov-Arnold network fast-weight programmers (QKAN-FWPs) to direct multi-step Abilene TM forecasting, where each model predicts the next 20 five-minute frames of a 144-channel origin-destination (OD) matrix from a two-hour history. We benchmark three QKAN placement variants against a matched-size long short-term memory (LSTM) network, a larger LSTM, and a classical gated fast-weight programmer under a shared fixed-budget training protocol. Among the evaluated recurrent models, G-QKANFWP achieves the best pooled root-mean-square error (RMSE), while using only 22.4% of the larger LSTM. It also outperforms both the matched-size LSTM and the classical G-FWP baseline, indicating that the gain is not due to gated fast-weight framework alone. Convergence and channel-wise analyses further show that the quantum-inspired variants obtain lower validation-loss area under the learning curve (AULC) than matched-size recurrent baselines, while G-QKANFWP and GQKAN-FWP achieve substantially more OD-channel wins. These results identify a classical slow programmer with a quantum-inspired fast programmer as a promising accuracy-efficiency design for resource-conscious network traffic-matrix forecasting.",
+  "abstract_ja": "トラフィックマトリックス (TM) はネットワーク全体の発信地-宛先需要を捉え、トラフィックエンジニアリングの中心となるものですが、オンラインネットワーク制御のメモリ、更新、トレーニング予算の制約の下で予測を実行する必要があるため、マトリックス全体の正確な予測は依然として困難です。本論文では、専用のグラフ、トランスフォーマー、または拡散モジュールに頼ることなく、コンパクトな量子着想型リカレントモデルが効果的な TM 予測を提供できるかどうかを調査します。ゲート付き量子着想型コルモゴロフ-アーノルドネットワーク高速重みプログラマ (QKAN-FWP) を、マルチステップの Abilene TM 予測に適用します。各モデルは、2 時間の履歴から 144 チャネルの発信地-宛先 (OD) マトリックスの次の 20 個の 5 分フレームを予測します。共有固定予算トレーニングプロトコルの下で、3 つの QKAN 配置バリアントを、同サイズの長短期記憶 (LSTM) ネットワーク、より大きな LSTM、および古典的なゲート付き高速重みプログラマと比較評価します。評価対象のリカレントモデルの中で、G-QKANFWPは、より大きなLSTMのわずか22.4%しか使用せずに、最高のプールされた二乗平均平方根誤差（RMSE）を達成しました。また、同サイズのLSTMと従来のG-FWPベースラインの両方を上回っており、この性能向上はゲート付き高速重みフレームワークのみによるものではないことを示しています。収束とチャネルごとの分析では、量子に着想を得たバリアントは、同サイズのリカレントベースラインよりも検証損失の学習曲線下面積（AULC）が低く、G-QKANFWPとGQKAN-FWPはODチャネルでの勝利数が大幅に増加していることがさらに示されています。これらの結果は、従来の低速プログラマと量子に着想を得た高速プログラマを組み合わせたものが、リソースを意識するネットワークトラフィックマトリックス予測のための有望な精度効率設計であることを示しています。"
+ },
+ {
+  "id": "2606.27838",
+  "posted_at": "2026-06-29T06:02:12Z",
+  "title": "Quantum LiDAR with non-local modulation",
+  "authors": "Xiao-Dong Fan, Zhong-Hua Ou, Yun-Ru Fan, Kai Guo, Zong-Liang Xie, Qiang Qi, Li-Xun Zhang, Si Shen, Hai-Zhi Song, Yan-Yu Wei, Hao Li, Li-Xing You, Qi Zhang, Yong Liu, Guang-Can Guo, Qiang Zhou",
+  "link": "https://arxiv.org/abs/2606.27838",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sensing"
+  ],
+  "genre_names": [
+   "量子センシング・計測"
+  ],
+  "abstract_en": "Quantum light detection and ranging (LiDAR) utilizes quantum entanglement and correlation to improve precision, noise resilience and covertness of target detection. Despite recent advances, the development of a quantum LiDAR system that simultaneously achieves high precision and a large measurement range remains challenging. Here, we demonstrate a quantum amplitude-modulated continuous wave LiDAR with micrometer precision achievable via increased acquisition time and meter-scale measurement range. In our demonstration, the signal photons directly illuminate the target, while the idler photons are non-locally modulated with a high-frequency cosine wave and never interact with the target. By leveraging the non-local modulation and the quantum correlation, the target detection is achieved with a precision of 0.64 $\\pm$ 0.06 mm within one second over a measurement range of 2-8 m. As the acquisition time is up to 500 s, the system achieves a precision of 29 $\\pm\\ 4{\\ \\mathrm{\\mu m}}$. Furthermore, our system realizes a 50 times precision improvement over the classical single-photon scheme in a background noise 37 dB stronger than the returned probe photons. With these advantages, our method will open venues for the development of high-precision, long-range, and noise-resilient target detection.",
+  "abstract_ja": "量子光検出測距（LiDAR）は、量子もつれと相関を利用して、ターゲット検出の精度、ノイズ耐性、秘匿性を向上させます。近年の進歩にもかかわらず、高精度と広い測定範囲を同時に実現する量子LiDARシステムの開発は依然として困難です。ここでは、取得時間の延長とメートルスケールの測定範囲によってマイクロメートル精度が達成可能な量子振幅変調連続波LiDARを実証します。この実証では、信号光子はターゲットを直接照射し、アイドラー光子は高周波コサイン波で非局所的に変調され、ターゲットと相互作用しません。非局所変調と量子相関を活用することで、2～8 mの測定範囲で、1秒以内に0.64 ± 0.06 mmの精度でターゲット検出が実現されます。取得時間が最大500秒になると、システムは29 ± 4 μmの精度を達成します。さらに、本システムは、反射プローブ光子よりも37dB強い背景雑音下において、従来の単一光子方式に比べて50倍の精度向上を実現しています。これらの利点により、本手法は高精度、長距離、かつ雑音耐性に優れたターゲット検出技術の開発に新たな道を開くでしょう。"
+ },
+ {
+  "id": "2606.27856",
+  "posted_at": "2026-06-29T06:02:13Z",
+  "title": "Simulating the Dynamics of Markovian Quantum Processes by Quantum Collision Models on Quantum Computers",
+  "authors": "Zeqing Wang, Julian D. Teske, Anshuman Bhardwaj, Masahiro O. Takahashi, Seiji Yunoki",
+  "link": "https://arxiv.org/abs/2606.27856",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim",
+   "nisq"
+  ],
+  "genre_names": [
+   "量子シミュレーション",
+   "変分・NISQアルゴリズム"
+  ],
+  "abstract_en": "Hamiltonian dynamics have been widely implemented on noisy intermediate-scale quantum devices in recent years. In contrast, experimental demonstrations of Markovian quantum dynamics remain limited, because implementing nonunitary evolution on quantum computers is challenging. Quantum collision models provide a natural approach to this problem by coupling the system to ancillas to realize dissipation. However, previous implementations of quantum collision models on quantum computers have typically been restricted to one or two system qubits and fewer than 12 time steps, owing to noise, circuit depth, the overhead of ancilla reset, and limited qubit resources. In this work, we experimentally simulate Markovian quantum processes with local and nonlocal dissipation on both trapped-ion and superconducting quantum computers. By employing hardware-specific ancilla strategies, we realize simulations with up to seven system qubits, corresponding to 13 qubits in total, and 40 time steps. Our results demonstrate that, even for the same physical model, the optimal implementation strategy depends strongly on the hardware characteristics of the quantum computer.",
+  "abstract_ja": "ハミルトニアンダイナミクスは、近年、ノイズの多い中規模量子デバイスで広く実装されてきました。一方、マルコフ量子ダイナミクスの実験的実証は、量子コンピュータ上で非ユニタリ進化を実装することが困難であるため、依然として限られています。量子衝突モデルは、システムを補助系に結合して散逸を実現することで、この問題に対する自然なアプローチを提供します。しかし、これまでの量子衝突モデルの量子コンピュータ上での実装は、ノイズ、回路の深さ、補助系のリセットのオーバーヘッド、および限られた量子ビットリソースのために、通常、1つまたは2つのシステム量子ビットと12ステップ未満のタイムステップに制限されていました。本研究では、トラップイオン型量子コンピュータと超伝導型量子コンピュータの両方で、局所的および非局所的な散逸を伴うマルコフ量子プロセスを実験的にシミュレートします。ハードウェア固有の補助系戦略を採用することで、最大7つのシステム量子ビット（合計13量子ビットに相当）と40タイムステップのシミュレーションを実現しました。私たちの結果は、同じ物理モデルであっても、最適な実装戦略は量子コンピュータのハードウェア特性に大きく依存することを示しています。"
+ },
+ {
+  "id": "2606.27870",
+  "posted_at": "2026-06-29T06:02:16Z",
+  "title": "Standard-quantum-limit-surpassing vector polarimetry using Rydberg atoms in an SU(1,1) interferometer",
+  "authors": "Weiqiang Guan, Yuetao Chen, Jun Zhou, Keyi Li, Yu Huang, Shaoyan Gao",
+  "link": "https://arxiv.org/abs/2606.27870",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sensing"
+  ],
+  "genre_names": [
+   "量子センシング・計測"
+  ],
+  "abstract_en": "Vector polarimetry is an important application frontier for Rydberg-atom-based sensing. While prior research has largely concentrated on developing novel measurement schemes, high-sensitivity vector polarimetry remains an open question. Here we propose a theoretical framework for high-sensitivity detection of radio-frequency (RF) electric field polarization direction, which is particularly suitable for weak-field detection. Under a static magnetic field, the asymmetry in coupling between the Zeeman sublevels of the Rydberg atom and the RF field's polarization components enables the polarization angles to be determined from the atomic absorption index, which is retrieved via homodyne detection by incorporating the Rydberg atom system into an SU(1,1) interferometer. We derive the sensitivity of the polarization angles along with the corresponding standard quantum limit (SQL) and quantum Cram\\'{e}r--Rao bound (QCRB). Our results demonstrate a sensitivity surpassing the SQL across wide angular ranges using either dual coherent states or a coherent state combined with a squeezed vacuum state as input. Significantly, the optimal sensitivity reaches below \\SI{e-6}{\\degree}, with sensitivities better than \\SI{e-3}{\\degree} maintained over most of the angular domain. This work establishes a foundation for high-precision vector polarimetry, thereby advancing the development of Rydberg-atom-based quantum sensing and contributing to a deeper understanding of light--matter interactions.",
+  "abstract_ja": "ベクトル偏光測定は、リュードベリ原子を用いたセンシングにおける重要な応用分野です。これまでの研究は主に新しい測定方式の開発に集中してきましたが、高感度ベクトル偏光測定は未解決の問題として残っています。本稿では、特に弱場検出に適した、高周波（RF）電場偏光方向の高感度検出のための理論的枠組みを提案します。静磁場下では、リュードベリ原子のゼーマン準位とRF電場の偏光成分との結合の非対称性により、原子吸収指数から偏光角を決定できます。この原子吸収指数は、リュードベリ原子系をSU(1,1)干渉計に組み込むことでホモダイン検出によって取得されます。我々は、偏光角の感度と、それに対応する標準量子限界（SQL）および量子クラメール・ラオ限界（QCRB）を導出します。我々の結果は、入力としてデュアルコヒーレント状態、またはスクイーズド真空状態と組み合わせたコヒーレント状態のいずれかを使用することで、広い角度範囲にわたってSQLを超える感度を実現できることを示している。特筆すべきは、最適な感度が\\SI{e-6}{\\degree}以下に達し、角度領域の大部分で\\SI{e-3}{\\degree}よりも優れた感度が維持されている点である。本研究は高精度ベクトル偏光測定の基礎を確立し、リュードベリ原子を用いた量子センシングの開発を促進し、光と物質の相互作用に関するより深い理解に貢献するものである。"
+ },
+ {
+  "id": "2606.27894",
+  "posted_at": "2026-06-29T06:02:17Z",
+  "title": "Non-equilibrium quantum thermometry with bosonic samples",
+  "authors": "Marek Winczewski, Micha{\\l} Horodecki, Ricard Ravell Rodr\\'iguez",
+  "link": "https://arxiv.org/abs/2606.27894",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sensing",
+   "foundations"
+  ],
+  "genre_names": [
+   "量子センシング・計測",
+   "量子基礎・測定理論"
+  ],
+  "abstract_en": "We study low-temperature non-equilibrium quantum thermometry with a bosonic probe: a quantum harmonic oscillator strongly coupled to a bosonic bath at temperature $T$ through a Drude--Ohmic spectral density. We treat the probe--bath dynamics both exactly, using the quadratic solution of Boyanovsky and Jasnow, and within a renormalized Gorini--Kossakowski--Lindblad--Sudarshan (GKLS) master equation. From the time-dependent covariance matrix we extract the quantum Fisher information (QFI) for general single-mode Gaussian probe states, including squeezed ones. In the strong-coupling, non-Markovian regime the QFI is non-monotonic in time, displaying bath-memory revivals that make a finite interrogation time $t^*>0$ strictly optimal. By contrast, we prove that the Markovian QFI rises monotonically to its stationary value and develops no interior optimum, so that its optimum is always pinned to the boundary $t^*\\to\\infty$; this complements existing Markovian precision-rate bounds, which concern $(\\mathcal F(t)/t)$ rather than the single-shot QFI $(\\mathcal F(t))$. Squeezed initial states yield a large transient advantage that thermalisation eventually erases, establishing squeezing and interrogation time as complementary thermometric resources. At equilibrium, strong coupling replaces the exponential Boltzmann suppression of the low-temperature relative error by a far milder polynomial divergence. As the model maps directly onto circuit quantum electrodynamics, these protocols appear within current experimental reach.",
+  "abstract_ja": "我々は、ボソンプローブを用いた低温非平衡量子温度測定を研究する。ボソンプローブとは、温度 $T$ のボソン浴にドルーデ・オーム型スペクトル密度を介して強く結合した量子調和振動子である。プローブと浴のダイナミクスは、ボヤノフスキーとヤスノウの二次解を用いて厳密に扱うとともに、再規格化されたゴリーニ・コサコフスキー・リンドブラッド・スダルシャン (GKLS) マスター方程式を用いて扱う。時間依存共分散行列から、スクイーズド状態を含む一般的な単一モードガウスプローブ状態の量子フィッシャー情報 (QFI) を抽出する。強結合非マルコフ領域では、QFI は時間に対して非単調であり、浴の記憶の復活を示すため、有限の調査時間 $t^*>0$ が厳密に最適となる。対照的に、マルコフQFIは定常値まで単調に増加し、内部最適値を持たないため、その最適値は常に境界$t^*\\to\\infty$に固定されることを証明します。これは、単一ショットQFI $(\\mathcal F(t))$ではなく$(\\mathcal F(t)/t)$に関する既存のマルコフ精度レート境界を補完します。スクイーズされた初期状態は、熱化によって最終的に消滅する大きな過渡的利点をもたらし、スクイーズ時間とインターロゲーション時間を補完的な温度測定リソースとして確立します。平衡状態では、強い結合により、低温相対誤差の指数ボルツマン抑制がはるかに緩やかな多項式発散に置き換えられます。モデルは回路量子電磁力学に直接マッピングされるため、これらのプロトコルは現在の実験の範囲内にあるようです。"
+ },
+ {
+  "id": "2606.27907",
+  "posted_at": "2026-06-29T06:02:20Z",
+  "title": "End-to-End Learning of Quantum Control on Latent Dynamical Manifold",
+  "authors": "Jun-Dong Zhong, Zong-Yuan Ge, Feng-Hua Ren, Zhao-Ming Wang",
+  "link": "https://arxiv.org/abs/2606.27907",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "nisq",
+   "algo"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム",
+   "量子アルゴリズム"
+  ],
+  "abstract_en": "Traditional quantum control relies on an iterative \"simulate-then-optimize\" paradigm, where dynamics simulation and control design are decoupled, leading to substantial computational overhead and limited scalability, particularly in noisy environments. Here, we propose an end-to-end quantum control framework based on long short-term memory, in which system dynamics and control strategies are learned jointly in a low dimensional latent manifold. The model directly maps initial states and environmental parameters to both dynamical trajectories and optimized control pulse in a single forward pass. The framework is validated on adiabatic speedup in a two-level system and state transfer in a one-dimensional spin chain under noise, achieving accurate dynamical prediction and control optimization. It improves the fidelity for both tasks and significantly reduces the optimization cost by three orders of magnitude compared with conventional iterative methods, while exhibiting strong generalization to multi-parameter, time-varying noise, as well as to different initial states and driving fields. Our work introduces a data-driven control paradigm based on latent manifold learning, reducing the computational bottleneck of iterative optimization and enabling real-time adaptive control of complex open quantum systems.",
+  "abstract_ja": "従来の量子制御は、反復的な「シミュレーションしてから最適化する」パラダイムに依存しており、動的シミュレーションと制御設計が分離されているため、特にノイズの多い環境では、計算オーバーヘッドが大きく、スケーラビリティが制限されます。本稿では、低次元潜在多様体においてシステムダイナミクスと制御戦略を共同で学習する、長短期記憶に基づくエンドツーエンドの量子制御フレームワークを提案します。このモデルは、単一の順伝播で、初期状態と環境パラメータを動的軌道と最適化された制御パルスの両方に直接マッピングします。このフレームワークは、2レベルシステムの断熱的高速化と、ノイズ下の1次元スピンチェーンにおける状態転送で検証され、正確な動的予測と制御最適化を実現しました。従来の反復法と比較して、両方のタスクの忠実度が向上し、最適化コストが3桁大幅に削減されるとともに、多パラメータ、時間変動ノイズ、異なる初期状態、駆動場に対しても高い汎化性能を示します。私たちの研究は、潜在多様体学習に基づくデータ駆動型制御パラダイムを導入し、反復最適化における計算上のボトルネックを軽減し、複雑な開放型量子システムのリアルタイム適応制御を可能にするものです。"
+ },
+ {
+  "id": "2606.27994",
+  "posted_at": "2026-06-29T06:02:23Z",
+  "title": "Verifiable and Collusion-Resistant Multi-Party Quantum Private Set Operations",
+  "authors": "Zixian Gong, Kun Tian, Yi Zhang, Fengxia Liu",
+  "link": "https://arxiv.org/abs/2606.27994",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "crypto"
+  ],
+  "genre_names": [
+   "量子暗号・QKD"
+  ],
+  "abstract_en": "Threshold private set intersection (TPSI) allows parties to reveal their intersection only when its cardinality reaches a prescribed threshold. Existing quantum TPSI protocols typically rely on a third party (TP) to interpret the final results, which deviates from the cardinality-testing paradigm of TPSI. In this paper, we propose a quantum multiparty TPSI protocol with explicit cardinality testing. Our protocol develops a rotation-based quantum construction in which single-photon sequences are sequentially processed through participant-side data rotations, TP--participant masking rotations, and correlated aggregate rotations. This design produces hidden-label measurement vectors: TP can complete the final measurement, but cannot interpret the semantic meaning of the outcomes. Based on these hidden measurements, we further realize the threshold decision through an oblivious linear evaluation (OLE)-based inner product procedure and a lightweight garbled circuit, revealing only \\(\\mathbf 1[|\\bigcap_i X_i|\\ge \\tau]\\) before conditional intersection reconstruction. We prove the correctness and security of the proposed protocol, and further validate its feasibility through quantum-circuit simulations implemented on the IBM \\textsf{Qiskit} platform.",
+  "abstract_ja": "閾値プライベート集合交差（TPSI）では、参加者は、その集合の要素数が所定の閾値に達した場合にのみ、その交差を公開できます。既存の量子TPSIプロトコルは通常、最終結果を解釈するために第三者（TP）に依存しており、これはTPSIの要素数テストのパラダイムから逸脱しています。本論文では、明示的な要素数テストを備えた量子マルチパーティTPSIプロトコルを提案します。このプロトコルは、単一光子シーケンスが参加者側のデータ回転、TP参加者マスキング回転、および相関集約回転によって順次処理される回転ベースの量子構成を開発します。この設計により、ラベルが隠された測定ベクトルが生成されます。TPは最終測定を完了できますが、結果の意味を解釈することはできません。これらの隠された測定値に基づいて、我々はさらに、秘匿線形評価（OLE）ベースの内積手順と軽量な難読化回路を通して閾値決定を実現し、条件付き交差再構成の前に\\(\\mathbf 1[|\\bigcap_i X_i|\\ge \\tau]\\)のみを明らかにします。我々は提案されたプロトコルの正当性と安全性を証明し、さらにIBM \\textsf{Qiskit}プラットフォーム上で実装された量子回路シミュレーションを通してその実現可能性を検証します。"
+ },
+ {
+  "id": "2606.27996",
+  "posted_at": "2026-06-29T06:02:25Z",
+  "title": "Quantum Multi-Party Threshold Private Set Intersection with Explicit Cardinality Testing",
+  "authors": "Zixian Gong, Kun Tian, Yi Zhang, Fengxia Liu",
+  "link": "https://arxiv.org/abs/2606.27996",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "crypto"
+  ],
+  "genre_names": [
+   "量子暗号・QKD"
+  ],
+  "abstract_en": "Threshold private set intersection (TPSI) allows parties to reveal their intersection only when its cardinality reaches a prescribed threshold. Existing quantum TPSI protocols typically rely on a third party (TP) to interpret the final results, which deviates from the cardinality-testing paradigm of TPSI. In this paper, we propose a quantum multiparty TPSI protocol with explicit cardinality testing. Our protocol develops a rotation-based quantum construction in which single-photon sequences are sequentially processed through participant-side data rotations, TP--participant masking rotations, and correlated aggregate rotations. This design produces hidden-label measurement vectors: TP can complete the final measurement, but cannot interpret the semantic meaning of the outcomes. Based on these hidden measurements, we further realize the threshold decision through an oblivious linear evaluation (OLE)-based inner product procedure and a lightweight garbled circuit, revealing only \\(\\mathbf 1[|\\bigcap_i X_i|\\ge \\tau]\\) before conditional intersection reconstruction. We prove the correctness and security of the proposed protocol, and further validate its feasibility through quantum-circuit simulations implemented on the IBM \\textsf{Qiskit} platform.",
+  "abstract_ja": "閾値プライベート集合交差（TPSI）では、参加者は、その集合の要素数が所定の閾値に達した場合にのみ、その交差を公開できます。既存の量子TPSIプロトコルは通常、最終結果を解釈するために第三者（TP）に依存しており、これはTPSIの要素数テストのパラダイムから逸脱しています。本論文では、明示的な要素数テストを備えた量子マルチパーティTPSIプロトコルを提案します。このプロトコルは、単一光子シーケンスが参加者側のデータ回転、TP参加者マスキング回転、および相関集約回転によって順次処理される回転ベースの量子構成を開発します。この設計により、ラベルが隠された測定ベクトルが生成されます。TPは最終測定を完了できますが、結果の意味を解釈することはできません。これらの隠された測定値に基づいて、我々はさらに、秘匿線形評価（OLE）ベースの内積手順と軽量な難読化回路を通して閾値決定を実現し、条件付き交差再構成の前に\\(\\mathbf 1[|\\bigcap_i X_i|\\ge \\tau]\\)のみを明らかにします。我々は提案されたプロトコルの正当性と安全性を証明し、さらにIBM \\textsf{Qiskit}プラットフォーム上で実装された量子回路シミュレーションを通してその実現可能性を検証します。"
+ },
+ {
+  "id": "2606.28004",
+  "posted_at": "2026-06-29T06:02:26Z",
+  "title": "Hard-core Bosons in Action: Applications to Quantum Circuits",
+  "authors": "David Emmanuel-Costa, Michael Epping",
+  "link": "https://arxiv.org/abs/2606.28004",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim",
+   "algo"
+  ],
+  "genre_names": [
+   "量子シミュレーション",
+   "量子アルゴリズム"
+  ],
+  "abstract_en": "The use of algebraic frameworks based on complex Clifford algebras for the representation and simulation of quantum circuits has been discussed in the literature. Recently, an alternative algebraic approach employing hard-core bosons has been proposed. Hard-core bosons provide a natural representation of multi-qubit systems, in which the tensor-product structure is realized directly and no sign corrections are required, in contrast to realizations based on complex Clifford algebras. Although both approaches are formally equivalent, the hard-core boson formulation exhibits computational advantages. This work reviews and extends the hard-core boson algebra for circuit simulation and presents an efficient implementation. A performance comparison with IBM Qiskit shows substantially improved execution times for simulations. Moreover, a new application is introduced in which the hard-core boson formalism is combined with genetic algorithms for quantum circuit synthesis.",
+  "abstract_ja": "量子回路の表現とシミュレーションに、複素クリフォード代数に基づく代数的枠組みを用いる方法は、これまで文献で議論されてきた。近年、ハードコアボソンを用いた代替的な代数的アプローチが提案されている。ハードコアボソンは、多量子ビットシステムの自然な表現を提供し、複素クリフォード代数に基づく表現とは異なり、テンソル積構造が直接実現され、符号補正は不要である。両アプローチは形式的には等価であるが、ハードコアボソン定式化は計算上の利点を示す。本稿では、回路シミュレーションのためのハードコアボソン代数を概説・拡張し、効率的な実装方法を示す。IBM Qiskitとのパフォーマンス比較により、シミュレーションの実行時間が大幅に改善されることが示された。さらに、ハードコアボソン形式と遺伝的アルゴリズムを組み合わせた量子回路合成の新しい応用例を紹介する。"
+ },
+ {
+  "id": "2606.28007",
+  "posted_at": "2026-06-29T06:02:29Z",
+  "title": "Squeezing enhanced homodyne weak force sensing in cavity optomechanics",
+  "authors": "Madan Mohan Mahana, Sanket Das, Tarak Nath Dey",
+  "link": "https://arxiv.org/abs/2606.28007",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sensing"
+  ],
+  "genre_names": [
+   "量子センシング・計測"
+  ],
+  "abstract_en": "Cavity optomechanical systems have emerged as a promising platform for quantum sensing. Quantum mechanics imposes a standard quantum limit (SQL) on the force-sensitivity for the standard homodyne phase quadrature measurement of the cavity's output field. In this paper, we investigate ways to enhance sensitivity beyond SQL for weak-force measurement by adopting a variational homodyne quadrature readout and quantum squeezing. Our study reveals a remarkable improvement in the force sensitivity of a cavity optomechanical sensor at a suitable homodyne angle, compared with standard phase quadrature detection of the cavity output field within a specific frequency band. We show that the force sensitivity can be further improved by intra-cavity squeezing (ICS) or injected external squeezing (IES) of the cavity mode. Both variational homodyne readout and quantum squeezing induce quantum correlation between the amplitude and phase quadratures of the cavity's output field, thereby improving the force sensitivity. The squeezing-enhanced variational homodyne detection scheme can enable high-precision sensing across various hybrid quantum platforms.",
+  "abstract_ja": "キャビティ光メカニカルシステムは、量子センシングのための有望なプラットフォームとして注目されています。量子力学は、キャビティ出力場の標準ホモダイン位相直交測定における力感度に標準量子限界（SQL）を課します。本論文では、変分ホモダイン直交読み出しと量子スクイージングを採用することで、弱力測定における感度をSQL以上に高める方法を検討します。本研究では、特定の周波数帯域内でキャビティ出力場の標準位相直交検出と比較して、適切なホモダイン角度におけるキャビティ光メカニカルセンサの力感度が著しく向上することを示しました。また、キャビティモードの内部スクイージング（ICS）または外部注入スクイージング（IES）によって、力感度をさらに向上させることができることを示しました。変分ホモダイン読み出しと量子スクイージングはいずれも、キャビティ出力場の振幅と位相直交の間に量子相関を誘起し、それによって力感度を向上させます。スクイージング強化型変分ホモダイン検出方式は、様々なハイブリッド量子プラットフォームにおいて高精度センシングを可能にする。"
+ },
+ {
+  "id": "2606.28054",
+  "posted_at": "2026-06-29T06:02:30Z",
+  "title": "Static features from mixing in short- and long-range Lindbladians: Markov property and correlations",
+  "authors": "Paul Rosa-Ruiz, Matteo Scandi, \\'Angela Capel, \\'Alvaro M. Alhambra",
+  "link": "https://arxiv.org/abs/2606.28054",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations",
+   "qit"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論",
+   "量子情報理論"
+  ],
+  "abstract_en": "The classification of mixed-state phases requires criteria beyond two-point correlation functions, such as the decay of the mutual information (MI) and the conditional mutual information (CMI), with the latter encapsulated in the notion of Markov length. Here we show how such static properties of the fixed point of a Lindbladian follow from natural dynamical features of its generators: rapid mixing and frustration-freeness. We focus on systems with long-range interactions, and prove (i) that local Lindbladians satisfying (global) rapid mixing and frustration-freeness have fixed-points whose CMI decays with the shielding distance, and (ii) that (local) rapid mixing together with primitivity and regularity implies global decay of MI. For long-range interactions decaying with a power law with rate $\\alpha$, both quantities decay polynomially rather than exponentially, in contrast to the finite- and short-range regimes where exponential decay (a finite Markov length) is expected within a phase. We further show that Gibbs states of long-range, non-commuting Hamiltonians satisfy a local Markov property at any temperatures, extending the recent results (Chen--Rouz\\'e, 2025) for short-range systems to the long-range regime relevant to a variety of experimental platforms. As a numerical example, we study the long-range Ising model both with and without a transverse field. We find regimes in which the polynomial decay of the CMI holds, in accordance with the bounds proven.",
+  "abstract_ja": "混合状態相の分類には、2点相関関数を超える基準、例えば相互情報量 (MI) や条件付き相互情報量 (CMI) の減衰などが必要であり、後者はマルコフ長の概念に包含される。ここでは、リンドブラディアンの固定点の静的特性が、その生成子の自然な動的特徴、すなわち急速な混合とフラストレーションフリー性からどのように導かれるかを示す。我々は長距離相互作用を持つシステムに焦点を当て、(i) (大域的な) 急速な混合とフラストレーションフリー性を満たす局所リンドブラディアンは、遮蔽距離とともに CMI が減衰する固定点を持つこと、および (ii) (局所的な) 急速な混合と原始性および正則性が、MI の大域的な減衰を意味することを証明する。レート $\\alpha$ のべき乗則で減衰する長距離相互作用の場合、両方の量は指数関数的ではなく多項式的に減衰する。これは、相内で指数関数的減衰 (有限のマルコフ長) が期待される有限および短距離領域とは対照的である。さらに、長距離非可換ハミルトニアンのギブス状態は、任意の温度で局所マルコフ特性を満たすことを示し、短距離系に関する最近の結果（Chen-Rouz\\'e、2025）を、さまざまな実験プラットフォームに関連する長距離領域に拡張します。数値例として、横磁場がある場合とない場合の両方で長距離イジングモデルを調べます。証明された境界に従って、CMIの多項式減衰が成り立つ領域を見つけます。"
+ },
+ {
+  "id": "2606.28078",
+  "posted_at": "2026-06-29T06:02:33Z",
+  "title": "Single Electrons in a Dual-Plane Printed-Circuit-Board Penning Trap",
+  "authors": "Zirui Fang, Benedict A. D. Sukra, Xing Fan",
+  "link": "https://arxiv.org/abs/2606.28078",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "hardware"
+  ],
+  "genre_names": [
+   "量子ハードウェア・実装"
+  ],
+  "abstract_en": "We demonstrate single-electron trapping and detection in a two-dimensionally scalable dual-plane printed-circuit-board Penning trap. We characterize deterministic electron loading, axial damping, axial temperature, and collision-induced magnetron-radius growth at low magnetic fields. These results establish a practical platform for planar Penning traps and identify key next steps toward applications in quantum information science.",
+  "abstract_ja": "我々は、二次元的に拡張可能な二面プリント基板型ペニングトラップにおいて、単一電子の捕捉と検出を実証した。低磁場下における、決定論的な電子負荷、軸方向減衰、軸方向温度、および衝突誘起マグネトロン半径増大の特性を明らかにした。これらの結果は、平面型ペニングトラップの実用的な基盤を確立し、量子情報科学への応用に向けた重要な次のステップを示すものである。"
+ },
+ {
+  "id": "2606.28130",
+  "posted_at": "2026-06-29T06:02:35Z",
+  "title": "A Reproducible Pipeline for Symmetry-Respecting Excited States on Near-Term Quantum Computers: The H2O/STO-3G Case",
+  "authors": "Huajing Song",
+  "link": "https://arxiv.org/abs/2606.28130",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "nisq",
+   "sim"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム",
+   "量子シミュレーション"
+  ],
+  "abstract_en": "Variational excited-state quantum algorithms fail for reasons usually studied in isolation: barren plateaus, symmetry contamination, finite-sampling instability, and hardware cost. Using one small but complete system -- H$_2$O in the STO-3G basis (12 qubits, Jordan--Wigner) -- we assemble these into a single reproducible pipeline, checking every claim against exact diagonalization. The bare qubit Hamiltonian interleaves cation ($N{=}7$) states below the neutral manifold; hardware-efficient and number-conserving ans\\\"atze stall at Hartree--Fock, an exact stationary point by Brillouin's theorem, while ADAPT-VQE escapes; variational deflation inherits the contamination and inverts the spectrum, whereas the quantum equation-of-motion (qEOM) subspace method restores the ladder to sub-milli-Hartree accuracy. Particle number is protected \\emph{structurally} under shot noise, and a realistic measurement model collapses the thousands of subspace matrix elements to $\\sim\\!10^5$ commuting groups; a matrix-aware shot allocation then reaches chemical accuracy at $\\sim\\!3\\times10^9$ total shots -- a thousandfold below the naive per-element estimate and reachable in days -- leaving single-circuit gate fidelity, not measurement, as the binding constraint. This work is a teaching and benchmarking reference, not a new method; all code, parameters, and figures are released.",
+  "abstract_ja": "変分励起状態量子アルゴリズムは、通常個別に研究される理由、すなわち、不毛なプラトー、対称性の汚染、有限サンプリングの不安定性、およびハードウェアコストのために失敗する。我々は、1 つの小さく完全なシステム、STO-3G 基底の H$_2$O (12 量子ビット、Jordan--Wigner) を使用して、これらを単一の再現可能なパイプラインに組み立て、すべての主張を正確な対角化に対してチェックする。裸の量子ビットハミルトニアンは、中性マニフォールドの下に陽イオン ($N{=}7$) 状態をインターリーブする。ハードウェア効率が良く、粒子数も保存される ans\\\"atze は、ブリルアンの定理により正確な定常点である Hartree-Fock で停止しますが、ADAPT-VQE はそれを回避します。変分デフレーションは汚染を引き継ぎ、スペクトルを反転させますが、量子運動方程式 (qEOM) 部分空間法はラダーをサブミリ Hartree 精度に復元します。粒子数はショット ノイズの下で構造的に保護され、現実的な測定モデルは数千の部分空間行列要素を $\\sim\\!10^5$ の可換群に縮約します。行列を考慮したショット割り当ては、合計ショット数 $\\sim\\!3\\times10^9$ で化学的精度に達します。これは、単純な要素ごとの推定値の 1000 分の 1 であり、数日で達成可能です。これにより、測定ではなく、単一回路ゲートの忠実度が制約となります。この研究は、新しい方法ではなく、教育およびベンチマークの参照です。すべてのコード、パラメータ、および図が公開されています。"
+ },
+ {
+  "id": "2606.28139",
+  "posted_at": "2026-06-29T06:02:37Z",
+  "title": "Optimizing Resource Costs: A Practical Guide to Achieving Target Security in Verifiable Blind Quantum Computing",
+  "authors": "Janice van Dam, Micha{\\l} van Hooft, Stephanie D. C. Wehner",
+  "link": "https://arxiv.org/abs/2606.28139",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "ft",
+   "network"
+  ],
+  "genre_names": [
+   "フォールトトレラント計算",
+   "量子ネットワーク・通信"
+  ],
+  "abstract_en": "Verifiable blind quantum computing (VBQC) enables a resource-limited client to securely delegate computations to an untrusted quantum server while maintaining privacy and detecting deviations from the prescribed computation. The noise-robust VBQC protocol of Leichtle et al. achieves this through a round-based structure: the client delegates multiple computation rounds and test rounds, using the test outcomes to detect cheating while tolerating honest hardware noise. The protocol's security proof involves numerous interdependent parameters, making it non-trivial to find a valid parameter set for a given hardware noise level and security target. We formalize this as a constrained optimization problem and develop a practical framework to solve it. The framework yields the protocol parameters that minimize the number of rounds for any given setup. We derive a heuristic formula for the minimal number of rounds to help understand the scaling with noise and security targets and to provide rapid resource estimation. Since the number of rounds depends on noise while the time per round depends on hardware rate, the framework also enables optimization of rate-fidelity trade-offs to minimize end-to-end runtime. We demonstrate both applications through a case study of a trapped-ion server with a measurement-only client, showing how the client's polarization control hardware specifications translate into protocol parameters and runtime estimates, providing concrete guidance for near-term implementations.",
+  "abstract_ja": "検証可能なブラインド量子コンピューティング（VBQC）は、リソースが限られたクライアントが、プライバシーを維持し、規定された計算からの逸脱を検出しながら、信頼できない量子サーバーに計算を安全に委任することを可能にします。Leichtleらによるノイズ耐性VBQCプロトコルは、ラウンドベースの構造によってこれを実現します。クライアントは複数の計算ラウンドとテストラウンドを委任し、テスト結果を使用して不正行為を検出しつつ、ハードウェアノイズを許容します。このプロトコルのセキュリティ証明には多数の相互依存するパラメータが含まれるため、特定のハードウェアノイズレベルとセキュリティ目標に対して有効なパラメータセットを見つけることは容易ではありません。私たちはこれを制約付き最適化問題として定式化し、それを解決するための実用的なフレームワークを開発しました。このフレームワークは、任意の設定に対してラウンド数を最小化するプロトコルパラメータを生成します。ノイズとセキュリティ目標によるスケーリングを理解し、迅速なリソース推定を提供するために、最小ラウンド数に対するヒューリスティックな公式を導出します。ラウンド数はノイズに依存し、1ラウンドあたりの時間はハードウェアの速度に依存するため、このフレームワークは、エンドツーエンドの実行時間を最小限に抑えるための速度と忠実度のトレードオフの最適化も可能にします。本稿では、測定専用クライアントを備えたトラップイオンサーバのケーススタディを通して、これらの両方の応用例を示します。クライアントの偏極制御ハードウェア仕様がプロトコルパラメータと実行時間推定値にどのように変換されるかを示し、近未来の実装に向けた具体的な指針を提供します。"
+ },
+ {
+  "id": "2606.28169",
+  "posted_at": "2026-06-29T06:02:40Z",
+  "title": "Time Evolution on Hybrid Tensor Networks -- A Novel and Parallelizable Algorithm",
+  "authors": "Tobias V. Bauer, Richard M. Milbradt, Christian B. Mendl",
+  "link": "https://arxiv.org/abs/2606.28169",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim"
+  ],
+  "genre_names": [
+   "量子シミュレーション"
+  ],
+  "abstract_en": "We develop a novel time-evolution algorithm for matrix product states based on the recently introduced hybrid tensor network (hTN) framework. We retain the tensors close to the boundary on the classical computer and offload the highly entangled inner ones to the quantum computer. In our variant, we employ the Basis Update and Galerkin (BUG) integrator to time-evolve the classical tensors, and we develop a coupling scheme between the classical and quantum parts. Our framework admits modular combination with any quantum time-evolution method, such as (classically pre-optimized) Trotterization. The ratio of classical and quantum tensor degrees of freedom can be dynamically adjusted during the time evolution, which can be advantageous when the classical memory requirements become prohibitive. The quantum and classical components can run in parallel during a single time step and are not constrained by synchronization barriers or mid-circuit measurements. We describe the detailed steps and pseudocode for our algorithm specialized for tensor networks originating from the matrix product state Ansatz.",
+  "abstract_ja": "我々は、最近導入されたハイブリッドテンソルネットワーク（hTN）フレームワークに基づき、行列積状態のための新しい時間発展アルゴリズムを開発しました。境界に近いテンソルは古典コンピュータ上に保持し、高度に絡み合った内部のテンソルは量子コンピュータにオフロードします。我々のバリアントでは、基底更新とガラーキン（BUG）積分器を用いて古典テンソルを時間発展させ、古典部分と量子部分の間の結合スキームを開発しました。我々のフレームワークは、（古典的に事前最適化された）トロッター化など、任意の量子時間発展法とモジュール式に組み合わせることができます。古典テンソルと量子テンソルの自由度の比率は、時間発展中に動的に調整できるため、古典メモリの要件が許容範囲を超える場合に有利になります。量子コンポーネントと古典コンポーネントは、単一の時間ステップで並列に実行でき、同期バリアや中間回路測定による制約を受けません。我々は、行列積状態アンザッツから生じるテンソルネットワークに特化したアルゴリズムの詳細な手順と擬似コードについて説明します。"
+ },
+ {
+  "id": "2606.28178",
+  "posted_at": "2026-06-29T06:02:42Z",
+  "title": "Vacuum Fluctuation-Induced State Switching in Degenerate Optical Parametric Oscillators",
+  "authors": "Yihao Huang, Seou Choi, Rom Simovitch, Jamison Sloan, Charles Roques-Carmes, Michael Horodynski, Marin Solja\\v{c}i\\'c, Yannick Salamin",
+  "link": "https://arxiv.org/abs/2606.28178",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations",
+   "nisq"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論",
+   "変分・NISQアルゴリズム"
+  ],
+  "abstract_en": "Bistable driven-dissipative systems near bifurcations can exhibit noise-activated switching between steady states. Here, we investigate how quantum vacuum fluctuations induce such switching in a biased optical parametric oscillator (OPO), a nonlinear system with intrinsic bistability. We show how microscopic quantum fluctuations driving macroscopic transitions can be controlled with an external bias field that reshapes the OPO steady-state metapotential. We derive analytical expressions for the average switching time and validate them through simulations of the OPO field distribution and inter-state probability flow under bias injection. We further examine how switching depends on bias strength, pump gain, and optical nonlinearity. Our findings clarify how quantum noise can shape macroscopic dynamics and provide a foundation for noise-assisted photonic machine learning and probabilistic quantum gates.",
+  "abstract_ja": "分岐点近傍の双安定駆動散逸系は、ノイズによって定常状態間のスイッチングを起こすことがあります。本研究では、固有の双安定性を持つ非線形系であるバイアス光パラメトリック発振器（OPO）において、量子真空ゆらぎがこのようなスイッチングをどのように引き起こすかを調べます。マクロな遷移を駆動する微視的な量子ゆらぎが、OPOの定常状態メタポテンシャルを再構成する外部バイアス場によってどのように制御できるかを示します。平均スイッチング時間の解析式を導出し、バイアス注入下でのOPO場分布と状態間確率フローのシミュレーションによって検証します。さらに、スイッチングがバイアス強度、ポンプゲイン、および光非線形性にどのように依存するかを調べます。本研究の結果は、量子ノイズがマクロなダイナミクスをどのように形成するかを明らかにし、ノイズ支援型フォトニック機械学習および確率的量子ゲートの基礎を提供します。"
+ },
+ {
+  "id": "2606.28199",
+  "posted_at": "2026-06-29T06:02:45Z",
+  "title": "Hybrid quantum-classical neural network for sample-efficient recognition of topological phases",
+  "authors": "Markus K. Hoffmann, Leon C. Sander, Colin Scarato, Christoph Hellings, Johannes Kn\\\"orzer, Michael J. Hartmann, Petr Zapletal",
+  "link": "https://arxiv.org/abs/2606.28199",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml"
+  ],
+  "genre_names": [
+   "量子機械学習"
+  ],
+  "abstract_en": "With increasing maturity of quantum computers, standard methods for characterizing global properties of their output quantum states via direct measurements and classical post-processing are becoming increasingly impractical due to large measurement costs. Although quantum neural networks could directly process quantum states to identify underlying characteristics with reduced measurement efforts, they often require deep quantum circuits that cannot be implemented on existing devices. To overcome these challenges, we introduce a hybrid quantum-classical neural network that consists of a shallow parameterized quantum circuit, measurements, and a classical neural network. The parameterized quantum circuit performs a nonlocal transformation of the measurement basis, which is jointly trained with the classical neural network to maximize the statistical distance between data obtained by measuring different quantum states. Using supervised learning, we demonstrate that the hybrid neural network distinguishes the topological phase of the surface code from a symmetry-enriched topological phase and random product states. Moreover, this hybrid neural network reduces both inference and training sample complexities of recognizing the topological phase by approximately one order of magnitude compared to a classical neural network trained on randomized Pauli measurements. As this hybrid neural network features a shallow quantum circuit that can be readily implemented on existing quantum computers, it enables the efficient characterization of complex quantum states.",
+  "abstract_ja": "量子コンピュータの成熟度が高まるにつれ、直接測定と古典的な後処理による出力量子状態のグローバル特性を特徴付ける標準的な手法は、測定コストが高額になるため、ますます非現実的になってきています。量子ニューラルネットワークは、測定の手間を減らしながら量子状態を直接処理して根本的な特性を特定できますが、多くの場合、既存のデバイスでは実装できない深い量子回路を必要とします。これらの課題を克服するために、浅いパラメータ化された量子回路、測定、および古典ニューラルネットワークから構成されるハイブリッド量子古典ニューラルネットワークを提案します。パラメータ化された量子回路は、測定基底の非局所変換を実行し、古典ニューラルネットワークと共同で学習することで、異なる量子状態の測定によって得られたデータ間の統計的距離を最大化します。教師あり学習を用いて、このハイブリッドニューラルネットワークが、表面コードのトポロジカル位相を対称性に富んだトポロジカル位相およびランダム積状態から区別できることを示します。さらに、このハイブリッドニューラルネットワークは、ランダム化されたパウリ測定で学習した古典ニューラルネットワークと比較して、トポロジカル位相を認識するための推論と学習サンプルの複雑さを約1桁削減します。このハイブリッドニューラルネットワークは、既存の量子コンピュータに容易に実装できる浅い量子回路を特徴としているため、複雑な量子状態を効率的に特徴付けることができる。"
+ },
+ {
+  "id": "2606.28201",
+  "posted_at": "2026-06-29T06:02:46Z",
+  "title": "Hybrid Quantum-Classical Neural Networks for Recognizing Quantum Phases",
+  "authors": "Colin Scarato, Johannes Kn\\\"orzer, Markus K. Hoffmann, Leon C. Sander, Luca Hofele, Shengpu Wang, Kilian Hanke, Ashay Sathe, Dominic Hagmann, Alexander Flasby, Michael J. Hartmann, Petr Zapletal, Andreas Wallraff, Christoph Hellings",
+  "link": "https://arxiv.org/abs/2606.28201",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml"
+  ],
+  "genre_names": [
+   "量子機械学習"
+  ],
+  "abstract_en": "Identifying quantum phases of matter is key to understanding strongly correlated materials, but remains a challenging task for both conventional computers and current quantum processors. Here, we introduce and implement a hybrid quantum-classical neural network for quantum phase recognition by combining a hardware-efficient parameterized quantum circuit and a feedforward neural network. We jointly train both components with superconducting quantum hardware in the optimization loop, to experimentally demonstrate a classifier for the quantum phases of surface code lattices with up to 4x4 sites in a magnetic field. To learn nonlocal features of the topological phase, we train the hybrid neural network to distinguish topological ground states of the surface code from a featureless ensemble of product states. This allows the trained classifier to distinguish topological ground states from randomly chosen product states, even when subjected to any single-qubit Pauli error. The classifier reaches accuracies above 85% in single-shot measurements, and above 99% when averaging over ten measurements. We expect hybrid neural networks such as the one presented here to be a promising approach for characterizing quantum states in scenarios where classical methods exhibit an unfavorable scaling of sample complexity.",
+  "abstract_ja": "物質の量子相を識別することは、強相関物質を理解する上で重要ですが、従来のコンピュータと現在の量子プロセッサの両方にとって依然として困難な課題です。本稿では、ハードウェア効率の高いパラメータ化された量子回路とフィードフォワードニューラルネットワークを組み合わせることで、量子相認識のためのハイブリッド量子古典ニューラルネットワークを導入し、実装します。最適化ループで超伝導量子ハードウェアを用いて両方のコンポーネントを共同でトレーニングし、磁場中の最大4x4サイトの表面コード格子の量子相分類器を実験的に実証します。トポロジカル相の非局所的特徴を学習するために、ハイブリッドニューラルネットワークをトレーニングして、表面コードのトポロジカル基底状態を特徴のない積状態のアンサンブルから区別します。これにより、トレーニングされた分類器は、単一量子ビットのパウリエラーが発生した場合でも、トポロジカル基底状態をランダムに選択された積状態から区別することができます。この分類器は、シングルショット測定で85%を超える精度を達成し、10回の測定を平均すると99%を超える精度を達成します。ここで紹介したようなハイブリッドニューラルネットワークは、古典的な手法ではサンプル複雑性のスケーリングが好ましくないシナリオにおいて、量子状態を特徴づけるための有望なアプローチになると期待されます。"
+ },
+ {
+  "id": "2606.28234",
+  "posted_at": "2026-06-29T06:02:47Z",
+  "title": "Noise-Directed Adaptive Remapping for Integer Optimization: from qubits to (encoded) qudits",
+  "authors": "Stuart Hadfield, Filip B. Maciejewski, Davide Venturelli",
+  "link": "https://arxiv.org/abs/2606.28234",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "algo",
+   "nisq"
+  ],
+  "genre_names": [
+   "量子アルゴリズム",
+   "変分・NISQアルゴリズム"
+  ],
+  "abstract_en": "We extend Noise-Directed Adaptive Remapping (NDAR), a recently proposed heuristic meta-algorithm that leverages device noise as a computational resource, to optimization problems over discrete (integer) domains. While originally introduced for unconstrained binary optimization, the proposed generalization introduces additional gauge degrees of freedom at the logical level, such that the gauge transformation applied at each iteration is no longer unique, allowing tailoring to particular encodings or quantum hardware. We identify encoding-dependent requirements for NDAR beyond binary domains: feasibility of the noise attractor, existence of compatible gauge transformations that preserve an efficiently implementable circuit family, and a systematic way to select the transform to apply at each step. We analyze these criteria for qudit-native and for binary, one-hot, and domain-wall qubit encodings, using the Max-k-colorable subgraph problem as a running example. We demonstrate that these encodings can exhibit distinct advantages and tradeoffs when integrated within the NDAR framework, particularly in how noise-induced dynamics interact with the solution landscape and choice of encoding. Our results indicate that NDAR-guided noise considerations provide a new criterion for comparing device-level encoding choices for quantum optimization. Finally, we outline directions toward experimental realization in superconducting qudit devices and further algorithmic improvements.",
+  "abstract_ja": "我々は、デバイスノイズを計算リソースとして活用する最近提案されたヒューリスティックメタアルゴリズムであるノイズ指向適応リマッピング（NDAR）を、離散（整数）領域上の最適化問題に拡張する。NDARは元々制約のないバイナリ最適化のために導入されたものだが、提案された一般化では論理レベルでゲージ自由度が追加され、各反復で適用されるゲージ変換が一意ではなくなり、特定のエンコーディングや量子ハードウェアに合わせて調整できるようになる。我々は、バイナリ領域を超えたNDARのエンコーディング依存要件を特定する。すなわち、ノイズアトラクターの実現可能性、効率的に実装可能な回路ファミリーを維持する互換性のあるゲージ変換の存在、および各ステップで適用する変換を選択する体系的な方法である。我々は、これらの基準を、quditネイティブ、バイナリ、ワンホット、およびドメインウォール量子ビットエンコーディングについて、実行例としてMax-k彩色可能な部分グラフ問題を用いて分析する。本研究では、これらの符号化方式がNDARフレームワークに統合された場合、特にノイズ誘起ダイナミクスが解のランドスケープや符号化方式の選択とどのように相互作用するかという点で、明確な利点とトレードオフを示すことを実証します。私たちの結果は、NDARに基づいたノイズの考慮が、量子最適化のためのデバイスレベルの符号化方式の選択を比較する新たな基準を提供することを示しています。最後に、超伝導量子ビットデバイスにおける実験的実現と、さらなるアルゴリズムの改善に向けた方向性を概説します。"
+ },
+ {
+  "id": "2606.28236",
+  "posted_at": "2026-06-29T06:02:50Z",
+  "title": "Qudit extension of parameterized IQP circuits: A generative quantum machine learning approach to integer data",
+  "authors": "Robert J. Banks, Arianna Crippa, Matthias Traube, Josua Unger, Christian Ertler, Wolfgang Lechner",
+  "link": "https://arxiv.org/abs/2606.28236",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml"
+  ],
+  "genre_names": [
+   "量子機械学習"
+  ],
+  "abstract_en": "Parameterized Instantaneous Quantum Polynomial (IQP) circuits have proven useful in quantum generative learning models, particularly for binary distributions. However, when applied to non-binary datasets, they exhibit notable limitations: mapping integer values into qubit-compatible binary representations often destroys the original metric structure of the data. In this paper we aim to extend them to a qudits formulation operating on an integer mapping of the data. The IQP quantum circuit is adapted to encode each integer valued pixel into a bit-string of fixed length and quantum gates are transformed to follow the qudit formalism. As a generative machine learning approach, a suitable loss function for the circuit training and the calculation of the covariance matrix among features are developed and validated on the energy deposits from single-particle electron showers in the electromagnetic calorimeter of the CLIC detector. The method proposed in this work can be also extended to other applications that utilize quantum generative machine learning for non-binary data.",
+  "abstract_ja": "パラメータ化された瞬時量子多項式（IQP）回路は、特にバイナリ分布において、量子生成学習モデルで有用であることが証明されています。しかし、非バイナリデータセットに適用すると、顕著な制限が生じます。整数値を量子ビット互換のバイナリ表現にマッピングすると、データの元のメトリック構造が破壊されることがよくあります。本論文では、データの整数マッピング上で動作する量子ビット定式化にIQPを拡張することを目指します。IQP量子回路は、各整数値のピクセルを固定長のビット列にエンコードするように調整され、量子ゲートは量子ビット形式に従うように変換されます。生成機械学習アプローチとして、回路トレーニングと特徴間の共分散行列の計算に適した損失関数が開発され、CLIC検出器の電磁カロリメータにおける単粒子電子シャワーからのエネルギー堆積量で検証されます。本研究で提案する手法は、非バイナリデータに量子生成機械学習を利用する他のアプリケーションにも拡張できます。"
+ },
+ {
+  "id": "2606.28252",
+  "posted_at": "2026-06-29T06:02:52Z",
+  "title": "Parameter-Efficient Continuous-Variable Photonic Quantum Neural Networks for Edge Quantum AI: Demonstration in Oral Cancer Detection",
+  "authors": "Akshay Bhagwan Sonawane, Sophie Choe, Lakshman Tamil",
+  "link": "https://arxiv.org/abs/2606.28252",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml",
+   "nisq"
+  ],
+  "genre_names": [
+   "量子機械学習",
+   "変分・NISQアルゴリズム"
+  ],
+  "abstract_en": "Early detection of oral cancer markedly improves clinical outcomes, yet specialized diagnostic tools remain scarce in low-resource settings. Smartphone-based screening is a scalable alternative but needs lightweight models that run within edge-hardware constraints. Hybrid classical-quantum architectures are emerging candidates for parameter-efficient learning, yet most rely on qubit hardware that needs cryogenic operation, unsuitable for edge deployment. Continuous-variable (CV) photonic quantum computing, which operates at room temperature, offers a complementary route. We investigate a hybrid classical-CV quantum classifier for oral cancer detection from smartphone images. The pipeline combines a MobileNetV1 feature extractor, principal component analysis to 16 dimensions, and a parameterized CV-QNN of displacement, interferometric, and Kerr gates on a photonic backend. We propose a simplified $\\Phi \\circ D \\circ U_1$ CV-QNN architecture that cuts trainable parameters 40-45% relative to the standard CV-QNN layer of Killoran et al. (2019a), and identify dimensionality-reduction and encoding-restriction strategies that mitigate barren plateaus, raising loss-gradient variance by roughly 58 orders of magnitude. Whether the simplified layer beats the full layer is width-dependent: the full layer holds a small but significant edge at two qumodes, whereas the simplified layer is significantly better at four qumodes using 44% fewer parameters. The strongest model, a four-qumode simplified CV-QNN with only 18 parameters, attains the highest validation AUC of all models, exceeds a 55-parameter classical baseline using 67% fewer parameters, and reaches 100% calibrated test accuracy across all seeds. These results support CV photonic quantum machine learning for parameter-efficient, room-temperature medical image classification and motivate progress toward edge quantum AI.",
+  "abstract_ja": "口腔がんの早期発見は臨床転帰を大幅に改善しますが、低資源環境では専門的な診断ツールが不足しています。スマートフォンベースのスクリーニングは拡張可能な代替手段ですが、エッジハードウェアの制約内で動作する軽量モデルが必要です。ハイブリッド古典量子アーキテクチャは、パラメータ効率の良い学習の有力候補ですが、ほとんどが極低温動作を必要とする量子ビットハードウェアに依存しており、エッジ展開には適していません。室温で動作する連続変数（CV）フォトニック量子コンピューティングは、補完的な方法を提供します。私たちは、スマートフォン画像からの口腔がん検出のためのハイブリッド古典CV量子分類器を調査します。パイプラインは、MobileNetV1特徴抽出器、16次元への主成分分析、およびフォトニックバックエンド上の変位、干渉、およびカーゲートのパラメータ化されたCV-QNNを組み合わせています。私たちは、Killoranらの標準的なCV-QNN層と比較して、学習可能なパラメータを40～45%削減する簡略化された$\\Phi \\circ D \\circ U_1$ CV-QNNアーキテクチャを提案します。 （2019a）では、不毛なプラトーを軽減する次元削減とエンコーディング制限戦略を特定し、損失勾配の分散を約 58 桁増加させました。簡略化されたレイヤーが完全なレイヤーを上回るかどうかは幅に依存します。完全なレイヤーは 2 つの qumode でわずかですが有意な優位性を持ちますが、簡略化されたレイヤーは 4 つの qumode で 44% 少ないパラメータを使用して大幅に優れています。最も強力なモデルである、わずか 18 個のパラメータを持つ 4 つの qumode 簡略化された CV-QNN は、すべてのモデルの中で最高の検証 AUC を達成し、67% 少ないパラメータを使用して 55 個のパラメータを持つ古典的なベースラインを上回り、すべてのシードで 100% の較正済みテスト精度を達成しました。これらの結果は、パラメータ効率の高い室温医療画像分類のための CV フォトニック量子機械学習を支持し、エッジ量子 AI への進歩を促進します。"
+ },
+ {
+  "id": "2606.28255",
+  "posted_at": "2026-06-29T06:02:54Z",
+  "title": "Efficient targeting of arbitrary excited states with quantum inverse power iteration through filtering polynomials",
+  "authors": "Srushti Patil, Nina Glaser",
+  "link": "https://arxiv.org/abs/2606.28255",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim",
+   "algo"
+  ],
+  "genre_names": [
+   "量子シミュレーション",
+   "量子アルゴリズム"
+  ],
+  "abstract_en": "In this work, we introduce a quantum inverse power iteration (QIPI) algorithm based on the quantum singular value transformation (QSVT) to target arbitrary excited states. Given an energy shift $\\omega$, QIPI prepares the target excited state by iteratively applying an approximation of the shifted inverse Hamiltonian $(H-\\omega I)^{-1}$ to a trial state. Prior quantum inverse power approaches typically relied on Fourier decompositions of the inverse Hamiltonian, with numerical quadrature used to reconstruct the transformation, but such methods are highly sensitive to hyperparameter choices and have been observed to be numerically unstable, effectively restricting their use to ground-state preparation. To enable robust excited-state targeting, we investigate two alternative transformation techniques: a Chebyshev decomposition of the inverse (Cheb-inv) and an eigenstate filtering (EF) approach based on QSVT. We find that EF-based QIPI is substantially more robust than Cheb-inv and other decomposition-based approaches due to the symmetry of the applied filtering polynomial, avoiding divergence with respect to the choice of $\\omega$ and efficiently suppressing off-target eigenstates even in closely spaced spectra. Numerical simulations for molecular Hamiltonians of H$_2$, LiH, and BeH$_2$ show improved convergence and enhanced access to higher excited states relative to other quantum power methods. Assuming standard oracle access to the Hamiltonian, we further provide logical resource estimates in fault-tolerant settings in terms of T gate counts, and conclude that QIPI can achieve high target state amplification with modest polynomial degrees, thereby making it a promising candidate for scalable excited-state preparation in fault-tolerant quantum chemistry applications.",
+  "abstract_ja": "この研究では、任意の励起状態を対象とする量子特異値変換 (QSVT) に基づく量子逆べき反復 (QIPI) アルゴリズムを紹介します。エネルギーシフト $\\omega$ が与えられると、QIPI は、シフトされた逆ハミルトニアン $(H-\\omega I)^{-1}$ の近似を試行状態に反復適用することにより、対象の励起状態を準備します。従来の量子逆べきアプローチでは、通常、逆ハミルトニアンのフーリエ分解に依存し、数値積分を使用して変換を再構築していましたが、このような方法はハイパーパラメータの選択に非常に敏感であり、数値的に不安定であることが観察されており、その使用は実質的に基底状態の準備に限定されていました。堅牢な励起状態ターゲティングを可能にするために、2 つの代替変換技術、すなわち逆ハミルトニアンのチェビシェフ分解 (Cheb-inv) と QSVT に基づく固有状態フィルタリング (EF) アプローチを調査します。 EFベースのQIPIは、適用されるフィルタリング多項式の対称性により、Cheb-invや他の分解ベースのアプローチよりも大幅に堅牢であることがわかりました。これにより、$\\omega$の選択に関して発散を回避し、近接したスペクトルであってもオフターゲットの固有状態を効率的に抑制できます。H$_2$、LiH、BeH$_2$の分子ハミルトニアンの数値シミュレーションでは、他の量子パワー法と比較して、収束性が向上し、より高い励起状態へのアクセスが強化されていることが示されました。ハミルトニアンへの標準的なオラクルアクセスを仮定して、Tゲート数の観点からフォールトトレラント設定における論理リソースの推定値をさらに提供し、QIPIは控えめな多項式の次数で高いターゲット状態増幅を達成できるため、フォールトトレラント量子化学アプリケーションにおけるスケーラブルな励起状態準備の有望な候補であると結論付けました。"
+ },
+ {
+  "id": "2606.28269",
+  "posted_at": "2026-06-29T06:02:57Z",
+  "title": "Efficient Approximation of the Wigner Kernel in Phase-Space Quantum Mechanics",
+  "authors": "Mehran Attar, Bassant Selim, Jean Michel Sellier",
+  "link": "https://arxiv.org/abs/2606.28269",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim"
+  ],
+  "genre_names": [
+   "量子シミュレーション"
+  ],
+  "abstract_en": "The Signed Particle Formulation provides a particle-based interpretation of quantum mechanics in phase space, where quantum dynamics are represented through the creation and evolution of signed particles. A central computational challenge in this framework is the evaluation of the Wigner kernel, which generally involves highly oscillatory integrals and can become computationally demanding in time-dependent simulations. This paper proposes an analytical approximation of the Wigner kernel for one-dimensional single body quantum systems by exploiting a series-based representation of the potential function. The resulting expression provides an efficient way to approximate the Wigner kernel and the associated Gamma function, which governs the particle-generation process in the Signed Particle Formulation framework. The proposed approximation is evaluated for several Gaussian-based potential profiles, including single, double, triple, and quadruple Gaussian potentials. Numerical comparisons between the approximated and directly computed Wigner kernels and Gamma functions show that the proposed method captures the main behavior of the exact quantities while significantly reducing the computational cost. These results indicate that the proposed approximation can serve as an efficient computational component for scalable Signed Particle Formulation based quantum simulations.",
+  "abstract_ja": "符号付き粒子定式化は、位相空間における量子力学の粒子ベースの解釈を提供するものであり、量子力学のダイナミクスは符号付き粒子の生成と進化によって表現されます。この枠組みにおける中心的な計算上の課題は、ウィグナー核の評価です。これは一般的に非常に振動的な積分を伴い、時間依存シミュレーションでは計算負荷が高くなる可能性があります。本論文では、ポテンシャル関数の級数表現を利用することで、一次元単体量子系に対するウィグナー核の解析的近似を提案します。得られた式は、符号付き粒子定式化の枠組みにおける粒子生成プロセスを支配するウィグナー核と関連するガンマ関数を効率的に近似する方法を提供します。提案された近似は、単一、二重、三重、四重ガウスポテンシャルを含む、いくつかのガウスベースのポテンシャルプロファイルに対して評価されます。近似されたウィグナー核とガンマ関数と直接計算されたウィグナー核とガンマ関数の数値比較により、提案された方法は、計算コストを大幅に削減しながら、正確な量の主要な挙動を捉えていることが示されています。これらの結果は、提案された近似法が、スケーラブルな符号付き粒子定式化に基づく量子シミュレーションのための効率的な計算コンポーネントとして機能することを示している。"
+ },
+ {
+  "id": "2606.28291",
+  "posted_at": "2026-06-29T06:02:59Z",
+  "title": "Composing Quantum Instruments",
+  "authors": "Robert I. Booth, Dominik Leichtle, Alex Rice, Kim Worrall",
+  "link": "https://arxiv.org/abs/2606.28291",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qit",
+   "foundations"
+  ],
+  "genre_names": [
+   "量子情報理論",
+   "量子基礎・測定理論"
+  ],
+  "abstract_en": "We study the composition of classically-controlled quantum instruments--the natural quantum analogue of Markov kernels. Classically, Markov kernels compose by integrating one kernel against another. Defining this composition for quantum instruments with continuous outcomes requires an integral of quantum channel-valued functions with respect to a quantum instrument. We construct this integral in the Heisenberg picture using the Okamura-Ozawa normal extension to a von Neumann tensor product. This integral recovers the expected finite formula, preserves normal complete positivity and subunitality, and provides the multiplication for a monad governing the composition of quantum instruments. As an immediate consequence, we identify the category of quantum Markov kernels as the Kleisli category of this monad.",
+  "abstract_ja": "本稿では、古典的に制御される量子計測器の構成、すなわちマルコフ核の自然な量子版について考察する。古典的には、マルコフ核は、ある核を別の核と積分することによって構成される。連続的な結果を持つ量子計測器についてこの構成を定義するには、量子計測器に関する量子チャネル値関数の積分が必要となる。我々は、ハイゼンベルク描像において、フォン・ノイマン・テンソル積への岡村・小澤正規拡張を用いてこの積分を構成する。この積分は、期待される有限式を回復し、正規完全正値性と部分単位性を保持し、量子計測器の構成を規定するモナドの乗算を提供する。その直接的な結果として、量子マルコフ核の圏をこのモナドのクライスリ圏として特定する。"
+ },
+ {
+  "id": "2606.28313",
+  "posted_at": "2026-06-29T06:03:02Z",
+  "title": "Diameter truncated operator evolution",
+  "authors": "Tom Holden-Dye, Max Marvell, Joel Mills, Christoper J. Turner, Arijeet Pal",
+  "link": "https://arxiv.org/abs/2606.28313",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim"
+  ],
+  "genre_names": [
+   "量子シミュレーション"
+  ],
+  "abstract_en": "We present a method for simulating operator dynamics in out-of-equilibrium quantum systems. Due to the rapid growth of complexity in these systems, this is typically speaking an intractable task. However, exceptional progress has been made in recent years to sidestep this barrier, with the introduction of a number of methods that make use of a truncation of the simulation to low-weight (the number of non-trivial terms in a Pauli string basis expansion) observables, which turns out to be a good approximation for many dynamical quantities of interest, e.g., two-point infinite-temperature correlation functions between local operators. In this work, we extend this idea to a leaner truncation protocol, truncating operators based on their diameter - that is, the size of the region on the lattice on which they are non-trivially supported. Using existing analysis for generic circuits we argue that this kind of truncation protocol is physically well-motivated, and show via extensive numerical simulations for a number of systems of interest (here, the kicked Ising model and the Heisenberg XXZ model) that it is effective, and allows us to efficiently and accurately extract local correlation functions and transport properties.",
+  "abstract_ja": "本稿では、非平衡量子系における演算子ダイナミクスをシミュレートする方法を提示する。これらの系では複雑性が急速に増大するため、これは一般的に扱いが困難な課題である。しかし、近年、この障壁を回避するために、シミュレーションを低重み（パウリ弦基底展開における非自明項の数）の観測量に切り捨てる方法を導入することで、目覚ましい進歩が遂げられてきた。この方法は、局所演算子間の2点無限温度相関関数など、多くの関心のある動的量に対して良好な近似となることが分かっている。本研究では、このアイデアをより軽量な切り捨てプロトコルに拡張し、演算子をその直径、すなわち格子上で非自明に支持される領域のサイズに基づいて切り捨てる。一般的な回路に対する既存の解析を用いて、この種の切り捨てプロトコルは物理的に十分な根拠があると主張し、いくつかの興味深いシステム（ここでは、キックドイジングモデルとハイゼンベルクXXZモデル）に対する広範な数値シミュレーションを通して、それが効果的であり、局所相関関数と輸送特性を効率的かつ正確に抽出できることを示します。"
+ },
+ {
+  "id": "2606.27415",
+  "posted_at": "2026-06-29T06:03:03Z",
+  "title": "Elimination of Flux Trapping in Superconducting Circuits in Ambient Magnetic Fields",
+  "authors": "Rohan T. Kapur, Alex Wynn, Sergey K. Tolpygo, Neel Parmar, Anil Mankame, Adam A. Libson, Rabindra Das, Michele Kelley, Pauli Kehayias, Nathaniel J. O'Connor, Collin N. Muniz, Justin L. Mallek, Jennifer M. Schloss",
+  "link": "https://arxiv.org/abs/2606.27415",
+  "primary": "cond-mat.supr-con",
+  "announce_type": "cross",
+  "genre_ids": [
+   "hardware"
+  ],
+  "genre_names": [
+   "量子ハードウェア・実装"
+  ],
+  "abstract_en": "Superconductor digital electronics and quantum computing with superconducting qubits are promising next-generation computing technologies. When cooled down or operated in the presence of a nonzero background magnetic field $B_r$, superconducting thin films comprising the circuits can trap magnetic vortices that can degrade circuit or qubit performance. In this work, we report a practical solution for eliminating flux trapped during cooldown in ambient magnetic fields, $B_r\\leq 60$ $\\upmu$T, based on controlled local thermal gradients and moats, etched holes in the superconducting films of the circuit. Thermal gradients created by integrated on-chip resistive heaters move vortices towards the moats, where they become trapped away from circuitry regions and pinning sites. Using magnetic imaging and electrical circuit readout, we demonstrate that this approach is capable of removing magnetic flux trapped during field cooling and magnetic flux nucleated by circuit operation. If used in an environment with basic magnetic shielding, this solution is capable of suppressing all magnetic flux in a large-scale circuit, overcoming one of the long-standing challenges preventing high-performance scalable computing using superconductors.",
+  "abstract_ja": "超伝導デジタルエレクトロニクスと超伝導量子ビットを用いた量子コンピューティングは、有望な次世代コンピューティング技術です。回路を構成する超伝導薄膜は、冷却時または非ゼロの背景磁場 $B_r$ の存在下で動作時に、磁気渦を捕捉し、回路または量子ビットの性能を低下させる可能性があります。本研究では、制御された局所的な熱勾配と、回路の超伝導薄膜にエッチングされた穴である溝に基づいて、周囲磁場 $B_r\\leq 60$ \\upmu$T での冷却中に捕捉された磁束を除去する実用的なソリューションを報告します。チップ上に集積された抵抗ヒーターによって生成された熱勾配は、渦を溝に向かって移動させ、そこで渦は回路領域やピン止めサイトから離れた場所に捕捉されます。磁気イメージングと電気回路読み出しを用いて、このアプローチが磁場冷却中に捕捉された磁束と回路動作によって核生成された磁束を除去できることを実証します。基本的な磁気シールドを備えた環境で使用する場合、このソリューションは大規模回路におけるすべての磁束を抑制することができ、超伝導体を用いた高性能でスケーラブルなコンピューティングを阻んできた長年の課題の1つを克服することができる。"
+ },
+ {
+  "id": "2606.27422",
+  "posted_at": "2026-06-29T06:03:04Z",
+  "title": "Magnetic long-range order at finite temperature in two-dimensional hyperbolic lattices",
+  "authors": "Alexander Hickey, Joseph Maciejko",
+  "link": "https://arxiv.org/abs/2606.27422",
+  "primary": "cond-mat.str-el",
+  "announce_type": "cross",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "abstract_en": "Infrared singularities of gapless Goldstone modes preclude magnetic long-range order at finite temperature in conventional two-dimensional systems. By studying the spin-$S$ Heisenberg model on regular tilings of the hyperbolic plane, we show that this obstruction is absent in negatively curved space. Using spin-wave theory, we find that the zero-energy collective modes required by symmetry carry vanishing local spectral weight and are separated from the thermodynamic bulk magnon continuum by a finite gap in the bulk local spectral density. As a result, local transverse correlations remain short ranged, with a finite correlation length, despite the presence of Goldstone modes associated with the broken SO(3) spin-rotation symmetry. Stronger negative curvature is found to suppress quantum fluctuations in bulk thermodynamic quantities, pushing the ordered state toward \"mean-field-like\" behavior. We further estimate the ordering temperature from the thermal spin-wave correction to the ordered moment. These results establish hyperbolic geometry as a route to finite-temperature magnetic order that circumvents the Mermin-Wagner obstruction without breaking or modifying the continuous symmetry.",
+  "abstract_ja": "ギャップレス・ゴールドストーン・モードの赤外特異点は、従来の二次元系では有限温度での磁気長距離秩序を阻害する。双曲平面の正則タイリング上のスピンSハイゼンベルク模型を研究することで、負の曲率を持つ空間ではこの障害が存在しないことを示す。スピン波理論を用いると、対称性によって要求されるゼロエネルギー集団モードは局所スペクトル重みがゼロであり、バルク局所スペクトル密度の有限ギャップによって熱力学的バルクマグノン連続体から分離されることがわかる。その結果、破れたSO(3)スピン回転対称性に関連するゴールドストーン・モードが存在するにもかかわらず、局所横方向相関は有限の相関長を持つ短距離のままとなる。より強い負の曲率はバルク熱力学的量の量子ゆらぎを抑制し、秩序状態を「平均場のような」振る舞いへと押し上げることがわかった。さらに、秩序モーメントへの熱スピン波補正から秩序化温度を推定する。これらの結果は、双曲幾何学が、連続対称性を破壊または変更することなく、マーミン・ワーグナーの障害を回避する有限温度磁気秩序への道であることを示している。"
+ },
+ {
+  "id": "2606.27442",
+  "posted_at": "2026-06-29T06:03:06Z",
+  "title": "A Quantum Method of Types",
+  "authors": "Arick Grootveld",
+  "link": "https://arxiv.org/abs/2606.27442",
+  "primary": "cs.IT",
+  "announce_type": "cross",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "abstract_en": "The method of types is a fundamental tool in classical information theory, with applications ranging from composite hypothesis testing and universal source coding to the capacity of arbitrarily varying channels. In this work we introduce an empirical operator acting as a quantum analog of the empirical distribution. We show that this empirical operator satisfies combinatorial and large-deviation bounds, which in combination describe a quantum method of types. As an application, we use this quantum method of types to prove a universal achievability result for composite quantum hypothesis testing.",
+  "abstract_ja": "型の方法は、古典情報理論における基本的なツールであり、複合仮説検定や普遍的なソース符号化から、任意に変化するチャネルの容量に至るまで、幅広い応用分野を持つ。本研究では、経験分布の量子版として機能する経験演算子を導入する。この経験演算子が組み合わせ論的境界と大偏差境界を満たし、これらを組み合わせることで量子型の方法が記述されることを示す。応用例として、この量子型の方法を用いて、複合量子仮説検定の普遍的達成可能性結果を証明する。"
+ },
+ {
+  "id": "2606.27498",
+  "posted_at": "2026-06-29T06:03:07Z",
+  "title": "Soft QED as Open Quantum System: Infrared Cancellation and Soft-Shell Coarse Graining",
+  "authors": "Soo-Jong Rey",
+  "link": "https://arxiv.org/abs/2606.27498",
+  "primary": "hep-th",
+  "announce_type": "cross",
+  "genre_ids": [
+   "foundations"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "abstract_en": "I formulate unresolved soft-photon sector of QED as open quantum system. Resolved charged particles and hard photons form the system, unresolved soft photons form the environment, and basic object is the reduced density matrix. A resolved outcome $f$ of multiple hard particles and photons has probability $P_{f}(i) =\\sum_n|\\langle f,n|S|i,0\\rangle|^2=\\langle i|F_f|i\\rangle$, with Kraus operators $K_n= {}_{\\rm soft} \\langle n|S|0 \\rangle_{\\rm soft}$ and effect $F_f=\\sum_nK_n^\\dagger\\Pi_fK_n$. The SK formulation places unresolved virtual and real terms in one doubled-contour expansion. At one loop they carry the same on-shell eikonal kernel with opposite signs. This elegantly organizes the QED probability: for the same observable, perturbative order, diagrams, and phase space, the OQS gives the same infrared-finite terms as the full-QED. The soft-photon evolution is a unitary coherent-state displacement driven by the scattering current. The equal-history identity of influence functional exactly normalizes this soft evolution; together with the soft-photon theorem it removes the IR divergent leading-soft factor from inclusive probability. I also derive explicit leading-soft QED realization of scale-parametrized Lindblad evolution on a fixed hard-branch space. Tracing an infinitesimal soft-photon shell produces diagonal jump operators whose entries are fixed by the corresponding eikonal emission amplitudes. The finite-shell map is a completely positive unital Schur channel and, in the sharp scale-invariant leading-soft regime, a dephasing semigroup of a completely-positive-divisible scale flow. The resulting logarithmic visibility slope and monotonic purity loss are off-diagonal predictions of the reduced-state description. The same controlled-displacement dilation gives the Sudakov probability, Poisson soft-photon multiplicities, and the bremsstrahlung number spectrum.",
+  "abstract_ja": "QED の未解決のソフト光子セクターをオープン量子システムとして定式化します。解決された荷電粒子とハード光子がシステムを構成し、未解決のソフト光子が環境を構成し、基本オブジェクトは縮約密度行列です。複数のハード粒子と光子の解決された結果 $f$ の確率は $P_{f}(i) =\\sum_n|\\langle f,n|S|i,0\\rangle|^2=\\langle i|F_f|i\\rangle$ であり、Kraus 演算子は $K_n= {}_{\\rm soft} \\langle n|S|0 \\rangle_{\\rm soft}$ で、効果は $F_f=\\sum_nK_n^\\dagger\\Pi_fK_n$ です。SK 定式化では、未解決の仮想項と実項が 1 つの二重経路展開に配置されます。1 つのループでは、それらは符号が反対の同じオンシェル アイコナール カーネルを持ちます。これは、QED 確率をエレガントに整理します。同じ観測量、摂動次数、図、位相空間に対して、OQS は完全 QED と同じ赤外有限項を与えます。ソフト光子の進化は、散乱電流によって駆動されるユニタリーなコヒーレント状態の変位です。影響汎関数の履歴等価性は、このソフト進化を正確に正規化します。ソフト光子定理と合わせて、包括的確率から IR 発散するリーディング ソフト因子を取り除きます。また、固定されたハード分岐空間上のスケールパラメータ化されたリンドブラッド進化の明示的なリーディング ソフト QED 実現を導出します。無限小のソフト光子シェルをトレースすると、対応するアイコナール放出振幅によってエントリが固定される対角ジャンプ演算子が生成されます。有限シェル写像は、完全に正のユニタル シュール チャネルであり、鋭いスケール不変のリーディング ソフト領域では、完全に正の可除スケール フローのデコヒーレンス半群です。結果として得られる対数可視度勾配と単調な純度損失は、縮約状態記述の非対角成分の予測値である。同じ制御変位膨張により、スダコフ確率、ポアソン軟光子多重度、および制動放射数スペクトルが得られる。"
+ },
+ {
+  "id": "2606.27561",
+  "posted_at": "2026-06-29T06:03:09Z",
+  "title": "Quantum Generative Diffusion Model for Real-World Time Series",
+  "authors": "Jack Waller, Filippo Caruso, Dimitrios Makris, Rajagopal Nilavalan, Xing Liang",
+  "link": "https://arxiv.org/abs/2606.27561",
+  "primary": "cs.LG",
+  "announce_type": "cross",
+  "genre_ids": [
+   "qml"
+  ],
+  "genre_names": [
+   "量子機械学習"
+  ],
+  "abstract_en": "Generative models have achieved remarkable success in data synthesis, though recent advances driven by increasing model scale have introduced challenges in computational cost and efficiency. Quantum machine learning offers a promising alternative, representing complex data distributions using compact, highly expressive models. Here, we propose QDiffusion-TS, the first quantum generative diffusion model for time series synthesis, and validate it on the IQM quantum processor. The framework extends a classical diffusion architecture by replacing feed-forward components within the denoising transformer with quantum neural networks, yielding a hybrid quantum transformer that reduces the number of trainable parameters in each replaced component by nearly three orders of magnitude. Evaluated on financial time series from Apple and Amazon, the model generates synthetic data that more accurately reproduces the real distributions, reducing Wasserstein distance by approximately 44% relative to its classical counterpart across both datasets. In a downstream forecasting task, augmentation with the generated data improves predictive performance by up to 71% in RMSE over a baseline trained solely on real data. These results show that quantum enhanced architectures can consistently match and frequently surpass classical performance with substantially fewer parameters, establishing a practical framework towards more efficient and scalable data-driven generative modelling.",
+  "abstract_ja": "生成モデルはデータ合成において目覚ましい成功を収めてきましたが、近年のモデル規模の拡大に伴う進歩は、計算コストと効率性の面で課題をもたらしています。量子機械学習は、コンパクトで表現力の高いモデルを用いて複雑なデータ分布を表現する有望な代替手段を提供します。本稿では、時系列合成のための初の量子生成拡散モデルであるQDiffusion-TSを提案し、IQM量子プロセッサ上で検証します。このフレームワークは、ノイズ除去トランスフォーマー内のフィードフォワードコンポーネントを量子ニューラルネットワークに置き換えることで、従来の拡散アーキテクチャを拡張し、各置き換えコンポーネントの学習可能なパラメータ数を約3桁削減するハイブリッド量子トランスフォーマーを実現します。AppleとAmazonの金融時系列データで評価した結果、このモデルは実際の分布をより正確に再現する合成データを生成し、両データセットにおいて従来のモデルと比較してWasserstein距離を約44%削減しました。下流の予測タスクでは、生成されたデータによる拡張により、実データのみで学習したベースラインと比較して、RMSEで最大71%の予測性能向上を実現しました。これらの結果は、量子強化アーキテクチャが、従来型の性能に一貫して匹敵し、多くの場合それを上回る性能を、大幅に少ないパラメータで実現できることを示しており、より効率的で拡張性の高いデータ駆動型生成モデリングに向けた実用的な枠組みを確立するものである。"
+ },
+ {
+  "id": "2606.27740",
+  "posted_at": "2026-06-29T06:03:10Z",
+  "title": "Bottleneck Effects and Harmonic-Type Velocity Bounds for Periodic Quantum Walks",
+  "authors": "Houssam Abdul-Rahman, Thomas A. Jackson, Darren C. Ong",
+  "link": "https://arxiv.org/abs/2606.27740",
+  "primary": "math-ph",
+  "announce_type": "cross",
+  "genre_ids": [
+   "algo"
+  ],
+  "genre_names": [
+   "量子アルゴリズム"
+  ],
+  "abstract_en": "We prove explicit upper bounds on the propagation velocity of one-dimensional quantum walks with periodic coins of arbitrary period. We treat two complementary settings. First, in a perturbative regime where one transmission parameter is small, we show that the corresponding almost reflecting coin acts as a bottleneck for transport: the velocity is bounded linearly in this parameter, with an explicit leading order estimate. Second, for arbitrary nonzero transmission parameters, we prove a general a priori bound in terms of their harmonic mean, together with a refined version that detects the spatial variation of neighboring coins. Moreover, we prove a general lower bound on the velocity. These bounds apply directly to the corresponding CMV setting.",
+  "abstract_ja": "本稿では、任意の周期の周期的なコインを用いた一次元量子ウォークの伝播速度に対する明示的な上限を証明する。我々は2つの相補的な設定を扱う。まず、1つの透過パラメータが小さい摂動領域において、対応するほぼ反射するコインが輸送のボトルネックとして機能することを示す。すなわち、速度はこのパラメータに関して線形に有界であり、明示的な主要項の推定値が得られる。次に、任意の非ゼロ透過パラメータに対して、それらの調和平均に関する一般的な事前上限と、隣接するコインの空間的変動を検出する改良版を証明する。さらに、速度に対する一般的な下限も証明する。これらの上限は、対応するCMV設定に直接適用できる。"
+ },
+ {
+  "id": "2606.27805",
+  "posted_at": "2026-06-29T06:03:11Z",
+  "title": "The quantum instrument monad",
+  "authors": "Tobias Fritz",
+  "link": "https://arxiv.org/abs/2606.27805",
+  "primary": "cs.LO",
+  "announce_type": "cross",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "abstract_en": "Monads are a ubiquitous structure in functional programming used for modelling computational effects. For example, the state monad models the effect of a computation interacting with a memory system. Here we introduce the quantum instrument monad $\\mathcal{I}_\\mathcal{A}$, which models the effect of a computation interacting with a quantum system with algebra of observables $\\mathcal{A}$. It can be thought of as a noncommutative generalization of the state monad. We construct this quantum instrument monad in two versions: a finitary version on the category of sets and a measure-theoretic version on the category of measurable spaces (the latter under the assumption that $\\mathcal{A}$ is a type I von Neumann algebra with separable predual). Both versions are strong monads. The construction of the measure-theoretic version is based on a new notion of integral of a quantum-operation-valued function against a state-valued measure.",
+  "abstract_ja": "モナドは、関数型プログラミングにおいて計算効果をモデル化するために用いられる遍在的な構造です。例えば、状態モナドは、メモリシステムと相互作用する計算の効果をモデル化します。ここでは、観測量の代数 $\\mathcal{A}$ を持つ量子システムと相互作用する計算の効果をモデル化する量子機器モナド $\\mathcal{I}_\\mathcal{A}$ を導入します。これは、状態モナドの非可換一般化と考えることができます。この量子機器モナドは、集合のカテゴリ上の有限バージョンと、可測空間のカテゴリ上の測度論的バージョン（後者は、$\\mathcal{A}$ が分離可能な前双対を持つタイプ I フォン ノイマン代数であるという仮定の下）の 2 つのバージョンで構築します。どちらのバージョンも強いモナドです。測度論的バージョンの構築は、量子演算値関数と状態値測度の積分という新しい概念に基づいています。"
+ },
+ {
+  "id": "2606.27825",
+  "posted_at": "2026-06-29T06:03:13Z",
+  "title": "Factorization through Lorentz cones",
+  "authors": "Guillaume Aubrun, Francesca La Piana, Alexander M\\\"uller-Hermes",
+  "link": "https://arxiv.org/abs/2606.27825",
+  "primary": "math.FA",
+  "announce_type": "cross",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "abstract_en": "A pair of proper cones $(\\mathsf{C}_1,\\mathsf{C}_2)$ is said to have the Lorentz factorization property (LFP) if every $(\\mathsf{C}_1,\\mathsf{C}_2)$-positive map factors through a direct sum of Lorentzian cones, i.e., cones over Euclidean balls. Clearly, $(\\mathsf{C}_1,\\mathsf{C}_2)$ has the LFP if either $\\mathsf{C}_1$ or $\\mathsf{C}_2$ is a direct sum of Lorentzian cones, and our main goal is to find other examples. We show that such examples cannot be found for pairs $(\\mathsf{C}_1,\\mathsf{C}_2)$ where $\\mathsf{C}_1=\\mathsf{C}_2$, or in the case where both $\\mathsf{C}_1$ and $\\mathsf{C}_2$ are polyhedral. We also focus on the case where $\\mathsf{C}_1=\\mathsf{C}_\\square$ is the square-based cone in $\\mathbf{R}^3$. Here, we show that $(\\mathsf{C}_\\square,\\mathsf{C})$ has the LFP whenever $\\mathsf{C}$ is a symmetric cone, i.e., a direct sum of Lorentz cones, cones of positive semidefinite matrices over the real numbers, complex numbers or quaternions, and the cone of $3\\times 3$ positive semidefinite matrices over the octonions. We leave open the question whether there are more examples, but we show that this list cannot be extended by any strictly convex cone $\\mathsf{C}$ or for a cone $\\mathsf{C}$ with $\\text{dim}(\\mathsf{C})\\leq 5$. Finally, we discuss an application to a problem in quantum information theory.",
+  "abstract_ja": "適切な錐のペア $(\\mathsf{C}_1,\\mathsf{C}_2)$ は、すべての $(\\mathsf{C}_1,\\mathsf{C}_2)$-正の写像がローレンツ錐の直和、すなわちユークリッド球上の錐によって因数分解される場合、ローレンツ因数分解特性 (LFP) を持つと言われます。明らかに、$\\mathsf{C}_1$ または $\\mathsf{C}_2$ のいずれかがローレンツ錐の直和である場合、$(\\mathsf{C}_1,\\mathsf{C}_2)$ は LFP を持ちますが、私たちの主な目標は他の例を見つけることです。本稿では、$\\mathsf{C}_1=\\mathsf{C}_2$ の場合、または $\\mathsf{C}_1$ と $\\mathsf{C}_2$ の両方が多面体である場合、そのような例はペア $(\\mathsf{C}_1,\\mathsf{C}_2)$ では見つからないことを示す。また、$\\mathsf{C}_1=\\mathsf{C}_\\square$ が $\\mathbf{R}^3$ の正方形を底とする円錐である場合にも注目する。ここでは、$\\mathsf{C}$ が対称錐、すなわちローレンツ錐、実数、複素数、または四元数上の正定値半行列の錐、および八元数上の $3\\times 3$ 正定値半行列の錐の直和である場合、$(\\mathsf{C}_\\square,\\mathsf{C})$ が LFP を持つことを示します。他の例があるかどうかは未解決のままですが、このリストは厳密に凸な錐 $\\mathsf{C}$ や $\\text{dim}(\\mathsf{C})\\leq 5$ の錐 $\\mathsf{C}$ では拡張できないことを示します。最後に、量子情報理論の問題への応用について議論します。"
+ },
+ {
+  "id": "2606.27830",
+  "posted_at": "2026-06-29T06:03:14Z",
+  "title": "Theory of Electron Spin Resonance Scanning Tunneling Microscopy: The First Decade",
+  "authors": "Saba Taherpour, Denis Jankovi\\'c, Hoang-Anh Le, Jose Reina-Galvez, Christoph Wolf",
+  "link": "https://arxiv.org/abs/2606.27830",
+  "primary": "cond-mat.mes-hall",
+  "announce_type": "cross",
+  "genre_ids": [
+   "sensing",
+   "hardware"
+  ],
+  "genre_names": [
+   "量子センシング・計測",
+   "量子ハードウェア・実装"
+  ],
+  "abstract_en": "Electron spin resonance in scanning tunneling microscopy enabled the study of electronic transitions of magnetic impurities on surfaces at the atomic scale. This ESR-STM technique allows to spectroscopically probe and coherently manipulate spins using an all-electrical method without oscillating external magnetic driving fields. Here, we aim to review recent advancements in ESR-STM. We will discuss possible fundamental mechanisms by which the electric field drives spin resonance based on Heisenberg exchange, Kondo scattering, and Anderson impurity models. We validate theoretical predictions against experimental observations, to understand how electronic correlations, spin exchange, and many-body effects manifest in ESR-STM signals. After reviewing coherent spin control in the STM junction, we discuss potential applications of the ESR-STM method for coherent multi-spin control which enables multiple-qubit operations. Finally, we address recent developments in coupled electron-nuclear spin systems, including hyperfine-resolved ESR spectroscopy, and the driving and polarization of nuclear spins in ESR-STM.",
+  "abstract_ja": "走査トンネル顕微鏡における電子スピン共鳴（ESR）は、表面上の磁性不純物の電子遷移を原子スケールで研究することを可能にしました。このESR-STM技術は、外部磁場を振動させることなく、全電気的な方法を用いてスピンを分光的にプローブし、コヒーレントに操作することを可能にします。本稿では、ESR-STMの最近の進歩を概説します。ハイゼンベルク交換、近藤散乱、アンダーソン不純物モデルに基づき、電場がスピン共鳴を駆動する可能性のある基本的なメカニズムについて議論します。理論的な予測を実験結果と比較検証し、電子相関、スピン交換、多体効果がESR-STM信号にどのように現れるかを理解します。STM接合におけるコヒーレントなスピン制御を概説した後、多量子ビット操作を可能にするコヒーレントな多スピン制御へのESR-STM法の潜在的な応用について議論します。最後に、超微細構造分解能ESR分光法やESR-STMにおける核スピンの駆動と偏極など、電子-核スピン結合系における最近の進展について述べる。"
+ },
+ {
+  "id": "2606.27868",
+  "posted_at": "2026-06-29T06:03:17Z",
+  "title": "Quantum enhancement of information-mediated energy transfer",
+  "authors": "Shotaro Oki, Yuki Kadono, Kaito Tojo, Takahiro Sagawa, Ken Funo",
+  "link": "https://arxiv.org/abs/2606.27868",
+  "primary": "cond-mat.stat-mech",
+  "announce_type": "cross",
+  "genre_ids": [
+   "qit",
+   "nisq"
+  ],
+  "genre_names": [
+   "量子情報理論",
+   "変分・NISQアルゴリズム"
+  ],
+  "abstract_en": "Thermodynamics of information identifies information flow as a thermodynamic resource, but whether quantum coherence and collective coupling can enhance it at low entropy-production cost remains unresolved. We address this question for interacting open quantum systems by deriving a thermodynamic uncertainty relation that bounds information flow by entropy production in nonequilibrium steady states. We construct a quantum engine in which N-fold degenerate ground and excited states are collectively coupled to heat baths. Collective jumps enhance heat currents and information flow linearly with N, while entropy production remains independent of N, realizing a high-power, low-dissipation autonomous quantum Maxwell's demon that leverages collectively enhanced information flow to pump heat against a temperature gradient. Beyond steady states, collective interactions amplify the unitary component of quantum information flow, yielding a quadratic enhancement of the free-energy charging power of quantum batteries. Our results reveal scalable advantages of quantum coherence and collective effects in quantum engines.",
+  "abstract_ja": "情報の熱力学では、情報フローを熱力学的資源として捉えていますが、量子コヒーレンスと集団結合がエントロピー生成コストを抑えつつ情報フローを強化できるかどうかは未解決のままです。本研究では、非平衡定常状態におけるエントロピー生成によって情報フローを制限する熱力学的不確定性関係を導出することで、相互作用する開放量子系におけるこの問題に取り組みます。N重縮退した基底状態と励起状態が熱浴に集団的に結合した量子エンジンを構築します。集団ジャンプは熱流と情報フローをNに比例して強化しますが、エントロピー生成はNに依存しないため、集団的に強化された情報フローを利用して温度勾配に逆らって熱をポンプする、高出力・低散逸の自律型量子マクスウェルの悪魔が実現します。定常状態を超えると、集団相互作用は量子情報フローの単位成分を増幅し、量子電池の自由エネルギー充電電力を2乗に比例して強化します。本研究の結果は、量子エンジンにおける量子コヒーレンスと集団効果のスケーラブルな利点を明らかにします。"
+ },
+ {
+  "id": "2606.28034",
+  "posted_at": "2026-06-29T06:03:20Z",
+  "title": "Quantum Correlations in the Decay of $B^0$ meson and Entanglement Entropy",
+  "authors": "Divya Sharma, Vaibhav Rawoot, Sudip Kumar Haldar",
+  "link": "https://arxiv.org/abs/2606.28034",
+  "primary": "hep-ph",
+  "announce_type": "cross",
+  "genre_ids": [
+   "qit",
+   "complexity"
+  ],
+  "genre_names": [
+   "量子情報理論",
+   "量子複雑性理論"
+  ],
+  "abstract_en": "We present a phenomenological study of quantum correlations in the decay of $B^0$ mesons into a system of two vector mesons. The decay of the $B^0$ meson into two vector mesons constitutes a bipartite system of two qutrits. The entanglement entropy is used as a measure of quantum correlations in the system of decaying particles. We study the variation of the R\\'enyi entropy with R\\'enyi order ($\\alpha$) for the decay channels $B_s^0 \\rightarrow \\phi\\, \\phi$, $B_d^0 \\rightarrow J/\\psi\\, K^{*}(892)^0$, $B_d^0 \\rightarrow \\phi\\, K^{*}(892)^0$ and $B_s^0 \\rightarrow J/\\psi\\, \\phi$ and discuss the significance of entanglement entropy at different R\\'enyi order regimes. The LHCb, ATLAS and Belle collaborations experimental measurements of complex polarization amplitudes and relative phases are used as input for our analysis. A comparison of entanglement entropy for all the $B^0$ meson decay processes, with both vanishing and non-vanishing phases, reveals a strong phase dependence of the entropy. We further present the results of Hartley entropy (Max-Entropy), von Neumann entropy, collision entropy, and min-entropy, each corresponding to different values and limits of the R\\'enyi order. The comparison between the branching fractions of the decay processes and the von Neumann entropy shows a connection between entanglement and decay dynamics, indicating the role of weak and strong interaction in generating quantum entanglement. In addition, we evaluate several other entanglement measures, including linear entropy, I-concurrence, tangle, negativity, logarithmic negativity, Schmidt coefficients, and Schmidt rank for different $B^0$ meson decay processes. Our study demonstrates that entanglement measures provide useful insights into the underlying decay dynamics and may serve as important tools for understanding quantum correlations in high-energy particle physics processes.",
+  "abstract_ja": "本稿では、B⁰中間子が2つのベクトル中間子系に崩壊する際の量子相関に関する現象論的研究を提示する。B⁰中間子が2つのベクトル中間子に崩壊すると、2つのキュートリットからなる二体系が形成される。崩壊粒子系における量子相関の尺度として、エンタングルメントエントロピーを用いる。我々は、崩壊チャネル $B_s^0 \\rightarrow \\phi\\, \\phi$、$B_d^0 \\rightarrow J/\\psi\\, K^{*}(892)^0$、$B_d^0 \\rightarrow \\phi\\, K^{*}(892)^0$ および $B_s^0 \\rightarrow J/\\psi\\, \\phi$ に対する R\\'enyi エントロピーの R\\'enyi 次数 ($\\alpha$) による変化を調べ、異なる R\\'enyi 次数領域におけるエンタングルメント エントロピーの重要性について議論する。我々の分析の入力として、LHCb、ATLAS、および Belle コラボレーションによる複素偏極振幅と相対位相の実験的測定を使用する。位相がゼロの場合とゼロでない場合の両方で、すべての $B^0$ 中間子崩壊過程のエンタングルメント エントロピーを比較すると、エントロピーの強い位相依存性が明らかになる。さらに、ハートレーエントロピー（最大エントロピー）、フォンノイマンエントロピー、衝突エントロピー、最小エントロピーの結果を示します。これらはそれぞれ、レニー次数の異なる値と限界に対応しています。崩壊過程の分岐比とフォンノイマンエントロピーの比較は、量子もつれと崩壊ダイナミクスの間の関連性を示しており、量子もつれの生成における弱い相互作用と強い相互作用の役割を示唆しています。加えて、さまざまな$B^0$中間子崩壊過程について、線形エントロピー、I-コンカレンス、タングル、ネガティビティ、対数ネガティビティ、シュミット係数、シュミットランクなど、他のいくつかのもつれ尺度を評価しました。本研究は、もつれ尺度が基礎となる崩壊ダイナミクスに関する有用な洞察を提供し、高エネルギー素粒子物理過程における量子相関を理解するための重要なツールとなり得ることを示しています。"
+ },
+ {
+  "id": "2606.28082",
+  "posted_at": "2026-06-29T06:03:23Z",
+  "title": "Population-Dominated Ergotropy in a Capacitively Coupled Double-Quantum-Dot Battery under 1/f Charge Noise",
+  "authors": "Khalil Loukhssami, Khadija El Hawary, Sanaa Abaach, Morad El Baz",
+  "link": "https://arxiv.org/abs/2606.28082",
+  "primary": "cond-mat.mes-hall",
+  "announce_type": "cross",
+  "genre_ids": [
+   "nisq"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム"
+  ],
+  "abstract_en": "We investigate extractable work storage in a capacitively coupled double quantum dot (DQD) quantum battery (QB) subjected to experimentally motivated detuning charge noise. The battery is modeled as two interacting charge qubits with an Ising-type capacitive coupling and is charged by resonant microwave modulation of the tunnel coupling channel. Detuning fluctuations are introduced as classical stochastic processes generated from a band-limited 1/f noise spectrum. For each noise realization, the evolution remains unitary, whereas decoherence and loss of contrast emerge after ensemble averaging. We analyze the total ergotropy, its population and coherent contributions, the energy basis populations, a passive ordering violation diagnostic, and the Jensen-Shannon coherence of the noise-averaged state. The results show that resonant tunnel coupling driving selects a dominant E0 <-> E3 population transfer channel in the interacting DQD spectrum. The dominant extractable work is stored in non-passive population distributions, in agreement with recent population ordering interpretations of ergotropy in QBs, while coherence accompanies and supports the resonant transfer as a transient dynamical resource. Detuning noise reduces the energy basis coherence amplitude and also weakens the population transfer pathway responsible for the dominant population ergotropy. This framework provides a noise-aware description of semiconductor QB charging based on extractable work rather than on injected energy alone.",
+  "abstract_ja": "実験的に意図されたデチューニング電荷ノイズを受ける容量結合二重量子ドット（DQD）量子電池（QB）における抽出可能な作業記憶について調査する。この電池は、イジング型容量結合を持つ相互作用する2つの電荷量子ビットとしてモデル化され、トンネル結合チャネルの共鳴マイクロ波変調によって充電される。デチューニング変動は、帯域制限された1/fノイズスペクトルから生成される古典的な確率過程として導入される。各ノイズ実現において、進化はユニタリーのままであるが、アンサンブル平均後にデコヒーレンスとコントラストの喪失が現れる。我々は、全エルゴトロピー、その集団およびコヒーレント寄与、エネルギー基底集団、受動的な順序違反診断、およびノイズ平均状態のジェンセン・シャノンコヒーレンスを解析する。結果は、共鳴トンネル結合駆動が、相互作用するDQDスペクトルにおいて支配的なE0 <-> E3集団転送チャネルを選択することを示している。抽出可能な仕事の大部分は非受動的な集団分布に蓄積され、これは量子ボールにおけるエルゴトロピーに関する最近の集団順序付け解釈と一致する。一方、コヒーレンスは、一時的な動的リソースとして共鳴転送を伴い、それを支える。デチューニングノイズは、エネルギー基底コヒーレンス振幅を減少させ、支配的な集団エルゴトロピーの原因となる集団転送経路も弱める。このフレームワークは、注入エネルギーのみに基づくのではなく、抽出可能な仕事に基づいて、半導体量子ボールの充電をノイズを考慮した形で記述する。"
+ },
+ {
+  "id": "2606.28195",
+  "posted_at": "2026-06-29T06:03:24Z",
+  "title": "Role of the Casimir force in the capacitive radio-frequency microelectromechanical switches",
+  "authors": "G. L. Klimchitskaya, A. S. Korotkov, V. V. Loboda, V. M. Mostepanenko",
+  "link": "https://arxiv.org/abs/2606.28195",
+  "primary": "cond-mat.mes-hall",
+  "announce_type": "cross",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "abstract_en": "We determine the role of the fluctuation-induced Casimir force acting between a membrane of cylindrical shape and a bottom electrode in microelectromechanical capacitive switches. For this purpose, the Casimir force is computed taking into account the real properties of both a membrane and a bottom electrode materials with account of surface roughness. The obtained results are compared with those found for the smooth surfaces using the idealization of ideal metal. It is shown that an account of both the real material properties and surface roughness is crucial for obtaining the correct values of the Casimir force. According to our results, at the shortest separations, when the switch membrane is in contact with the transmission line, the magnitudes of the Casimir force may exceed the magnitudes of the electric one depending on the value of the operating voltage. The obtained values of the Casimir force can be used for determining the thickness of the switch membrane, which ensures the necessary magnitude of the restoring elastic force required for a stable cyclic functioning of the micromechanical switch with no pull-in.",
+  "abstract_ja": "マイクロ電気機械式容量スイッチにおいて、円筒形膜と下部電極との間に作用する変動誘起カシミール力の役割を明らかにする。この目的のために、膜と下部電極材料の実際の特性と表面粗さを考慮してカシミール力を計算する。得られた結果を、理想的な金属の理想化を用いて滑らかな表面について得られた結果と比較する。実際の材料特性と表面粗さの両方を考慮することが、カシミール力の正しい値を得る上で重要であることが示される。我々の結果によれば、スイッチ膜が伝送線路に接触する最短距離では、動作電圧の値に応じてカシミール力の大きさが電気力の大きさを超える可能性がある。得られたカシミール力の値は、スイッチ膜の厚さを決定するために使用できる。この厚さによって、引き込み現象のないマイクロメカニカルスイッチの安定した周期的動作に必要な復元弾性力の大きさが確保される。"
+ },
+ {
+  "id": "2606.28275",
+  "posted_at": "2026-06-29T06:03:26Z",
+  "title": "Revealing precision bounds on neutrino oscillation parameters with quantum estimation theory",
+  "authors": "Jihong Huang, Tommy Ohlsson, Sampsa Vihonen, Shun Zhou",
+  "link": "https://arxiv.org/abs/2606.28275",
+  "primary": "hep-ph",
+  "announce_type": "cross",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "abstract_en": "Quantum estimation theory provides ultimate precision bounds on parameter estimation, independent of experimental setups. In this article, we apply this theoretical framework to neutrino oscillations, aiming to clarify some subtle issues and reveal the maximum achievable precision of oscillation parameters. First, taking the example of two-flavor oscillations, we clarify how the quantum Fisher information (QFI) depends on the choice of bases when the basis transformation itself involves the parameters in question. Then, for three-flavor oscillations, we compute the QFI matrix for electron and muon neutrino states in the flavor basis and derive analytical expressions and numerical results for both diagonal and off-diagonal elements. The implications of off-diagonal correlations for multiparameter estimation are discussed, and the quantum Cram\\'{e}r-Rao bounds on the precision of oscillation parameters for typical reactor and long-baseline accelerator neutrino experiments are obtained. Our results establish a theoretical benchmark for the ultimate precision achievable in future neutrino oscillation experiments.",
+  "abstract_ja": "量子推定理論は、実験装置に依存せず、パラメータ推定の究極的な精度限界を提供する。本稿では、この理論的枠組みをニュートリノ振動に適用し、いくつかの微妙な問題を解明し、振動パラメータの最大達成精度を明らかにすることを目的とする。まず、2フレーバー振動を例にとり、基底変換自体が問題のパラメータを含む場合、量子フィッシャー情報（QFI）が基底の選択にどのように依存するかを明らかにする。次に、3フレーバー振動について、フレーバー基底における電子ニュートリノ状態とミューニュートリノ状態のQFI行列を計算し、対角要素と非対角要素の両方について解析的表現と数値結果を導出する。多パラメータ推定における非対角相関の影響について議論し、典型的な原子炉および長基線加速器ニュートリノ実験における振動パラメータの精度に関する量子クラメール・ラオ限界を得る。我々の結果は、将来のニュートリノ振動実験で達成可能な究極的な精度の理論的ベンチマークを確立する。"
  }
 ]

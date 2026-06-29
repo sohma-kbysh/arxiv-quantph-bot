@@ -135,6 +135,16 @@ def main() -> None:
     if not args.token or not args.channel_id:
         raise SystemExit(
             "Set DISCORD_BOT_TOKEN and DISCORD_CHANNEL_ID, or pass --token and --channel-id.")
+    if args.token == "...":
+        raise SystemExit(
+            "DISCORD_BOT_TOKEN is still '...'. Set it to an actual Discord bot token.")
+    if args.channel_id.startswith(("http://", "https://")):
+        raise SystemExit(
+            "DISCORD_CHANNEL_ID must be the numeric channel ID, not a webhook URL. "
+            "Enable Discord Developer Mode, right-click #general, and Copy Channel ID.")
+    if not re.fullmatch(r"\d{17,20}", args.channel_id):
+        raise SystemExit(
+            "DISCORD_CHANNEL_ID should look like a 17-20 digit Discord channel ID.")
 
     regex = re.compile(args.pattern, re.IGNORECASE)
     matched: list[dict[str, Any]] = []

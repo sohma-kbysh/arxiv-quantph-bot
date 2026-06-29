@@ -273,8 +273,9 @@ python3 arxiv_bot.py
 
 cross-list 論文の primary カテゴリから分類を補助する設定。
 
+- `cross_classify_primary_as_quantph`: primary がこのリストにある論文だけ通常分類する。デフォルト運用では `quant-ph` と `cs.CR` のみ。その他の primary から quant-ph へ cross-list された論文は `other` に分類される
 - `category_genre_hints`: カテゴリ → ジャンル ID のマッピング。該当カテゴリの論文は指定ジャンルのスコアが +0.15 される
-- `category_other_overrides`: このリストのカテゴリが primary の論文は `other` スコアが +1.0 され、実質的に強制 `other` になる
+- `category_other_overrides`: 追加で明示的に `other` 扱いしたい primary カテゴリ
 
 ### cross-list フィルタ
 

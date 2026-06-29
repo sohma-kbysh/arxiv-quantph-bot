@@ -16,6 +16,11 @@
 
   "cross_deny_primary": [],
 
+  "cross_classify_primary_as_quantph": [
+    "quant-ph",
+    "cs.CR"
+  ],
+
   "category_genre_hints": {
     "cs.CC": "complexity",
     "cs.CR": "crypto",
@@ -64,7 +69,14 @@
       "verifiability",
       "secure",
       "securely",
-      "security"
+      "security",
+      "delegated quantum computation",
+      "secure delegation",
+      "blind delegation",
+      "verifiable delegation",
+      "untrusted server",
+      "malicious server",
+      "client-server"
     ]
   },
 

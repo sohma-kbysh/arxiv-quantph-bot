@@ -265,6 +265,27 @@ def classify_multi(paper: dict, genres: list[dict],
             break
         result.append(genre_map[gid])
     result = result if result else ([fallback] if fallback else [])
+    return postprocess_genres(paper, result, genres, cfg)
+
+
+def postprocess_genres(paper: dict, selected: list[dict | None],
+                       genres: list[dict], cfg: dict | None = None) -> list[dict]:
+    """Apply deterministic category and keyword overrides after classification."""
+    result = [g for g in selected if g]
+    if not cfg:
+        return result
+
+    primary = paper.get("primary", "")
+    quantph_equivalent = cfg.get(
+        "cross_classify_primary_as_quantph", ["quant-ph", "cs.CR"])
+    if primary and not category_matches(primary, quantph_equivalent):
+        fallback = genre_by_id("other", genres)
+        return [fallback] if fallback else result
+
+    if category_matches(primary, cfg.get("category_other_overrides", [])):
+        fallback = genre_by_id("other", genres)
+        return [fallback] if fallback else result
+
     return apply_forced_genres(paper, result, genres, cfg)
 
 
@@ -731,7 +752,7 @@ def main() -> None:
                     gemini_stats["entries_translated"] += 1
                     gs = [genre_map[g] for g in gids if g in genre_map]
                     e["genres"] = gs if gs else [genre_by_id(None, genres)]
-                    e["genres"] = apply_forced_genres(
+                    e["genres"] = postprocess_genres(
                         e["paper"], e["genres"], genres, cfg)
                     e["llm_done"] = True
                     gemini_stats["entries_classified"] += 1
@@ -754,7 +775,7 @@ def main() -> None:
                 if gids:
                     gs = [genre_map[g] for g in gids if g in genre_map]
                     e["genres"] = gs if gs else [genre_by_id(None, genres)]
-                    e["genres"] = apply_forced_genres(
+                    e["genres"] = postprocess_genres(
                         e["paper"], e["genres"], genres, cfg)
                     e["llm_done"] = True
                     gemini_stats["entries_classified"] += 1

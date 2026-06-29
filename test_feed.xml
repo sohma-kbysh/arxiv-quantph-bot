@@ -103,6 +103,18 @@ Abstract: We derive tight one-shot achievability and converse bounds for entangl
       <arxiv:announce_type>new</arxiv:announce_type>
     </item>
 
+    <!-- 期待分類: other (cs.IT が primary) -->
+    <item>
+      <title>[TEST] Classical information-theoretic capacity bounds with quantum notation</title>
+      <link>https://arxiv.org/abs/2606.99020</link>
+      <description>arXiv:2606.99020 Announce Type: cross
+Abstract: We derive one-shot bounds on communication rates using smooth entropies and channel coding arguments, with a short appendix connecting the notation to quantum channels. The primary contribution is in classical information theory and the paper is cross-listed to quant-ph for notation and context.</description>
+      <dc:creator>Iris Info</dc:creator>
+      <category>cs.IT</category>
+      <category>quant-ph</category>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+    </item>
+
     <!-- 期待分類: network -->
     <item>
       <title>[TEST] Optimal scheduling for entanglement distribution in multi-hop quantum networks</title>
@@ -124,6 +136,17 @@ Abstract: We construct a two-party protocol for generating a shared secret key i
       <dc:creator>Nancy Crypto, Oscar QKD</dc:creator>
       <category>quant-ph</category>
       <category>cs.CR</category>
+      <arxiv:announce_type>new</arxiv:announce_type>
+    </item>
+
+    <!-- 期待分類: crypto -->
+    <item>
+      <title>[TEST] Delegated quantum computation with an untrusted server</title>
+      <link>https://arxiv.org/abs/2606.99018</link>
+      <description>arXiv:2606.99018 Announce Type: new
+Abstract: We analyze a client-server protocol for delegated quantum computation where a limited client interacts with an untrusted server. The construction supports blind delegation and verifiable delegation against a malicious server while keeping the client workload small.</description>
+      <dc:creator>Dana Delegate, Victor Verify</dc:creator>
+      <category>quant-ph</category>
       <arxiv:announce_type>new</arxiv:announce_type>
     </item>
 
@@ -193,6 +216,18 @@ Abstract: We characterize the role of Kochen-Specker contextuality in sequential
       <dc:creator>Sam Foundations</dc:creator>
       <category>quant-ph</category>
       <arxiv:announce_type>new</arxiv:announce_type>
+    </item>
+
+    <!-- 期待分類: other (cond-mat.str-el が primary) -->
+    <item>
+      <title>[TEST] Entanglement entropy in meson decays from collider amplitudes</title>
+      <link>https://arxiv.org/abs/2606.99019</link>
+      <description>arXiv:2606.99019 Announce Type: cross
+Abstract: We study quantum correlations in B meson decay into two vector mesons using entanglement entropy, Renyi entropy, negativity, Schmidt coefficients, and collider measurements of complex polarization amplitudes. The analysis is a phenomenological high-energy physics study of decay dynamics and entanglement in particle physics.</description>
+      <dc:creator>Hector Hep</dc:creator>
+      <category>hep-ph</category>
+      <category>quant-ph</category>
+      <arxiv:announce_type>cross</arxiv:announce_type>
     </item>
 
     <!-- 期待分類: other (cond-mat.str-el が primary) -->

@@ -1,6 +1,6 @@
 # arXiv quant-ph → Discord 通知 bot(日本語訳付き)
 
-arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を平日1日3回取得し、論文を15ジャンルのいずれかに分類して、日本語訳 abstract とともに Discord の各チャンネルへ Webhook で投稿する。
+arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を平日1日3回取得し、論文を15ジャンルのいずれかに分類して、日本語の邦題・abstract 訳とともに Discord の各チャンネルへ Webhook で投稿する。
 現在の標準運用では、Gemini は**分類のみ**に使い、翻訳は DeepL → Google Cloud Translation の順に試行する。Gemini の出力はジャンル ID だけなので、翻訳まで Gemini に任せる構成より API 消費を抑えやすい。**標準ライブラリのみで動作し、`pip install` は不要。**
 
 ---
@@ -108,6 +108,7 @@ DeepL → Google Cloud Translation
 ```
 
 - 先頭から順に試行し、成功した時点で次の論文へ移る
+- abstract の翻訳に成功した投稿対象論文について、英語タイトルとは別に邦題も同じ翻訳チェーンで作成する
 - クォータ枯渇を検知したバックエンド(Gemini: 持続的 429、DeepL: 456、Google: 403/429)はその実行回では以後スキップされる(**circuit breaker**)
 - 全段で翻訳できなかった論文は `require_translation: true`(デフォルト)の場合は投稿せず次回に持ち越す
 
@@ -122,6 +123,7 @@ DeepL → Google Cloud Translation
   "id": "2506.12345",
   "posted_at": "2025-06-24T01:10:00Z",
   "title": "...",
+  "title_ja": "...",
   "authors": "...",
   "link": "https://arxiv.org/abs/2506.12345",
   "primary": "quant-ph",
@@ -316,6 +318,7 @@ untrusted server, malicious server, client-server
 | `max_translate_chars` | `2000` | Gemini に渡す abstract の最大文字数(超過は切り捨て) |
 | `translate_only_matched` | `false` | `true` にするとジャンル未分類論文は翻訳しない(API節約) |
 | `require_translation` | `true` | `true`: 翻訳失敗論文は次回へ持ち越す / `false`: 英語のまま投稿 |
+| `show_japanese_title` | `true` | `true` にすると Discord embed 本文の先頭に邦題を表示する |
 | `show_original_abstract` | `false` | `true` にすると日本語訳に加えて英語 abstract も embed に含める |
 | `include_replacements` | `false` | `true` にすると差替え論文(replace)も投稿する |
 | `gemini_model` | `"gemini-2.5-flash-lite"` | 分類に使用する Gemini モデル ID |

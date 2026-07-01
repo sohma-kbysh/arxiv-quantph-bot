@@ -90,6 +90,7 @@
   "max_translate_chars": 2000,
   "translate_only_matched": false,
   "require_translation": true,
+  "show_japanese_title": true,
   "show_original_abstract": false,
 
   "genres": [

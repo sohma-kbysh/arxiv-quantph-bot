@@ -637,9 +637,18 @@ def truncate(s: str, n: int) -> str:
     return s if len(s) <= n else s[: n - 1] + "…"
 
 
+def embed_description(paper: dict, jp_title: str | None,
+                      jp_abstract: str | None, cfg: dict) -> str:
+    abstract = jp_abstract if jp_abstract else paper["abstract"]
+    if jp_title and cfg.get("show_japanese_title", True):
+        return f"**邦題:** {jp_title}\n\n{abstract}"
+    return abstract
+
+
 def post_to_discord(webhook: str, paper: dict, genre_name: str,
-                    jp_abstract: str | None, cfg: dict) -> bool:
-    desc = jp_abstract if jp_abstract else paper["abstract"]
+                    jp_abstract: str | None, jp_title: str | None,
+                    cfg: dict) -> bool:
+    desc = embed_description(paper, jp_title, jp_abstract, cfg)
     embed = {
         "title": truncate(paper["title"], 256),
         "url": paper["link"],
@@ -706,8 +715,16 @@ def main() -> None:
 
     # Each entry carries the paper plus its resolved genres + translation.
     # genres is always a non-empty list; fallback genre is "other".
-    entries: list[dict[str, Any]] = [{"paper": p, "genres": [], "jp": None, "need_tr":
-                                     bool(p["abstract"])} for p in pending]
+    entries: list[dict[str, Any]] = [
+        {
+            "paper": p,
+            "genres": [],
+            "jp": None,
+            "jp_title": None,
+            "need_tr": bool(p["abstract"]),
+        }
+        for p in pending
+    ]
 
     batch_size = max(1, cfg.get("translate_batch_size", 5))
     use_llm_cls = cfg.get("classify_with_llm", True)
@@ -821,6 +838,21 @@ def main() -> None:
             for e, jp in zip(chunk, translate_batch(abstracts, cfg)):
                 e["jp"] = jp
 
+        if cfg.get("show_japanese_title", True):
+            to_title_tr = [
+                e for e in entries
+                if e["paper"].get("title") and e["jp_title"] is None
+                and not (
+                    cfg.get("require_translation", True)
+                    and e["need_tr"] and e["jp"] is None
+                )
+            ]
+            for i in range(0, len(to_title_tr), batch_size):
+                chunk = to_title_tr[i: i + batch_size]
+                titles = [e["paper"]["title"] for e in chunk]
+                for e, jp_title in zip(chunk, translate_batch(titles, cfg)):
+                    e["jp_title"] = jp_title
+
     # ---- dry-run: print classification results and exit --------------------
     if dry_run:
         print(f"[dry-run] {len(entries)} papers from feed (seen_ids ignored)\n")
@@ -850,7 +882,9 @@ def main() -> None:
             webhook, genre_name = resolve_webhook(genre)
             if not webhook or webhook in posted_webhooks:
                 continue
-            if post_to_discord(webhook, e["paper"], genre_name, e["jp"], cfg):
+            if post_to_discord(
+                    webhook, e["paper"], genre_name, e["jp"],
+                    e.get("jp_title"), cfg):
                 posted_webhooks.add(webhook)
                 if not paper_logged:
                     seen.add(e["paper"]["id"])
@@ -859,6 +893,7 @@ def main() -> None:
                         "posted_at": time.strftime("%Y-%m-%dT%H:%M:%SZ",
                                                    time.gmtime()),
                         "title": e["paper"]["title"],
+                        "title_ja": e.get("jp_title"),
                         "authors": e["paper"]["authors"],
                         "link": e["paper"]["link"],
                         "primary": e["paper"]["primary"],

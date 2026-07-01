@@ -647,7 +647,7 @@ def embed_description(paper: dict, jp_title: str | None,
 
 def post_to_discord(webhook: str, paper: dict, genre_name: str,
                     jp_abstract: str | None, jp_title: str | None,
-                    cfg: dict) -> bool:
+                    cfg: dict, extra_fields: list[dict] | None = None) -> bool:
     desc = embed_description(paper, jp_title, jp_abstract, cfg)
     embed = {
         "title": truncate(paper["title"], 256),
@@ -661,6 +661,8 @@ def post_to_discord(webhook: str, paper: dict, genre_name: str,
     if paper["authors"]:
         embed["fields"].append(
             {"name": "Authors", "value": truncate(paper["authors"], 1024)})
+    if extra_fields:
+        embed["fields"].extend(extra_fields)
     if jp_abstract and cfg.get("show_original_abstract", False):
         embed["fields"].append(
             {"name": "Original abstract",

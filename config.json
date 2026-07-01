@@ -92,6 +92,8 @@
   "require_translation": true,
   "show_japanese_title": true,
   "show_original_abstract": false,
+  "scirate_range_days": 7,
+  "scirate_min_scites": 30,
 
   "genres": [
     {

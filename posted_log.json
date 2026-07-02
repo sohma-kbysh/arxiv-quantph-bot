@@ -8673,5 +8673,114 @@
   "abstract_en": "Active systems can exhibit a broad range of phenomena forbidden in equilibrium. Their dynamics are often specified by abstract local update rules, and it is generally unclear when the same behavior can arise from physically natural driving. Here we show that two simple driving mechanisms can universally simulate any local active dynamics in spin systems. The first is the familiar setting of a time-periodic Hamiltonian coupled to a cold bath, which we call a \"many-body Brownian pump.\" As a second mechanism, we promote the Brownian ratchet, traditionally a mechanism for transport, to a \"many-body Brownian ratchet\": a static Hamiltonian coupled to a hot bath and a cold bath, where the resulting steady heat current can be harnessed not only to drive transport but also to generate local active dynamics. Using probabilistic cellular automata as an explicit model, we prove that for any continuous-time (or discrete-time) local active dynamics, there is always a many-body Brownian ratchet (or pump) that approximates the dynamics, up to noise that can be made arbitrarily weak by tuning energy scales and other parameters. As a concrete demonstration, we construct a simple ferromagnetic Ising ratchet on a bilayer lattice. When the two layers are coupled to baths at different temperatures, this model serves as a robust classical memory even under a symmetry-breaking field, something impossible in equilibrium. More broadly, our work shows that ratchets can use steady heat currents to autonomously generate and stabilize novel collective behavior, realizing a new static setting for nonequilibrium many-body dynamics.",
   "abstract_ja": "アクティブシステムは、平衡状態では許されない幅広い現象を示すことがあります。そのダイナミクスは、抽象的な局所更新ルールによって規定されることが多く、物理的に自然な駆動によって同じ挙動が生じるかどうかは一般的に不明です。本稿では、2つの単純な駆動メカニズムによって、スピンシステムのあらゆる局所アクティブダイナミクスを普遍的にシミュレートできることを示します。1つ目は、冷浴に結合した時間周期ハミルトニアンというおなじみの設定で、これを「多体ブラウンポンプ」と呼びます。2つ目のメカニズムとして、従来輸送のメカニズムであったブラウンラチェットを「多体ブラウンラチェット」に発展させます。これは、高温浴と低温浴に結合した静的ハミルトニアンであり、結果として生じる定常熱流は、輸送を駆動するだけでなく、局所アクティブダイナミクスを生成するためにも利用できます。確率的セルオートマトンを明示的なモデルとして用いることで、連続時間（または離散時間）の任意の局所的アクティブダイナミクスに対して、エネルギー尺度やその他のパラメータを調整することでノイズを任意に弱めることができるノイズを除いて、常にそのダイナミクスを近似する多体ブラウンラチェット（またはポンプ）が存在することを証明します。具体的な例として、二層格子上に単純な強磁性イジングラチェットを構築します。2つの層が異なる温度の熱浴に結合されている場合、このモデルは対称性を破る場の下でも堅牢な古典的メモリとして機能し、これは平衡状態では不可能なことです。より広く言えば、私たちの研究は、ラチェットが定常熱流を利用して新しい集団的挙動を自律的に生成および安定化させ、非平衡多体ダイナミクスのための新しい静的設定を実現できることを示しています。",
   "abstract_translated": "アクティブシステムは、平衡状態では許されない幅広い現象を示すことがあります。そのダイナミクスは、抽象的な局所更新ルールによって規定されることが多く、物理的に自然な駆動によって同じ挙動が生じるかどうかは一般的に不明です。本稿では、2つの単純な駆動メカニズムによって、スピンシステムのあらゆる局所アクティブダイナミクスを普遍的にシミュレートできることを示します。1つ目は、冷浴に結合した時間周期ハミルトニアンというおなじみの設定で、これを「多体ブラウンポンプ」と呼びます。2つ目のメカニズムとして、従来輸送のメカニズムであったブラウンラチェットを「多体ブラウンラチェット」に発展させます。これは、高温浴と低温浴に結合した静的ハミルトニアンであり、結果として生じる定常熱流は、輸送を駆動するだけでなく、局所アクティブダイナミクスを生成するためにも利用できます。確率的セルオートマトンを明示的なモデルとして用いることで、連続時間（または離散時間）の任意の局所的アクティブダイナミクスに対して、エネルギー尺度やその他のパラメータを調整することでノイズを任意に弱めることができるノイズを除いて、常にそのダイナミクスを近似する多体ブラウンラチェット（またはポンプ）が存在することを証明します。具体的な例として、二層格子上に単純な強磁性イジングラチェットを構築します。2つの層が異なる温度の熱浴に結合されている場合、このモデルは対称性を破る場の下でも堅牢な古典的メモリとして機能し、これは平衡状態では不可能なことです。より広く言えば、私たちの研究は、ラチェットが定常熱流を利用して新しい集団的挙動を自律的に生成および安定化させ、非平衡多体ダイナミクスのための新しい静的設定を実現できることを示しています。"
+ },
+ {
+  "id": "2606.99020",
+  "posted_at": "2026-07-02T07:39:05Z",
+  "title": "[TEST] Classical information-theoretic capacity bounds with quantum notation",
+  "title_ja": "[テスト]量子記法を用いた古典的情報理論的容量の上限",
+  "title_translated": "[テスト]量子記法を用いた古典的情報理論的容量の上限",
+  "translation_language": "ja",
+  "authors": "Iris Info",
+  "link": "https://arxiv.org/abs/2606.99020",
+  "primary": "cs.IT",
+  "announce_type": "cross",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "abstract_en": "We derive one-shot bounds on communication rates using smooth entropies and channel coding arguments, with a short appendix connecting the notation to quantum channels. The primary contribution is in classical information theory and the paper is cross-listed to quant-ph for notation and context.",
+  "abstract_ja": "滑らかなエントロピーとチャネル符号化引数を用いて通信速度のワンショット境界を導き出し、短い付録で量子チャネルと結びつけています。主な貢献は古典情報理論にあり、表記法と文脈のために量子-pHにクロスリストされています。",
+  "abstract_translated": "滑らかなエントロピーとチャネル符号化引数を用いて通信速度のワンショット境界を導き出し、短い付録で量子チャネルと結びつけています。主な貢献は古典情報理論にあり、表記法と文脈のために量子-pHにクロスリストされています。"
+ },
+ {
+  "id": "2606.99018",
+  "posted_at": "2026-07-02T07:39:06Z",
+  "title": "[TEST] Delegated quantum computation with an untrusted server",
+  "title_ja": "[テスト]信頼できないサーバーによる委譲量子計算",
+  "title_translated": "[テスト]信頼できないサーバーによる委譲量子計算",
+  "translation_language": "ja",
+  "authors": "Dana Delegate, Victor Verify",
+  "link": "https://arxiv.org/abs/2606.99018",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "ft",
+   "crypto"
+  ],
+  "genre_names": [
+   "フォールトトレラント計算",
+   "暗号・セキュリティ"
+  ],
+  "abstract_en": "We analyze a client-server protocol for delegated quantum computation where a limited client interacts with an untrusted server. The construction supports blind delegation and verifiable delegation against a malicious server while keeping the client workload small.",
+  "abstract_ja": "限られたクライアントが信頼できないサーバーとやり取りする委託量子計算のためのクライアント-サーバープロトコルを分析します。この構造は、クライアントのワークロードを小さく抑えつつ、悪意のあるサーバーに対するブラインド委任と検証可能な委任をサポートします。",
+  "abstract_translated": "限られたクライアントが信頼できないサーバーとやり取りする委託量子計算のためのクライアント-サーバープロトコルを分析します。この構造は、クライアントのワークロードを小さく抑えつつ、悪意のあるサーバーに対するブラインド委任と検証可能な委任をサポートします。"
+ },
+ {
+  "id": "2606.99017",
+  "posted_at": "2026-07-02T07:39:09Z",
+  "title": "[TEST] Verifiable blind quantum computation with a secure classical client",
+  "title_ja": "[テスト]安全な古典クライアントを用いた検証可能な盲量子計算",
+  "title_translated": "[テスト]安全な古典クライアントを用いた検証可能な盲量子計算",
+  "translation_language": "ja",
+  "authors": "Vera Blind, Calvin Secure",
+  "link": "https://arxiv.org/abs/2606.99017",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "ft",
+   "crypto"
+  ],
+  "genre_names": [
+   "フォールトトレラント計算",
+   "暗号・セキュリティ"
+  ],
+  "abstract_en": "We study verifiable blind quantum computing protocols that allow a client to securely delegate a quantum computation to an untrusted server. The protocol provides blindness of the input and computation, verifiability of the returned outcome, and a composable security proof against malicious servers, while keeping the client nearly classical.",
+  "abstract_ja": "クライアントが信頼できないサーバーに量子計算を安全に委任できる検証可能なブラインド量子コンピューティングプロトコルを研究しています。このプロトコルは入力と計算のブラインド性、返された結果の検証可能性、悪意あるサーバーに対する構成可能なセキュリティ証明を提供しつつ、クライアントをほぼクラシックなまま保ちます。",
+  "abstract_translated": "クライアントが信頼できないサーバーに量子計算を安全に委任できる検証可能なブラインド量子コンピューティングプロトコルを研究しています。このプロトコルは入力と計算のブラインド性、返された結果の検証可能性、悪意あるサーバーに対する構成可能なセキュリティ証明を提供しつつ、クライアントをほぼクラシックなまま保ちます。"
+ },
+ {
+  "id": "2606.99016",
+  "posted_at": "2026-07-02T07:39:12Z",
+  "title": "[TEST] Generic structures of quantum auction and secure summation protocols",
+  "title_ja": "[テスト]量子オークションおよび安全な総和プロトコルの一般的な構造",
+  "title_translated": "[テスト]量子オークションおよび安全な総和プロトコルの一般的な構造",
+  "translation_language": "ja",
+  "authors": "Alice Auction, Sam Summation",
+  "link": "https://arxiv.org/abs/2606.99016",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "crypto"
+  ],
+  "genre_names": [
+   "暗号・セキュリティ"
+  ],
+  "abstract_en": "Secure multi-party computation addresses the problem of jointly computing functions of private inputs while revealing minimal information about individual data. We identify structural symmetries between quantum sealed-bid auction protocols and secure multi-party summation, showing that auction primitives such as revenue estimation and winner determination reduce to repeated invocations of a secure summation oracle. The framework is protocol-agnostic and applies to gate-based and photonic implementations.",
+  "abstract_ja": "安全な多人数計算は、個別データに関する情報を最小限に抑えつつ、プライベート入力の関数を共同で計算する問題に対処します。量子密閉入札オークションプロトコルと安全な多方合計との間の構造的対称性を特定し、収益推定や勝者決定などのオークションプリミティブが安全な総和オラクルの繰り返し呼び出しに還元されることを示しました。このフレームワークはプロトコルに依存しず、ゲートベースおよびフォトニック実装に適用されます。",
+  "abstract_translated": "安全な多人数計算は、個別データに関する情報を最小限に抑えつつ、プライベート入力の関数を共同で計算する問題に対処します。量子密閉入札オークションプロトコルと安全な多方合計との間の構造的対称性を特定し、収益推定や勝者決定などのオークションプリミティブが安全な総和オラクルの繰り返し呼び出しに還元されることを示しました。このフレームワークはプロトコルに依存しず、ゲートベースおよびフォトニック実装に適用されます。"
+ },
+ {
+  "id": "2606.99019",
+  "posted_at": "2026-07-02T07:39:14Z",
+  "title": "[TEST] Entanglement entropy in meson decays from collider amplitudes",
+  "title_ja": "[テスト]衝突器振幅によるメソンのエンタングルメントエントロピーの崩壊",
+  "title_translated": "[テスト]衝突器振幅によるメソンのエンタングルメントエントロピーの崩壊",
+  "translation_language": "ja",
+  "authors": "Hector Hep",
+  "link": "https://arxiv.org/abs/2606.99019",
+  "primary": "hep-ph",
+  "announce_type": "cross",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "abstract_en": "We study quantum correlations in B meson decay into two vector mesons using entanglement entropy, Renyi entropy, negativity, Schmidt coefficients, and collider measurements of complex polarization amplitudes. The analysis is a phenomenological high-energy physics study of decay dynamics and entanglement in particle physics.",
+  "abstract_ja": "我々は、Bメソン崩壊による2つのベクトルメソンへの量子相関を、エンタングルメントエントロピー、レーニエントロピー、負の度合、シュミット係数、複素偏光振幅のコライダー測定を用いて研究します。この解析は、素粒子物理学における崩壊ダイナミクスとエンタングルメントの現象学的高エネルギー物理学研究です。",
+  "abstract_translated": "我々は、Bメソン崩壊による2つのベクトルメソンへの量子相関を、エンタングルメントエントロピー、レーニエントロピー、負の度合、シュミット係数、複素偏光振幅のコライダー測定を用いて研究します。この解析は、素粒子物理学における崩壊ダイナミクスとエンタングルメントの現象学的高エネルギー物理学研究です。"
  }
 ]

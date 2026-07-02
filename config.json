@@ -92,6 +92,7 @@
   "translate_batch_size": 5,
   "max_translate_chars": 2000,
   "translate_only_matched": false,
+  "google_skip_translation_genres": ["other", "foundations", "sensing", "nisq"],
   "require_translation": true,
   "show_translated_title": true,
   "show_original_abstract": false,

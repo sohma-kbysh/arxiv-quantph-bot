@@ -123,7 +123,8 @@ DeepL -> Azure Translator -> Google Cloud Translation
 - Backends are tried in order; once one succeeds, the bot moves to the next paper
 - For papers whose abstract translation succeeds, the same translation chain also creates a translated title separately from the English title
 - Backends where quota exhaustion is detected (Gemini: persistent 429, DeepL: 456, Google: 403/429) are skipped for the rest of that run (**circuit breaker**)
-- If every backend fails and `require_translation: true` (default), the paper is not posted and is retried on the next run
+- If DeepL and Azure fail, Google is used only for papers outside `google_skip_translation_genres`. Papers that belong only to those skipped genres are posted in English instead of being deferred.
+- If every allowed backend fails and `require_translation: true` (default), the paper is not posted and is retried on the next run
 
 ### 6. Discord posting
 
@@ -426,8 +427,9 @@ untrusted server, malicious server, client-server
 | `google_target_language` | unset | Optional Google-specific target language code. Defaults to `target_language` |
 | `translated_title_label` | `"邦題"` | Label shown before the translated title in Discord embeds |
 | `translate_batch_size` | `5` | Number of papers grouped into one request |
-| `max_translate_chars` | `2000` | Maximum abstract length passed to Gemini. Longer abstracts are truncated |
+| `max_translate_chars` | `2000` | Maximum abstract length passed to translation backends. Longer abstracts are truncated |
 | `translate_only_matched` | `false` | When `true`, papers with no classified genre are not translated, saving API usage |
+| `google_skip_translation_genres` | `["other","foundations","sensing","nisq"]` | When only Google remains, papers whose genres are all in this list are posted in English to save Google quota |
 | `require_translation` | `true` | `true`: papers whose translation failed are retried later / `false`: post in English |
 | `show_translated_title` | `true` | Show the translated title at the beginning of the Discord embed body |
 | `show_original_abstract` | `false` | Include the English abstract in addition to the translated abstract |
@@ -447,7 +449,7 @@ untrusted server, malicious server, client-server
 - Genre classification is heuristic, using Gemini as the primary path and TF-IDF as fallback, so misclassification is unavoidable. The quality of `description` directly affects Gemini classification accuracy; for genres with fuzzy boundaries, write explicit boundary conditions.
 - The default checked-in configuration is intentionally Japanese. Multilingual behavior is opt-in through `target_language` and related settings, so changing the code does not change the default Japanese Discord workflow.
 - Azure Translator's F0 tier includes 2M free characters/month, which makes it a useful middle fallback before Google. For an Azure-only setup, use `translators: ["azure"]` and set `target_language` to an Azure-supported language code such as `fr`, `de`, `ko`, or `zh-Hans`.
-- Google Cloud Translation supports many target languages and remains the final fallback in the default chain.
+- Google Cloud Translation supports many target languages and remains the final fallback in the default chain. To reduce Google usage, papers posted only to `other`, `foundations`, `sensing`, and `nisq` are posted in English when DeepL/Azure cannot translate them first.
 - Gemini free-tier RPD (requests per day) limits may change, so check the current values in [Google AI Studio](https://aistudio.google.com/) when setting it up.
 - `seen_ids.json` keeps the latest 3000 IDs and `posted_log.json` keeps the latest 5000 entries. Older entries are truncated automatically.
 
@@ -595,7 +597,8 @@ DeepL → Azure Translator → Google Cloud Translation
 - 先頭から順に試行し、成功した時点で次の論文へ移る
 - abstract の翻訳に成功した投稿対象論文について、英語タイトルとは別に翻訳済みタイトルも同じ翻訳チェーンで作成する
 - クォータ枯渇を検知したバックエンド(Gemini: 持続的 429、DeepL: 456、Google: 403/429)はその実行回では以後スキップされる(**circuit breaker**)
-- 全段で翻訳できなかった論文は `require_translation: true`(デフォルト)の場合は投稿せず次回に持ち越す
+- DeepL と Azure が失敗した場合、Google は `google_skip_translation_genres` の対象外論文にだけ使う。対象ジャンルだけに属する論文は、持ち越さず英語原文で投稿する。
+- 許可された全段で翻訳できなかった論文は `require_translation: true`(デフォルト)の場合は投稿せず次回に持ち越す
 
 ### 6. Discord 投稿
 
@@ -898,8 +901,9 @@ untrusted server, malicious server, client-server
 | `google_target_language` | 未設定 | Google 専用の翻訳先言語コード。未設定時は `target_language` を使う |
 | `translated_title_label` | `"邦題"` | Discord embed で翻訳済みタイトルの前に表示するラベル |
 | `translate_batch_size` | `5` | 1リクエストにまとめる論文数 |
-| `max_translate_chars` | `2000` | Gemini に渡す abstract の最大文字数(超過は切り捨て) |
+| `max_translate_chars` | `2000` | 翻訳バックエンドに渡す abstract の最大文字数(超過は切り捨て) |
 | `translate_only_matched` | `false` | `true` にするとジャンル未分類論文は翻訳しない(API節約) |
+| `google_skip_translation_genres` | `["other","foundations","sensing","nisq"]` | Google だけが残った場合、このリスト内のジャンルだけに属する論文は英語原文で投稿して Google quota を節約する |
 | `require_translation` | `true` | `true`: 翻訳失敗論文は次回へ持ち越す / `false`: 英語のまま投稿 |
 | `show_translated_title` | `true` | `true` にすると Discord embed 本文の先頭に翻訳済みタイトルを表示する |
 | `show_original_abstract` | `false` | `true` にすると翻訳文に加えて英語 abstract も embed に含める |
@@ -919,7 +923,7 @@ untrusted server, malicious server, client-server
 - ジャンル分類は Gemini(主)と TF-IDF(フォールバック)によるヒューリスティックであり、誤分類は不可避。`description` の記述精度が Gemini 分類の精度に直結するため、境界が曖昧なジャンルは境界条件を明示した文章にすること。
 - チェックインされている標準設定は意図的に日本語運用のまま。多言語動作は `target_language` と関連設定を変更した場合のみ有効になるため、今回の多言語対応は既存の日本語 Discord ワークフローを変更しない。
 - Azure Translator の F0 は月200万文字まで無料なので、Google の前に挟む中間フォールバックとして有用。Azure のみで使う場合は `translators: ["azure"]` とし、`target_language` に `fr`, `de`, `ko`, `zh-Hans` などの Azure 対応言語コードを設定する。
-- Google Cloud Translation は多くの言語に対応しており、標準チェーンでは最後のフォールバックとして使う。
+- Google Cloud Translation は多くの言語に対応しており、標準チェーンでは最後のフォールバックとして使う。Google 使用量を抑えるため、DeepL/Azure で翻訳できなかった `other`, `foundations`, `sensing`, `nisq` のみに投稿される論文は英語原文で投稿する。
 - Gemini 無料枠の RPD(1日あたりリクエスト数)制限は変更される可能性があるため、導入時に [Google AI Studio](https://aistudio.google.com/) で現行値を確認すること。
 - `seen_ids.json` は最新3000件、`posted_log.json` は最新5000件を保持し、それ以前のエントリは自動的に切り捨てられる。
 

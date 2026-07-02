@@ -628,6 +628,7 @@ def translate_deepl(text: str, cfg: dict) -> str | None:
         return None
     key = os.environ.get("DEEPL_API_KEY", "")
     if not key:
+        _deepl_dead = True
         return None
     data = urllib.parse.urlencode(
         {"text": text, "target_lang": deepl_target_language(cfg),
@@ -663,6 +664,7 @@ def translate_google(text: str, cfg: dict) -> str | None:
         return None
     key = os.environ.get("GOOGLE_TRANSLATE_API_KEY", "")
     if not key:
+        _google_dead = True
         return None
     url = ("https://translation.googleapis.com/language/translate/v2"
            f"?key={urllib.parse.quote(key)}")
@@ -711,6 +713,7 @@ def translate_azure(text: str, cfg: dict) -> str | None:
         return None
     key = os.environ.get("AZURE_TRANSLATOR_KEY", "")
     if not key:
+        _azure_dead = True
         return None
     headers = {
         "Ocp-Apim-Subscription-Key": key,
@@ -736,7 +739,9 @@ def translate_azure(text: str, cfg: dict) -> str | None:
     return None
 
 
-def translate_batch(texts: list[str], cfg: dict) -> list[str | None]:
+def translate_batch(texts: list[str], cfg: dict,
+                    google_allowed: list[bool] | None = None
+                    ) -> list[str | None]:
     """Translate a chunk of abstracts through the configured backend chain.
 
     Each backend only receives the items that all previous backends
@@ -745,13 +750,20 @@ def translate_batch(texts: list[str], cfg: dict) -> list[str | None]:
     limit = cfg.get("max_translate_chars", 2000)
     texts = [t[:limit] for t in texts]
     chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
+    if google_allowed is None:
+        google_allowed = [True] * len(texts)
 
     results: list[str | None] = [None] * len(texts)
     for backend in chain:
         missing = [i for i, r in enumerate(results) if r is None]
         if not missing:
             break
-        subset = [texts[i] for i in missing]
+        target = missing
+        if backend == "google":
+            target = [i for i in missing if google_allowed[i]]
+            if not target:
+                continue
+        subset = [texts[i] for i in target]
         if backend == "gemini":
             sub = translate_gemini_batch(subset, cfg)
         elif backend == "deepl":
@@ -763,9 +775,50 @@ def translate_batch(texts: list[str], cfg: dict) -> list[str | None]:
         else:
             print(f"[warn] unknown translator '{backend}'", file=sys.stderr)
             continue
-        for i, r in zip(missing, sub):
+        for i, r in zip(target, sub):
             results[i] = r
     return results
+
+
+def google_translation_allowed(entry: dict, cfg: dict) -> bool:
+    """Whether this entry may use Google after DeepL/Azure fail."""
+    skip = set(cfg.get("google_skip_translation_genres",
+                       ["other", "foundations", "sensing", "nisq"]))
+    genre_ids = {g["id"] for g in entry.get("genres", []) if g}
+    return not genre_ids or not genre_ids.issubset(skip)
+
+
+_TRANSLATOR_DEAD_FLAGS = {
+    "deepl": lambda: _deepl_dead,
+    "azure": lambda: _azure_dead,
+    "google": lambda: _google_dead,
+    "gemini": lambda: _gemini_dead,
+}
+
+
+def dead_translators(cfg: dict) -> list[str]:
+    """Backends in the configured chain that gave up for this run."""
+    chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
+    return [b for b in chain if _TRANSLATOR_DEAD_FLAGS.get(b, lambda: False)()]
+
+
+def notify_translation_outage(deferred: int, dead: list[str]) -> None:
+    """Warn the general Discord channel when every translator backend in
+    the chain is unavailable, so papers are being silently deferred."""
+    webhook, _ = resolve_webhook(None)
+    content = (
+        "⚠️ All translation backends are unavailable "
+        f"({', '.join(dead)}); {deferred} paper(s) deferred until "
+        "translation recovers."
+    )
+    if not webhook:
+        print(f"[warn] {content} (no DISCORD_WEBHOOK_GENERAL configured "
+              "to send this notice)", file=sys.stderr)
+        return
+    status, body = http_post_json(webhook, {"content": content})
+    if status not in (200, 204):
+        print(f"[warn] failed to send translation-outage notice: "
+              f"HTTP {status} {body[:200]!r}", file=sys.stderr)
 
 
 # ----------------------------------------------------------------- discord
@@ -861,6 +914,7 @@ def main() -> None:
             "jp": None,
             "jp_title": None,
             "need_tr": bool(p["abstract"]),
+            "allow_untranslated": False,
         }
         for p in pending
     ]
@@ -974,13 +1028,19 @@ def main() -> None:
         for i in range(0, len(to_tr), batch_size):
             chunk = to_tr[i: i + batch_size]
             abstracts = [e["paper"]["abstract"] for e in chunk]
-            for e, jp in zip(chunk, translate_batch(abstracts, cfg)):
+            google_allowed = [google_translation_allowed(e, cfg) for e in chunk]
+            for e, jp in zip(
+                    chunk, translate_batch(abstracts, cfg, google_allowed)):
                 e["jp"] = jp
+            for e, allowed in zip(chunk, google_allowed):
+                if e["jp"] is None and not allowed:
+                    e["allow_untranslated"] = True
 
         if show_translated_title(cfg):
             to_title_tr = [
                 e for e in entries
                 if e["paper"].get("title") and e["jp_title"] is None
+                and not e.get("allow_untranslated", False)
                 and not (
                     cfg.get("require_translation", True)
                     and e["need_tr"] and e["jp"] is None
@@ -989,7 +1049,10 @@ def main() -> None:
             for i in range(0, len(to_title_tr), batch_size):
                 chunk = to_title_tr[i: i + batch_size]
                 titles = [e["paper"]["title"] for e in chunk]
-                for e, jp_title in zip(chunk, translate_batch(titles, cfg)):
+                google_allowed = [google_translation_allowed(e, cfg)
+                                  for e in chunk]
+                for e, jp_title in zip(
+                        chunk, translate_batch(titles, cfg, google_allowed)):
                     e["jp_title"] = jp_title
 
     # ---- dry-run: print classification results and exit --------------------
@@ -1012,7 +1075,8 @@ def main() -> None:
     require_tr = cfg.get("require_translation", True)
     posted = deferred = 0
     for e in entries:
-        if e["need_tr"] and e["jp"] is None and require_tr:
+        if (e["need_tr"] and e["jp"] is None and require_tr
+                and not e.get("allow_untranslated", False)):
             deferred += 1
             continue
         posted_webhooks: set[str] = set()
@@ -1048,6 +1112,12 @@ def main() -> None:
                     paper_logged = True
                 posted += 1
             time.sleep(1.2)  # Discord webhook rate limit headroom
+
+    if deferred > 0:
+        dead = dead_translators(cfg)
+        chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
+        if chain and len(dead) == len(chain):
+            notify_translation_outage(deferred, dead)
 
     # Keep the state file bounded.
     state["seen"] = sorted(seen)[-3000:]

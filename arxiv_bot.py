@@ -469,11 +469,14 @@ def translate_gemini_batch(texts: list[str], cfg: dict) -> list[str | None]:
         f"<<<{i + 1}>>>\n{t}" for i, t in enumerate(texts))
     lang_name = target_language_name(cfg)
     prompt = (
-        f"以下に{len(texts)}件の量子情報科学分野のarXiv論文abstract(英語)を示す。"
-        "各々を、専門用語は標準的な訳語(必要なら英語併記)を用いて"
-        f"学術的な{lang_name}に翻訳せよ。\n"
-        "出力では各訳文の直前に対応する番号タグ <<<k>>> をそのまま付し、"
-        "タグと訳文以外の文字列(前置き・後書き)を一切含めないこと。\n\n"
+        f"Below are {len(texts)} English abstracts from arXiv papers in "
+        "quantum information science. Translate each abstract into "
+        f"scholarly {lang_name}, using standard technical terminology "
+        "and keeping the English term in parentheses when helpful.\n"
+        "In the output, place the matching number tag <<<k>>> immediately "
+        "before each translated abstract. The final AI output must be in "
+        f"{lang_name}; include nothing except the tags and translated text "
+        "(no preface or afterword).\n\n"
         + numbered
     )
     out = _gemini_request(prompt, cfg)
@@ -515,22 +518,30 @@ def translate_classify_gemini_batch(
     max_genres = cfg.get("classify_max_genres", 2)
     lang_name = target_language_name(cfg)
     prompt = (
-        f"以下に{len(texts)}件の量子情報科学分野のarXiv論文のタイトルとabstract(英語)を示す。"
-        "各論文について次の2つを行え。\n"
-        f"(1) 各ジャンルの説明文を精読し、論文の主要な貢献を最もよく表すジャンルIDを"
-        "下記の一覧から選ぶ。\n"
-        "    - 1つのジャンルに明確に帰属する場合は1つのみ選ぶ。\n"
-        f"    - 複数ジャンルにまたがり両方が主要な貢献である場合のみ、"
-        f"優先度順に最大{max_genres}個までカンマ区切りで選ぶ(例: qec,ft)。\n"
-        "    - 迷う場合は1つに絞ること。説明文に合致しない場合はotherを選ぶ。\n"
-        "(2) abstractを、専門用語は標準的な訳語(必要なら英語併記)を用いて"
-        f"学術的な{lang_name}に翻訳する。\n\n"
-        "[ジャンル一覧]\n"
+        f"Below are {len(texts)} English titles and abstracts from arXiv "
+        "papers in quantum information science. For each paper, perform "
+        "the following two tasks.\n"
+        "(1) Carefully read every genre description and choose the genre ID "
+        "from the list below that best represents the paper's primary "
+        "contribution.\n"
+        "    - If the paper clearly belongs to a single genre, choose only "
+        "one genre.\n"
+        "    - Only when the paper spans multiple genres and both are "
+        f"major contributions, choose up to {max_genres} genre IDs in "
+        "priority order, separated by commas (example: qec,ft).\n"
+        "    - If unsure, choose one genre. If the paper does not fit any "
+        "description, choose other.\n"
+        "(2) Translate the abstract into scholarly "
+        f"{lang_name}, using standard technical terminology and keeping "
+        "the English term in parentheses when helpful.\n\n"
+        "[Genre list]\n"
         + _genre_menu(genres)
-        + "\n\n[出力形式]\n"
-        "各エントリの訳文の直前に <<<k|genre_id>>> を付すこと。"
-        "複数ジャンルの場合は <<<k|id1,id2>>> 形式(例: <<<1|qec,ft>>>)。"
-        "タグと訳文以外の文字列(前置き・後書き・見出し)を一切含めないこと。\n\n"
+        + "\n\n[Output format]\n"
+        "Place <<<k|genre_id>>> immediately before the translated abstract "
+        "for each entry. For multiple genres, use <<<k|id1,id2>>> "
+        "(example: <<<1|qec,ft>>>). The final AI output must be in "
+        f"{lang_name}; include nothing except the tags and translated text "
+        "(no preface, afterword, or headings).\n\n"
         + numbered
     )
     out = _gemini_request(prompt, cfg)
@@ -568,20 +579,24 @@ def classify_gemini_batch(
     valid_ids = {g["id"] for g in genres}
     max_genres = cfg.get("classify_max_genres", 2)
     prompt = (
-        f"以下に{len(texts)}件の量子情報科学分野のarXiv論文のタイトルとabstract(英語)を示す。"
-        "各論文について次を行え。\n"
-        f"各ジャンルの説明文を精読し、論文の主要な貢献を最もよく表すジャンルIDを"
-        "下記の一覧から選ぶ。\n"
-        "    - 1つのジャンルに明確に帰属する場合は1つのみ選ぶ。\n"
-        f"    - 複数ジャンルにまたがり両方が主要な貢献である場合のみ、"
-        f"優先度順に最大{max_genres}個までカンマ区切りで選ぶ(例: qec,ft)。\n"
-        "    - 迷う場合は1つに絞ること。説明文に合致しない場合はotherを選ぶ。\n\n"
-        "[ジャンル一覧]\n"
+        f"Below are {len(texts)} English titles and abstracts from arXiv "
+        "papers in quantum information science. For each paper, carefully "
+        "read every genre description and choose the genre ID that best "
+        "represents the paper's primary contribution from the list below.\n"
+        "    - If the paper clearly belongs to a single genre, choose only "
+        "one genre.\n"
+        "    - Only when the paper spans multiple genres and both are "
+        f"major contributions, choose up to {max_genres} genre IDs in "
+        "priority order, separated by commas (example: qec,ft).\n"
+        "    - If unsure, choose one genre. If the paper does not fit any "
+        "description, choose other.\n\n"
+        "[Genre list]\n"
         + _genre_menu(genres)
-        + "\n\n[出力形式]\n"
-        "各エントリについて <<<k>>> の直後にジャンルIDのみを出力すること。"
-        "複数の場合はカンマ区切り(例: <<<1>>> qec,ft)。"
-        "ジャンルID・タグ・改行以外の文字列を一切含めないこと。\n\n"
+        + "\n\n[Output format]\n"
+        "For each entry, output only the genre ID immediately after <<<k>>>. "
+        "For multiple genres, separate IDs with commas "
+        "(example: <<<1>>> qec,ft). Include nothing except genre IDs, tags, "
+        "and newlines.\n\n"
         + numbered
     )
     out = _gemini_request(prompt, cfg)

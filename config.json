@@ -80,7 +80,7 @@
     ]
   },
 
-  "translators": ["deepl", "google"],
+  "translators": ["deepl", "azure", "google"],
   "target_language": "ja",
   "target_language_name": "Japanese",
   "translated_title_label": "邦題",

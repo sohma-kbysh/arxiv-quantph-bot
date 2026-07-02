@@ -5,16 +5,15 @@ arXiv quant-ph -> Discord notifier with translated abstracts.
 - Fetches the official arXiv RSS feed (rss.arxiv.org/rss/quant-ph)
 - Filters out cross-listed papers whose primary category is irrelevant
   (e.g. cond-mat.*) while keeping quantum-information-adjacent categories
-- Classifies papers into user-defined genres. Primary path: the Gemini
-  call translates AND classifies in one request. Fallback path (Gemini
-  unavailable): keyword matching for the genre + the translator chain.
-- Translates abstracts via Gemini -> DeepL -> Google
-  (configurable chain); each backend stops for the run on quota exhaustion
+- Classifies papers into user-defined genres. Primary path: Gemini
+  classify-only. Fallback path: keyword matching for the genre.
+- Translates abstracts via the configurable translator chain
+  (default: DeepL -> Azure -> Google); each backend stops for the run on quota exhaustion
   (circuit breaker), and any paper left untranslated is deferred, never
   posted in English.
 - Posts one Discord embed per paper via webhook (per-genre webhooks)
 
-Standard library only. Designed to run once per day on GitHub Actions.
+Standard library only. Designed to run on GitHub Actions.
 """
 
 import json
@@ -436,6 +435,10 @@ def google_target_language(cfg: dict) -> str:
     return str(cfg.get("google_target_language", target_language(cfg))).strip() or "ja"
 
 
+def azure_target_language(cfg: dict) -> str:
+    return str(cfg.get("azure_target_language", target_language(cfg))).strip() or "ja"
+
+
 def show_translated_title(cfg: dict) -> bool:
     return cfg.get("show_translated_title",
                    cfg.get("show_japanese_title", True))
@@ -570,7 +573,7 @@ def classify_gemini_batch(
 
     Output tokens are minimal (just genre IDs), so quota consumption is
     roughly 1/50 of the combined translate+classify request. Use this when
-    translation is handled by DeepL or Google Cloud Translation instead.
+    translation is handled by the configured translator chain instead.
 
     Returns a list of genre ID lists (empty list when Gemini fails for that entry).
     """
@@ -615,6 +618,7 @@ def classify_gemini_batch(
 
 
 _deepl_dead = False
+_azure_dead = False
 _google_dead = False
 
 
@@ -680,6 +684,58 @@ def translate_google(text: str, cfg: dict) -> str | None:
     return None
 
 
+def azure_translate_url(cfg: dict) -> str:
+    endpoint = str(
+        cfg.get("azure_translator_endpoint")
+        or os.environ.get("AZURE_TRANSLATOR_ENDPOINT", "")
+        or "https://api.cognitive.microsofttranslator.com"
+    ).rstrip("/")
+    if endpoint.endswith("/translate"):
+        base = endpoint
+    elif "cognitiveservices.azure.com" in endpoint:
+        base = endpoint + "/translator/text/v3.0/translate"
+    else:
+        base = endpoint + "/translate"
+    query = urllib.parse.urlencode({
+        "api-version": "3.0",
+        "from": "en",
+        "to": azure_target_language(cfg),
+    })
+    return f"{base}?{query}"
+
+
+def translate_azure(text: str, cfg: dict) -> str | None:
+    """Azure AI Translator Text API. Free F0 tier: 2M chars/month."""
+    global _azure_dead
+    if _azure_dead:
+        return None
+    key = os.environ.get("AZURE_TRANSLATOR_KEY", "")
+    if not key:
+        return None
+    headers = {
+        "Ocp-Apim-Subscription-Key": key,
+        "Content-Type": "application/json; charset=UTF-8",
+    }
+    region = os.environ.get("AZURE_TRANSLATOR_REGION", "")
+    if region:
+        headers["Ocp-Apim-Subscription-Region"] = region
+    status, body = http_post_json(
+        azure_translate_url(cfg), [{"Text": text}], headers=headers)
+    if status == 200:
+        try:
+            data = json.loads(body)
+            return data[0]["translations"][0]["text"].strip()
+        except (KeyError, IndexError, json.JSONDecodeError):
+            return None
+    print(f"[warn] Azure Translator HTTP {status}: {body[:200]!r}",
+          file=sys.stderr)
+    if status in (401, 403, 429):  # credential, quota, or rate-limit problem
+        print("[warn] Azure Translator credential/quota problem; "
+              "skipping Azure for the rest of this run.", file=sys.stderr)
+        _azure_dead = True
+    return None
+
+
 def translate_batch(texts: list[str], cfg: dict) -> list[str | None]:
     """Translate a chunk of abstracts through the configured backend chain.
 
@@ -700,6 +756,8 @@ def translate_batch(texts: list[str], cfg: dict) -> list[str | None]:
             sub = translate_gemini_batch(subset, cfg)
         elif backend == "deepl":
             sub = [translate_deepl(t, cfg) for t in subset]
+        elif backend == "azure":
+            sub = [translate_azure(t, cfg) for t in subset]
         elif backend == "google":
             sub = [translate_google(t, cfg) for t in subset]
         else:

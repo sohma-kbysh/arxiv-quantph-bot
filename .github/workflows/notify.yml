@@ -53,6 +53,8 @@ jobs:
           DISCORD_WEBHOOK_OTHER: ${{ secrets.DISCORD_WEBHOOK_OTHER }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          AZURE_TRANSLATOR_KEY: ${{ secrets.AZURE_TRANSLATOR_KEY }}
+          AZURE_TRANSLATOR_REGION: ${{ secrets.AZURE_TRANSLATOR_REGION }}
           GOOGLE_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
           ARXIV_TEST_FEED: ${{ inputs.use_test_feed == true && 'test_feed.xml' || '' }}
         run: python arxiv_bot.py

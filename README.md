@@ -1,3 +1,396 @@
+# arXiv quant-ph -> Discord notification bot (with Japanese translation)
+
+This bot fetches the official arXiv RSS feed (`rss.arxiv.org/rss/quant-ph`) three times per weekday, classifies each paper into one of 15 genres, and posts it to the corresponding Discord channel through webhooks with a Japanese title and abstract translation.
+In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Google Cloud Translation. Because Gemini only returns genre IDs, this setup uses less API quota than asking Gemini to translate as well. The bot uses **only the Python standard library**; `pip install` is not required.
+
+---
+
+## File layout
+
+| File | Role |
+| --- | --- |
+| `arxiv_bot.py` | Main bot. Uses only the Python standard library |
+| `config.json` | All configuration: feeds, genre definitions, API behavior, classification parameters |
+| `seen_ids.json` | Posted arXiv ID state. Automatically committed by Actions, capped at 3000 IDs |
+| `posted_log.json` | Metadata log for posted papers. JSON array, capped at 5000 entries |
+| `scirate_weekly.py` | Weekend bot that reposts popular weekly quant-ph papers from SciRate into the normal genre channels |
+| `scirate_weekly_state.json` | Posted arXiv ID state for the SciRate weekend bot |
+| `test_feed.xml` | Sample RSS feed for local testing |
+| `scripts/clean_discord_urls.py` | Helper script to find or delete arXiv URL posts in Discord channels |
+| `.github/workflows/notify.yml` | GitHub Actions schedule and secret references for the main notifier |
+| `.github/workflows/scirate_weekly.yml` | GitHub Actions schedule for the SciRate weekend digest |
+
+---
+
+## Run schedule
+
+GitHub Actions runs the main notifier **three times per weekday** (Monday-Friday UTC = Tuesday-Saturday JST).
+
+| UTC | JST | Purpose |
+| --- | --- | --- |
+| 01:05 | 10:05 | Catch new papers soon after the arXiv announcement at around 00:00 UTC |
+| 04:00 | 13:00 | Cover missed or delayed items |
+| 07:00 | 16:00 | Same as above |
+
+`seen_ids.json` prevents duplicate posting, so the same paper is not posted multiple times across runs.
+
+On weekends, a separate workflow posts a SciRate weekly popular-paper digest.
+
+| UTC | JST | Purpose |
+| --- | --- | --- |
+| Sunday 00:30 | Sunday 09:30 | Post popular quant-ph papers from the last 7 days on SciRate |
+
+---
+
+## Processing flow
+
+```text
+Fetch RSS -> filter -> genre classification + translation -> Discord post -> save state
+```
+
+### 1. Fetch RSS
+
+The bot fetches RSS feeds for the categories listed in `config.json` under `feeds` (for example, `"quant-ph"`) and deduplicates papers by ID. If the same paper appears in multiple feeds, the later entry overwrites the earlier one.
+
+### 2. Filtering
+
+`should_post()` evaluates each paper using the following rules.
+
+| announce_type | Behavior |
+| --- | --- |
+| `new` | Always passes as a new quant-ph paper |
+| `cross` | Evaluated by the cross-list policy below |
+| `replace` | Passes only when `include_replacements: true` |
+
+**Cross-list posting policy (default: pass all)**
+
+A cross-listed paper is excluded only when its primary category matches `cross_deny_primary`. This list is empty by default (`[]`), so **all cross-listed papers pass**, including `hep-*`, `gr-qc`, and `cond-mat.*`. Add categories to `cross_deny_primary` if you want to exclude them.
+
+`cross_allow_primary` is a whitelist and takes priority over the denylist, for cases where you want exceptions after adding categories to the denylist.
+
+**Cross-list classification policy**
+
+Even for cross-listed papers that remain eligible for posting, normal genre classification is limited by `cross_classify_primary_as_quantph`. Currently, only `quant-ph` and `cs.CR` are treated as quant-ph-equivalent.
+
+- primary is `quant-ph`: normal classification
+- primary is `cs.CR`: normal classification, to catch blind/verifiable/secure/delegation topics and PQC
+- primary is anything else: forced to `other`, regardless of Gemini or TF-IDF output
+
+### 3. Genre classification + translation (two paths)
+
+**Primary path: Gemini classify-only**
+
+When `classify_with_llm: true` (default) and `GEMINI_API_KEY` is available, the bot sends titles and abstracts to Gemini in batches of `translate_batch_size` entries (default: 5) and asks Gemini to return only genre IDs.
+
+- The prompt includes the full natural-language `description` for every genre, so papers can be classified by meaning even when they do not contain fixed keywords
+- Output format: `<<<k|genre_id>>>` or `<<<k|id1,id2>>>` for multi-label classification
+- One paper can be assigned to multiple genres; see "Multi-label classification" below
+- Cross-listed papers whose primary category is not `quant-ph` or `cs.CR` are overwritten to `other` after Gemini classification
+
+**Fallback path: TF-IDF cosine similarity**
+
+Used when Gemini is unavailable due to quota exhaustion or similar failures, or when Gemini does not return a result for an individual entry.
+
+- Vectorizes each genre's `description` + `keywords` text with TF-IDF
+- Computes cosine similarity against the paper's `title + abstract`
+- Applies arXiv category hints from `category_genre_hints` (+0.15 to the target genre) and forced `other` handling from `category_other_overrides` (+1.0 to `other`)
+- Words that appear in every genre, such as "quantum", get IDF=0 and do not affect the score
+
+Translation on the fallback path uses the backends listed in `translators`. The current standard order is DeepL -> Google Cloud Translation.
+
+### 4. Multi-label classification
+
+One paper can be classified into multiple genres and posted to each corresponding channel.
+
+- `classify_max_genres` (default: 2): maximum number of genres assigned to one paper
+- `classify_secondary_ratio` (default: 0.7, TF-IDF fallback only): secondary genres are accepted only when their score is at least 70% of the top genre score, preventing weak accidental matches from causing multi-channel posts
+- On the Gemini path, the prompt instructs the LLM to return multiple IDs only when the paper genuinely spans multiple genres
+- `force_genre_keywords`: adds a configured genre when specified words appear in the title or abstract
+- Duplicate posts to the same webhook are removed with the `posted_webhooks` set
+
+### 5. Translation fallback chain
+
+Current standard setting:
+
+```text
+DeepL -> Google Cloud Translation
+```
+
+- Backends are tried in order; once one succeeds, the bot moves to the next paper
+- For papers whose abstract translation succeeds, the same translation chain also creates a Japanese title separately from the English title
+- Backends where quota exhaustion is detected (Gemini: persistent 429, DeepL: 456, Google: 403/429) are skipped for the rest of that run (**circuit breaker**)
+- If every backend fails and `require_translation: true` (default), the paper is not posted and is retried on the next run
+
+### 6. Discord posting
+
+For each paper, the bot posts once for each assigned genre. It waits 1.2 seconds between posts to leave headroom for Discord webhook rate limits.
+
+`posted_log.json` records metadata for posted papers. Example entry:
+
+```json
+{
+  "id": "2506.12345",
+  "posted_at": "2025-06-24T01:10:00Z",
+  "title": "...",
+  "title_ja": "...",
+  "authors": "...",
+  "link": "https://arxiv.org/abs/2506.12345",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": ["qec", "ft"],
+  "genre_names": ["誤り訂正・符号理論", "フォールトトレラント計算"],
+  "abstract_en": "...",
+  "abstract_ja": "..."
+}
+```
+
+---
+
+## SciRate weekend digest
+
+The weekend workflow `.github/workflows/scirate_weekly.yml` fetches `https://scirate.com/arxiv/quant-ph?range=7` and targets only papers whose `Scite!` count is at least `scirate_min_scites`. The default threshold is 30.
+
+Unlike the normal new-paper notifier, the SciRate weekend digest deduplicates with `scirate_weekly_state.json` instead of `seen_ids.json`. This allows papers that were already posted on weekdays to be reposted on the weekend as popular papers.
+
+It uses the same genres and webhooks as the normal notifier.
+
+- If `posted_log.json` already has classification history for the same arXiv ID, saved `genre_ids` are reused
+- If no classification history exists, Gemini classify-only is used
+- If Gemini is unavailable, the bot falls back to TF-IDF
+- If translated `title_ja` / `abstract_ja` values exist in `posted_log.json`, they are reused
+- If no translation exists, the same DeepL -> Google Cloud Translation chain is used
+
+SciRate posts add a `SciRate` field to the normal embed and show the number of Scites from the last 7 days.
+
+Local check:
+
+```bash
+python3 scirate_weekly.py --dry-run
+```
+
+Some environments receive HTTP 403 when accessing SciRate directly. In that case, the script prints a warning and exits without posting to Discord or updating state.
+
+---
+
+## Genre list (15 genres)
+
+| ID | Name | Main topics |
+| --- | --- | --- |
+| `qec` | 誤り訂正・符号理論 | Stabilizer codes, surface codes, LDPC, decoder design |
+| `ft` | フォールトトレラント計算 | Magic-state distillation, lattice surgery, resource estimates |
+| `algo` | 量子アルゴリズム | Grover, Shor, quantum walks, phase estimation, HHL |
+| `complexity` | 量子複雑性理論 | BQP, QMA, query complexity, local Hamiltonian |
+| `nisq` | 変分・NISQアルゴリズム | VQE, QAOA, error mitigation, barren plateaus |
+| `sim` | 量子シミュレーション | Hamiltonian simulation, Trotterization, quantum chemistry |
+| `qml` | 量子機械学習 | QNN, quantum kernels, quantum reinforcement learning |
+| `qit` | 量子情報理論 | Entanglement theory, resource theories, channel capacity |
+| `network` | 量子ネットワーク・通信 | Quantum repeaters, entanglement distribution, quantum teleportation |
+| `crypto` | 暗号・セキュリティ | QKD, DI-QKD, blind/verifiable/secure delegation, SMC/quantum auctions |
+| `pqc` | 耐量子計算機暗号 | Lattice cryptography (LWE/Kyber), NIST PQC standardization |
+| `hardware` | 量子ハードウェア・実装 | Superconducting systems, ion traps, Rydberg systems, spin qubits |
+| `sensing` | 量子センシング・計測 | Heisenberg limit, quantum Fisher information, atomic clocks |
+| `foundations` | 量子基礎・測定理論 | Bell inequalities, decoherence, quantum thermodynamics |
+| `other` | その他・異分野 | Papers outside quantum information, such as hep-*, gr-qc, nucl-*, and general cond-mat |
+
+If none of the genres match, the paper is sent to `DISCORD_WEBHOOK_GENERAL` as a fallback.
+
+---
+
+## Setup
+
+### 1. Create Discord webhooks
+
+For each destination channel, create a webhook from "Channel Settings -> Integrations -> Webhooks". Prepare a channel for each genre and register each URL as a GitHub Secret below.
+
+If you do not want fine-grained genre channels, setting only `DISCORD_WEBHOOK_GENERAL` is enough; all papers will go there.
+
+### 2. Get API keys
+
+Translation backends are tried in the order listed in `config.json` under `translators`. The current standard setting is `["deepl", "google"]`. **Unregistered backends are skipped automatically.**
+
+| Backend | Purpose | Free tier | Secret name |
+| --- | --- | --- | --- |
+| Gemini | Classification only | Free tier available, no card required | `GEMINI_API_KEY` |
+| DeepL | Translation | Free up to 500k characters/month | `DEEPL_API_KEY` |
+| Google Cloud Translation | Translation | Free up to 500k characters/month (**billing account required**) | `GOOGLE_TRANSLATE_API_KEY` |
+
+You can create a Gemini API key in [Google AI Studio](https://aistudio.google.com/). If no Gemini key is available, classification falls back to TF-IDF.
+
+### 3. Register GitHub Secrets
+
+Register the following under `Settings -> Secrets and variables -> Actions -> New repository secret`.
+
+**Webhooks (all 15 genres + general)**
+
+```text
+DISCORD_WEBHOOK_GENERAL
+DISCORD_WEBHOOK_QEC
+DISCORD_WEBHOOK_FT
+DISCORD_WEBHOOK_ALGO
+DISCORD_WEBHOOK_COMPLEXITY
+DISCORD_WEBHOOK_NISQ
+DISCORD_WEBHOOK_SIM
+DISCORD_WEBHOOK_QML
+DISCORD_WEBHOOK_QIT
+DISCORD_WEBHOOK_NETWORK
+DISCORD_WEBHOOK_CRYPTO
+DISCORD_WEBHOOK_PQC
+DISCORD_WEBHOOK_HARDWARE
+DISCORD_WEBHOOK_SENSING
+DISCORD_WEBHOOK_FOUNDATIONS
+DISCORD_WEBHOOK_OTHER
+```
+
+**API keys (only the ones you use)**
+
+```text
+GEMINI_API_KEY
+DEEPL_API_KEY            # optional
+GOOGLE_TRANSLATE_API_KEY # optional
+```
+
+Posting to genres whose Secret is missing is skipped automatically.
+
+### 4. Test the workflow
+
+Open the Actions tab -> `workflow_dispatch` -> "Run workflow" to run it manually.
+
+---
+
+## Local checks
+
+### dry-run mode (recommended, no API usage)
+
+This mode does not call Discord or any translation API. It prints only TF-IDF classification results to stdout.
+
+```bash
+python3 arxiv_bot.py --dry-run
+```
+
+Because this fetches the live arXiv feed before classifying, run it on a weekday after the arXiv announcement (around 10:00 JST or later). On weekends and holidays, the feed may be empty.
+
+### Full test with test_feed.xml
+
+This reads a local RSS file and exercises the full path, including translation and Discord posting.
+
+```bash
+export GEMINI_API_KEY="..."
+export DEEPL_API_KEY="..."
+export DISCORD_WEBHOOK_GENERAL="..."   # URL for a test channel
+export ARXIV_TEST_FEED=test_feed.xml
+python3 arxiv_bot.py
+```
+
+If you do not want test posts recorded in `seen_ids.json`, reset `seen_ids.json` to `{"seen": []}` after the test. Before returning to live operation, run `unset ARXIV_TEST_FEED`.
+
+---
+
+## Customization
+
+### Add or edit genres
+
+Edit the `genres` array in `config.json`. Fields for each genre object:
+
+| Key | Required | Description |
+| --- | --- | --- |
+| `id` | yes | Alphanumeric characters and underscores only. Must be unique. Also used as Gemini's output ID |
+| `name` | yes | Japanese name shown in the Discord embed |
+| `description` | yes | **Decision basis for Gemini classification**. Detailed descriptions with clear boundaries against other genres improve classification accuracy |
+| `webhook_env` | yes | Environment variable name registered as a Secret, for example `"DISCORD_WEBHOOK_QEC"` |
+| `keywords` | yes | Word list used by the TF-IDF fallback |
+
+When adding a genre, also register the corresponding Discord channel webhook as a Secret and add it to the `env:` section in `.github/workflows/notify.yml`.
+
+### Classification parameters
+
+Classification-related settings in `config.json`:
+
+| Key | Default | Description |
+| --- | --- | --- |
+| `classify_with_llm` | `true` | Use TF-IDF fallback every time when set to `false` |
+| `classify_min_score` | `0.05` | Minimum TF-IDF score to accept |
+| `classify_max_genres` | `2` | Maximum number of genres assigned to one paper |
+| `classify_secondary_ratio` | `0.7` | Minimum score ratio for secondary genres when using TF-IDF |
+| `force_genre_keywords` | `{}` | Add the target genre when specified words appear in the title or abstract |
+
+The run log prints Gemini usage. Example:
+
+```text
+[info] Gemini usage: mode=classify-only, model=gemini-2.5-flash-lite, requests=17, classified=82/82, tfidf_fallback=0, disabled_for_run=False
+```
+
+### arXiv category hints
+
+Settings that help classify cross-listed papers from their primary category:
+
+- `cross_classify_primary_as_quantph`: only papers whose primary category is in this list are normally classified. In the default setup, only `quant-ph` and `cs.CR` are included. Papers cross-listed into quant-ph from other primary categories are classified as `other`
+- `category_genre_hints`: category -> genre ID mapping. Matching papers receive +0.15 to the target genre score
+- `category_other_overrides`: additional primary categories to explicitly treat as `other`
+
+### Forced crypto keywords
+
+If a word listed in `force_genre_keywords.crypto` appears in the title or abstract, `crypto` is added to the Gemini/TF-IDF result. The current list includes terms such as the following to avoid missing topics around verifiable quantum computation, blind quantum computation, secure quantum computation, and delegated quantum computation.
+
+```text
+blind, verifiable, secure, delegated quantum computation,
+secure delegation, blind delegation, verifiable delegation,
+untrusted server, malicious server, client-server
+```
+
+### Cross-list filtering
+
+| Key | Description |
+| --- | --- |
+| `cross_deny_primary` | Exclude cross-listed papers whose primary category matches this list. Default is empty, meaning all pass |
+| `cross_allow_primary` | Whitelist that takes priority over the denylist |
+
+### Translation and posting settings
+
+| Key | Default | Description |
+| --- | --- | --- |
+| `translators` | `["deepl","google"]` | Translation backend order |
+| `translate_batch_size` | `5` | Number of papers grouped into one request |
+| `max_translate_chars` | `2000` | Maximum abstract length passed to Gemini. Longer abstracts are truncated |
+| `translate_only_matched` | `false` | When `true`, papers with no classified genre are not translated, saving API usage |
+| `require_translation` | `true` | `true`: papers whose translation failed are retried later / `false`: post in English |
+| `show_japanese_title` | `true` | Show the Japanese title at the beginning of the Discord embed body |
+| `show_original_abstract` | `false` | Include the English abstract in addition to the Japanese translation |
+| `include_replacements` | `false` | Post replacement papers when set to `true` |
+| `scirate_range_days` | `7` | Date range used by the SciRate weekend digest |
+| `scirate_min_scites` | `30` | Minimum Scite count for the SciRate weekend digest |
+| `gemini_model` | `"gemini-2.5-flash-lite"` | Gemini model ID used for classification |
+| `gemini_min_interval_sec` | `7` | Minimum interval between Gemini requests, in seconds |
+| `gemini_max_retries` | `4` | Maximum retries for temporary errors |
+| `gemini_overload_giveup` | `2` | Open the circuit breaker after this many consecutive overload errors |
+
+---
+
+## Notes
+
+- The bot treats the first RSS `<category>` element as the primary category. This is a heuristic from observed RSS behavior, not an arXiv API guarantee.
+- Genre classification is heuristic, using Gemini as the primary path and TF-IDF as fallback, so misclassification is unavoidable. The quality of `description` directly affects Gemini classification accuracy; for genres with fuzzy boundaries, write explicit boundary conditions.
+- Gemini free-tier RPD (requests per day) limits may change, so check the current values in [Google AI Studio](https://aistudio.google.com/) when setting it up.
+- `seen_ids.json` keeps the latest 3000 IDs and `posted_log.json` keeps the latest 5000 entries. Older entries are truncated automatically.
+
+---
+
+## Helper: cleaning Discord URL posts
+
+`scripts/clean_discord_urls.py` is a helper script that finds bot/webhook posts containing arXiv URLs in a specified channel. It is dry-run by default, and deletes messages only when `--delete` is passed.
+
+```bash
+export DISCORD_BOT_TOKEN="actual Discord Bot Token"
+export DISCORD_CHANNEL_ID="numeric channel ID"
+python3 scripts/clean_discord_urls.py
+python3 scripts/clean_discord_urls.py --delete
+```
+
+Note: a webhook URL is not a Bot Token and cannot be used with this script. Deleting old messages requires a Discord Bot with `View Channels`, `Read Message History`, and `Manage Messages` permissions.
+
+---
+
+# 日本語
+
 # arXiv quant-ph → Discord 通知 bot(日本語訳付き)
 
 arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を平日1日3回取得し、論文を15ジャンルのいずれかに分類して、日本語の邦題・abstract 訳とともに Discord の各チャンネルへ Webhook で投稿する。

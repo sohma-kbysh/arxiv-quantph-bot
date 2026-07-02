@@ -81,6 +81,9 @@
   },
 
   "translators": ["deepl", "google"],
+  "target_language": "ja",
+  "target_language_name": "Japanese",
+  "translated_title_label": "邦題",
   "classify_with_llm": true,
   "gemini_model": "gemini-2.5-flash-lite",
   "gemini_min_interval_sec": 7,
@@ -90,7 +93,7 @@
   "max_translate_chars": 2000,
   "translate_only_matched": false,
   "require_translation": true,
-  "show_japanese_title": true,
+  "show_translated_title": true,
   "show_original_abstract": false,
   "scirate_range_days": 7,
   "scirate_min_scites": 30,

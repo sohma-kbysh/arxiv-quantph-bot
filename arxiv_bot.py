@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-arXiv quant-ph -> Discord notifier with Japanese abstract translation.
+arXiv quant-ph -> Discord notifier with translated abstracts.
 
 - Fetches the official arXiv RSS feed (rss.arxiv.org/rss/quant-ph)
 - Filters out cross-listed papers whose primary category is irrelevant
@@ -8,7 +8,7 @@ arXiv quant-ph -> Discord notifier with Japanese abstract translation.
 - Classifies papers into user-defined genres. Primary path: the Gemini
   call translates AND classifies in one request. Fallback path (Gemini
   unavailable): keyword matching for the genre + the translator chain.
-- Translates abstracts into Japanese via Gemini -> DeepL -> Google
+- Translates abstracts via Gemini -> DeepL -> Google
   (configurable chain); each backend stops for the run on quota exhaustion
   (circuit breaker), and any paper left untranslated is deferred, never
   posted in English.
@@ -403,14 +403,75 @@ def _gemini_request(prompt: str, cfg: dict) -> str | None:
     return None
 
 
+def target_language(cfg: dict) -> str:
+    return str(cfg.get("target_language", "ja")).strip() or "ja"
+
+
+def target_language_name(cfg: dict) -> str:
+    code = target_language(cfg)
+    default_names = {
+        "ja": "Japanese",
+        "fr": "French",
+        "de": "German",
+        "es": "Spanish",
+        "it": "Italian",
+        "ko": "Korean",
+        "zh-cn": "Simplified Chinese",
+        "zh-tw": "Traditional Chinese",
+    }
+    configured = str(cfg.get("target_language_name", "")).strip()
+    if configured and not (
+        configured == "Japanese" and code.lower() != "ja"
+    ):
+        return configured
+    return default_names.get(code.lower(), code)
+
+
+def deepl_target_language(cfg: dict) -> str:
+    code = str(cfg.get("deepl_target_language", target_language(cfg))).strip()
+    return code.upper() or "JA"
+
+
+def google_target_language(cfg: dict) -> str:
+    return str(cfg.get("google_target_language", target_language(cfg))).strip() or "ja"
+
+
+def show_translated_title(cfg: dict) -> bool:
+    return cfg.get("show_translated_title",
+                   cfg.get("show_japanese_title", True))
+
+
+def translated_title_label(cfg: dict) -> str:
+    default = "邦題" if target_language(cfg).lower() == "ja" else "Translated title"
+    configured = str(cfg.get("translated_title_label", "")).strip()
+    if configured and not (
+        configured == "邦題" and target_language(cfg).lower() != "ja"
+    ):
+        return configured
+    return default
+
+
+def translation_log_matches(entry: dict, cfg: dict) -> bool:
+    return entry.get("translation_language", "ja") == target_language(cfg)
+
+
+def log_title_translation(entry: dict) -> str | None:
+    return entry.get("title_translated") or entry.get("title_ja")
+
+
+def log_abstract_translation(entry: dict) -> str | None:
+    return entry.get("abstract_translated") or entry.get("abstract_ja")
+
+
 def translate_gemini_batch(texts: list[str], cfg: dict) -> list[str | None]:
     """Translate several abstracts in one request using <<<k>>> delimiters."""
     numbered = "\n\n".join(
         f"<<<{i + 1}>>>\n{t}" for i, t in enumerate(texts))
+    lang_name = target_language_name(cfg)
     prompt = (
         f"以下に{len(texts)}件の量子情報科学分野のarXiv論文abstract(英語)を示す。"
         "各々を、専門用語は標準的な訳語(必要なら英語併記)を用いて"
-        "学術的な日本語に翻訳せよ。\n"
+        f"学術的な{lang_name}に翻訳せよ。\n"
         "出力では各訳文の直前に対応する番号タグ <<<k>>> をそのまま付し、"
         "タグと訳文以外の文字列(前置き・後書き)を一切含めないこと。\n\n"
         + numbered
@@ -445,13 +506,14 @@ def translate_classify_gemini_batch(
         genres: list[dict]) -> list[tuple[str | None, list[str]]]:
     """Translate AND classify several abstracts in a single Gemini request.
 
-    Returns a list of (japanese_text, genre_ids) tuples.
+    Returns a list of (translated_text, genre_ids) tuples.
     genre_ids is a list of 1-N valid genre id strings (empty on failure).
     """
     numbered = "\n\n".join(
         f"<<<{i + 1}>>>\n{t}" for i, t in enumerate(texts))
     valid_ids = {g["id"] for g in genres}
     max_genres = cfg.get("classify_max_genres", 2)
+    lang_name = target_language_name(cfg)
     prompt = (
         f"以下に{len(texts)}件の量子情報科学分野のarXiv論文のタイトルとabstract(英語)を示す。"
         "各論文について次の2つを行え。\n"
@@ -462,7 +524,7 @@ def translate_classify_gemini_batch(
         f"優先度順に最大{max_genres}個までカンマ区切りで選ぶ(例: qec,ft)。\n"
         "    - 迷う場合は1つに絞ること。説明文に合致しない場合はotherを選ぶ。\n"
         "(2) abstractを、専門用語は標準的な訳語(必要なら英語併記)を用いて"
-        "学術的な日本語に翻訳する。\n\n"
+        f"学術的な{lang_name}に翻訳する。\n\n"
         "[ジャンル一覧]\n"
         + _genre_menu(genres)
         + "\n\n[出力形式]\n"
@@ -549,7 +611,8 @@ def translate_deepl(text: str, cfg: dict) -> str | None:
     if not key:
         return None
     data = urllib.parse.urlencode(
-        {"text": text, "target_lang": "JA", "source_lang": "EN"}
+        {"text": text, "target_lang": deepl_target_language(cfg),
+         "source_lang": "EN"}
     ).encode("utf-8")
     req = urllib.request.Request(
         "https://api-free.deepl.com/v2/translate",
@@ -585,7 +648,8 @@ def translate_google(text: str, cfg: dict) -> str | None:
     url = ("https://translation.googleapis.com/language/translate/v2"
            f"?key={urllib.parse.quote(key)}")
     status, body = http_post_json(
-        url, {"q": text, "source": "en", "target": "ja", "format": "text"})
+        url, {"q": text, "source": "en",
+              "target": google_target_language(cfg), "format": "text"})
     if status == 200:
         try:
             data = json.loads(body)
@@ -640,8 +704,8 @@ def truncate(s: str, n: int) -> str:
 def embed_description(paper: dict, jp_title: str | None,
                       jp_abstract: str | None, cfg: dict) -> str:
     abstract = jp_abstract if jp_abstract else paper["abstract"]
-    if jp_title and cfg.get("show_japanese_title", True):
-        return f"**邦題:** {jp_title}\n\n{abstract}"
+    if jp_title and show_translated_title(cfg):
+        return f"**{translated_title_label(cfg)}:** {jp_title}\n\n{abstract}"
     return abstract
 
 
@@ -840,7 +904,7 @@ def main() -> None:
             for e, jp in zip(chunk, translate_batch(abstracts, cfg)):
                 e["jp"] = jp
 
-        if cfg.get("show_japanese_title", True):
+        if show_translated_title(cfg):
             to_title_tr = [
                 e for e in entries
                 if e["paper"].get("title") and e["jp_title"] is None
@@ -896,6 +960,8 @@ def main() -> None:
                                                    time.gmtime()),
                         "title": e["paper"]["title"],
                         "title_ja": e.get("jp_title"),
+                        "title_translated": e.get("jp_title"),
+                        "translation_language": target_language(cfg),
                         "authors": e["paper"]["authors"],
                         "link": e["paper"]["link"],
                         "primary": e["paper"]["primary"],
@@ -904,6 +970,7 @@ def main() -> None:
                         "genre_names": [g["name"] for g in e["genres"] if g],
                         "abstract_en": e["paper"]["abstract"],
                         "abstract_ja": e["jp"],
+                        "abstract_translated": e["jp"],
                     })
                     paper_logged = True
                 posted += 1

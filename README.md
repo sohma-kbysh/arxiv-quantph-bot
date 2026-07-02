@@ -1,7 +1,11 @@
-# arXiv quant-ph -> Discord notification bot (with Japanese translation)
+# arXiv quant-ph -> Discord notification bot (with configurable translation)
 
-This bot fetches the official arXiv RSS feed (`rss.arxiv.org/rss/quant-ph`) three times per weekday, classifies each paper into one of 15 genres, and posts it to the corresponding Discord channel through webhooks with a Japanese title and abstract translation.
+This bot fetches the official arXiv RSS feed (`rss.arxiv.org/rss/quant-ph`) three times per weekday, classifies each paper into one of 15 genres, and posts it to the corresponding Discord channel through webhooks with a translated title and abstract.
 In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Google Cloud Translation. Because Gemini only returns genre IDs, this setup uses less API quota than asking Gemini to translate as well. The bot uses **only the Python standard library**; `pip install` is not required.
+
+The default translation target is Japanese (`target_language: "ja"`), but it can be changed to any language supported by Google Cloud Translation by editing `target_language` in `config.json`. If you choose a language that DeepL does not support, set `translators` to `["google"]` or use `deepl_target_language` / `google_target_language` for backend-specific language codes.
+
+The checked-in `config.json` remains configured for the original Japanese Discord workflow: `target_language: "ja"`, `target_language_name: "Japanese"`, `translated_title_label: "邦題"`, `translators: ["deepl", "google"]`, and `require_translation: true`.
 
 ---
 
@@ -117,7 +121,7 @@ DeepL -> Google Cloud Translation
 ```
 
 - Backends are tried in order; once one succeeds, the bot moves to the next paper
-- For papers whose abstract translation succeeds, the same translation chain also creates a Japanese title separately from the English title
+- For papers whose abstract translation succeeds, the same translation chain also creates a translated title separately from the English title
 - Backends where quota exhaustion is detected (Gemini: persistent 429, DeepL: 456, Google: 403/429) are skipped for the rest of that run (**circuit breaker**)
 - If every backend fails and `require_translation: true` (default), the paper is not posted and is retried on the next run
 
@@ -133,6 +137,8 @@ For each paper, the bot posts once for each assigned genre. It waits 1.2 seconds
   "posted_at": "2025-06-24T01:10:00Z",
   "title": "...",
   "title_ja": "...",
+  "title_translated": "...",
+  "translation_language": "ja",
   "authors": "...",
   "link": "https://arxiv.org/abs/2506.12345",
   "primary": "quant-ph",
@@ -140,9 +146,12 @@ For each paper, the bot posts once for each assigned genre. It waits 1.2 seconds
   "genre_ids": ["qec", "ft"],
   "genre_names": ["誤り訂正・符号理論", "フォールトトレラント計算"],
   "abstract_en": "...",
-  "abstract_ja": "..."
+  "abstract_ja": "...",
+  "abstract_translated": "..."
 }
 ```
+
+`title_translated`, `abstract_translated`, and `translation_language` are the language-neutral fields. `title_ja` and `abstract_ja` are still written for backward compatibility with older logs and the existing Japanese workflow.
 
 ---
 
@@ -157,7 +166,7 @@ It uses the same genres and webhooks as the normal notifier.
 - If `posted_log.json` already has classification history for the same arXiv ID, saved `genre_ids` are reused
 - If no classification history exists, Gemini classify-only is used
 - If Gemini is unavailable, the bot falls back to TF-IDF
-- If translated `title_ja` / `abstract_ja` values exist in `posted_log.json`, they are reused
+- If translated `title_translated` / `abstract_translated` values exist in `posted_log.json` for the same `translation_language`, they are reused
 - If no translation exists, the same DeepL -> Google Cloud Translation chain is used
 
 SciRate posts add a `SciRate` field to the normal embed and show the number of Scites from the last 7 days.
@@ -198,11 +207,33 @@ If none of the genres match, the paper is sent to `DISCORD_WEBHOOK_GENERAL` as a
 
 ## Setup
 
+### Quick start for your own Discord server
+
+For the smallest working setup, you do not need to create all 15 genre channels.
+
+1. Fork this repository.
+2. Create one Discord webhook for a test or general channel.
+3. Add that webhook URL as the `DISCORD_WEBHOOK_GENERAL` repository secret.
+4. Add `GEMINI_API_KEY` if you want LLM-based classification. Without it, the bot falls back to TF-IDF classification.
+5. Add at least one translation key, usually `GOOGLE_TRANSLATE_API_KEY` for the widest language coverage, or `DEEPL_API_KEY` for DeepL-supported languages.
+6. Edit `config.json` if you want another language, for example `target_language: "fr"` and `translators: ["google"]`.
+7. Run the workflow manually from the Actions tab once before relying on the schedule.
+
+Useful official references:
+
+- Discord webhook setup: [Intro to Webhooks](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
+- GitHub Actions secrets: [Using secrets in GitHub Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions)
+- Google Cloud Translation language codes: [Language support](https://cloud.google.com/translate/docs/languages)
+- DeepL target language codes: [Languages supported](https://developers.deepl.com/docs/resources/supported-languages)
+- Gemini API keys: [Google AI Studio](https://aistudio.google.com/)
+
 ### 1. Create Discord webhooks
 
 For each destination channel, create a webhook from "Channel Settings -> Integrations -> Webhooks". Prepare a channel for each genre and register each URL as a GitHub Secret below.
 
 If you do not want fine-grained genre channels, setting only `DISCORD_WEBHOOK_GENERAL` is enough; all papers will go there.
+
+For genre-specific routing, create one webhook per channel and store each URL in the matching `DISCORD_WEBHOOK_*` secret. Keep webhook URLs and API keys out of committed files.
 
 ### 2. Get API keys
 
@@ -269,7 +300,39 @@ python3 arxiv_bot.py --dry-run
 
 Because this fetches the live arXiv feed before classifying, run it on a weekday after the arXiv announcement (around 10:00 JST or later). On weekends and holidays, the feed may be empty.
 
-### Full test with test_feed.xml
+### Translation-only local test with test_feed.xml
+
+This checks translation into another language without calling Discord and without updating `seen_ids.json` or `posted_log.json`.
+
+```bash
+export GOOGLE_TRANSLATE_API_KEY="..."
+export ARXIV_TEST_FEED=test_feed.xml
+
+python3 - <<'PY'
+import arxiv_bot
+
+cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
+cfg.update({
+    "translators": ["google"],
+    "target_language": "de",
+    "target_language_name": "German",
+    "translated_title_label": "Deutscher Titel",
+    "show_translated_title": True,
+})
+
+paper = arxiv_bot.fetch_feed("quant-ph")[0]
+title_de = arxiv_bot.translate_batch([paper["title"]], cfg)[0]
+abstract_de = arxiv_bot.translate_batch([paper["abstract"]], cfg)[0]
+
+print("ID:", paper["id"])
+print("German title:", title_de)
+print("German abstract:", abstract_de)
+PY
+
+unset ARXIV_TEST_FEED
+```
+
+### Full Discord test with test_feed.xml
 
 This reads a local RSS file and exercises the full path, including translation and Discord posting.
 
@@ -294,7 +357,7 @@ Edit the `genres` array in `config.json`. Fields for each genre object:
 | Key | Required | Description |
 | --- | --- | --- |
 | `id` | yes | Alphanumeric characters and underscores only. Must be unique. Also used as Gemini's output ID |
-| `name` | yes | Japanese name shown in the Discord embed |
+| `name` | yes | Genre name shown in the Discord embed. The default config uses Japanese names |
 | `description` | yes | **Decision basis for Gemini classification**. Detailed descriptions with clear boundaries against other genres improve classification accuracy |
 | `webhook_env` | yes | Environment variable name registered as a Secret, for example `"DISCORD_WEBHOOK_QEC"` |
 | `keywords` | yes | Word list used by the TF-IDF fallback |
@@ -349,12 +412,17 @@ untrusted server, malicious server, client-server
 | Key | Default | Description |
 | --- | --- | --- |
 | `translators` | `["deepl","google"]` | Translation backend order |
+| `target_language` | `"ja"` | Translation target language code. Passed to Google Cloud Translation unless overridden |
+| `target_language_name` | `"Japanese"` | Human-readable target language name used in Gemini translation prompts |
+| `deepl_target_language` | unset | Optional DeepL-specific target language code, such as `JA`, `EN-US`, or `PT-BR` |
+| `google_target_language` | unset | Optional Google-specific target language code. Defaults to `target_language` |
+| `translated_title_label` | `"邦題"` | Label shown before the translated title in Discord embeds |
 | `translate_batch_size` | `5` | Number of papers grouped into one request |
 | `max_translate_chars` | `2000` | Maximum abstract length passed to Gemini. Longer abstracts are truncated |
 | `translate_only_matched` | `false` | When `true`, papers with no classified genre are not translated, saving API usage |
 | `require_translation` | `true` | `true`: papers whose translation failed are retried later / `false`: post in English |
-| `show_japanese_title` | `true` | Show the Japanese title at the beginning of the Discord embed body |
-| `show_original_abstract` | `false` | Include the English abstract in addition to the Japanese translation |
+| `show_translated_title` | `true` | Show the translated title at the beginning of the Discord embed body |
+| `show_original_abstract` | `false` | Include the English abstract in addition to the translated abstract |
 | `include_replacements` | `false` | Post replacement papers when set to `true` |
 | `scirate_range_days` | `7` | Date range used by the SciRate weekend digest |
 | `scirate_min_scites` | `30` | Minimum Scite count for the SciRate weekend digest |
@@ -369,6 +437,8 @@ untrusted server, malicious server, client-server
 
 - The bot treats the first RSS `<category>` element as the primary category. This is a heuristic from observed RSS behavior, not an arXiv API guarantee.
 - Genre classification is heuristic, using Gemini as the primary path and TF-IDF as fallback, so misclassification is unavoidable. The quality of `description` directly affects Gemini classification accuracy; for genres with fuzzy boundaries, write explicit boundary conditions.
+- The default checked-in configuration is intentionally Japanese. Multilingual behavior is opt-in through `target_language` and related settings, so changing the code does not change the default Japanese Discord workflow.
+- Google Cloud Translation supports many more target languages than DeepL. For a Google-only arbitrary-language setup, use `translators: ["google"]` and set `target_language` to a Google language code such as `fr`, `de`, `ko`, or `zh-CN`.
 - Gemini free-tier RPD (requests per day) limits may change, so check the current values in [Google AI Studio](https://aistudio.google.com/) when setting it up.
 - `seen_ids.json` keeps the latest 3000 IDs and `posted_log.json` keeps the latest 5000 entries. Older entries are truncated automatically.
 
@@ -391,10 +461,14 @@ Note: a webhook URL is not a Bot Token and cannot be used with this script. Dele
 
 # 日本語
 
-# arXiv quant-ph → Discord 通知 bot(日本語訳付き)
+# arXiv quant-ph → Discord 通知 bot(翻訳付き)
 
-arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を平日1日3回取得し、論文を15ジャンルのいずれかに分類して、日本語の邦題・abstract 訳とともに Discord の各チャンネルへ Webhook で投稿する。
+arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を平日1日3回取得し、論文を15ジャンルのいずれかに分類して、翻訳済みタイトル・abstract 訳とともに Discord の各チャンネルへ Webhook で投稿する。
 現在の標準運用では、Gemini は**分類のみ**に使い、翻訳は DeepL → Google Cloud Translation の順に試行する。Gemini の出力はジャンル ID だけなので、翻訳まで Gemini に任せる構成より API 消費を抑えやすい。**標準ライブラリのみで動作し、`pip install` は不要。**
+
+デフォルトの翻訳先は日本語(`target_language: "ja"`)だが、`config.json` の `target_language` を変更すれば Google Cloud Translation が対応する任意の言語へ翻訳できる。DeepL は Google より対応言語が少ないため、DeepL 非対応言語を使う場合は `translators` を `["google"]` にするか、`deepl_target_language` / `google_target_language` でバックエンドごとの言語コードを指定する。
+
+このリポジトリに含まれる `config.json` は、従来の日本語 Discord 運用のままになっている。具体的には `target_language: "ja"`, `target_language_name: "Japanese"`, `translated_title_label: "邦題"`, `translators: ["deepl", "google"]`, `require_translation: true`。
 
 ---
 
@@ -510,7 +584,7 @@ DeepL → Google Cloud Translation
 ```
 
 - 先頭から順に試行し、成功した時点で次の論文へ移る
-- abstract の翻訳に成功した投稿対象論文について、英語タイトルとは別に邦題も同じ翻訳チェーンで作成する
+- abstract の翻訳に成功した投稿対象論文について、英語タイトルとは別に翻訳済みタイトルも同じ翻訳チェーンで作成する
 - クォータ枯渇を検知したバックエンド(Gemini: 持続的 429、DeepL: 456、Google: 403/429)はその実行回では以後スキップされる(**circuit breaker**)
 - 全段で翻訳できなかった論文は `require_translation: true`(デフォルト)の場合は投稿せず次回に持ち越す
 
@@ -526,6 +600,8 @@ DeepL → Google Cloud Translation
   "posted_at": "2025-06-24T01:10:00Z",
   "title": "...",
   "title_ja": "...",
+  "title_translated": "...",
+  "translation_language": "ja",
   "authors": "...",
   "link": "https://arxiv.org/abs/2506.12345",
   "primary": "quant-ph",
@@ -533,9 +609,12 @@ DeepL → Google Cloud Translation
   "genre_ids": ["qec", "ft"],
   "genre_names": ["誤り訂正・符号理論", "フォールトトレラント計算"],
   "abstract_en": "...",
-  "abstract_ja": "..."
+  "abstract_ja": "...",
+  "abstract_translated": "..."
 }
 ```
+
+`title_translated`, `abstract_translated`, `translation_language` は多言語対応用の汎用フィールド。`title_ja` と `abstract_ja` は、既存の日本語ログや従来運用との互換性のために引き続き保存される。
 
 ---
 
@@ -550,7 +629,7 @@ DeepL → Google Cloud Translation
 - `posted_log.json` に同じ arXiv ID の分類履歴がある場合は、保存済みの `genre_ids` を再利用する
 - 分類履歴がない場合は Gemini classify-only を使う
 - Gemini が使えない場合は TF-IDF にフォールバックする
-- 翻訳済みの `title_ja` / `abstract_ja` が `posted_log.json` にあれば再利用する
+- 同じ `translation_language` の `title_translated` / `abstract_translated` が `posted_log.json` にあれば再利用する
 - 未翻訳の場合は通常通知と同じ DeepL → Google Cloud Translation チェーンで翻訳する
 
 SciRate投稿には通常の embed に加えて `SciRate` フィールドが付き、直近7日での Scite 数を表示する。
@@ -591,11 +670,33 @@ SciRate が直接取得できない環境では HTTP 403 になることがあ�
 
 ## セットアップ
 
+### 自分の Discord サーバーで使う最小構成
+
+最小構成では、15ジャンルすべてのチャンネルを作る必要はない。
+
+1. このリポジトリを fork する。
+2. テスト用または general 用チャンネルに Discord Webhook を1つ作る。
+3. その Webhook URL を `DISCORD_WEBHOOK_GENERAL` という repository secret として登録する。
+4. LLM による分類を使う場合は `GEMINI_API_KEY` を登録する。未設定の場合は TF-IDF 分類にフォールバックする。
+5. 翻訳キーを少なくとも1つ登録する。対応言語の広さを優先するなら通常は `GOOGLE_TRANSLATE_API_KEY`、DeepL 対応言語だけでよければ `DEEPL_API_KEY`。
+6. 他言語で使う場合は `config.json` を編集する。例: `target_language: "fr"` と `translators: ["google"]`。
+7. schedule に任せる前に、Actions タブから一度手動実行して確認する。
+
+公式リファレンス:
+
+- Discord Webhook の作成: [Intro to Webhooks](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
+- GitHub Actions Secrets: [Using secrets in GitHub Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions)
+- Google Cloud Translation の言語コード: [Language support](https://cloud.google.com/translate/docs/languages)
+- DeepL の翻訳先言語コード: [Languages supported](https://developers.deepl.com/docs/resources/supported-languages)
+- Gemini API キー: [Google AI Studio](https://aistudio.google.com/)
+
 ### 1. Discord Webhook の作成
 
 通知先チャンネルごとに「チャンネル設定 → 連携サービス → ウェブフック」で Webhook URL を作成する。各ジャンルに対応するチャンネルを用意し、それぞれの URL を後述の Secret として登録する。
 
 ジャンルを細かく分けずに運用する場合は `DISCORD_WEBHOOK_GENERAL` のみ設定すれば全論文がそこへ届く。
+
+ジャンル別に振り分けたい場合は、チャンネルごとに Webhook を作り、対応する `DISCORD_WEBHOOK_*` secret に URL を入れる。Webhook URL や API キーは repository に commit しないこと。
 
 ### 2. API キーの取得
 
@@ -662,7 +763,39 @@ python3 arxiv_bot.py --dry-run
 
 実際の arXiv フィードを取得して分類するため、平日かつ arXiv アナウンス後(JST 10:00 頃以降)に実行する必要がある。週末・休日はフィードが空になる。
 
-### test_feed.xml を使ったフルテスト
+### test_feed.xml を使った翻訳のみのローカルテスト
+
+Discord へ投稿せず、`seen_ids.json` や `posted_log.json` も更新せずに、別言語への翻訳だけを確認できる。
+
+```bash
+export GOOGLE_TRANSLATE_API_KEY="..."
+export ARXIV_TEST_FEED=test_feed.xml
+
+python3 - <<'PY'
+import arxiv_bot
+
+cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
+cfg.update({
+    "translators": ["google"],
+    "target_language": "de",
+    "target_language_name": "German",
+    "translated_title_label": "Deutscher Titel",
+    "show_translated_title": True,
+})
+
+paper = arxiv_bot.fetch_feed("quant-ph")[0]
+title_de = arxiv_bot.translate_batch([paper["title"]], cfg)[0]
+abstract_de = arxiv_bot.translate_batch([paper["abstract"]], cfg)[0]
+
+print("ID:", paper["id"])
+print("German title:", title_de)
+print("German abstract:", abstract_de)
+PY
+
+unset ARXIV_TEST_FEED
+```
+
+### test_feed.xml を使った Discord フルテスト
 
 ローカルの RSS ファイルを読み込み、翻訳・Discord 投稿まで含む全経路を確認できる。
 
@@ -687,7 +820,7 @@ python3 arxiv_bot.py
 | キー | 必須 | 説明 |
 | --- | --- | --- |
 | `id` | ○ | 英数字・アンダースコアのみ。重複不可。Gemini の出力 ID としても使われる |
-| `name` | ○ | Discord embed に表示される日本語名称 |
+| `name` | ○ | Discord embed に表示されるジャンル名。標準設定では日本語名称 |
 | `description` | ○ | **Gemini 分類の判定根拠**。詳細かつ他ジャンルとの境界を明示する文が分類精度を高める |
 | `webhook_env` | ○ | Secret に登録した環境変数名(例: `"DISCORD_WEBHOOK_QEC"`) |
 | `keywords` | ○ | TF-IDF フォールバック時に使用する語のリスト |
@@ -742,12 +875,17 @@ untrusted server, malicious server, client-server
 | キー | デフォルト | 説明 |
 | --- | --- | --- |
 | `translators` | `["deepl","google"]` | 翻訳バックエンドの試行順 |
+| `target_language` | `"ja"` | 翻訳先言語コード。個別指定がない場合 Google Cloud Translation に渡される |
+| `target_language_name` | `"Japanese"` | Gemini 翻訳プロンプトで使う翻訳先言語名 |
+| `deepl_target_language` | 未設定 | DeepL 専用の翻訳先言語コード。例: `JA`, `EN-US`, `PT-BR` |
+| `google_target_language` | 未設定 | Google 専用の翻訳先言語コード。未設定時は `target_language` を使う |
+| `translated_title_label` | `"邦題"` | Discord embed で翻訳済みタイトルの前に表示するラベル |
 | `translate_batch_size` | `5` | 1リクエストにまとめる論文数 |
 | `max_translate_chars` | `2000` | Gemini に渡す abstract の最大文字数(超過は切り捨て) |
 | `translate_only_matched` | `false` | `true` にするとジャンル未分類論文は翻訳しない(API節約) |
 | `require_translation` | `true` | `true`: 翻訳失敗論文は次回へ持ち越す / `false`: 英語のまま投稿 |
-| `show_japanese_title` | `true` | `true` にすると Discord embed 本文の先頭に邦題を表示する |
-| `show_original_abstract` | `false` | `true` にすると日本語訳に加えて英語 abstract も embed に含める |
+| `show_translated_title` | `true` | `true` にすると Discord embed 本文の先頭に翻訳済みタイトルを表示する |
+| `show_original_abstract` | `false` | `true` にすると翻訳文に加えて英語 abstract も embed に含める |
 | `include_replacements` | `false` | `true` にすると差替え論文(replace)も投稿する |
 | `scirate_range_days` | `7` | SciRate 週末ダイジェストで見る期間 |
 | `scirate_min_scites` | `30` | SciRate 週末ダイジェストで投稿対象にする最低 Scite 数 |
@@ -762,6 +900,8 @@ untrusted server, malicious server, client-server
 
 - RSS の `<category>` 要素の先頭を primary カテゴリとみなすヒューリスティックを使用している(arXiv API の保証ではなく経験則)。
 - ジャンル分類は Gemini(主)と TF-IDF(フォールバック)によるヒューリスティックであり、誤分類は不可避。`description` の記述精度が Gemini 分類の精度に直結するため、境界が曖昧なジャンルは境界条件を明示した文章にすること。
+- チェックインされている標準設定は意図的に日本語運用のまま。多言語動作は `target_language` と関連設定を変更した場合のみ有効になるため、今回の多言語対応は既存の日本語 Discord ワークフローを変更しない。
+- Google Cloud Translation は DeepL より多くの翻訳先言語に対応している。任意の Google 対応言語だけを使う場合は、`translators: ["google"]` とし、`target_language` に `fr`, `de`, `ko`, `zh-CN` などの Google 言語コードを設定する。
 - Gemini 無料枠の RPD(1日あたりリクエスト数)制限は変更される可能性があるため、導入時に [Google AI Studio](https://aistudio.google.com/) で現行値を確認すること。
 - `seen_ids.json` は最新3000件、`posted_log.json` は最新5000件を保持し、それ以前のエントリは自動的に切り捨てられる。
 

@@ -223,7 +223,7 @@ def translate_entries(entries: list[dict], cfg: dict) -> None:
         for e, jp in zip(chunk, arxiv_bot.translate_batch(abstracts, cfg)):
             e["jp"] = jp
 
-    if cfg.get("show_japanese_title", True):
+    if arxiv_bot.show_translated_title(cfg):
         to_title = [
             e for e in entries
             if e["paper"].get("title") and e.get("jp_title") is None
@@ -280,6 +280,9 @@ def main() -> None:
             continue
         paper["announce_type"] = f"scirate weekly · {cand['scites']} Scites"
         prev = previous.get(cand["id"], {})
+        reusable_translation = (
+            prev if arxiv_bot.translation_log_matches(prev, cfg) else {}
+        )
         genre_list = genres_from_log(prev, genres)
         if genre_list:
             genre_list = arxiv_bot.postprocess_genres(paper, genre_list, genres, cfg)
@@ -288,8 +291,8 @@ def main() -> None:
             "paper": paper,
             "scites": cand["scites"],
             "genres": genre_list,
-            "jp": prev.get("abstract_ja"),
-            "jp_title": prev.get("title_ja"),
+            "jp": arxiv_bot.log_abstract_translation(reusable_translation),
+            "jp_title": arxiv_bot.log_title_translation(reusable_translation),
             "classified_by": "posted_log" if genre_list else None,
         })
 
@@ -348,6 +351,8 @@ def main() -> None:
                 "scirate_scites": e["scites"],
                 "title": e["paper"]["title"],
                 "title_ja": e.get("jp_title"),
+                "title_translated": e.get("jp_title"),
+                "translation_language": arxiv_bot.target_language(cfg),
                 "authors": e["paper"]["authors"],
                 "link": e["paper"]["link"],
                 "primary": e["paper"]["primary"],
@@ -356,6 +361,7 @@ def main() -> None:
                 "genre_names": [g["name"] for g in e["genres"] if g],
                 "abstract_en": e["paper"]["abstract"],
                 "abstract_ja": e.get("jp"),
+                "abstract_translated": e.get("jp"),
             })
 
     state.setdefault("posted", {})

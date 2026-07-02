@@ -1,4 +1,4 @@
-# new arXiv quant-ph paper -> Discord notification bot (with configurable translation)
+# New arXiv quant-ph paper -> Discord notification bot (with configurable translation)
 
 This bot fetches the official arXiv RSS feed (`rss.arxiv.org/rss/quant-ph`) three times per weekday, classifies each paper into one of 15 genres, and posts it to the corresponding Discord channel through webhooks with a translated title and abstract.
 In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Google Cloud Translation. Because Gemini only returns genre IDs, this setup uses less API quota than asking Gemini to translate as well. The bot uses **only the Python standard library**; `pip install` is not required.

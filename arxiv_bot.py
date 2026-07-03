@@ -825,6 +825,16 @@ def google_translation_allowed(entry: dict, cfg: dict) -> bool:
     return not genre_ids or not genre_ids.issubset(skip)
 
 
+def translation_priority(entry: dict, cfg: dict) -> tuple[int, str]:
+    """Sort key for translating higher-priority Discord channels first."""
+    priority = cfg.get("translation_priority_genres") or []
+    rank = {genre_id: i for i, genre_id in enumerate(priority)}
+    genre_ids = [g["id"] for g in entry.get("genres", []) if g]
+    best = min((rank.get(gid, len(rank)) for gid in genre_ids),
+               default=len(rank))
+    return best, entry["paper"]["id"]
+
+
 _TRANSLATOR_DEAD_FLAGS = {
     "deepl": lambda: _deepl_dead,
     "azure": lambda: _azure_dead,
@@ -1059,6 +1069,7 @@ def main() -> None:
     # ---- translation via chain (all papers without jp) --------------------
     # Covers path B (Gemini classify-only) and TF-IDF fallback papers.
     # Also covers path A papers where Gemini failed to return a translation.
+    entries.sort(key=lambda e: translation_priority(e, cfg))
     if not dry_run:
         to_tr = [e for e in entries if e["need_tr"] and e["jp"] is None and (
             e["genres"] or not cfg.get("translate_only_matched", False))]

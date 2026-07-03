@@ -432,6 +432,7 @@ untrusted server, malicious server, client-server
 | `azure_max_retries` | `4` | Retries for Azure Translator 429 rate-limit responses |
 | `google_min_interval_sec` | `1.2` | Minimum spacing between Google Translate requests |
 | `google_max_retries` | `3` | Retries for Google Translate 429 / user-rate-limit responses |
+| `translation_priority_genres` | `["ft","qec","complexity","qml","crypto","pqc","network","algo","sim","nisq","hardware","sensing","qit","foundations","other"]` | Genre priority used after classification when choosing translation/posting order |
 | `translate_only_matched` | `false` | When `true`, papers with no classified genre are not translated, saving API usage |
 | `google_skip_translation_genres` | `["other","foundations","sensing","nisq"]` | When only Google remains, papers whose genres are all in this list are posted in English to save Google quota |
 | `require_translation` | `true` | `true`: papers whose translation failed are retried later / `false`: post in English |
@@ -910,6 +911,7 @@ untrusted server, malicious server, client-server
 | `azure_max_retries` | `4` | Azure Translator の 429 rate limit 応答に対するリトライ回数 |
 | `google_min_interval_sec` | `1.2` | Google Translate リクエスト間の最小間隔(秒) |
 | `google_max_retries` | `3` | Google Translate の 429 / user-rate-limit 応答に対するリトライ回数 |
+| `translation_priority_genres` | `["ft","qec","complexity","qml","crypto","pqc","network","algo","sim","nisq","hardware","sensing","qit","foundations","other"]` | 分類後に翻訳・投稿するジャンル優先順 |
 | `translate_only_matched` | `false` | `true` にするとジャンル未分類論文は翻訳しない(API節約) |
 | `google_skip_translation_genres` | `["other","foundations","sensing","nisq"]` | Google だけが残った場合、このリスト内のジャンルだけに属する論文は英語原文で投稿して Google quota を節約する |
 | `require_translation` | `true` | `true`: 翻訳失敗論文は次回へ持ち越す / `false`: 英語のまま投稿 |

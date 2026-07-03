@@ -102,12 +102,15 @@ def day_window(day: str, tz_name: str) -> tuple[datetime, datetime]:
 
 def channel_ids_from_args(args: argparse.Namespace) -> list[str]:
     raw: list[str] = []
+    if args.all_channels:
+        raw.extend(os.environ.get("DISCORD_ALL_CHANNEL_IDS", "").split(","))
     if args.channel_id:
         raw.extend(args.channel_id)
-    env_channels = os.environ.get("DISCORD_CHANNEL_IDS") or os.environ.get(
-        "DISCORD_CHANNEL_ID", "")
-    if env_channels:
-        raw.extend(env_channels.split(","))
+    if not args.all_channels:
+        env_channels = os.environ.get("DISCORD_CHANNEL_IDS") or os.environ.get(
+            "DISCORD_CHANNEL_ID", "")
+        if env_channels:
+            raw.extend(env_channels.split(","))
     ids = [c.strip() for c in raw if c.strip()]
     return list(dict.fromkeys(ids))
 
@@ -148,6 +151,8 @@ def parse_args() -> argparse.Namespace:
                         help="Discord bot token, or DISCORD_BOT_TOKEN env var.")
     parser.add_argument("--channel-id", action="append",
                         help="Discord channel ID. May be repeated. Env fallback: DISCORD_CHANNEL_IDS or DISCORD_CHANNEL_ID.")
+    parser.add_argument("--all-channels", action="store_true",
+                        help="Use all channel IDs from DISCORD_ALL_CHANNEL_IDS.")
     parser.add_argument("--pattern", default=DEFAULT_PATTERN,
                         help="Regex to match against message content and embeds.")
     parser.add_argument("--limit", type=int, default=None,
@@ -175,6 +180,9 @@ def main() -> None:
     args = parse_args()
     channel_ids = channel_ids_from_args(args)
     if not args.token or not channel_ids:
+        if args.all_channels:
+            raise SystemExit(
+                "Set DISCORD_BOT_TOKEN and DISCORD_ALL_CHANNEL_IDS for --all-channels.")
         raise SystemExit(
             "Set DISCORD_BOT_TOKEN and DISCORD_CHANNEL_ID(S), or pass --token and --channel-id.")
     if args.token == "...":

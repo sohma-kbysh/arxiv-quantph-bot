@@ -486,6 +486,14 @@ export DISCORD_CHANNEL_IDS="111111111111111111,222222222222222222"
 python3 scripts/clean_discord_urls.py --today
 ```
 
+To target all bot channels, store every channel ID once in `DISCORD_ALL_CHANNEL_IDS` and use `--all-channels`:
+
+```bash
+export DISCORD_ALL_CHANNEL_IDS="111111111111111111,222222222222222222,333333333333333333"
+python3 scripts/clean_discord_urls.py --all-channels --today
+python3 scripts/clean_discord_urls.py --all-channels --today --delete
+```
+
 To target specific channels and a custom Japan-time range:
 
 ```bash
@@ -1002,6 +1010,14 @@ python3 scripts/clean_discord_urls.py --today --delete
 ```bash
 export DISCORD_CHANNEL_IDS="111111111111111111,222222222222222222"
 python3 scripts/clean_discord_urls.py --today
+```
+
+全 bot チャンネルを対象にする場合は、全チャンネルIDを一度 `DISCORD_ALL_CHANNEL_IDS` に入れて `--all-channels` を使う:
+
+```bash
+export DISCORD_ALL_CHANNEL_IDS="111111111111111111,222222222222222222,333333333333333333"
+python3 scripts/clean_discord_urls.py --all-channels --today
+python3 scripts/clean_discord_urls.py --all-channels --today --delete
 ```
 
 対象チャンネルと日本時間の範囲を指定する場合:

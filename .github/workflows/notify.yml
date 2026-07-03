@@ -36,6 +36,7 @@ jobs:
       - name: Run notifier
         env:
           DISCORD_WEBHOOK_GENERAL: ${{ secrets.DISCORD_WEBHOOK_GENERAL }}
+          DISCORD_WEBHOOK_BOT_EMERGENCY: ${{ secrets.DISCORD_WEBHOOK_BOT_EMERGENCY }}
           DISCORD_WEBHOOK_QEC: ${{ secrets.DISCORD_WEBHOOK_QEC }}
           DISCORD_WEBHOOK_FT: ${{ secrets.DISCORD_WEBHOOK_FT }}
           DISCORD_WEBHOOK_ALGO: ${{ secrets.DISCORD_WEBHOOK_ALGO }}

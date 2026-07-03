@@ -850,16 +850,16 @@ def dead_translators(cfg: dict) -> list[str]:
 
 
 def notify_translation_outage(deferred: int, dead: list[str]) -> None:
-    """Warn the general Discord channel when every translator backend in
-    the chain is unavailable, so papers are being silently deferred."""
-    webhook, _ = resolve_webhook(None)
+    """Warn the bot-emergency Discord channel when every translator backend
+    in the chain is unavailable, so papers are being silently deferred."""
+    webhook = os.environ.get("DISCORD_WEBHOOK_BOT_EMERGENCY", "")
     content = (
         "⚠️ All translation backends are unavailable "
         f"({', '.join(dead)}); {deferred} paper(s) deferred until "
         "translation recovers."
     )
     if not webhook:
-        print(f"[warn] {content} (no DISCORD_WEBHOOK_GENERAL configured "
+        print(f"[warn] {content} (no DISCORD_WEBHOOK_BOT_EMERGENCY configured "
               "to send this notice)", file=sys.stderr)
         return
     status, body = http_post_json(webhook, {"content": content})

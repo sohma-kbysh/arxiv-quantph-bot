@@ -507,6 +507,18 @@ def _genre_menu(genres: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def normalize_genre_ids(raw_ids: list[str], valid_ids: set[str]) -> list[str]:
+    """Keep valid genre IDs in model order while removing duplicates."""
+    seen: set[str] = set()
+    result: list[str] = []
+    for gid in raw_ids:
+        gid = gid.strip()
+        if gid in valid_ids and gid not in seen:
+            result.append(gid)
+            seen.add(gid)
+    return result
+
+
 def translate_classify_gemini_batch(
         texts: list[str], cfg: dict,
         genres: list[dict]) -> list[tuple[str | None, list[str]]]:
@@ -561,7 +573,7 @@ def translate_classify_gemini_batch(
         if 0 <= k < len(texts):
             t = body.strip()
             gids = [g.strip() for g in gids_str.split(",")]
-            gids = [g for g in gids if g in valid_ids]
+            gids = normalize_genre_ids(gids, valid_ids)
             results[k] = (t or None, gids)
     return results
 
@@ -613,7 +625,7 @@ def classify_gemini_batch(
             continue
         if 0 <= k < len(texts):
             gids = [g.strip() for g in match.group(2).split(",")]
-            results[k] = [g for g in gids if g in valid_ids]
+            results[k] = normalize_genre_ids(gids, valid_ids)
     return results
 
 

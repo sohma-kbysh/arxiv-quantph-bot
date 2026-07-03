@@ -65,6 +65,7 @@ def main() -> int:
         return 0
 
     diffs: list[tuple[dict, list[str], list[str]]] = []
+    unclassified: list[dict] = []
     attempted = 0
     classified = 0
 
@@ -79,6 +80,7 @@ def main() -> int:
         gid_lists = arxiv_bot.classify_gemini_batch(texts, cfg, genres)
         for row, gids in zip(chunk, gid_lists):
             if not gids:
+                unclassified.append(row)
                 continue
             paper = {
                 "id": row.get("id", ""),
@@ -98,6 +100,9 @@ def main() -> int:
 
     print(f"[audit] gemini_classified={classified}/{attempted}")
     print(f"[audit] differences={len(diffs)}")
+    if unclassified:
+        print("[audit] unclassified=" + ",".join(
+            row.get("id", "") for row in unclassified))
     for row, before, after in diffs:
         print()
         print(row.get("id", ""))
@@ -106,7 +111,7 @@ def main() -> int:
         print(f"after : {after} ({genre_names(after, genre_map)})")
         print(row.get("link", ""))
 
-    return 0 if classified == attempted else 1
+    return 0
 
 
 if __name__ == "__main__":

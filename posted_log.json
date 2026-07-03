@@ -10516,5 +10516,120 @@
   "abstract_en": "The no-broadcasting theorem in quantum information says that a set of states on a quantum system admits a common broadcasting (copying) operation if and only if their density matrices belong to a commuting family. We discuss and prove this theorem, as well as the closely related no-cloning theorem in the context of quantum probability theory, i.e. in the category of (finite dimensional) C-star-algebras with unital completely positive maps.",
   "abstract_ja": "量子情報におけるノーブロードキャスト定理は、量子系上の状態の集合が共通のブロードキャスト(コピー)操作を持つのは、その密度行列が通常族に属していることと同値であることを意味します。この定理と、量子確率論の文脈、すなわち単位元完全正写像を持つ(有限次元の)Cスター代数の圏において、密接に関連するノークローン定理について議論し証明します。",
   "abstract_translated": "量子情報におけるノーブロードキャスト定理は、量子系上の状態の集合が共通のブロードキャスト(コピー)操作を持つのは、その密度行列が通常族に属していることと同値であることを意味します。この定理と、量子確率論の文脈、すなわち単位元完全正写像を持つ(有限次元の)Cスター代数の圏において、密接に関連するノークローン定理について議論し証明します。"
+ },
+ {
+  "id": "2607.02427",
+  "posted_at": "2026-07-03T10:10:39Z",
+  "title": "Optimal stellar rank approximation of squeezed cat states with photon catalysis",
+  "title_ja": "フォトン触媒による圧縮されたCat状態の最適恒星ランク近似",
+  "title_translated": "フォトン触媒による圧縮されたCat状態の最適恒星ランク近似",
+  "translation_language": "ja",
+  "authors": "Julian K. Nauth, Nathan Walk, Ananga M. Datta, Kurt Busch, Jens Eisert, Oliver Benson, Roger A. K\\\"ogler",
+  "link": "https://arxiv.org/abs/2607.02427",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "ft",
+   "hardware"
+  ],
+  "genre_names": [
+   "フォールトトレラント計算",
+   "量子ハードウェア・実装"
+  ],
+  "abstract_en": "Non-Gaussian quantum states and operations constitute essential resources for achieving quantum computational advantage and enabling quantum error correction in bosonic platforms. However, their generation in optical settings remains a challenging experimental task, often relying on probabilistic heralded protocols. Here, we present an in-depth analysis of the suitability of photon catalysis between low number Fock states and squeezed states for the generation of squeezed coherent state superpositions. We employ the stellar rank formalism to characterize the non-Gaussian complexity of input resources (including both states and measurements) and the generated states. This enables a systematic comparison of the fidelity between the catalyzed output and the target states to the maximum fidelity achievable by any protocol with the same non-Gaussian input resources. In this sense, we identify instances where the catalysis protocols considered here are provably optimal. We identify parameter regimes in which high-fidelity approximations of the target states can be achieved with minimal resources. Furthermore, we benchmark the performance of photon catalysis against Gaussian boson sampling-inspired protocols in terms of success probability and state quality, highlighting the advantages of deterministic Fock state sources. We also investigate the generation of related non-Gaussian resources including squeezed Fock states relevant for quantum error correction. To account for experimental imperfections, we model losses across all optical modes using a Hilbert space truncation approach in the Fock basis and analyze the robustness of the generated states under realistic conditions. Our results quantify the trade-offs between non-Gaussian resource complexity, achievable fidelity, and losses in photon catalysis protocols, providing practical guidelines for near-term photonic implementations.",
+  "abstract_ja": "非ガウス量子状態と演算は、ボソンプラットフォームにおける量子計算的優位性を達成し、量子誤り訂正を可能にするために不可欠な資源を構成しています。しかし、光学的環境での生成は依然として実験的に困難であり、多くの場合確率的に推奨されるプロトコルに依存しています。ここでは、低数のフォック状態と圧縮状態間の光子触媒の適合性を詳細に分析し、圧縮されたコヒーレント状態の重ね合わせ生成に適しているかを提示します。私たちは、スタラーランク形式主義を用いて、入力資源(状態と測定の両方を含む)および生成状態の非ガウス的複雑さを特徴付けます。これにより、触媒出力とターゲット状態の忠実度を、同じ非ガウス入力リソースを持つ任意のプロトコルで達成可能な最大忠実度と体系的に比較することが可能になります。この意味で、ここで検討した触媒プロトコルが証明可能に最適な事例を特定します。最小限のリソースで目標状態の高精度近似が達成できるパラメータ領域を特定します。さらに、光子触媒の性能をガウス粒子サンプリングに着想を得たプロトコルと比較して、成功確率や状態品質の観点からベンチマークを行い、決定論的Fock状態源の利点を強調しました。また、量子誤り訂正に関連する圧縮フォック状態を含む関連する非ガウス資源の生成も調査します。実験的な不完全さを考慮するために、フォック基底におけるヒルベルト空間切断アプローチを用いてすべての光学モードにわたる損失をモデル化し、現実的な条件下での生成状態の堅牢性を解析します。私たちの結果は、非ガウス資源の複雑さ、達成可能な忠実度、光子触媒プロトコルにおける損失とのトレードオフを定量化し、近い将来のフォトニック実装のための実践的な指針を提供します。",
+  "abstract_translated": "非ガウス量子状態と演算は、ボソンプラットフォームにおける量子計算的優位性を達成し、量子誤り訂正を可能にするために不可欠な資源を構成しています。しかし、光学的環境での生成は依然として実験的に困難であり、多くの場合確率的に推奨されるプロトコルに依存しています。ここでは、低数のフォック状態と圧縮状態間の光子触媒の適合性を詳細に分析し、圧縮されたコヒーレント状態の重ね合わせ生成に適しているかを提示します。私たちは、スタラーランク形式主義を用いて、入力資源(状態と測定の両方を含む)および生成状態の非ガウス的複雑さを特徴付けます。これにより、触媒出力とターゲット状態の忠実度を、同じ非ガウス入力リソースを持つ任意のプロトコルで達成可能な最大忠実度と体系的に比較することが可能になります。この意味で、ここで検討した触媒プロトコルが証明可能に最適な事例を特定します。最小限のリソースで目標状態の高精度近似が達成できるパラメータ領域を特定します。さらに、光子触媒の性能をガウス粒子サンプリングに着想を得たプロトコルと比較して、成功確率や状態品質の観点からベンチマークを行い、決定論的Fock状態源の利点を強調しました。また、量子誤り訂正に関連する圧縮フォック状態を含む関連する非ガウス資源の生成も調査します。実験的な不完全さを考慮するために、フォック基底におけるヒルベルト空間切断アプローチを用いてすべての光学モードにわたる損失をモデル化し、現実的な条件下での生成状態の堅牢性を解析します。私たちの結果は、非ガウス資源の複雑さ、達成可能な忠実度、光子触媒プロトコルにおける損失とのトレードオフを定量化し、近い将来のフォトニック実装のための実践的な指針を提供します。"
+ },
+ {
+  "id": "2607.02482",
+  "posted_at": "2026-07-03T10:10:42Z",
+  "title": "Automated logical Clifford gadgets for heterogeneous architectures via chain maps",
+  "title_ja": "チェーンマップを用いた異種アーキテクチャ向けの自動化論理クリフォードガジェット",
+  "title_translated": "チェーンマップを用いた異種アーキテクチャ向けの自動化論理クリフォードガジェット",
+  "translation_language": "ja",
+  "authors": "Asmae Benhemou, Noah Berthusen",
+  "link": "https://arxiv.org/abs/2607.02482",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "ft",
+   "qec"
+  ],
+  "genre_names": [
+   "フォールトトレラント計算",
+   "誤り訂正・符号理論"
+  ],
+  "abstract_en": "Transversal CNOTs are ubiquitous for entangling logical qubits of identical CSS codes pairwise. For distinct codes, the options are much more limited, and are typically known only for structurally related code families. We introduce an automated framework for synthesising inter-code logical CNOT circuits between arbitrary CSS codes using chain maps. Given a prescribed bipartite logical CNOT network between these codes, our method constructs the affine space of chain maps realising the desired logical action, and then searches this space for shallow and sparse physical circuit candidates. We benchmark this method on a range of heterogeneous CSS code pairs, recovering known transversal constructions, and finding new low-depth solutions, including distance-preserving and partially distance-preserving examples, which we demonstrate can be promoted to the full code distance using additional flag measurements. We discuss applications to code switching, magic-state injection, Pauli product measurements, and operations on concatenated codes, where bespoke chain maps offer favourable spacetime tradeoffs for logical interfaces tailored to heterogeneous architectures. Finally, we show how our framework straightforwardly extends to targeted logical CZ gates.",
+  "abstract_ja": "横断CNOTは、同一のCSSコードの論理量子ビットをペアごとにエンタングルするのに広く使われています。異なるコードの場合、選択肢ははるかに限られており、通常は構造的に関連したコードファミリーのみが知られています。任意のCSSコード間の論理的CNT回路をチェーンマップを用いて合成する自動化フレームワークを導入します。これらの符号間に二部構成の論理CNTネットワークが与えられたとき、我々の手法は望ましい論理的行動を実現する鎖写像のアフィン空間を構築し、その空間から浅く稀な物理回路候補を探します。この手法を多様な異種CSSコードペアでベンチマークし、既知の横断構成を復元し、距離保持および部分距離保持の例を含む新しい低深さ解を見つけ出します。これらは追加のフラグ測定を用いて完全な符号距離に昇格できることを実証します。コードスイッチング、マジックステート注入、パウリ積測定、連結コードの操作など、異種アーキテクチャに合わせた論理インターフェースに対して有利な時空的トレードオフを提供するカスタムチェーンマップの応用について論じます。最後に、我々のフレームワークがターゲット的論理CZゲートに直接拡張できることを示します。",
+  "abstract_translated": "横断CNOTは、同一のCSSコードの論理量子ビットをペアごとにエンタングルするのに広く使われています。異なるコードの場合、選択肢ははるかに限られており、通常は構造的に関連したコードファミリーのみが知られています。任意のCSSコード間の論理的CNT回路をチェーンマップを用いて合成する自動化フレームワークを導入します。これらの符号間に二部構成の論理CNTネットワークが与えられたとき、我々の手法は望ましい論理的行動を実現する鎖写像のアフィン空間を構築し、その空間から浅く稀な物理回路候補を探します。この手法を多様な異種CSSコードペアでベンチマークし、既知の横断構成を復元し、距離保持および部分距離保持の例を含む新しい低深さ解を見つけ出します。これらは追加のフラグ測定を用いて完全な符号距離に昇格できることを実証します。コードスイッチング、マジックステート注入、パウリ積測定、連結コードの操作など、異種アーキテクチャに合わせた論理インターフェースに対して有利な時空的トレードオフを提供するカスタムチェーンマップの応用について論じます。最後に、我々のフレームワークがターゲット的論理CZゲートに直接拡張できることを示します。"
+ },
+ {
+  "id": "2607.02444",
+  "posted_at": "2026-07-03T10:10:45Z",
+  "title": "Optimal Stabilizer Testing and Learning with Limited Quantum Memory",
+  "title_ja": "限られた量子記憶による最適安定化装置のテストと学習",
+  "title_translated": "限られた量子記憶による最適安定化装置のテストと学習",
+  "translation_language": "ja",
+  "authors": "Srinivasan Arunachalam, Louis Schatzki",
+  "link": "https://arxiv.org/abs/2607.02444",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml",
+   "qit"
+  ],
+  "genre_names": [
+   "量子機械学習",
+   "量子情報理論"
+  ],
+  "abstract_en": "We study stabilizer state testing and learning with limited coherent quantum memory. Here an algorithm sequentially receives copies of an unknown $n$-qubit state, but may keep only $k$ qubits of coherent quantum memory between measurements. With unrestricted memory, seminal work of Gross, Nezami and Walter showed how to test $n$-qubit stabilizer states using $6$ copies, which is dimension independent, unlike the learning complexity of $\\Theta(n)$. We show that this testing-vs-learning separation is lost under memory constraints. More concretely we show that (1) The sample complexity of testing stabilizer states in the $k$-qubit memory framework is $\\Theta(n-k)$. Our upper bound goes via a novel connection to the hidden shift problem and the lower bound is proven using a novel approach to average case bounds on likelihood ratios via combinatorics of the stochastic orthogonal group. (2) The sample complexity of learning stabilizer states with $k$ qubits of memory, in the non-adaptive framework, is $\\Theta(n^2/k)$. As a further application of our techniques, we prove an exponential lower bound for purity testing even when the memory may be left coherent throughout the protocol. Our main results identify coherent quantum memory as the resource enabling the usual separation between stabilizer testing and learning. In particular, even with $k=0.99n$ qubits of memory, there is no constant-copy stabilizer tester; furthermore for $k=cn$ qubits of memory (for $0< c < 1$), stabilizer testing is as hard as learning, with both requiring $\\Theta(n)$ copies.",
+  "abstract_ja": "私たちは、限定的なコヒーレント量子記憶を用いた安定化状態のテストと学習を研究します。ここではアルゴリズムは未知の$n$量子ビット状態のコピーを逐次的に受け取りますが、測定間にコヒーレント量子メモリを保持する量子メモリは$k$キュービットのみです。制限のない記憶を用いて、グロス、ネザミ、ウォルターの画期的な研究は、$6$コピーを使って$n$-量子ビット安定化状態を検証する方法を示しました。これは次元に依存しませんが、$\\Theta(n)$の学習複雑さとは異なります。このテストと学習の分離はメモリ制約の下で失われることを示しました。より具体的には、(1) $k$-キュービットメモリフレームワークにおける安定化状態のサンプル計算量は$\\Theta(n-k)$であることを示します。上界は隠れシフト問題との新しい接続を通じて現れ、下限は確率直交群の組合せ論を用いた尤度比の平均ケース界の新しいアプローチで証明されます。(2) 学習安定化状態のサンプル計算量は、非適応的枠組みにおいて$k$キュービットのメモリを持つ場合、$\\Theta(n^2/k)$です。さらに、私たちの技術を応用し、記憶がプロトコル全体を通じて一貫性を保持しても純度検査の指数関数的な下限を証明しました。主な成果は、安定化テストと学習の通常の分離を可能にする資源としてコヒーレント量子記憶を特定しました。特に、$k=0.99n$の量子ビットメモリでも、定数コピースタビライザーテスタは存在しません。さらに、$k=cn$キュービットのメモリ($0< C<1$の場合)では、安定化テストは学習と同じくらい難しく、どちらも$\\Theta(n)$のコピーを必要とします。",
+  "abstract_translated": "私たちは、限定的なコヒーレント量子記憶を用いた安定化状態のテストと学習を研究します。ここではアルゴリズムは未知の$n$量子ビット状態のコピーを逐次的に受け取りますが、測定間にコヒーレント量子メモリを保持する量子メモリは$k$キュービットのみです。制限のない記憶を用いて、グロス、ネザミ、ウォルターの画期的な研究は、$6$コピーを使って$n$-量子ビット安定化状態を検証する方法を示しました。これは次元に依存しませんが、$\\Theta(n)$の学習複雑さとは異なります。このテストと学習の分離はメモリ制約の下で失われることを示しました。より具体的には、(1) $k$-キュービットメモリフレームワークにおける安定化状態のサンプル計算量は$\\Theta(n-k)$であることを示します。上界は隠れシフト問題との新しい接続を通じて現れ、下限は確率直交群の組合せ論を用いた尤度比の平均ケース界の新しいアプローチで証明されます。(2) 学習安定化状態のサンプル計算量は、非適応的枠組みにおいて$k$キュービットのメモリを持つ場合、$\\Theta(n^2/k)$です。さらに、私たちの技術を応用し、記憶がプロトコル全体を通じて一貫性を保持しても純度検査の指数関数的な下限を証明しました。主な成果は、安定化テストと学習の通常の分離を可能にする資源としてコヒーレント量子記憶を特定しました。特に、$k=0.99n$の量子ビットメモリでも、定数コピースタビライザーテスタは存在しません。さらに、$k=cn$キュービットのメモリ($0< C<1$の場合)では、安定化テストは学習と同じくらい難しく、どちらも$\\Theta(n)$のコピーを必要とします。"
+ },
+ {
+  "id": "2607.02481",
+  "posted_at": "2026-07-03T10:10:48Z",
+  "title": "Symmetries of Pauli Noise from Lindbladian Dynamics",
+  "title_ja": "リンドブラディアン動力学によるパウリノイズの対称性",
+  "title_translated": "リンドブラディアン動力学によるパウリノイズの対称性",
+  "translation_language": "ja",
+  "authors": "Moein Malekakhlagh, Edward H. Chen, Luke C. G. Govia, Alireza Seif",
+  "link": "https://arxiv.org/abs/2607.02481",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "nisq",
+   "hardware"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム",
+   "量子ハードウェア・実装"
+  ],
+  "abstract_en": "Characterizing noise in quantum circuits is fundamentally limited by gauge degrees of freedom; certain parameters, such as the individual contributions of state preparation and measurement (SPAM) errors, are in principle unlearnable from any experiment within the gate set. Here, we show that the physical structure of realistic noise processes imposes approximate symmetry constraints on the Pauli fidelities of gate noise channels. These symmetries relate the fidelity of a Pauli $P$ and its gate-conjugate $U_g P U_g ^{\\dagger}$, and can be used to fix the gauge using only knowledge of the error type and not its magnitude. Using Lindbladian perturbation theory, we analyze a broad class of Clifford gates, including $ZZ_{\\pi/2}$, CZ, CNOT, iSWAP, and SWAP, and demonstrate that coherent errors do not induce first-order asymmetry, while only a restricted set of predominantly off-diagonal dissipative errors can break the symmetry at first order, for which we derive simple selection rules. Notably, common single-qubit noise sources such as $T_1$-relaxation and $T_{2\\phi}$-pure-dephasing can only cause asymmetry at second order. Leveraging these symmetries to fix the gauge enables systematic identification of SPAM errors, simplifying error characterization and mitigation. We validate our results numerically and experimentally on IBM Kingston.",
+  "abstract_ja": "量子回路におけるノイズの特性評価は、ゲージ自由度によって根本的に制限されます。状態準備および測定誤差(SPAM)の個々の寄与など、特定のパラメータは、ゲート集合内のいかなる実験からも原則として学習不可能です。ここでは、現実的なノイズ過程の物理的構造がゲートノイズチャネルのパウリ忠実度に近似対称性制約を課していることを示します。これらの対称性はパウリ$P$とそのゲート共役 $U_g P U_g ^{\\dagger}$ の忠実度を関連付け、誤差の種類のみを知り、その大きさは知らないことでゲージを固定できます。リンドブラッド摂動理論を用いて、$ZZ_{\\pi/2}$、CZ、CNOT、iSWAP、SWAPなどの広範なクリフォードゲートクラスを解析し、コヒーレント誤りは一次非対称性を誘起せず、主に対角線外の耗散誤りの限定集合だけが一階対称性を破ることを示し、これらに対して単純な選択則を導出します。特に、$T_1$弛緩や$T_{2\\phi}$純粋なデフェージングのような一般的な単一量子ビットノイズ源は、2次目の非対称性しか引き起こせません。これらの対称性を活用してゲージを固定することで、SPAMエラーの体系的な特定が可能となり、誤差の特性評価と軽減が簡素化されます。私たちはIBM Kingstonで数値的および実験的に結果を検証しています。",
+  "abstract_translated": "量子回路におけるノイズの特性評価は、ゲージ自由度によって根本的に制限されます。状態準備および測定誤差(SPAM)の個々の寄与など、特定のパラメータは、ゲート集合内のいかなる実験からも原則として学習不可能です。ここでは、現実的なノイズ過程の物理的構造がゲートノイズチャネルのパウリ忠実度に近似対称性制約を課していることを示します。これらの対称性はパウリ$P$とそのゲート共役 $U_g P U_g ^{\\dagger}$ の忠実度を関連付け、誤差の種類のみを知り、その大きさは知らないことでゲージを固定できます。リンドブラッド摂動理論を用いて、$ZZ_{\\pi/2}$、CZ、CNOT、iSWAP、SWAPなどの広範なクリフォードゲートクラスを解析し、コヒーレント誤りは一次非対称性を誘起せず、主に対角線外の耗散誤りの限定集合だけが一階対称性を破ることを示し、これらに対して単純な選択則を導出します。特に、$T_1$弛緩や$T_{2\\phi}$純粋なデフェージングのような一般的な単一量子ビットノイズ源は、2次目の非対称性しか引き起こせません。これらの対称性を活用してゲージを固定することで、SPAMエラーの体系的な特定が可能となり、誤差の特性評価と軽減が簡素化されます。私たちはIBM Kingstonで数値的および実験的に結果を検証しています。"
+ },
+ {
+  "id": "2607.02462",
+  "posted_at": "2026-07-03T10:10:50Z",
+  "title": "Quantum mutual information as a robust probe of integrability in open quantum systems",
+  "title_ja": "開量子系における可積分性の堅牢なプローブとしての量子相互情報",
+  "title_translated": "開量子系における可積分性の堅牢なプローブとしての量子相互情報",
+  "translation_language": "ja",
+  "authors": "Nirupam Sen, Keshav Das Agarwal, Aditi Sen De",
+  "link": "https://arxiv.org/abs/2607.02462",
+  "primary": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "other",
+   "qit"
+  ],
+  "genre_names": [
+   "その他・異分野",
+   "量子情報理論"
+  ],
+  "abstract_en": "The dynamics of a quantum system encode signatures of whether the underlying Hamiltonian is integrable or chaotic, giving rise to the concept of quantum information scrambling through the properties of the resulting dynamical states or operators. We introduce an information-theoretic framework based on the Haar-averaged sum of total correlations (aSTC), together with average genuine multipartite entanglement generated dynamically from initially fully separable states, as robust probes of quantum information scrambling. Using the long-range quantum XYZ spin model in transverse and longitudinal magnetic fields, whose integrable limit is the nearest-neighbor transverse XY model, we demonstrate that the long-time average and, more importantly, the temporal fluctuations of the aSTC provide a faithful and system-size-independent signature of integrable and chaotic dynamics, similar to the conventional measure of scrambling, out-of-time-ordered correlator (OTOC). When the system is in contact with the thermal reservoir and system-bath coupling follows Markovianity, we find that the fluctuations of the aSTC and OTOC continue to distinguish integrable and chaotic dynamics only at intermediate times. However, we observe that in the non-Markovian domain, information backflow restores the scrambling dynamics, enabling the aSTC to retain its distinguishing power even at long times. Interestingly, we exhibit that, under Markovian amplitude damping and non-Markovian dephasing noise, the temporal fluctuations of the aSTC can discriminate between integrability and non-integrability in the weak Markovian regime, even when OTOC fails to do so.",
+  "abstract_ja": "量子系の動力学は、基礎となるハミルトニアンが可積分かカオス的かの署名を符号化し、その結果得られる動的状態や演算子の性質を量子情報がスクランブルする概念を生み出します。我々は、ハーア平均総相関和(aSTC)と、最初に完全に分離可能状態から動的に生成される平均真の多部分エンタングルメントに基づく情報理論的枠組みを、量子情報スクランブルの堅牢なプローブとして導入します。横方向および縦方向磁場における長距離量子XYZスピンモデル(その可積分極限は最近傍横方向XYモデル)を用いることで、aSTCの長期平均、そして何より時間的ゆらぎが、従来のスクランブル・アウト・オブ・タイム順序相関器(OTOC)の測定に似た、可積分かつカオス的なダイナミクスの忠実かつシステムサイズに依存しないシグネチャーを提供することを示しました。系が熱貯留層と接触し、系-浴結合がマルコフ性に従う場合、aSTCとOTOCの揺らぎは中間時点でのみ可積分力学とカオス力学を区別し続けることがわかります。しかし、非マルコフ領域では情報バックフローがスクランブルダイナミクスを回復させ、aSTCが長期間でも識別力を保持できることが観察されます。興味深いことに、マルコフ振幅減衰および非マルコフ位相除去ノイズの下で、aSTCの時間的揺らぎは、OTOCがそれを成し遂げられなくても、弱マルコフ領域において可積分性と非可積分性を区別できることを示しています。",
+  "abstract_translated": "量子系の動力学は、基礎となるハミルトニアンが可積分かカオス的かの署名を符号化し、その結果得られる動的状態や演算子の性質を量子情報がスクランブルする概念を生み出します。我々は、ハーア平均総相関和(aSTC)と、最初に完全に分離可能状態から動的に生成される平均真の多部分エンタングルメントに基づく情報理論的枠組みを、量子情報スクランブルの堅牢なプローブとして導入します。横方向および縦方向磁場における長距離量子XYZスピンモデル(その可積分極限は最近傍横方向XYモデル)を用いることで、aSTCの長期平均、そして何より時間的ゆらぎが、従来のスクランブル・アウト・オブ・タイム順序相関器(OTOC)の測定に似た、可積分かつカオス的なダイナミクスの忠実かつシステムサイズに依存しないシグネチャーを提供することを示しました。系が熱貯留層と接触し、系-浴結合がマルコフ性に従う場合、aSTCとOTOCの揺らぎは中間時点でのみ可積分力学とカオス力学を区別し続けることがわかります。しかし、非マルコフ領域では情報バックフローがスクランブルダイナミクスを回復させ、aSTCが長期間でも識別力を保持できることが観察されます。興味深いことに、マルコフ振幅減衰および非マルコフ位相除去ノイズの下で、aSTCの時間的揺らぎは、OTOCがそれを成し遂げられなくても、弱マルコフ領域において可積分性と非可積分性を区別できることを示しています。"
  }
 ]

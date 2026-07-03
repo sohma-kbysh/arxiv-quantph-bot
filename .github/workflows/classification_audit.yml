@@ -1,0 +1,34 @@
+name: Classification audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Local date to audit, e.g. 2026-07-03"
+        required: true
+        default: "2026-07-03"
+      timezone:
+        description: "Timezone for posted_at grouping"
+        required: true
+        default: "Asia/Tokyo"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Re-run Gemini classification and print differences
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/audit_classification.py \
+            --date "${{ inputs.date }}" \
+            --timezone "${{ inputs.timezone }}"

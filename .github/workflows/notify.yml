@@ -14,6 +14,10 @@ on:
         description: "test_feed.xml を使う (本番RSSの代わり)"
         type: boolean
         default: false
+      test_emergency_alert:
+        description: "bot-emergency 通知のテスト送信のみ行う"
+        type: boolean
+        default: false
 
 
 permissions:
@@ -33,7 +37,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Test emergency alert (temporary)
+        if: ${{ inputs.test_emergency_alert == true }}
+        env:
+          DISCORD_WEBHOOK_BOT_EMERGENCY: ${{ secrets.DISCORD_WEBHOOK_BOT_EMERGENCY }}
+        run: |
+          python3 -c "import arxiv_bot as ab; ab.notify_translation_outage(3, ['deepl','azure','google'])"
+
       - name: Run notifier
+        if: ${{ inputs.test_emergency_alert != true }}
         env:
           DISCORD_WEBHOOK_GENERAL: ${{ secrets.DISCORD_WEBHOOK_GENERAL }}
           DISCORD_WEBHOOK_BOT_EMERGENCY: ${{ secrets.DISCORD_WEBHOOK_BOT_EMERGENCY }}

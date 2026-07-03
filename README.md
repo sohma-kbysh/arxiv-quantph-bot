@@ -486,6 +486,23 @@ export DISCORD_CHANNEL_IDS="111111111111111111,222222222222222222"
 python3 scripts/clean_discord_urls.py --today
 ```
 
+To target specific channels and a custom Japan-time range:
+
+```bash
+python3 scripts/clean_discord_urls.py \
+  --channel-id 111111111111111111 \
+  --channel-id 222222222222222222 \
+  --since "2026-07-03T13:55" \
+  --until "2026-07-03T16:30"
+
+python3 scripts/clean_discord_urls.py \
+  --channel-id 111111111111111111 \
+  --channel-id 222222222222222222 \
+  --since "2026-07-03T13:55" \
+  --until "2026-07-03T16:30" \
+  --delete
+```
+
 After deleting Discord messages, remove the same local day from the bot state so the notifier can repost those papers:
 
 ```bash
@@ -985,6 +1002,23 @@ python3 scripts/clean_discord_urls.py --today --delete
 ```bash
 export DISCORD_CHANNEL_IDS="111111111111111111,222222222222222222"
 python3 scripts/clean_discord_urls.py --today
+```
+
+対象チャンネルと日本時間の範囲を指定する場合:
+
+```bash
+python3 scripts/clean_discord_urls.py \
+  --channel-id 111111111111111111 \
+  --channel-id 222222222222222222 \
+  --since "2026-07-03T13:55" \
+  --until "2026-07-03T16:30"
+
+python3 scripts/clean_discord_urls.py \
+  --channel-id 111111111111111111 \
+  --channel-id 222222222222222222 \
+  --since "2026-07-03T13:55" \
+  --until "2026-07-03T16:30" \
+  --delete
 ```
 
 Discord 側を削除した後、同じ日付を bot の state からも消すと、その論文を再投稿できる:

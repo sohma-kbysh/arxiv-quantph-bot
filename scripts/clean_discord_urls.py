@@ -86,8 +86,11 @@ def parse_discord_time(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
-def parse_time_arg(value: str) -> datetime:
-    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+def parse_time_arg(value: str, tz_name: str) -> datetime:
+    dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=ZoneInfo(tz_name))
+    return dt.astimezone(timezone.utc)
 
 
 def day_window(day: str, tz_name: str) -> tuple[datetime, datetime]:
@@ -156,9 +159,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--timezone", default="Asia/Tokyo",
                         help="Timezone for --date/--today. Default: Asia/Tokyo.")
     parser.add_argument("--since",
-                        help="Only match messages at or after this ISO timestamp.")
+                        help="Only match messages at or after this time. Naive ISO values use --timezone.")
     parser.add_argument("--until",
-                        help="Only match messages before this ISO timestamp.")
+                        help="Only match messages before this time. Naive ISO values use --timezone.")
     parser.add_argument("--include-human", action="store_true",
                         help="Also match human-authored messages. Default is bot/webhook only.")
     parser.add_argument("--delete", action="store_true",
@@ -186,8 +189,8 @@ def main() -> None:
             raise SystemExit(
                 "DISCORD_CHANNEL_ID should look like a 17-20 digit Discord channel ID.")
 
-    since = parse_time_arg(args.since) if args.since else None
-    until = parse_time_arg(args.until) if args.until else None
+    since = parse_time_arg(args.since, args.timezone) if args.since else None
+    until = parse_time_arg(args.until, args.timezone) if args.until else None
     if args.today:
         args.date = datetime.now(ZoneInfo(args.timezone)).date().isoformat()
     if args.date:

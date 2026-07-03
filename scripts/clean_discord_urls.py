@@ -21,7 +21,9 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timedelta, timezone
 from typing import Any
+from zoneinfo import ZoneInfo
 
 
 API_BASE = "https://discord.com/api/v10"
@@ -80,6 +82,33 @@ def is_bot_or_webhook_message(message: dict[str, Any]) -> bool:
     return bool(author.get("bot") or message.get("webhook_id"))
 
 
+def parse_discord_time(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
+def parse_time_arg(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
+def day_window(day: str, tz_name: str) -> tuple[datetime, datetime]:
+    tz = ZoneInfo(tz_name)
+    start = datetime.fromisoformat(day).replace(tzinfo=tz)
+    return start.astimezone(timezone.utc), (
+        start + timedelta(days=1)).astimezone(timezone.utc)
+
+
+def channel_ids_from_args(args: argparse.Namespace) -> list[str]:
+    raw: list[str] = []
+    if args.channel_id:
+        raw.extend(args.channel_id)
+    env_channels = os.environ.get("DISCORD_CHANNEL_IDS") or os.environ.get(
+        "DISCORD_CHANNEL_ID", "")
+    if env_channels:
+        raw.extend(env_channels.split(","))
+    ids = [c.strip() for c in raw if c.strip()]
+    return list(dict.fromkeys(ids))
+
+
 def iter_messages(channel_id: str, token: str, limit: int | None = None):
     before = None
     fetched = 0
@@ -114,13 +143,22 @@ def parse_args() -> argparse.Namespace:
         description="Find/delete bot or webhook Discord messages containing URLs.")
     parser.add_argument("--token", default=os.environ.get("DISCORD_BOT_TOKEN"),
                         help="Discord bot token, or DISCORD_BOT_TOKEN env var.")
-    parser.add_argument("--channel-id",
-                        default=os.environ.get("DISCORD_CHANNEL_ID"),
-                        help="Discord channel ID, or DISCORD_CHANNEL_ID env var.")
+    parser.add_argument("--channel-id", action="append",
+                        help="Discord channel ID. May be repeated. Env fallback: DISCORD_CHANNEL_IDS or DISCORD_CHANNEL_ID.")
     parser.add_argument("--pattern", default=DEFAULT_PATTERN,
                         help="Regex to match against message content and embeds.")
     parser.add_argument("--limit", type=int, default=None,
                         help="Maximum number of recent messages to inspect.")
+    parser.add_argument("--date",
+                        help="Local date to match, YYYY-MM-DD. Use with --timezone.")
+    parser.add_argument("--today", action="store_true",
+                        help="Match today's date in --timezone.")
+    parser.add_argument("--timezone", default="Asia/Tokyo",
+                        help="Timezone for --date/--today. Default: Asia/Tokyo.")
+    parser.add_argument("--since",
+                        help="Only match messages at or after this ISO timestamp.")
+    parser.add_argument("--until",
+                        help="Only match messages before this ISO timestamp.")
     parser.add_argument("--include-human", action="store_true",
                         help="Also match human-authored messages. Default is bot/webhook only.")
     parser.add_argument("--delete", action="store_true",
@@ -132,45 +170,66 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    if not args.token or not args.channel_id:
+    channel_ids = channel_ids_from_args(args)
+    if not args.token or not channel_ids:
         raise SystemExit(
-            "Set DISCORD_BOT_TOKEN and DISCORD_CHANNEL_ID, or pass --token and --channel-id.")
+            "Set DISCORD_BOT_TOKEN and DISCORD_CHANNEL_ID(S), or pass --token and --channel-id.")
     if args.token == "...":
         raise SystemExit(
             "DISCORD_BOT_TOKEN is still '...'. Set it to an actual Discord bot token.")
-    if args.channel_id.startswith(("http://", "https://")):
-        raise SystemExit(
-            "DISCORD_CHANNEL_ID must be the numeric channel ID, not a webhook URL. "
-            "Enable Discord Developer Mode, right-click #general, and Copy Channel ID.")
-    if not re.fullmatch(r"\d{17,20}", args.channel_id):
-        raise SystemExit(
-            "DISCORD_CHANNEL_ID should look like a 17-20 digit Discord channel ID.")
+    for channel_id in channel_ids:
+        if channel_id.startswith(("http://", "https://")):
+            raise SystemExit(
+                "DISCORD_CHANNEL_ID must be the numeric channel ID, not a webhook URL. "
+                "Enable Discord Developer Mode, right-click a channel, and Copy Channel ID.")
+        if not re.fullmatch(r"\d{17,20}", channel_id):
+            raise SystemExit(
+                "DISCORD_CHANNEL_ID should look like a 17-20 digit Discord channel ID.")
+
+    since = parse_time_arg(args.since) if args.since else None
+    until = parse_time_arg(args.until) if args.until else None
+    if args.today:
+        args.date = datetime.now(ZoneInfo(args.timezone)).date().isoformat()
+    if args.date:
+        since, until = day_window(args.date, args.timezone)
 
     regex = re.compile(args.pattern, re.IGNORECASE)
-    matched: list[dict[str, Any]] = []
+    matched: list[tuple[str, dict[str, Any]]] = []
     inspected = 0
-    for message in iter_messages(args.channel_id, args.token, args.limit):
-        inspected += 1
-        if not args.include_human and not is_bot_or_webhook_message(message):
-            continue
-        text = message_text(message)
-        if regex.search(text):
-            matched.append(message)
-            author = (message.get("author") or {}).get("username", "unknown")
-            created = message.get("timestamp", "")
-            preview = " ".join(text.split())[:160]
-            print(f"[match] {message['id']} {created} {author}: {preview}")
+    for channel_id in channel_ids:
+        for message in iter_messages(channel_id, args.token, args.limit):
+            inspected += 1
+            created_dt = parse_discord_time(message.get("timestamp", ""))
+            if since and created_dt < since:
+                break
+            if until and created_dt >= until:
+                continue
+            if not args.include_human and not is_bot_or_webhook_message(message):
+                continue
+            text = message_text(message)
+            if regex.search(text):
+                matched.append((channel_id, message))
+                author = (message.get("author") or {}).get("username", "unknown")
+                created = message.get("timestamp", "")
+                preview = " ".join(text.split())[:160]
+                print(f"[match] channel={channel_id} {message['id']} "
+                      f"{created} {author}: {preview}")
 
     action = "delete" if args.delete else "dry-run"
-    print(f"[summary] action={action} inspected={inspected} matched={len(matched)}")
+    window = ""
+    if since or until:
+        window = (f" since={since.isoformat() if since else '-'}"
+                  f" until={until.isoformat() if until else '-'}")
+    print(f"[summary] action={action} inspected={inspected} "
+          f"matched={len(matched)}{window}")
 
     if not args.delete:
         print("[summary] no messages deleted; rerun with --delete to delete matches")
         return
 
-    for message in matched:
-        delete_message(args.channel_id, message["id"], args.token)
-        print(f"[deleted] {message['id']}")
+    for channel_id, message in matched:
+        delete_message(channel_id, message["id"], args.token)
+        print(f"[deleted] channel={channel_id} {message['id']}")
         time.sleep(args.sleep)
 
 

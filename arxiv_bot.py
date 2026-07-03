@@ -620,6 +620,15 @@ def classify_gemini_batch(
 _deepl_dead = False
 _azure_dead = False
 _google_dead = False
+_last_azure_call = 0.0
+_last_google_call = 0.0
+
+
+def wait_for_backend_slot(last_call: float, min_interval: float) -> float:
+    wait = last_call + min_interval - time.time()
+    if wait > 0:
+        time.sleep(wait)
+    return time.time()
 
 
 def translate_deepl(text: str, cfg: dict) -> str | None:
@@ -659,7 +668,7 @@ def translate_deepl(text: str, cfg: dict) -> str | None:
 
 def translate_google(text: str, cfg: dict) -> str | None:
     """Official Cloud Translation API (v2). Free tier: 500k chars/month."""
-    global _google_dead
+    global _google_dead, _last_google_call
     if _google_dead:
         return None
     key = os.environ.get("GOOGLE_TRANSLATE_API_KEY", "")
@@ -668,21 +677,37 @@ def translate_google(text: str, cfg: dict) -> str | None:
         return None
     url = ("https://translation.googleapis.com/language/translate/v2"
            f"?key={urllib.parse.quote(key)}")
-    status, body = http_post_json(
-        url, {"q": text, "source": "en",
-              "target": google_target_language(cfg), "format": "text"})
-    if status == 200:
-        try:
-            data = json.loads(body)
-            return data["data"]["translations"][0]["translatedText"].strip()
-        except (KeyError, IndexError, json.JSONDecodeError):
-            return None
-    print(f"[warn] Google Translate HTTP {status}: {body[:200]!r}",
-          file=sys.stderr)
-    if status in (403, 429):  # quota / billing problem: stop hammering
-        print("[warn] Google Translate quota/credential problem; "
-              "skipping Google for the rest of this run.", file=sys.stderr)
-        _google_dead = True
+    payload = {"q": text, "source": "en",
+               "target": google_target_language(cfg), "format": "text"}
+    max_retries = cfg.get("google_max_retries", 3)
+    min_interval = cfg.get("google_min_interval_sec", 1.2)
+    for attempt in range(max_retries + 1):
+        _last_google_call = wait_for_backend_slot(
+            _last_google_call, min_interval)
+        status, body = http_post_json(url, payload)
+        if status == 200:
+            try:
+                data = json.loads(body)
+                return data["data"]["translations"][0]["translatedText"].strip()
+            except (KeyError, IndexError, json.JSONDecodeError):
+                return None
+        retryable = status == 429 or (
+            status == 403 and b"User Rate Limit Exceeded" in body
+        )
+        if retryable and attempt < max_retries:
+            backoff = min(60, 10 * (2 ** attempt))
+            print(f"[warn] Google Translate HTTP {status}; retry in "
+                  f"{backoff}s ({attempt + 1}/{max_retries})",
+                  file=sys.stderr)
+            time.sleep(backoff)
+            continue
+        print(f"[warn] Google Translate HTTP {status}: {body[:200]!r}",
+              file=sys.stderr)
+        if status in (400, 401, 403, 429):
+            print("[warn] Google Translate quota/credential problem; "
+                  "skipping Google for the rest of this run.", file=sys.stderr)
+            _google_dead = True
+        return None
     return None
 
 
@@ -708,7 +733,7 @@ def azure_translate_url(cfg: dict) -> str:
 
 def translate_azure(text: str, cfg: dict) -> str | None:
     """Azure AI Translator Text API. Free F0 tier: 2M chars/month."""
-    global _azure_dead
+    global _azure_dead, _last_azure_call
     if _azure_dead:
         return None
     key = os.environ.get("AZURE_TRANSLATOR_KEY", "")
@@ -722,20 +747,32 @@ def translate_azure(text: str, cfg: dict) -> str | None:
     region = os.environ.get("AZURE_TRANSLATOR_REGION", "")
     if region:
         headers["Ocp-Apim-Subscription-Region"] = region
-    status, body = http_post_json(
-        azure_translate_url(cfg), [{"Text": text}], headers=headers)
-    if status == 200:
-        try:
-            data = json.loads(body)
-            return data[0]["translations"][0]["text"].strip()
-        except (KeyError, IndexError, json.JSONDecodeError):
-            return None
-    print(f"[warn] Azure Translator HTTP {status}: {body[:200]!r}",
-          file=sys.stderr)
-    if status in (401, 403, 429):  # credential, quota, or rate-limit problem
-        print("[warn] Azure Translator credential/quota problem; "
-              "skipping Azure for the rest of this run.", file=sys.stderr)
-        _azure_dead = True
+    max_retries = cfg.get("azure_max_retries", 4)
+    min_interval = cfg.get("azure_min_interval_sec", 1.2)
+    for attempt in range(max_retries + 1):
+        _last_azure_call = wait_for_backend_slot(
+            _last_azure_call, min_interval)
+        status, body = http_post_json(
+            azure_translate_url(cfg), [{"Text": text}], headers=headers)
+        if status == 200:
+            try:
+                data = json.loads(body)
+                return data[0]["translations"][0]["text"].strip()
+            except (KeyError, IndexError, json.JSONDecodeError):
+                return None
+        if status == 429 and attempt < max_retries:
+            backoff = min(60, 10 * (2 ** attempt))
+            print(f"[warn] Azure Translator HTTP 429; retry in {backoff}s "
+                  f"({attempt + 1}/{max_retries})", file=sys.stderr)
+            time.sleep(backoff)
+            continue
+        print(f"[warn] Azure Translator HTTP {status}: {body[:200]!r}",
+              file=sys.stderr)
+        if status in (401, 403, 429):
+            print("[warn] Azure Translator credential/quota problem; "
+                  "skipping Azure for the rest of this run.", file=sys.stderr)
+            _azure_dead = True
+        return None
     return None
 
 

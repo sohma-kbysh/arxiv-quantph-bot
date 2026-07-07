@@ -273,8 +273,16 @@
   "target_language_name": "Japanese",
   "translated_title_label": "邦題",
   "classify_with_llm": true,
-  "gemini_model": "gemini-2.5-flash-lite",
+  "gemini_model": "gemini-2.5-flash",
+  "gemini_model_primary": "gemini-2.5-pro",
+  "gemini_model_secondary": "gemini-2.5-flash",
   "gemini_min_interval_sec": 7,
+  "gemini_min_intervals": {
+    "gemini-2.5-pro": 13,
+    "gemini-2.5-flash": 7
+  },
+  "gemini_primary_run_budget": 60,
+  "prescreen_defer_genres": ["nisq", "hardware", "sensing", "foundations", "other"],
   "gemini_max_retries": 4,
   "gemini_overload_giveup": 2,
   "translate_batch_size": 5,

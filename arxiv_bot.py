@@ -5,8 +5,12 @@ arXiv quant-ph -> Discord notifier with translated abstracts.
 - Fetches the official arXiv RSS feed (rss.arxiv.org/rss/quant-ph)
 - Filters out cross-listed papers whose primary category is irrelevant
   (e.g. cond-mat.*) while keeping quantum-information-adjacent categories
-- Classifies papers into user-defined genres. Primary path: Gemini
-  classify-only. Fallback path: keyword matching for the genre.
+- Classifies papers into user-defined genres. A TF-IDF pre-screen first
+  routes papers: those touching only core-topic genres go to the primary
+  Gemini model (gemini-2.5-pro), the rest to the secondary model
+  (gemini-2.5-flash) when the pro request budget is tight or pro is
+  rate-limited out. The TF-IDF result itself is only posted as an
+  emergency fallback when Gemini is entirely unavailable.
 - Translates abstracts via the configurable translator chain
   (default: DeepL -> Azure -> Google); each backend stops for the run on quota exhaustion
   (circuit breaker), and any paper left untranslated is deferred, never
@@ -397,40 +401,52 @@ def genre_by_id(genre_id: str | None, genres: list[dict]) -> dict | None:
 
 # ------------------------------------------------------------- translation
 
-_last_gemini_call = 0.0
-_gemini_dead = False        # True when Gemini is given up for this run
-_gemini_fail_streak = 0     # consecutive post-backoff overload failures
+_last_gemini_calls: dict[str, float] = {}   # per-model request pacing
+_gemini_dead_models: set[str] = set()       # models given up for this run
+_gemini_fail_streaks: dict[str, int] = {}   # per-model overload streaks
 
 BATCH_TAG = re.compile(r"<<<(\d+)>>>")
 # Tag form for the combined translate+classify call: <<<k|genre_id>>> or <<<k|id1,id2>>>
 BATCH_TAG_CLS = re.compile(r"<<<(\d+)\s*\|\s*([A-Za-z0-9_,\s]+?)>>>")
 
 
-def _gemini_request(prompt: str, cfg: dict) -> str | None:
-    """One paced, retried Gemini call. Sets _gemini_dead on persistent
-    quota exhaustion (429) or sustained server overload (500/503)."""
-    global _last_gemini_call, _gemini_dead, _gemini_fail_streak
-    if _gemini_dead:
+def gemini_min_interval(cfg: dict, model: str) -> float:
+    """Per-model pacing. Free-tier gemini-2.5-pro allows only 5 RPM, so it
+    defaults to 13s spacing; other models use gemini_min_interval_sec."""
+    intervals = cfg.get("gemini_min_intervals", {})
+    if model in intervals:
+        return float(intervals[model])
+    base = float(cfg.get("gemini_min_interval_sec", 7))
+    if "pro" in model:
+        return max(13.0, base)
+    return base
+
+
+def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | None:
+    """One paced, retried Gemini call. Marks the model dead for this run on
+    persistent quota exhaustion (429) or sustained server overload (500/503);
+    other models keep working."""
+    model = model or cfg.get("gemini_model", "gemini-2.5-flash")
+    if model in _gemini_dead_models:
         return None
     key = os.environ.get("GEMINI_API_KEY", "")
     if not key:
         return None
-    model = cfg.get("gemini_model", "gemini-2.5-flash")
     url = (f"https://generativelanguage.googleapis.com/v1beta/models/"
            f"{model}:generateContent?key={key}")
-    min_interval = cfg.get("gemini_min_interval_sec", 7)
+    min_interval = gemini_min_interval(cfg, model)
     max_retries = cfg.get("gemini_max_retries", 4)
 
     for attempt in range(max_retries + 1):
-        wait = _last_gemini_call + min_interval - time.time()
+        wait = _last_gemini_calls.get(model, 0.0) + min_interval - time.time()
         if wait > 0:
             time.sleep(wait)
-        _last_gemini_call = time.time()
+        _last_gemini_calls[model] = time.time()
 
         status, body = http_post_json(
             url, {"contents": [{"parts": [{"text": prompt}]}]})
         if status == 200:
-            _gemini_fail_streak = 0
+            _gemini_fail_streaks[model] = 0
             try:
                 data = json.loads(body)
                 return (data["candidates"][0]["content"]["parts"][0]["text"]
@@ -439,31 +455,32 @@ def _gemini_request(prompt: str, cfg: dict) -> str | None:
                 return None
         if status in (429, 500, 503) and attempt < max_retries:
             backoff = min(60, 10 * (2 ** attempt))
-            print(f"[warn] Gemini HTTP {status}; retry in {backoff}s "
+            print(f"[warn] Gemini {model} HTTP {status}; retry in {backoff}s "
                   f"({attempt + 1}/{max_retries})", file=sys.stderr)
             time.sleep(backoff)
             continue
         # Full backoff exhausted (or a non-retryable status).
         if status == 429:
             # Daily quota (requests per day) exhausted: never recovers today.
-            print("[warn] Gemini daily quota appears exhausted; "
-                  "skipping Gemini for the rest of this run.", file=sys.stderr)
-            _gemini_dead = True
+            print(f"[warn] Gemini {model} daily quota appears exhausted; "
+                  "skipping this model for the rest of this run.",
+                  file=sys.stderr)
+            _gemini_dead_models.add(model)
         elif status in (500, 503):
             # Server overload. One request surviving full backoff is bad
-            # enough; if it keeps happening, stop hammering Gemini for this
-            # run and let the translator chain fall through to DeepL/Google.
-            _gemini_fail_streak += 1
-            print(f"[warn] Gemini HTTP {status} after full backoff "
-                  f"(streak {_gemini_fail_streak}/"
+            # enough; if it keeps happening, stop hammering this model for
+            # the run and let callers fall through to the next model.
+            streak = _gemini_fail_streaks.get(model, 0) + 1
+            _gemini_fail_streaks[model] = streak
+            print(f"[warn] Gemini {model} HTTP {status} after full backoff "
+                  f"(streak {streak}/"
                   f"{cfg.get('gemini_overload_giveup', 2)})", file=sys.stderr)
-            if _gemini_fail_streak >= cfg.get("gemini_overload_giveup", 2):
-                print("[warn] Gemini appears overloaded; skipping Gemini for "
-                      "the rest of this run (falling back to next translator).",
-                      file=sys.stderr)
-                _gemini_dead = True
+            if streak >= cfg.get("gemini_overload_giveup", 2):
+                print(f"[warn] Gemini {model} appears overloaded; skipping "
+                      "this model for the rest of this run.", file=sys.stderr)
+                _gemini_dead_models.add(model)
         else:
-            print(f"[warn] Gemini HTTP {status}: {body[:200]!r}",
+            print(f"[warn] Gemini {model} HTTP {status}: {body[:200]!r}",
                   file=sys.stderr)
         return None
     return None
@@ -603,17 +620,11 @@ def translate_classify_gemini_batch(
         f"Below are {len(texts)} English titles and abstracts from arXiv "
         "papers in quantum information science. For each paper, perform "
         "the following two tasks.\n"
-        "(1) Carefully read every genre description and choose the genre ID "
-        "from the list below that best represents the paper's primary "
-        "contribution.\n"
-        "    - If the paper clearly belongs to a single genre, choose only "
-        "one genre.\n"
-        "    - Only when the paper spans multiple genres and both are "
-        f"major contributions, choose up to {max_genres} genre IDs in "
-        "priority order, separated by commas (example: qec,ft).\n"
-        "    - If unsure, choose one genre. If the paper does not fit any "
-        "description, choose other.\n"
-        "(2) Translate the abstract into scholarly "
+        "(1) Carefully read every genre description and choose the genre "
+        "IDs from the list below. Each genre is a Discord channel followed "
+        "by researchers of that area.\n"
+        + _classification_rules(max_genres)
+        + "(2) Translate the abstract into scholarly "
         f"{lang_name}, using standard technical terminology and keeping "
         "the English term in parentheses when helpful.\n\n"
         "[Genre list]\n"
@@ -645,34 +656,56 @@ def translate_classify_gemini_batch(
     return results
 
 
+def _classification_rules(max_genres: int) -> str:
+    """Shared multi-label criterion: route a paper to every channel whose
+    researchers would genuinely want to read it, but never for genres that
+    are merely used as a tool or demonstration platform."""
+    return (
+        "    - First choose the genre ID of the paper's primary "
+        "contribution.\n"
+        f"    - Additionally choose more genres (up to {max_genres} total, "
+        "in priority order, separated by commas, example: qec,ft) whenever "
+        "the paper also has genuine value for researchers who follow that "
+        "genre -- i.e. they would want to read it even though it is not the "
+        "primary topic. Example: a paper that constructs or analyzes "
+        "error-correcting codes in order to realize transversal or "
+        "fault-tolerant logic belongs to BOTH qec and ft.\n"
+        "    - Do NOT add a genre whose subject is merely used as a tool, "
+        "platform, or demonstration. Example: a paper that simply runs a "
+        "known algorithm on quantum hardware is hardware, not algo; "
+        "routine use of entanglement measures does not make a paper qit.\n"
+        "    - If unsure, choose one genre. If the paper does not fit any "
+        "description, choose other.\n"
+    )
+
+
 def classify_gemini_batch(
         texts: list[str], cfg: dict,
-        genres: list[dict]) -> list[list[str]]:
+        genres: list[dict], model: str | None = None) -> list[list[str]]:
     """Classify papers using Gemini without translating (classification only).
 
     Output tokens are minimal (just genre IDs), so quota consumption is
     roughly 1/50 of the combined translate+classify request. Use this when
     translation is handled by the configured translator chain instead.
 
-    Returns a list of genre ID lists (empty list when Gemini fails for that entry).
+    `model` overrides the Gemini model (defaults to gemini_model_primary,
+    then gemini_model). Returns a list of genre ID lists (empty list when
+    Gemini fails for that entry).
     """
+    model = model or cfg.get("gemini_model_primary") or cfg.get(
+        "gemini_model", "gemini-2.5-flash")
     numbered = "\n\n".join(
         f"<<<{i + 1}>>>\n{t}" for i, t in enumerate(texts))
     valid_ids = {g["id"] for g in genres}
     max_genres = cfg.get("classify_max_genres", 2)
     prompt = (
         f"Below are {len(texts)} English titles and abstracts from arXiv "
-        "papers in quantum information science. For each paper, carefully "
-        "read every genre description and choose the genre ID that best "
-        "represents the paper's primary contribution from the list below.\n"
-        "    - If the paper clearly belongs to a single genre, choose only "
-        "one genre.\n"
-        "    - Only when the paper spans multiple genres and both are "
-        f"major contributions, choose up to {max_genres} genre IDs in "
-        "priority order, separated by commas (example: qec,ft).\n"
-        "    - If unsure, choose one genre. If the paper does not fit any "
-        "description, choose other.\n\n"
-        "[Genre list]\n"
+        "papers in quantum information science. Each genre below is a "
+        "Discord channel followed by researchers of that area. For each "
+        "paper, carefully read every genre description and choose the "
+        "genre IDs of the channels where the paper should be posted.\n"
+        + _classification_rules(max_genres)
+        + "\n[Genre list]\n"
         + _genre_menu(genres)
         + "\n\n[Output format]\n"
         "For each entry, output only the genre ID immediately after <<<k>>>. "
@@ -681,7 +714,7 @@ def classify_gemini_batch(
         "and newlines.\n\n"
         + numbered
     )
-    out = _gemini_request(prompt, cfg)
+    out = _gemini_request(prompt, cfg, model=model)
     results: list[list[str]] = [[] for _ in range(len(texts))]
     if not out:
         return results
@@ -922,14 +955,21 @@ _TRANSLATOR_DEAD_FLAGS = {
     "deepl": lambda: _deepl_dead,
     "azure": lambda: _azure_dead,
     "google": lambda: _google_dead,
-    "gemini": lambda: _gemini_dead,
 }
 
 
 def dead_translators(cfg: dict) -> list[str]:
     """Backends in the configured chain that gave up for this run."""
     chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
-    return [b for b in chain if _TRANSLATOR_DEAD_FLAGS.get(b, lambda: False)()]
+    dead = []
+    for b in chain:
+        if b == "gemini":
+            # Gemini-as-translator uses gemini_model; dead flags are per model.
+            if cfg.get("gemini_model", "gemini-2.5-flash") in _gemini_dead_models:
+                dead.append(b)
+        elif _TRANSLATOR_DEAD_FLAGS.get(b, lambda: False)():
+            dead.append(b)
+    return dead
 
 
 def notify_translation_outage(deferred: int, dead: list[str]) -> None:
@@ -984,7 +1024,14 @@ def notify_run_report(report: dict, cfg: dict) -> None:
         f" / ❌ 投稿失敗: {len(failed)}件",
     ]
     gemini = report.get("gemini")
-    if gemini and gemini.get("entries_attempted"):
+    classifier_counts = report.get("classifier_counts") or {}
+    if classifier_counts:
+        breakdown = " / ".join(
+            f"{'TF-IDF' if m == 'tfidf' else m}: {n}件"
+            for m, n in sorted(classifier_counts.items(),
+                               key=lambda kv: -kv[1]))
+        lines.append(f"🏷 分類: {breakdown}")
+    elif gemini and gemini.get("entries_attempted"):
         lines.append(
             f"🏷 分類: Gemini({gemini.get('mode', '?')})"
             f" {gemini.get('entries_classified', 0)}/"
@@ -1154,9 +1201,13 @@ def main() -> None:
     llm_first = use_llm_cls and chain and chain[0] == "gemini"
     llm_classify_only = use_llm_cls and not llm_first
     genre_map = {g["id"]: g for g in genres}
+    model_primary = cfg.get("gemini_model_primary") or cfg.get(
+        "gemini_model", "gemini-2.5-flash")
+    model_secondary = cfg.get("gemini_model_secondary") or model_primary
     gemini_stats = {
         "mode": "disabled",
-        "model": cfg.get("gemini_model", "gemini-2.5-flash"),
+        "model": f"{model_primary}+{model_secondary}"
+                 if model_secondary != model_primary else model_primary,
         "key_present": bool(os.environ.get("GEMINI_API_KEY", "")),
         "requests": 0,
         "entries_attempted": 0,
@@ -1194,35 +1245,90 @@ def main() -> None:
                     e["genres"] = postprocess_genres(
                         e["paper"], e["genres"], genres, cfg)
                     e["llm_done"] = True
+                    e["classifier"] = cfg.get("gemini_model",
+                                              "gemini-2.5-flash")
                     gemini_stats["entries_classified"] += 1
 
     # ---- path B: Gemini classify only, translate via DeepL/Google ---------
     # Used when classify_with_llm=true but "gemini" is NOT in translators.
     # Gemini output is ~genre IDs only, so quota usage is 1/50 of path A.
+    #
+    # A TF-IDF pre-screen routes the papers first (routing only; its labels
+    # are never posted unless Gemini is entirely unavailable):
+    #   - papers touching none of prescreen_defer_genres -> "priority" group,
+    #     always classified by the primary model (gemini-2.5-pro)
+    #   - the rest -> "deferred" group: also the primary model while the
+    #     estimated request count fits gemini_primary_run_budget, otherwise
+    #     the secondary model (gemini-2.5-flash)
+    # Either group falls through to the other model when one is rate-limited
+    # out mid-run (per-model circuit breaker).
     elif llm_classify_only and not dry_run and gemini_stats["key_present"]:
-        for i in range(0, len(entries), batch_size):
-            chunk = entries[i: i + batch_size]
+        defer_ids = set(cfg.get("prescreen_defer_genres",
+                                ["nisq", "hardware", "sensing",
+                                 "foundations", "other"]))
+        for e in entries:
+            e["prescreen"] = classify_multi(e["paper"], genres, cfg)
+            pre_ids = {g["id"] for g in e["prescreen"] if g}
+            e["route"] = "defer" if pre_ids & defer_ids else "priority"
+        priority_group = [e for e in entries if e["route"] == "priority"]
+        deferred_group = [e for e in entries if e["route"] == "defer"]
+
+        est_requests = (math.ceil(len(priority_group) / batch_size)
+                        + math.ceil(len(deferred_group) / batch_size))
+        budget = cfg.get("gemini_primary_run_budget", 60)
+        defer_chain = ([model_primary, model_secondary]
+                       if est_requests <= budget
+                       else [model_secondary])
+        print(f"[info] classification routing: priority={len(priority_group)}, "
+              f"deferred={len(deferred_group)}, est_requests={est_requests}, "
+              f"deferred group uses "
+              f"{'primary' if est_requests <= budget else 'secondary'} model")
+
+        def classify_group(group: list[dict], model_chain: list[str]) -> None:
             limit = cfg.get("max_translate_chars", 2000)
-            abstracts = [
-                f"Title: {e['paper']['title']}\n\nAbstract: {e['paper']['abstract'][:limit]}"
-                for e in chunk
-            ]
-            gemini_stats["requests"] += 1
-            gemini_stats["entries_attempted"] += len(chunk)
-            gid_lists = classify_gemini_batch(abstracts, cfg, genres)
-            for e, gids in zip(chunk, gid_lists):
-                if gids:
-                    gs = [genre_map[g] for g in gids if g in genre_map]
-                    e["genres"] = gs if gs else [genre_by_id(None, genres)]
-                    e["genres"] = postprocess_genres(
-                        e["paper"], e["genres"], genres, cfg)
-                    e["llm_done"] = True
-                    gemini_stats["entries_classified"] += 1
+            seen_models: set[str] = set()
+            model_chain = [m for m in model_chain
+                           if not (m in seen_models or seen_models.add(m))]
+            for i in range(0, len(group), batch_size):
+                chunk = group[i: i + batch_size]
+                texts = [
+                    f"Title: {e['paper']['title']}\n\n"
+                    f"Abstract: {e['paper']['abstract'][:limit]}"
+                    for e in chunk
+                ]
+                gemini_stats["entries_attempted"] += len(chunk)
+                for model in model_chain:
+                    if model in _gemini_dead_models:
+                        continue
+                    todo = [j for j, e in enumerate(chunk)
+                            if not e.get("llm_done")]
+                    if not todo:
+                        break
+                    gemini_stats["requests"] += 1
+                    gid_lists = classify_gemini_batch(
+                        [texts[j] for j in todo], cfg, genres, model=model)
+                    for j, gids in zip(todo, gid_lists):
+                        if not gids:
+                            continue
+                        e = chunk[j]
+                        gs = [genre_map[g] for g in gids if g in genre_map]
+                        e["genres"] = gs if gs else [genre_by_id(None, genres)]
+                        e["genres"] = postprocess_genres(
+                            e["paper"], e["genres"], genres, cfg)
+                        e["llm_done"] = True
+                        e["classifier"] = model
+                        gemini_stats["entries_classified"] += 1
+
+        classify_group(priority_group, [model_primary, model_secondary])
+        classify_group(deferred_group, defer_chain)
 
     # ---- fallback: TF-IDF classify (papers not yet classified) ------------
+    # Reuses the pre-screen result when available (emergency fallback only).
     leftover = [e for e in entries if not e.get("llm_done")]
     for e in leftover:
-        e["genres"] = classify_multi(e["paper"], genres, cfg)
+        e["genres"] = e.get("prescreen") or classify_multi(
+            e["paper"], genres, cfg)
+        e["classifier"] = "tfidf"
     gemini_fallback = len(leftover)
 
     if dry_run:
@@ -1245,7 +1351,7 @@ def main() -> None:
             f"{gemini_stats['entries_attempted']}"
             f"{translated}, "
             f"tfidf_fallback={gemini_fallback}, "
-            f"disabled_for_run={_gemini_dead}"
+            f"disabled_models={sorted(_gemini_dead_models) or None}"
         )
 
     # ---- translation via chain (all papers without jp) --------------------
@@ -1349,6 +1455,7 @@ def main() -> None:
                         "announce_type": e["paper"]["announce_type"],
                         "genre_ids": [g["id"] for g in e["genres"] if g],
                         "genre_names": [g["name"] for g in e["genres"] if g],
+                        "classifier": e.get("classifier", "tfidf"),
                         "abstract_en": e["paper"]["abstract"],
                         "abstract_ja": e["jp"],
                         "abstract_translated": e["jp"],
@@ -1383,6 +1490,8 @@ def main() -> None:
         "deferred": deferred_records,
         "failed": failed_records,
         "gemini": gemini_stats,
+        "classifier_counts": dict(Counter(
+            e.get("classifier", "tfidf") for e in entries)),
         "tfidf_fallback": gemini_fallback,
         "translated": dict(_translation_success),
         "dead_translators": dead_translators(cfg),

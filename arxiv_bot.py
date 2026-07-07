@@ -461,10 +461,12 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
             continue
         # Full backoff exhausted (or a non-retryable status).
         if status == 429:
-            # Daily quota (requests per day) exhausted: never recovers today.
-            print(f"[warn] Gemini {model} daily quota appears exhausted; "
-                  "skipping this model for the rest of this run.",
-                  file=sys.stderr)
+            # Daily quota (requests per day) exhausted -- or a model with no
+            # free-tier quota at all (429 with "limit: 0" on the first call).
+            # Either way it will not recover today.
+            print(f"[warn] Gemini {model} quota exhausted or unavailable "
+                  f"({body[:300]!r}); skipping this model for the rest of "
+                  "this run.", file=sys.stderr)
             _gemini_dead_models.add(model)
         elif status in (500, 503):
             # Server overload. One request surviving full backoff is bad

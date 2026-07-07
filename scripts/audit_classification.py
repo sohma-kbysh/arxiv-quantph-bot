@@ -42,6 +42,10 @@ def main() -> int:
                         help="Local date to audit, e.g. 2026-07-03.")
     parser.add_argument("--timezone", default="Asia/Tokyo")
     parser.add_argument("--batch-size", type=int, default=None)
+    parser.add_argument("--model", action="append", default=None,
+                        help="Gemini model chain override (repeatable). "
+                             "Default: gemini_model_primary, then "
+                             "gemini_model_secondary as fallback.")
     args = parser.parse_args()
 
     cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
@@ -64,10 +68,19 @@ def main() -> int:
     if not rows:
         return 0
 
+    chain = args.model or [m for m in (
+        cfg.get("gemini_model_primary"),
+        cfg.get("gemini_model_secondary"),
+    ) if m] or [cfg.get("gemini_model", "gemini-2.5-flash")]
+    seen_models: set[str] = set()
+    chain = [m for m in chain if not (m in seen_models or seen_models.add(m))]
+    print(f"[audit] model_chain={chain}")
+
     diffs: list[tuple[dict, list[str], list[str]]] = []
     unclassified: list[dict] = []
     attempted = 0
     classified = 0
+    model_counts: dict[str, int] = {}
 
     for i in range(0, len(rows), batch_size):
         chunk = rows[i:i + batch_size]
@@ -77,8 +90,20 @@ def main() -> int:
             for row in chunk
         ]
         attempted += len(chunk)
-        gid_lists = arxiv_bot.classify_gemini_batch(texts, cfg, genres)
-        for row, gids in zip(chunk, gid_lists):
+        results: list[list[str]] = [[] for _ in chunk]
+        for model in chain:
+            if model in arxiv_bot._gemini_dead_models:
+                continue
+            todo = [j for j, r in enumerate(results) if not r]
+            if not todo:
+                break
+            gid_lists = arxiv_bot.classify_gemini_batch(
+                [texts[j] for j in todo], cfg, genres, model=model)
+            for j, gids in zip(todo, gid_lists):
+                if gids:
+                    results[j] = gids
+                    model_counts[model] = model_counts.get(model, 0) + 1
+        for row, gids in zip(chunk, results):
             if not gids:
                 unclassified.append(row)
                 continue
@@ -98,7 +123,8 @@ def main() -> int:
             if old_ids != new_ids:
                 diffs.append((row, old_ids, new_ids))
 
-    print(f"[audit] gemini_classified={classified}/{attempted}")
+    print(f"[audit] gemini_classified={classified}/{attempted} "
+          f"by_model={model_counts}")
     print(f"[audit] differences={len(diffs)}")
     if unclassified:
         print("[audit] unclassified=" + ",".join(

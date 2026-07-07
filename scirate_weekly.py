@@ -321,11 +321,24 @@ def main() -> None:
     require_translation = cfg.get("require_translation", True)
     posted = deferred = 0
     posted_ids: set[str] = set()
+    posted_records: list[dict] = []
+    deferred_records: list[dict] = []
+    failed_records: list[dict] = []
     for e in entries:
         if require_translation and e["paper"].get("abstract") and e.get("jp") is None:
             deferred += 1
+            deferred_records.append({
+                "id": e["paper"]["id"],
+                "title": e.get("jp_title") or e["paper"]["title"],
+                "link": e["paper"]["link"],
+                "genre_names": [g["name"] for g in e["genres"] if g],
+            })
             continue
         posted_webhooks: set[str] = set()
+        posted_channels: list[str] = []
+        failed_channels: list[str] = []
+        # Footer shows every assigned genre, not just the channel posted to.
+        genre_label = ", ".join(g["name"] for g in e["genres"] if g)
         for genre in e["genres"]:
             webhook, genre_name = arxiv_bot.resolve_webhook(genre)
             if not webhook or webhook in posted_webhooks:
@@ -335,13 +348,25 @@ def main() -> None:
                 "value": f"{e['scites']} Scites in the past {range_days} days",
             }]
             if arxiv_bot.post_to_discord(
-                webhook, e["paper"], genre_name, e.get("jp"),
+                webhook, e["paper"], genre_label or genre_name, e.get("jp"),
                 e.get("jp_title"), cfg, extra_fields=fields,
             ):
                 posted_webhooks.add(webhook)
                 posted += 1
                 posted_ids.add(e["paper"]["id"])
+                posted_channels.append(genre_name)
+            else:
+                failed_channels.append(genre_name)
             time.sleep(1.2)
+        record = {
+            "id": e["paper"]["id"],
+            "title": e.get("jp_title") or e["paper"]["title"],
+            "link": e["paper"]["link"],
+        }
+        if posted_channels:
+            posted_records.append({**record, "genre_names": posted_channels})
+        if failed_channels:
+            failed_records.append({**record, "genre_names": failed_channels})
 
         if e["paper"]["id"] in posted_ids:
             log.append({
@@ -369,6 +394,24 @@ def main() -> None:
     state["posted"][str(range_days)] = sorted((prior | posted_ids))[-1000:]
     write_json(STATE_PATH, state)
     write_json(arxiv_bot.LOG_PATH, log[-5000:])
+
+    arxiv_bot.notify_run_report({
+        "source": "SciRate週間ダイジェスト",
+        "fetched": len(candidates),
+        "candidates": len(entries),
+        "messages": posted,
+        "posted": posted_records,
+        "deferred": deferred_records,
+        "failed": failed_records,
+        "gemini": {
+            "mode": "classify-only",
+            "entries_attempted": attempted,
+            "entries_classified": classified,
+        },
+        "tfidf_fallback": fallback,
+        "translated": dict(arxiv_bot._translation_success),
+        "dead_translators": arxiv_bot.dead_translators(cfg),
+    }, cfg)
     print(
         f"posted {posted} SciRate weekly posts "
         f"({len(candidates)} candidates, {deferred} deferred for retry)"

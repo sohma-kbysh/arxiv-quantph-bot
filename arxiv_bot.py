@@ -11,7 +11,11 @@ arXiv quant-ph -> Discord notifier with translated abstracts.
   (default: DeepL -> Azure -> Google); each backend stops for the run on quota exhaustion
   (circuit breaker), and any paper left untranslated is deferred, never
   posted in English.
-- Posts one Discord embed per paper via webhook (per-genre webhooks)
+- Posts one Discord embed per paper via webhook (per-genre webhooks);
+  multi-genre papers are posted to every matching channel and the embed
+  footer lists all assigned genres
+- Posts a per-run summary report (in Japanese) to the bot-emergency
+  channel: which papers went to which channels, deferrals, failures
 
 Standard library only. Designed to run on GitHub Actions.
 """
@@ -155,7 +159,8 @@ _STOPWORDS = frozenset(
     "a an the of in for to and or with on at by as is are was be been "
     "we our this that these which its it also can show based using used "
     "such via from have has had not do does did will would could may "
-    "must both only even more most some any all one two new no".split()
+    "must both only even more most some any all one two new no "
+    "quantum qubit qubits state states system systems".split()
 )
 _classifier_cache = None  # (genre_tf, idf) precomputed once per run
 
@@ -163,6 +168,17 @@ _classifier_cache = None  # (genre_tf, idf) precomputed once per run
 def _tokenize(text: str) -> list[str]:
     return [w for w in re.findall(r"[a-z][a-z0-9]*", text.lower())
             if w not in _STOPWORDS and len(w) > 2]
+
+
+def _keyword_tokens(keywords: list[str]) -> list[str]:
+    """Use single-token keywords in TF-IDF; phrases are scored separately."""
+    tokens: list[str] = []
+    for keyword in keywords:
+        key = str(keyword).strip().lower()
+        if re.search(r"[\s-]", key):
+            continue
+        tokens.append(key)
+    return tokens
 
 
 def _build_tfidf(genres: list[dict]) -> tuple[dict, dict]:
@@ -174,7 +190,7 @@ def _build_tfidf(genres: list[dict]) -> tuple[dict, dict]:
     tf: dict[str, Counter] = {}
     for g in genres:
         words = _tokenize(
-            f"{g.get('description', '')} {' '.join(g.get('keywords', []))}"
+            f"{g.get('description', '')} {' '.join(_keyword_tokens(g.get('keywords', [])))}"
         )
         tf[g["id"]] = Counter(words)
     N = len(tf)
@@ -184,6 +200,54 @@ def _build_tfidf(genres: list[dict]) -> tuple[dict, dict]:
             df[term] = df.get(term, 0) + 1
     idf = {t: math.log(N / d) for t, d in df.items() if d < N}
     return tf, idf
+
+
+def _phrase_pattern(phrase: str) -> str:
+    parts = [re.escape(p) for p in re.findall(r"[a-z][a-z0-9]*", phrase.lower())]
+    return r"\b" + r"[\s-]+".join(parts) + r"\b" if parts else r"$^"
+
+
+def _keyword_evidence_scores(paper: dict, genres: list[dict],
+                             cfg: dict | None = None) -> dict[str, float]:
+    title = paper.get("title", "").lower()
+    abstract = paper.get("abstract", "").lower()
+    scores = {g["id"]: 0.0 for g in genres}
+
+    title_phrase = cfg.get("fallback_title_phrase_bonus", 0.35) if cfg else 0.35
+    abstract_phrase = cfg.get("fallback_abstract_phrase_bonus", 0.18) if cfg else 0.18
+    title_token = cfg.get("fallback_title_token_bonus", 0.10) if cfg else 0.10
+    abstract_token = cfg.get("fallback_abstract_token_bonus", 0.03) if cfg else 0.03
+
+    for g in genres:
+        gid = g["id"]
+        for keyword in g.get("keywords", []):
+            key = str(keyword).strip().lower()
+            if not key:
+                continue
+            if re.search(r"[\s-]", key):
+                pattern = _phrase_pattern(key)
+                if re.search(pattern, title):
+                    scores[gid] += title_phrase
+                elif re.search(pattern, abstract):
+                    scores[gid] += abstract_phrase
+            elif key not in _STOPWORDS:
+                pattern = r"\b" + re.escape(key) + r"\w*\b"
+                if re.search(pattern, title):
+                    scores[gid] += title_token
+                elif re.search(pattern, abstract):
+                    scores[gid] += abstract_token
+
+    for gid, keywords in (cfg or {}).get("fallback_keyword_boosts", {}).items():
+        if gid not in scores:
+            continue
+        for keyword in keywords:
+            pattern = _phrase_pattern(str(keyword))
+            if re.search(pattern, title):
+                scores[gid] += title_phrase
+            elif re.search(pattern, abstract):
+                scores[gid] += abstract_phrase
+
+    return scores
 
 
 def _score_genres(paper: dict, genres: list[dict],
@@ -216,6 +280,9 @@ def _score_genres(paper: dict, genres: list[dict],
                 gid = hints.get(cat)
                 if gid and gid in scores:
                     scores[gid] += 0.15
+        keyword_scores = _keyword_evidence_scores(paper, genres, cfg)
+        for gid, score in keyword_scores.items():
+            scores[gid] = scores.get(gid, 0.0) + score
 
     return scores
 
@@ -634,6 +701,7 @@ _azure_dead = False
 _google_dead = False
 _last_azure_call = 0.0
 _last_google_call = 0.0
+_translation_success: Counter = Counter()  # successful texts per backend
 
 
 def wait_for_backend_slot(last_call: float, min_interval: float) -> float:
@@ -824,6 +892,9 @@ def translate_batch(texts: list[str], cfg: dict,
         else:
             print(f"[warn] unknown translator '{backend}'", file=sys.stderr)
             continue
+        ok = sum(1 for r in sub if r)
+        if ok:
+            _translation_success[backend] += ok
         for i, r in zip(target, sub):
             results[i] = r
     return results
@@ -877,6 +948,105 @@ def notify_translation_outage(deferred: int, dead: list[str]) -> None:
     status, body = http_post_json(webhook, {"content": content})
     if status not in (200, 204):
         print(f"[warn] failed to send translation-outage notice: "
+              f"HTTP {status} {body[:200]!r}", file=sys.stderr)
+
+
+def _report_paper_line(item: dict) -> str:
+    title = truncate(str(item.get("title") or item.get("id") or "?"), 80)
+    link = item.get("link", "")
+    head = f"[{title}]({link})" if link else title
+    channels = ", ".join(item.get("genre_names", []))
+    return f"・{head} → **{channels}**" if channels else f"・{head}"
+
+
+def notify_run_report(report: dict, cfg: dict) -> None:
+    """Post a per-run summary (in Japanese) to the bot-emergency channel.
+
+    Sent on every run, including fully successful ones, so the channel
+    doubles as an execution log: which papers were posted to which genre
+    channels, what was deferred for translation, and what failed.
+    """
+    webhook = os.environ.get("DISCORD_WEBHOOK_BOT_EMERGENCY", "")
+    if not webhook:
+        print("[info] run report skipped "
+              "(DISCORD_WEBHOOK_BOT_EMERGENCY not configured)")
+        return
+
+    posted = report.get("posted", [])
+    deferred = report.get("deferred", [])
+    failed = report.get("failed", [])
+
+    lines = [
+        f"📥 フィード取得: {report.get('fetched', 0)}件 / "
+        f"新規投稿対象: {report.get('candidates', 0)}件",
+        f"📤 投稿成功: {len(posted)}論文({report.get('messages', 0)}メッセージ)"
+        f" / ⏸ 翻訳持ち越し: {len(deferred)}件"
+        f" / ❌ 投稿失敗: {len(failed)}件",
+    ]
+    gemini = report.get("gemini")
+    if gemini and gemini.get("entries_attempted"):
+        lines.append(
+            f"🏷 分類: Gemini({gemini.get('mode', '?')})"
+            f" {gemini.get('entries_classified', 0)}/"
+            f"{gemini.get('entries_attempted', 0)}件成功、"
+            f"TF-IDFフォールバック {report.get('tfidf_fallback', 0)}件")
+    else:
+        lines.append(
+            f"🏷 分類: TF-IDFフォールバック {report.get('tfidf_fallback', 0)}件"
+            "(Gemini未使用)")
+    translated = report.get("translated") or {}
+    if translated:
+        usage = " / ".join(f"{b}: {n}件" for b, n in translated.items())
+        lines.append(f"🌐 翻訳成功(タイトル含む): {usage}")
+    dead = report.get("dead_translators") or []
+    if dead:
+        lines.append(f"⚠️ この実行で停止した翻訳バックエンド: {', '.join(dead)}")
+    if not report.get("candidates"):
+        lines.append("🈳 新規の投稿対象論文はありませんでした。")
+
+    sections = [
+        ("📤 投稿した論文と送信先チャンネル", posted),
+        ("⏸ 翻訳できず次回へ持ち越した論文", deferred),
+        ("❌ Discord投稿に失敗した論文", failed),
+    ]
+    body_lines = list(lines)
+    total = sum(len(line) + 1 for line in body_lines)
+    clipped = False
+    for heading, items in sections:
+        if not items:
+            continue
+        heading_line = f"\n**{heading}**"
+        if total + len(heading_line) > 3800:
+            clipped = True
+            break
+        body_lines.append(heading_line)
+        total += len(heading_line) + 1
+        for item in items:
+            line = _report_paper_line(item)
+            if total + len(line) > 3800:
+                clipped = True
+                break
+            body_lines.append(line)
+            total += len(line) + 1
+    if clipped:
+        body_lines.append("…(長いため以降は省略)")
+
+    if failed:
+        icon, color = "🚨", 0xE74C3C
+    elif deferred:
+        icon, color = "🟡", 0xE67E22
+    else:
+        icon, color = "✅", 0x2ECC71
+    embed = {
+        "title": truncate(
+            f"{icon} 実行レポート | {report.get('source', 'arXiv新着通知')}", 256),
+        "description": truncate("\n".join(body_lines), 4000),
+        "color": color,
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    }
+    status, body = http_post_json(webhook, {"embeds": [embed]})
+    if status not in (200, 204):
+        print(f"[warn] failed to send run report: "
               f"HTTP {status} {body[:200]!r}", file=sys.stderr)
 
 
@@ -1134,21 +1304,35 @@ def main() -> None:
     # ---- post ---------------------------------------------------------------
     require_tr = cfg.get("require_translation", True)
     posted = deferred = 0
+    posted_records: list[dict] = []
+    deferred_records: list[dict] = []
+    failed_records: list[dict] = []
     for e in entries:
         if (e["need_tr"] and e["jp"] is None and require_tr
                 and not e.get("allow_untranslated", False)):
             deferred += 1
+            deferred_records.append({
+                "id": e["paper"]["id"],
+                "title": e.get("jp_title") or e["paper"]["title"],
+                "link": e["paper"]["link"],
+                "genre_names": [g["name"] for g in e["genres"] if g],
+            })
             continue
         posted_webhooks: set[str] = set()
+        posted_channels: list[str] = []
+        failed_channels: list[str] = []
         paper_logged = False
+        # Footer shows every assigned genre, not just the channel posted to.
+        genre_label = ", ".join(g["name"] for g in e["genres"] if g)
         for genre in e["genres"]:
             webhook, genre_name = resolve_webhook(genre)
             if not webhook or webhook in posted_webhooks:
                 continue
             if post_to_discord(
-                    webhook, e["paper"], genre_name, e["jp"],
+                    webhook, e["paper"], genre_label or genre_name, e["jp"],
                     e.get("jp_title"), cfg):
                 posted_webhooks.add(webhook)
+                posted_channels.append(genre_name)
                 if not paper_logged:
                     seen.add(e["paper"]["id"])
                     log.append({
@@ -1171,13 +1355,38 @@ def main() -> None:
                     })
                     paper_logged = True
                 posted += 1
+            else:
+                failed_channels.append(genre_name)
             time.sleep(1.2)  # Discord webhook rate limit headroom
+        record = {
+            "id": e["paper"]["id"],
+            "title": e.get("jp_title") or e["paper"]["title"],
+            "link": e["paper"]["link"],
+        }
+        if posted_channels:
+            posted_records.append({**record, "genre_names": posted_channels})
+        if failed_channels:
+            failed_records.append({**record, "genre_names": failed_channels})
 
     if deferred > 0:
         dead = dead_translators(cfg)
         chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
         if chain and len(dead) == len(chain):
             notify_translation_outage(deferred, dead)
+
+    notify_run_report({
+        "source": "arXiv新着通知",
+        "fetched": len(papers),
+        "candidates": len(pending),
+        "messages": posted,
+        "posted": posted_records,
+        "deferred": deferred_records,
+        "failed": failed_records,
+        "gemini": gemini_stats,
+        "tfidf_fallback": gemini_fallback,
+        "translated": dict(_translation_success),
+        "dead_translators": dead_translators(cfg),
+    }, cfg)
 
     # Keep the state file bounded.
     state["seen"] = sorted(seen)[-3000:]

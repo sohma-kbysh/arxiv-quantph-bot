@@ -25,9 +25,12 @@ The checked-in `config.json` remains configured for the original Japanese Discor
 | `scripts/clean_discord_urls.py` | Helper script to find or delete arXiv URL posts in Discord channels |
 | `scripts/rollback_posted_day.py` | Helper script to remove one local day from `posted_log.json` and `seen_ids.json` before reposting |
 | `scripts/audit_classification.py` | Helper script that re-runs Gemini classification for already-posted papers and prints only the differences |
+| `scripts/repost_missing_channels.py` | Posts already-published papers to genre channels missed by the original classification, reusing stored translations |
+| `repost_plan.json` | Repost plan (paper id -> channels to add), generated from a classification audit |
 | `.github/workflows/notify.yml` | GitHub Actions schedule and secret references for the main notifier |
 | `.github/workflows/scirate_weekly.yml` | GitHub Actions schedule for the SciRate weekend digest |
 | `.github/workflows/classification_audit.yml` | Manually triggered workflow that audits one day of past classifications |
+| `.github/workflows/repost.yml` | Manually triggered workflow that posts papers to missing channels per repost_plan.json |
 
 ---
 
@@ -227,6 +230,14 @@ Local equivalent:
 ```bash
 export GEMINI_API_KEY="..."
 python3 scripts/audit_classification.py --date 2026-07-03 --timezone Asia/Tokyo
+```
+
+After an audit, papers that gained genres can be posted to just those missing channels with the repost workflow (`repost.yml`, manual `workflow_dispatch`, inputs: `plan` path defaulting to `repost_plan.json` and `dry_run` defaulting to `true`). It reuses `title_translated` / `abstract_translated` from `posted_log.json` for each paper (no translation API calls), posts one embed per missing channel with the corrected full genre list in the footer, and updates the log entry's `genre_ids` / `genre_names` to the corrected classification (recording `repost_channels` and `reposted_at`). It never touches `seen_ids.json`, and deliberately skips channels whose webhook secret is missing instead of falling back to the general channel. A run report in Japanese is sent to the bot-emergency channel.
+
+Local equivalent:
+
+```bash
+python3 scripts/repost_missing_channels.py --plan repost_plan.json --dry-run
 ```
 
 ---
@@ -636,9 +647,12 @@ arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1
 | `scripts/clean_discord_urls.py` | Discord チャンネル内の arXiv URL 投稿を検索・削除する補助スクリプト |
 | `scripts/rollback_posted_day.py` | 再投稿前に `posted_log.json` と `seen_ids.json` から指定日の状態を戻す補助スクリプト |
 | `scripts/audit_classification.py` | 投稿済み論文の Gemini 分類を再実行し、差分だけを表示する補助スクリプト |
+| `scripts/repost_missing_channels.py` | 分類修正後、取り逃したジャンルチャンネルへ保存済み翻訳を使って追い投稿する補助スクリプト |
+| `repost_plan.json` | 追い投稿プラン(論文ID → 追加チャンネル)。分類監査の結果から生成 |
 | `.github/workflows/notify.yml` | 実行スケジュールと Secret 参照の定義 |
 | `.github/workflows/scirate_weekly.yml` | SciRate 週末ダイジェストの実行スケジュール |
 | `.github/workflows/classification_audit.yml` | 過去1日分の分類を監査する手動実行ワークフロー |
+| `.github/workflows/repost.yml` | repost_plan.json に従って不足チャンネルへ追い投稿する手動実行ワークフロー |
 
 ---
 
@@ -838,6 +852,14 @@ embed の色は、全成功なら緑、持ち越しありなら橙、Discord 投
 ```bash
 export GEMINI_API_KEY="..."
 python3 scripts/audit_classification.py --date 2026-07-03 --timezone Asia/Tokyo
+```
+
+監査の結果、ジャンルが追加された論文は、追い投稿ワークフロー(`repost.yml`、手動 `workflow_dispatch`、入力: `plan` パス(デフォルト `repost_plan.json`)、`dry_run`(デフォルト `true`))で不足チャンネルにだけ投稿できる。`posted_log.json` の `title_translated` / `abstract_translated` を再利用するため翻訳 API は呼び出さず、不足チャンネルごとに、footer に修正後の全ジャンル一覧を載せた embed を1件投稿する。ログエントリの `genre_ids` / `genre_names` は修正後の分類に更新され(`repost_channels` と `reposted_at` を記録)、`seen_ids.json` には一切触れない。Webhook secret が未設定のチャンネルは general チャンネルへのフォールバックはせず、意図的にスキップされる。実行後は日本語の実行レポートが bot-emergency チャンネルへ送られる。
+
+ローカルでの実行:
+
+```bash
+python3 scripts/repost_missing_channels.py --plan repost_plan.json --dry-run
 ```
 
 ---

@@ -1,0 +1,688 @@
+[
+ {
+  "id": "2607.02804",
+  "channels": [
+   "hardware"
+  ],
+  "genres_after": [
+   "hardware",
+   "ft",
+   "qec"
+  ]
+ },
+ {
+  "id": "2607.03313",
+  "channels": [
+   "hardware"
+  ],
+  "genres_after": [
+   "hardware"
+  ]
+ },
+ {
+  "id": "2607.04082",
+  "channels": [
+   "hardware"
+  ],
+  "genres_after": [
+   "qec",
+   "hardware"
+  ]
+ },
+ {
+  "id": "2607.04227",
+  "channels": [
+   "hardware"
+  ],
+  "genres_after": [
+   "ft",
+   "hardware",
+   "qec"
+  ]
+ },
+ {
+  "id": "2607.04672",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "network",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.04742",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.04845",
+  "channels": [
+   "nisq",
+   "qml"
+  ],
+  "genres_after": [
+   "nisq",
+   "qml"
+  ]
+ },
+ {
+  "id": "2607.04991",
+  "channels": [
+   "crypto"
+  ],
+  "genres_after": [
+   "crypto"
+  ]
+ },
+ {
+  "id": "2607.05107",
+  "channels": [
+   "qec"
+  ],
+  "genres_after": [
+   "qec",
+   "ft"
+  ]
+ },
+ {
+  "id": "2607.05361",
+  "channels": [
+   "foundations"
+  ],
+  "genres_after": [
+   "foundations"
+  ]
+ },
+ {
+  "id": "2607.05386",
+  "channels": [
+   "qec"
+  ],
+  "genres_after": [
+   "qec"
+  ]
+ },
+ {
+  "id": "2607.04015",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "qit",
+   "qec"
+  ]
+ },
+ {
+  "id": "2607.04462",
+  "channels": [
+   "nisq"
+  ],
+  "genres_after": [
+   "qec",
+   "nisq"
+  ]
+ },
+ {
+  "id": "2607.02616",
+  "channels": [
+   "nisq"
+  ],
+  "genres_after": [
+   "nisq"
+  ]
+ },
+ {
+  "id": "2607.03278",
+  "channels": [
+   "qml"
+  ],
+  "genres_after": [
+   "complexity",
+   "qml"
+  ]
+ },
+ {
+  "id": "2607.03438",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.03747",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.04054",
+  "channels": [
+   "nisq"
+  ],
+  "genres_after": [
+   "complexity",
+   "nisq"
+  ]
+ },
+ {
+  "id": "2607.02767",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "qml",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.03187",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.03437",
+  "channels": [
+   "hardware"
+  ],
+  "genres_after": [
+   "hardware",
+   "network"
+  ]
+ },
+ {
+  "id": "2607.04915",
+  "channels": [
+   "nisq"
+  ],
+  "genres_after": [
+   "qml",
+   "nisq"
+  ]
+ },
+ {
+  "id": "2607.05281",
+  "channels": [
+   "hardware"
+  ],
+  "genres_after": [
+   "hardware",
+   "crypto"
+  ]
+ },
+ {
+  "id": "2607.05307",
+  "channels": [
+   "sim"
+  ],
+  "genres_after": [
+   "qml",
+   "sim"
+  ]
+ },
+ {
+  "id": "2607.03527",
+  "channels": [
+   "hardware"
+  ],
+  "genres_after": [
+   "crypto",
+   "hardware"
+  ]
+ },
+ {
+  "id": "2607.03579",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "crypto",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.04035",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "foundations",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.04186",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "crypto",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.04936",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "crypto",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.05109",
+  "channels": [
+   "network"
+  ],
+  "genres_after": [
+   "crypto",
+   "network"
+  ]
+ },
+ {
+  "id": "2607.04656",
+  "channels": [
+   "foundations",
+   "qit"
+  ],
+  "genres_after": [
+   "foundations",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.02811",
+  "channels": [
+   "algo"
+  ],
+  "genres_after": [
+   "sim",
+   "algo"
+  ]
+ },
+ {
+  "id": "2607.02906",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.03235",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.03274",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.03493",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.03939",
+  "channels": [
+   "other",
+   "qit"
+  ],
+  "genres_after": [
+   "other",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.04659",
+  "channels": [
+   "other",
+   "qit"
+  ],
+  "genres_after": [
+   "other",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.04669",
+  "channels": [
+   "algo"
+  ],
+  "genres_after": [
+   "algo"
+  ]
+ },
+ {
+  "id": "2607.05218",
+  "channels": [
+   "foundations"
+  ],
+  "genres_after": [
+   "foundations"
+  ]
+ },
+ {
+  "id": "2607.02673",
+  "channels": [
+   "sim"
+  ],
+  "genres_after": [
+   "sim",
+   "nisq"
+  ]
+ },
+ {
+  "id": "2607.02696",
+  "channels": [
+   "qml",
+   "algo"
+  ],
+  "genres_after": [
+   "qml",
+   "algo"
+  ]
+ },
+ {
+  "id": "2607.02794",
+  "channels": [
+   "algo"
+  ],
+  "genres_after": [
+   "nisq",
+   "algo"
+  ]
+ },
+ {
+  "id": "2607.03340",
+  "channels": [
+   "algo"
+  ],
+  "genres_after": [
+   "algo",
+   "nisq"
+  ]
+ },
+ {
+  "id": "2607.03361",
+  "channels": [
+   "algo"
+  ],
+  "genres_after": [
+   "nisq",
+   "algo"
+  ]
+ },
+ {
+  "id": "2607.04110",
+  "channels": [
+   "sim"
+  ],
+  "genres_after": [
+   "nisq",
+   "sim"
+  ]
+ },
+ {
+  "id": "2607.04363",
+  "channels": [
+   "foundations"
+  ],
+  "genres_after": [
+   "foundations"
+  ]
+ },
+ {
+  "id": "2607.04586",
+  "channels": [
+   "qml"
+  ],
+  "genres_after": [
+   "qml"
+  ]
+ },
+ {
+  "id": "2607.02997",
+  "channels": [
+   "qec"
+  ],
+  "genres_after": [
+   "qec"
+  ]
+ },
+ {
+  "id": "2607.04175",
+  "channels": [
+   "sim"
+  ],
+  "genres_after": [
+   "sim"
+  ]
+ },
+ {
+  "id": "2607.04736",
+  "channels": [
+   "foundations"
+  ],
+  "genres_after": [
+   "foundations"
+  ]
+ },
+ {
+  "id": "2607.04791",
+  "channels": [
+   "nisq",
+   "foundations"
+  ],
+  "genres_after": [
+   "nisq",
+   "foundations"
+  ]
+ },
+ {
+  "id": "2607.04979",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.05112",
+  "channels": [
+   "algo"
+  ],
+  "genres_after": [
+   "algo"
+  ]
+ },
+ {
+  "id": "2607.02962",
+  "channels": [
+   "foundations"
+  ],
+  "genres_after": [
+   "sensing",
+   "foundations"
+  ]
+ },
+ {
+  "id": "2607.02987",
+  "channels": [
+   "hardware",
+   "nisq"
+  ],
+  "genres_after": [
+   "hardware",
+   "nisq"
+  ]
+ },
+ {
+  "id": "2607.03002",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.03052",
+  "channels": [
+   "hardware",
+   "nisq"
+  ],
+  "genres_after": [
+   "hardware",
+   "nisq"
+  ]
+ },
+ {
+  "id": "2607.04021",
+  "channels": [
+   "qit"
+  ],
+  "genres_after": [
+   "sensing",
+   "qit"
+  ]
+ },
+ {
+  "id": "2607.04295",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "sensing",
+   "other"
+  ]
+ },
+ {
+  "id": "2607.04488",
+  "channels": [
+   "sensing"
+  ],
+  "genres_after": [
+   "qit",
+   "sensing"
+  ]
+ },
+ {
+  "id": "2607.04555",
+  "channels": [
+   "sensing"
+  ],
+  "genres_after": [
+   "qit",
+   "sensing"
+  ]
+ },
+ {
+  "id": "2607.05094",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.03950",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "other"
+  ]
+ },
+ {
+  "id": "2607.04399",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "foundations",
+   "other"
+  ]
+ },
+ {
+  "id": "2607.04455",
+  "channels": [
+   "sim"
+  ],
+  "genres_after": [
+   "foundations",
+   "sim"
+  ]
+ },
+ {
+  "id": "2607.04519",
+  "channels": [
+   "other"
+  ],
+  "genres_after": [
+   "foundations",
+   "other"
+  ]
+ },
+ {
+  "id": "2607.04721",
+  "channels": [
+   "qml"
+  ],
+  "genres_after": [
+   "foundations",
+   "qml"
+  ]
+ },
+ {
+  "id": "2607.04864",
+  "channels": [
+   "sim"
+  ],
+  "genres_after": [
+   "foundations",
+   "sim"
+  ]
+ },
+ {
+  "id": "2607.04075",
+  "channels": [
+   "foundations",
+   "sim"
+  ],
+  "genres_after": [
+   "foundations",
+   "sim"
+  ]
+ }
+]

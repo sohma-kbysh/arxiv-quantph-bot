@@ -44,8 +44,7 @@ def main() -> int:
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--model", action="append", default=None,
                         help="Gemini model chain override (repeatable). "
-                             "Default: gemini_model_primary, then "
-                             "gemini_model_secondary as fallback.")
+                             "Default: configured classifier chain.")
     args = parser.parse_args()
 
     cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
@@ -55,8 +54,9 @@ def main() -> int:
     batch_size = max(1, args.batch_size or cfg.get("translate_batch_size", 5))
     limit = cfg.get("max_translate_chars", 2000)
 
-    if not os.environ.get("GEMINI_API_KEY"):
-        print("GEMINI_API_KEY is not set.", file=sys.stderr)
+    if not any(arxiv_bot.classifier_key_present(s)
+               for s in arxiv_bot.classifier_model_specs(cfg)):
+        print("No classifier API key is set.", file=sys.stderr)
         return 2
 
     rows = [
@@ -68,13 +68,24 @@ def main() -> int:
     if not rows:
         return 0
 
-    chain = args.model or [m for m in (
-        cfg.get("gemini_model_primary"),
-        cfg.get("gemini_model_secondary"),
-    ) if m] or [cfg.get("gemini_model", "gemini-2.5-flash")]
-    seen_models: set[str] = set()
-    chain = [m for m in chain if not (m in seen_models or seen_models.add(m))]
-    print(f"[audit] model_chain={chain}")
+    if args.model:
+        chain = [{"provider": "gemini", "model": m, "name": m}
+                 for m in args.model]
+    else:
+        chain = arxiv_bot.classifier_model_specs(cfg)
+    seen_models: set[tuple[str, str]] = set()
+    chain = [
+        m for m in chain
+        if not (
+            (str(m.get("provider", "gemini")), arxiv_bot.classifier_spec_name(m))
+            in seen_models
+            or seen_models.add(
+                (str(m.get("provider", "gemini")),
+                 arxiv_bot.classifier_spec_name(m)))
+        )
+    ]
+    print("[audit] model_chain="
+          f"{[arxiv_bot.classifier_spec_name(s) for s in chain]}")
 
     diffs: list[tuple[dict, list[str], list[str]]] = []
     unclassified: list[dict] = []
@@ -91,18 +102,20 @@ def main() -> int:
         ]
         attempted += len(chunk)
         results: list[list[str]] = [[] for _ in chunk]
-        for model in chain:
-            if model in arxiv_bot._gemini_dead_models:
+        for spec in chain:
+            if (not arxiv_bot.classifier_key_present(spec)
+                    or arxiv_bot.classifier_dead(spec)):
                 continue
             todo = [j for j, r in enumerate(results) if not r]
             if not todo:
                 break
-            gid_lists = arxiv_bot.classify_gemini_batch(
-                [texts[j] for j in todo], cfg, genres, model=model)
+            model_name = arxiv_bot.classifier_spec_name(spec)
+            gid_lists = arxiv_bot.classify_llm_batch(
+                [texts[j] for j in todo], cfg, genres, spec=spec)
             for j, gids in zip(todo, gid_lists):
                 if gids:
                     results[j] = gids
-                    model_counts[model] = model_counts.get(model, 0) + 1
+                    model_counts[model_name] = model_counts.get(model_name, 0) + 1
         for row, gids in zip(chunk, results):
             if not gids:
                 unclassified.append(row)

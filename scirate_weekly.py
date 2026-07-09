@@ -19,6 +19,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
@@ -179,9 +180,10 @@ def classify_entries(entries: list[dict], cfg: dict, genres: list[dict],
     batch_size = max(1, cfg.get("translate_batch_size", 5))
     genre_map = {g["id"]: g for g in genres}
     attempted = classified = 0
+    classifier_specs = arxiv_bot.classifier_model_specs(cfg)
     if (
         cfg.get("classify_with_llm", True)
-        and os.environ.get("GEMINI_API_KEY")
+        and any(arxiv_bot.classifier_key_present(s) for s in classifier_specs)
         and not dry_run
     ):
         for i in range(0, len(entries), batch_size):
@@ -193,13 +195,26 @@ def classify_entries(entries: list[dict], cfg: dict, genres: list[dict],
                 for e in chunk
             ]
             attempted += len(chunk)
-            gid_lists = arxiv_bot.classify_gemini_batch(payloads, cfg, genres)
-            for e, gids in zip(chunk, gid_lists):
-                if gids:
+            results: list[list[str]] = [[] for _ in chunk]
+            for spec in classifier_specs:
+                if (not arxiv_bot.classifier_key_present(spec)
+                        or arxiv_bot.classifier_dead(spec)):
+                    continue
+                todo = [j for j, gids in enumerate(results) if not gids]
+                if not todo:
+                    break
+                model_name = arxiv_bot.classifier_spec_name(spec)
+                gid_lists = arxiv_bot.classify_llm_batch(
+                    [payloads[j] for j in todo], cfg, genres, spec=spec)
+                for j, gids in zip(todo, gid_lists):
+                    if not gids:
+                        continue
+                    results[j] = gids
+                    e = chunk[j]
                     gs = [genre_map[g] for g in gids if g in genre_map]
                     e["genres"] = arxiv_bot.postprocess_genres(
                         e["paper"], gs, genres, cfg)
-                    e["classified_by"] = "gemini"
+                    e["classified_by"] = model_name
                     classified += 1
     fallback = 0
     for e in entries:
@@ -305,7 +320,7 @@ def main() -> None:
         f"url={url}, min_scites={min_scites}, "
         f"candidates={len(candidates)}, postable={len(entries)}, "
         f"reused_classification={reused}, "
-        f"gemini_classified={classified}/{attempted}, "
+        f"llm_classified={classified}/{attempted}, "
         f"tfidf_fallback={fallback}"
     )
 
@@ -408,6 +423,8 @@ def main() -> None:
             "entries_attempted": attempted,
             "entries_classified": classified,
         },
+        "classifier_counts": dict(Counter(
+            e.get("classified_by", "tfidf") for e in entries)),
         "tfidf_fallback": fallback,
         "translated": dict(arxiv_bot._translation_success),
         "dead_translators": arxiv_bot.dead_translators(cfg),

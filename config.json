@@ -281,6 +281,17 @@
     "gemini-2.5-flash": 7,
     "gemini-2.5-flash-lite": 5
   },
+  "llm_classification_fallbacks": [
+    {
+      "name": "gpt-oss-120b",
+      "provider": "openai_compatible",
+      "model": "gpt-oss-120b",
+      "base_url": "https://api.cerebras.ai/v1",
+      "api_key_env": "CEREBRAS_API_KEY",
+      "min_interval_sec": 5,
+      "max_retries": 3
+    }
+  ],
   "gemini_primary_run_budget": 20,
   "prescreen_defer_genres": ["nisq", "hardware", "sensing", "foundations", "other"],
   "gemini_max_retries": 4,

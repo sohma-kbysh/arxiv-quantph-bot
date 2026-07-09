@@ -404,6 +404,8 @@ def genre_by_id(genre_id: str | None, genres: list[dict]) -> dict | None:
 _last_gemini_calls: dict[str, float] = {}   # per-model request pacing
 _gemini_dead_models: set[str] = set()       # models given up for this run
 _gemini_fail_streaks: dict[str, int] = {}   # per-model overload streaks
+_last_openai_compat_calls: dict[str, float] = {}
+_openai_compat_dead_models: set[str] = set()
 
 BATCH_TAG = re.compile(r"<<<(\d+)>>>")
 # Tag form for the combined translate+classify call: <<<k|genre_id>>> or <<<k|id1,id2>>>
@@ -486,6 +488,137 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
                   file=sys.stderr)
         return None
     return None
+
+
+def _openai_compat_request(prompt: str, cfg: dict, spec: dict) -> str | None:
+    """One OpenAI-compatible chat.completions call for classification fallback."""
+    model = str(spec.get("model", "")).strip()
+    name = str(spec.get("name") or model or "openai-compatible").strip()
+    if not model:
+        return None
+    if name in _openai_compat_dead_models:
+        return None
+    key_env = str(spec.get("api_key_env", "OPENAI_COMPAT_API_KEY")).strip()
+    key = os.environ.get(key_env, "")
+    if not key:
+        return None
+    base_url = str(spec.get("base_url", "")).rstrip("/")
+    if not base_url:
+        print(f"[warn] {name} fallback missing base_url", file=sys.stderr)
+        _openai_compat_dead_models.add(name)
+        return None
+    min_interval = float(spec.get("min_interval_sec", 5))
+    max_retries = int(spec.get("max_retries", cfg.get("gemini_max_retries", 4)))
+    url = f"{base_url}/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json",
+        "User-Agent": "arxiv-quantph-bot-classifier/1.0",
+    }
+    payload = {
+        "model": model,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "You classify quantum-information arXiv papers. "
+                    "Return only the requested tags and genre IDs."
+                ),
+            },
+            {"role": "user", "content": prompt},
+        ],
+        "temperature": float(spec.get("temperature", 0)),
+        "max_tokens": int(spec.get("max_tokens", 256)),
+    }
+
+    for attempt in range(max_retries + 1):
+        wait = _last_openai_compat_calls.get(name, 0.0) + min_interval - time.time()
+        if wait > 0:
+            time.sleep(wait)
+        _last_openai_compat_calls[name] = time.time()
+
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers=headers,
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=90) as resp:
+                body = resp.read().decode("utf-8")
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            if exc.code in (429, 500, 503) and attempt < max_retries:
+                backoff = min(60, 10 * (2 ** attempt))
+                print(f"[warn] {name} HTTP {exc.code}; retry in {backoff}s "
+                      f"({attempt + 1}/{max_retries})", file=sys.stderr)
+                time.sleep(backoff)
+                continue
+            if exc.code == 429:
+                print(f"[warn] {name} quota/rate limit exhausted "
+                      f"({body[:500]!r}); skipping this model for the rest "
+                      "of this run.", file=sys.stderr)
+                _openai_compat_dead_models.add(name)
+            else:
+                print(f"[warn] {name} HTTP {exc.code}: {body[:500]!r}",
+                      file=sys.stderr)
+            return None
+        except urllib.error.URLError as exc:
+            print(f"[warn] {name} request failed: {exc}", file=sys.stderr)
+            return None
+
+        try:
+            data = json.loads(body)
+            return data["choices"][0]["message"]["content"].strip()
+        except (KeyError, IndexError, json.JSONDecodeError):
+            print(f"[warn] {name} returned an unexpected response: "
+                  f"{body[:500]!r}", file=sys.stderr)
+            return None
+    return None
+
+
+def classifier_model_specs(cfg: dict) -> list[dict]:
+    primary = cfg.get("gemini_model_primary") or cfg.get(
+        "gemini_model", "gemini-2.5-flash")
+    secondary = cfg.get("gemini_model_secondary") or primary
+    specs: list[dict] = [
+        {"provider": "gemini", "model": primary, "name": primary},
+    ]
+    if secondary != primary:
+        specs.append({"provider": "gemini", "model": secondary, "name": secondary})
+    for spec in cfg.get("llm_classification_fallbacks", []):
+        if isinstance(spec, dict):
+            specs.append(spec)
+    seen: set[tuple[str, str]] = set()
+    result: list[dict] = []
+    for spec in specs:
+        provider = str(spec.get("provider", "gemini"))
+        model = str(spec.get("model", ""))
+        key = (provider, model)
+        if model and key not in seen:
+            result.append(spec)
+            seen.add(key)
+    return result
+
+
+def classifier_spec_name(spec: dict) -> str:
+    return str(spec.get("name") or spec.get("model") or "unknown")
+
+
+def classifier_key_present(spec: dict) -> bool:
+    provider = str(spec.get("provider", "gemini"))
+    if provider == "gemini":
+        return bool(os.environ.get("GEMINI_API_KEY", ""))
+    key_env = str(spec.get("api_key_env", "OPENAI_COMPAT_API_KEY"))
+    return bool(os.environ.get(key_env, ""))
+
+
+def classifier_dead(spec: dict) -> bool:
+    provider = str(spec.get("provider", "gemini"))
+    name = classifier_spec_name(spec)
+    if provider == "gemini":
+        return str(spec.get("model", "")) in _gemini_dead_models
+    return name in _openai_compat_dead_models
 
 
 def target_language(cfg: dict) -> str:
@@ -605,6 +738,46 @@ def normalize_genre_ids(raw_ids: list[str], valid_ids: set[str]) -> list[str]:
     return result
 
 
+def _classification_prompt(texts: list[str], cfg: dict,
+                           genres: list[dict]) -> str:
+    numbered = "\n\n".join(
+        f"<<<{i + 1}>>>\n{t}" for i, t in enumerate(texts))
+    max_genres = cfg.get("classify_max_genres", 2)
+    return (
+        f"Below are {len(texts)} English titles and abstracts from arXiv "
+        "papers in quantum information science. Each genre below is a "
+        "Discord channel followed by researchers of that area. For each "
+        "paper, carefully read every genre description and choose the "
+        "genre IDs of the channels where the paper should be posted.\n"
+        + _classification_rules(max_genres)
+        + "\n[Genre list]\n"
+        + _genre_menu(genres)
+        + "\n\n[Output format]\n"
+        "For each entry, output only the genre ID immediately after <<<k>>>. "
+        "For multiple genres, separate IDs with commas "
+        "(example: <<<1>>> qec,ft). Include nothing except genre IDs, tags, "
+        "and newlines.\n\n"
+        + numbered
+    )
+
+
+def _parse_classification_output(out: str | None, count: int,
+                                 valid_ids: set[str]) -> list[list[str]]:
+    results: list[list[str]] = [[] for _ in range(count)]
+    if not out:
+        return results
+    pattern = r"<<<(\d+)>>>[\s:-]*([A-Za-z0-9_][A-Za-z0-9_,\s]*)"
+    for match in re.finditer(pattern, out):
+        try:
+            k = int(match.group(1)) - 1
+        except ValueError:
+            continue
+        if 0 <= k < count:
+            gids = [g.strip() for g in match.group(2).split(",")]
+            results[k] = normalize_genre_ids(gids, valid_ids)
+    return results
+
+
 def translate_classify_gemini_batch(
         texts: list[str], cfg: dict,
         genres: list[dict]) -> list[tuple[str | None, list[str]]]:
@@ -696,39 +869,25 @@ def classify_gemini_batch(
     """
     model = model or cfg.get("gemini_model_primary") or cfg.get(
         "gemini_model", "gemini-2.5-flash")
-    numbered = "\n\n".join(
-        f"<<<{i + 1}>>>\n{t}" for i, t in enumerate(texts))
     valid_ids = {g["id"] for g in genres}
-    max_genres = cfg.get("classify_max_genres", 2)
-    prompt = (
-        f"Below are {len(texts)} English titles and abstracts from arXiv "
-        "papers in quantum information science. Each genre below is a "
-        "Discord channel followed by researchers of that area. For each "
-        "paper, carefully read every genre description and choose the "
-        "genre IDs of the channels where the paper should be posted.\n"
-        + _classification_rules(max_genres)
-        + "\n[Genre list]\n"
-        + _genre_menu(genres)
-        + "\n\n[Output format]\n"
-        "For each entry, output only the genre ID immediately after <<<k>>>. "
-        "For multiple genres, separate IDs with commas "
-        "(example: <<<1>>> qec,ft). Include nothing except genre IDs, tags, "
-        "and newlines.\n\n"
-        + numbered
-    )
+    prompt = _classification_prompt(texts, cfg, genres)
     out = _gemini_request(prompt, cfg, model=model)
-    results: list[list[str]] = [[] for _ in range(len(texts))]
-    if not out:
-        return results
-    for match in re.finditer(r"<<<(\d+)>>>[\s:-]*([A-Za-z0-9_][A-Za-z0-9_,\s]*)", out):
-        try:
-            k = int(match.group(1)) - 1
-        except ValueError:
-            continue
-        if 0 <= k < len(texts):
-            gids = [g.strip() for g in match.group(2).split(",")]
-            results[k] = normalize_genre_ids(gids, valid_ids)
-    return results
+    return _parse_classification_output(out, len(texts), valid_ids)
+
+
+def classify_llm_batch(
+        texts: list[str], cfg: dict,
+        genres: list[dict], spec: dict) -> list[list[str]]:
+    provider = str(spec.get("provider", "gemini"))
+    if provider == "gemini":
+        return classify_gemini_batch(texts, cfg, genres, model=spec.get("model"))
+    if provider == "openai_compatible":
+        valid_ids = {g["id"] for g in genres}
+        prompt = _classification_prompt(texts, cfg, genres)
+        out = _openai_compat_request(prompt, cfg, spec)
+        return _parse_classification_output(out, len(texts), valid_ids)
+    print(f"[warn] unknown classifier provider '{provider}'", file=sys.stderr)
+    return [[] for _ in texts]
 
 
 _deepl_dead = False
@@ -1203,14 +1362,17 @@ def main() -> None:
     llm_first = use_llm_cls and chain and chain[0] == "gemini"
     llm_classify_only = use_llm_cls and not llm_first
     genre_map = {g["id"]: g for g in genres}
+    classifier_specs = classifier_model_specs(cfg)
     model_primary = cfg.get("gemini_model_primary") or cfg.get(
         "gemini_model", "gemini-2.5-flash")
     model_secondary = cfg.get("gemini_model_secondary") or model_primary
+    classifier_names = [classifier_spec_name(s) for s in classifier_specs]
     gemini_stats = {
         "mode": "disabled",
-        "model": f"{model_primary}+{model_secondary}"
-                 if model_secondary != model_primary else model_primary,
+        "model": "+".join(classifier_names) or model_primary,
         "key_present": bool(os.environ.get("GEMINI_API_KEY", "")),
+        "classifier_key_present": any(classifier_key_present(s)
+                                      for s in classifier_specs),
         "requests": 0,
         "entries_attempted": 0,
         "entries_classified": 0,
@@ -1264,7 +1426,8 @@ def main() -> None:
     #     the secondary model (gemini-2.5-flash)
     # Either group falls through to the other model when one is rate-limited
     # out mid-run (per-model circuit breaker).
-    elif llm_classify_only and not dry_run and gemini_stats["key_present"]:
+    elif (llm_classify_only and not dry_run
+          and gemini_stats["classifier_key_present"]):
         defer_ids = set(cfg.get("prescreen_defer_genres",
                                 ["nisq", "hardware", "sensing",
                                  "foundations", "other"]))
@@ -1278,19 +1441,36 @@ def main() -> None:
         est_requests = (math.ceil(len(priority_group) / batch_size)
                         + math.ceil(len(deferred_group) / batch_size))
         budget = cfg.get("gemini_primary_run_budget", 60)
-        defer_chain = ([model_primary, model_secondary]
+        primary_spec = {"provider": "gemini", "model": model_primary,
+                        "name": model_primary}
+        secondary_spec = {"provider": "gemini", "model": model_secondary,
+                          "name": model_secondary}
+        fallback_specs = [
+            s for s in classifier_specs
+            if classifier_spec_name(s) not in {model_primary, model_secondary}
+        ]
+        priority_chain = [primary_spec, secondary_spec, *fallback_specs]
+        defer_chain = ([primary_spec, secondary_spec, *fallback_specs]
                        if est_requests <= budget
-                       else [model_secondary])
+                       else [secondary_spec, *fallback_specs])
         print(f"[info] classification routing: priority={len(priority_group)}, "
               f"deferred={len(deferred_group)}, est_requests={est_requests}, "
               f"deferred group uses "
               f"{'primary' if est_requests <= budget else 'secondary'} model")
 
-        def classify_group(group: list[dict], model_chain: list[str]) -> None:
+        def classify_group(group: list[dict], model_chain: list[dict]) -> None:
             limit = cfg.get("max_translate_chars", 2000)
-            seen_models: set[str] = set()
-            model_chain = [m for m in model_chain
-                           if not (m in seen_models or seen_models.add(m))]
+            seen_models: set[tuple[str, str]] = set()
+            model_chain = [
+                m for m in model_chain
+                if not (
+                    (str(m.get("provider", "gemini")), classifier_spec_name(m))
+                    in seen_models
+                    or seen_models.add(
+                        (str(m.get("provider", "gemini")),
+                         classifier_spec_name(m)))
+                )
+            ]
             for i in range(0, len(group), batch_size):
                 chunk = group[i: i + batch_size]
                 texts = [
@@ -1299,16 +1479,17 @@ def main() -> None:
                     for e in chunk
                 ]
                 gemini_stats["entries_attempted"] += len(chunk)
-                for model in model_chain:
-                    if model in _gemini_dead_models:
+                for spec in model_chain:
+                    if not classifier_key_present(spec) or classifier_dead(spec):
                         continue
+                    model_name = classifier_spec_name(spec)
                     todo = [j for j, e in enumerate(chunk)
                             if not e.get("llm_done")]
                     if not todo:
                         break
                     gemini_stats["requests"] += 1
-                    gid_lists = classify_gemini_batch(
-                        [texts[j] for j in todo], cfg, genres, model=model)
+                    gid_lists = classify_llm_batch(
+                        [texts[j] for j in todo], cfg, genres, spec=spec)
                     for j, gids in zip(todo, gid_lists):
                         if not gids:
                             continue
@@ -1318,10 +1499,10 @@ def main() -> None:
                         e["genres"] = postprocess_genres(
                             e["paper"], e["genres"], genres, cfg)
                         e["llm_done"] = True
-                        e["classifier"] = model
+                        e["classifier"] = model_name
                         gemini_stats["entries_classified"] += 1
 
-        classify_group(priority_group, [model_primary, model_secondary])
+        classify_group(priority_group, priority_chain)
         classify_group(deferred_group, defer_chain)
 
     # ---- fallback: TF-IDF classify (papers not yet classified) ------------
@@ -1337,8 +1518,8 @@ def main() -> None:
         print("[info] Gemini usage: skipped (dry-run; TF-IDF only)")
     elif not use_llm_cls:
         print("[info] Gemini usage: skipped (classify_with_llm=false)")
-    elif not gemini_stats["key_present"]:
-        print("[info] Gemini usage: skipped (GEMINI_API_KEY missing); "
+    elif not gemini_stats["classifier_key_present"]:
+        print("[info] LLM classification skipped (no classifier API key); "
               f"TF-IDF fallback={gemini_fallback}")
     else:
         translated = ""
@@ -1353,7 +1534,8 @@ def main() -> None:
             f"{gemini_stats['entries_attempted']}"
             f"{translated}, "
             f"tfidf_fallback={gemini_fallback}, "
-            f"disabled_models={sorted(_gemini_dead_models) or None}"
+            f"disabled_models="
+            f"{sorted(_gemini_dead_models | _openai_compat_dead_models) or None}"
         )
 
     # ---- translation via chain (all papers without jp) --------------------

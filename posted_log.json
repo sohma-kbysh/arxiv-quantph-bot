@@ -45734,5 +45734,764 @@
   "abstract_en": "A nonempty subfamily of a $k$-uniform hypergraph is an \\emph{even cover} if every vertex lies in an even number of its hyperedges; for $k=2$ these are edge-disjoint unions of cycles, so the minimum size of an even cover is the natural hypergraph analogue of girth. We prove Feige's 2008 conjecture on the hypergraph Moore bound: there are absolute constants $A$ and $C$ (independent of $k$) such that for every $k\\ge3$ and every $1\\le\\ell\\le n$, any $k$-uniform hypergraph on $n$ vertices with more than $C\\,n^{k/2}/\\ell^{k/2-1}$ hyperedges contains an even cover of size at most $A\\,\\ell\\log(en/\\ell)$. Our proof is based on sharp spectral bounds for Kikuchi matrices, which we expect to be of independent interest; we apply them to the refutation of random constraint satisfaction problems in a companion paper.",
   "abstract_ja": "$k$一様なハイパーグラフの空でない部分族は、すべての頂点がそのハイパーエッジの偶数個に属している場合、\\emph{偶被覆}と呼ばれます。$k=2$の場合、これらは辺で素な環の和集合であるため、偶被覆の最小サイズは自然なハイパーグラフのガースの類似物です。ハイパーグラフ・ムーア境界に関するファイギの2008年の予想を証明します。すなわち、絶対定数$A$と$C$($k$に依存しない)が存在し、任意の$k\\ge3$および任意の$1\\l\\ell\\le n$に対して$k、$n$C\\,n^{k/2}/\\ell^{$$の超辺を超えて、最大でサイズ$Aの偶数被覆を持つことを示す絶対定数$と$______が存在します。Ell\\Log(en/\\ell)$。我々の証明は菊池行列の鋭いスペクトル境界に基づいており、これは独立した関心事であると予想されます。これらは、伴随論文におけるランダム制約充足問題の反証に適用します。",
   "abstract_translated": "$k$一様なハイパーグラフの空でない部分族は、すべての頂点がそのハイパーエッジの偶数個に属している場合、\\emph{偶被覆}と呼ばれます。$k=2$の場合、これらは辺で素な環の和集合であるため、偶被覆の最小サイズは自然なハイパーグラフのガースの類似物です。ハイパーグラフ・ムーア境界に関するファイギの2008年の予想を証明します。すなわち、絶対定数$A$と$C$($k$に依存しない)が存在し、任意の$k\\ge3$および任意の$1\\l\\ell\\le n$に対して$k、$n$C\\,n^{k/2}/\\ell^{$$の超辺を超えて、最大でサイズ$Aの偶数被覆を持つことを示す絶対定数$と$______が存在します。Ell\\Log(en/\\ell)$。我々の証明は菊池行列の鋭いスペクトル境界に基づいており、これは独立した関心事であると予想されます。これらは、伴随論文におけるランダム制約充足問題の反証に適用します。"
+ },
+ {
+  "id": "2606.31601",
+  "posted_at": "2026-07-29T20:36:53Z",
+  "title": "Digital signature schemes based on code equivalence and syndrome decoding from restricted errors",
+  "title_ja": "制限された誤りからの符号同値性と症候群デコードに基づくデジタル署名方式",
+  "title_translated": "制限された誤りからの符号同値性と症候群デコードに基づくデジタル署名方式",
+  "translation_language": "ja",
+  "authors": "Sarah Arpin, Jason T. LeGrow, Hiram H. López, Gretchen L. Matthews",
+  "link": "https://arxiv.org/abs/2606.31601v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "qec"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Digital signature schemes are an important cryptographic tool to ensure data authenticity and integrity in many applications that must be resilient to attacks, including those facilitated by quantum computers. We consider the two digital signature schemes based on error-correcting codes that are second-round candidates in NIST's call for Additional Signature Schemes, which is part of the Post-Quantum Cryptography Standardization Process. Specifically, we provide an overview of the Codes and Restricted Objects Signature Scheme (CROSS) and the Linear Equivalence Signature Scheme (LESS). We describe their underlying problems of syndrome decoding from restricted errors and code equivalence. We review sigma protocols and how they can be transformed into digital signature schemes via the Fiat-Shamir transform. Finally, we explain how this procedure yields code-based digital signatures believed to be post-quantum secure.",
+  "abstract_ja": "デジタル署名スキームは、量子コンピュータによる攻撃を含む多くのアプリケーションにおいて、データの真正性と完全性を確保するための重要な暗号ツールです。NISTの追加署名スキーム募集(ポスト量子暗号標準化プロセスの一環)で、誤り訂正コードに基づく2つのデジタル署名方式を検討します。具体的には、符号および制限対象署名スキーム(CROSS)および線形同値シグネチャスキーム(LESS)の概要を提供します。制限された誤りやコード同値性による症候群の解読という根本的な問題について説明します。シグマプロトコルをレビューし、フィアット・シャミール変換を通じてデジタル署名方式に変換する方法を解説します。最後に、この手法がポスト量子安全と考えられるコードベースのデジタル署名を生み出す方法を説明します。",
+  "abstract_translated": "デジタル署名スキームは、量子コンピュータによる攻撃を含む多くのアプリケーションにおいて、データの真正性と完全性を確保するための重要な暗号ツールです。NISTの追加署名スキーム募集(ポスト量子暗号標準化プロセスの一環)で、誤り訂正コードに基づく2つのデジタル署名方式を検討します。具体的には、符号および制限対象署名スキーム(CROSS)および線形同値シグネチャスキーム(LESS)の概要を提供します。制限された誤りやコード同値性による症候群の解読という根本的な問題について説明します。シグマプロトコルをレビューし、フィアット・シャミール変換を通じてデジタル署名方式に変換する方法を解説します。最後に、この手法がポスト量子安全と考えられるコードベースのデジタル署名を生み出す方法を説明します。"
+ },
+ {
+  "id": "2607.03802",
+  "posted_at": "2026-07-29T20:36:56Z",
+  "title": "The Hermitian Hull Dimensions for a Class of (L,P)-Twisted Generalized Reed-Solomon Codes",
+  "title_ja": "(L,P)-ねじれ一般化リード-ソロモン符号のクラスにおけるエルミート殻次元",
+  "title_translated": "(L,P)-ねじれ一般化リード-ソロモン符号のクラスにおけるエルミート殻次元",
+  "translation_language": "ja",
+  "authors": "Chenlu Jia, Zhonghao Liang, Yue Huang, Qunying Liao",
+  "link": "https://arxiv.org/abs/2607.03802v1",
+  "primary": "cs.IT",
+  "source_feed": "cs.IT",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec",
+   "qit"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論",
+   "量子情報理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Determining the hull of linear codes has long been an important topic in coding theory. Recently, non-generalized Reed-Solomon (in short, non-GRS) codes have attracted extensive research interest. The (L,P)-twisted generalized Reed-Solomon (in short, (L,P)-TGRS) code, which is an extension of the generalized Reed-Solomon (GRS) code, constitutes a well-studied calss of non-GRS codes.There are numerous works focusing on the Euclidean hull of (L,P)-TGRS codes, while only a few results on the Hermitian hull of (L,P)-TGRS codes. In this paper, we focus on a class of (L,P)-TGRS codes C_k(a). By taking a special class of the vector a with length i(q-1), and analyze the parity of i and the relation between i and q+1, we divide three cases to fully determine the Hermitian hull dimension of C_k(a). As an application, we construct two classes of entanglement-assisted quantum error-correcting codes.",
+  "abstract_ja": "線形符号のハルを決定することは、符号理論において長い間重要なテーマでした。近年では、非一般化リード・ソロモン符号(略して非GRS)符号が広範な研究関心を集めています。(L,P)ねじれた一般化リード・ソロモン符号(略して (L,P)-TGRS)符号は、一般化されたリード・ソロモン符号(GRS)の拡張であり、非GRS符号のよく研究されたカルスを構成します。(L,P)-TGRS コードのユークリッド包に焦点を当てた研究は多数存在し、(L,P)-TGRS コードのエルミート包体に関する結果はごくわずかです。本論文では、(L,P)-TGRS コードのクラス C_k(a) に焦点を当てます。長さ i(q-1) のベクトル a の特別なクラスを取り、i のパリティと i と q+1 の関係を解析することで、3つのケースを分割して C_k(a) のエルミート殻次元を完全に決定します。応用として、私たちはエンタングルメント支援量子誤り訂正符号の2つのクラスを構築します。",
+  "abstract_translated": "線形符号のハルを決定することは、符号理論において長い間重要なテーマでした。近年では、非一般化リード・ソロモン符号(略して非GRS)符号が広範な研究関心を集めています。(L,P)ねじれた一般化リード・ソロモン符号(略して (L,P)-TGRS)符号は、一般化されたリード・ソロモン符号(GRS)の拡張であり、非GRS符号のよく研究されたカルスを構成します。(L,P)-TGRS コードのユークリッド包に焦点を当てた研究は多数存在し、(L,P)-TGRS コードのエルミート包体に関する結果はごくわずかです。本論文では、(L,P)-TGRS コードのクラス C_k(a) に焦点を当てます。長さ i(q-1) のベクトル a の特別なクラスを取り、i のパリティと i と q+1 の関係を解析することで、3つのケースを分割して C_k(a) のエルミート殻次元を完全に決定します。応用として、私たちはエンタングルメント支援量子誤り訂正符号の2つのクラスを構築します。"
+ },
+ {
+  "id": "2607.07181",
+  "posted_at": "2026-07-29T20:36:59Z",
+  "title": "Four classes of few-weight self-orthogonal codes and their applications for LCD codes and quantum codes",
+  "title_ja": "4つのクラスの少重自己直交符号と、そのLCD符号および量子符号への応用",
+  "title_translated": "4つのクラスの少重自己直交符号と、そのLCD符号および量子符号への応用",
+  "translation_language": "ja",
+  "authors": "Yue Huang, Zhonghao Liang, Chenlu Jia, Yongkang Wan, Qunying Liao",
+  "link": "https://arxiv.org/abs/2607.07181v1",
+  "primary": "cs.IT",
+  "source_feed": "cs.IT",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Since self-orthogonal codes, few-weight codes, linear complementary dual codes(LCD codes, for short) and quantum codes have nice applications in coding theory and cryptography, they have received continuous attention. In 2024, by introducing the notion of the augment code, Heng et al.[30] constructed several classes of few-weight self-orthogonal codes basing on defining sets, which are introduced by Ding et al.[10] in 2007. In this manuscript, for two classes of defining sets, we consider the corresponding augmented codes, construct a class of projective four-weight self-orthogonal codes and three classes of four-weight self-orthogonal codes. And for two classes of these four-weight self-orthogonal linear codes, we determine the parameters of their dual codes. As applications, we construct two classes of LCD codes and a class of quantum codes. In particular, we prove that there exists a class of these LCD codes whose dual codes are almost optimal LCD codes according to the sphere packing bound, and a class of quantum codes are AMDS according to the quantum Singleton bound.",
+  "abstract_ja": "自己直交符号、少重符号、線形補完双対符号(略してLCD符号)、量子符号は符号理論や暗号学において良い応用があるため、継続的に注目を集めています。2024年、拡張符号の概念を導入することで、Hengら[30]は定義集合に基づくいくつかの低重自己直交符号のクラスを構築し、これらは2007年にDingら[10]によって導入されました。本稿では、定義集合の2つのクラスについて、対応する拡張符号を考慮し、射影4重自己直交符号のクラスと4重自己直交符号のクラス3つを構築します。そして、これら4重み自己直交線形符号の2つのクラスについて、それらの双対符号のパラメータを決定します。応用として、LCDコードの2つのクラスと量子コードのクラスを構築します。特に、これらのLCD符号のクラスの存在で、その双対符号が球面パッキング境界に従ってほぼ最適LCD符号であり、量子シングルトン境界に従ってAMDSとなる量子符号のクラスが存在することを証明します。",
+  "abstract_translated": "自己直交符号、少重符号、線形補完双対符号(略してLCD符号)、量子符号は符号理論や暗号学において良い応用があるため、継続的に注目を集めています。2024年、拡張符号の概念を導入することで、Hengら[30]は定義集合に基づくいくつかの低重自己直交符号のクラスを構築し、これらは2007年にDingら[10]によって導入されました。本稿では、定義集合の2つのクラスについて、対応する拡張符号を考慮し、射影4重自己直交符号のクラスと4重自己直交符号のクラス3つを構築します。そして、これら4重み自己直交線形符号の2つのクラスについて、それらの双対符号のパラメータを決定します。応用として、LCDコードの2つのクラスと量子コードのクラスを構築します。特に、これらのLCD符号のクラスの存在で、その双対符号が球面パッキング境界に従ってほぼ最適LCD符号であり、量子シングルトン境界に従ってAMDSとなる量子符号のクラスが存在することを証明します。"
+ },
+ {
+  "id": "2607.12187",
+  "posted_at": "2026-07-29T20:37:00Z",
+  "title": "Auxiliary Nodes for BP Decoding of Quantum LDPC Codes",
+  "title_ja": "量子LDPC符号のBP復号のための補助ノード",
+  "title_translated": "量子LDPC符号のBP復号のための補助ノード",
+  "translation_language": "ja",
+  "authors": "Daniel Tandler, Paul Bezner, Stephan ten Brink",
+  "link": "https://arxiv.org/abs/2607.12187v1",
+  "primary": "cs.IT",
+  "source_feed": "cs.IT",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Many recently proposed Calderbank-Shor-Steane (CSS) quantum low-density parity-check (QLDPC) codes have sparse decoding graphs, enabling syndrome-based belief propagation (BP) decoding at low complexity. Their construction, however, often results in properties that impair BP performance, such as short cycles and degeneracy. In this work, we propose a general framework for introducing auxiliary variable nodes (AVNs) and auxiliary check nodes (ACNs) into the decoding graph of CSS codes, compatible with the standard stabilizer measurement framework. This provides an additional degree of freedom in the design of the decoding graph itself and can be used to tackle the aforementioned shortcomings. We show that recently proposed techniques, 4-cycle removal and subcode ensemble decoding, can be interpreted as instances of this framework. For 4-cycle removal, we find that the gains depend strongly on the BP iteration count and check-node message scaling. Building on this framework, we further propose a graph-derived subcode ensemble decoder and demonstrate under circuit-level noise that it substantially reduces the per-round logical error rate compared with BP on the corresponding 4-cycle-free decoding graph.",
+  "abstract_ja": "最近提案された多くのカルダーバンク-ショール-スティーン(CSS)量子低密度パリティチェック(QLDPC)コードは、疎化デコードグラフを持ち、低複雑さでシンドロームベースの信念伝播(BP)デコードが可能です。しかし、その構造はしばしば短周期や縮退などBPのパフォーマンスを損なう性質をもたらします。本研究では、標準的な安定化装置測定フレームワークと互換性のある、CSSコードのデコードグラフに補助変数ノード(AVN)および補助チェックノード(ACN)を導入するための一般的なフレームワークを提案します。これにより、復号グラフ自体の設計にさらなる自由度が与えられ、前述の欠点を補うことができます。最近提案された4サイクル除去やサブコードアンサンブル復号法は、この枠組みの例として解釈できることを示しています。4サイクル除去の場合、ゲインはBPの反復回数とチェックノードメッセージのスケーリングに大きく依存することがわかります。この枠組みを基に、グラフ由来のサブコードアンサンブルデコーダをさらに提案し、回路レベルのノイズ下で対応する4サイクルフリー復号グラフ上のBPと比較して、1ラウンドあたりの論理誤り率を大幅に低減することを実証します。",
+  "abstract_translated": "最近提案された多くのカルダーバンク-ショール-スティーン(CSS)量子低密度パリティチェック(QLDPC)コードは、疎化デコードグラフを持ち、低複雑さでシンドロームベースの信念伝播(BP)デコードが可能です。しかし、その構造はしばしば短周期や縮退などBPのパフォーマンスを損なう性質をもたらします。本研究では、標準的な安定化装置測定フレームワークと互換性のある、CSSコードのデコードグラフに補助変数ノード(AVN)および補助チェックノード(ACN)を導入するための一般的なフレームワークを提案します。これにより、復号グラフ自体の設計にさらなる自由度が与えられ、前述の欠点を補うことができます。最近提案された4サイクル除去やサブコードアンサンブル復号法は、この枠組みの例として解釈できることを示しています。4サイクル除去の場合、ゲインはBPの反復回数とチェックノードメッセージのスケーリングに大きく依存することがわかります。この枠組みを基に、グラフ由来のサブコードアンサンブルデコーダをさらに提案し、回路レベルのノイズ下で対応する4サイクルフリー復号グラフ上のBPと比較して、1ラウンドあたりの論理誤り率を大幅に低減することを実証します。"
+ },
+ {
+  "id": "2607.20805",
+  "posted_at": "2026-07-29T20:37:01Z",
+  "title": "New Criteria and Constructions for Self-Orthogonal Codes",
+  "title_ja": "自己直交符号の新しい基準と構成",
+  "title_translated": "自己直交符号の新しい基準と構成",
+  "translation_language": "ja",
+  "authors": "Peng Wang, Ziling Heng",
+  "link": "https://arxiv.org/abs/2607.20805v1",
+  "primary": "cs.IT",
+  "source_feed": "cs.IT",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Self-orthogonal codes have attracted considerable attention owing to their applications in quantum error-correcting codes, linear complementary dual codes, and a variety of other fields. In this paper, we construct new families of self-orthogonal codes and self-orthogonal minimal codes by establishing criteria that characterize the self-orthogonality of certain linear codes. To this end, we first establish several new criteria for linear codes arising from the defining-set construction to be self-orthogonal. More specifically, for $q > 3$, we show that the code $\\mathcal{C}_D$ is self-orthogonal whenever the defining set $D$ is $G$-invariant, where $G \\subseteq \\mathbb{F}_q^*$ and $|G| > 2$. For $q = 2, 3$, we characterize the self-orthogonality of $\\mathcal{C}_D$ using certain character sums. By combining these criteria with partial difference sets, we construct several new families of self-orthogonal codes, which lead to optimal or almost optimal quantum codes. Secondly, via the action of a multiplicative subgroup $G \\subseteq \\mathbb{F}_q^*$ with $|G| > 2$ on the columns of a projective linear code, we construct self-orthogonal codes with flexible parameters. From their augmented codes, we derive quantum codes. By choosing suitable projective codes, we obtain optimal quantum codes with high parametric flexibility. Thirdly, we employ the characteristic function method to construct linear codes and establish criterion for their self-orthogonality. Based on this, we construct several classes of self-orthogonal minimal codes that violate the Ashikhmin-Barg condition, using vectorial dual-bent functions and $s$-plateaued functions.",
+  "abstract_ja": "自己直交符号は、量子誤り訂正符号、線形補完双対符号、その他さまざまな分野での応用により大きな注目を集めています。本論文では、特定の線形符号の自己直交性を特徴づける基準を確立し、新たな自己直交符号族および自己直交最小符号族を構築します。この目的のために、まず定義集合構成から生じる線形符号が自己直交であることを示すいくつかの新しい基準を確立します。より具体的には、$q > 3$ に対して、コード $\\mathcal{C}_D$ は定義集合 $D$ が$G$-不変であるときに自己直交的であることを示し、ここで $G \\subseteq \\mathbb{F}_q^*$ および $|G|>2ドル。$q = 2, 3$の場合、特定の文字和を用いて$\\mathcal{C}_D$の自己直交性を特徴付けます。これらの基準と偏差集合を組み合わせることで、いくつかの新しい自己直交符号族を構築し、最適またはほぼ最適の量子符号へと導きます。次に、乗法部分群 $G \\subseteq \\mathbb{F}_q^*$ の作用を通じて、G|射影線形符号の列に2$>、柔軟なパラメータを持つ自己直交符号を構成します。拡張されたコードから量子コードを導き出します。適切な射影符号を選択することで、高いパラメトリック柔軟性を持つ最適な量子符号が得られます。第三に、特徴関数法を用いて線形符号を構築し、その自己直交性の基準を確立します。これに基づき、ベクトル双対ベント関数と$s$プラトー関数を用いて、アシクミン・バーグ条件に違反する自己直交最小符号のクラスを複数構成します。",
+  "abstract_translated": "自己直交符号は、量子誤り訂正符号、線形補完双対符号、その他さまざまな分野での応用により大きな注目を集めています。本論文では、特定の線形符号の自己直交性を特徴づける基準を確立し、新たな自己直交符号族および自己直交最小符号族を構築します。この目的のために、まず定義集合構成から生じる線形符号が自己直交であることを示すいくつかの新しい基準を確立します。より具体的には、$q > 3$ に対して、コード $\\mathcal{C}_D$ は定義集合 $D$ が$G$-不変であるときに自己直交的であることを示し、ここで $G \\subseteq \\mathbb{F}_q^*$ および $|G|>2ドル。$q = 2, 3$の場合、特定の文字和を用いて$\\mathcal{C}_D$の自己直交性を特徴付けます。これらの基準と偏差集合を組み合わせることで、いくつかの新しい自己直交符号族を構築し、最適またはほぼ最適の量子符号へと導きます。次に、乗法部分群 $G \\subseteq \\mathbb{F}_q^*$ の作用を通じて、G|射影線形符号の列に2$>、柔軟なパラメータを持つ自己直交符号を構成します。拡張されたコードから量子コードを導き出します。適切な射影符号を選択することで、高いパラメトリック柔軟性を持つ最適な量子符号が得られます。第三に、特徴関数法を用いて線形符号を構築し、その自己直交性の基準を確立します。これに基づき、ベクトル双対ベント関数と$s$プラトー関数を用いて、アシクミン・バーグ条件に違反する自己直交最小符号のクラスを複数構成します。"
+ },
+ {
+  "id": "2607.24891",
+  "posted_at": "2026-07-29T20:37:03Z",
+  "title": "High-Performance Reinforcement-Learned BP Decoding of Quantum LDPC Codes",
+  "title_ja": "量子LDPCコードの高性能強化学習BP復号",
+  "title_translated": "量子LDPCコードの高性能強化学習BP復号",
+  "translation_language": "ja",
+  "authors": "Mohsen Moradi, Vahid Nourozi, Taejoon Kim, Remi A. Chou, David G. M. Mitchell",
+  "link": "https://arxiv.org/abs/2607.24891v1",
+  "primary": "cs.IT",
+  "source_feed": "cs.IT",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Belief-propagation (BP) decoding is attractive for quantum low-density parity-check (QLDPC) codes because it uses local message passing on sparse Tanner graphs. However, conventional flooding BP often stalls due to stabilizer degeneracy and short cycles. Reinforcement-learning-based sequential variable-node scheduling (RL-S), which learns the update order offline, has shown that adaptive scheduling can improve BP convergence. In this paper, we extend this idea with a second-order local update decoder, RL-S2LU. The proposed decoder preserves BP locality and low complexity, while numerical results show significant error-correction gains over conventional BP and the considered BP-OSD-10 baseline.",
+  "abstract_ja": "信念伝播(BP)デコードは、スパース・タナーグラフ上で局所メッセージを渡すため、量子低密度パリティチェック(QLDPC)符号に魅力的です。しかし、従来の洪水BPは安定化器の縮退や短いサイクルによりしばしば停滞します。更新順序をオフラインで学習する強化学習ベースの逐次変数ノードスケジューリング(RL-S)は、適応型スケジューリングがBP収束を改善することを示しています。本論文では、この考えを二次局所更新デコーダであるRL-S2LUで拡張します。提案されたデコーダはBPの局所性と低複雑さを維持し、数値的結果では従来のBPや考慮されたBP-OSD-10ベースラインに比べて誤り訂正の大きな向上が示されています。",
+  "abstract_translated": "信念伝播(BP)デコードは、スパース・タナーグラフ上で局所メッセージを渡すため、量子低密度パリティチェック(QLDPC)符号に魅力的です。しかし、従来の洪水BPは安定化器の縮退や短いサイクルによりしばしば停滞します。更新順序をオフラインで学習する強化学習ベースの逐次変数ノードスケジューリング(RL-S)は、適応型スケジューリングがBP収束を改善することを示しています。本論文では、この考えを二次局所更新デコーダであるRL-S2LUで拡張します。提案されたデコーダはBPの局所性と低複雑さを維持し、数値的結果では従来のBPや考慮されたBP-OSD-10ベースラインに比べて誤り訂正の大きな向上が示されています。"
+ },
+ {
+  "id": "2607.01671",
+  "posted_at": "2026-07-29T20:37:04Z",
+  "title": "Self-Referential $K$-SAT and the Finite Analogue of Gödel's Incompleteness Theorem",
+  "title_ja": "自己参照的 $K$-SAT とゲーデルの不完全性定理の有限類似物",
+  "title_translated": "自己参照的 $K$-SAT とゲーデルの不完全性定理の有限類似物",
+  "translation_language": "ja",
+  "authors": "Wen Fang, Xianxian Li, Jun Liu, Jie Luo, Yongxin Tong, Ke Xu",
+  "link": "https://arxiv.org/abs/2607.01671v1",
+  "primary": "cs.CC",
+  "source_feed": "cs.CC",
+  "announce_type": "external",
+  "genre_ids": [
+   "complexity",
+   "algo"
+  ],
+  "genre_names": [
+   "量子複雑性理論",
+   "量子アルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash-lite",
+  "abstract_en": "Self-reference and solution independence are core properties underlying intractability. This paper establishes a finite combinatorial analogue of Gödel's incompleteness theorems within Boolean $K$-SAT. While standard random $K$-SAT has assignment correlations that disrupt solution independence, we resolve this via a logarithmic-width ensemble ($K = O(\\log N)$). Here, satisfying assignments converge to a Poisson distribution, letting unsatisfiable and uniquely satisfiable formulas coexist. By executing a single-clause substitution conditioned on the unique solution, we construct structurally irreducible SAT/UNSAT pairs that are indistinguishable via local evaluation. Using algorithmic information theory and Shannon channels, we prove that deductive pipelines restricted to a sublinear window suffer from an informational blind spot, forcing a descriptive lower bound of $K(\\mathcal{A}) \\geq Ω(N^{1-δ})$. This deficit forces any Resolution refutation of the UNSAT instance to utilize wide clauses ($w(π) \\geq Ω(N^{1-δ})$), triggering an exponential proof-tree explosion ($S(φ) \\geq \\exp(Ω(N^{1-2δ}))$). As $δ\\rightarrow 0^+$, this bound converges to the worst-case $2^N$ threshold, reframing the Strong Exponential Time Hypothesis (SETH) as a direct projection of Gödel incompleteness onto finite computation. We diagnose the decades-long stagnation in complexity theory. Transitioning from Turing's class separation to a Gödelian paradigm of instance indistinguishability, we introduce a multi-dimensional comparative framework that contrasts these two historical lineages across distinct perspectives. The self-referential hardness exhibits physical invariance: it precludes quantum shortcuts due to the necessity of global semantic analysis and delineates a scaling bottleneck for machine learning architectures operating on lossy, local compression.",
+  "abstract_ja": "自己参照性と解の独立性は、難解性の根底にある核心的な特性です。本論文は、ブール$K$-SATにおけるゲーデルの不完全性定理の有限組合せ的類似物を確立します。標準的なランダム$K$-SATは解の独立性を乱す割り当て相関を持ちますが、これは対数幅アンサンブル($K = O(\\log N)$)によって解消されます。ここで、充足する割り当てはポアソン分布に収束し、充足不可能かつ一意に充足可能な公式が共存します。一意解を条件に単一節の置換を行うことで、局所評価で区別できない構造的に既約なSAT/UNSATペアを構築します。アルゴリズム情報理論とシャノンチャネルを用いて、サブリニアウィンドウに制限された演繹的パイプラインには情報盲点があり、記述的な下限が$K(\\mathcal{A}) \\geq Ω(N^{1-δ}))$であることを証明しました。この欠損により、UNSATインスタンスに対する決議反論は広い節($w(π) \\geq Ω(N^{1-δ}))$)を用い、指数関数的な証明木爆発($S(φ) \\geq \\exp(Ω(N^{2δ})))を発生させます。$δ\\rightarrow 0^+$ の場合、この束縛は最悪の場合の$2^N$閾値に収束し、強い指数時間仮説(SETH)をゲーデル不完全性を有限計算に直接投影したものとして再構成します。私たちは複雑性理論の数十年にわたる停滞を診断します。チューリングの階級分離から、インスタンスの区別不能性に関するゲーデル的パラダイムへと移行し、これら二つの歴史的系譜を異なる視点で対比する多次元比較枠組みを導入します。自己参照的な硬さは物理的不変性を示します。グローバルセマンティック解析の必要性から量子近道を排除し、ロッシィな局所圧縮で動作する機械学習アーキテクチャにおけるスケーリングのボトルネックを明確にします。",
+  "abstract_translated": "自己参照性と解の独立性は、難解性の根底にある核心的な特性です。本論文は、ブール$K$-SATにおけるゲーデルの不完全性定理の有限組合せ的類似物を確立します。標準的なランダム$K$-SATは解の独立性を乱す割り当て相関を持ちますが、これは対数幅アンサンブル($K = O(\\log N)$)によって解消されます。ここで、充足する割り当てはポアソン分布に収束し、充足不可能かつ一意に充足可能な公式が共存します。一意解を条件に単一節の置換を行うことで、局所評価で区別できない構造的に既約なSAT/UNSATペアを構築します。アルゴリズム情報理論とシャノンチャネルを用いて、サブリニアウィンドウに制限された演繹的パイプラインには情報盲点があり、記述的な下限が$K(\\mathcal{A}) \\geq Ω(N^{1-δ}))$であることを証明しました。この欠損により、UNSATインスタンスに対する決議反論は広い節($w(π) \\geq Ω(N^{1-δ}))$)を用い、指数関数的な証明木爆発($S(φ) \\geq \\exp(Ω(N^{2δ})))を発生させます。$δ\\rightarrow 0^+$ の場合、この束縛は最悪の場合の$2^N$閾値に収束し、強い指数時間仮説(SETH)をゲーデル不完全性を有限計算に直接投影したものとして再構成します。私たちは複雑性理論の数十年にわたる停滞を診断します。チューリングの階級分離から、インスタンスの区別不能性に関するゲーデル的パラダイムへと移行し、これら二つの歴史的系譜を異なる視点で対比する多次元比較枠組みを導入します。自己参照的な硬さは物理的不変性を示します。グローバルセマンティック解析の必要性から量子近道を排除し、ロッシィな局所圧縮で動作する機械学習アーキテクチャにおけるスケーリングのボトルネックを明確にします。"
+ },
+ {
+  "id": "2607.08888",
+  "posted_at": "2026-07-29T20:37:07Z",
+  "title": "QMA Lower Bounds for Batch Verification via Approximate Degree",
+  "title_ja": "バッチ検証のQMA下限(近似次数による)",
+  "title_translated": "バッチ検証のQMA下限(近似次数による)",
+  "translation_language": "ja",
+  "authors": "Mark Bun, Mandar Juvekar, Samuel King",
+  "link": "https://arxiv.org/abs/2607.08888v1",
+  "primary": "cs.CC",
+  "source_feed": "cs.CC",
+  "announce_type": "external",
+  "genre_ids": [
+   "complexity"
+  ],
+  "genre_names": [
+   "量子複雑性理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We study batch verification in QMA query and communication complexity, where the goal is to understand how the resources needed to verify $m$ copies of a Boolean function $f$ depend on $m$. We give a general technique for proving lower bounds on the witness-query tradeoff needed to batch verify a function $f$ in terms of its approximate degree. Applying this technique to an explicit family of DNF formulas $f$, we show that attempting to save even a constant factor on the witness length of the baseline approach to batch verifying $f$ necessitates a large polynomial increase in the query cost. We also obtain new lower bounds on the QMA query complexity of read-once CNF formulas and on the surjectivity and $k$-element distinctness functions. Our lower bounds also lift to give communication analogs of these results.",
+  "abstract_ja": "私たちはQMAクエリと通信複雑性におけるバッチ検証を研究し、$m$のブール関数$f検証に必要なリソースが$m$に依存していることを理解することを目的としています。関数$f$を近似次数でバッチ検証するために必要な証人-クエリのトレードオフの下限を証明する一般的な手法を示します。この手法を明示的なDNF式の族$f$に適用すると、$f$をバッチ検証するベースラインアプローチの証人長に定数因子を節約しようとすると、クエリコストが大幅に増加することが示されました。また、読み取り一度のCNF式のQMAクエリ複雑度および全射関数および$k$要素の区別関数の新しい下限も得られます。また、下限も上昇し、これらの結果のコミュニケーションの類似例を与えます。",
+  "abstract_translated": "私たちはQMAクエリと通信複雑性におけるバッチ検証を研究し、$m$のブール関数$f検証に必要なリソースが$m$に依存していることを理解することを目的としています。関数$f$を近似次数でバッチ検証するために必要な証人-クエリのトレードオフの下限を証明する一般的な手法を示します。この手法を明示的なDNF式の族$f$に適用すると、$f$をバッチ検証するベースラインアプローチの証人長に定数因子を節約しようとすると、クエリコストが大幅に増加することが示されました。また、読み取り一度のCNF式のQMAクエリ複雑度および全射関数および$k$要素の区別関数の新しい下限も得られます。また、下限も上昇し、これらの結果のコミュニケーションの類似例を与えます。"
+ },
+ {
+  "id": "2607.05429",
+  "posted_at": "2026-07-29T20:37:09Z",
+  "title": "Grover-Based PLS: AUD and Beamforming with Artificial Noise in CD-NOMA",
+  "title_ja": "グローバーベースPLS:CD-NOMAにおける人工ノイズを用いたAUDとビームフォーミング",
+  "title_translated": "グローバーベースPLS:CD-NOMAにおける人工ノイズを用いたAUDとビームフォーミング",
+  "translation_language": "ja",
+  "authors": "Deemah H. Tashman, Soumaya Cherkaoui",
+  "link": "https://arxiv.org/abs/2607.05429v1",
+  "primary": "cs.IT",
+  "source_feed": "cs.IT",
+  "announce_type": "external",
+  "genre_ids": [
+   "algo",
+   "network",
+   "crypto"
+  ],
+  "genre_names": [
+   "量子アルゴリズム",
+   "量子ネットワーク・通信",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Sixth-Generation (6G) networks will require massive connectivity, ultra-low latency, and robust security, making reliable Active User Detection (AUD) essential for interference control and physical layer protection. This letter proposes a Grover-based physical layer security (PLS) framework for a code-domain non-orthogonal multiple access (CD-NOMA) network, where the base station employs artificial-noise (AN)-assisted beamforming and identifies the active set via Grover's quantum search algorithm. We consider two threat models: passive eavesdroppers formed by detected inactive users, and active eavesdroppers selected as the top f% most frequent transmitters among detected active users. By aligning beams and AN with the Grover-based AUD output, the proposed scheme enlarges the main-wiretap rate gap and significantly improves the average secrecy rate compared with compressive sensing and classical correlation receiver baselines, while approaching maximum-likelihood detection performance with a quadratic reduction in search complexity. The impact of the information/AN power split, the base station transmit power, and the fraction of highly active users treated as eavesdroppers on secrecy is characterized through numerical simulations, and design insights are extracted for 6G PLS under both passive and active eavesdropping.",
+  "abstract_ja": "第6世代(6G)ネットワークは大規模な接続性、超低遅延、堅牢なセキュリティを必要とし、信頼性の高いアクティブユーザー検出(AUD)が干渉制御や物理層保護に不可欠です。本書は、基地局が人工ノイズ(AN)支援ビームフォーミングを用い、グローバーの量子探索アルゴリズムによってアクティブ集合を特定するコードドメイン非直交多重接続(CD-NOMA)ネットワーク向けのグローバーベースの物理層セキュリティ(PLS)フレームワークを提案しています。私たちは2つの脅威モデルを検討します。非アクティブユーザーが検出された受動的な盗聴者と、検出されたアクティブユーザーの中でトップf%で最も頻繁に送信するアクティブ盗聴者です。ビームとANをグローバーベースのAUD出力に整列させることで、提案されたスキームはメインワイタップのレートギャップを拡大し、圧縮センシングや古典的相関受信機ベースラインと比較して平均秘密率を大幅に向上させるとともに、探索複雑度を2乗的に低減しながら最大尤検出性能に近づきます。情報/ANの電力分配、基地局の送信出力、そして盗聴者として扱われる高度アクティブユーザーの割合が秘密性に与える影響は数値シミュレーションを通じて特徴づけられ、6G PLSの設計洞察は受動的および能動的の両方で抽出されます。",
+  "abstract_translated": "第6世代(6G)ネットワークは大規模な接続性、超低遅延、堅牢なセキュリティを必要とし、信頼性の高いアクティブユーザー検出(AUD)が干渉制御や物理層保護に不可欠です。本書は、基地局が人工ノイズ(AN)支援ビームフォーミングを用い、グローバーの量子探索アルゴリズムによってアクティブ集合を特定するコードドメイン非直交多重接続(CD-NOMA)ネットワーク向けのグローバーベースの物理層セキュリティ(PLS)フレームワークを提案しています。私たちは2つの脅威モデルを検討します。非アクティブユーザーが検出された受動的な盗聴者と、検出されたアクティブユーザーの中でトップf%で最も頻繁に送信するアクティブ盗聴者です。ビームとANをグローバーベースのAUD出力に整列させることで、提案されたスキームはメインワイタップのレートギャップを拡大し、圧縮センシングや古典的相関受信機ベースラインと比較して平均秘密率を大幅に向上させるとともに、探索複雑度を2乗的に低減しながら最大尤検出性能に近づきます。情報/ANの電力分配、基地局の送信出力、そして盗聴者として扱われる高度アクティブユーザーの割合が秘密性に与える影響は数値シミュレーションを通じて特徴づけられ、6G PLSの設計洞察は受動的および能動的の両方で抽出されます。"
+ },
+ {
+  "id": "2607.08226",
+  "posted_at": "2026-07-29T20:37:13Z",
+  "title": "Threshold Authorization Without Threshold Signatures: Signature-Agnostic MPC Custody",
+  "title_ja": "閾値署名なしの閾値認可:署名に依存しないMPC保管",
+  "title_translated": "閾値署名なしの閾値認可:署名に依存しないMPC保管",
+  "translation_language": "ja",
+  "authors": "Dariia Porechna",
+  "link": "https://arxiv.org/abs/2607.08226v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "crypto"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Digital-asset custody has been built on threshold multi-party approval: no operation proceeds unless $t$ of $n$ parties approve, and fewer than t compromised parties can neither authorize nor learn the authorization secret. Threshold signature schemes (TSS) have been the standard mechanism, but the post-quantum transition disrupts this model: standardized hash-based signatures resist efficient threshold signing, and lattice-based threshold protocols remain an emerging research track. We present a dual-gate architecture that separates member authentication from threshold authorization. Each member signs its approval with an ordinary signature under any EUF-CMA scheme; the quorum jointly produces a threshold seal from Shamir-shared secrets bound to the operation. The seal is the base instance of a programmable authorization computation: simple quorum is the minimal policy, while richer policies can evaluate secret-shared state without making the member-signature scheme part of that computation. The signature scheme is a deployment parameter: migrating from ECDSA to SLH-DSA or ML-DSA is a key rotation, not a protocol redesign, and members holding keys in commodity HSMs participate through the standard sign API. The architecture can be deployed wherever the asset-control path supports programmable verification, such as smart contracts, vault modules, or HSMs guarding a master key, and produces an enforcement-layer authorization rather than a native chain signature. Below-threshold secrecy is information-theoretic; an adversary holding $\\geq t$ signing keys but no coefficient shares still cannot produce the seal.",
+  "abstract_ja": "デジタル資産の保管は、閾値の多当事者承認に基づいて構築されています。$n$中$t$の承認なしには作戦は進行せず、侵害された当事者は承認秘密を承認も知ることもできません。閾値シグネチャ方式(TSS)は標準的なメカニズムですが、ポスト量子移行はこのモデルを乱します。標準化されたハッシュベースの署名は効率的な閾値署名に抵抗し、格子ベースの閾値プロトコルは依然として新興の研究路線です。メンバー認証と閾値認可を分離するデュアルゲートアーキテクチャを提案します。各加盟国はEUF-CMA制度において通常の署名で承認に署名します。定足数は、シャミールが共有する秘密から作戦に結びついた閾値封印を共同で作成します。シールはプログラム可能な認可計算の基本インスタンスであり、単純なクォーラムが最小ポリシーであり、リッチなポリシーはメンバー署名スキームを計算に含めずに秘密共有状態を評価できます。署名スキームは展開パラメータであり、ECDSAからSLH-DSAまたはML-DSAへの移行は鍵の回転であり、プロトコルの再設計ではありません。一般的なHSMで鍵を保有するメンバーは標準の署名APIを通じて参加します。このアーキテクチャは、スマートコントラクト、ヴォールトモジュール、マスターキーを守るHSMなど、プログラム可能な検証をサポートする資産制御経路のどこでも展開でき、ネイティブのチェーン署名ではなく強制層の認可を生成します。閾値以下の秘密は情報理論的であり、$\\GEQ T$を保持して鍵に署名しても係数シェアがない敵対者は、印章を発行できません。",
+  "abstract_translated": "デジタル資産の保管は、閾値の多当事者承認に基づいて構築されています。$n$中$t$の承認なしには作戦は進行せず、侵害された当事者は承認秘密を承認も知ることもできません。閾値シグネチャ方式(TSS)は標準的なメカニズムですが、ポスト量子移行はこのモデルを乱します。標準化されたハッシュベースの署名は効率的な閾値署名に抵抗し、格子ベースの閾値プロトコルは依然として新興の研究路線です。メンバー認証と閾値認可を分離するデュアルゲートアーキテクチャを提案します。各加盟国はEUF-CMA制度において通常の署名で承認に署名します。定足数は、シャミールが共有する秘密から作戦に結びついた閾値封印を共同で作成します。シールはプログラム可能な認可計算の基本インスタンスであり、単純なクォーラムが最小ポリシーであり、リッチなポリシーはメンバー署名スキームを計算に含めずに秘密共有状態を評価できます。署名スキームは展開パラメータであり、ECDSAからSLH-DSAまたはML-DSAへの移行は鍵の回転であり、プロトコルの再設計ではありません。一般的なHSMで鍵を保有するメンバーは標準の署名APIを通じて参加します。このアーキテクチャは、スマートコントラクト、ヴォールトモジュール、マスターキーを守るHSMなど、プログラム可能な検証をサポートする資産制御経路のどこでも展開でき、ネイティブのチェーン署名ではなく強制層の認可を生成します。閾値以下の秘密は情報理論的であり、$\\GEQ T$を保持して鍵に署名しても係数シェアがない敵対者は、印章を発行できません。"
+ },
+ {
+  "id": "2607.09923",
+  "posted_at": "2026-07-29T20:37:16Z",
+  "title": "A Hybrid Quantum-Chaos Theory Approach to Image Encryption Using Reservoir Computing",
+  "title_ja": "リザーバーコンピューティングを用いた画像暗号化におけるハイブリッド量子・カオス理論アプローチ",
+  "title_translated": "リザーバーコンピューティングを用いた画像暗号化におけるハイブリッド量子・カオス理論アプローチ",
+  "translation_language": "ja",
+  "authors": "Naheen Mohd. Kadir",
+  "link": "https://arxiv.org/abs/2607.09923v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "crypto"
+  ],
+  "genre_names": [
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "This research presents a novel hybrid image encryption system that combines quantum cryptography, chaos theory and reservoir computing to address the limitations of conventional encryption methods. With the rapid advancements in quantum computing, traditional systems like RSA, DHKE (related to prime number factorization) are vulnerable to quantum attacks i.e. Shor's algorithm, Grover's algorithm. In response, this study proposes a hybrid solution that uses quantum cryptographic protocols, particularly the E91 protocol, to generate secure, eavesdrop-proof keys through quantum entanglement. The integration of chaos theory, specifically the Lorenz hyper-chaotic system, enhances the encryption system by adding unpredictability and sensitivity to initial conditions, making it more resistant to both classical and quantum-based attacks. Reservoir computing is used to improve computational efficiency, enabling faster and more effective encryption and decryption processes. The system achieved encryption times as low as 0.0296s and decryption times as low as 0.0164s for 128x128 images, with MAE reduced for 300-600 node networks, and NPCR and UACI above 99.6% and 0.49, respectively, across various image sizes and configurations. By combining quantum cryptography, chaos theory and reservoir computing, this approach offers both enhanced security and practical feasibility for image encryption in the age of quantum computing.",
+  "abstract_ja": "本研究は、量子暗号学、カオス理論、リザーバーコンピューティングを組み合わせた新しいハイブリッド画像暗号化システムを提示し、従来の暗号化手法の限界に取り組むことを目的としています。量子コンピューティングの急速な進歩により、RSAやDHKE(素数分解に関連する)などの従来のシステムは、ショアのアルゴリズムやグローバーのアルゴリズムなどの量子攻撃に対して脆弱になっています。これに対し、本研究は量子暗号プロトコル、特にE91プロトコルを用いて量子もつれを通じて安全で盗聴に耐えうる鍵を生成するハイブリッドソリューションを提案します。カオス理論、特にローレンツ超カオスシステムの統合により、初期条件に予測不能さと感度を加え、古典的攻撃と量子ベースの攻撃の両方に対してより耐性を持つ暗号システムを強化します。リザーバーコンピューティングは計算効率を向上させ、より迅速かつ効果的な暗号化および復号化プロセスを可能にします。このシステムは128x128画像で0.0296秒の暗号化時間、復号化時間が0.0164秒まで低く、300〜600ノードネットワークではMAEを低減し、NPCRとUACIはそれぞれ99.6%と0.49%以上に抑えられました。これらは様々な画像サイズや構成で行われました。量子暗号学、カオス理論、リザーバーコンピューティングを組み合わせることで、このアプローチは量子コンピューティング時代における画像暗号化の安全性向上と実用的な実現可能性の両方を提供します。",
+  "abstract_translated": "本研究は、量子暗号学、カオス理論、リザーバーコンピューティングを組み合わせた新しいハイブリッド画像暗号化システムを提示し、従来の暗号化手法の限界に取り組むことを目的としています。量子コンピューティングの急速な進歩により、RSAやDHKE(素数分解に関連する)などの従来のシステムは、ショアのアルゴリズムやグローバーのアルゴリズムなどの量子攻撃に対して脆弱になっています。これに対し、本研究は量子暗号プロトコル、特にE91プロトコルを用いて量子もつれを通じて安全で盗聴に耐えうる鍵を生成するハイブリッドソリューションを提案します。カオス理論、特にローレンツ超カオスシステムの統合により、初期条件に予測不能さと感度を加え、古典的攻撃と量子ベースの攻撃の両方に対してより耐性を持つ暗号システムを強化します。リザーバーコンピューティングは計算効率を向上させ、より迅速かつ効果的な暗号化および復号化プロセスを可能にします。このシステムは128x128画像で0.0296秒の暗号化時間、復号化時間が0.0164秒まで低く、300〜600ノードネットワークではMAEを低減し、NPCRとUACIはそれぞれ99.6%と0.49%以上に抑えられました。これらは様々な画像サイズや構成で行われました。量子暗号学、カオス理論、リザーバーコンピューティングを組み合わせることで、このアプローチは量子コンピューティング時代における画像暗号化の安全性向上と実用的な実現可能性の両方を提供します。"
+ },
+ {
+  "id": "2607.12765",
+  "posted_at": "2026-07-29T20:37:18Z",
+  "title": "A Scalable Cloud-Orchestrated and Service-Oriented Multi-Domain QKD Network with PQC Integration",
+  "title_ja": "PQC統合を備えたスケーラブルなクラウドオーケストライズドかつサービス指向のマルチドメインQKDネットワーク",
+  "title_translated": "PQC統合を備えたスケーラブルなクラウドオーケストライズドかつサービス指向のマルチドメインQKDネットワーク",
+  "translation_language": "ja",
+  "authors": "Konstantinos Krilakis, Antonia Tsili, Aikaterini Mandilara, Dimitris Syvridis",
+  "link": "https://arxiv.org/abs/2607.12765v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "network",
+   "pqc",
+   "crypto"
+  ],
+  "genre_names": [
+   "量子ネットワーク・通信",
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Quantum key distribution (QKD) offers unconditional security but existing QKD networks remain difficult to scale across heterogeneous infrastructures and administrative domains due to vendor-specific interfaces, trusted-node constraints, and limited interoperability. This work presents a flexible multi-domain and multi-site quantum-secure network architecture integrating vendor-agnostic QKD, SDN orchestration, and cloud-managed trust services. Communication is based on Zero Trust Network Access protocols featuring multi-level authentication mechanisms building upon post-quantum cryptography (PQC) signature and key encapsulation algorithms. The system is deployed on a real-world testbed with domains incorporating QKD nodes from 3 vendors, as well as domains without QKD infrastructure elements. Experimental results show that PQC and SDN overhead remain relatively low even on constrained devices, with the main bottleneck being QKD key retrieval and vendor-specific key streaming limitations. The proposed framework extends quantum-safe key transport beyond native QKD boundaries while preserving flexibility, interoperability, and compatibility with existing infrastructures.",
+  "abstract_ja": "量子鍵配布(QKD)は無条件のセキュリティを提供しますが、既存のQKDネットワークはベンダー固有のインターフェース、信頼ノードの制約、相互運用性の制限により、異種インフラや管理ドメイン間での拡張が依然として困難です。本研究は、ベンダーに依存しないQKD、SDNオーケストレーション、クラウド管理の信頼サービスを統合した柔軟なマルチドメイン・マルチサイト量子セキュアネットワークアーキテクチャを提示します。通信はゼロトラストネットワークアクセスプロトコルに基づいており、ポスト量子暗号(PQC)署名および鍵カプセル化アルゴリズムに基づく多層認証メカニズムを特徴としています。システムは3つのベンダーのQKDノードを含むドメインや、QKDインフラ要素を持たないドメインを含む実際のテストベッドで展開されています。実験結果によると、制約のあるデバイスでもPQCおよびSDNのオーバーヘッドは比較的低く、主なボトルネックはQKD鍵の取得とベンダー固有の鍵ストリーミングの制限にあります。提案されたフレームワークは、QKDのネイティブ境界を超えて量子安全な鍵トランスポートを拡張しつつ、柔軟性、相互運用性、既存インフラとの互換性を維持します。",
+  "abstract_translated": "量子鍵配布(QKD)は無条件のセキュリティを提供しますが、既存のQKDネットワークはベンダー固有のインターフェース、信頼ノードの制約、相互運用性の制限により、異種インフラや管理ドメイン間での拡張が依然として困難です。本研究は、ベンダーに依存しないQKD、SDNオーケストレーション、クラウド管理の信頼サービスを統合した柔軟なマルチドメイン・マルチサイト量子セキュアネットワークアーキテクチャを提示します。通信はゼロトラストネットワークアクセスプロトコルに基づいており、ポスト量子暗号(PQC)署名および鍵カプセル化アルゴリズムに基づく多層認証メカニズムを特徴としています。システムは3つのベンダーのQKDノードを含むドメインや、QKDインフラ要素を持たないドメインを含む実際のテストベッドで展開されています。実験結果によると、制約のあるデバイスでもPQCおよびSDNのオーバーヘッドは比較的低く、主なボトルネックはQKD鍵の取得とベンダー固有の鍵ストリーミングの制限にあります。提案されたフレームワークは、QKDのネイティブ境界を超えて量子安全な鍵トランスポートを拡張しつつ、柔軟性、相互運用性、既存インフラとの互換性を維持します。"
+ },
+ {
+  "id": "2607.17076",
+  "posted_at": "2026-07-29T20:37:22Z",
+  "title": "SATLOCK: Handover-Coupled Scheduling for Weather-Resilient Quantum Key Distribution over LEO Constellations",
+  "title_ja": "SATLOCK:LEO星座上の気候耐性量子鍵配布のためのハンドオーバー結合スケジューリング",
+  "title_translated": "SATLOCK:LEO星座上の気候耐性量子鍵配布のためのハンドオーバー結合スケジューリング",
+  "translation_language": "ja",
+  "authors": "Mohammad Arif Hossain, Md Jafrin Hossain",
+  "link": "https://arxiv.org/abs/2607.17076v2",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "crypto",
+   "network",
+   "algo"
+  ],
+  "genre_names": [
+   "暗号・セキュリティ",
+   "量子ネットワーク・通信",
+   "量子アルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Routing quantum keys over low-earth-orbit (LEO) satellite constellations is harder than classical routing: satellite handovers couple consecutive scheduling decisions, stochastic cloud cover can silently zero a ground link, and finite-key effects eliminate short, low-elevation passes entirely. We present SATLOCK, a handover-aware Quantum Key Distribution (QKD) routing framework that combines (i) a composite channel model incorporating atmospheric loss, pointing jitter, Markov cloud cover, decoy-state estimation, and finite-key correction; (ii) an integer linear program (ILP) giving a provable handover-aware throughput upper bound; and (iii) a decentralized deep Q-network (DQN) baseline for weather-adaptive online routing. We evaluate two contention regimes on a Walker constellation serving intercontinental demands. In low contention (16 satellites, 6 demands), the ILP delivers 1,311 Mbit while the strongest heuristics reach 95--96\\% of ILP. In high contention (8 satellites, 12 demands), where handovers become binding, heuristics drop to 89.5\\% of ILP. The DQN agent reaches 91.8\\% and 84.6\\% of ILP in the two regimes; it learns effective per-demand weather policies but is limited in aggregate by the lack of cross-demand coordination.",
+  "abstract_ja": "低軌道(LEO)衛星コンステレーション上で量子鍵をルーティングするのは古典的なルーティングよりも難しい。衛星ハンドオーバーは連続したスケジューリング決定を組み合わせ、確率的な雲の覆いは地上リンクを静かにゼロにし、有限鍵効果は短く低高度の通過を完全に排除する。私たちはSATLOCKを提示します。これは、(i) 大気損失、指向ジッター、マルコフ雲被覆、デコイ状態推定、有限鍵補正を組み込んだ複合チャネルモデルを組み合わせたハンドオーバー認識型の量子鍵分配(QKD)ルーティングフレームワークです。(ii) 証明可能なハンドオーバー対応スループット上限を与える整数線形計画法(ILP);(iii)天候適応型オンラインルーティングのための分散型ディープQネットワーク(DQN)ベースライン。私たちは、大陸間需要に対応するウォーカー星座に関する2つの競合体制を評価します。低競争(16基の衛星、6の需要)ではILPは1,311 Mbitを提供し、最も強力なヒューリスティックはILPの95〜96%に達します。高い競争(8基の衛星、12の需要)では、ハンドオーバーが拘束力を持つ場合、ヒューリスティックはILPの89.5%に低下します。DQNエージェントは両リージョンでILPの91.8%と84.6%に達します。効果的な需要ごとの気象政策を学習しますが、クロスデマンドの調整不足により総合的には制限があります。",
+  "abstract_translated": "低軌道(LEO)衛星コンステレーション上で量子鍵をルーティングするのは古典的なルーティングよりも難しい。衛星ハンドオーバーは連続したスケジューリング決定を組み合わせ、確率的な雲の覆いは地上リンクを静かにゼロにし、有限鍵効果は短く低高度の通過を完全に排除する。私たちはSATLOCKを提示します。これは、(i) 大気損失、指向ジッター、マルコフ雲被覆、デコイ状態推定、有限鍵補正を組み込んだ複合チャネルモデルを組み合わせたハンドオーバー認識型の量子鍵分配(QKD)ルーティングフレームワークです。(ii) 証明可能なハンドオーバー対応スループット上限を与える整数線形計画法(ILP);(iii)天候適応型オンラインルーティングのための分散型ディープQネットワーク(DQN)ベースライン。私たちは、大陸間需要に対応するウォーカー星座に関する2つの競合体制を評価します。低競争(16基の衛星、6の需要)ではILPは1,311 Mbitを提供し、最も強力なヒューリスティックはILPの95〜96%に達します。高い競争(8基の衛星、12の需要)では、ハンドオーバーが拘束力を持つ場合、ヒューリスティックはILPの89.5%に低下します。DQNエージェントは両リージョンでILPの91.8%と84.6%に達します。効果的な需要ごとの気象政策を学習しますが、クロスデマンドの調整不足により総合的には制限があります。"
+ },
+ {
+  "id": "2607.18340",
+  "posted_at": "2026-07-29T20:37:26Z",
+  "title": "Quantum Cryptanalysis on IBM Quantum Hardware: Extending Even--Mansour Period Recovery from $N=4$ to $N=10$",
+  "title_ja": "IBM量子ハードウェア上の量子暗号解析:偶数-マンスール周期回復を$N=4$から$N=10$へ拡張する",
+  "title_translated": "IBM量子ハードウェア上の量子暗号解析:偶数-マンスール周期回復を$N=4$から$N=10$へ拡張する",
+  "translation_language": "ja",
+  "authors": "Taebong Kim, Youngsik Hong, Minsik Kim, Sunyoung Choi, Jaewon Jang, Junghoon Shin, Minseo Kim",
+  "link": "https://arxiv.org/abs/2607.18340v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "crypto",
+   "algo",
+   "nisq"
+  ],
+  "genre_names": [
+   "暗号・セキュリティ",
+   "量子アルゴリズム",
+   "変分・NISQアルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We report genuine-un-compiled, textbook-faithful-quantum cryptanalysis of symmetric-cipher structures executed on real IBM quantum hardware (ibm\\_kingston, Heron generation). Using Simon's algorithm we recover the hidden period of the Even-Mansour cipher up to security parameter N = 10 on real hardware, beyond the largest previously reported real-hardware key recovery of N = 4, and we cleanly recover the periods of a 3-round Feistel (DES-family) construction at block sizes 6 and 8; a 21-qubit block-10 instance is verified in simulation and submitted to hardware. We further provide a breadth-first benchmark of five genuine quantum attacks spanning four symmetric-cipher design paradigms -- Bernstein-Vazirani (linear structure, single query), Grover (SPN key search, quadratic), and Simon (Even-Mansour, CBC-MAC forgery, and Feistel; exponential-to-polynomial in query complexity) -- validated to the classical-simulation ceiling of 25 qubits. We are deliberately explicit about scope: these attacks target reduced or structured constructions in the Q2 (quantum-query) model, asymptotically follow the birthday bound and therefore do not constitute quantum advantage over classical collision-finding, do not break full AES/RSA or 16-round DES, and rely on error mitigation rather than fault-tolerant error correction. Our contribution is the real-hardware demonstration at record structure sizes, the breadth of genuine algorithmic coverage across four paradigms, and an honest, reproducible benchmark with public artifacts.",
+  "abstract_ja": "本物のIBM量子ハードウェア(ibm\\_kingston、Heron世代)上で実行された対称暗号構造の、真のコンパイルなし、教科書通りの量子暗号解析を報告しています。サイモンのアルゴリズムを用いることで、実際のハードウェア上でセキュリティパラメータN=10までの隠れ期間を復元し、これまで報告された最大の実ハードウェア鍵回復N=4を超えて復元し、ブロックサイズ6および8での3ラウンドFistel(DESファミリー)構成の周期もきれいに復元します。21量子ビットのブロック10インスタンスはシミュレーションで検証され、ハードウェアに提出されます。さらに、4つの対称暗号設計パラダイム――Bernstein-Vazirani(線形構造、単一クエリ)、Grover(SPN鍵検索、二次形式)、Simon(Even-Mansour、CBC-MAC偽造、Feistel;クエリ複雑度は指数関数的に多項式に)を対象とした5つの真の量子攻撃の広範囲優先ベンチマークを提供し、古典的シミュレーションの上限である25キュービットまで検証しました。私たちは範囲を意図的に明確にしています。これらの攻撃はQ2(量子クエリ)モデルの縮小または構造化を標的とし、誕生日境界を漸近的に追随するため、古典的な衝突検出に対して量子的優位性を生みません。完全なAES/RSAや16ラウンドDESを破ることもなく、フォールトトレラントの誤り訂正ではなく誤り軽減に依存しています。私たちの貢献は、記録的な構造サイズでの実際のハードウェア実証、4つのパラダイムにわたる真のアルゴリズムカバレッジの幅広さ、そして公開された成果物を用いた誠実で再現可能なベンチマークです。",
+  "abstract_translated": "本物のIBM量子ハードウェア(ibm\\_kingston、Heron世代)上で実行された対称暗号構造の、真のコンパイルなし、教科書通りの量子暗号解析を報告しています。サイモンのアルゴリズムを用いることで、実際のハードウェア上でセキュリティパラメータN=10までの隠れ期間を復元し、これまで報告された最大の実ハードウェア鍵回復N=4を超えて復元し、ブロックサイズ6および8での3ラウンドFistel(DESファミリー)構成の周期もきれいに復元します。21量子ビットのブロック10インスタンスはシミュレーションで検証され、ハードウェアに提出されます。さらに、4つの対称暗号設計パラダイム――Bernstein-Vazirani(線形構造、単一クエリ)、Grover(SPN鍵検索、二次形式)、Simon(Even-Mansour、CBC-MAC偽造、Feistel;クエリ複雑度は指数関数的に多項式に)を対象とした5つの真の量子攻撃の広範囲優先ベンチマークを提供し、古典的シミュレーションの上限である25キュービットまで検証しました。私たちは範囲を意図的に明確にしています。これらの攻撃はQ2(量子クエリ)モデルの縮小または構造化を標的とし、誕生日境界を漸近的に追随するため、古典的な衝突検出に対して量子的優位性を生みません。完全なAES/RSAや16ラウンドDESを破ることもなく、フォールトトレラントの誤り訂正ではなく誤り軽減に依存しています。私たちの貢献は、記録的な構造サイズでの実際のハードウェア実証、4つのパラダイムにわたる真のアルゴリズムカバレッジの幅広さ、そして公開された成果物を用いた誠実で再現可能なベンチマークです。"
+ },
+ {
+  "id": "2606.31681",
+  "posted_at": "2026-07-29T20:37:31Z",
+  "title": "Exploring Side-Channel Protections in Hardware Implementations of PQC ML-KEM Verification",
+  "title_ja": "PQC ML-KEM検証のハードウェア実装におけるサイドチャネル保護の探求",
+  "title_translated": "PQC ML-KEM検証のハードウェア実装におけるサイドチャネル保護の探求",
+  "translation_language": "ja",
+  "authors": "Davis Ranney, Yashaswini I Makaram, A. Adam Ding, Yunsi Fei",
+  "link": "https://arxiv.org/abs/2606.31681v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "hardware"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "As ML-KEM is adopted as a post-quantum cryptographic standard, resilience against physical side-channel attacks has become essential. Among the constituent steps, the decapsulation Fujisaki-Okamoto (FO) verification is particularly vulnerable to side-channel power and electromagnetic (EM) analysis. In this work, we focus on common FPGA-based implementations and examine their side-channel vulnerabilities, and compare them with those of microcontroller implementations. Three verification implementations, unprotected, hash-based (first-order), and higher-order masked, are evaluated for side-channel security on both a microcontroller and an FPGA. While FPGAs offer higher speed and parallelism, they often exhibit stronger side-channel leakage, especially in high bandwidth configurations. The higher-order masked designs still leak information about the underlying data due to hardware-level effects and data-dependent processing. Our experiments show that their parallelized processing on FPGAs introduces sufficient first-order leakage for full secret-key recovery. These results underscore the persistent challenge of securing PQC algorithms in performance-constrained and parallelized hardware environments.",
+  "abstract_ja": "ML-KEMがポスト量子暗号標準として採用されるにつれて、物理的サイドチャネル攻撃に対する耐性が不可欠となっています。構成工程の中で、藤崎・岡本(FO)によるカプス化解除は、サイドチャネル電力解析や電磁(EM)解析に特に脆弱です。本研究では、一般的なFPGAベースの実装に焦点を当て、そのサイドチャネル脆弱性を検証し、マイクロコントローラ実装と比較しています。マイコンおよびFPGAの両方で、無保護、ハッシュベース(一次)、高次マスキングの3つの検証実装がサイドチャネルのセキュリティ評価を行っています。FPGAは高速かつ並列性が高い一方で、特に高帯域幅構成ではサイドチャネルリークが強いことが多いです。高次のマスク設計でも、ハードウェアレベルの影響やデータ依存的な処理により、基礎データに関する情報が漏れます。私たちの実験は、FPGA上での並列処理が完全な秘密鍵復旧に十分な一次リーケージをもたらすことを示しました。これらの結果は、性能制約が厳しい並列化されたハードウェア環境でPQCアルゴリズムを保護するという継続的な課題を強調しています。",
+  "abstract_translated": "ML-KEMがポスト量子暗号標準として採用されるにつれて、物理的サイドチャネル攻撃に対する耐性が不可欠となっています。構成工程の中で、藤崎・岡本(FO)によるカプス化解除は、サイドチャネル電力解析や電磁(EM)解析に特に脆弱です。本研究では、一般的なFPGAベースの実装に焦点を当て、そのサイドチャネル脆弱性を検証し、マイクロコントローラ実装と比較しています。マイコンおよびFPGAの両方で、無保護、ハッシュベース(一次)、高次マスキングの3つの検証実装がサイドチャネルのセキュリティ評価を行っています。FPGAは高速かつ並列性が高い一方で、特に高帯域幅構成ではサイドチャネルリークが強いことが多いです。高次のマスク設計でも、ハードウェアレベルの影響やデータ依存的な処理により、基礎データに関する情報が漏れます。私たちの実験は、FPGA上での並列処理が完全な秘密鍵復旧に十分な一次リーケージをもたらすことを示しました。これらの結果は、性能制約が厳しい並列化されたハードウェア環境でPQCアルゴリズムを保護するという継続的な課題を強調しています。"
+ },
+ {
+  "id": "2607.03988",
+  "posted_at": "2026-07-29T20:37:33Z",
+  "title": "Energy-Aware System-Level Evaluation of Post-Quantum TLS on Embedded User Equipment over a Disaggregated 5G Network",
+  "title_ja": "分割された5Gネットワーク上の組み込みユーザー機器におけるポスト量子TLSのエネルギー認識システムレベル評価",
+  "title_translated": "分割された5Gネットワーク上の組み込みユーザー機器におけるポスト量子TLSのエネルギー認識システムレベル評価",
+  "translation_language": "ja",
+  "authors": "Sanzida Hoque, Abdullah Aydeger",
+  "link": "https://arxiv.org/abs/2607.03988v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "hardware",
+   "network"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装",
+   "量子ネットワーク・通信"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "The transition to quantum-resistant security is a critical priority for the next generation of mobile networks, particularly within the disaggregated architecture of 5G. This paper presents an energy-aware system-level evaluation of Post- Quantum Cryptography (PQC) integrated into the Transport Layer Security (TLS) handshake on embedded User Equipment (UE). Using Raspberry Pi 5s as representative embedded processing platforms, we evaluate the performance of NIST-standardized combinations of classical and post-quantum signature and key exchange mechanisms (KEM), incorporating direct on-device power measurements to estimate per-handshake energy consumption. Results experimentally validate a strong coupling between latency and energy consumption, indicating that execution time is the dominant contributor to energy cost. Hash-based signature schemes incur up to 4x higher latency and 2x energy compared to lattice-based alternatives, while the impact of KEMs is comparatively smaller. The analysis further reveals that overall system performance is primarily constrained by cryptographic computation and concurrency-induced contention rather than network transport effects. These findings provide practical guidance for PQC deployment in mobile environments and demonstrate that lattice-based signatures offer a more favorable balance between security, efficiency, and scalability for 5G systems.",
+  "abstract_ja": "量子耐性セキュリティへの移行は、次世代モバイルネットワーク、特に5Gの分散アーキテクチャにおいて極めて重要な優先事項です。本論文では、組み込みユーザー機器(UE)上のトランスポート層セキュリティ(TLS)ハンドシェイクに統合されたポスト量子暗号(PQC)のエネルギー意識型システムレベルの評価を提示します。Raspberry Pi 5sを代表的な組み込み処理プラットフォームとして用い、NIST標準化された古典的およびポスト量子署名および鍵交換機構(KEM)の組み合わせの性能を評価し、直接デバイス上の電力測定を取り入れて、ハンドシェイクごとのエネルギー消費を推定します。結果は、遅延とエネルギー消費の強い連動を実験的に検証し、実行時間がエネルギーコストの主要な要因であることを示しています。ハッシュベースの署名方式は、格子ベースの代替方式と比べて最大4倍の遅延と2倍のエネルギーを生じますが、KEMの影響は比較的小さいです。分析はさらに、システム全体の性能が主に暗号計算や並行性による競合によって制約されており、ネットワークのトランスポート効果ではないことが明らかになりました。これらの発見は、モバイル環境でのPQC導入における実践的な指針を提供し、格子ベースの署名が5Gシステムにおいてセキュリティ、効率性、スケーラビリティのより良好なバランスをもたらすことを示しています。",
+  "abstract_translated": "量子耐性セキュリティへの移行は、次世代モバイルネットワーク、特に5Gの分散アーキテクチャにおいて極めて重要な優先事項です。本論文では、組み込みユーザー機器(UE)上のトランスポート層セキュリティ(TLS)ハンドシェイクに統合されたポスト量子暗号(PQC)のエネルギー意識型システムレベルの評価を提示します。Raspberry Pi 5sを代表的な組み込み処理プラットフォームとして用い、NIST標準化された古典的およびポスト量子署名および鍵交換機構(KEM)の組み合わせの性能を評価し、直接デバイス上の電力測定を取り入れて、ハンドシェイクごとのエネルギー消費を推定します。結果は、遅延とエネルギー消費の強い連動を実験的に検証し、実行時間がエネルギーコストの主要な要因であることを示しています。ハッシュベースの署名方式は、格子ベースの代替方式と比べて最大4倍の遅延と2倍のエネルギーを生じますが、KEMの影響は比較的小さいです。分析はさらに、システム全体の性能が主に暗号計算や並行性による競合によって制約されており、ネットワークのトランスポート効果ではないことが明らかになりました。これらの発見は、モバイル環境でのPQC導入における実践的な指針を提供し、格子ベースの署名が5Gシステムにおいてセキュリティ、効率性、スケーラビリティのより良好なバランスをもたらすことを示しています。"
+ },
+ {
+  "id": "2607.05831",
+  "posted_at": "2026-07-29T20:37:38Z",
+  "title": "Withdrawability in Fiat-Shamir with aborts constructions",
+  "title_ja": "フィアット・シャミールの廃車性(建設中止)",
+  "title_translated": "フィアット・シャミールの廃車性(建設中止)",
+  "translation_language": "ja",
+  "authors": "Ramses Fernandez-Valencia",
+  "link": "https://arxiv.org/abs/2607.05831v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "This article presents an extension of the work performed by Liu, Baek and Susilo on withdrawable signatures to the Fiat-Shamir with aborts paradigm. We introduce an abstract construction, and provide security proofs for this proposal. As an instantiation, we provide a concrete withdrawable signature scheme based on a no-hint, full-t Dilithium-style Fiat-Shamir with aborts construction; adapting to production ML-DSA (with hints) introduces a small epsilon term.",
+  "abstract_ja": "本記事では、リウ、ベク、スシロによる撤回可能な署名に関する研究を、中止を伴うフィアット・シャミールパラダイムに拡張したものを示します。抽象的な構成を導入し、この提案のためのセキュリティ証明を提供します。具体化として、ヒントなしのフルt型ディリチウム型フィアットシャミアと中止構造に基づく具体的な撤退可能な署名スキームを提供します。ML-DSA(ヒント付き)を本番に適応させることで、小さなイプシロン項が導入されます。",
+  "abstract_translated": "本記事では、リウ、ベク、スシロによる撤回可能な署名に関する研究を、中止を伴うフィアット・シャミールパラダイムに拡張したものを示します。抽象的な構成を導入し、この提案のためのセキュリティ証明を提供します。具体化として、ヒントなしのフルt型ディリチウム型フィアットシャミアと中止構造に基づく具体的な撤退可能な署名スキームを提供します。ML-DSA(ヒント付き)を本番に適応させることで、小さなイプシロン項が導入されます。"
+ },
+ {
+  "id": "2607.05921",
+  "posted_at": "2026-07-29T20:37:40Z",
+  "title": "From Regression to Prior-Aware Inference: Solving the ILWE Family in Randomness Leakage Attacks against ML-DSA",
+  "title_ja": "回帰から事前認識的推論へ:ML-DSAに対するランダム性リーケージ攻撃におけるILWEファミリーの解法",
+  "title_translated": "回帰から事前認識的推論へ:ML-DSAに対するランダム性リーケージ攻撃におけるILWEファミリーの解法",
+  "translation_language": "ja",
+  "authors": "Peiheng Zhang, Yuejun Liu, Wei Cheng, Muye Li, Honglin Shao, Yongbin Zhou",
+  "link": "https://arxiv.org/abs/2607.05921v3",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "algo"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子アルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "ML-DSA is a representative lattice-based signature scheme standardized by NIST. It relies on signing randomness and rejection sampling to ensure that released signatures are statistically independent of the secret key. Practical implementations, however, may leak partial information about this randomness, and such leakage can transform public signatures into ILWE-type problems, resulting in secret key disclosure risks. Such randomness leakage attack can be formulated as a two-stage key-recovery procedure, in which leaked partial information and public signatures are first transformed into an ILWE-family instance, and then a recovery solver is applied to recover the secret key. Existing work has mainly focused on the first stage by constructing such instances under different leakage models. By contrast, the role of solver in the subsequent instance-solving stage remains under-explored, and existing attacks often rely on ad-hoc model-specific solvers. To address this gap, we propose a unified framework to systematically evaluate different recovery solvers on leakage-derived ILWE-family instances. The framework covers three ILWE instances, including the ordinary ILWE, Fiat-Shamir ILWE (FS-ILWE) and Concealed ILWE (CILWE) under different scenarios. Within our framework, we explore three classes of solvers. Our experiments show that the solver has a significant impact on the secret-key recovery efficiency. In particular, on FS-ILWE, prior-aware discrete-inference reduces the number of informative relations by one to two orders of magnitude compared to the baselines: Compared with OLS, BP constitutes a reduction by a factor of 15.4x-64.9x in noise-free settings, and by a factor of 10.5x-73.9x in noisy settings. Overall, this work provides a systematic evaluation on different solvers in randomness leakage attacks, and presents new benchmarks for future analysis on ML-DSA.",
+  "abstract_ja": "ML-DSAはNISTによって標準化された代表的な格子ベースの署名方式です。署名ランダム性とリジェクションサンプリングに依存し、公開署名が秘密鍵から統計的に独立していることを保証します。しかし実際の実装では、このランダム性に関する部分的な情報が漏れることがあり、そのような漏れは公開署名をILWE型の問題に変え、秘密鍵の開示リスクを引き起こす可能性があります。このようなランダム性リーク攻撃は、リークされた部分情報と公開署名をまずILWEファミリーインスタンスに変換し、その後リカバリーソルバーを適用して秘密鍵を回復する2段階の鍵回復手順として定式化できます。既存の研究は主に第1段階に焦点を当てており、異なるリーケージモデルの下でこのようなインスタンスを構築しています。対照的に、次のインスタンス解決段階におけるソルバーの役割は十分に探求されておらず、既存の攻撃はしばしばモデル固有のアドホックソルバーに依存しています。このギャップを埋めるために、漏れ由来のILWEファミリーインスタンスにおける異なるリカバリーソルバーを体系的に評価する統一フレームワークを提案します。このフレームワークは、通常のILWE、Fiat-Shamir ILWE(FS-ILWE)、隠蔽ILWE(CILWE)を含む3つのILWEインスタンスを異なるシナリオでカバーしています。私たちの枠組みの中で、3つのソルバーのクラスを探ります。私たちの実験は、ソルバーが秘密鍵の回復効率に大きな影響を与えることを示しています。特にFS-ILWEでは、事前認識離散推論により、ベースラインと比べて情報関係の数が1〜2桁減少します。OLSと比較して、BPはノイズフリー環境で15.4倍から64.9倍、ノイズが多い環境では10.5倍から73.9倍の減少を示しています。全体として、本研究はランダム性リーメージ攻撃における異なるソルバーの体系的な評価を提供し、ML-DSAの将来の解析のための新たなベンチマークを提示します。",
+  "abstract_translated": "ML-DSAはNISTによって標準化された代表的な格子ベースの署名方式です。署名ランダム性とリジェクションサンプリングに依存し、公開署名が秘密鍵から統計的に独立していることを保証します。しかし実際の実装では、このランダム性に関する部分的な情報が漏れることがあり、そのような漏れは公開署名をILWE型の問題に変え、秘密鍵の開示リスクを引き起こす可能性があります。このようなランダム性リーク攻撃は、リークされた部分情報と公開署名をまずILWEファミリーインスタンスに変換し、その後リカバリーソルバーを適用して秘密鍵を回復する2段階の鍵回復手順として定式化できます。既存の研究は主に第1段階に焦点を当てており、異なるリーケージモデルの下でこのようなインスタンスを構築しています。対照的に、次のインスタンス解決段階におけるソルバーの役割は十分に探求されておらず、既存の攻撃はしばしばモデル固有のアドホックソルバーに依存しています。このギャップを埋めるために、漏れ由来のILWEファミリーインスタンスにおける異なるリカバリーソルバーを体系的に評価する統一フレームワークを提案します。このフレームワークは、通常のILWE、Fiat-Shamir ILWE(FS-ILWE)、隠蔽ILWE(CILWE)を含む3つのILWEインスタンスを異なるシナリオでカバーしています。私たちの枠組みの中で、3つのソルバーのクラスを探ります。私たちの実験は、ソルバーが秘密鍵の回復効率に大きな影響を与えることを示しています。特にFS-ILWEでは、事前認識離散推論により、ベースラインと比べて情報関係の数が1〜2桁減少します。OLSと比較して、BPはノイズフリー環境で15.4倍から64.9倍、ノイズが多い環境では10.5倍から73.9倍の減少を示しています。全体として、本研究はランダム性リーメージ攻撃における異なるソルバーの体系的な評価を提供し、ML-DSAの将来の解析のための新たなベンチマークを提示します。"
+ },
+ {
+  "id": "2607.09541",
+  "posted_at": "2026-07-29T20:37:42Z",
+  "title": "Portable Acceleration of Learning With Errors KEMs for Post-Quantum Cryptography",
+  "title_ja": "ポスト量子暗号学における誤差KEMを用いた学習の携帯性加速",
+  "title_translated": "ポスト量子暗号学における誤差KEMを用いた学習の携帯性加速",
+  "translation_language": "ja",
+  "authors": "Tiziana Liberati, Nitin Shukla, Simone Rizzo, Elisabetta Boella, Matteo Barbieri, Gabriella Bettonte, Daniele Gregori, Marco Pedicini",
+  "link": "https://arxiv.org/abs/2607.09541v2",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "hardware"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "The transition to post-quantum cryptography (PQC) is driving demand for implementations that can meet the computational requirements of real-world applications. Among the proposed PQC constructions, Learning With Errors (LWE) based key encapsulation mechanisms (KEMs) are particularly attractive due to their strong security foundations, but they incur substantial computational costs from matrix operations and large-scale cryptographically secure random number generation. These characteristics position GPU acceleration as an effective approach for lowering the computational overhead of lattice based cryptographic schemes. In this work, we present a portable GPU implementation of a plain LWE based KEM using OpenMP Target offloading. Unlike most existing GPU implementations, which rely on CUDA specific optimizations, our approach uses a single source code base that executes on both NVIDIA and AMD accelerators. We evaluate the proposed implementation on different accelerator architectures, analyzing performance benchmarking, runtime profiling, scalability analysis, and energy to solution measurements. Experimental results show that OpenMP Target offloading delivers substantial acceleration over a multicore CPU baseline while preserving source level portability across heterogeneous GPU ecosystems. Cross platform analysis identifies NVIDIA GH200 and AMD MI300X as the most effective platforms for this memory bound workload, while profiling indicates that memory system organization and CPU GPU interaction play a more critical role than peak compute capability alone. These findings demonstrate that portable GPU acceleration can significantly reduce the computational overhead of PQC while avoiding vendor lock in, thereby facilitating the deployment of quantum resistant cryptographic infrastructures.",
+  "abstract_ja": "ポスト量子暗号(PQC)への移行は、実際の応用の計算要件を満たす実装への需要を押し上げています。提案されているPQC構成の中で、Learning With Errors(LWE)ベースの鍵カプセル化機構(KEM)は強固なセキュリティ基盤を持つため特に魅力的ですが、行列演算や大規模な暗号学的に安全な乱数生成に伴う計算コストがかなり高まります。これらの特性により、GPU加速は格子ベースの暗号方式の計算負荷を削減する効果的なアプローチとなっています。本研究では、OpenMPターゲットオフロードを用いた単純なLWEベースのKEMのポータブルGPU実装を提示します。既存のGPU実装がCUDA固有の最適化に依存しているのに対し、私たちのアプローチはNVIDIAとAMDの両方のアクセラレータ上で実行される単一のソースコードベースを使用しています。提案された実装を異なるアクセラレータアーキテクチャで評価し、パフォーマンスベンチマーキング、ランタイムプロファイリング、スケーラビリティ分析、ソリューションへのエネルギー測定を分析します。実験結果によると、OpenMPターゲットのオフロードはマルチコアCPUベースライン上で大幅な加速を実現しつつ、異種GPUエコシステム間でのソースレベルの移植性を保つことが示されています。クロスプラットフォーム分析では、このメモリ制約ワークロードに対してNVIDIA GH200とAMD MI300Xが最も効果的なプラットフォームであると特定されており、プロファイリングではメモリシステムの構成やCPUのGPU相互作用がピーク計算能力単独よりも重要な役割を果たすことが示されています。これらの発見は、ポータブルGPUアクセラレーションがPQCの計算負荷を大幅に削減しつつベンダーロックインを回避し、量子耐性暗号インフラの展開を容易にできることを示しています。",
+  "abstract_translated": "ポスト量子暗号(PQC)への移行は、実際の応用の計算要件を満たす実装への需要を押し上げています。提案されているPQC構成の中で、Learning With Errors(LWE)ベースの鍵カプセル化機構(KEM)は強固なセキュリティ基盤を持つため特に魅力的ですが、行列演算や大規模な暗号学的に安全な乱数生成に伴う計算コストがかなり高まります。これらの特性により、GPU加速は格子ベースの暗号方式の計算負荷を削減する効果的なアプローチとなっています。本研究では、OpenMPターゲットオフロードを用いた単純なLWEベースのKEMのポータブルGPU実装を提示します。既存のGPU実装がCUDA固有の最適化に依存しているのに対し、私たちのアプローチはNVIDIAとAMDの両方のアクセラレータ上で実行される単一のソースコードベースを使用しています。提案された実装を異なるアクセラレータアーキテクチャで評価し、パフォーマンスベンチマーキング、ランタイムプロファイリング、スケーラビリティ分析、ソリューションへのエネルギー測定を分析します。実験結果によると、OpenMPターゲットのオフロードはマルチコアCPUベースライン上で大幅な加速を実現しつつ、異種GPUエコシステム間でのソースレベルの移植性を保つことが示されています。クロスプラットフォーム分析では、このメモリ制約ワークロードに対してNVIDIA GH200とAMD MI300Xが最も効果的なプラットフォームであると特定されており、プロファイリングではメモリシステムの構成やCPUのGPU相互作用がピーク計算能力単独よりも重要な役割を果たすことが示されています。これらの発見は、ポータブルGPUアクセラレーションがPQCの計算負荷を大幅に削減しつつベンダーロックインを回避し、量子耐性暗号インフラの展開を容易にできることを示しています。"
+ },
+ {
+  "id": "2607.12504",
+  "posted_at": "2026-07-29T20:37:45Z",
+  "title": "On the Security Implications of PQC in TLS: Handshake Exhaustion and IDS Degradation",
+  "title_ja": "TLSにおけるPQCのセキュリティへの影響:ハンドシェイクの枯渇とIDSの劣化について",
+  "title_translated": "TLSにおけるPQCのセキュリティへの影響:ハンドシェイクの枯渇とIDSの劣化について",
+  "translation_language": "ja",
+  "authors": "Lin-Fa Lee, Yi-Yu Chang, Chia-Mu Yu, Kuo-Hui Yeh",
+  "link": "https://arxiv.org/abs/2607.12504v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Post-Quantum Cryptography (PQC) is increasingly being integrated into TLS 1.3 to enhance resilience against quantum-enabled attacks. However, the additional computational and communication overhead introduced by PQC primitives during the handshake phase may also amplify the impact of TLS handshake exhaustion attacks, leading to more severe Distributed Denial-of-Service (DDoS) threats. In this study, we establish an empirical testbed consisting of one PQC-enabled TLS server and ten attacking nodes, generating over 16.5 GB of mixed traffic data that includes both legitimate browsing behavior and high-intensity handshake exhaustion attacks. Experimental results show that PQC-TLS can prolong periods of sustained high CPU utilization on the server by up to 88 times, significantly amplifying the effectiveness of such attacks. Furthermore, we evaluate state-of-the-art deep learning-based Intrusion Detection Systems (IDS) and observe a substantial decline in attack detection performance under PQC traffic conditions. In particular, exosphere achieves only around 50% recall, while HyperVision's AU-ROC degrades to near-random levels (0.49), revealing critical detection blind spots in existing IDS when operating in PQC environments. The main contributions of this work are threefold: (1) we systematically quantify and analyze the root causes of IDS detection blind spots in PQC settings; (2) we publicly release a comprehensive PQC-DDoS hybrid traffic dataset, including precise attack timestamps and server-side resource monitoring data; and (3) we open-source all experimental code and AWS deployment scripts, enabling a fully reproducible cloud-based testing environment. These resources aim to support both academia and industry in developing next-generation PQC-aware intrusion detection systems.",
+  "abstract_ja": "ポスト量子暗号(PQC)は、量子攻撃に対する耐性を高めるために、TLS 1.3にますます統合されています。しかし、ハンドシェイクフェーズでPQCプリミティブがもたらす追加の計算および通信オーバーヘッドは、TLSハンドシェイク枯渇攻撃の影響を増幅し、より深刻な分散サービス拒否(DDoS)脅威につながる可能性があります。本研究では、PQC対応TLSサーバー1台と攻撃ノード10台からなる実証的テストベッドを構築し、正当なブラウジング行動と高強度のハンドシェイク消耗攻撃を含む16.5GB以上の混合トラフィックデータを生成しました。実験結果によると、PQC-TLSはサーバー上の持続的な高CPU使用率を最大88倍に延長し、その効果を大幅に高めることが示されています。さらに、最先端のディープラーニングベースの侵入検知システム(IDS)を評価し、PQCトラフィック条件下での攻撃検知性能の著しい低下を観察しました。特にエクソスフィアは約50%のリコール率しか達成できず、HyperVisionのAU-ROCはほぼランダムレベル(0.49)に劣化し、PQC環境で動作する際に既存のIDSにおける重要な検出盲点を明らかにします。本研究の主な貢献は三つあります。(1) PQC環境におけるIDS検出盲点の根本原因を体系的に定量化・解析すること;(2) 正確な攻撃タイムスタンプやサーバー側リソース監視データを含む包括的なPQC-DDoSハイブリッドトラフィックデータセットを公開します。(3)すべての実験的なコードとAWSデプロイスクリプトをオープンソース化し、完全に再現可能なクラウドベースのテスト環境を実現します。これらのリソースは、学術界と産業界の双方が次世代のPQC対応侵入検知システムの開発を支援することを目的としています。",
+  "abstract_translated": "ポスト量子暗号(PQC)は、量子攻撃に対する耐性を高めるために、TLS 1.3にますます統合されています。しかし、ハンドシェイクフェーズでPQCプリミティブがもたらす追加の計算および通信オーバーヘッドは、TLSハンドシェイク枯渇攻撃の影響を増幅し、より深刻な分散サービス拒否(DDoS)脅威につながる可能性があります。本研究では、PQC対応TLSサーバー1台と攻撃ノード10台からなる実証的テストベッドを構築し、正当なブラウジング行動と高強度のハンドシェイク消耗攻撃を含む16.5GB以上の混合トラフィックデータを生成しました。実験結果によると、PQC-TLSはサーバー上の持続的な高CPU使用率を最大88倍に延長し、その効果を大幅に高めることが示されています。さらに、最先端のディープラーニングベースの侵入検知システム(IDS)を評価し、PQCトラフィック条件下での攻撃検知性能の著しい低下を観察しました。特にエクソスフィアは約50%のリコール率しか達成できず、HyperVisionのAU-ROCはほぼランダムレベル(0.49)に劣化し、PQC環境で動作する際に既存のIDSにおける重要な検出盲点を明らかにします。本研究の主な貢献は三つあります。(1) PQC環境におけるIDS検出盲点の根本原因を体系的に定量化・解析すること;(2) 正確な攻撃タイムスタンプやサーバー側リソース監視データを含む包括的なPQC-DDoSハイブリッドトラフィックデータセットを公開します。(3)すべての実験的なコードとAWSデプロイスクリプトをオープンソース化し、完全に再現可能なクラウドベースのテスト環境を実現します。これらのリソースは、学術界と産業界の双方が次世代のPQC対応侵入検知システムの開発を支援することを目的としています。"
+ },
+ {
+  "id": "2607.13235",
+  "posted_at": "2026-07-29T20:37:47Z",
+  "title": "Proof in a Bottle: Long-Lived Verifiable Secret Sharing via Pre-Quantum Commitment and Immutable Ledger Binding",
+  "title_ja": "プルーフ・イン・ア・ボトル:プレ量子コミットメントと不変台帳バインディングによる長寿命の検証可能な秘密共有",
+  "title_translated": "プルーフ・イン・ア・ボトル:プレ量子コミットメントと不変台帳バインディングによる長寿命の検証可能な秘密共有",
+  "translation_language": "ja",
+  "authors": "Markus Jakobsson, Keir Finlow-Bates",
+  "link": "https://arxiv.org/abs/2607.13235v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Traditional secret sharing techniques such as Verifiable Secret sharing (VSS) are vulnerable to quantum attacks by a Cryptographically Relevant Quantum Computer (CRQC) running Shor's algorithm. We observe that the binding a VSS needs is required only at the moment of dealing, and this binding can be made before any CRQC exists. We propose Proof in a Bottle (PiB), which decouples verifiability from long-term binding: standard Pedersen commitments provide zero-knowledge, publicly checkable consistency during a pre-quantum window, while a salted, index-bound hash of the share set, anchored to an immutable public ledger, preserves the binding established in that window into the post-quantum era. The guarantee is explicitly a commit-now, reveal-later one: it protects today's honest dealings against tomorrow's quantum adversary.",
+  "abstract_ja": "検証可能秘密共有(VSS)などの従来の秘密共有技術は、ショールのアルゴリズムを実行する暗号関連量子コンピュータ(CRQC)による量子攻撃に対して脆弱です。VSSが必要とするバインディングは、ディーリングの瞬間にのみ必要であり、このバインディングはCRQCが存在する前に行えることがわかります。我々はProof in a Bottle(PiB)を提案します。これは検証可能性と長期的な拘束を切り離すものです。標準的なPedersenコミットメントは、プレ量子ウィンドウにおいてゼロ知識で公開チェック可能な一貫性を提供しますが、不変の公開台帳に固定されたシェアセットのソルト付きインデックスバインドハッシュは、そのウィンドウで確立されたバインディングをポスト量子時代まで保持します。この保証は明確に「今はコミットし、後で明かす」ものであり、今日の誠実な取引を明日の量子的敵から守るものです。",
+  "abstract_translated": "検証可能秘密共有(VSS)などの従来の秘密共有技術は、ショールのアルゴリズムを実行する暗号関連量子コンピュータ(CRQC)による量子攻撃に対して脆弱です。VSSが必要とするバインディングは、ディーリングの瞬間にのみ必要であり、このバインディングはCRQCが存在する前に行えることがわかります。我々はProof in a Bottle(PiB)を提案します。これは検証可能性と長期的な拘束を切り離すものです。標準的なPedersenコミットメントは、プレ量子ウィンドウにおいてゼロ知識で公開チェック可能な一貫性を提供しますが、不変の公開台帳に固定されたシェアセットのソルト付きインデックスバインドハッシュは、そのウィンドウで確立されたバインディングをポスト量子時代まで保持します。この保証は明確に「今はコミットし、後で明かす」ものであり、今日の誠実な取引を明日の量子的敵から守るものです。"
+ },
+ {
+  "id": "2607.13554",
+  "posted_at": "2026-07-29T20:37:48Z",
+  "title": "Multivariate Cryptography-Based Anonymous Certificate Scheme",
+  "title_ja": "多変量暗号に基づく匿名証明書スキーム",
+  "title_translated": "多変量暗号に基づく匿名証明書スキーム",
+  "translation_language": "ja",
+  "authors": "Abel C. H. Chen",
+  "link": "https://arxiv.org/abs/2607.13554v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "As quantum computing technology continues to mature, the US National Institute of Standards and Technology (NIST) has outlined a migration timeline for Post-Quantum Cryptography (PQC), recommending the deprecation of certain elliptic curve cryptography (ECC) by 2030. Furthermore, privacy-sensitive application scenarios, such as vehicular communications, require the use of anonymous certificates. However, existing anonymous certificate schemes are still largely based on ECC. Therefore, this study proposes a multivariate cryptography-based anonymous certificate scheme, aiming to design quantum-safe anonymous certificates suitable for privacy-sensitive application services. The proposed multivariate cryptography-based anonymous certificate scheme is supported by rigorous mathematical proofs and illustrated with computational cases.",
+  "abstract_ja": "量子コンピューティング技術が成熟し続ける中、米国国立標準技術研究所(NIST)はポスト量子暗号(PQC)の移行スケジュールを示し、特定の楕円曲線暗号(ECC)を2030年までに廃止することを推奨しています。さらに、車両通信のようなプライバシーに敏感な応用シナリオでは、匿名証明書の使用が必要です。しかし、既存の匿名証明書制度は依然として主にECCに基づいています。したがって、本研究は多変量暗号学に基づく匿名証明書スキームを提案し、プライバシーに敏感なアプリケーションサービスに適した量子安全匿名証明書の設計を目指します。提案された多変量暗号に基づく匿名証明書スキームは、厳密な数学的証明と計算ケースによって支持されています。",
+  "abstract_translated": "量子コンピューティング技術が成熟し続ける中、米国国立標準技術研究所(NIST)はポスト量子暗号(PQC)の移行スケジュールを示し、特定の楕円曲線暗号(ECC)を2030年までに廃止することを推奨しています。さらに、車両通信のようなプライバシーに敏感な応用シナリオでは、匿名証明書の使用が必要です。しかし、既存の匿名証明書制度は依然として主にECCに基づいています。したがって、本研究は多変量暗号学に基づく匿名証明書スキームを提案し、プライバシーに敏感なアプリケーションサービスに適した量子安全匿名証明書の設計を目指します。提案された多変量暗号に基づく匿名証明書スキームは、厳密な数学的証明と計算ケースによって支持されています。"
+ },
+ {
+  "id": "2607.13939",
+  "posted_at": "2026-07-29T20:37:50Z",
+  "title": "HORCRUX: A Complete PQC RISC-V eXtension Architecture",
+  "title_ja": "HORCRUX:完全なPQC RISC-V拡張アーキテクチャ",
+  "title_translated": "HORCRUX:完全なPQC RISC-V拡張アーキテクチャ",
+  "translation_language": "ja",
+  "authors": "Alessandra Dolmeta, Valeria Piscopo, Michael Hutter, Maurizio Martina, Guido Masera",
+  "link": "https://arxiv.org/abs/2607.13939v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "hardware",
+   "pqc"
+  ],
+  "genre_names": [
+   "量子ハードウェア・実装",
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "This work presents a compact RISC-V extension for Post-Quantum Cryptography (PQC) called HORCRUX, which provides a unified Instruction-Set Extension (ISE) supporting all NIST-approved PQC algorithms. HORCRUX addresses the difficult trade-off between crypto-agility, high performance, and low resource consumption in constrained environments, a balance typically missing in hardware extensions that focus on limited PQC subsets. By targeting shared kernels across ML-KEM, MLDSA, SLH-DSA, HQC, and Falcon, the extension introduces new RISC-V instructions executed by a resource-efficient, tightly coupled coprocessor. This architecture is specifically optimized for embedded systems with strict energy budgets and limited area. Experimental evaluation on a Zynq UltraScale+ FPGA demonstrates speedups of up to 129x for hash-based, 9x for lattice-based, and 27x for code-based schemes, while adding fewer than 21k LUTs and 4.4k FFs. ASIC results from postsynthesis characterization in 65 nm CMOS are also reported, alongside a rigorous power characterization to validate the architecture's energy efficiency. The extension's modular structure maintains backward compatibility with standard RISC-V cores, offering a scalable solution for deploying PQC on constrained embedded systems.",
+  "abstract_ja": "本研究では、ポスト量子暗号(PQC)向けのコンパクトなRISC-V拡張であるHORCRUXを提示し、NIST承認のすべてのPQCアルゴリズムをサポートする統一命令セット拡張(ISE)を提供します。HORCRUXは、限られたPQCサブセットに特化したハードウェア拡張では、暗号の機敏性、高性能、低リソース消費の難しいトレードオフに対応します。ML-KEM、MLDSA、SLH-DSA、HQC、FALCONの共有カーネルを対象にすることで、この拡張はリソース効率の高い密結合コプロセッサによって実行される新しいRISC-V命令を導入します。このアーキテクチャは、厳しいエネルギー予算と限られた面積を持つ組み込みシステムに特化して最適化されています。Zynq UltraScale+ FPGAでの実験評価では、ハッシュベースで最大129倍、格子ベースで9倍、コードベースで27倍の高速化が示されており、追加されたLUTは21k未満、FFは4.4k未満です。65nm CMOSでの合成後特性評価によるASIC結果も報告されており、アーキテクチャのエネルギー効率を検証するための厳密な電力特性評価も行われています。この拡張のモジュール構造は標準RISC-Vコアとの後方互換性を維持し、制約のある組み込みシステム上でPQCを展開するためのスケーラブルなソリューションを提供します。",
+  "abstract_translated": "本研究では、ポスト量子暗号(PQC)向けのコンパクトなRISC-V拡張であるHORCRUXを提示し、NIST承認のすべてのPQCアルゴリズムをサポートする統一命令セット拡張(ISE)を提供します。HORCRUXは、限られたPQCサブセットに特化したハードウェア拡張では、暗号の機敏性、高性能、低リソース消費の難しいトレードオフに対応します。ML-KEM、MLDSA、SLH-DSA、HQC、FALCONの共有カーネルを対象にすることで、この拡張はリソース効率の高い密結合コプロセッサによって実行される新しいRISC-V命令を導入します。このアーキテクチャは、厳しいエネルギー予算と限られた面積を持つ組み込みシステムに特化して最適化されています。Zynq UltraScale+ FPGAでの実験評価では、ハッシュベースで最大129倍、格子ベースで9倍、コードベースで27倍の高速化が示されており、追加されたLUTは21k未満、FFは4.4k未満です。65nm CMOSでの合成後特性評価によるASIC結果も報告されており、アーキテクチャのエネルギー効率を検証するための厳密な電力特性評価も行われています。この拡張のモジュール構造は標準RISC-Vコアとの後方互換性を維持し、制約のある組み込みシステム上でPQCを展開するためのスケーラブルなソリューションを提供します。"
+ },
+ {
+  "id": "2607.14690",
+  "posted_at": "2026-07-29T20:37:52Z",
+  "title": "Lattice-based extended withdrawability",
+  "title_ja": "格子ベースの拡張引き出し可能性",
+  "title_translated": "格子ベースの拡張引き出し可能性",
+  "translation_language": "ja",
+  "authors": "Ramses Fernandez-Valencia",
+  "link": "https://arxiv.org/abs/2607.14690v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We extend the extended withdrawable signatures of Liu, Susilo and Baek to lattice-based constructions built on the Fiat-Shamir with aborts paradigm. Departing from an earlier draft that transported a per-signer shift in the clear, which leaks the signer, we realise extended withdrawable signatures as a claimable ring signature: signer ambiguity is provided by a one-out-of-N signature used as a black box (anonymity under full key exposure), and confirmation is the signer's claim, a binding signature together with the opening of a hiding index commitment bound into the transcript. No signer-derived value is published in the clear. We give complete proofs of correctness, extended withdrawability (as anonymity-until-claim), unforgeability under insider corruption, and claimability soundness, reducing to decisional MLWE (commitment hiding), MSIS (commitment binding), the anonymity of the one-out-of-$N$ scheme, and the EUF-CMA security of the base signature, in the (quantum) random-oracle model. We instantiate the base signature with a no-hint, full-$t$ Dilithium-style scheme and the one-out-of-$N$ layer with an established lattice one-out-of-many proof.",
+  "abstract_ja": "リウ、スシロ、ベクの延長撤回可能な署名を、フィアット・シャミール型の中止型構造物にも拡大します。以前の草案では署名者ごとのシフトがクリアに含まれ、署名者をリークするというものから、拡張された撤回可能な署名が請求可能なリング署名として認識されます。署名者の曖昧さはブラックボックスとして使われる1/N署名(完全な鍵露出下での匿名性)によって提供され、確認は署名者の請求であり、拘束力のある署名と、隠すインデックスコミットメントの開封が書き起こしに結合されます。署名者由来の価値は透明に公開されません。正しさ、拡張撤回可能性(匿名性-請求権として)、内部腐敗下での偽造不可性、請求可能性の健全性を完全に証明し、決定的MLWE(コミットメント隠蔽)、MSIS(コミットメント拘束)、1-out-of$N$スキームの匿名性、ベース署名のEUF-CMAセキュリティにまで還元し、(量子)ランダムオラクルモデルを用います。基本署名はヒントなしのフル$tドルのディリチウムスタイルスキームと、確立された格子の多数のうちの一つの証明を持つ1枚の層で$Nドルに1枚ずつインスタンス化します。",
+  "abstract_translated": "リウ、スシロ、ベクの延長撤回可能な署名を、フィアット・シャミール型の中止型構造物にも拡大します。以前の草案では署名者ごとのシフトがクリアに含まれ、署名者をリークするというものから、拡張された撤回可能な署名が請求可能なリング署名として認識されます。署名者の曖昧さはブラックボックスとして使われる1/N署名(完全な鍵露出下での匿名性)によって提供され、確認は署名者の請求であり、拘束力のある署名と、隠すインデックスコミットメントの開封が書き起こしに結合されます。署名者由来の価値は透明に公開されません。正しさ、拡張撤回可能性(匿名性-請求権として)、内部腐敗下での偽造不可性、請求可能性の健全性を完全に証明し、決定的MLWE(コミットメント隠蔽)、MSIS(コミットメント拘束)、1-out-of$N$スキームの匿名性、ベース署名のEUF-CMAセキュリティにまで還元し、(量子)ランダムオラクルモデルを用います。基本署名はヒントなしのフル$tドルのディリチウムスタイルスキームと、確立された格子の多数のうちの一つの証明を持つ1枚の層で$Nドルに1枚ずつインスタンス化します。"
+ },
+ {
+  "id": "2607.17573",
+  "posted_at": "2026-07-29T20:37:54Z",
+  "title": "Quantum-Resilient Banking Transaction Security using DW-HKEM: A Hybrid RSA/ML-KEM Cryptographic Gateway with Real-Time",
+  "title_ja": "DW-HKEMを用いた量子レジリエント銀行取引セキュリティ:リアルタイム対応のハイブリッドRSA/ML-KEM暗号ゲートウェイ",
+  "title_translated": "DW-HKEMを用いた量子レジリエント銀行取引セキュリティ:リアルタイム対応のハイブリッドRSA/ML-KEM暗号ゲートウェイ",
+  "translation_language": "ja",
+  "authors": "Siddhaarth S Prabhu, Aswani Kumar Cherukuri",
+  "link": "https://arxiv.org/abs/2607.17573v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "The increasing number of online banking and financial services on public-facing networks has caused security of cryptographic protocols to become a serious, systemic problem. RSA-2048 is the key length that is used in the majority of transactions that travel over the Internet every day. A very insidious threat vector, the Harvest Now, Decrypt Later (HNDL) paradigm, is already in existence with the adversarial nation-state actors and well-funded threat actors. The exposure window is not a time in the future it is the NOW moment! Quantum computation is a certain threat to the current public-key cryptographic infrastructure, and one that is moving ever closer. In this paper, the authors take up both of these challenges, designing, implementing and testing an integrated system based on a Dual-Wrap Hybrid Key Encapsulation Mechanism (DW-HKEM) and a live cryptographic analytics dashboard. Both the RSA-256 and ML-KEM-768 are hosted within the DW-HKEM framework and an AES-256 session key is wrapped in each of them, with a composite key created using a Key Derivation Function based on SHA-256, resulting in combinatorial security against classical and quantum adversaries and backwards compatibility with existing banking systems. The CryptoX real-time dashboard offers time tracking for each operation, session-level analytics and visualization of performance trends for immediate use in enterprise banking security operations. The results from empirical benchmarking across 100 independent iterations show a total overhead of about 1.58ms, which is well within the enterprise deployment threshold, proving the architecture viable as a practical, scalable reference for the financial-sector's cryptographic infrastructure and applications to move to a post-quantum era. We also provide complete source code of the work carried out.",
+  "abstract_ja": "オンラインバンキングや金融サービスが公共向けネットワークで増加したことで、暗号プロトコルのセキュリティは深刻かつ体系的な問題となっています。RSA-2048は、毎日インターネット上で移動する取引の大多数で使われる鍵長です。非常に陰湿な脅威ベクトルである「今収穫後で復号(HNDL)」パラダイムは、敵対的な国家主体や資金力のある脅威アクターによってすでに存在しています。露出時間は未来の時間ではなく、今の瞬間です!量子計算は現在の公開鍵暗号インフラにとって確実な脅威であり、ますます近づいています。本論文では、著者らはこれら両方の課題に取り組み、デュアルラップハイブリッド鍵カプセル化機構(DW-HKEM)とライブ暗号解析ダッシュボードに基づく統合システムの設計、実装、テストを行います。RSA-256とML-KEM-768はどちらもDW-HKEMフレームワーク内でホストされており、それぞれにAES-256セッションキーがラップされています。SHA-256に基づくキー導出関数で合成キーが作成され、古典的および量子的な敵対者に対する組合せ的セキュリティと既存の銀行システムとの後方互換性を実現しています。CryptoXのリアルタイムダッシュボードは、各業務の時間追跡、セッションレベルの分析、パフォーマンストレンドの可視化を提供し、企業銀行のセキュリティ運用に即時活用できます。100回の独立した反復にわたる実証的ベンチマーキングの結果、総オーバーヘッドは約1.58msであり、これはエンタープライズ展開の閾値内であり、金融セクターの暗号インフラやアプリケーションがポスト量子時代へ移行するための実用的かつスケーラブルな基準として実現可能であることを証明しています。また、実施された作業の完全なソースコードも提供しています。",
+  "abstract_translated": "オンラインバンキングや金融サービスが公共向けネットワークで増加したことで、暗号プロトコルのセキュリティは深刻かつ体系的な問題となっています。RSA-2048は、毎日インターネット上で移動する取引の大多数で使われる鍵長です。非常に陰湿な脅威ベクトルである「今収穫後で復号(HNDL)」パラダイムは、敵対的な国家主体や資金力のある脅威アクターによってすでに存在しています。露出時間は未来の時間ではなく、今の瞬間です!量子計算は現在の公開鍵暗号インフラにとって確実な脅威であり、ますます近づいています。本論文では、著者らはこれら両方の課題に取り組み、デュアルラップハイブリッド鍵カプセル化機構(DW-HKEM)とライブ暗号解析ダッシュボードに基づく統合システムの設計、実装、テストを行います。RSA-256とML-KEM-768はどちらもDW-HKEMフレームワーク内でホストされており、それぞれにAES-256セッションキーがラップされています。SHA-256に基づくキー導出関数で合成キーが作成され、古典的および量子的な敵対者に対する組合せ的セキュリティと既存の銀行システムとの後方互換性を実現しています。CryptoXのリアルタイムダッシュボードは、各業務の時間追跡、セッションレベルの分析、パフォーマンストレンドの可視化を提供し、企業銀行のセキュリティ運用に即時活用できます。100回の独立した反復にわたる実証的ベンチマーキングの結果、総オーバーヘッドは約1.58msであり、これはエンタープライズ展開の閾値内であり、金融セクターの暗号インフラやアプリケーションがポスト量子時代へ移行するための実用的かつスケーラブルな基準として実現可能であることを証明しています。また、実施された作業の完全なソースコードも提供しています。"
+ },
+ {
+  "id": "2607.19109",
+  "posted_at": "2026-07-29T20:37:55Z",
+  "title": "Exploiting Load/Store Leakage of Sparse Vectors for Key Recovery in HQC",
+  "title_ja": "HQCにおけるキーリカバリのためのスパースベクトルのロード/ストア漏れを悪用する",
+  "title_translated": "HQCにおけるキーリカバリのためのスパースベクトルのロード/ストア漏れを悪用する",
+  "translation_language": "ja",
+  "authors": "Gustavo Banegas, Benjamin Smith, Jad Zahreddine",
+  "link": "https://arxiv.org/abs/2607.19109v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "hardware"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Hamming Quasi-Cyclic (HQC) is a code-based key encapsulation mechanism selected by NIST for standardization, making its resistance to implementation attacks critically important. We present a side-channel attack that exploits load/store leakage in the manipulation of HQC's sparse secret vectors. Analysing Cortex-M4 assembly generated from the reference implementation, we identify a leakage surface in which the low and high 32-bit halves of each 64-bit word leak with different strengths, due to compiler-generated register spilling. We exploit this leakage to construct a simple zero-word distinguisher classifying machine words of the secret vector as zero or nonzero from electromagnetic measurements. The recovered zero positions are then translated into decoding hints, reducing HQC key recovery to a shortened syndrome-decoding problem. We analyse the resulting decoding complexity for all HQC parameter sets: at 32-bit granularity an expected 88.7% of the machine words of y are zero for HQC-1, cutting the decoding to $\\approx$ 2 46 bit operations. Experiments on a Cortex-M4 validate the predicted low/high-half asymmetry-approximately 500 traces for the stronger low-half channel and 5,000 for the weaker high-half channeland recover the zero words of an HQC-1 key at 32-bit granularity. Finally, we discuss practical countermeasures that eliminate the sparsity exploited by the attack.",
+  "abstract_ja": "ハミング準サイクリック(HQC)は、NISTが標準化のために選定したコードベースの鍵カプセル化機構であり、実装攻撃に対する耐性が非常に重要となっています。本社では、HQCのスパースな秘密ベクトルを操作する際にロード/ストアリークを利用するサイドチャネル攻撃を提案します。参照実装から生成されたCortex-M4アセンブリを解析し、各64ビットワードの低32ビット半分が異なる強度でリークするリーケー面を特定しました。これはコンパイラによるレジスタのスピリングによるものです。このリークを利用して、電磁観測から秘密ベクトルの機械語をゼロまたは非ゼロに分類する単純なゼロワード識別子を構築します。回復されたゼロ位置は復号ヒントに変換され、HQC鍵の回復は短縮された症候群復号問題にまで減少します。すべてのHQCパラメータセットのデコード複雑さを解析します。32ビットの粒度では、HQC-1のマシンワードのうちyの88.7%がゼロになり、デコードは約2回の46ビット演算に削減されます。Cortex-M4での実験により、予測された低・高半非対称性が検証されます。強いローハーフチャネルは約500トレース、弱いハイハーフチャネルは約5,000トレースで、32ビットの粒度でHQC-1キーのゼロワードを復元します。最後に、攻撃によって悪用されるスパース性を排除するための実践的な対策について議論します。",
+  "abstract_translated": "ハミング準サイクリック(HQC)は、NISTが標準化のために選定したコードベースの鍵カプセル化機構であり、実装攻撃に対する耐性が非常に重要となっています。本社では、HQCのスパースな秘密ベクトルを操作する際にロード/ストアリークを利用するサイドチャネル攻撃を提案します。参照実装から生成されたCortex-M4アセンブリを解析し、各64ビットワードの低32ビット半分が異なる強度でリークするリーケー面を特定しました。これはコンパイラによるレジスタのスピリングによるものです。このリークを利用して、電磁観測から秘密ベクトルの機械語をゼロまたは非ゼロに分類する単純なゼロワード識別子を構築します。回復されたゼロ位置は復号ヒントに変換され、HQC鍵の回復は短縮された症候群復号問題にまで減少します。すべてのHQCパラメータセットのデコード複雑さを解析します。32ビットの粒度では、HQC-1のマシンワードのうちyの88.7%がゼロになり、デコードは約2回の46ビット演算に削減されます。Cortex-M4での実験により、予測された低・高半非対称性が検証されます。強いローハーフチャネルは約500トレース、弱いハイハーフチャネルは約5,000トレースで、32ビットの粒度でHQC-1キーのゼロワードを復元します。最後に、攻撃によって悪用されるスパース性を排除するための実践的な対策について議論します。"
+ },
+ {
+  "id": "2607.20305",
+  "posted_at": "2026-07-29T20:37:58Z",
+  "title": "Constant-time decoding of Gabidulin codes and their generalizations with application to RQC",
+  "title_ja": "ガビドゥリン符号の定時復号とそのRQCへの応用",
+  "title_translated": "ガビドゥリン符号の定時復号とそのRQCへの応用",
+  "translation_language": "ja",
+  "authors": "Nicolas Aragon, Chloé Baïsse, Anthony Fraga, Philippe Gaborit, Ilaria Zappatore",
+  "link": "https://arxiv.org/abs/2607.20305v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "algo"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子アルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Gabidulin codes are a rank metric analog of Reed-Solomon codes. Although these codes are used in different very efficient rank-based cryptosystems like the RQC cryptosystem or the Loidreau cryptosystem, there was no constant-time implementation of Gabidulin codes, when having a constant-time implementation is crucial for real-life development of cryptosystems. In this paper, we propose the first constant-time decoding algorithm of Augmented Gabidulin (AG) codes, a simple variation on Gabidulin codes where one adds zero columns to Gabidulin codes, and which contains the case of Gabidulin codes. These AG codes are used in practice in the most efficient variations of the RQC cryptosystem. We prove that AG code decoding can be achieved with quadratic complexity. We further present a constant-time algorithm for the left division of $q$-polynomials along with a complete description of the AG code decoding procedure. These algorithms are integrated into the RQC-Block-MS-AG scheme, and we evaluate the performance of our implementation through benchmarks. Our results show that our implementation outperforms the original RQC, though it remains approximately four times slower than HQC. However, it achieves ciphertexts and key sizes about four times smaller, highlighting an appealing trade-off between performance and compactness.",
+  "abstract_ja": "ガビドゥリン符号はリード・ソロモン符号のランク計量類似物です。これらの符号はRQC暗号システムやロイドロー暗号システムのような非常に効率的なランクベースの暗号システムで使われていますが、ガビドゥリン符号の定時実装は存在せず、定時実装は実際の暗号システム開発において非常に重要です。本論文では、拡張ガビドゥリン符号(AG)符号の最初の定時復号アルゴリズムを提案します。これは、ガビドゥリン符号に列をゼロ加える単純なバリエーションであり、ガビドゥリン符号のケースを含みます。これらのAGコードは、RQC暗号システムの最も効率的なバリエーションで実際に使用されています。AGコード復号が二次計算量で達成可能であることを証明しました。さらに、$q$多項式の左割り算のための定時アルゴリズムと、AG符号復号手順の完全な説明を提示します。これらのアルゴリズムはRQC-Block-MS-AGスキームに統合されており、ベンチマークを通じて実装のパフォーマンスを評価しています。結果として、私たちの実装は元のRQCを上回る性能を示していますが、HQCの約4倍の遅さは依然として残っています。しかし、暗号文とキーサイズは約4倍小さくなり、性能とコンパクトさの魅力的なトレードオフを示しています。",
+  "abstract_translated": "ガビドゥリン符号はリード・ソロモン符号のランク計量類似物です。これらの符号はRQC暗号システムやロイドロー暗号システムのような非常に効率的なランクベースの暗号システムで使われていますが、ガビドゥリン符号の定時実装は存在せず、定時実装は実際の暗号システム開発において非常に重要です。本論文では、拡張ガビドゥリン符号(AG)符号の最初の定時復号アルゴリズムを提案します。これは、ガビドゥリン符号に列をゼロ加える単純なバリエーションであり、ガビドゥリン符号のケースを含みます。これらのAGコードは、RQC暗号システムの最も効率的なバリエーションで実際に使用されています。AGコード復号が二次計算量で達成可能であることを証明しました。さらに、$q$多項式の左割り算のための定時アルゴリズムと、AG符号復号手順の完全な説明を提示します。これらのアルゴリズムはRQC-Block-MS-AGスキームに統合されており、ベンチマークを通じて実装のパフォーマンスを評価しています。結果として、私たちの実装は元のRQCを上回る性能を示していますが、HQCの約4倍の遅さは依然として残っています。しかし、暗号文とキーサイズは約4倍小さくなり、性能とコンパクトさの魅力的なトレードオフを示しています。"
+ },
+ {
+  "id": "2607.20800",
+  "posted_at": "2026-07-29T20:38:01Z",
+  "title": "Classical Acceptance Is Not Hybrid Authentication: Measuring X.509 Verifier Semantics in Post-Quantum Migration",
+  "title_ja": "古典的受容はハイブリッド認証ではない:ポスト量子移動におけるX.509検証器の意味論の測定",
+  "title_translated": "古典的受容はハイブリッド認証ではない:ポスト量子移動におけるX.509検証器の意味論の測定",
+  "translation_language": "ja",
+  "authors": "Taesung Kim, Boheung Chung, Keonwoo Kim, Yousung Kang",
+  "link": "https://arxiv.org/abs/2607.20800v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "A relying party validating a hybrid X.509 certificate --- carrying both a classical and a post-quantum credential --- must distinguish whether its accepting judgment rests on the post-quantum evidence or only on the classical path. To preserve compatibility, the separable designs place that evidence where classical path validation may ignore it. A verifier can then validate the classical path and accept while the post-quantum evidence never bears on the decision --- a valid classical result silently promoted to a hybrid conclusion it did not establish. We measure this across eight path-validation stacks (seven independent codebases), in nine validation modes, over six certificate schemes. Under a hybrid-required policy, nearly every stack parsing a separable hybrid certificate accepts on the classical path without making the post-quantum evidence outcome-bearing; one enforcing mode instead fractures interoperability over a signature-input encoding not yet interoperably profiled; and stacks that verify post-quantum signatures still do not enforce the binding by default: the gap is structural, not explained by missing primitive capability alone. Under lifecycle desynchronization the downgrade is realized: when a bound post-quantum credential is revoked while the classical certificate stays valid, the default path still accepts, because the bound credential lies outside the decision's scope. Binding success is not authentication success. We contribute a specification-derived verifier model and an executable, policy-parametric reference contract --- what a verifier must recognize, verify, make outcome-bearing, and check before reporting a validation as hybrid --- with a diagnosis of why standards do not require it.",
+  "abstract_ja": "古典的およびポスト量子の資格---を持つハイブリッドX.509証明書---を検証する依存者は、その判断がポスト量子証拠に基づくのか、それとも古典的な経路のみに基づくのかを区別しなければなりません。互換性を保つために、分離可能設計は古典的な経路検証が無視する可能性のある証拠を配置します。検証者は古典的な経路を検証し、ポスト量子の証拠が妥当な古典的結果---決定に影響を与えず、その結果が確立されていないハイブリッドな結論に密かに推進されるのを受け入れることができます。これを8つのパス検証スタック(7つの独立したコードベース)、9つの検証モード、6つの証明書スキームで測定します。ハイブリッド必須ポリシーの下では、分離可能なハイブリッド証明書を解析するほぼすべてのスタックは、ポスト量子証拠を結果決定的なものにせずに古典的な経路を受け入れます。一方の強制モードは、まだ相互運用性プロファイルが確立されていない署名入力符号化上の相互運用性を破壊します。また、ポスト量子署名を検証するスタックは依然としてデフォルトで結合を強制しません。ギャップは構造的なものであり、単に原始的能力が欠如しているだけで説明できるわけではありません。ライフサイクル同期解除では、ダウングレードが実現されます。バインドされたポスト量子認証が取り消され、古典証明書が有効である場合でも、デフォルトパスは依然として受け入れられます。なぜなら、バインドされた認証情報は決定の範囲外にあるからです。バインディング成功は認証成功ではありません。私たちは、仕様由来の検証モデルと実行可能なポリシーパラメトリック参照契約を提供し、検証者が検証、検証、結果決定、検証を報告する前に検証を報告し、なぜ標準がそれを要求しないのかを診断するハイブリッド------として検証しなければならないものを提供します。",
+  "abstract_translated": "古典的およびポスト量子の資格---を持つハイブリッドX.509証明書---を検証する依存者は、その判断がポスト量子証拠に基づくのか、それとも古典的な経路のみに基づくのかを区別しなければなりません。互換性を保つために、分離可能設計は古典的な経路検証が無視する可能性のある証拠を配置します。検証者は古典的な経路を検証し、ポスト量子の証拠が妥当な古典的結果---決定に影響を与えず、その結果が確立されていないハイブリッドな結論に密かに推進されるのを受け入れることができます。これを8つのパス検証スタック(7つの独立したコードベース)、9つの検証モード、6つの証明書スキームで測定します。ハイブリッド必須ポリシーの下では、分離可能なハイブリッド証明書を解析するほぼすべてのスタックは、ポスト量子証拠を結果決定的なものにせずに古典的な経路を受け入れます。一方の強制モードは、まだ相互運用性プロファイルが確立されていない署名入力符号化上の相互運用性を破壊します。また、ポスト量子署名を検証するスタックは依然としてデフォルトで結合を強制しません。ギャップは構造的なものであり、単に原始的能力が欠如しているだけで説明できるわけではありません。ライフサイクル同期解除では、ダウングレードが実現されます。バインドされたポスト量子認証が取り消され、古典証明書が有効である場合でも、デフォルトパスは依然として受け入れられます。なぜなら、バインドされた認証情報は決定の範囲外にあるからです。バインディング成功は認証成功ではありません。私たちは、仕様由来の検証モデルと実行可能なポリシーパラメトリック参照契約を提供し、検証者が検証、検証、結果決定、検証を報告する前に検証を報告し、なぜ標準がそれを要求しないのかを診断するハイブリッド------として検証しなければならないものを提供します。"
+ },
+ {
+  "id": "2607.23007",
+  "posted_at": "2026-07-29T20:38:03Z",
+  "title": "Practical Post-Quantum Cryptography for Bandwidth Constrained or Non-Terrestrial Networks, and Power Constrained Devices",
+  "title_ja": "帯域幅制約または非地球ネットワークおよび電力制約デバイス向けの実用的なポスト量子暗号",
+  "title_translated": "帯域幅制約または非地球ネットワークおよび電力制約デバイス向けの実用的なポスト量子暗号",
+  "translation_language": "ja",
+  "authors": "Elliot Eichen, Sylvia Llosa, Yueqi Chen, Sangtae Ha",
+  "link": "https://arxiv.org/abs/2607.23007v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "network"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ネットワーク・通信"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Post-quantum (PQ) cryptographic algorithms, particularly for authentication, are more complex than classical algorithms and require larger certificates, signatures, and keys. Establishing a PQ-secure network connection increases bandwidth, memory, computation time, and energy consumption. These costs are especially severe in Non-Terrestrial Networks (NTNs), where long propagation delays, intermittent connectivity, constrained link budgets, satellite handovers, limited terminal resources, and bandwidth-constrained satellite-to-ground links amplify the overhead of certificate-based PQ authentication. Consequently, applications such as key rotation and key management may be unable to achieve acceptable handshake reliability or support NIST PQ Security Categories above Category 1. Similar limitations affect low-power IoT devices and bandwidth- or energy-constrained terrestrial networks, where PQ authentication may restrict devices to Category 1 security or prevent ambient-powered endpoints from supporting PQ authentication altogether. This paper investigates an alternative cryptographic framework that replaces PQ digital certificates with shared secret keys (SSKs). The framework leverages shared-secret ecosystems that do not rely on asymmetric key distribution, such as 5G/6G, and combines a Key Distribution Center (KDC) (e.g., Kerberos) with a preshared-key PQ handshake (e.g., DTLS-PSK) and ephemeral PQ key establishment (e.g., ML-KEM). Compared with certificate-based PQ authentication (e.g., ML-DSA), the proposed approach reduces handshake bandwidth, endpoint RAM, computation time, and energy use while preserving PQ-secure AEAD, including forward secrecy and replay resistance. Applications include NTN-based key rotation and management, uncrewed aerial vehicle (UAV) command-and-control systems, embedded medical sensors, and supply-chain monitoring and asset-tracking platforms.",
+  "abstract_ja": "ポスト量子(PQ)暗号アルゴリズムは、特に認証用で、古典的なアルゴリズムよりも複雑で、より大きな証明書、署名、鍵を必要とします。PQセキュアなネットワーク接続を確立すると、帯域幅、メモリ、計算時間、エネルギー消費が増加します。これらのコストは特に非地球ネットワーク(NTN)で大きく、長い伝搬遅延、断続的な接続、制限されたリンク予算、衛星ハンドオーバー、限られた端末資源、帯域幅制約の衛星-地上リンクが証明書ベースのPQ認証のオーバーヘッドを増幅します。その結果、鍵の回転や鍵管理などのアプリケーションは、許容可能なハンドシェイクの信頼性を達成できなかったり、カテゴリー1を超えるNIST PQセキュリティカテゴリのサポートが困難になることがあります。同様の制限は、低消費電力のIoTデバイスや帯域幅やエネルギー制約のある地上波ネットワークにも影響を及ぼし、PQ認証がデバイスをカテゴリー1のセキュリティに制限したり、アンビエント電源のエンドポイントがPQ認証をサポートしなくなることがあります。本論文は、PQデジタル証明書を共有秘密鍵(SSK)に置き換える代替的な暗号学的枠組みを調査します。このフレームワークは、5G/6Gのような非対称鍵配布に依存しない共有秘密エコシステムを活用し、鍵配布センター(KDC)(例:Kerberos)と事前共有鍵PQハンドシェイク(例:DTLS-PSK)、そして一時的なPQ鍵確立(例:ML-KEM)を組み合わせています。証明書ベースのPQ認証(例:ML-DSA)と比較して、提案されたアプローチはハンドシェイク帯域幅、エンドポイントRAM、計算時間、エネルギー消費を削減しつつ、PQで安全なAEADを維持し、前方の秘密性や再生抵抗性も確保します。用途には、NTNベースのキー回転管理、無人航空機(UAV)指揮統制システム、組み込み医療センサー、サプライチェーン監視および資産追跡プラットフォームなどが含まれます。",
+  "abstract_translated": "ポスト量子(PQ)暗号アルゴリズムは、特に認証用で、古典的なアルゴリズムよりも複雑で、より大きな証明書、署名、鍵を必要とします。PQセキュアなネットワーク接続を確立すると、帯域幅、メモリ、計算時間、エネルギー消費が増加します。これらのコストは特に非地球ネットワーク(NTN)で大きく、長い伝搬遅延、断続的な接続、制限されたリンク予算、衛星ハンドオーバー、限られた端末資源、帯域幅制約の衛星-地上リンクが証明書ベースのPQ認証のオーバーヘッドを増幅します。その結果、鍵の回転や鍵管理などのアプリケーションは、許容可能なハンドシェイクの信頼性を達成できなかったり、カテゴリー1を超えるNIST PQセキュリティカテゴリのサポートが困難になることがあります。同様の制限は、低消費電力のIoTデバイスや帯域幅やエネルギー制約のある地上波ネットワークにも影響を及ぼし、PQ認証がデバイスをカテゴリー1のセキュリティに制限したり、アンビエント電源のエンドポイントがPQ認証をサポートしなくなることがあります。本論文は、PQデジタル証明書を共有秘密鍵(SSK)に置き換える代替的な暗号学的枠組みを調査します。このフレームワークは、5G/6Gのような非対称鍵配布に依存しない共有秘密エコシステムを活用し、鍵配布センター(KDC)(例:Kerberos)と事前共有鍵PQハンドシェイク(例:DTLS-PSK)、そして一時的なPQ鍵確立(例:ML-KEM)を組み合わせています。証明書ベースのPQ認証(例:ML-DSA)と比較して、提案されたアプローチはハンドシェイク帯域幅、エンドポイントRAM、計算時間、エネルギー消費を削減しつつ、PQで安全なAEADを維持し、前方の秘密性や再生抵抗性も確保します。用途には、NTNベースのキー回転管理、無人航空機(UAV)指揮統制システム、組み込み医療センサー、サプライチェーン監視および資産追跡プラットフォームなどが含まれます。"
+ },
+ {
+  "id": "2607.23218",
+  "posted_at": "2026-07-29T20:38:06Z",
+  "title": "SPARC: Automated Root-Cause Analysis of Pre-Silicon Power Side-Channel Leakage in the Processor Design Flow",
+  "title_ja": "SPARC:プロセッサ設計フローにおけるプレシリコンパワーサイドチャネルリークの自動根本原因解析",
+  "title_translated": "SPARC:プロセッサ設計フローにおけるプレシリコンパワーサイドチャネルリークの自動根本原因解析",
+  "translation_language": "ja",
+  "authors": "Andrija Nešković, Christian Ewert, Mladen Berekovic, Saleh Mulhem",
+  "link": "https://arxiv.org/abs/2607.23218v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "hardware",
+   "pqc"
+  ],
+  "genre_names": [
+   "量子ハードウェア・実装",
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Power-Side-Channel Leakage (PSCL) originates from architectural and micro-architectural artifacts in a processor and poses a severe threat to the confidentiality of cryptographic software. Consequently, pre-silicon PSCL evaluation is indispensable for secure hardware design. Existing frameworks are either limited by poor simulation scalability or fail to attribute leakage to the correct hardware signals and software instructions, thereby impeding a comprehensive root-cause analysis. This paper presents SPARC, an automated framework for pre-silicon PSCL evaluation and root-cause analysis. SPARC leverages macro-cell-level Information Flow Tracking (IFT) augmented with enhanced shadow logic that tags switching activity originating from secret-dependent data. By isolating this activity, SPARC applies statistical leakage tests to detect PSCL, while simultaneously attributing the leakage to specific hardware signals and mapping those signals to the corresponding software instructions. This approach thus delivers a full end-to-end leakage evaluation and root-cause analysis for both hardware and software. To demonstrate and validate SPARC, PSCL of multiple open-source RISC-V CPUs, encompassing 32-bit and 64-bit cores with both in-order and out-of-order pipelines, is evaluated across a range of cryptographic workloads, including masked and unmasked AES and ML-KEM (CRYSTALS-Kyber-512). SPARC recovers known leakage sources as a sanity check and identifies specific microarchitectural leakage sources, achieving an 8x per-trace simulation speedup over previously shown approaches on comparable designs. By enabling precise and scalable root-cause analysis at the pre-silicon stage, this work provides a practical framework to mitigate PSCL early in the design flow, thereby strengthening the security of future processors.",
+  "abstract_ja": "パワーサイドチャネルリーク(PSCL)は、プロセッサ内のアーキテクチャおよびマイクロアーキテクチャのアーティファクトに由来し、暗号ソフトウェアの機密性に深刻な脅威をもたらします。したがって、プレシリコンPSCL評価は安全なハードウェア設計に不可欠です。既存のフレームワークは、シミュレーションのスケーラビリティが低いか、リーケージを正しいハードウェア信号やソフトウェア命令に帰属させられず、包括的な根本原因分析を妨げています。本論文では、プレシリコンPSCL評価および根本原因分析のための自動化フレームワークであるSPARCを紹介します。SPARCは、マクロセルレベルの情報フロートラッキング(IFT)を活用し、秘密依存データに基づくスイッチング活動をタグ付けする強化されたシャドウロジックを組み合わせています。この活動を分離することで、SPARCは統計的なリーク検定を適用してPSCLを検出しつつ、同時にリークを特定のハードウェア信号に帰属させ、それらの信号を対応するソフトウェア命令にマッピングします。このアプローチにより、ハードウェアとソフトウェアの両方に対してエンドツーエンドのリーク評価と根本原因分析が完全に提供されます。SPARCの実証と検証のために、32ビットおよび64ビットコアを持ち、順次外のパイプラインを持つ複数のオープンソースRISC-V CPUのPSCLが、マスクドおよびアンマスキングされたAESおよびML-KEM(CRYSTALS-Kyber-512)を含む幅広い暗号ワークロードで評価されます。SPARCは既知の漏れ源を合理性チェックとして回収し、特定の微細構造的漏れ源を特定し、同等設計で示された手法に比べて1トレースあたりのシミュレーション速度を8倍向上させます。プレシリコン段階で正確かつスケーラブルな根本原因解析を可能にすることで、設計フローの初期段階でPSCLを緩和する実践的な枠組みを提供し、将来のプロセッサのセキュリティを強化します。",
+  "abstract_translated": "パワーサイドチャネルリーク(PSCL)は、プロセッサ内のアーキテクチャおよびマイクロアーキテクチャのアーティファクトに由来し、暗号ソフトウェアの機密性に深刻な脅威をもたらします。したがって、プレシリコンPSCL評価は安全なハードウェア設計に不可欠です。既存のフレームワークは、シミュレーションのスケーラビリティが低いか、リーケージを正しいハードウェア信号やソフトウェア命令に帰属させられず、包括的な根本原因分析を妨げています。本論文では、プレシリコンPSCL評価および根本原因分析のための自動化フレームワークであるSPARCを紹介します。SPARCは、マクロセルレベルの情報フロートラッキング(IFT)を活用し、秘密依存データに基づくスイッチング活動をタグ付けする強化されたシャドウロジックを組み合わせています。この活動を分離することで、SPARCは統計的なリーク検定を適用してPSCLを検出しつつ、同時にリークを特定のハードウェア信号に帰属させ、それらの信号を対応するソフトウェア命令にマッピングします。このアプローチにより、ハードウェアとソフトウェアの両方に対してエンドツーエンドのリーク評価と根本原因分析が完全に提供されます。SPARCの実証と検証のために、32ビットおよび64ビットコアを持ち、順次外のパイプラインを持つ複数のオープンソースRISC-V CPUのPSCLが、マスクドおよびアンマスキングされたAESおよびML-KEM(CRYSTALS-Kyber-512)を含む幅広い暗号ワークロードで評価されます。SPARCは既知の漏れ源を合理性チェックとして回収し、特定の微細構造的漏れ源を特定し、同等設計で示された手法に比べて1トレースあたりのシミュレーション速度を8倍向上させます。プレシリコン段階で正確かつスケーラブルな根本原因解析を可能にすることで、設計フローの初期段階でPSCLを緩和する実践的な枠組みを提供し、将来のプロセッサのセキュリティを強化します。"
+ },
+ {
+  "id": "2607.25222",
+  "posted_at": "2026-07-29T20:38:09Z",
+  "title": "How to Watermark the RLWE Homomorphic Ciphertexts",
+  "title_ja": "RLWE準同型暗号文の透かしの方法",
+  "title_translated": "RLWE準同型暗号文の透かしの方法",
+  "translation_language": "ja",
+  "authors": "Yufei Zhou",
+  "link": "https://arxiv.org/abs/2607.25222v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "algo"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子アルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "In recent years, homomorphic encryption (HE) schemes based on the Ring Learning with Errors (RLWE) problem have rapidly developed and been widely applied to secure computation tasks, including privacy-preserving deep learning inference, privacy-preserving database queries, and related applications. However, most existing HE schemes focus primarily on the feasibility and efficiency of homomorphic computation, often neglecting practical requirements such as copyright protection of ciphertexts, source authentication, and supervision during computation. To address these issues, we propose a watermarking technique for RLWE-based HE ciphertexts. The algebraic structure of RLWE polynomials allows us to embed small noise as watermarking information into the ciphertext polynomials without affecting the plaintext values. However, HE ciphertexts typically undergo multiple homomorphic operations, which can distort or even remove the embedded watermark information. To address this challenge, we propose two practical solutions. The first, ARWMark, is a watermarking scheme based on noise stratification and is robust to homomorphic additive operations. The second scheme, MRWMark, is constructed using the roots of a linear equation and is resilient to both homomorphic additive and multiplicative operations, while supporting zero-bit watermarking. We provide a detailed theoretical analysis, proving that our schemes do not compromise the original security of HE, while ensuring the correctness and robustness of the proposed watermarking techniques. Furthermore, we conduct extensive experiments to demonstrate the effectiveness of both watermarking schemes.",
+  "abstract_ja": "近年、エラー付きリング学習(RLWE)問題に基づく準同型暗号(HE)スキームが急速に発展し、プライバシー保護のディープラーニング推論、プライバシー保護のデータベースクエリ、関連アプリケーションを含む安全な計算タスクに広く応用されています。しかし、既存の多くのHEスキームは準同型計算の実現可能性と効率に主に焦点を当てており、暗号文の著作権保護、ソース認証、計算中の監督といった実務的な要件をしばしば軽視しています。これらの問題に対処するため、RLWEベースのHE暗号文に対する透かし技術を提案します。RLWE多項式の代数的構造により、暗号文多項式に小さなノイズをウォーターマークとして埋め込むことができ、平文の値には影響を与えません。しかし、HE暗号文は通常、複数の準同型操作を経ており、埋め込まれた透かし情報が歪んだり、削除されたりすることがあります。この課題に対処するために、私たちは2つの実践的な解決策を提案します。1つ目のARWMarkはノイズ層化に基づくウォーターマーキング方式で、準同型加法演算に対してもロバスト性があります。2つ目のスキームであるMRWMarkは、線形方程式の根を用いて構成され、準同型加法演算と乗算演算の両方に耐性があり、ゼロビットのウォーターマークをサポートしています。詳細な理論分析を提供し、当社のスキームがHEの元の安全性を損なわず、提案された透かし技術の正確性と堅牢性を確保していることを証明します。さらに、両方の透かし方式の有効性を示すために広範な実験も行っています。",
+  "abstract_translated": "近年、エラー付きリング学習(RLWE)問題に基づく準同型暗号(HE)スキームが急速に発展し、プライバシー保護のディープラーニング推論、プライバシー保護のデータベースクエリ、関連アプリケーションを含む安全な計算タスクに広く応用されています。しかし、既存の多くのHEスキームは準同型計算の実現可能性と効率に主に焦点を当てており、暗号文の著作権保護、ソース認証、計算中の監督といった実務的な要件をしばしば軽視しています。これらの問題に対処するため、RLWEベースのHE暗号文に対する透かし技術を提案します。RLWE多項式の代数的構造により、暗号文多項式に小さなノイズをウォーターマークとして埋め込むことができ、平文の値には影響を与えません。しかし、HE暗号文は通常、複数の準同型操作を経ており、埋め込まれた透かし情報が歪んだり、削除されたりすることがあります。この課題に対処するために、私たちは2つの実践的な解決策を提案します。1つ目のARWMarkはノイズ層化に基づくウォーターマーキング方式で、準同型加法演算に対してもロバスト性があります。2つ目のスキームであるMRWMarkは、線形方程式の根を用いて構成され、準同型加法演算と乗算演算の両方に耐性があり、ゼロビットのウォーターマークをサポートしています。詳細な理論分析を提供し、当社のスキームがHEの元の安全性を損なわず、提案された透かし技術の正確性と堅牢性を確保していることを証明します。さらに、両方の透かし方式の有効性を示すために広範な実験も行っています。"
  }
 ]

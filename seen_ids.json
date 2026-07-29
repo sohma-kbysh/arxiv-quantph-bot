@@ -269,9 +269,11 @@
   "2606.31568",
   "2606.31586",
   "2606.31598",
+  "2606.31601",
   "2606.31610",
   "2606.31667",
   "2606.31678",
+  "2606.31681",
   "2606.31697",
   "2606.31709",
   "2606.31721",
@@ -429,6 +431,7 @@
   "2607.01624",
   "2607.01635",
   "2607.01653",
+  "2607.01671",
   "2607.01685",
   "2607.01712",
   "2607.01731",
@@ -553,6 +556,7 @@
   "2607.03779",
   "2607.03786",
   "2607.03799",
+  "2607.03802",
   "2607.03805",
   "2607.03820",
   "2607.03845",
@@ -564,6 +568,7 @@
   "2607.03950",
   "2607.03982",
   "2607.03983",
+  "2607.03988",
   "2607.04007",
   "2607.04015",
   "2607.04021",
@@ -650,6 +655,7 @@
   "2607.05361",
   "2607.05385",
   "2607.05386",
+  "2607.05429",
   "2607.05447",
   "2607.05448",
   "2607.05459",
@@ -677,11 +683,13 @@
   "2607.05786",
   "2607.05805",
   "2607.05814",
+  "2607.05831",
   "2607.05847",
   "2607.05865",
   "2607.05873",
   "2607.05897",
   "2607.05900",
+  "2607.05921",
   "2607.05940",
   "2607.05959",
   "2607.05973",
@@ -760,6 +768,7 @@
   "2607.07125",
   "2607.07138",
   "2607.07167",
+  "2607.07181",
   "2607.07197",
   "2607.07222",
   "2607.07223",
@@ -846,6 +855,7 @@
   "2607.08200",
   "2607.08212",
   "2607.08220",
+  "2607.08226",
   "2607.08235",
   "2607.08275",
   "2607.08294",
@@ -900,6 +910,7 @@
   "2607.08827",
   "2607.08841",
   "2607.08882",
+  "2607.08888",
   "2607.08898",
   "2607.08911",
   "2607.08928",
@@ -940,6 +951,7 @@
   "2607.09511",
   "2607.09513",
   "2607.09534",
+  "2607.09541",
   "2607.09570",
   "2607.09592",
   "2607.09597",
@@ -968,6 +980,7 @@
   "2607.09905",
   "2607.09906",
   "2607.09912",
+  "2607.09923",
   "2607.09927",
   "2607.09933",
   "2607.09976",
@@ -1112,6 +1125,7 @@
   "2607.12167",
   "2607.12174",
   "2607.12182",
+  "2607.12187",
   "2607.12190",
   "2607.12225",
   "2607.12228",
@@ -1128,6 +1142,7 @@
   "2607.12453",
   "2607.12470",
   "2607.12487",
+  "2607.12504",
   "2607.12513",
   "2607.12532",
   "2607.12533",
@@ -1148,6 +1163,7 @@
   "2607.12710",
   "2607.12727",
   "2607.12751",
+  "2607.12765",
   "2607.12780",
   "2607.12802",
   "2607.12821",
@@ -1191,6 +1207,7 @@
   "2607.13198",
   "2607.13215",
   "2607.13223",
+  "2607.13235",
   "2607.13244",
   "2607.13267",
   "2607.13287",
@@ -1210,6 +1227,7 @@
   "2607.13476",
   "2607.13512",
   "2607.13521",
+  "2607.13554",
   "2607.13570",
   "2607.13580",
   "2607.13630",
@@ -1235,6 +1253,7 @@
   "2607.13872",
   "2607.13887",
   "2607.13937",
+  "2607.13939",
   "2607.13957",
   "2607.13975",
   "2607.13989",
@@ -1289,6 +1308,7 @@
   "2607.14650",
   "2607.14663",
   "2607.14687",
+  "2607.14690",
   "2607.14704",
   "2607.14755",
   "2607.14759",
@@ -1450,6 +1470,7 @@
   "2607.16988",
   "2607.16996",
   "2607.17023",
+  "2607.17076",
   "2607.17081",
   "2607.17086",
   "2607.17101",
@@ -1479,6 +1500,7 @@
   "2607.17534",
   "2607.17554",
   "2607.17562",
+  "2607.17573",
   "2607.17583",
   "2607.17618",
   "2607.17629",
@@ -1517,6 +1539,7 @@
   "2607.18297",
   "2607.18333",
   "2607.18338",
+  "2607.18340",
   "2607.18351",
   "2607.18374",
   "2607.18383",
@@ -1560,6 +1583,7 @@
   "2607.19070",
   "2607.19078",
   "2607.19097",
+  "2607.19109",
   "2607.19129",
   "2607.19136",
   "2607.19142",
@@ -1640,6 +1664,7 @@
   "2607.20266",
   "2607.20283",
   "2607.20292",
+  "2607.20305",
   "2607.20311",
   "2607.20329",
   "2607.20333",
@@ -1665,7 +1690,9 @@
   "2607.20707",
   "2607.20756",
   "2607.20795",
+  "2607.20800",
   "2607.20804",
+  "2607.20805",
   "2607.20815",
   "2607.20840",
   "2607.20867",
@@ -1808,6 +1835,7 @@
   "2607.22990",
   "2607.22995",
   "2607.22998",
+  "2607.23007",
   "2607.23036",
   "2607.23039",
   "2607.23044",
@@ -1819,6 +1847,7 @@
   "2607.23127",
   "2607.23137",
   "2607.23179",
+  "2607.23218",
   "2607.23240",
   "2607.23276",
   "2607.23324",
@@ -1928,6 +1957,7 @@
   "2607.24853",
   "2607.24855",
   "2607.24858",
+  "2607.24891",
   "2607.24906",
   "2607.24907",
   "2607.24924",
@@ -1954,6 +1984,7 @@
   "2607.25170",
   "2607.25176",
   "2607.25179",
+  "2607.25222",
   "2607.25245",
   "2607.25256",
   "2607.25267",
@@ -2007,5 +2038,925 @@
   "2607.26019",
   "2607.26028",
   "2607.26029"
- ]
+ ],
+ "external_reviews": {
+  "cs.CR:2607.23614": {
+   "genre_ids": [],
+   "classifier": "skip-consensus:gemini-2.5-flash+gemini-2.5-flash-lite",
+   "skip_votes": [
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite"
+   ],
+   "reviewed_at": "2026-07-29T20:34:16Z"
+  },
+  "cs.CR:2607.23007": {
+   "genre_ids": [
+    "pqc",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:16Z",
+   "paper": {
+    "id": "2607.23007",
+    "title": "Practical Post-Quantum Cryptography for Bandwidth Constrained or Non-Terrestrial Networks, and Power Constrained Devices",
+    "link": "https://arxiv.org/abs/2607.23007v1",
+    "authors": "Elliot Eichen, Sylvia Llosa, Yueqi Chen, Sangtae Ha",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Post-quantum (PQ) cryptographic algorithms, particularly for authentication, are more complex than classical algorithms and require larger certificates, signatures, and keys. Establishing a PQ-secure network connection increases bandwidth, memory, computation time, and energy consumption. These costs are especially severe in Non-Terrestrial Networks (NTNs), where long propagation delays, intermittent connectivity, constrained link budgets, satellite handovers, limited terminal resources, and bandwidth-constrained satellite-to-ground links amplify the overhead of certificate-based PQ authentication. Consequently, applications such as key rotation and key management may be unable to achieve acceptable handshake reliability or support NIST PQ Security Categories above Category 1. Similar limitations affect low-power IoT devices and bandwidth- or energy-constrained terrestrial networks, where PQ authentication may restrict devices to Category 1 security or prevent ambient-powered endpoints from supporting PQ authentication altogether. This paper investigates an alternative cryptographic framework that replaces PQ digital certificates with shared secret keys (SSKs). The framework leverages shared-secret ecosystems that do not rely on asymmetric key distribution, such as 5G/6G, and combines a Key Distribution Center (KDC) (e.g., Kerberos) with a preshared-key PQ handshake (e.g., DTLS-PSK) and ephemeral PQ key establishment (e.g., ML-KEM). Compared with certificate-based PQ authentication (e.g., ML-DSA), the proposed approach reduces handshake bandwidth, endpoint RAM, computation time, and energy use while preserving PQ-secure AEAD, including forward secrecy and replay resistance. Applications include NTN-based key rotation and management, uncrewed aerial vehicle (UAV) command-and-control systems, embedded medical sensors, and supply-chain monitoring and asset-tracking platforms.",
+    "published": "2026-07-25T02:51:15Z",
+    "updated": "2026-07-25T02:51:15Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "network"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.20800": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:16Z",
+   "paper": {
+    "id": "2607.20800",
+    "title": "Classical Acceptance Is Not Hybrid Authentication: Measuring X.509 Verifier Semantics in Post-Quantum Migration",
+    "link": "https://arxiv.org/abs/2607.20800v1",
+    "authors": "Taesung Kim, Boheung Chung, Keonwoo Kim, Yousung Kang",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "A relying party validating a hybrid X.509 certificate --- carrying both a classical and a post-quantum credential --- must distinguish whether its accepting judgment rests on the post-quantum evidence or only on the classical path. To preserve compatibility, the separable designs place that evidence where classical path validation may ignore it. A verifier can then validate the classical path and accept while the post-quantum evidence never bears on the decision --- a valid classical result silently promoted to a hybrid conclusion it did not establish. We measure this across eight path-validation stacks (seven independent codebases), in nine validation modes, over six certificate schemes. Under a hybrid-required policy, nearly every stack parsing a separable hybrid certificate accepts on the classical path without making the post-quantum evidence outcome-bearing; one enforcing mode instead fractures interoperability over a signature-input encoding not yet interoperably profiled; and stacks that verify post-quantum signatures still do not enforce the binding by default: the gap is structural, not explained by missing primitive capability alone. Under lifecycle desynchronization the downgrade is realized: when a bound post-quantum credential is revoked while the classical certificate stays valid, the default path still accepts, because the bound credential lies outside the decision's scope. Binding success is not authentication success. We contribute a specification-derived verifier model and an executable, policy-parametric reference contract --- what a verifier must recognize, verify, make outcome-bearing, and check before reporting a validation as hybrid --- with a diagnosis of why standards do not require it.",
+    "published": "2026-07-23T00:04:32Z",
+    "updated": "2026-07-23T00:04:32Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.17573": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:16Z",
+   "paper": {
+    "id": "2607.17573",
+    "title": "Quantum-Resilient Banking Transaction Security using DW-HKEM: A Hybrid RSA/ML-KEM Cryptographic Gateway with Real-Time",
+    "link": "https://arxiv.org/abs/2607.17573v1",
+    "authors": "Siddhaarth S Prabhu, Aswani Kumar Cherukuri",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "The increasing number of online banking and financial services on public-facing networks has caused security of cryptographic protocols to become a serious, systemic problem. RSA-2048 is the key length that is used in the majority of transactions that travel over the Internet every day. A very insidious threat vector, the Harvest Now, Decrypt Later (HNDL) paradigm, is already in existence with the adversarial nation-state actors and well-funded threat actors. The exposure window is not a time in the future it is the NOW moment! Quantum computation is a certain threat to the current public-key cryptographic infrastructure, and one that is moving ever closer. In this paper, the authors take up both of these challenges, designing, implementing and testing an integrated system based on a Dual-Wrap Hybrid Key Encapsulation Mechanism (DW-HKEM) and a live cryptographic analytics dashboard. Both the RSA-256 and ML-KEM-768 are hosted within the DW-HKEM framework and an AES-256 session key is wrapped in each of them, with a composite key created using a Key Derivation Function based on SHA-256, resulting in combinatorial security against classical and quantum adversaries and backwards compatibility with existing banking systems. The CryptoX real-time dashboard offers time tracking for each operation, session-level analytics and visualization of performance trends for immediate use in enterprise banking security operations. The results from empirical benchmarking across 100 independent iterations show a total overhead of about 1.58ms, which is well within the enterprise deployment threshold, proving the architecture viable as a practical, scalable reference for the financial-sector's cryptographic infrastructure and applications to move to a post-quantum era. We also provide complete source code of the work carried out.",
+    "published": "2026-07-20T05:30:53Z",
+    "updated": "2026-07-20T05:30:53Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.18340": {
+   "genre_ids": [
+    "crypto",
+    "algo",
+    "nisq"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:16Z",
+   "paper": {
+    "id": "2607.18340",
+    "title": "Quantum Cryptanalysis on IBM Quantum Hardware: Extending Even--Mansour Period Recovery from $N=4$ to $N=10$",
+    "link": "https://arxiv.org/abs/2607.18340v1",
+    "authors": "Taebong Kim, Youngsik Hong, Minsik Kim, Sunyoung Choi, Jaewon Jang, Junghoon Shin, Minseo Kim",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.AI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "We report genuine-un-compiled, textbook-faithful-quantum cryptanalysis of symmetric-cipher structures executed on real IBM quantum hardware (ibm\\_kingston, Heron generation). Using Simon's algorithm we recover the hidden period of the Even-Mansour cipher up to security parameter N = 10 on real hardware, beyond the largest previously reported real-hardware key recovery of N = 4, and we cleanly recover the periods of a 3-round Feistel (DES-family) construction at block sizes 6 and 8; a 21-qubit block-10 instance is verified in simulation and submitted to hardware. We further provide a breadth-first benchmark of five genuine quantum attacks spanning four symmetric-cipher design paradigms -- Bernstein-Vazirani (linear structure, single query), Grover (SPN key search, quadratic), and Simon (Even-Mansour, CBC-MAC forgery, and Feistel; exponential-to-polynomial in query complexity) -- validated to the classical-simulation ceiling of 25 qubits. We are deliberately explicit about scope: these attacks target reduced or structured constructions in the Q2 (quantum-query) model, asymptotically follow the birthday bound and therefore do not constitute quantum advantage over classical collision-finding, do not break full AES/RSA or 16-round DES, and rely on error mitigation rather than fault-tolerant error correction. Our contribution is the real-hardware demonstration at record structure sizes, the breadth of genuine algorithmic coverage across four paradigms, and an honest, reproducible benchmark with public artifacts.",
+    "published": "2026-07-20T04:29:44Z",
+    "updated": "2026-07-20T04:29:44Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "crypto",
+     "algo",
+     "nisq"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.17076": {
+   "genre_ids": [
+    "crypto",
+    "network",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:27Z",
+   "paper": {
+    "id": "2607.17076",
+    "title": "SATLOCK: Handover-Coupled Scheduling for Weather-Resilient Quantum Key Distribution over LEO Constellations",
+    "link": "https://arxiv.org/abs/2607.17076v2",
+    "authors": "Mohammad Arif Hossain, Md Jafrin Hossain",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Routing quantum keys over low-earth-orbit (LEO) satellite constellations is harder than classical routing: satellite handovers couple consecutive scheduling decisions, stochastic cloud cover can silently zero a ground link, and finite-key effects eliminate short, low-elevation passes entirely. We present SATLOCK, a handover-aware Quantum Key Distribution (QKD) routing framework that combines (i) a composite channel model incorporating atmospheric loss, pointing jitter, Markov cloud cover, decoy-state estimation, and finite-key correction; (ii) an integer linear program (ILP) giving a provable handover-aware throughput upper bound; and (iii) a decentralized deep Q-network (DQN) baseline for weather-adaptive online routing. We evaluate two contention regimes on a Walker constellation serving intercontinental demands. In low contention (16 satellites, 6 demands), the ILP delivers 1,311 Mbit while the strongest heuristics reach 95--96\\% of ILP. In high contention (8 satellites, 12 demands), where handovers become binding, heuristics drop to 89.5\\% of ILP. The DQN agent reaches 91.8\\% and 84.6\\% of ILP in the two regimes; it learns effective per-demand weather policies but is limited in aggregate by the lack of cross-demand coordination.",
+    "published": "2026-07-19T04:53:54Z",
+    "updated": "2026-07-27T17:26:13Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "crypto",
+     "network",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.14690": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:27Z",
+   "paper": {
+    "id": "2607.14690",
+    "title": "Lattice-based extended withdrawability",
+    "link": "https://arxiv.org/abs/2607.14690v1",
+    "authors": "Ramses Fernandez-Valencia",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "We extend the extended withdrawable signatures of Liu, Susilo and Baek to lattice-based constructions built on the Fiat-Shamir with aborts paradigm. Departing from an earlier draft that transported a per-signer shift in the clear, which leaks the signer, we realise extended withdrawable signatures as a claimable ring signature: signer ambiguity is provided by a one-out-of-N signature used as a black box (anonymity under full key exposure), and confirmation is the signer's claim, a binding signature together with the opening of a hiding index commitment bound into the transcript. No signer-derived value is published in the clear. We give complete proofs of correctness, extended withdrawability (as anonymity-until-claim), unforgeability under insider corruption, and claimability soundness, reducing to decisional MLWE (commitment hiding), MSIS (commitment binding), the anonymity of the one-out-of-$N$ scheme, and the EUF-CMA security of the base signature, in the (quantum) random-oracle model. We instantiate the base signature with a no-hint, full-$t$ Dilithium-style scheme and the one-out-of-$N$ layer with an established lattice one-out-of-many proof.",
+    "published": "2026-07-16T07:51:55Z",
+    "updated": "2026-07-16T07:51:55Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.13939": {
+   "genre_ids": [
+    "hardware",
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:27Z",
+   "paper": {
+    "id": "2607.13939",
+    "title": "HORCRUX: A Complete PQC RISC-V eXtension Architecture",
+    "link": "https://arxiv.org/abs/2607.13939v1",
+    "authors": "Alessandra Dolmeta, Valeria Piscopo, Michael Hutter, Maurizio Martina, Guido Masera",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "This work presents a compact RISC-V extension for Post-Quantum Cryptography (PQC) called HORCRUX, which provides a unified Instruction-Set Extension (ISE) supporting all NIST-approved PQC algorithms. HORCRUX addresses the difficult trade-off between crypto-agility, high performance, and low resource consumption in constrained environments, a balance typically missing in hardware extensions that focus on limited PQC subsets. By targeting shared kernels across ML-KEM, MLDSA, SLH-DSA, HQC, and Falcon, the extension introduces new RISC-V instructions executed by a resource-efficient, tightly coupled coprocessor. This architecture is specifically optimized for embedded systems with strict energy budgets and limited area. Experimental evaluation on a Zynq UltraScale+ FPGA demonstrates speedups of up to 129x for hash-based, 9x for lattice-based, and 27x for code-based schemes, while adding fewer than 21k LUTs and 4.4k FFs. ASIC results from postsynthesis characterization in 65 nm CMOS are also reported, alongside a rigorous power characterization to validate the architecture's energy efficiency. The extension's modular structure maintains backward compatibility with standard RISC-V cores, offering a scalable solution for deploying PQC on constrained embedded systems.",
+    "published": "2026-07-15T15:21:26Z",
+    "updated": "2026-07-15T15:21:26Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "hardware",
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.13554": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:27Z",
+   "paper": {
+    "id": "2607.13554",
+    "title": "Multivariate Cryptography-Based Anonymous Certificate Scheme",
+    "link": "https://arxiv.org/abs/2607.13554v1",
+    "authors": "Abel C. H. Chen",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.IT",
+     "cs.NI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "As quantum computing technology continues to mature, the US National Institute of Standards and Technology (NIST) has outlined a migration timeline for Post-Quantum Cryptography (PQC), recommending the deprecation of certain elliptic curve cryptography (ECC) by 2030. Furthermore, privacy-sensitive application scenarios, such as vehicular communications, require the use of anonymous certificates. However, existing anonymous certificate schemes are still largely based on ECC. Therefore, this study proposes a multivariate cryptography-based anonymous certificate scheme, aiming to design quantum-safe anonymous certificates suitable for privacy-sensitive application services. The proposed multivariate cryptography-based anonymous certificate scheme is supported by rigorous mathematical proofs and illustrated with computational cases.",
+    "published": "2026-07-15T07:57:49Z",
+    "updated": "2026-07-15T07:57:49Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.13235": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:27Z",
+   "paper": {
+    "id": "2607.13235",
+    "title": "Proof in a Bottle: Long-Lived Verifiable Secret Sharing via Pre-Quantum Commitment and Immutable Ledger Binding",
+    "link": "https://arxiv.org/abs/2607.13235v1",
+    "authors": "Markus Jakobsson, Keir Finlow-Bates",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.ET"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Traditional secret sharing techniques such as Verifiable Secret sharing (VSS) are vulnerable to quantum attacks by a Cryptographically Relevant Quantum Computer (CRQC) running Shor's algorithm. We observe that the binding a VSS needs is required only at the moment of dealing, and this binding can be made before any CRQC exists. We propose Proof in a Bottle (PiB), which decouples verifiability from long-term binding: standard Pedersen commitments provide zero-knowledge, publicly checkable consistency during a pre-quantum window, while a salted, index-bound hash of the share set, anchored to an immutable public ledger, preserves the binding established in that window into the post-quantum era. The guarantee is explicitly a commit-now, reveal-later one: it protects today's honest dealings against tomorrow's quantum adversary.",
+    "published": "2026-07-14T19:57:43Z",
+    "updated": "2026-07-14T19:57:43Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.12765": {
+   "genre_ids": [
+    "network",
+    "pqc",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:42Z",
+   "paper": {
+    "id": "2607.12765",
+    "title": "A Scalable Cloud-Orchestrated and Service-Oriented Multi-Domain QKD Network with PQC Integration",
+    "link": "https://arxiv.org/abs/2607.12765v1",
+    "authors": "Konstantinos Krilakis, Antonia Tsili, Aikaterini Mandilara, Dimitris Syvridis",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Quantum key distribution (QKD) offers unconditional security but existing QKD networks remain difficult to scale across heterogeneous infrastructures and administrative domains due to vendor-specific interfaces, trusted-node constraints, and limited interoperability. This work presents a flexible multi-domain and multi-site quantum-secure network architecture integrating vendor-agnostic QKD, SDN orchestration, and cloud-managed trust services. Communication is based on Zero Trust Network Access protocols featuring multi-level authentication mechanisms building upon post-quantum cryptography (PQC) signature and key encapsulation algorithms. The system is deployed on a real-world testbed with domains incorporating QKD nodes from 3 vendors, as well as domains without QKD infrastructure elements. Experimental results show that PQC and SDN overhead remain relatively low even on constrained devices, with the main bottleneck being QKD key retrieval and vendor-specific key streaming limitations. The proposed framework extends quantum-safe key transport beyond native QKD boundaries while preserving flexibility, interoperability, and compatibility with existing infrastructures.",
+    "published": "2026-07-14T13:37:28Z",
+    "updated": "2026-07-14T13:37:28Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "network",
+     "pqc",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.12504": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:42Z",
+   "paper": {
+    "id": "2607.12504",
+    "title": "On the Security Implications of PQC in TLS: Handshake Exhaustion and IDS Degradation",
+    "link": "https://arxiv.org/abs/2607.12504v1",
+    "authors": "Lin-Fa Lee, Yi-Yu Chang, Chia-Mu Yu, Kuo-Hui Yeh",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Post-Quantum Cryptography (PQC) is increasingly being integrated into TLS 1.3 to enhance resilience against quantum-enabled attacks. However, the additional computational and communication overhead introduced by PQC primitives during the handshake phase may also amplify the impact of TLS handshake exhaustion attacks, leading to more severe Distributed Denial-of-Service (DDoS) threats. In this study, we establish an empirical testbed consisting of one PQC-enabled TLS server and ten attacking nodes, generating over 16.5 GB of mixed traffic data that includes both legitimate browsing behavior and high-intensity handshake exhaustion attacks. Experimental results show that PQC-TLS can prolong periods of sustained high CPU utilization on the server by up to 88 times, significantly amplifying the effectiveness of such attacks. Furthermore, we evaluate state-of-the-art deep learning-based Intrusion Detection Systems (IDS) and observe a substantial decline in attack detection performance under PQC traffic conditions. In particular, exosphere achieves only around 50% recall, while HyperVision's AU-ROC degrades to near-random levels (0.49), revealing critical detection blind spots in existing IDS when operating in PQC environments. The main contributions of this work are threefold: (1) we systematically quantify and analyze the root causes of IDS detection blind spots in PQC settings; (2) we publicly release a comprehensive PQC-DDoS hybrid traffic dataset, including precise attack timestamps and server-side resource monitoring data; and (3) we open-source all experimental code and AWS deployment scripts, enabling a fully reproducible cloud-based testing environment. These resources aim to support both academia and industry in developing next-generation PQC-aware intrusion detection systems.",
+    "published": "2026-07-14T08:35:31Z",
+    "updated": "2026-07-14T08:35:31Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.09923": {
+   "genre_ids": [
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:42Z",
+   "paper": {
+    "id": "2607.09923",
+    "title": "A Hybrid Quantum-Chaos Theory Approach to Image Encryption Using Reservoir Computing",
+    "link": "https://arxiv.org/abs/2607.09923v1",
+    "authors": "Naheen Mohd. Kadir",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "This research presents a novel hybrid image encryption system that combines quantum cryptography, chaos theory and reservoir computing to address the limitations of conventional encryption methods. With the rapid advancements in quantum computing, traditional systems like RSA, DHKE (related to prime number factorization) are vulnerable to quantum attacks i.e. Shor's algorithm, Grover's algorithm. In response, this study proposes a hybrid solution that uses quantum cryptographic protocols, particularly the E91 protocol, to generate secure, eavesdrop-proof keys through quantum entanglement. The integration of chaos theory, specifically the Lorenz hyper-chaotic system, enhances the encryption system by adding unpredictability and sensitivity to initial conditions, making it more resistant to both classical and quantum-based attacks. Reservoir computing is used to improve computational efficiency, enabling faster and more effective encryption and decryption processes. The system achieved encryption times as low as 0.0296s and decryption times as low as 0.0164s for 128x128 images, with MAE reduced for 300-600 node networks, and NPCR and UACI above 99.6% and 0.49, respectively, across various image sizes and configurations. By combining quantum cryptography, chaos theory and reservoir computing, this approach offers both enhanced security and practical feasibility for image encryption in the age of quantum computing.",
+    "published": "2026-07-10T19:19:06Z",
+    "updated": "2026-07-10T19:19:06Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.09541": {
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:42Z",
+   "paper": {
+    "id": "2607.09541",
+    "title": "Portable Acceleration of Learning With Errors KEMs for Post-Quantum Cryptography",
+    "link": "https://arxiv.org/abs/2607.09541v2",
+    "authors": "Tiziana Liberati, Nitin Shukla, Simone Rizzo, Elisabetta Boella, Matteo Barbieri, Gabriella Bettonte, Daniele Gregori, Marco Pedicini",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "The transition to post-quantum cryptography (PQC) is driving demand for implementations that can meet the computational requirements of real-world applications. Among the proposed PQC constructions, Learning With Errors (LWE) based key encapsulation mechanisms (KEMs) are particularly attractive due to their strong security foundations, but they incur substantial computational costs from matrix operations and large-scale cryptographically secure random number generation. These characteristics position GPU acceleration as an effective approach for lowering the computational overhead of lattice based cryptographic schemes. In this work, we present a portable GPU implementation of a plain LWE based KEM using OpenMP Target offloading. Unlike most existing GPU implementations, which rely on CUDA specific optimizations, our approach uses a single source code base that executes on both NVIDIA and AMD accelerators. We evaluate the proposed implementation on different accelerator architectures, analyzing performance benchmarking, runtime profiling, scalability analysis, and energy to solution measurements. Experimental results show that OpenMP Target offloading delivers substantial acceleration over a multicore CPU baseline while preserving source level portability across heterogeneous GPU ecosystems. Cross platform analysis identifies NVIDIA GH200 and AMD MI300X as the most effective platforms for this memory bound workload, while profiling indicates that memory system organization and CPU GPU interaction play a more critical role than peak compute capability alone. These findings demonstrate that portable GPU acceleration can significantly reduce the computational overhead of PQC while avoiding vendor lock in, thereby facilitating the deployment of quantum resistant cryptographic infrastructures.",
+    "published": "2026-07-10T15:46:20Z",
+    "updated": "2026-07-28T07:34:17Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.08226": {
+   "genre_ids": [
+    "pqc",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:42Z",
+   "paper": {
+    "id": "2607.08226",
+    "title": "Threshold Authorization Without Threshold Signatures: Signature-Agnostic MPC Custody",
+    "link": "https://arxiv.org/abs/2607.08226v1",
+    "authors": "Dariia Porechna",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Digital-asset custody has been built on threshold multi-party approval: no operation proceeds unless $t$ of $n$ parties approve, and fewer than t compromised parties can neither authorize nor learn the authorization secret. Threshold signature schemes (TSS) have been the standard mechanism, but the post-quantum transition disrupts this model: standardized hash-based signatures resist efficient threshold signing, and lattice-based threshold protocols remain an emerging research track. We present a dual-gate architecture that separates member authentication from threshold authorization. Each member signs its approval with an ordinary signature under any EUF-CMA scheme; the quorum jointly produces a threshold seal from Shamir-shared secrets bound to the operation. The seal is the base instance of a programmable authorization computation: simple quorum is the minimal policy, while richer policies can evaluate secret-shared state without making the member-signature scheme part of that computation. The signature scheme is a deployment parameter: migrating from ECDSA to SLH-DSA or ML-DSA is a key rotation, not a protocol redesign, and members holding keys in commodity HSMs participate through the standard sign API. The architecture can be deployed wherever the asset-control path supports programmable verification, such as smart contracts, vault modules, or HSMs guarding a master key, and produces an enforcement-layer authorization rather than a native chain signature. Below-threshold secrecy is information-theoretic; an adversary holding $\\geq t$ signing keys but no coefficient shares still cannot produce the seal.",
+    "published": "2026-07-09T08:20:45Z",
+    "updated": "2026-07-09T08:20:45Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.07269": {
+   "genre_ids": [],
+   "classifier": "skip-consensus:gemini-2.5-flash+gemini-2.5-flash-lite",
+   "skip_votes": [
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite"
+   ],
+   "reviewed_at": "2026-07-29T20:34:53Z"
+  },
+  "cs.CR:2607.03988": {
+   "genre_ids": [
+    "pqc",
+    "hardware",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:53Z",
+   "paper": {
+    "id": "2607.03988",
+    "title": "Energy-Aware System-Level Evaluation of Post-Quantum TLS on Embedded User Equipment over a Disaggregated 5G Network",
+    "link": "https://arxiv.org/abs/2607.03988v1",
+    "authors": "Sanzida Hoque, Abdullah Aydeger",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.PF"
+    ],
+    "primary": "cs.CR",
+    "abstract": "The transition to quantum-resistant security is a critical priority for the next generation of mobile networks, particularly within the disaggregated architecture of 5G. This paper presents an energy-aware system-level evaluation of Post- Quantum Cryptography (PQC) integrated into the Transport Layer Security (TLS) handshake on embedded User Equipment (UE). Using Raspberry Pi 5s as representative embedded processing platforms, we evaluate the performance of NIST-standardized combinations of classical and post-quantum signature and key exchange mechanisms (KEM), incorporating direct on-device power measurements to estimate per-handshake energy consumption. Results experimentally validate a strong coupling between latency and energy consumption, indicating that execution time is the dominant contributor to energy cost. Hash-based signature schemes incur up to 4x higher latency and 2x energy compared to lattice-based alternatives, while the impact of KEMs is comparatively smaller. The analysis further reveals that overall system performance is primarily constrained by cryptographic computation and concurrency-induced contention rather than network transport effects. These findings provide practical guidance for PQC deployment in mobile environments and demonstrate that lattice-based signatures offer a more favorable balance between security, efficiency, and scalability for 5G systems.",
+    "published": "2026-07-04T19:14:08Z",
+    "updated": "2026-07-04T19:14:08Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware",
+     "network"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2606.31681": {
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:53Z",
+   "paper": {
+    "id": "2606.31681",
+    "title": "Exploring Side-Channel Protections in Hardware Implementations of PQC ML-KEM Verification",
+    "link": "https://arxiv.org/abs/2606.31681v1",
+    "authors": "Davis Ranney, Yashaswini I Makaram, A. Adam Ding, Yunsi Fei",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.AR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "As ML-KEM is adopted as a post-quantum cryptographic standard, resilience against physical side-channel attacks has become essential. Among the constituent steps, the decapsulation Fujisaki-Okamoto (FO) verification is particularly vulnerable to side-channel power and electromagnetic (EM) analysis. In this work, we focus on common FPGA-based implementations and examine their side-channel vulnerabilities, and compare them with those of microcontroller implementations. Three verification implementations, unprotected, hash-based (first-order), and higher-order masked, are evaluated for side-channel security on both a microcontroller and an FPGA. While FPGAs offer higher speed and parallelism, they often exhibit stronger side-channel leakage, especially in high bandwidth configurations. The higher-order masked designs still leak information about the underlying data due to hardware-level effects and data-dependent processing. Our experiments show that their parallelized processing on FPGAs introduces sufficient first-order leakage for full secret-key recovery. These results underscore the persistent challenge of securing PQC algorithms in performance-constrained and parallelized hardware environments.",
+    "published": "2026-06-30T13:57:33Z",
+    "updated": "2026-06-30T13:57:33Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2606.31601": {
+   "genre_ids": [
+    "pqc",
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:53Z",
+   "paper": {
+    "id": "2606.31601",
+    "title": "Digital signature schemes based on code equivalence and syndrome decoding from restricted errors",
+    "link": "https://arxiv.org/abs/2606.31601v1",
+    "authors": "Sarah Arpin, Jason T. LeGrow, Hiram H. L\u00f3pez, Gretchen L. Matthews",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.IT"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Digital signature schemes are an important cryptographic tool to ensure data authenticity and integrity in many applications that must be resilient to attacks, including those facilitated by quantum computers. We consider the two digital signature schemes based on error-correcting codes that are second-round candidates in NIST's call for Additional Signature Schemes, which is part of the Post-Quantum Cryptography Standardization Process. Specifically, we provide an overview of the Codes and Restricted Objects Signature Scheme (CROSS) and the Linear Equivalence Signature Scheme (LESS). We describe their underlying problems of syndrome decoding from restricted errors and code equivalence. We review sigma protocols and how they can be transformed into digital signature schemes via the Fiat-Shamir transform. Finally, we explain how this procedure yields code-based digital signatures believed to be post-quantum secure.",
+    "published": "2026-06-30T12:50:55Z",
+    "updated": "2026-06-30T12:50:55Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.23218": {
+   "genre_ids": [
+    "hardware",
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:34:53Z",
+   "paper": {
+    "id": "2607.23218",
+    "title": "SPARC: Automated Root-Cause Analysis of Pre-Silicon Power Side-Channel Leakage in the Processor Design Flow",
+    "link": "https://arxiv.org/abs/2607.23218v1",
+    "authors": "Andrija Ne\u0161kovi\u0107, Christian Ewert, Mladen Berekovic, Saleh Mulhem",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.AR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Power-Side-Channel Leakage (PSCL) originates from architectural and micro-architectural artifacts in a processor and poses a severe threat to the confidentiality of cryptographic software. Consequently, pre-silicon PSCL evaluation is indispensable for secure hardware design. Existing frameworks are either limited by poor simulation scalability or fail to attribute leakage to the correct hardware signals and software instructions, thereby impeding a comprehensive root-cause analysis. This paper presents SPARC, an automated framework for pre-silicon PSCL evaluation and root-cause analysis. SPARC leverages macro-cell-level Information Flow Tracking (IFT) augmented with enhanced shadow logic that tags switching activity originating from secret-dependent data. By isolating this activity, SPARC applies statistical leakage tests to detect PSCL, while simultaneously attributing the leakage to specific hardware signals and mapping those signals to the corresponding software instructions. This approach thus delivers a full end-to-end leakage evaluation and root-cause analysis for both hardware and software. To demonstrate and validate SPARC, PSCL of multiple open-source RISC-V CPUs, encompassing 32-bit and 64-bit cores with both in-order and out-of-order pipelines, is evaluated across a range of cryptographic workloads, including masked and unmasked AES and ML-KEM (CRYSTALS-Kyber-512). SPARC recovers known leakage sources as a sanity check and identifies specific microarchitectural leakage sources, achieving an 8x per-trace simulation speedup over previously shown approaches on comparable designs. By enabling precise and scalable root-cause analysis at the pre-silicon stage, this work provides a practical framework to mitigate PSCL early in the design flow, thereby strengthening the security of future processors.",
+    "published": "2026-07-25T14:14:54Z",
+    "updated": "2026-07-25T14:14:54Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "hardware",
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.05921": {
+   "genre_ids": [
+    "pqc",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:08Z",
+   "paper": {
+    "id": "2607.05921",
+    "title": "From Regression to Prior-Aware Inference: Solving the ILWE Family in Randomness Leakage Attacks against ML-DSA",
+    "link": "https://arxiv.org/abs/2607.05921v3",
+    "authors": "Peiheng Zhang, Yuejun Liu, Wei Cheng, Muye Li, Honglin Shao, Yongbin Zhou",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "ML-DSA is a representative lattice-based signature scheme standardized by NIST. It relies on signing randomness and rejection sampling to ensure that released signatures are statistically independent of the secret key. Practical implementations, however, may leak partial information about this randomness, and such leakage can transform public signatures into ILWE-type problems, resulting in secret key disclosure risks. Such randomness leakage attack can be formulated as a two-stage key-recovery procedure, in which leaked partial information and public signatures are first transformed into an ILWE-family instance, and then a recovery solver is applied to recover the secret key. Existing work has mainly focused on the first stage by constructing such instances under different leakage models. By contrast, the role of solver in the subsequent instance-solving stage remains under-explored, and existing attacks often rely on ad-hoc model-specific solvers. To address this gap, we propose a unified framework to systematically evaluate different recovery solvers on leakage-derived ILWE-family instances. The framework covers three ILWE instances, including the ordinary ILWE, Fiat-Shamir ILWE (FS-ILWE) and Concealed ILWE (CILWE) under different scenarios. Within our framework, we explore three classes of solvers. Our experiments show that the solver has a significant impact on the secret-key recovery efficiency. In particular, on FS-ILWE, prior-aware discrete-inference reduces the number of informative relations by one to two orders of magnitude compared to the baselines: Compared with OLS, BP constitutes a reduction by a factor of 15.4x-64.9x in noise-free settings, and by a factor of 10.5x-73.9x in noisy settings. Overall, this work provides a systematic evaluation on different solvers in randomness leakage attacks, and presents new benchmarks for future analysis on ML-DSA.",
+    "published": "2026-07-07T07:20:32Z",
+    "updated": "2026-07-14T02:15:49Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.05831": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:08Z",
+   "paper": {
+    "id": "2607.05831",
+    "title": "Withdrawability in Fiat-Shamir with aborts constructions",
+    "link": "https://arxiv.org/abs/2607.05831v1",
+    "authors": "Ramses Fernandez-Valencia",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "This article presents an extension of the work performed by Liu, Baek and Susilo on withdrawable signatures to the Fiat-Shamir with aborts paradigm. We introduce an abstract construction, and provide security proofs for this proposal. As an instantiation, we provide a concrete withdrawable signature scheme based on a no-hint, full-t Dilithium-style Fiat-Shamir with aborts construction; adapting to production ML-DSA (with hints) introduces a small epsilon term.",
+    "published": "2026-07-07T04:44:33Z",
+    "updated": "2026-07-07T04:44:33Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.20305": {
+   "genre_ids": [
+    "pqc",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:08Z",
+   "paper": {
+    "id": "2607.20305",
+    "title": "Constant-time decoding of Gabidulin codes and their generalizations with application to RQC",
+    "link": "https://arxiv.org/abs/2607.20305v1",
+    "authors": "Nicolas Aragon, Chlo\u00e9 Ba\u00efsse, Anthony Fraga, Philippe Gaborit, Ilaria Zappatore",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.IT"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Gabidulin codes are a rank metric analog of Reed-Solomon codes. Although these codes are used in different very efficient rank-based cryptosystems like the RQC cryptosystem or the Loidreau cryptosystem, there was no constant-time implementation of Gabidulin codes, when having a constant-time implementation is crucial for real-life development of cryptosystems. In this paper, we propose the first constant-time decoding algorithm of Augmented Gabidulin (AG) codes, a simple variation on Gabidulin codes where one adds zero columns to Gabidulin codes, and which contains the case of Gabidulin codes. These AG codes are used in practice in the most efficient variations of the RQC cryptosystem. We prove that AG code decoding can be achieved with quadratic complexity. We further present a constant-time algorithm for the left division of $q$-polynomials along with a complete description of the AG code decoding procedure. These algorithms are integrated into the RQC-Block-MS-AG scheme, and we evaluate the performance of our implementation through benchmarks. Our results show that our implementation outperforms the original RQC, though it remains approximately four times slower than HQC. However, it achieves ciphertexts and key sizes about four times smaller, highlighting an appealing trade-off between performance and compactness.",
+    "published": "2026-07-22T15:51:25Z",
+    "updated": "2026-07-22T15:51:25Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.19109": {
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:08Z",
+   "paper": {
+    "id": "2607.19109",
+    "title": "Exploiting Load/Store Leakage of Sparse Vectors for Key Recovery in HQC",
+    "link": "https://arxiv.org/abs/2607.19109v1",
+    "authors": "Gustavo Banegas, Benjamin Smith, Jad Zahreddine",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "math.NT"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Hamming Quasi-Cyclic (HQC) is a code-based key encapsulation mechanism selected by NIST for standardization, making its resistance to implementation attacks critically important. We present a side-channel attack that exploits load/store leakage in the manipulation of HQC's sparse secret vectors. Analysing Cortex-M4 assembly generated from the reference implementation, we identify a leakage surface in which the low and high 32-bit halves of each 64-bit word leak with different strengths, due to compiler-generated register spilling. We exploit this leakage to construct a simple zero-word distinguisher classifying machine words of the secret vector as zero or nonzero from electromagnetic measurements. The recovered zero positions are then translated into decoding hints, reducing HQC key recovery to a shortened syndrome-decoding problem. We analyse the resulting decoding complexity for all HQC parameter sets: at 32-bit granularity an expected 88.7% of the machine words of y are zero for HQC-1, cutting the decoding to $\\approx$ 2 46 bit operations. Experiments on a Cortex-M4 validate the predicted low/high-half asymmetry-approximately 500 traces for the stronger low-half channel and 5,000 for the weaker high-half channeland recover the zero words of an HQC-1 key at 32-bit granularity. Finally, we discuss practical countermeasures that eliminate the sparsity exploited by the attack.",
+    "published": "2026-07-21T13:53:36Z",
+    "updated": "2026-07-21T13:53:36Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CR:2607.25222": {
+   "genre_ids": [
+    "pqc",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:08Z",
+   "paper": {
+    "id": "2607.25222",
+    "title": "How to Watermark the RLWE Homomorphic Ciphertexts",
+    "link": "https://arxiv.org/abs/2607.25222v1",
+    "authors": "Yufei Zhou",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "In recent years, homomorphic encryption (HE) schemes based on the Ring Learning with Errors (RLWE) problem have rapidly developed and been widely applied to secure computation tasks, including privacy-preserving deep learning inference, privacy-preserving database queries, and related applications. However, most existing HE schemes focus primarily on the feasibility and efficiency of homomorphic computation, often neglecting practical requirements such as copyright protection of ciphertexts, source authentication, and supervision during computation. To address these issues, we propose a watermarking technique for RLWE-based HE ciphertexts. The algebraic structure of RLWE polynomials allows us to embed small noise as watermarking information into the ciphertext polynomials without affecting the plaintext values. However, HE ciphertexts typically undergo multiple homomorphic operations, which can distort or even remove the embedded watermark information. To address this challenge, we propose two practical solutions. The first, ARWMark, is a watermarking scheme based on noise stratification and is robust to homomorphic additive operations. The second scheme, MRWMark, is constructed using the roots of a linear equation and is resilient to both homomorphic additive and multiplicative operations, while supporting zero-bit watermarking. We provide a detailed theoretical analysis, proving that our schemes do not compromise the original security of HE, while ensuring the correctness and robustness of the proposed watermarking techniques. Furthermore, we conduct extensive experiments to demonstrate the effectiveness of both watermarking schemes.",
+    "published": "2026-07-28T02:53:30Z",
+    "updated": "2026-07-28T02:53:30Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CC:2607.08888": {
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:12Z",
+   "paper": {
+    "id": "2607.08888",
+    "title": "QMA Lower Bounds for Batch Verification via Approximate Degree",
+    "link": "https://arxiv.org/abs/2607.08888v1",
+    "authors": "Mark Bun, Mandar Juvekar, Samuel King",
+    "announce_type": "external",
+    "categories": [
+     "cs.CC"
+    ],
+    "primary": "cs.CC",
+    "abstract": "We study batch verification in QMA query and communication complexity, where the goal is to understand how the resources needed to verify $m$ copies of a Boolean function $f$ depend on $m$. We give a general technique for proving lower bounds on the witness-query tradeoff needed to batch verify a function $f$ in terms of its approximate degree. Applying this technique to an explicit family of DNF formulas $f$, we show that attempting to save even a constant factor on the witness length of the baseline approach to batch verifying $f$ necessitates a large polynomial increase in the query cost. We also obtain new lower bounds on the QMA query complexity of read-once CNF formulas and on the surjectivity and $k$-element distinctness functions. Our lower bounds also lift to give communication analogs of these results.",
+    "published": "2026-07-09T19:26:15Z",
+    "updated": "2026-07-09T19:26:15Z",
+    "source_feed": "cs.CC",
+    "external_genre_ids": [
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.CC:2607.01671": {
+   "genre_ids": [
+    "complexity",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash-lite",
+   "skip_votes": [
+    "gemini-2.5-flash"
+   ],
+   "reviewed_at": "2026-07-29T20:35:12Z",
+   "paper": {
+    "id": "2607.01671",
+    "title": "Self-Referential $K$-SAT and the Finite Analogue of G\u00f6del's Incompleteness Theorem",
+    "link": "https://arxiv.org/abs/2607.01671v1",
+    "authors": "Wen Fang, Xianxian Li, Jun Liu, Jie Luo, Yongxin Tong, Ke Xu",
+    "announce_type": "external",
+    "categories": [
+     "cs.CC",
+     "cs.DS",
+     "cs.IT",
+     "cs.LO"
+    ],
+    "primary": "cs.CC",
+    "abstract": "Self-reference and solution independence are core properties underlying intractability. This paper establishes a finite combinatorial analogue of G\u00f6del's incompleteness theorems within Boolean $K$-SAT. While standard random $K$-SAT has assignment correlations that disrupt solution independence, we resolve this via a logarithmic-width ensemble ($K = O(\\log N)$). Here, satisfying assignments converge to a Poisson distribution, letting unsatisfiable and uniquely satisfiable formulas coexist. By executing a single-clause substitution conditioned on the unique solution, we construct structurally irreducible SAT/UNSAT pairs that are indistinguishable via local evaluation. Using algorithmic information theory and Shannon channels, we prove that deductive pipelines restricted to a sublinear window suffer from an informational blind spot, forcing a descriptive lower bound of $K(\\mathcal{A}) \\geq \u03a9(N^{1-\u03b4})$. This deficit forces any Resolution refutation of the UNSAT instance to utilize wide clauses ($w(\u03c0) \\geq \u03a9(N^{1-\u03b4})$), triggering an exponential proof-tree explosion ($S(\u03c6) \\geq \\exp(\u03a9(N^{1-2\u03b4}))$). As $\u03b4\\rightarrow 0^+$, this bound converges to the worst-case $2^N$ threshold, reframing the Strong Exponential Time Hypothesis (SETH) as a direct projection of G\u00f6del incompleteness onto finite computation. We diagnose the decades-long stagnation in complexity theory. Transitioning from Turing's class separation to a G\u00f6delian paradigm of instance indistinguishability, we introduce a multi-dimensional comparative framework that contrasts these two historical lineages across distinct perspectives. The self-referential hardness exhibits physical invariance: it precludes quantum shortcuts due to the necessity of global semantic analysis and delineates a scaling bottleneck for machine learning architectures operating on lossy, local compression.",
+    "published": "2026-07-02T03:52:23Z",
+    "updated": "2026-07-02T03:52:23Z",
+    "source_feed": "cs.CC",
+    "external_genre_ids": [
+     "complexity",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash-lite"
+   }
+  },
+  "cs.IT:2607.24891": {
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:30Z",
+   "paper": {
+    "id": "2607.24891",
+    "title": "High-Performance Reinforcement-Learned BP Decoding of Quantum LDPC Codes",
+    "link": "https://arxiv.org/abs/2607.24891v1",
+    "authors": "Mohsen Moradi, Vahid Nourozi, Taejoon Kim, Remi A. Chou, David G. M. Mitchell",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Belief-propagation (BP) decoding is attractive for quantum low-density parity-check (QLDPC) codes because it uses local message passing on sparse Tanner graphs. However, conventional flooding BP often stalls due to stabilizer degeneracy and short cycles. Reinforcement-learning-based sequential variable-node scheduling (RL-S), which learns the update order offline, has shown that adaptive scheduling can improve BP convergence. In this paper, we extend this idea with a second-order local update decoder, RL-S2LU. The proposed decoder preserves BP locality and low complexity, while numerical results show significant error-correction gains over conventional BP and the considered BP-OSD-10 baseline.",
+    "published": "2026-07-27T14:49:09Z",
+    "updated": "2026-07-27T14:49:09Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.IT:2607.20805": {
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:30Z",
+   "paper": {
+    "id": "2607.20805",
+    "title": "New Criteria and Constructions for Self-Orthogonal Codes",
+    "link": "https://arxiv.org/abs/2607.20805v1",
+    "authors": "Peng Wang, Ziling Heng",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Self-orthogonal codes have attracted considerable attention owing to their applications in quantum error-correcting codes, linear complementary dual codes, and a variety of other fields. In this paper, we construct new families of self-orthogonal codes and self-orthogonal minimal codes by establishing criteria that characterize the self-orthogonality of certain linear codes. To this end, we first establish several new criteria for linear codes arising from the defining-set construction to be self-orthogonal. More specifically, for $q > 3$, we show that the code $\\mathcal{C}_D$ is self-orthogonal whenever the defining set $D$ is $G$-invariant, where $G \\subseteq \\mathbb{F}_q^*$ and $|G| > 2$. For $q = 2, 3$, we characterize the self-orthogonality of $\\mathcal{C}_D$ using certain character sums. By combining these criteria with partial difference sets, we construct several new families of self-orthogonal codes, which lead to optimal or almost optimal quantum codes. Secondly, via the action of a multiplicative subgroup $G \\subseteq \\mathbb{F}_q^*$ with $|G| > 2$ on the columns of a projective linear code, we construct self-orthogonal codes with flexible parameters. From their augmented codes, we derive quantum codes. By choosing suitable projective codes, we obtain optimal quantum codes with high parametric flexibility. Thirdly, we employ the characteristic function method to construct linear codes and establish criterion for their self-orthogonality. Based on this, we construct several classes of self-orthogonal minimal codes that violate the Ashikhmin-Barg condition, using vectorial dual-bent functions and $s$-plateaued functions.",
+    "published": "2026-07-23T00:23:43Z",
+    "updated": "2026-07-23T00:23:43Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.IT:2607.12187": {
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:30Z",
+   "paper": {
+    "id": "2607.12187",
+    "title": "Auxiliary Nodes for BP Decoding of Quantum LDPC Codes",
+    "link": "https://arxiv.org/abs/2607.12187v1",
+    "authors": "Daniel Tandler, Paul Bezner, Stephan ten Brink",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT",
+     "eess.SP"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Many recently proposed Calderbank-Shor-Steane (CSS) quantum low-density parity-check (QLDPC) codes have sparse decoding graphs, enabling syndrome-based belief propagation (BP) decoding at low complexity. Their construction, however, often results in properties that impair BP performance, such as short cycles and degeneracy. In this work, we propose a general framework for introducing auxiliary variable nodes (AVNs) and auxiliary check nodes (ACNs) into the decoding graph of CSS codes, compatible with the standard stabilizer measurement framework. This provides an additional degree of freedom in the design of the decoding graph itself and can be used to tackle the aforementioned shortcomings. We show that recently proposed techniques, 4-cycle removal and subcode ensemble decoding, can be interpreted as instances of this framework. For 4-cycle removal, we find that the gains depend strongly on the BP iteration count and check-node message scaling. Building on this framework, we further propose a graph-derived subcode ensemble decoder and demonstrate under circuit-level noise that it substantially reduces the per-round logical error rate compared with BP on the corresponding 4-cycle-free decoding graph.",
+    "published": "2026-07-13T22:12:35Z",
+    "updated": "2026-07-13T22:12:35Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.IT:2607.07181": {
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:30Z",
+   "paper": {
+    "id": "2607.07181",
+    "title": "Four classes of few-weight self-orthogonal codes and their applications for LCD codes and quantum codes",
+    "link": "https://arxiv.org/abs/2607.07181v1",
+    "authors": "Yue Huang, Zhonghao Liang, Chenlu Jia, Yongkang Wan, Qunying Liao",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Since self-orthogonal codes, few-weight codes, linear complementary dual codes(LCD codes, for short) and quantum codes have nice applications in coding theory and cryptography, they have received continuous attention. In 2024, by introducing the notion of the augment code, Heng et al.[30] constructed several classes of few-weight self-orthogonal codes basing on defining sets, which are introduced by Ding et al.[10] in 2007. In this manuscript, for two classes of defining sets, we consider the corresponding augmented codes, construct a class of projective four-weight self-orthogonal codes and three classes of four-weight self-orthogonal codes. And for two classes of these four-weight self-orthogonal linear codes, we determine the parameters of their dual codes. As applications, we construct two classes of LCD codes and a class of quantum codes. In particular, we prove that there exists a class of these LCD codes whose dual codes are almost optimal LCD codes according to the sphere packing bound, and a class of quantum codes are AMDS according to the quantum Singleton bound.",
+    "published": "2026-07-08T09:14:30Z",
+    "updated": "2026-07-08T09:14:30Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.IT:2607.03802": {
+   "genre_ids": [
+    "qec",
+    "qit"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:30Z",
+   "paper": {
+    "id": "2607.03802",
+    "title": "The Hermitian Hull Dimensions for a Class of (L,P)-Twisted Generalized Reed-Solomon Codes",
+    "link": "https://arxiv.org/abs/2607.03802v1",
+    "authors": "Chenlu Jia, Zhonghao Liang, Yue Huang, Qunying Liao",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Determining the hull of linear codes has long been an important topic in coding theory. Recently, non-generalized Reed-Solomon (in short, non-GRS) codes have attracted extensive research interest. The (L,P)-twisted generalized Reed-Solomon (in short, (L,P)-TGRS) code, which is an extension of the generalized Reed-Solomon (GRS) code, constitutes a well-studied calss of non-GRS codes.There are numerous works focusing on the Euclidean hull of (L,P)-TGRS codes, while only a few results on the Hermitian hull of (L,P)-TGRS codes. In this paper, we focus on a class of (L,P)-TGRS codes C_k(a). By taking a special class of the vector a with length i(q-1), and analyze the parity of i and the relation between i and q+1, we divide three cases to fully determine the Hermitian hull dimension of C_k(a). As an application, we construct two classes of entanglement-assisted quantum error-correcting codes.",
+    "published": "2026-07-04T10:19:45Z",
+    "updated": "2026-07-04T10:19:45Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec",
+     "qit"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  },
+  "cs.IT:2607.05429": {
+   "genre_ids": [
+    "algo",
+    "network",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-29T20:35:38Z",
+   "paper": {
+    "id": "2607.05429",
+    "title": "Grover-Based PLS: AUD and Beamforming with Artificial Noise in CD-NOMA",
+    "link": "https://arxiv.org/abs/2607.05429v1",
+    "authors": "Deemah H. Tashman, Soumaya Cherkaoui",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Sixth-Generation (6G) networks will require massive connectivity, ultra-low latency, and robust security, making reliable Active User Detection (AUD) essential for interference control and physical layer protection. This letter proposes a Grover-based physical layer security (PLS) framework for a code-domain non-orthogonal multiple access (CD-NOMA) network, where the base station employs artificial-noise (AN)-assisted beamforming and identifies the active set via Grover's quantum search algorithm. We consider two threat models: passive eavesdroppers formed by detected inactive users, and active eavesdroppers selected as the top f% most frequent transmitters among detected active users. By aligning beams and AN with the Grover-based AUD output, the proposed scheme enlarges the main-wiretap rate gap and significantly improves the average secrecy rate compared with compressive sensing and classical correlation receiver baselines, while approaching maximum-likelihood detection performance with a quadratic reduction in search complexity. The impact of the information/AN power split, the base station transmit power, and the fraction of highly active users treated as eavesdroppers on secrecy is characterized through numerical simulations, and design insights are extracted for 6G PLS under both passive and active eavesdropping.",
+    "published": "2026-07-02T14:16:19Z",
+    "updated": "2026-07-02T14:16:19Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "algo",
+     "network",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   }
+  }
+ },
+ "external_pending": {}
 }

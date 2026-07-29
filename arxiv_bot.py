@@ -3,6 +3,9 @@
 arXiv quant-ph -> Discord notifier with translated abstracts.
 
 - Fetches the official arXiv RSS feed (rss.arxiv.org/rss/quant-ph)
+- Uses custom arXiv API queries to find non-cross-listed candidates from
+  selected adjacent categories, then subjects them to strict LLM review with
+  an explicit skip decision before they can enter configured genre channels
 - Filters out cross-listed papers whose primary category is irrelevant
   (e.g. cond-mat.*) while keeping quantum-information-adjacent categories
 - Classifies papers into user-defined genres. A TF-IDF pre-screen first
@@ -34,6 +37,7 @@ import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -44,6 +48,10 @@ LOG_PATH = BASE_DIR / "posted_log.json"
 
 RSS_NS = {
     "dc": "http://purl.org/dc/elements/1.1/",
+    "arxiv": "http://arxiv.org/schemas/atom",
+}
+ATOM_NS = {
+    "atom": "http://www.w3.org/2005/Atom",
     "arxiv": "http://arxiv.org/schemas/atom",
 }
 
@@ -123,6 +131,167 @@ def fetch_feed(category: str) -> list[dict]:
             "abstract": abstract,
         })
     return papers
+
+
+def build_external_arxiv_query(category: str, terms: list[str],
+                               max_results: int = 100,
+                               start: int = 0) -> str:
+    """Build an arXiv API query for a category plus recall-oriented terms."""
+    clauses = []
+    for raw_term in terms:
+        term = str(raw_term).strip().replace('"', "")
+        if not term:
+            continue
+        clauses.append(f'all:"{term}"' if re.search(r"\s", term)
+                       else f"all:{term}")
+    if not clauses:
+        raise ValueError(f"external arXiv query for {category} has no terms")
+    search_query = f"cat:{category} AND ({' OR '.join(clauses)})"
+    params = urllib.parse.urlencode({
+        "search_query": search_query,
+        "start": max(0, int(start)),
+        "max_results": max(1, int(max_results)),
+        "sortBy": "submittedDate",
+        "sortOrder": "descending",
+    })
+    return f"https://export.arxiv.org/api/query?{params}"
+
+
+def parse_external_atom(raw: bytes, source_category: str) -> list[dict]:
+    """Parse custom-query Atom results into the normal internal paper shape."""
+    root = ET.fromstring(raw)
+    papers = []
+    for entry in root.findall("atom:entry", ATOM_NS):
+        title = re.sub(
+            r"\s+", " ", entry.findtext("atom:title", "", ATOM_NS)).strip()
+        abstract = re.sub(
+            r"\s+", " ", entry.findtext("atom:summary", "", ATOM_NS)).strip()
+        id_url = entry.findtext("atom:id", "", ATOM_NS).strip()
+        arxiv_id = re.sub(r"v\d+$", "", id_url.rsplit("/", 1)[-1])
+        categories = [
+            node.get("term", "").strip()
+            for node in entry.findall("atom:category", ATOM_NS)
+            if node.get("term")
+        ]
+        primary_node = entry.find("arxiv:primary_category", ATOM_NS)
+        primary = (
+            primary_node.get("term", "").strip()
+            if primary_node is not None else
+            (categories[0] if categories else source_category)
+        )
+        authors = ", ".join(
+            name.text.strip()
+            for name in entry.findall("atom:author/atom:name", ATOM_NS)
+            if name.text
+        )
+        alternate = next((
+            node.get("href", "")
+            for node in entry.findall("atom:link", ATOM_NS)
+            if node.get("rel") == "alternate"
+        ), id_url)
+        papers.append({
+            "id": arxiv_id,
+            "title": title,
+            "link": alternate,
+            "authors": authors,
+            "announce_type": "external",
+            "categories": categories,
+            "primary": primary,
+            "abstract": abstract,
+            "published": entry.findtext("atom:published", "", ATOM_NS).strip(),
+            "updated": entry.findtext("atom:updated", "", ATOM_NS).strip(),
+            "source_feed": source_category,
+        })
+    return papers
+
+
+def fetch_external_arxiv(category: str, rule: dict) -> list[dict]:
+    """Fetch short API queries, paging until the lookback boundary."""
+    terms = [str(t) for t in rule.get("terms", []) if str(t).strip()]
+    terms_per_query = max(1, int(rule.get("terms_per_query", 8)))
+    page_size = max(1, int(rule.get("max_results", 100)))
+    lookback_days = int(rule.get("lookback_days", 4))
+    min_interval = float(rule.get("query_min_interval_sec", 3))
+    by_id: dict[str, dict] = {}
+    chunks = [
+        terms[i:i + terms_per_query]
+        for i in range(0, len(terms), terms_per_query)
+    ]
+    request_count = 0
+    for chunk in chunks:
+        start = 0
+        previous_page: tuple[str, ...] | None = None
+        while True:
+            if request_count:
+                time.sleep(min_interval)
+            url = build_external_arxiv_query(
+                category, chunk, page_size, start=start)
+            rows = parse_external_atom(http_get(url), category)
+            request_count += 1
+            signature = tuple(paper["id"] for paper in rows)
+            # Defensive guard for an upstream endpoint that ignores ``start``.
+            if signature and signature == previous_page:
+                break
+            previous_page = signature
+            for paper in rows:
+                by_id.setdefault(paper["id"], paper)
+            if (
+                len(rows) < page_size
+                or not rows
+                or not external_paper_is_recent(rows[-1], lookback_days)
+            ):
+                break
+            start += page_size
+    return list(by_id.values())
+
+
+def _normalized_match_text(value: str) -> str:
+    return " " + re.sub(r"[^a-z0-9+]+", " ", value.lower()).strip() + " "
+
+
+def matches_external_terms(paper: dict, terms: list[str]) -> bool:
+    """Locally verify that an API result contains at least one query term."""
+    haystack = _normalized_match_text(
+        f"{paper.get('title', '')} {paper.get('abstract', '')}")
+    return any(
+        _normalized_match_text(str(term)).strip()
+        and f" {_normalized_match_text(str(term)).strip()} " in haystack
+        for term in terms
+    )
+
+
+def external_paper_is_recent(paper: dict, lookback_days: int,
+                             now: datetime | None = None) -> bool:
+    """Bound first-run backfill while retaining papers across long weekends."""
+    published = str(paper.get("published", "")).strip()
+    if not published:
+        return True
+    try:
+        timestamp = datetime.fromisoformat(published.replace("Z", "+00:00"))
+    except ValueError:
+        return True
+    reference = now or datetime.now(timezone.utc)
+    if timestamp.tzinfo is None:
+        timestamp = timestamp.replace(tzinfo=timezone.utc)
+    return timestamp >= reference - timedelta(days=max(1, lookback_days))
+
+
+def select_external_candidates(
+        fetched: list[dict], category: str, rule: dict,
+        core_ids: set[str], seen: set[str],
+        now: datetime | None = None) -> list[dict]:
+    """Apply local safeguards after the recall-oriented arXiv API query."""
+    lookback = int(rule.get("lookback_days", 4))
+    terms = [str(t) for t in rule.get("terms", [])]
+    return [
+        paper for paper in fetched
+        if paper["id"] not in core_ids
+        and paper["id"] not in seen
+        and paper["primary"] == category
+        and "quant-ph" not in paper.get("categories", [])
+        and external_paper_is_recent(paper, lookback, now)
+        and matches_external_terms(paper, terms)
+    ]
 
 
 # ---------------------------------------------------------------- filtering
@@ -890,6 +1059,243 @@ def classify_llm_batch(
     return [[] for _ in texts]
 
 
+def external_allowed_genre_ids(rule: dict,
+                               genres: list[dict]) -> list[str]:
+    """Resolve hard output choices; source mappings may remain soft hints."""
+    genre_ids = [str(g["id"]) for g in genres]
+    excluded = {str(gid) for gid in rule.get("excluded_genres", ["other"])}
+    if rule.get("allow_all_genres", False):
+        return [gid for gid in genre_ids if gid not in excluded]
+    requested = {str(gid) for gid in rule.get("candidate_genres", [])}
+    return [
+        gid for gid in genre_ids
+        if gid in requested and gid not in excluded
+    ]
+
+
+def _external_review_prompt(texts: list[str], cfg: dict,
+                            genres: list[dict], category: str,
+                            rule: dict) -> str:
+    """Strict adjacent-category prompt with an explicit non-posting class."""
+    genre_map = {g["id"]: g for g in genres}
+    allowed_ids = external_allowed_genre_ids(rule, genres)
+    allowed_genres = [genre_map[gid] for gid in allowed_ids]
+    likely_ids = [
+        str(gid) for gid in rule.get("candidate_genres", [])
+        if str(gid) in allowed_ids
+    ]
+    numbered = "\n\n".join(
+        f"<<<{i + 1}>>>\n{text}" for i, text in enumerate(texts))
+    max_genres = min(
+        max(1, int(cfg.get(
+            "external_classify_max_genres",
+            cfg.get("classify_max_genres", 2)))),
+        max(1, len(allowed_ids)),
+    )
+    instructions = str(rule.get("review_instructions", "")).strip()
+    return (
+        f"Below are {len(texts)} papers retrieved by a deliberately "
+        f"recall-oriented keyword query from arXiv category {category}. "
+        "They have NOT yet been accepted for a quantum-information Discord "
+        "server. This review is optimized for COMPLETENESS: missing a relevant "
+        "paper is substantially worse than posting a borderline one.\n\n"
+        "For each paper, choose every allowed channel where the paper makes "
+        "at least one SUBSTANTIVE new contribution or concrete application "
+        "that researchers following that channel would value. The channel "
+        "topic does not need to be the paper's single primary field. New "
+        "theorems, constructions, algorithms, protocols, implementations, "
+        "experiments, attacks, benchmarks, or nontrivial applications count. "
+        "Choose skip ONLY when the apparent connection occurs solely in "
+        "background, motivation, future work, citations, or a comparison, "
+        "with no substantive result for any allowed channel. When uncertain, "
+        "prefer the most plausible allowed genre instead of skip.\n"
+        f"Choose at most {max_genres} allowed genre IDs. Never output a "
+        "genre outside this allowed list. The token skip must appear alone.\n"
+        + (f"The source category most often maps to {', '.join(likely_ids)}, "
+           "but these are soft hints only; use any allowed channel supported "
+           "by the paper's actual contributions.\n" if likely_ids else "")
+        + (f"\n[Source-specific criteria]\n{instructions}\n" if instructions
+           else "")
+        + "\n[Allowed channels]\n"
+        + _genre_menu(allowed_genres)
+        + "\n- skip: Do not post this paper to any channel.\n"
+        "\n[Output format]\n"
+        "For every entry output only <<<k>>> followed by allowed genre IDs "
+        "separated by commas, or skip. Examples: <<<1>>> pqc and "
+        "<<<2>>> skip. Include every input number exactly once and include "
+        "no explanation, headings, or other text.\n\n"
+        + numbered
+    )
+
+
+def classify_external_llm_batch(
+        texts: list[str], cfg: dict, genres: list[dict],
+        category: str, rule: dict, spec: dict) -> list[list[str]]:
+    """Classify adjacent-category candidates as allowed genres or ``skip``."""
+    allowed_ids = set(external_allowed_genre_ids(rule, genres))
+    valid_ids = allowed_ids | {"skip"}
+    prompt = _external_review_prompt(texts, cfg, genres, category, rule)
+    provider = str(spec.get("provider", "gemini"))
+    if provider == "gemini":
+        out = _gemini_request(prompt, cfg, model=spec.get("model"))
+    elif provider == "openai_compatible":
+        out = _openai_compat_request(prompt, cfg, spec)
+    else:
+        print(f"[warn] unknown classifier provider '{provider}'",
+              file=sys.stderr)
+        return [[] for _ in texts]
+    results = _parse_classification_output(out, len(texts), valid_ids)
+    normalized = []
+    for gids in results:
+        if "skip" in gids:
+            normalized.append(["skip"])
+        else:
+            normalized.append([gid for gid in gids if gid in allowed_ids])
+    return normalized
+
+
+def review_external_candidates(
+        candidates_by_category: dict[str, list[dict]], cfg: dict,
+        genres: list[dict], cached_reviews: dict[str, dict],
+        dry_run: bool = False,
+) -> tuple[list[dict], dict[str, dict], dict[str, Any]]:
+    """Strictly review external candidates using the configured LLM chain.
+
+    A completed decision is cached by ``category:arxiv_id``. Rejections are
+    cached separately from the global posted-ID set so a later quant-ph
+    cross-list of the same paper can still be processed normally.
+    """
+    accepted: list[dict] = []
+    new_reviews: dict[str, dict] = {}
+    stats: dict[str, Any] = {
+        "mechanical_candidates": sum(
+            len(rows) for rows in candidates_by_category.values()),
+        "cached": 0,
+        "reviewed": 0,
+        "accepted": 0,
+        "skipped": 0,
+        "unreviewed": 0,
+        "skip_disagreements": 0,
+        "single_skip_pending": 0,
+        "requests": 0,
+        "classifier_counts": {},
+        "_pending_papers": {},
+    }
+    model_counts: Counter = Counter()
+    specs = classifier_model_specs(cfg)
+    batch_size = max(1, int(cfg.get("translate_batch_size", 5)))
+    text_limit = int(cfg.get("max_translate_chars", 2000))
+    skip_consensus = max(2, int(cfg.get("external_skip_consensus", 2)))
+
+    for category, papers in candidates_by_category.items():
+        rule = cfg.get("external_arxiv_queries", {}).get(category, {})
+        allowed = set(external_allowed_genre_ids(rule, genres))
+        pending: list[dict] = []
+        for paper in papers:
+            key = f"{category}:{paper['id']}"
+            cached = cached_reviews.get(key)
+            if isinstance(cached, dict) and "genre_ids" in cached:
+                stats["cached"] += 1
+                gids = [
+                    str(gid) for gid in cached.get("genre_ids", [])
+                    if str(gid) in allowed
+                ]
+                if gids:
+                    paper["external_genre_ids"] = gids
+                    paper["external_classifier"] = cached.get(
+                        "classifier", "cached-external-review")
+                    accepted.append(paper)
+                    stats["accepted"] += 1
+                else:
+                    stats["skipped"] += 1
+                continue
+            pending.append(paper)
+
+        if dry_run:
+            stats["unreviewed"] += len(pending)
+            continue
+
+        for i in range(0, len(pending), batch_size):
+            chunk = pending[i:i + batch_size]
+            texts = [
+                f"Title: {paper['title']}\n\n"
+                f"Abstract: {paper['abstract'][:text_limit]}"
+                for paper in chunk
+            ]
+            accepted_decisions: list[list[str]] = [[] for _ in chunk]
+            accepted_models: list[str | None] = [None] * len(chunk)
+            skip_models: list[list[str]] = [[] for _ in chunk]
+            for spec in specs:
+                if not classifier_key_present(spec) or classifier_dead(spec):
+                    continue
+                todo = [
+                    j for j in range(len(chunk))
+                    if not accepted_decisions[j]
+                    and len(skip_models[j]) < skip_consensus
+                ]
+                if not todo:
+                    break
+                stats["requests"] += 1
+                model_name = classifier_spec_name(spec)
+                outputs = classify_external_llm_batch(
+                    [texts[j] for j in todo], cfg, genres,
+                    category, rule, spec)
+                for j, gids in zip(todo, outputs):
+                    if gids == ["skip"]:
+                        skip_models[j].append(model_name)
+                    elif gids:
+                        accepted_decisions[j] = [
+                            gid for gid in gids if gid in allowed
+                        ]
+                        accepted_models[j] = model_name
+
+            for paper, gids, model_name, skip_votes in zip(
+                    chunk, accepted_decisions, accepted_models, skip_models):
+                has_skip_consensus = len(skip_votes) >= skip_consensus
+                if not gids and not has_skip_consensus:
+                    stats["unreviewed"] += 1
+                    key = f"{category}:{paper['id']}"
+                    stats["_pending_papers"][key] = paper
+                    if skip_votes:
+                        stats["single_skip_pending"] += 1
+                    continue
+                stats["reviewed"] += 1
+                key = f"{category}:{paper['id']}"
+                accepted_gids = gids
+                if accepted_gids:
+                    final_classifier = str(model_name)
+                    model_counts[final_classifier] += 1
+                    if skip_votes:
+                        stats["skip_disagreements"] += 1
+                else:
+                    final_classifier = (
+                        "skip-consensus:" + "+".join(skip_votes))
+                    model_counts["skip-consensus"] += 1
+                review = {
+                    "genre_ids": accepted_gids,
+                    "classifier": final_classifier,
+                    "skip_votes": skip_votes,
+                    "reviewed_at": time.strftime(
+                        "%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                }
+                if accepted_gids:
+                    # Keep the paper until it has actually been posted. This
+                    # lets a later run retry translation or Discord delivery
+                    # even after the API lookback window has elapsed.
+                    review["paper"] = paper
+                new_reviews[key] = review
+                if accepted_gids:
+                    paper["external_genre_ids"] = accepted_gids
+                    paper["external_classifier"] = final_classifier
+                    accepted.append(paper)
+                    stats["accepted"] += 1
+                else:
+                    stats["skipped"] += 1
+
+    stats["classifier_counts"] = dict(model_counts)
+    return accepted, new_reviews, stats
+
+
 _deepl_dead = False
 _azure_dead = False
 _google_dead = False
@@ -1102,14 +1508,15 @@ def google_translation_allowed(entry: dict, cfg: dict) -> bool:
     return not genre_ids or not genre_ids.issubset(skip)
 
 
-def translation_priority(entry: dict, cfg: dict) -> tuple[int, str]:
-    """Sort key for translating higher-priority Discord channels first."""
+def translation_priority(entry: dict, cfg: dict) -> tuple[int, int, str]:
+    """Prioritize quant-ph papers, then higher-priority genre channels."""
     priority = cfg.get("translation_priority_genres") or []
     rank = {genre_id: i for i, genre_id in enumerate(priority)}
     genre_ids = [g["id"] for g in entry.get("genres", []) if g]
     best = min((rank.get(gid, len(rank)) for gid in genre_ids),
                default=len(rank))
-    return best, entry["paper"]["id"]
+    external = int(entry["paper"].get("announce_type") == "external")
+    return external, best, entry["paper"]["id"]
 
 
 _TRANSLATOR_DEAD_FLAGS = {
@@ -1202,6 +1609,17 @@ def notify_run_report(report: dict, cfg: dict) -> None:
         lines.append(
             f"🏷 分類: TF-IDFフォールバック {report.get('tfidf_fallback', 0)}件"
             "(Gemini未使用)")
+    external = report.get("external_review") or {}
+    if external.get("mechanical_candidates"):
+        lines.append(
+            "🔎 外部分野の厳密審査: "
+            f"機械候補 {external.get('mechanical_candidates', 0)}件 / "
+            f"採用 {external.get('accepted', 0)}件 / "
+            f"skip {external.get('skipped', 0)}件 / "
+            f"未審査 {external.get('unreviewed', 0)}件"
+            f"(skip反対判定 {external.get('skip_disagreements', 0)}件 / "
+            f"単独skip保留 {external.get('single_skip_pending', 0)}件 / "
+            f"キャッシュ {external.get('cached', 0)}件)")
     translated = report.get("translated") or {}
     if translated:
         usage = " / ".join(f"{b}: {n}件" for b, n in translated.items())
@@ -1320,20 +1738,106 @@ def main() -> None:
     dry_run = "--dry-run" in sys.argv
 
     cfg = load_json(CONFIG_PATH, {})
+    backfill_raw = os.environ.get("EXTERNAL_ARXIV_LOOKBACK_DAYS", "").strip()
+    if backfill_raw:
+        try:
+            backfill_days = int(backfill_raw)
+        except ValueError:
+            backfill_days = 0
+            print("[warn] EXTERNAL_ARXIV_LOOKBACK_DAYS must be an integer; "
+                  f"ignoring {backfill_raw!r}", file=sys.stderr)
+        if backfill_days > 0:
+            rules = cfg.get("external_arxiv_queries", {})
+            if isinstance(rules, dict):
+                cfg["external_arxiv_queries"] = {
+                    category: {
+                        **rule,
+                        "lookback_days": backfill_days,
+                    } if isinstance(rule, dict) else rule
+                    for category, rule in rules.items()
+                }
+                print("[info] one-time external arXiv backfill window: "
+                      f"{backfill_days} days")
     state = load_json(STATE_PATH, {"seen": []})
     seen = set() if dry_run else set(state["seen"])
     log: list[dict] = load_json(LOG_PATH, [])
     genres = cfg.get("genres", [])
+    cached_external_reviews = (
+        {} if dry_run else state.get("external_reviews", {}))
+    if not isinstance(cached_external_reviews, dict):
+        cached_external_reviews = {}
+    cached_external_pending = (
+        {} if dry_run else state.get("external_pending", {}))
+    if not isinstance(cached_external_pending, dict):
+        cached_external_pending = {}
 
     papers: dict[str, dict] = {}
     for cat in cfg.get("feeds", ["quant-ph"]):
         try:
             for p in fetch_feed(cat):
+                p["source_feed"] = cat
                 papers.setdefault(p["id"], p)
         except Exception as err:  # noqa: BLE001
             print(f"[warn] feed {cat} failed: {err}", file=sys.stderr)
         if not dry_run:
             time.sleep(3)  # be polite to arXiv
+
+    # Adjacent arXiv categories use custom API queries as a high-recall,
+    # mechanical first stage. Their results are never sent through the normal
+    # "other" fallback: a separate strict LLM review must explicitly accept
+    # them into only the configured destination channels.
+    external_candidates: dict[str, list[dict]] = {}
+    external_rules = cfg.get("external_arxiv_queries", {})
+    using_test_feed = bool(os.environ.get("ARXIV_TEST_FEED", ""))
+    if isinstance(external_rules, dict) and not using_test_feed:
+        for cat, rule in external_rules.items():
+            if not isinstance(rule, dict) or not rule.get("enabled", True):
+                continue
+            try:
+                fetched = fetch_external_arxiv(cat, rule)
+                rows = select_external_candidates(
+                    fetched, cat, rule, set(papers), seen)
+                external_candidates[cat] = rows
+                print(f"[info] external query {cat}: fetched={len(fetched)}, "
+                      f"mechanical_candidates={len(rows)}")
+            except Exception as err:  # noqa: BLE001
+                print(f"[warn] external query {cat} failed: {err}",
+                      file=sys.stderr)
+            if not dry_run:
+                time.sleep(3)  # arXiv API asks clients to avoid rapid calls
+    elif using_test_feed and external_rules:
+        print("[info] external queries skipped while ARXIV_TEST_FEED is set")
+
+    # A candidate without a completed review must not disappear merely because
+    # it ages out of lookback_days. Accepted-but-not-yet-posted papers are also
+    # restored from the review cache, so translation or Discord failures remain
+    # retryable. Fresh API rows win when both copies are present.
+    if not dry_run and isinstance(external_rules, dict):
+        durable_candidates: list[tuple[str, dict]] = []
+        for key, paper in cached_external_pending.items():
+            if isinstance(paper, dict):
+                durable_candidates.append((key, paper))
+        for key, review in cached_external_reviews.items():
+            if (
+                isinstance(review, dict)
+                and review.get("genre_ids")
+                and isinstance(review.get("paper"), dict)
+            ):
+                durable_candidates.append((key, review["paper"]))
+
+        for key, paper in durable_candidates:
+            category = key.split(":", 1)[0]
+            rule = external_rules.get(category)
+            if (
+                not isinstance(rule, dict)
+                or not rule.get("enabled", True)
+                or paper.get("id") in seen
+                or paper.get("id") in papers
+            ):
+                continue
+            rows = external_candidates.setdefault(category, [])
+            if not any(row.get("id") == paper.get("id") for row in rows):
+                rows.append(paper)
 
     # ---- determine which papers to post (filtering only) ------------------
     pending = []  # papers passing should_post, not yet seen
@@ -1344,14 +1848,21 @@ def main() -> None:
 
     # Each entry carries the paper plus its resolved genres + translation.
     # genres is always a non-empty list; fallback genre is "other".
+    genre_map = {g["id"]: g for g in genres}
     entries: list[dict[str, Any]] = [
         {
             "paper": p,
-            "genres": [],
+            "genres": [
+                genre_map[gid]
+                for gid in p.get("external_genre_ids", [])
+                if gid in genre_map
+            ],
             "jp": None,
             "jp_title": None,
             "need_tr": bool(p["abstract"]),
             "allow_untranslated": False,
+            "llm_done": False,
+            "classifier": None,
         }
         for p in pending
     ]
@@ -1361,7 +1872,6 @@ def main() -> None:
     chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
     llm_first = use_llm_cls and chain and chain[0] == "gemini"
     llm_classify_only = use_llm_cls and not llm_first
-    genre_map = {g["id"]: g for g in genres}
     classifier_specs = classifier_model_specs(cfg)
     model_primary = cfg.get("gemini_model_primary") or cfg.get(
         "gemini_model", "gemini-2.5-flash")
@@ -1390,8 +1900,9 @@ def main() -> None:
     # ---- path A: Gemini translate + classify in one request ---------------
     # Used when "gemini" is first in the translators chain.
     if llm_first and not dry_run and gemini_stats["key_present"]:
-        for i in range(0, len(entries), batch_size):
-            chunk = entries[i: i + batch_size]
+        normal_entries = [e for e in entries if not e.get("llm_done")]
+        for i in range(0, len(normal_entries), batch_size):
+            chunk = normal_entries[i: i + batch_size]
             limit = cfg.get("max_translate_chars", 2000)
             abstracts = [
                 f"Title: {e['paper']['title']}\n\nAbstract: {e['paper']['abstract'][:limit]}"
@@ -1431,12 +1942,15 @@ def main() -> None:
         defer_ids = set(cfg.get("prescreen_defer_genres",
                                 ["nisq", "hardware", "sensing",
                                  "foundations", "other"]))
-        for e in entries:
+        normal_entries = [e for e in entries if not e.get("llm_done")]
+        for e in normal_entries:
             e["prescreen"] = classify_multi(e["paper"], genres, cfg)
             pre_ids = {g["id"] for g in e["prescreen"] if g}
             e["route"] = "defer" if pre_ids & defer_ids else "priority"
-        priority_group = [e for e in entries if e["route"] == "priority"]
-        deferred_group = [e for e in entries if e["route"] == "defer"]
+        priority_group = [
+            e for e in normal_entries if e["route"] == "priority"]
+        deferred_group = [
+            e for e in normal_entries if e["route"] == "defer"]
 
         est_requests = (math.ceil(len(priority_group) / batch_size)
                         + math.ceil(len(deferred_group) / batch_size))
@@ -1538,9 +2052,50 @@ def main() -> None:
             f"{sorted(_gemini_dead_models | _openai_compat_dead_models) or None}"
         )
 
+    # ---- strict external review (only after quant-ph classification) ------
+    # This ordering is intentional: adjacent-category candidates may use only
+    # classifier capacity left after every normal quant-ph paper has received
+    # its classification attempt.
+    accepted_external, new_external_reviews, external_stats = (
+        review_external_candidates(
+            external_candidates, cfg, genres, cached_external_reviews,
+            dry_run=dry_run))
+    pending_external_reviews = external_stats.pop("_pending_papers", {})
+    if external_stats["mechanical_candidates"]:
+        print(
+            "[info] external review (after quant-ph): "
+            f"candidates={external_stats['mechanical_candidates']}, "
+            f"cached={external_stats['cached']}, "
+            f"reviewed={external_stats['reviewed']}, "
+            f"accepted={external_stats['accepted']}, "
+            f"skipped={external_stats['skipped']}, "
+            f"unreviewed={external_stats['unreviewed']}, "
+            f"skip_disagreements={external_stats['skip_disagreements']}, "
+            f"single_skip_pending={external_stats['single_skip_pending']}, "
+            f"requests={external_stats['requests']}"
+        )
+    cached_external_reviews.update(new_external_reviews)
+    entries.extend({
+        "paper": paper,
+        "genres": [
+            genre_map[gid]
+            for gid in paper.get("external_genre_ids", [])
+            if gid in genre_map
+        ],
+        "jp": None,
+        "jp_title": None,
+        "need_tr": bool(paper["abstract"]),
+        "allow_untranslated": False,
+        "llm_done": True,
+        "classifier": paper.get(
+            "external_classifier", "cached-external-review"),
+    } for paper in accepted_external)
+
     # ---- translation via chain (all papers without jp) --------------------
     # Covers path B (Gemini classify-only) and TF-IDF fallback papers.
     # Also covers path A papers where Gemini failed to return a translation.
+    # Every quant-ph paper sorts before every external paper, irrespective of
+    # genre, so external sources cannot consume translation quota first.
     entries.sort(key=lambda e: translation_priority(e, cfg))
     if not dry_run:
         to_tr = [e for e in entries if e["need_tr"] and e["jp"] is None and (
@@ -1636,6 +2191,8 @@ def main() -> None:
                         "authors": e["paper"]["authors"],
                         "link": e["paper"]["link"],
                         "primary": e["paper"]["primary"],
+                        "source_feed": e["paper"].get(
+                            "source_feed", e["paper"]["primary"]),
                         "announce_type": e["paper"]["announce_type"],
                         "genre_ids": [g["id"] for g in e["genres"] if g],
                         "genre_names": [g["name"] for g in e["genres"] if g],
@@ -1668,7 +2225,7 @@ def main() -> None:
     notify_run_report({
         "source": "arXiv新着通知",
         "fetched": len(papers),
-        "candidates": len(pending),
+        "candidates": len(pending) + len(accepted_external),
         "messages": posted,
         "posted": posted_records,
         "deferred": deferred_records,
@@ -1679,10 +2236,15 @@ def main() -> None:
         "tfidf_fallback": gemini_fallback,
         "translated": dict(_translation_success),
         "dead_translators": dead_translators(cfg),
+        "external_review": external_stats,
     }, cfg)
 
     # Keep the state file bounded.
     state["seen"] = sorted(seen)[-3000:]
+    state["external_reviews"] = dict(
+        list(cached_external_reviews.items())[-3000:])
+    state["external_pending"] = dict(
+        list(pending_external_reviews.items())[-1000:])
     STATE_PATH.write_text(json.dumps(state, indent=1), encoding="utf-8")
     LOG_PATH.write_text(
         json.dumps(log[-5000:], indent=1, ensure_ascii=False), encoding="utf-8"

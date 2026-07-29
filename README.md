@@ -65,7 +65,52 @@ Fetch RSS -> filter -> genre classification + translation -> Discord post -> sav
 
 ### 1. Fetch RSS
 
-The bot fetches RSS feeds for the categories listed in `config.json` under `feeds` (for example, `"quant-ph"`) and deduplicates papers by ID. If the same paper appears in multiple feeds, the later entry overwrites the earlier one.
+The bot fetches RSS feeds for the categories listed in `config.json` under `feeds` (for example, `"quant-ph"`) and deduplicates papers by ID. If the same paper appears in multiple feeds, the first configured feed wins.
+
+In addition, `external_arxiv_queries` retrieves mechanically narrowed
+candidates whose primary category is adjacent to quant-ph and which are not
+already cross-listed to quant-ph, through custom Atom API queries:
+
+- `cs.CR` -> usually `pqc` / `crypto`
+- `cs.CC` -> usually `complexity` / `algo`
+- `cs.IT` -> usually `qit` / `qec` / `network`
+
+The configured search terms are deliberately recall-oriented. Matching an API
+query never causes a post by itself. Candidates go through a separate strict
+review using the same configured classifier chain as normal classification
+(primary Gemini, secondary Gemini, then configured OpenAI-compatible
+fallbacks). Long term lists are split across short API queries, each query is
+paged until it crosses the configured lookback boundary, and the combined
+results are deduplicated. This avoids both unreliable oversized requests and
+silent truncation at one API result page.
+
+The source mappings above are soft hints, not output restrictions. External
+review can select any configured genre except `other`, up to
+`external_classify_max_genres`. Its prompt is completeness-oriented: a
+substantive secondary contribution or nontrivial application is enough, and
+`skip` is appropriate only when the connection appears solely in background,
+motivation, future work, citations, or comparison. A rejection is cached only
+after `external_skip_consensus` models independently return `skip`; if any
+reviewer selects a genre, the paper is accepted. A lone skip with no second
+working reviewer remains unreviewed for retry. Unresolved candidates are saved
+with their paper metadata in `external_pending`, so they continue to be
+reviewed even after the API lookback window expires. Accepted papers are also
+retryable until they are actually posted. Unlike normal quant-ph classification,
+an external candidate is never posted through TF-IDF or routed to `other` when
+LLM review cannot reach a decision.
+
+Normal quant-ph papers always consume classifier and translation capacity
+first. External strict review starts only after quant-ph classification is
+finished, and every quant-ph translation is sorted ahead of every external
+translation regardless of genre priority.
+
+External decisions are cached in `seen_ids.json` under `external_reviews`.
+Rejected IDs are not put in the global `seen` set, so the paper can still be
+processed normally if it is later cross-listed to quant-ph. `lookback_days`
+prevents a large historical backfill when an external query is enabled for the
+first time. For a one-time manual backfill, set
+`EXTERNAL_ARXIV_LOOKBACK_DAYS` (or the matching Actions workflow input) to the
+desired number of days; the configured normal window remains unchanged.
 
 ### 2. Filtering
 
@@ -483,6 +528,9 @@ Classification-related settings in `config.json`:
 | `gemini_min_intervals` | flash: `7`, flash-lite: `5` | Per-model request spacing in seconds, overriding `gemini_min_interval_sec` |
 | `gemini_primary_run_budget` | `20` | Estimated-request threshold above which the deferred group switches to the secondary model |
 | `prescreen_defer_genres` | `["nisq","hardware","sensing","foundations","other"]` | TF-IDF pre-screen genres that route a paper into the deferred group |
+| `external_classify_max_genres` | `3` | Maximum genre count for a completeness-oriented external review |
+| `external_skip_consensus` | `2` | Independent LLM `skip` votes required before an external paper is rejected |
+| `external_arxiv_queries` | three adjacent-category queries | Per-category custom arXiv terms, soft genre hints, recency window, API page size, query chunk size, and review criteria. Set `enabled: false` to disable one source |
 
 The run log prints Gemini usage. Example:
 
@@ -748,7 +796,37 @@ RSS 取得 → フィルタリング → ジャンル分類 + 翻訳 → Discord
 
 ### 1. RSS 取得
 
-`config.json` の `feeds` に列挙したカテゴリ(`"quant-ph"` 等)の RSS を順に取得し、論文を ID でまとめる。複数フィードで同一論文が登場した場合は後から来た方が上書きされる(重複排除)。
+`config.json` の `feeds` に列挙したカテゴリ(`"quant-ph"` 等)の RSS を順に取得し、論文を ID でまとめる。複数フィードで同一論文が登場した場合は、設定上先にあるフィードを優先する。
+
+加えて `external_arxiv_queries` により、arXiv API のカスタム Atom
+クエリから、primary が隣接カテゴリで、かつ quant-ph へ cross-list
+されていない候補を機械的に絞って取得する。
+
+- `cs.CR` → 主に `pqc` / `crypto`
+- `cs.CC` → 主に `complexity` / `algo`
+- `cs.IT` → 主に `qit` / `qec` / `network`
+
+検索語は取りこぼしを抑えるため再現率寄りに設定してあり、検索に一致しただけでは投稿しない。長い検索語リストは短いAPIクエリへ分割し、各クエリを取得日数の境界までページングしてから重複排除する。これにより長すぎるURLによる取得不安定と、APIの1ページ上限による欠落の両方を避ける。候補は通常分類と同じ分類器チェーン（プライマリ Gemini → セカンダリ Gemini → 設定済み OpenAI 互換フォールバック）による独立審査へ送られる。
+
+上記の取得元別ジャンルは優先ヒントであり、出力制限ではない。外部審査では
+`other` 以外の全ジャンルから `external_classify_max_genres` 件まで選べる。
+プロンプトは completeness 優先で、実質的な副次貢献や非自明な応用も採用し、
+量子との関係が背景・動機・将来課題・引用・比較だけの場合に限って `skip`
+する。却下を保存するには `external_skip_consensus` 個のモデルが独立に
+`skip` する必要があり、1モデルでもジャンルを選べば採用する。1件の
+`skip` しか得られず再審査モデルが使えない場合は却下せず、論文情報を
+`external_pending` に保存して、APIの取得日数を過ぎても決着まで再審査する。
+採用後に翻訳やDiscord投稿が失敗した論文も、実際に投稿されるまで再試行できる。
+
+外部候補については、すべての LLM が利用できない場合も TF-IDF
+で投稿したり `other` へ流したりせず、未審査のまま次回へ残す。判定結果は
+`seen_ids.json` の `external_reviews` に保存する。却下した ID は通常の
+`seen` には入れないため、後日 quant-ph に cross-list された場合は通常どおり処理できる。`lookback_days` は初回有効化時の大量の過去論文投稿を防ぐ。
+一回限り遡る場合は `EXTERNAL_ARXIV_LOOKBACK_DAYS`（Actionsの同名入力）
+に日数を指定でき、通常設定の取得日数は変更されない。
+
+分類器と翻訳APIの容量は常に通常の quant-ph 論文を優先する。外部候補の
+厳密審査は quant-ph の分類がすべて完了した後に開始し、翻訳もジャンル優先度にかかわらず全 quant-ph 論文を全外部論文より先に処理する。
 
 ### 2. フィルタリング
 
@@ -1166,6 +1244,9 @@ python3 arxiv_bot.py
 | `gemini_min_intervals` | flash: `7`, flash-lite: `5` | モデルごとのリクエスト間隔(秒)。`gemini_min_interval_sec` を上書きする |
 | `gemini_primary_run_budget` | `20` | この推定リクエスト数を超えると繰り延べグループがセカンダリモデルに切り替わる閾値 |
 | `prescreen_defer_genres` | `["nisq","hardware","sensing","foundations","other"]` | 論文を繰り延べグループへ振り分ける TF-IDF 事前分類のジャンル |
+| `external_classify_max_genres` | `3` | completeness優先の外部審査で割り当てる最大ジャンル数 |
+| `external_skip_consensus` | `2` | 外部論文の却下に必要な独立LLMの`skip`票数 |
+| `external_arxiv_queries` | 隣接3カテゴリのクエリ | カテゴリごとのAPI検索語、ジャンルの優先ヒント、取得日数、APIページサイズ、クエリ分割数、審査基準。個別に止める場合は `enabled: false` |
 
 実行ログには Gemini の利用状況が出力される。例:
 

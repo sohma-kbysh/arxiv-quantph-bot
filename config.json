@@ -1,6 +1,66 @@
 {
   "feeds": ["quant-ph"],
 
+  "external_arxiv_queries": {
+    "cs.CR": {
+      "enabled": true,
+      "candidate_genres": ["pqc", "crypto"],
+      "allow_all_genres": true,
+      "excluded_genres": ["other"],
+      "lookback_days": 4,
+      "max_results": 100,
+      "terms_per_query": 8,
+      "terms": [
+        "quantum", "PQC",
+        "post-quantum", "post quantum", "quantum-resistant", "quantum resistant",
+        "quantum-safe", "quantum safe", "quantum adversary", "quantum attack",
+        "quantum random oracle", "QROM",
+        "ML-KEM", "ML-DSA", "SLH-DSA", "Kyber", "Dilithium", "Falcon",
+        "SPHINCS", "HQC", "BIKE", "Classic McEliece", "FrodoKEM", "NTRU",
+        "learning with errors", "LWE", "RLWE", "module-LWE", "module-SIS",
+        "lattice-based cryptography", "code-based cryptography",
+        "hash-based signature", "isogeny-based cryptography",
+        "multivariate cryptography",
+        "quantum cryptography", "quantum key distribution", "QKD",
+        "device-independent QKD", "MDI-QKD", "twin-field QKD",
+        "continuous-variable QKD", "quantum random number",
+        "quantum randomness", "quantum secret sharing",
+        "quantum authentication", "quantum money",
+        "quantum position verification", "quantum bit commitment",
+        "blind quantum computation", "verifiable quantum computation"
+      ],
+      "review_instructions": "Choose pqc when the paper substantively designs, proves, implements, benchmarks, standardizes, or cryptanalyzes CLASSICAL cryptography intended to remain secure against quantum attackers. This includes post-quantum schemes and assumptions, quantum-adversary security proofs, and concrete quantum attacks on classical cryptography. Choose crypto for cryptography or security whose protocol intrinsically uses quantum states, measurements, correlations, communication, algorithms, or attacks, including QKD, DI/MDI/TF/CV-QKD, quantum cryptanalysis, quantum randomness, quantum secret sharing, quantum authentication, quantum money, position verification, bit commitment, blind or verifiable quantum computation, and closely related security proofs. Add any other allowed genres with substantive value, such as network for QKD routing, hardware for PQC accelerators, or algo for quantum cryptanalysis. Reject generic cybersecurity, blockchain or classical cryptography only when there is no substantive quantum or post-quantum result and the connection is merely motivational."
+    },
+    "cs.CC": {
+      "enabled": true,
+      "candidate_genres": ["complexity", "algo"],
+      "allow_all_genres": true,
+      "excluded_genres": ["other"],
+      "lookback_days": 4,
+      "max_results": 100,
+      "terms_per_query": 8,
+      "terms": [
+        "quantum", "BQP", "QMA", "QCMA", "QIP", "QNC",
+        "quantum query", "quantum circuit", "quantum algorithm"
+      ],
+      "review_instructions": "The most likely labels are complexity for substantive results about quantum models of computation, quantum complexity classes, quantum query or communication complexity, circuit complexity, interactive proofs, Hamiltonian complexity, or quantum lower/upper bounds, and algo for a concrete new or materially improved quantum algorithm, algorithmic technique, or rigorous performance analysis. Other allowed labels may be added whenever the paper has a substantive contribution for them. Reject purely classical work only when quantum computing appears solely in motivation, background, or comparison."
+    },
+    "cs.IT": {
+      "enabled": true,
+      "candidate_genres": ["qit", "qec", "network"],
+      "allow_all_genres": true,
+      "excluded_genres": ["other"],
+      "lookback_days": 4,
+      "max_results": 100,
+      "terms_per_query": 8,
+      "terms": [
+        "quantum", "qubit", "entanglement", "quantum channel",
+        "quantum code", "quantum communication"
+      ],
+      "review_instructions": "The most likely labels are qit for substantive quantum information-theoretic results such as quantum channels and capacities, entropies, entanglement, resource theories, one-shot information theory, or quantum Shannon theory; qec for construction, decoding, bounds, or analysis of quantum error-correcting codes; and network for quantum communication systems, repeaters, entanglement distribution, network protocols, or networked quantum memories. Other allowed labels such as algo or crypto may be used when supported by a substantive contribution. Reject classical coding or information theory only when quantum terminology is incidental and the paper derives no new quantum result or nontrivial quantum application."
+    }
+  },
+
   "include_replacements": false,
 
   "cross_allow_primary": [
@@ -61,6 +121,8 @@
   ],
 
   "classify_min_score": 0.08,
+  "external_classify_max_genres": 3,
+  "external_skip_consensus": 2,
   "classify_secondary_ratio": 0.82,
   "fallback_title_phrase_bonus": 0.35,
   "fallback_abstract_phrase_bonus": 0.18,

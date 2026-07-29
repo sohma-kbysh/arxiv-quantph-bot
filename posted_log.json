@@ -46385,16 +46385,22 @@
   "announce_type": "external",
   "genre_ids": [
    "pqc",
-   "algo"
+   "algo",
+   "qec"
   ],
   "genre_names": [
    "耐量子計算機暗号",
-   "量子アルゴリズム"
+   "量子アルゴリズム",
+   "誤り訂正・符号理論"
   ],
   "classifier": "gemini-2.5-flash",
   "abstract_en": "Gabidulin codes are a rank metric analog of Reed-Solomon codes. Although these codes are used in different very efficient rank-based cryptosystems like the RQC cryptosystem or the Loidreau cryptosystem, there was no constant-time implementation of Gabidulin codes, when having a constant-time implementation is crucial for real-life development of cryptosystems. In this paper, we propose the first constant-time decoding algorithm of Augmented Gabidulin (AG) codes, a simple variation on Gabidulin codes where one adds zero columns to Gabidulin codes, and which contains the case of Gabidulin codes. These AG codes are used in practice in the most efficient variations of the RQC cryptosystem. We prove that AG code decoding can be achieved with quadratic complexity. We further present a constant-time algorithm for the left division of $q$-polynomials along with a complete description of the AG code decoding procedure. These algorithms are integrated into the RQC-Block-MS-AG scheme, and we evaluate the performance of our implementation through benchmarks. Our results show that our implementation outperforms the original RQC, though it remains approximately four times slower than HQC. However, it achieves ciphertexts and key sizes about four times smaller, highlighting an appealing trade-off between performance and compactness.",
   "abstract_ja": "ガビドゥリン符号はリード・ソロモン符号のランク計量類似物です。これらの符号はRQC暗号システムやロイドロー暗号システムのような非常に効率的なランクベースの暗号システムで使われていますが、ガビドゥリン符号の定時実装は存在せず、定時実装は実際の暗号システム開発において非常に重要です。本論文では、拡張ガビドゥリン符号(AG)符号の最初の定時復号アルゴリズムを提案します。これは、ガビドゥリン符号に列をゼロ加える単純なバリエーションであり、ガビドゥリン符号のケースを含みます。これらのAGコードは、RQC暗号システムの最も効率的なバリエーションで実際に使用されています。AGコード復号が二次計算量で達成可能であることを証明しました。さらに、$q$多項式の左割り算のための定時アルゴリズムと、AG符号復号手順の完全な説明を提示します。これらのアルゴリズムはRQC-Block-MS-AGスキームに統合されており、ベンチマークを通じて実装のパフォーマンスを評価しています。結果として、私たちの実装は元のRQCを上回る性能を示していますが、HQCの約4倍の遅さは依然として残っています。しかし、暗号文とキーサイズは約4倍小さくなり、性能とコンパクトさの魅力的なトレードオフを示しています。",
-  "abstract_translated": "ガビドゥリン符号はリード・ソロモン符号のランク計量類似物です。これらの符号はRQC暗号システムやロイドロー暗号システムのような非常に効率的なランクベースの暗号システムで使われていますが、ガビドゥリン符号の定時実装は存在せず、定時実装は実際の暗号システム開発において非常に重要です。本論文では、拡張ガビドゥリン符号(AG)符号の最初の定時復号アルゴリズムを提案します。これは、ガビドゥリン符号に列をゼロ加える単純なバリエーションであり、ガビドゥリン符号のケースを含みます。これらのAGコードは、RQC暗号システムの最も効率的なバリエーションで実際に使用されています。AGコード復号が二次計算量で達成可能であることを証明しました。さらに、$q$多項式の左割り算のための定時アルゴリズムと、AG符号復号手順の完全な説明を提示します。これらのアルゴリズムはRQC-Block-MS-AGスキームに統合されており、ベンチマークを通じて実装のパフォーマンスを評価しています。結果として、私たちの実装は元のRQCを上回る性能を示していますが、HQCの約4倍の遅さは依然として残っています。しかし、暗号文とキーサイズは約4倍小さくなり、性能とコンパクトさの魅力的なトレードオフを示しています。"
+  "abstract_translated": "ガビドゥリン符号はリード・ソロモン符号のランク計量類似物です。これらの符号はRQC暗号システムやロイドロー暗号システムのような非常に効率的なランクベースの暗号システムで使われていますが、ガビドゥリン符号の定時実装は存在せず、定時実装は実際の暗号システム開発において非常に重要です。本論文では、拡張ガビドゥリン符号(AG)符号の最初の定時復号アルゴリズムを提案します。これは、ガビドゥリン符号に列をゼロ加える単純なバリエーションであり、ガビドゥリン符号のケースを含みます。これらのAGコードは、RQC暗号システムの最も効率的なバリエーションで実際に使用されています。AGコード復号が二次計算量で達成可能であることを証明しました。さらに、$q$多項式の左割り算のための定時アルゴリズムと、AG符号復号手順の完全な説明を提示します。これらのアルゴリズムはRQC-Block-MS-AGスキームに統合されており、ベンチマークを通じて実装のパフォーマンスを評価しています。結果として、私たちの実装は元のRQCを上回る性能を示していますが、HQCの約4倍の遅さは依然として残っています。しかし、暗号文とキーサイズは約4倍小さくなり、性能とコンパクトさの魅力的なトレードオフを示しています。",
+  "repost_channels": [
+   "誤り訂正・符号理論"
+  ],
+  "reposted_at": "2026-07-29T20:56:33Z"
  },
  {
   "id": "2607.20800",

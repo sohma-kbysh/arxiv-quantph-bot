@@ -99,6 +99,12 @@ retryable until they are actually posted. Unlike normal quant-ph classification,
 an external candidate is never posted through TF-IDF or routed to `other` when
 LLM review cannot reach a decision.
 
+The `qec` channel intentionally includes coding theory broadly whenever a
+paper has a non-incidental quantum, quantum-communication, or PQC connection.
+The code itself may be classical. High-signal code-construction and decoding
+terms add `qec` deterministically after classification, covering examples such
+as rank-metric and Gabidulin codes used in code-based cryptography.
+
 Normal quant-ph papers always consume classifier and translation capacity
 first. External strict review starts only after quant-ph classification is
 finished, and every quant-ph translation is sorted ahead of every external
@@ -817,6 +823,11 @@ RSS 取得 → フィルタリング → ジャンル分類 + 翻訳 → Discord
 `skip` しか得られず再審査モデルが使えない場合は却下せず、論文情報を
 `external_pending` に保存して、APIの取得日数を過ぎても決着まで再審査する。
 採用後に翻訳やDiscord投稿が失敗した論文も、実際に投稿されるまで再試行できる。
+
+`qec` は量子誤り訂正符号だけでなく、量子計算・量子通信・PQCとの
+非自明な接点がある符号理論全般を含む。符号自体は古典でもよい。
+rank-metric・Gabidulin符号やcode-based cryptographyのように、符号構成や
+復号が技術的貢献である論文は、分類後にも決定的ルールで`qec`を補う。
 
 外部候補については、すべての LLM が利用できない場合も TF-IDF
 で投稿したり `other` へ流したりせず、未審査のまま次回へ残す。判定結果は

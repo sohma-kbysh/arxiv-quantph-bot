@@ -249,6 +249,65 @@ class ExternalArxivTests(unittest.TestCase):
         self.assertEqual(
             reviews["cs.CR:2607.00004"]["genre_ids"], ["crypto"])
 
+    def test_quantum_adjacent_coding_theory_is_also_qec(self) -> None:
+        genres = [
+            genre("pqc"), genre("algo"), genre("qec"), genre("other"),
+        ]
+        cfg = {
+            "gemini_model_primary": "gemini-test",
+            "qec_adjacent_coding_terms": [
+                "Gabidulin codes", "decoding algorithm",
+            ],
+            "external_arxiv_queries": {
+                "cs.CR": {
+                    "candidate_genres": ["pqc"],
+                    "allow_all_genres": True,
+                    "excluded_genres": ["other"],
+                }
+            },
+        }
+        paper = {
+            "id": "2607.20305",
+            "title": (
+                "Constant-time decoding of Gabidulin codes and their "
+                "generalizations with application to RQC"
+            ),
+            "abstract": (
+                "We give a constant-time decoding algorithm for a "
+                "post-quantum code-based cryptosystem."
+            ),
+        }
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test"}, clear=False):
+            with patch.object(
+                    arxiv_bot, "_gemini_request",
+                    return_value="<<<1>>> pqc,algo"):
+                accepted, reviews, _ = arxiv_bot.review_external_candidates(
+                    {"cs.CR": [paper]}, cfg, genres, {})
+        self.assertEqual(
+            accepted[0]["external_genre_ids"], ["pqc", "algo", "qec"])
+        self.assertEqual(
+            reviews["cs.CR:2607.20305"]["genre_ids"],
+            ["pqc", "algo", "qec"],
+        )
+
+    def test_normal_quantph_coding_theory_is_also_qec(self) -> None:
+        genres = [genre("pqc"), genre("algo"), genre("qec"), genre("other")]
+        cfg = {
+            "cross_classify_primary_as_quantph": ["quant-ph", "cs.CR"],
+            "category_other_overrides": [],
+            "qec_adjacent_coding_terms": ["rank-metric codes"],
+        }
+        paper = {
+            "primary": "quant-ph",
+            "title": "New bounds for rank-metric codes",
+            "abstract": "Applications to quantum-secure communication.",
+        }
+        selected = [genres[0], genres[1]]
+        result = arxiv_bot.postprocess_genres(
+            paper, selected, genres, cfg)
+        self.assertEqual(
+            [item["id"] for item in result], ["pqc", "algo", "qec"])
+
     def test_external_review_accepts_when_second_model_overrules_skip(self) -> None:
         genres = [genre("pqc"), genre("crypto"), genre("algo"), genre("other")]
         cfg = {

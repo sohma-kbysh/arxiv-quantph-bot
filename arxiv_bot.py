@@ -260,6 +260,14 @@ def matches_external_terms(paper: dict, terms: list[str]) -> bool:
     )
 
 
+def is_qec_adjacent_coding_paper(paper: dict, cfg: dict) -> bool:
+    """Return whether a paper has a substantive coding-theory signal."""
+    terms = [
+        str(term) for term in cfg.get("qec_adjacent_coding_terms", [])
+    ]
+    return bool(terms) and matches_external_terms(paper, terms)
+
+
 def external_paper_is_recent(paper: dict, lookback_days: int,
                              now: datetime | None = None) -> bool:
     """Bound first-run backfill while retaining papers across long weekends."""
@@ -525,7 +533,15 @@ def postprocess_genres(paper: dict, selected: list[dict | None],
         fallback = genre_by_id("other", genres)
         return [fallback] if fallback else result
 
-    return apply_forced_genres(paper, result, genres, cfg)
+    result = apply_forced_genres(paper, result, genres, cfg)
+    if (
+        is_qec_adjacent_coding_paper(paper, cfg)
+        and not any(g.get("id") == "qec" for g in result)
+    ):
+        qec = genre_by_id("qec", genres)
+        if qec:
+            result.append(qec)
+    return result
 
 
 def apply_forced_genres(paper: dict, selected: list[dict | None],
@@ -1014,6 +1030,11 @@ def _classification_rules(max_genres: int) -> str:
         "primary topic. Example: a paper that constructs or analyzes "
         "error-correcting codes in order to realize transversal or "
         "fault-tolerant logic belongs to BOTH qec and ft.\n"
+        "    - Treat qec as a broad coding-theory channel. Include qec for "
+        "a substantive classical or quantum coding-theory contribution "
+        "whenever it has any non-incidental quantum, quantum-communication, "
+        "or post-quantum-cryptography connection; the code itself does not "
+        "have to be a quantum error-correcting code.\n"
         "    - Do NOT add a genre whose subject is merely used as a tool, "
         "platform, or demonstration. Example: a paper that simply runs a "
         "known algorithm on quantum hardware is hardware, not algo; "
@@ -1154,6 +1175,18 @@ def classify_external_llm_batch(
     return normalized
 
 
+def apply_external_qec_policy(
+        paper: dict, genre_ids: list[str], allowed_ids: set[str],
+        cfg: dict) -> list[str]:
+    """Include broad quantum-adjacent coding theory in the QEC channel."""
+    result = list(genre_ids)
+    if "qec" not in allowed_ids or "qec" in result:
+        return result
+    if is_qec_adjacent_coding_paper(paper, cfg):
+        result.append("qec")
+    return result
+
+
 def review_external_candidates(
         candidates_by_category: dict[str, list[dict]], cfg: dict,
         genres: list[dict], cached_reviews: dict[str, dict],
@@ -1201,6 +1234,8 @@ def review_external_candidates(
                     if str(gid) in allowed
                 ]
                 if gids:
+                    gids = apply_external_qec_policy(
+                        paper, gids, allowed, cfg)
                     paper["external_genre_ids"] = gids
                     paper["external_classifier"] = cached.get(
                         "classifier", "cached-external-review")
@@ -1263,6 +1298,8 @@ def review_external_candidates(
                 key = f"{category}:{paper['id']}"
                 accepted_gids = gids
                 if accepted_gids:
+                    accepted_gids = apply_external_qec_policy(
+                        paper, accepted_gids, allowed, cfg)
                     final_classifier = str(model_name)
                     model_counts[final_classifier] += 1
                     if skip_votes:

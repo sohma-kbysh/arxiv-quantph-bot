@@ -29,7 +29,7 @@
         "quantum position verification", "quantum bit commitment",
         "blind quantum computation", "verifiable quantum computation"
       ],
-      "review_instructions": "Choose pqc when the paper substantively designs, proves, implements, benchmarks, standardizes, or cryptanalyzes CLASSICAL cryptography intended to remain secure against quantum attackers. This includes post-quantum schemes and assumptions, quantum-adversary security proofs, and concrete quantum attacks on classical cryptography. Choose crypto for cryptography or security whose protocol intrinsically uses quantum states, measurements, correlations, communication, algorithms, or attacks, including QKD, DI/MDI/TF/CV-QKD, quantum cryptanalysis, quantum randomness, quantum secret sharing, quantum authentication, quantum money, position verification, bit commitment, blind or verifiable quantum computation, and closely related security proofs. Add any other allowed genres with substantive value, such as network for QKD routing, hardware for PQC accelerators, or algo for quantum cryptanalysis. Reject generic cybersecurity, blockchain or classical cryptography only when there is no substantive quantum or post-quantum result and the connection is merely motivational."
+      "review_instructions": "Choose pqc when the paper substantively designs, proves, implements, benchmarks, standardizes, or cryptanalyzes CLASSICAL cryptography intended to remain secure against quantum attackers. This includes post-quantum schemes and assumptions, quantum-adversary security proofs, and concrete quantum attacks on classical cryptography. Choose crypto for cryptography or security whose protocol intrinsically uses quantum states, measurements, correlations, communication, algorithms, or attacks, including QKD, DI/MDI/TF/CV-QKD, quantum cryptanalysis, quantum randomness, quantum secret sharing, quantum authentication, quantum money, position verification, bit commitment, blind or verifiable quantum computation, and closely related security proofs. Always also choose qec when a substantive contribution is coding theory, code construction, or decoding with any non-incidental quantum or PQC connection, even when the code itself is classical. This includes code-based cryptography, rank-metric and Gabidulin codes, RQC, HQC, BIKE, McEliece, syndrome decoding, code equivalence, and related decoding algorithms. Add any other allowed genres with substantive value, such as network for QKD routing, hardware for PQC accelerators, or algo for quantum cryptanalysis. Reject generic cybersecurity, blockchain or classical cryptography only when there is no substantive quantum or post-quantum result and the connection is merely motivational."
     },
     "cs.CC": {
       "enabled": true,
@@ -57,7 +57,7 @@
         "quantum", "qubit", "entanglement", "quantum channel",
         "quantum code", "quantum communication"
       ],
-      "review_instructions": "The most likely labels are qit for substantive quantum information-theoretic results such as quantum channels and capacities, entropies, entanglement, resource theories, one-shot information theory, or quantum Shannon theory; qec for construction, decoding, bounds, or analysis of quantum error-correcting codes; and network for quantum communication systems, repeaters, entanglement distribution, network protocols, or networked quantum memories. Other allowed labels such as algo or crypto may be used when supported by a substantive contribution. Reject classical coding or information theory only when quantum terminology is incidental and the paper derives no new quantum result or nontrivial quantum application."
+      "review_instructions": "The most likely labels are qit for substantive quantum information-theoretic results such as quantum channels and capacities, entropies, entanglement, resource theories, one-shot information theory, or quantum Shannon theory; qec for quantum error correction and, more broadly, any substantive classical or quantum coding-theory contribution with a non-incidental quantum, quantum-communication, or PQC connection; and network for quantum communication systems, repeaters, entanglement distribution, network protocols, or networked quantum memories. For qec, include code constructions, bounds, decoders, rank-metric or algebraic codes, self-orthogonal codes, LDPC codes, and classical codes used to construct quantum codes. Other allowed labels such as algo or crypto may be used when supported by a substantive contribution. Reject classical coding or information theory only when quantum terminology is incidental and the paper derives no new quantum result or nontrivial quantum application."
     }
   },
 
@@ -123,6 +123,25 @@
   "classify_min_score": 0.08,
   "external_classify_max_genres": 3,
   "external_skip_consensus": 2,
+  "qec_adjacent_coding_terms": [
+    "coding theory",
+    "error-correcting code", "error-correcting codes",
+    "error correction code", "error correction codes",
+    "linear code", "linear codes",
+    "classical code", "classical codes",
+    "quantum code", "quantum codes",
+    "rank-metric code", "rank-metric codes",
+    "rank metric code", "rank metric codes",
+    "Gabidulin code", "Gabidulin codes",
+    "Reed-Solomon code", "Reed-Solomon codes",
+    "algebraic geometry code", "algebraic geometry codes",
+    "AG code", "AG codes",
+    "LDPC code", "LDPC codes",
+    "self-orthogonal code", "self-orthogonal codes",
+    "syndrome decoding", "code equivalence",
+    "code-based cryptography", "code based cryptography",
+    "decoding algorithm", "decoding algorithms"
+  ],
   "classify_secondary_ratio": 0.82,
   "fallback_title_phrase_bonus": 0.35,
   "fallback_abstract_phrase_bonus": 0.18,
@@ -393,7 +412,7 @@
     {
       "id": "qec",
       "name": "誤り訂正・符号理論",
-      "description": "量子誤り訂正符号の設計・解析。安定化符号、表面符号、トーリック符号、カラー符号、LDPC符号、ボゾン符号、CSS構成。デコーダの設計・解析・閾値定理。符号距離・論理演算子の最適化など。フォールトトレラント実装は ft へ。",
+      "description": "量子誤り訂正・量子符号に加え、量子計算・量子通信・PQCとの非自明な接点が少しでもある符号理論全般。古典符号も含み、安定化符号、表面符号、LDPC符号、CSS構成、自己直交符号、Reed-Solomon・代数幾何・rank-metric・Gabidulin符号、code-based cryptography、符号構成・限界・復号アルゴリズムを扱う。フォールトトレラント実装は ft も付与する。",
       "webhook_env": "DISCORD_WEBHOOK_QEC",
       "keywords": [
         "error correction", "error-correct", "stabilizer code", "surface code",

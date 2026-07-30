@@ -26217,15 +26217,22 @@
   "primary": "cs.IT",
   "announce_type": "cross",
   "genre_ids": [
-   "other"
+   "qec"
   ],
   "genre_names": [
-   "その他・異分野"
+   "誤り訂正・符号理論"
   ],
   "classifier": "gemini-2.5-flash",
   "abstract_en": "We introduce a Jordan-canonical-form framework for constructing $q$-ary quantum stabilizer codes from arbitrary classical linear codes over $\\F_{q^2}$. The framework does not require the classical linear code $\\mathcal{C}$ to satisfy the dual-containing condition (i.e., self-orthogonality). Given a classical code $\\mathcal{C}=[n,k,d]_{q^2}$ with parity-check matrix $H$, we measure the obstruction to Hermitian self-orthogonality by the rank $r=(n-k)-\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h}\\cap \\mathcal{C})$. The ingredient code $\\mathcal{C}$ is $r$-nearly dual containing, or, equivalently, $\\mathcal{C}^{\\perp_h}$ is $r$-nearly self-orthogonal, by which we mean that $r=\\Rank(HH^{\\dagger})=\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h})-\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h}\\cap \\mathcal{C})$. By systematically reducing the rank of the Hermitian inner-product matrix $A=HH^{\\dagger}$ through rank-one perturbations along the Jordan basis $W=P^{-1}$ of the decomposition $A=PJ_AP^{-1}$, we construct an explicit Hermitian self-orthogonal code $\\mathcal{C}_{\\mathrm{so}}=[n+r,n-k]_{q^2}$. A sufficient distance-preservation criterion guarantees that the resulting $q$-ary quantum code has parameters $[[n+r,2k-n+r,\\geq d]]_q$. Applying this construction to classical codes produces several record quantum codes that improve or supplement the best-known parameters in Grassl's tables.",
   "abstract_ja": "任意の古典線形コードから$\\F_{q^2}$上の任意の線形コードから$q$元量子安定化符号を構成するためのジョーダン標準形式フレームワークを導入します。この枠組みは、双対包含条件(すなわち自己直交性)を満たすために古典的な線形符号$\\mathcal{C}$を必要としません。古典符号$\\mathcal{C}=[n,k,d]_{q^2}$ とパリティチェック行列$H$)が与えられると、エルミート自己直交性への障害をランク $r=(n-k)-\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h}\\cap \\mathcal{C})$ で測定します。成分コード$\\mathcal{C}$は$r$-ほぼ二重包含、つまり同等に$\\mathcal{C}^{\\perp_h}$は$r$-ほぼ自己直交的であり、つまり$r=\\Rank(HH^{\\dagger})=\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h})-\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h}\\cap \\mathcal{C})$。分解$A$A=PJ_AP^{-1}$のジョーダン基$W底に沿ったランク1摂動を通じてエルミート内積行列のランクを体系的に減少させることで、明示的なエルミート自己直交符号$\\mathcal{C}_{\\mathrm{so}}=[n+r,n-k]_{q^2}$を構成します。十分な距離保存基準は、得られる$q$元量子符号のパラメータ$[[n+r,2k-n+r,\\geq d]]_q$を持つことを保証します。この構成を古典符号に適用すると、グラスル表で最もよく知られているパラメータを補完または補完する複数のレコード量子符号が得られます。",
-  "abstract_translated": "任意の古典線形コードから$\\F_{q^2}$上の任意の線形コードから$q$元量子安定化符号を構成するためのジョーダン標準形式フレームワークを導入します。この枠組みは、双対包含条件(すなわち自己直交性)を満たすために古典的な線形符号$\\mathcal{C}$を必要としません。古典符号$\\mathcal{C}=[n,k,d]_{q^2}$ とパリティチェック行列$H$)が与えられると、エルミート自己直交性への障害をランク $r=(n-k)-\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h}\\cap \\mathcal{C})$ で測定します。成分コード$\\mathcal{C}$は$r$-ほぼ二重包含、つまり同等に$\\mathcal{C}^{\\perp_h}$は$r$-ほぼ自己直交的であり、つまり$r=\\Rank(HH^{\\dagger})=\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h})-\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h}\\cap \\mathcal{C})$。分解$A$A=PJ_AP^{-1}$のジョーダン基$W底に沿ったランク1摂動を通じてエルミート内積行列のランクを体系的に減少させることで、明示的なエルミート自己直交符号$\\mathcal{C}_{\\mathrm{so}}=[n+r,n-k]_{q^2}$を構成します。十分な距離保存基準は、得られる$q$元量子符号のパラメータ$[[n+r,2k-n+r,\\geq d]]_q$を持つことを保証します。この構成を古典符号に適用すると、グラスル表で最もよく知られているパラメータを補完または補完する複数のレコード量子符号が得られます。"
+  "abstract_translated": "任意の古典線形コードから$\\F_{q^2}$上の任意の線形コードから$q$元量子安定化符号を構成するためのジョーダン標準形式フレームワークを導入します。この枠組みは、双対包含条件(すなわち自己直交性)を満たすために古典的な線形符号$\\mathcal{C}$を必要としません。古典符号$\\mathcal{C}=[n,k,d]_{q^2}$ とパリティチェック行列$H$)が与えられると、エルミート自己直交性への障害をランク $r=(n-k)-\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h}\\cap \\mathcal{C})$ で測定します。成分コード$\\mathcal{C}$は$r$-ほぼ二重包含、つまり同等に$\\mathcal{C}^{\\perp_h}$は$r$-ほぼ自己直交的であり、つまり$r=\\Rank(HH^{\\dagger})=\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h})-\\dim_{\\F_{q^2}}(\\mathcal{C}^{\\perp_h}\\cap \\mathcal{C})$。分解$A$A=PJ_AP^{-1}$のジョーダン基$W底に沿ったランク1摂動を通じてエルミート内積行列のランクを体系的に減少させることで、明示的なエルミート自己直交符号$\\mathcal{C}_{\\mathrm{so}}=[n+r,n-k]_{q^2}$を構成します。十分な距離保存基準は、得られる$q$元量子符号のパラメータ$[[n+r,2k-n+r,\\geq d]]_q$を持つことを保証します。この構成を古典符号に適用すると、グラスル表で最もよく知られているパラメータを補完または補完する複数のレコード量子符号が得られます。",
+  "repost_channels": [
+   "誤り訂正・符号理論"
+  ],
+  "repost_genre_ids": [
+   "qec"
+  ],
+  "reposted_at": "2026-07-30T06:39:30Z"
  },
  {
   "id": "2607.12355",
@@ -29963,15 +29970,22 @@
   "primary": "cs.IT",
   "announce_type": "cross",
   "genre_ids": [
-   "other"
+   "qec"
   ],
   "genre_names": [
-   "その他・異分野"
+   "誤り訂正・符号理論"
   ],
   "classifier": "gemini-2.5-flash",
   "abstract_en": "Stabilizer codes are often constructed within the Calderbank--Shor--Steane (CSS) framework, where two mutually orthogonal binary classical codes define $X$ and $Z$-type stabilizer generators. While this structure is algebraically convenient, additional non-CSS constraints may help suppress low-weight logical operators and improve decoding performance in the finite-length regime. We thus introduce quantum XYZ stabilizer codes, whose parity-check matrix (PCM) is built from three pairwise orthogonal binary PCMs associated with $X$-, $Y$-, and $Z$-type stabilizer generators. A nontrivial point is that an XYZ code instance is not automatically genuinely non-CSS: the same stabilizer group may admit a CSS generating set. We characterize this collapse, obtaining algebraic and rank conditions for deciding when the $Y$-type checks are redundant and when they define genuinely non-CSS stabilizer constraints. We also derive upper and lower bounds on the quantum minimum distance, including bounds for mixed Pauli logical operators. The novel framework includes a known non-CSS topological code, namely the XYZ$^2$ hexagonal code, and yields also sparse finite-length quantum low-density parity-check (qLDPC) constructions from intersecting-subset and quasi-dyadic code families. Simulations under depolarizing code-capacity noise and quaternary belief propagation decoding show that the proposed XYZ qLDPC instances can outperform representative CSS qLDPC instances with similar finite-length parameters.",
   "abstract_ja": "スタビライザー符号はしばしばCalderbank-Shor-Steane(CSS)フレームワーク内で構築され、2つの直交する2つの2進古典符号が$X$型および$Z$型安定化器ジェネレータを定義します。この構造は代数的に便利ですが、追加の非CSS制約は低重性論理演算子を抑制し、有限長域での復号性能を向上させるのに役立つかもしれません。そこで、パリティチェック行列(PCM)が、$X$-、$Y$-、$Z$-型安定化器ジェネレータに関連付けられた3つのペアワイズ直交二項PCMから構成された量子XYZ安定化符号を導入します。非自明な点として、XYZコードインスタンスが自動的に真に非CSSであるとは限らない。同じ安定化グループがCSS生成集合を許容する可能性がある。この崩壊を特徴づけ、$Y$型チェックが冗長である場合と、真にCSSでない安定化制約を定義する場合を判定するための代数的およびランク条件を得ます。また、混合パウリ論理演算子の限界を含む量子最小距離の上限と下限も導出します。この新しい枠組みには、既知の非CSS位相符号であるXYZ$^2$六角形符号が含まれており、交差部分集合および準二元符号族からの疎有限長量子低密度パリティチェック(qLDPC)構成も導き出します。脱分極符号容量ノイズおよび四次信念伝播復号を用いたシミュレーションでは、提案されたXYZ qLDPCインスタンスは、類似の有限長パラメータを持つ代表的なCSS qLDPCインスタンスを上回ることが示されています。",
-  "abstract_translated": "スタビライザー符号はしばしばCalderbank-Shor-Steane(CSS)フレームワーク内で構築され、2つの直交する2つの2進古典符号が$X$型および$Z$型安定化器ジェネレータを定義します。この構造は代数的に便利ですが、追加の非CSS制約は低重性論理演算子を抑制し、有限長域での復号性能を向上させるのに役立つかもしれません。そこで、パリティチェック行列(PCM)が、$X$-、$Y$-、$Z$-型安定化器ジェネレータに関連付けられた3つのペアワイズ直交二項PCMから構成された量子XYZ安定化符号を導入します。非自明な点として、XYZコードインスタンスが自動的に真に非CSSであるとは限らない。同じ安定化グループがCSS生成集合を許容する可能性がある。この崩壊を特徴づけ、$Y$型チェックが冗長である場合と、真にCSSでない安定化制約を定義する場合を判定するための代数的およびランク条件を得ます。また、混合パウリ論理演算子の限界を含む量子最小距離の上限と下限も導出します。この新しい枠組みには、既知の非CSS位相符号であるXYZ$^2$六角形符号が含まれており、交差部分集合および準二元符号族からの疎有限長量子低密度パリティチェック(qLDPC)構成も導き出します。脱分極符号容量ノイズおよび四次信念伝播復号を用いたシミュレーションでは、提案されたXYZ qLDPCインスタンスは、類似の有限長パラメータを持つ代表的なCSS qLDPCインスタンスを上回ることが示されています。"
+  "abstract_translated": "スタビライザー符号はしばしばCalderbank-Shor-Steane(CSS)フレームワーク内で構築され、2つの直交する2つの2進古典符号が$X$型および$Z$型安定化器ジェネレータを定義します。この構造は代数的に便利ですが、追加の非CSS制約は低重性論理演算子を抑制し、有限長域での復号性能を向上させるのに役立つかもしれません。そこで、パリティチェック行列(PCM)が、$X$-、$Y$-、$Z$-型安定化器ジェネレータに関連付けられた3つのペアワイズ直交二項PCMから構成された量子XYZ安定化符号を導入します。非自明な点として、XYZコードインスタンスが自動的に真に非CSSであるとは限らない。同じ安定化グループがCSS生成集合を許容する可能性がある。この崩壊を特徴づけ、$Y$型チェックが冗長である場合と、真にCSSでない安定化制約を定義する場合を判定するための代数的およびランク条件を得ます。また、混合パウリ論理演算子の限界を含む量子最小距離の上限と下限も導出します。この新しい枠組みには、既知の非CSS位相符号であるXYZ$^2$六角形符号が含まれており、交差部分集合および準二元符号族からの疎有限長量子低密度パリティチェック(qLDPC)構成も導き出します。脱分極符号容量ノイズおよび四次信念伝播復号を用いたシミュレーションでは、提案されたXYZ qLDPCインスタンスは、類似の有限長パラメータを持つ代表的なCSS qLDPCインスタンスを上回ることが示されています。",
+  "repost_channels": [
+   "誤り訂正・符号理論"
+  ],
+  "repost_genre_ids": [
+   "qec"
+  ],
+  "reposted_at": "2026-07-30T06:39:31Z"
  },
  {
   "id": "2607.15070",
@@ -37345,15 +37359,22 @@
   "primary": "cs.IT",
   "announce_type": "cross",
   "genre_ids": [
-   "other"
+   "qec"
   ],
   "genre_names": [
-   "その他・異分野"
+   "誤り訂正・符号理論"
   ],
   "classifier": "gemini-2.5-flash",
   "abstract_en": "Belief-propagation (BP) decoding for quantum low-density parity-check (QLDPC) codes is attractive due to its low complexity, but its performance is often limited by short cycles, degeneracy, and convergence failures. Recently, reinforcement-learning-based sequential variable-node (VN) scheduling (RL-S) was shown to improve BP decoding by learning state-dependent update orders. However, the VN-by-VN nature of that approach offers limited within-iteration parallelism, since only one VN is updated at a time. In this paper, we propose a cluster-based extension of RL-S for QLDPC codes. The VNs are partitioned into fixed clusters, and at each scheduling step the RL agent selects one cluster to update, after which all VNs in that cluster are updated in parallel using the same pre-update incoming messages. To keep the tabular state space practical for large cluster sizes, we introduce a permutation-invariant cluster state based on a normalized histogram of local mismatch weights, followed by quantization. This representation makes the number of cluster states depend on the quantization resolution rather than the cluster size. We also develop the corresponding cluster-level Markov decision process, reward function, and Q-learning update. Numerical results on representative QLDPC codes show that the proposed clustered learned scheduling preserves most of the error-rate benefit of VN-level learned sequential scheduling while substantially reducing the number of scheduling decisions per BP iteration, thereby providing an attractive latency-parallelism tradeoff.",
   "abstract_ja": "量子低密度パリティチェック（QLDPC）符号に対する信念伝播（BP）復号は、その低い計算複雑度から注目されているが、その性能はしばしば短いサイクル、縮退、および収束失敗によって制限される。 最近、強化学習に基づく逐次可変ノード（VN）スケジューリング（RL-S）が、状態依存の更新順序を学習することでBP復号の性能を向上させることが示された。しかし、このアプローチはノードごとに処理を行う性質上、一度に1つのVNしか更新されないため、反復内での並列性が限定的である。 本論文では、QLDPC符号向けに、RL-Sのクラスタベースの拡張を提案する。VNは固定のクラスタに分割され、各スケジューリングステップにおいて、RLエージェントは更新するクラスタを1つ選択し、その後、そのクラスタ内のすべてのVNが、同じ更新前の受信メッセージを用いて並列に更新される。 大規模なクラスタサイズにおいても表形式の状態空間を実用的な範囲に収めるため、局所的なミスマッチ重みの正規化ヒストグラムに基づく、順列不変のクラスタ状態を導入し、それに続いて量子化を行う。この表現により、クラスタ状態の数はクラスタサイズではなく、量子化分解能に依存するようになる。 また、対応するクラスタレベルのマルコフ決定過程、報酬関数、およびQ学習による更新手法も開発した。 代表的なQLDPCコードに関する数値計算の結果、提案されたクラスタ化された学習型スケジューリングは、VNレベルの学習型逐次スケジューリングのエラー率の利点の大部分を維持しつつ、BP反復あたりのスケジューリング決定数を大幅に削減し、それによって魅力的なレイテンシと並列性のトレードオフを実現することが示された。",
-  "abstract_translated": "量子低密度パリティチェック（QLDPC）符号に対する信念伝播（BP）復号は、その低い計算複雑度から注目されているが、その性能はしばしば短いサイクル、縮退、および収束失敗によって制限される。 最近、強化学習に基づく逐次可変ノード（VN）スケジューリング（RL-S）が、状態依存の更新順序を学習することでBP復号の性能を向上させることが示された。しかし、このアプローチはノードごとに処理を行う性質上、一度に1つのVNしか更新されないため、反復内での並列性が限定的である。 本論文では、QLDPC符号向けに、RL-Sのクラスタベースの拡張を提案する。VNは固定のクラスタに分割され、各スケジューリングステップにおいて、RLエージェントは更新するクラスタを1つ選択し、その後、そのクラスタ内のすべてのVNが、同じ更新前の受信メッセージを用いて並列に更新される。 大規模なクラスタサイズにおいても表形式の状態空間を実用的な範囲に収めるため、局所的なミスマッチ重みの正規化ヒストグラムに基づく、順列不変のクラスタ状態を導入し、それに続いて量子化を行う。この表現により、クラスタ状態の数はクラスタサイズではなく、量子化分解能に依存するようになる。 また、対応するクラスタレベルのマルコフ決定過程、報酬関数、およびQ学習による更新手法も開発した。 代表的なQLDPCコードに関する数値計算の結果、提案されたクラスタ化された学習型スケジューリングは、VNレベルの学習型逐次スケジューリングのエラー率の利点の大部分を維持しつつ、BP反復あたりのスケジューリング決定数を大幅に削減し、それによって魅力的なレイテンシと並列性のトレードオフを実現することが示された。"
+  "abstract_translated": "量子低密度パリティチェック（QLDPC）符号に対する信念伝播（BP）復号は、その低い計算複雑度から注目されているが、その性能はしばしば短いサイクル、縮退、および収束失敗によって制限される。 最近、強化学習に基づく逐次可変ノード（VN）スケジューリング（RL-S）が、状態依存の更新順序を学習することでBP復号の性能を向上させることが示された。しかし、このアプローチはノードごとに処理を行う性質上、一度に1つのVNしか更新されないため、反復内での並列性が限定的である。 本論文では、QLDPC符号向けに、RL-Sのクラスタベースの拡張を提案する。VNは固定のクラスタに分割され、各スケジューリングステップにおいて、RLエージェントは更新するクラスタを1つ選択し、その後、そのクラスタ内のすべてのVNが、同じ更新前の受信メッセージを用いて並列に更新される。 大規模なクラスタサイズにおいても表形式の状態空間を実用的な範囲に収めるため、局所的なミスマッチ重みの正規化ヒストグラムに基づく、順列不変のクラスタ状態を導入し、それに続いて量子化を行う。この表現により、クラスタ状態の数はクラスタサイズではなく、量子化分解能に依存するようになる。 また、対応するクラスタレベルのマルコフ決定過程、報酬関数、およびQ学習による更新手法も開発した。 代表的なQLDPCコードに関する数値計算の結果、提案されたクラスタ化された学習型スケジューリングは、VNレベルの学習型逐次スケジューリングのエラー率の利点の大部分を維持しつつ、BP反復あたりのスケジューリング決定数を大幅に削減し、それによって魅力的なレイテンシと並列性のトレードオフを実現することが示された。",
+  "repost_channels": [
+   "誤り訂正・符号理論"
+  ],
+  "repost_genre_ids": [
+   "qec"
+  ],
+  "reposted_at": "2026-07-30T06:39:33Z"
  },
  {
   "id": "2607.20168",
@@ -43381,15 +43402,30 @@
   "primary": "cs.IT",
   "announce_type": "cross",
   "genre_ids": [
-   "other"
+   "network",
+   "qit",
+   "qec"
   ],
   "genre_names": [
-   "その他・異分野"
+   "量子ネットワーク・通信",
+   "量子情報理論",
+   "誤り訂正・符号理論"
   ],
   "classifier": "gemini-2.5-flash-lite",
   "abstract_en": "As quantum systems advance toward interconnected architectures, the ability to identify nodes, manage resources, and support network-level functions becomes increasingly critical. In this work, we propose a lossless source coding scheme for addressing in quantum networks that enables compact, hierarchical, and coherently processable quantum address states. Specifically, we introduce a prefix-suffix address space and develop an isometric hierarchical encoder-decoder that guarantees unique decodability. We further provide a practical Huffman-based procedure that embeds prefix-free, length-eigenstate codewords into the address space, thereby preserving isometry. The scheme is particularly designed for networks with hierarchical structure, heterogeneous cluster sizes, and configurable address assignment to accommodate dynamic network conditions. A numerical example on a 13-node network demonstrates that the proposed hierarchical encoding scheme is feasible and achieves perfect fidelity. This work establishes a rigorous connection between source coding theory and quantum network design, offering a practical framework towards scalable and coherent quantum addressing.",
   "abstract_ja": "量子システムが相互接続されたアーキテクチャへと進化するにつれ、ノードの識別、リソースの管理、およびネットワークレベルの機能をサポートする能力がますます重要になってきている。 本研究では、量子ネットワークにおけるアドレス指定のためのロスレスソース符号化方式を提案する。この方式により、コンパクトで階層的、かつコヒーレントに処理可能な量子アドレス状態を実現する。具体的には、プレフィックス・サフィックス形式のアドレス空間を導入し、一意的な復号性を保証する等長階層型エンコーダ・デコーダを開発する。 さらに、プレフィックスのない長さ固有状態のコードワードをアドレス空間に埋め込み、それによって等距性を維持する、ハフマン法に基づく実用的な手順を提示する。本方式は、動的なネットワーク状況に対応できるよう、階層構造を持ち、クラスタサイズが異種であり、アドレス割り当てが設定可能なネットワーク向けに特に設計されている。 13ノードのネットワークを用いた数値例により、提案された階層的符号化スキームが実現可能であり、完全な忠実度を達成することが実証された。本研究は、ソース符号化理論と量子ネットワーク設計との間に厳密な関連性を確立し、スケーラブルかつコヒーレントな量子アドレス指定に向けた実用的な枠組みを提供するものである。",
-  "abstract_translated": "量子システムが相互接続されたアーキテクチャへと進化するにつれ、ノードの識別、リソースの管理、およびネットワークレベルの機能をサポートする能力がますます重要になってきている。 本研究では、量子ネットワークにおけるアドレス指定のためのロスレスソース符号化方式を提案する。この方式により、コンパクトで階層的、かつコヒーレントに処理可能な量子アドレス状態を実現する。具体的には、プレフィックス・サフィックス形式のアドレス空間を導入し、一意的な復号性を保証する等長階層型エンコーダ・デコーダを開発する。 さらに、プレフィックスのない長さ固有状態のコードワードをアドレス空間に埋め込み、それによって等距性を維持する、ハフマン法に基づく実用的な手順を提示する。本方式は、動的なネットワーク状況に対応できるよう、階層構造を持ち、クラスタサイズが異種であり、アドレス割り当てが設定可能なネットワーク向けに特に設計されている。 13ノードのネットワークを用いた数値例により、提案された階層的符号化スキームが実現可能であり、完全な忠実度を達成することが実証された。本研究は、ソース符号化理論と量子ネットワーク設計との間に厳密な関連性を確立し、スケーラブルかつコヒーレントな量子アドレス指定に向けた実用的な枠組みを提供するものである。"
+  "abstract_translated": "量子システムが相互接続されたアーキテクチャへと進化するにつれ、ノードの識別、リソースの管理、およびネットワークレベルの機能をサポートする能力がますます重要になってきている。 本研究では、量子ネットワークにおけるアドレス指定のためのロスレスソース符号化方式を提案する。この方式により、コンパクトで階層的、かつコヒーレントに処理可能な量子アドレス状態を実現する。具体的には、プレフィックス・サフィックス形式のアドレス空間を導入し、一意的な復号性を保証する等長階層型エンコーダ・デコーダを開発する。 さらに、プレフィックスのない長さ固有状態のコードワードをアドレス空間に埋め込み、それによって等距性を維持する、ハフマン法に基づく実用的な手順を提示する。本方式は、動的なネットワーク状況に対応できるよう、階層構造を持ち、クラスタサイズが異種であり、アドレス割り当てが設定可能なネットワーク向けに特に設計されている。 13ノードのネットワークを用いた数値例により、提案された階層的符号化スキームが実現可能であり、完全な忠実度を達成することが実証された。本研究は、ソース符号化理論と量子ネットワーク設計との間に厳密な関連性を確立し、スケーラブルかつコヒーレントな量子アドレス指定に向けた実用的な枠組みを提供するものである。",
+  "repost_channels": [
+   "量子ネットワーク・通信",
+   "量子情報理論",
+   "誤り訂正・符号理論"
+  ],
+  "repost_genre_ids": [
+   "network",
+   "qit",
+   "qec"
+  ],
+  "reposted_at": "2026-07-30T06:39:37Z"
  },
  {
   "id": "2607.23533",

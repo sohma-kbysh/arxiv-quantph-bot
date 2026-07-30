@@ -2037,7 +2037,92 @@
   "2607.26011",
   "2607.26019",
   "2607.26028",
-  "2607.26029"
+  "2607.26029",
+  "2607.26080",
+  "2607.26086",
+  "2607.26093",
+  "2607.26116",
+  "2607.26122",
+  "2607.26123",
+  "2607.26126",
+  "2607.26131",
+  "2607.26132",
+  "2607.26139",
+  "2607.26142",
+  "2607.26145",
+  "2607.26146",
+  "2607.26154",
+  "2607.26156",
+  "2607.26157",
+  "2607.26161",
+  "2607.26208",
+  "2607.26214",
+  "2607.26225",
+  "2607.26242",
+  "2607.26293",
+  "2607.26331",
+  "2607.26349",
+  "2607.26351",
+  "2607.26413",
+  "2607.26431",
+  "2607.26436",
+  "2607.26438",
+  "2607.26445",
+  "2607.26474",
+  "2607.26477",
+  "2607.26478",
+  "2607.26480",
+  "2607.26486",
+  "2607.26502",
+  "2607.26550",
+  "2607.26620",
+  "2607.26669",
+  "2607.26672",
+  "2607.26707",
+  "2607.26711",
+  "2607.26716",
+  "2607.26745",
+  "2607.26756",
+  "2607.26761",
+  "2607.26771",
+  "2607.26772",
+  "2607.26856",
+  "2607.26867",
+  "2607.26880",
+  "2607.26898",
+  "2607.26905",
+  "2607.26919",
+  "2607.26925",
+  "2607.26957",
+  "2607.26978",
+  "2607.26999",
+  "2607.27009",
+  "2607.27013",
+  "2607.27015",
+  "2607.27025",
+  "2607.27028",
+  "2607.27045",
+  "2607.27051",
+  "2607.27060",
+  "2607.27067",
+  "2607.27075",
+  "2607.27091",
+  "2607.27094",
+  "2607.27111",
+  "2607.27116",
+  "2607.27117",
+  "2607.27123",
+  "2607.27144",
+  "2607.27153",
+  "2607.27168",
+  "2607.27171",
+  "2607.27173",
+  "2607.27181",
+  "2607.27184",
+  "2607.27185",
+  "2607.27195",
+  "2607.27204",
+  "2607.27206"
  ],
  "external_reviews": {
   "cs.CR:2607.23614": {
@@ -2956,7 +3041,67 @@
     ],
     "external_classifier": "gemini-2.5-flash"
    }
+  },
+  "cs.IT:2607.27091": {
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-07-30T04:22:47Z",
+   "paper": {
+    "id": "2607.27091",
+    "title": "Entanglement-Assisted Quantum Locally Recoverable Codes: Characterizations, Bounds, and Constructions",
+    "link": "https://arxiv.org/abs/2607.27091v1",
+    "authors": "Yang Li, San Ling, Zhenliang Lu, Gaojun Luo, Shixin Zhu",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Quantum locally recoverable codes (qLRCs) allow a single qudit erasure to be corrected by accessing only a small number of other qudits. Standard CSS and Hermitian constructions, however, impose dual-containing or self-orthogonal constraints on the underlying classical codes, thereby restricting the well-structured classical LRCs (cLRCs) that can be used to construct qLRCs. To relax these constraints, we introduce entanglement-assisted quantum locally recoverable codes (EAQLRCs) by assuming that halves of the pre-shared maximally entangled pairs are noiseless. We characterize sufficient support conditions on extended stabilizers under which entanglement-assisted stabilizer codes have locality $r$ and derive a CSS-like construction from two classical codes without imposing the ordinary dual-containing condition. We further establish an upper bound on locality and a Singleton-like bound for arbitrary CSS-like EAQLRCs, and characterize the pure codes attaining equality in the latter bound. These results yield a general framework for constructing optimal pure EAQLRCs from pairs of cLRCs. Applying this framework to $\\ell$-intersection pairs of MDS codes and block parity-check matrices, we obtain two families of optimal pure CSS-like EAQLRCs with flexible parameters and nontrivial localities. To the best of our knowledge, these represent the first explicit families of EAQLRCs.",
+    "published": "2026-07-29T16:19:14Z",
+    "updated": "2026-07-29T16:19:14Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash-lite"
+   }
   }
  },
- "external_pending": {}
+ "external_pending": {
+  "cs.CR:2607.26734": {
+   "id": "2607.26734",
+   "title": "Verifiable Random Sampling",
+   "link": "https://arxiv.org/abs/2607.26734v1",
+   "authors": "Yeoh Wei Zhu, Soorya Rethinasamy, Anthony Alexiades Armenakas, Yash Satsangi, Shaltiel Eloul, Ruslan Shaydulin",
+   "announce_type": "external",
+   "categories": [
+    "cs.CR"
+   ],
+   "primary": "cs.CR",
+   "abstract": "Verifiable random functions (VRF) underpin a wide range of applications that require publicly verifiable evaluations of a pseudorandom function on a given input. However, once the public key is published, the induced function is fixed and is a deterministic function of the input. This determinism can enable collusion and grinding-style attacks in which adversaries precompute and selectively exploit favorable input-output pairs. To address these limitations, we introduce the formal notion of verifiable random sampling (VRS). We propose a concrete VRS construction based on random quantum circuit sampling (RCS) executable on today's quantum computing devices. VRS supports multiparty protocols in which the verifier's final output is a sample that is statistically close to a specified target distribution, while remaining publicly verifiable. We model the construction and prove its security within the constructive cryptography (CC) framework, thereby ensuring composability with other cryptographic protocols. Overall, our results provide a mechanism for verifiable random sampling that simultaneously guarantees sample freshness and public verifiability, enabling applications that require unpredictable, fresh randomness while preserving fairness through public verifiability.",
+   "published": "2026-07-29T10:27:08Z",
+   "updated": "2026-07-29T10:27:08Z",
+   "source_feed": "cs.CR"
+  },
+  "cs.CR:2607.26241": {
+   "id": "2607.26241",
+   "title": "Learning the Word Problem: Geodesic Lengths and Cryptographic Applications",
+   "link": "https://arxiv.org/abs/2607.26241v1",
+   "authors": "Elisabeth Fink",
+   "announce_type": "external",
+   "categories": [
+    "cs.CR",
+    "cs.LG",
+    "math.GR"
+   ],
+   "primary": "cs.CR",
+   "abstract": "The Word Problem has been a subject of intensive mathematical study for over a century, initially driving advances in combinatorial group theory and more recently emerging as a foundational hardness assumption in post-quantum cryptography (PQC). While generally undecidable, several families of infinite non-abelian groups exhibit solvable or algorithmically fast word problems, making them attractive platforms for cryptographic design. This paper introduces WPNet, a novel Graph Neural Network architecture capable of solving the Word Problem heuristically, which is demonstrated on the Baumslag-Solitar group $BS(1,2)$ and on an Artin group. By mapping unreduced words to dynamic graph structures, the model learns to cluster algebraically equivalent elements in a continuous embedding space, effectively identifying the geodesic representative of a word without executing discrete reduction steps. As an application, a model variant is developed that can predict the geodesic length of an unreduced word in both groups. To demonstrate the cryptographic severity of this structural leakage, WPNet is successfully deployed against the Wagner-Magyarik public-key cryptosystem.",
+   "published": "2026-07-28T20:22:47Z",
+   "updated": "2026-07-28T20:22:47Z",
+   "source_feed": "cs.CR"
+  }
+ }
 }

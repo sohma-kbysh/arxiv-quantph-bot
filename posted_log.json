@@ -48520,5 +48520,55 @@
   "abstract_en": "Quantum locally recoverable codes (qLRCs) allow a single qudit erasure to be corrected by accessing only a small number of other qudits. Standard CSS and Hermitian constructions, however, impose dual-containing or self-orthogonal constraints on the underlying classical codes, thereby restricting the well-structured classical LRCs (cLRCs) that can be used to construct qLRCs. To relax these constraints, we introduce entanglement-assisted quantum locally recoverable codes (EAQLRCs) by assuming that halves of the pre-shared maximally entangled pairs are noiseless. We characterize sufficient support conditions on extended stabilizers under which entanglement-assisted stabilizer codes have locality $r$ and derive a CSS-like construction from two classical codes without imposing the ordinary dual-containing condition. We further establish an upper bound on locality and a Singleton-like bound for arbitrary CSS-like EAQLRCs, and characterize the pure codes attaining equality in the latter bound. These results yield a general framework for constructing optimal pure EAQLRCs from pairs of cLRCs. Applying this framework to $\\ell$-intersection pairs of MDS codes and block parity-check matrices, we obtain two families of optimal pure CSS-like EAQLRCs with flexible parameters and nontrivial localities. To the best of our knowledge, these represent the first explicit families of EAQLRCs.",
   "abstract_ja": "量子局所回復可能なコード(qLRC)は、少数の他のクディットにアクセスするだけで単一のクディット消去を修正することを可能にします。しかし、標準的なCSSやエルミート構成は、基礎となる古典符号に双対包含または自己直交制約を課し、qLRCを構成するために使えるよく構造化された古典的LRC(cLRCs)を制限します。これらの制約を緩和するために、事前に共有された最大エンタングルドペアの半分がノイズがないと仮定し、エンタングルメント支援量子局所復元コード(EAQLRC)を導入します。拡張安定化器に対して十分な支持条件を特徴付け、その下ではエンタングルメント支援安定化符号が局所性$r$を持ち、通常の双対包含条件を課さずに2つの古典符号からCSS様の構成を導出します。さらに、局所性の上限と任意のCSS様EAQLRCのシングルトン様の上限を確立し、後者の境界で等号を得る純粋符号を特徴付けます。これらの結果は、cLRCのペアから最適な純粋なEAQLRCを構築するための一般的な枠組みを生み出します。このフレームワークをMDSコードの$\\ell$交差対やブロックパリティチェック行列に適用すると、柔軟なパラメータと非自明な局所性を持つ最適純粋CSS様EAQLRCファミリー2つが得られる。私たちの知る限り、これらはEAQLRCの最初の明確なファミリーを示しています。",
   "abstract_translated": "量子局所回復可能なコード(qLRC)は、少数の他のクディットにアクセスするだけで単一のクディット消去を修正することを可能にします。しかし、標準的なCSSやエルミート構成は、基礎となる古典符号に双対包含または自己直交制約を課し、qLRCを構成するために使えるよく構造化された古典的LRC(cLRCs)を制限します。これらの制約を緩和するために、事前に共有された最大エンタングルドペアの半分がノイズがないと仮定し、エンタングルメント支援量子局所復元コード(EAQLRC)を導入します。拡張安定化器に対して十分な支持条件を特徴付け、その下ではエンタングルメント支援安定化符号が局所性$r$を持ち、通常の双対包含条件を課さずに2つの古典符号からCSS様の構成を導出します。さらに、局所性の上限と任意のCSS様EAQLRCのシングルトン様の上限を確立し、後者の境界で等号を得る純粋符号を特徴付けます。これらの結果は、cLRCのペアから最適な純粋なEAQLRCを構築するための一般的な枠組みを生み出します。このフレームワークをMDSコードの$\\ell$交差対やブロックパリティチェック行列に適用すると、柔軟なパラメータと非自明な局所性を持つ最適純粋CSS様EAQLRCファミリー2つが得られる。私たちの知る限り、これらはEAQLRCの最初の明確なファミリーを示しています。"
+ },
+ {
+  "id": "2607.26241",
+  "posted_at": "2026-07-30T06:32:02Z",
+  "title": "Learning the Word Problem: Geodesic Lengths and Cryptographic Applications",
+  "title_ja": "問題の学習:測地線の長さと暗号学的応用",
+  "title_translated": "問題の学習:測地線の長さと暗号学的応用",
+  "translation_language": "ja",
+  "authors": "Elisabeth Fink",
+  "link": "https://arxiv.org/abs/2607.26241v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "qml"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子機械学習"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "The Word Problem has been a subject of intensive mathematical study for over a century, initially driving advances in combinatorial group theory and more recently emerging as a foundational hardness assumption in post-quantum cryptography (PQC). While generally undecidable, several families of infinite non-abelian groups exhibit solvable or algorithmically fast word problems, making them attractive platforms for cryptographic design. This paper introduces WPNet, a novel Graph Neural Network architecture capable of solving the Word Problem heuristically, which is demonstrated on the Baumslag-Solitar group $BS(1,2)$ and on an Artin group. By mapping unreduced words to dynamic graph structures, the model learns to cluster algebraically equivalent elements in a continuous embedding space, effectively identifying the geodesic representative of a word without executing discrete reduction steps. As an application, a model variant is developed that can predict the geodesic length of an unreduced word in both groups. To demonstrate the cryptographic severity of this structural leakage, WPNet is successfully deployed against the Wagner-Magyarik public-key cryptosystem.",
+  "abstract_ja": "ワード・プロブレムは1世紀以上にわたり集中的な数学的研究の対象であり、当初は組合せ群論の進展を推進し、近年ではポスト量子暗号学(PQC)における基礎的なハードネス仮定として浮上しています。一般的に決定不能ですが、無限の非アーベル群のいくつかの族は解ける、またはアルゴリズム的に高速なワード問題を示し、暗号設計のプラットフォームとして魅力的です。本論文では、ワード問題をヒューリスティックに解くことができる新しいグラフニューラルネットワークアーキテクチャであるWPNetを紹介し、これはBaumslag-Solitar群$BS(1,2)$およびArtin群で実証されています。未還元語を動的グラフ構造に写すことで、モデルは連続的な埋め込み空間に代数的に同値な要素をクラスタリングすることを学習し、離散的な還元を行わずに単語の測地線代表を効果的に特定します。応用として、両グループにおける未還元語の測地線長を予測できるモデルバリアントが開発されます。この構造的な漏洩の暗号学的深刻さを示すために、WPNetはWagner-Magyarik公開鍵暗号システムに対して成功裏に展開されました。",
+  "abstract_translated": "ワード・プロブレムは1世紀以上にわたり集中的な数学的研究の対象であり、当初は組合せ群論の進展を推進し、近年ではポスト量子暗号学(PQC)における基礎的なハードネス仮定として浮上しています。一般的に決定不能ですが、無限の非アーベル群のいくつかの族は解ける、またはアルゴリズム的に高速なワード問題を示し、暗号設計のプラットフォームとして魅力的です。本論文では、ワード問題をヒューリスティックに解くことができる新しいグラフニューラルネットワークアーキテクチャであるWPNetを紹介し、これはBaumslag-Solitar群$BS(1,2)$およびArtin群で実証されています。未還元語を動的グラフ構造に写すことで、モデルは連続的な埋め込み空間に代数的に同値な要素をクラスタリングすることを学習し、離散的な還元を行わずに単語の測地線代表を効果的に特定します。応用として、両グループにおける未還元語の測地線長を予測できるモデルバリアントが開発されます。この構造的な漏洩の暗号学的深刻さを示すために、WPNetはWagner-Magyarik公開鍵暗号システムに対して成功裏に展開されました。"
+ },
+ {
+  "id": "2607.26734",
+  "posted_at": "2026-07-30T06:32:05Z",
+  "title": "Verifiable Random Sampling",
+  "title_ja": "検証可能なランダムサンプリング",
+  "title_translated": "検証可能なランダムサンプリング",
+  "translation_language": "ja",
+  "authors": "Yeoh Wei Zhu, Soorya Rethinasamy, Anthony Alexiades Armenakas, Yash Satsangi, Shaltiel Eloul, Ruslan Shaydulin",
+  "link": "https://arxiv.org/abs/2607.26734v1",
+  "primary": "cs.CR",
+  "source_feed": "cs.CR",
+  "announce_type": "external",
+  "genre_ids": [
+   "crypto",
+   "nisq"
+  ],
+  "genre_names": [
+   "暗号・セキュリティ",
+   "変分・NISQアルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Verifiable random functions (VRF) underpin a wide range of applications that require publicly verifiable evaluations of a pseudorandom function on a given input. However, once the public key is published, the induced function is fixed and is a deterministic function of the input. This determinism can enable collusion and grinding-style attacks in which adversaries precompute and selectively exploit favorable input-output pairs. To address these limitations, we introduce the formal notion of verifiable random sampling (VRS). We propose a concrete VRS construction based on random quantum circuit sampling (RCS) executable on today's quantum computing devices. VRS supports multiparty protocols in which the verifier's final output is a sample that is statistically close to a specified target distribution, while remaining publicly verifiable. We model the construction and prove its security within the constructive cryptography (CC) framework, thereby ensuring composability with other cryptographic protocols. Overall, our results provide a mechanism for verifiable random sampling that simultaneously guarantees sample freshness and public verifiability, enabling applications that require unpredictable, fresh randomness while preserving fairness through public verifiability.",
+  "abstract_ja": "検証可能な乱数関数(VRF)は、与えられた入力に対する擬似乱数関数の公開検証可能な評価を必要とする幅広い応用の基盤となっています。しかし、公開鍵が公開されると、誘導関数は固定され、入力の決定論的関数となります。この決定性は、敵対者が有利な入出力ペアを事前に計算し選択的に利用する共謀やグラインドスタイルの攻撃を可能にします。これらの制約に対処するために、検証可能なランダムサンプリング(VRS)という形式的な概念を導入します。私たちは、現在の量子コンピューティングデバイス上で実行可能なランダム量子回路サンプリング(RCS)に基づく具体的なVRS構築を提案します。VRSは、検証者の最終出力が指定されたターゲット分布に統計的に近いサンプルでありながら、公開検証可能な多党プロトコルをサポートしています。構築をモデル化し、構成的暗号(CC)フレームワーク内でその安全性を証明することで、他の暗号プロトコルとの組み合わせ可能性を確保しています。総じて、私たちの結果は、サンプルの新鮮さと公開検証性の両方を同時に保証し、予測不能で新鮮なランダム性を必要とするアプリケーションを可能にしつつ、公開検証可能性を通じて公平性を保つことを可能にしました。",
+  "abstract_translated": "検証可能な乱数関数(VRF)は、与えられた入力に対する擬似乱数関数の公開検証可能な評価を必要とする幅広い応用の基盤となっています。しかし、公開鍵が公開されると、誘導関数は固定され、入力の決定論的関数となります。この決定性は、敵対者が有利な入出力ペアを事前に計算し選択的に利用する共謀やグラインドスタイルの攻撃を可能にします。これらの制約に対処するために、検証可能なランダムサンプリング(VRS)という形式的な概念を導入します。私たちは、現在の量子コンピューティングデバイス上で実行可能なランダム量子回路サンプリング(RCS)に基づく具体的なVRS構築を提案します。VRSは、検証者の最終出力が指定されたターゲット分布に統計的に近いサンプルでありながら、公開検証可能な多党プロトコルをサポートしています。構築をモデル化し、構成的暗号(CC)フレームワーク内でその安全性を証明することで、他の暗号プロトコルとの組み合わせ可能性を確保しています。総じて、私たちの結果は、サンプルの新鮮さと公開検証性の両方を同時に保証し、予測不能で新鮮なランダム性を必要とするアプリケーションを可能にしつつ、公開検証可能性を通じて公平性を保つことを可能にしました。"
  }
 ]

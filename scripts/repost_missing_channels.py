@@ -19,6 +19,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import json
 import os
 import sys
@@ -79,12 +80,25 @@ def main() -> int:
             "abstract": row.get("abstract_en", ""),
         }
         ok_channels: list[str] = []
+        ok_genre_ids: list[str] = []
         ng_channels: list[str] = []
+        already_ids = set(row.get("repost_genre_ids", []))
+        already_names = set(row.get("repost_channels", []))
+        webhook_counts = Counter(
+            os.environ.get(genre_map[gid].get("webhook_env", ""), "")
+            for gid in item.get("channels", [])
+            if gid in genre_map
+            and os.environ.get(genre_map[gid].get("webhook_env", ""), "")
+        )
         for gid in item.get("channels", []):
             genre = genre_map.get(gid)
             if not genre:
                 print(f"[warn] {pid}: unknown genre '{gid}'; skipped",
                       file=sys.stderr)
+                ng_channels.append(f"{gid}(未知のジャンル)")
+                continue
+            if gid in already_ids or genre["name"] in already_names:
+                print(f"[skip] {pid} -> {genre['name']} already reposted")
                 continue
             webhook = os.environ.get(genre.get("webhook_env", ""), "")
             if not webhook:
@@ -93,15 +107,22 @@ def main() -> int:
                       file=sys.stderr)
                 ng_channels.append(f"{genre['name']}(webhook未設定)")
                 continue
+            if webhook_counts[webhook] > 1:
+                print(f"[warn] {pid}: duplicate webhook for {gid}; skipped",
+                      file=sys.stderr)
+                ng_channels.append(f"{genre['name']}(webhook重複)")
+                continue
             if args.dry_run:
                 print(f"[dry-run] {pid} -> {genre['name']} "
                       f"(footer: {label or genre['name']})")
                 ok_channels.append(genre["name"])
+                ok_genre_ids.append(gid)
                 continue
             if arxiv_bot.post_to_discord(
                     webhook, paper, label or genre["name"], jp, jp_title, cfg):
                 posted += 1
                 ok_channels.append(genre["name"])
+                ok_genre_ids.append(gid)
             else:
                 ng_channels.append(genre["name"])
             time.sleep(1.2)
@@ -111,19 +132,24 @@ def main() -> int:
         if ok_channels:
             posted_records.append({**record, "genre_names": ok_channels})
             if not args.dry_run:
-                row["genre_ids"] = after_ids
+                row["genre_ids"] = (
+                    after_ids if not ng_channels else list(dict.fromkeys(
+                        [*row.get("genre_ids", []), *ok_genre_ids])))
                 row["genre_names"] = [genre_map[g]["name"]
-                                      for g in after_ids]
-                row.setdefault("repost_channels", []).extend(ok_channels)
+                                      for g in row["genre_ids"]
+                                      if g in genre_map]
+                row["repost_channels"] = list(dict.fromkeys([
+                    *row.get("repost_channels", []), *ok_channels]))
+                row["repost_genre_ids"] = list(dict.fromkeys([
+                    *row.get("repost_genre_ids", []), *ok_genre_ids]))
                 row["reposted_at"] = time.strftime(
                     "%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         if ng_channels:
             failed_records.append({**record, "genre_names": ng_channels})
 
     if not args.dry_run:
-        arxiv_bot.LOG_PATH.write_text(
-            json.dumps(log[-5000:], indent=1, ensure_ascii=False),
-            encoding="utf-8")
+        arxiv_bot.atomic_write_json(
+            arxiv_bot.LOG_PATH, log[-5000:], ensure_ascii=False)
         arxiv_bot.notify_run_report({
             "source": "分類修正の追い投稿",
             "fetched": len(plan),
@@ -139,7 +165,7 @@ def main() -> int:
     print(f"[repost] done: {posted} posts to "
           f"{len(posted_records)} papers' missing channels, "
           f"{len(failed_records)} with problems")
-    return 0
+    return 3 if failed_records else 0
 
 
 if __name__ == "__main__":

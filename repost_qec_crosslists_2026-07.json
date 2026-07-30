@@ -1,0 +1,22 @@
+[
+  {
+    "id": "2607.12242",
+    "channels": ["qec"],
+    "genres_after": ["qec"]
+  },
+  {
+    "id": "2607.14988",
+    "channels": ["qec"],
+    "genres_after": ["qec"]
+  },
+  {
+    "id": "2607.20130",
+    "channels": ["qec"],
+    "genres_after": ["qec"]
+  },
+  {
+    "id": "2607.23510",
+    "channels": ["network", "qit", "qec"],
+    "genres_after": ["network", "qit", "qec"]
+  }
+]

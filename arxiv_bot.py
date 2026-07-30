@@ -8,19 +8,17 @@ arXiv quant-ph -> Discord notifier with translated abstracts.
   an explicit skip decision before they can enter configured genre channels
 - Filters out cross-listed papers whose primary category is irrelevant
   (e.g. cond-mat.*) while keeping quantum-information-adjacent categories
-- Classifies papers into user-defined genres. A TF-IDF pre-screen first
-  routes papers: those touching only core-topic genres go to the primary
-  Gemini model (gemini-2.5-pro), the rest to the secondary model
-  (gemini-2.5-flash) when the pro request budget is tight or pro is
-  rate-limited out. The TF-IDF result itself is only posted as an
-  emergency fallback when Gemini is entirely unavailable.
+- Classifies papers into user-defined genres. A TF-IDF pre-screen routes
+  papers through the configured classifier chain (currently Gemini 2.5 Flash,
+  Gemini 2.5 Flash Lite, then Cerebras gpt-oss-120b). The TF-IDF result itself
+  is only posted as an emergency fallback when every LLM is unavailable.
 - Translates abstracts via the configurable translator chain
   (default: DeepL -> Azure -> Google); each backend stops for the run on quota exhaustion
   (circuit breaker), and any paper left untranslated is deferred, never
   posted in English.
-- Posts one Discord embed per paper via webhook (per-genre webhooks);
-  multi-genre papers are posted to every matching channel and the embed
-  footer lists all assigned genres
+- Persists a durable per-paper/per-channel queue before translation and
+  Discord delivery. Multi-genre papers are retried only for channels that have
+  not acknowledged delivery, and the embed footer lists all assigned genres.
 - Posts a per-run summary report (in Japanese) to the bot-emergency
   channel: which papers went to which channels, deferrals, failures
 
@@ -66,6 +64,36 @@ def http_get(url: str, timeout: int = 30) -> bytes:
         return resp.read()
 
 
+def redact_url(url: str) -> str:
+    """Return a log-safe URL with credentials and query values removed."""
+    try:
+        parsed = urllib.parse.urlsplit(url)
+    except ValueError:
+        return "<redacted-url>"
+    path = parsed.path
+    if "/api/webhooks/" in path:
+        prefix = path.split("/api/webhooks/", 1)[0]
+        path = f"{prefix}/api/webhooks/<redacted>/<redacted>"
+    query = "<redacted>" if parsed.query else ""
+    return urllib.parse.urlunsplit(
+        (parsed.scheme, parsed.netloc, path, query, ""))
+
+
+def redact_request_error(value: Any, url: str) -> str:
+    """Remove the request URL and configured credentials from error text."""
+    text = str(value).replace(url, redact_url(url))
+    for name in (
+        "GEMINI_API_KEY",
+        "GOOGLE_TRANSLATE_API_KEY",
+        "DISCORD_WEBHOOK_GENERAL",
+        "DISCORD_WEBHOOK_BOT_EMERGENCY",
+    ):
+        secret = os.environ.get(name, "")
+        if secret:
+            text = text.replace(secret, "<redacted>")
+    return text
+
+
 def http_post_json(url: str, payload: dict, headers: dict | None = None,
                    timeout: int = 120) -> tuple[int, bytes]:
     data = json.dumps(payload).encode("utf-8")
@@ -79,10 +107,14 @@ def http_post_json(url: str, payload: dict, headers: dict | None = None,
     except urllib.error.HTTPError as e:
         return e.code, e.read()
     except urllib.error.URLError as e:
-        print(f"[warn] Connection error for {url}: {e.reason}", file=sys.stderr)
+        print(f"[warn] Connection error for {redact_url(url)}: "
+              f"{redact_request_error(e.reason, url)}",
+              file=sys.stderr)
         return 0, b""
     except Exception as e:
-        print(f"[warn] Unexpected request error for {url}: {e}", file=sys.stderr)
+        print(f"[warn] Unexpected request error for {redact_url(url)}: "
+              f"{redact_request_error(e, url)}",
+              file=sys.stderr)
         return 0, b""
 
 
@@ -90,6 +122,22 @@ def load_json(path: Path, default):
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
     return default
+
+
+def atomic_write_json(path: Path, data: Any, *,
+                      ensure_ascii: bool = True) -> None:
+    """Atomically replace a JSON file after flushing its new contents."""
+    tmp = path.with_name(f".{path.name}.{os.getpid()}.{time.time_ns()}.tmp")
+    try:
+        with tmp.open("w", encoding="utf-8") as handle:
+            json.dump(data, handle, indent=1, ensure_ascii=ensure_ascii)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, path)
+    finally:
+        if tmp.exists():
+            tmp.unlink()
 
 
 # ---------------------------------------------------------------- arXiv RSS
@@ -284,6 +332,26 @@ def external_paper_is_recent(paper: dict, lookback_days: int,
     return timestamp >= reference - timedelta(days=max(1, lookback_days))
 
 
+def effective_external_lookback_days(
+        rule: dict, last_success: str | None,
+        now: datetime | None = None) -> int:
+    """Expand the API lookback to cover time since the last complete fetch."""
+    base = max(1, int(rule.get("lookback_days", 4)))
+    if not last_success:
+        return base
+    try:
+        cursor = datetime.fromisoformat(
+            str(last_success).replace("Z", "+00:00"))
+    except ValueError:
+        return base
+    if cursor.tzinfo is None:
+        cursor = cursor.replace(tzinfo=timezone.utc)
+    reference = now or datetime.now(timezone.utc)
+    elapsed = max(0.0, (reference - cursor).total_seconds())
+    overlap = max(1, int(rule.get("cursor_overlap_days", 2)))
+    return max(base, math.ceil(elapsed / 86400) + overlap)
+
+
 def select_external_candidates(
         fetched: list[dict], category: str, rule: dict,
         core_ids: set[str], seen: set[str],
@@ -313,6 +381,22 @@ def category_matches(cat: str, patterns: list[str]) -> bool:
         elif cat == p:
             return True
     return False
+
+
+def is_quantph_feed_paper(paper: dict) -> bool:
+    """Whether normal quant-ph classification semantics apply to a paper.
+
+    RSS rows carry ``source_feed=quant-ph``.  SciRate and legacy audit rows may
+    only carry categories (or no source metadata at all), so those are treated
+    as quant-ph context unless they are explicitly marked as external.
+    """
+    if paper.get("announce_type") == "external":
+        return False
+    source = str(paper.get("source_feed", "")).strip()
+    if source:
+        return source == "quant-ph"
+    categories = [str(cat) for cat in paper.get("categories", [])]
+    return not categories or "quant-ph" in categories
 
 
 def should_post(paper: dict, cfg: dict) -> bool:
@@ -523,15 +607,16 @@ def postprocess_genres(paper: dict, selected: list[dict | None],
         return result
 
     primary = paper.get("primary", "")
-    quantph_equivalent = cfg.get(
-        "cross_classify_primary_as_quantph", ["quant-ph", "cs.CR"])
-    if primary and not category_matches(primary, quantph_equivalent):
-        fallback = genre_by_id("other", genres)
-        return [fallback] if fallback else result
+    if not is_quantph_feed_paper(paper):
+        quantph_equivalent = cfg.get(
+            "cross_classify_primary_as_quantph", ["quant-ph", "cs.CR"])
+        if primary and not category_matches(primary, quantph_equivalent):
+            fallback = genre_by_id("other", genres)
+            return [fallback] if fallback else result
 
-    if category_matches(primary, cfg.get("category_other_overrides", [])):
-        fallback = genre_by_id("other", genres)
-        return [fallback] if fallback else result
+        if category_matches(primary, cfg.get("category_other_overrides", [])):
+            fallback = genre_by_id("other", genres)
+            return [fallback] if fallback else result
 
     result = apply_forced_genres(paper, result, genres, cfg)
     if (
@@ -1620,6 +1705,7 @@ def notify_run_report(report: dict, cfg: dict) -> None:
     posted = report.get("posted", [])
     deferred = report.get("deferred", [])
     failed = report.get("failed", [])
+    source_failures = report.get("source_failures", [])
 
     lines = [
         f"📥 フィード取得: {report.get('fetched', 0)}件 / "
@@ -1628,6 +1714,14 @@ def notify_run_report(report: dict, cfg: dict) -> None:
         f" / ⏸ 翻訳持ち越し: {len(deferred)}件"
         f" / ❌ 投稿失敗: {len(failed)}件",
     ]
+    if source_failures:
+        lines.append(
+            "🚨 取得失敗: " + " / ".join(
+                f"{item.get('source', '?')}: "
+                f"{truncate(str(item.get('error', 'unknown error')), 120)}"
+                for item in source_failures
+            )
+        )
     gemini = report.get("gemini")
     classifier_counts = report.get("classifier_counts") or {}
     if classifier_counts:
@@ -1694,7 +1788,7 @@ def notify_run_report(report: dict, cfg: dict) -> None:
     if clipped:
         body_lines.append("…(長いため以降は省略)")
 
-    if failed:
+    if failed or source_failures:
         icon, color = "🚨", 0xE74C3C
     elif deferred:
         icon, color = "🟡", 0xE67E22
@@ -1761,18 +1855,199 @@ def post_to_discord(webhook: str, paper: dict, genre_name: str,
 
 
 def resolve_webhook(genre: dict | None) -> tuple[str, str]:
-    """Return (webhook_url, genre_name); fall back to the general webhook."""
+    """Return (webhook_url, genre_name) without cross-channel fallback."""
     general = os.environ.get("DISCORD_WEBHOOK_GENERAL", "")
     if genre is None:
         return general, "general"
-    url = os.environ.get(genre.get("webhook_env", ""), "") or general
+    url = os.environ.get(genre.get("webhook_env", ""), "")
     return url, genre["name"]
+
+
+def normalize_bot_state(raw: Any) -> dict:
+    """Migrate legacy paper-level state to the durable delivery schema."""
+    state = dict(raw) if isinstance(raw, dict) else {}
+    completed = state.get("completed_ids", state.get("seen", []))
+    if not isinstance(completed, list):
+        completed = []
+    completed_ids = sorted({str(pid) for pid in completed if pid})
+    deliveries = state.get("deliveries", {})
+    if not isinstance(deliveries, dict):
+        deliveries = {}
+    state["schema_version"] = 2
+    state["completed_ids"] = completed_ids
+    # Keep the legacy key while helper scripts transition to completed_ids.
+    state["seen"] = completed_ids
+    state["deliveries"] = {
+        str(pid): row for pid, row in deliveries.items()
+        if isinstance(row, dict) and isinstance(row.get("paper"), dict)
+    }
+    for key in ("external_reviews", "external_pending", "external_cursors"):
+        if not isinstance(state.get(key), dict):
+            state[key] = {}
+    return state
+
+
+def entry_from_delivery(record: dict, genre_map: dict[str, dict]) -> dict:
+    """Restore a normal in-memory entry from a durable delivery record."""
+    return {
+        "paper": record["paper"],
+        "genres": [
+            genre_map[gid] for gid in record.get("genre_ids", [])
+            if gid in genre_map
+        ],
+        "jp": record.get("abstract_translated"),
+        "jp_title": record.get("title_translated"),
+        "need_tr": bool(record.get(
+            "need_translation", record["paper"].get("abstract"))),
+        "allow_untranslated": bool(record.get("allow_untranslated", False)),
+        "llm_done": True,
+        "classifier": record.get("classifier", "persisted-delivery"),
+    }
+
+
+def merge_entry_into_delivery(entry: dict, existing: dict | None = None) -> dict:
+    """Create/update a delivery record while preserving channel receipts."""
+    old = existing if isinstance(existing, dict) else {}
+    genre_ids = [g["id"] for g in entry.get("genres", []) if g]
+    old_channels = old.get("channels", {})
+    if not isinstance(old_channels, dict):
+        old_channels = {}
+    channels = {}
+    for gid in genre_ids:
+        previous = old_channels.get(gid, {})
+        status = (
+            "delivered"
+            if isinstance(previous, dict)
+            and previous.get("status") == "delivered"
+            else "pending"
+        )
+        channels[gid] = {
+            "status": status,
+            **({
+                "delivered_at": previous.get("delivered_at"),
+            } if status == "delivered" and previous.get("delivered_at") else {}),
+        }
+    return {
+        "paper": entry["paper"],
+        "genre_ids": genre_ids,
+        "classifier": entry.get("classifier", "tfidf"),
+        "abstract_translated": entry.get("jp"),
+        "title_translated": entry.get("jp_title"),
+        "need_translation": bool(entry.get("need_tr", False)),
+        "allow_untranslated": bool(entry.get("allow_untranslated", False)),
+        "channels": channels,
+        "queued_at": old.get("queued_at") or time.strftime(
+            "%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    }
+
+
+def persist_bot_state(
+        state: dict, completed: set[str], deliveries: dict[str, dict],
+        external_reviews: dict[str, dict],
+        external_pending: dict[str, dict],
+        external_cursors: dict[str, str]) -> None:
+    """Persist all correctness-critical state without lossy size caps."""
+    completed_ids = sorted(completed)
+    state["schema_version"] = 2
+    state["completed_ids"] = completed_ids
+    state["seen"] = completed_ids
+    state["deliveries"] = deliveries
+    state["external_reviews"] = external_reviews
+    state["external_pending"] = external_pending
+    state["external_cursors"] = external_cursors
+    atomic_write_json(STATE_PATH, state)
+
+
+def strip_completed_external_papers(
+        external_reviews: dict[str, dict], completed: set[str],
+        queued_ids: set[str] | None = None) -> None:
+    """Keep review decisions, but move retry payloads into the delivery queue."""
+    queued = queued_ids or set()
+    for review in external_reviews.values():
+        if not isinstance(review, dict):
+            continue
+        paper = review.get("paper")
+        if (
+            isinstance(paper, dict)
+            and (paper.get("id") in completed or paper.get("id") in queued)
+        ):
+            review.pop("paper", None)
+
+
+def record_delivery_success(
+        log: list[dict], entry: dict, delivered_gid: str,
+        genre_map: dict[str, dict], record: dict, cfg: dict) -> None:
+    """Upsert a log row containing only channels actually delivered."""
+    paper = entry["paper"]
+    delivery_id = f"main:{paper['id']}"
+    row = next((
+        item for item in reversed(log)
+        if item.get("delivery_id") == delivery_id
+    ), None)
+    now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    if row is None:
+        row = {
+            "delivery_id": delivery_id,
+            "id": paper["id"],
+            "posted_at": now,
+            "title": paper["title"],
+            "title_ja": entry.get("jp_title"),
+            "title_translated": entry.get("jp_title"),
+            "translation_language": target_language(cfg),
+            "authors": paper["authors"],
+            "link": paper["link"],
+            "primary": paper["primary"],
+            "categories": paper.get("categories", []),
+            "source_feed": paper.get("source_feed", paper["primary"]),
+            "classification_context": (
+                "quant-ph" if is_quantph_feed_paper(paper) else "external"),
+            "announce_type": paper["announce_type"],
+            "genre_ids": [],
+            "genre_names": [],
+            "target_genre_ids": list(record.get("genre_ids", [])),
+            "target_genre_names": [
+                genre_map[gid]["name"]
+                for gid in record.get("genre_ids", [])
+                if gid in genre_map
+            ],
+            "classifier": entry.get("classifier", "tfidf"),
+            "abstract_en": paper["abstract"],
+            "abstract_ja": entry.get("jp"),
+            "abstract_translated": entry.get("jp"),
+        }
+        log.append(row)
+    delivered = list(row.get("genre_ids", []))
+    delivered_now = [
+        gid for gid in record.get("genre_ids", [])
+        if isinstance(record.get("channels", {}).get(gid), dict)
+        and record["channels"][gid].get("status") == "delivered"
+    ]
+    if delivered_gid not in delivered_now:
+        delivered_now.append(delivered_gid)
+    for gid in delivered_now:
+        if gid not in delivered:
+            delivered.append(gid)
+    row["genre_ids"] = delivered
+    row["genre_names"] = [
+        genre_map[gid]["name"] for gid in delivered if gid in genre_map
+    ]
+    row["last_delivered_at"] = now
 
 
 # -------------------------------------------------------------------- main
 
 def main() -> None:
     dry_run = "--dry-run" in sys.argv
+    discover_only = "--discover-only" in sys.argv
+    translate_only = "--translate-only" in sys.argv
+    prepare_only = "--prepare-only" in sys.argv
+    deliver_only = "--deliver-only" in sys.argv
+    phase_flags = [discover_only, translate_only, prepare_only, deliver_only]
+    if sum(phase_flags) > 1:
+        raise SystemExit("delivery phase flags are mutually exclusive")
+    if dry_run and any(phase_flags):
+        raise SystemExit("--dry-run cannot be combined with delivery phase flags")
+    resume_only = translate_only or deliver_only
 
     cfg = load_json(CONFIG_PATH, {})
     backfill_raw = os.environ.get("EXTERNAL_ARXIV_LOOKBACK_DAYS", "").strip()
@@ -1795,8 +2070,11 @@ def main() -> None:
                 }
                 print("[info] one-time external arXiv backfill window: "
                       f"{backfill_days} days")
-    state = load_json(STATE_PATH, {"seen": []})
-    seen = set() if dry_run else set(state["seen"])
+    state = normalize_bot_state(load_json(STATE_PATH, {"seen": []}))
+    completed = (
+        set() if dry_run else set(state.get("completed_ids", [])))
+    deliveries: dict[str, dict] = (
+        {} if dry_run else dict(state.get("deliveries", {})))
     log: list[dict] = load_json(LOG_PATH, [])
     genres = cfg.get("genres", [])
     cached_external_reviews = (
@@ -1807,17 +2085,30 @@ def main() -> None:
         {} if dry_run else state.get("external_pending", {}))
     if not isinstance(cached_external_pending, dict):
         cached_external_pending = {}
+    external_cursors = (
+        {} if dry_run else state.get("external_cursors", {}))
+    if not isinstance(external_cursors, dict):
+        external_cursors = {}
+    strip_completed_external_papers(
+        cached_external_reviews, completed, set(deliveries))
+    excluded_ids = completed | set(deliveries)
+    source_failures: list[dict[str, str]] = []
 
     papers: dict[str, dict] = {}
-    for cat in cfg.get("feeds", ["quant-ph"]):
-        try:
-            for p in fetch_feed(cat):
-                p["source_feed"] = cat
-                papers.setdefault(p["id"], p)
-        except Exception as err:  # noqa: BLE001
-            print(f"[warn] feed {cat} failed: {err}", file=sys.stderr)
-        if not dry_run:
-            time.sleep(3)  # be polite to arXiv
+    if not resume_only:
+        for cat in cfg.get("feeds", ["quant-ph"]):
+            try:
+                for p in fetch_feed(cat):
+                    p["source_feed"] = cat
+                    papers.setdefault(p["id"], p)
+            except Exception as err:  # noqa: BLE001
+                message = str(err)
+                source_failures.append({
+                    "source": f"RSS:{cat}", "error": message})
+                print(f"[error] feed {cat} failed: {message}",
+                      file=sys.stderr)
+            if not dry_run:
+                time.sleep(3)  # be polite to arXiv
 
     # Adjacent arXiv categories use custom API queries as a high-recall,
     # mechanical first stage. Their results are never sent through the normal
@@ -1826,30 +2117,44 @@ def main() -> None:
     external_candidates: dict[str, list[dict]] = {}
     external_rules = cfg.get("external_arxiv_queries", {})
     using_test_feed = bool(os.environ.get("ARXIV_TEST_FEED", ""))
-    if isinstance(external_rules, dict) and not using_test_feed:
+    if (
+        not resume_only
+        and isinstance(external_rules, dict)
+        and not using_test_feed
+    ):
         for cat, rule in external_rules.items():
             if not isinstance(rule, dict) or not rule.get("enabled", True):
                 continue
             try:
-                fetched = fetch_external_arxiv(cat, rule)
+                effective_rule = dict(rule)
+                effective_rule["lookback_days"] = (
+                    effective_external_lookback_days(
+                        rule, external_cursors.get(cat)))
+                fetched = fetch_external_arxiv(cat, effective_rule)
                 rows = select_external_candidates(
-                    fetched, cat, rule, set(papers), seen)
+                    fetched, cat, effective_rule, set(papers), excluded_ids)
                 external_candidates[cat] = rows
+                external_cursors[cat] = time.strftime(
+                    "%Y-%m-%dT%H:%M:%SZ", time.gmtime())
                 print(f"[info] external query {cat}: fetched={len(fetched)}, "
-                      f"mechanical_candidates={len(rows)}")
+                      f"mechanical_candidates={len(rows)}, "
+                      f"lookback_days={effective_rule['lookback_days']}")
             except Exception as err:  # noqa: BLE001
-                print(f"[warn] external query {cat} failed: {err}",
+                message = str(err)
+                source_failures.append({
+                    "source": f"arXiv API:{cat}", "error": message})
+                print(f"[error] external query {cat} failed: {message}",
                       file=sys.stderr)
             if not dry_run:
                 time.sleep(3)  # arXiv API asks clients to avoid rapid calls
-    elif using_test_feed and external_rules:
+    elif not resume_only and using_test_feed and external_rules:
         print("[info] external queries skipped while ARXIV_TEST_FEED is set")
 
     # A candidate without a completed review must not disappear merely because
     # it ages out of lookback_days. Accepted-but-not-yet-posted papers are also
     # restored from the review cache, so translation or Discord failures remain
     # retryable. Fresh API rows win when both copies are present.
-    if not dry_run and isinstance(external_rules, dict):
+    if not dry_run and not resume_only and isinstance(external_rules, dict):
         durable_candidates: list[tuple[str, dict]] = []
         for key, paper in cached_external_pending.items():
             if isinstance(paper, dict):
@@ -1868,7 +2173,8 @@ def main() -> None:
             if (
                 not isinstance(rule, dict)
                 or not rule.get("enabled", True)
-                or paper.get("id") in seen
+                or paper.get("id") in completed
+                or paper.get("id") in deliveries
                 or paper.get("id") in papers
             ):
                 continue
@@ -1879,7 +2185,7 @@ def main() -> None:
     # ---- determine which papers to post (filtering only) ------------------
     pending = []  # papers passing should_post, not yet seen
     for pid, paper in papers.items():
-        if pid in seen or not should_post(paper, cfg):
+        if pid in excluded_ids or not should_post(paper, cfg):
             continue
         pending.append(paper)
 
@@ -1887,6 +2193,10 @@ def main() -> None:
     # genres is always a non-empty list; fallback genre is "other".
     genre_map = {g["id"]: g for g in genres}
     entries: list[dict[str, Any]] = [
+        entry_from_delivery(record, genre_map)
+        for record in deliveries.values()
+    ]
+    entries.extend([
         {
             "paper": p,
             "genres": [
@@ -1902,12 +2212,21 @@ def main() -> None:
             "classifier": None,
         }
         for p in pending
-    ]
+    ])
 
     batch_size = max(1, cfg.get("translate_batch_size", 5))
     use_llm_cls = cfg.get("classify_with_llm", True)
     chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
-    llm_first = use_llm_cls and chain and chain[0] == "gemini"
+    # Discovery must never combine classification with translation: its queue
+    # is committed before a separate translation process starts. This remains
+    # true even for the legacy configuration that puts Gemini first in the
+    # translator chain.
+    llm_first = (
+        use_llm_cls
+        and chain
+        and chain[0] == "gemini"
+        and not (discover_only or prepare_only)
+    )
     llm_classify_only = use_llm_cls and not llm_first
     classifier_specs = classifier_model_specs(cfg)
     model_primary = cfg.get("gemini_model_primary") or cfg.get(
@@ -1968,10 +2287,10 @@ def main() -> None:
     # A TF-IDF pre-screen routes the papers first (routing only; its labels
     # are never posted unless Gemini is entirely unavailable):
     #   - papers touching none of prescreen_defer_genres -> "priority" group,
-    #     always classified by the primary model (gemini-2.5-pro)
+    #     always classified by the configured primary model
     #   - the rest -> "deferred" group: also the primary model while the
     #     estimated request count fits gemini_primary_run_budget, otherwise
-    #     the secondary model (gemini-2.5-flash)
+    #     the configured secondary model
     # Either group falls through to the other model when one is rate-limited
     # out mid-run (per-model circuit breaker).
     elif (llm_classify_only and not dry_run
@@ -2060,8 +2379,10 @@ def main() -> None:
     # Reuses the pre-screen result when available (emergency fallback only).
     leftover = [e for e in entries if not e.get("llm_done")]
     for e in leftover:
-        e["genres"] = e.get("prescreen") or classify_multi(
+        fallback_genres = e.get("prescreen") or classify_multi(
             e["paper"], genres, cfg)
+        e["genres"] = postprocess_genres(
+            e["paper"], fallback_genres, genres, cfg)
         e["classifier"] = "tfidf"
     gemini_fallback = len(leftover)
 
@@ -2093,11 +2414,39 @@ def main() -> None:
     # This ordering is intentional: adjacent-category candidates may use only
     # classifier capacity left after every normal quant-ph paper has received
     # its classification attempt.
-    accepted_external, new_external_reviews, external_stats = (
-        review_external_candidates(
-            external_candidates, cfg, genres, cached_external_reviews,
-            dry_run=dry_run))
-    pending_external_reviews = external_stats.pop("_pending_papers", {})
+    if resume_only:
+        accepted_external: list[dict] = []
+        new_external_reviews: dict[str, dict] = {}
+        pending_external_reviews = cached_external_pending
+        external_stats = {
+            "mechanical_candidates": 0,
+            "cached": 0,
+            "reviewed": 0,
+            "accepted": 0,
+            "skipped": 0,
+            "unreviewed": len(cached_external_pending),
+            "skip_disagreements": 0,
+            "single_skip_pending": 0,
+            "requests": 0,
+            "classifier_counts": {},
+        }
+    else:
+        accepted_external, new_external_reviews, external_stats = (
+            review_external_candidates(
+                external_candidates, cfg, genres, cached_external_reviews,
+                dry_run=dry_run))
+        pending_external_reviews = dict(cached_external_pending)
+        pending_external_reviews.update(
+            external_stats.pop("_pending_papers", {}))
+        completed_review_keys = set(new_external_reviews)
+        for category, rows in external_candidates.items():
+            for paper in rows:
+                key = f"{category}:{paper['id']}"
+                cached = cached_external_reviews.get(key)
+                if isinstance(cached, dict) and "genre_ids" in cached:
+                    completed_review_keys.add(key)
+        for key in completed_review_keys:
+            pending_external_reviews.pop(key, None)
     if external_stats["mechanical_candidates"]:
         print(
             "[info] external review (after quant-ph): "
@@ -2128,13 +2477,55 @@ def main() -> None:
             "external_classifier", "cached-external-review"),
     } for paper in accepted_external)
 
+    def finish_queue_phase(label: str) -> None:
+        if source_failures:
+            notify_run_report({
+                "source": "arXiv取得・配信準備",
+                "fetched": len(papers),
+                "candidates": len(pending) + len(accepted_external),
+                "messages": 0,
+                "posted": [],
+                "deferred": [],
+                "failed": [],
+                "source_failures": source_failures,
+                "gemini": gemini_stats,
+                "classifier_counts": dict(Counter(
+                    e.get("classifier", "tfidf") for e in entries)),
+                "tfidf_fallback": gemini_fallback,
+                "translated": dict(_translation_success),
+                "dead_translators": dead_translators(cfg),
+                "external_review": external_stats,
+            }, cfg)
+        print(f"{label} {len(entries)} queued paper(s); "
+              f"source_failures={len(source_failures)}")
+        if source_failures:
+            raise SystemExit(2)
+
+    # Save newly discovered/classified papers before translation starts.  A
+    # translator outage therefore cannot make a normal quant-ph paper depend
+    # on remaining present in the next RSS snapshot.
+    if not dry_run and not resume_only:
+        for entry in entries:
+            pid = entry["paper"]["id"]
+            if pid not in completed:
+                deliveries[pid] = merge_entry_into_delivery(
+                    entry, deliveries.get(pid))
+        strip_completed_external_papers(
+            cached_external_reviews, completed, set(deliveries))
+        persist_bot_state(
+            state, completed, deliveries, cached_external_reviews,
+            pending_external_reviews, external_cursors)
+    if discover_only:
+        finish_queue_phase("discovered")
+        return
+
     # ---- translation via chain (all papers without jp) --------------------
     # Covers path B (Gemini classify-only) and TF-IDF fallback papers.
     # Also covers path A papers where Gemini failed to return a translation.
     # Every quant-ph paper sorts before every external paper, irrespective of
     # genre, so external sources cannot consume translation quota first.
     entries.sort(key=lambda e: translation_priority(e, cfg))
-    if not dry_run:
+    if not dry_run and not deliver_only and not discover_only:
         to_tr = [e for e in entries if e["need_tr"] and e["jp"] is None and (
             e["genres"] or not cfg.get("translate_only_matched", False))]
         for i in range(0, len(to_tr), batch_size):
@@ -2183,6 +2574,25 @@ def main() -> None:
             print(f"  {'':>{label_width+2}}  cats={cats}  id={e['paper']['id']}")
         return
 
+    # Persist a complete retry payload before any Discord side effect.  The
+    # workflow commits this queue in a separate prepare phase before delivery.
+    for entry in entries:
+        pid = entry["paper"]["id"]
+        if pid in completed:
+            continue
+        deliveries[pid] = merge_entry_into_delivery(
+            entry, deliveries.get(pid))
+    strip_completed_external_papers(
+        cached_external_reviews, completed, set(deliveries))
+    persist_bot_state(
+        state, completed, deliveries, cached_external_reviews,
+        pending_external_reviews, external_cursors)
+
+    if prepare_only or translate_only:
+        finish_queue_phase(
+            "translated" if translate_only else "prepared")
+        return
+
     # ---- post ---------------------------------------------------------------
     require_tr = cfg.get("require_translation", True)
     posted = deferred = 0
@@ -2190,6 +2600,10 @@ def main() -> None:
     deferred_records: list[dict] = []
     failed_records: list[dict] = []
     for e in entries:
+        pid = e["paper"]["id"]
+        delivery = deliveries.get(pid)
+        if not isinstance(delivery, dict):
+            continue
         if (e["need_tr"] and e["jp"] is None and require_tr
                 and not e.get("allow_untranslated", False)):
             deferred += 1
@@ -2200,45 +2614,43 @@ def main() -> None:
                 "genre_names": [g["name"] for g in e["genres"] if g],
             })
             continue
-        posted_webhooks: set[str] = set()
         posted_channels: list[str] = []
         failed_channels: list[str] = []
-        paper_logged = False
         # Footer shows every assigned genre, not just the channel posted to.
         genre_label = ", ".join(g["name"] for g in e["genres"] if g)
+        webhook_counts = Counter(
+            webhook
+            for genre in e["genres"]
+            for webhook, _ in [resolve_webhook(genre)]
+            if webhook
+        )
         for genre in e["genres"]:
+            gid = genre["id"]
+            channel_state = delivery.setdefault("channels", {}).setdefault(
+                gid, {"status": "pending"})
+            if channel_state.get("status") == "delivered":
+                continue
             webhook, genre_name = resolve_webhook(genre)
-            if not webhook or webhook in posted_webhooks:
+            if not webhook:
+                failed_channels.append(f"{genre_name}(webhook未設定)")
+                continue
+            if webhook_counts[webhook] > 1:
+                failed_channels.append(f"{genre_name}(webhook重複)")
                 continue
             if post_to_discord(
                     webhook, e["paper"], genre_label or genre_name, e["jp"],
                     e.get("jp_title"), cfg):
-                posted_webhooks.add(webhook)
                 posted_channels.append(genre_name)
-                if not paper_logged:
-                    seen.add(e["paper"]["id"])
-                    log.append({
-                        "id": e["paper"]["id"],
-                        "posted_at": time.strftime("%Y-%m-%dT%H:%M:%SZ",
-                                                   time.gmtime()),
-                        "title": e["paper"]["title"],
-                        "title_ja": e.get("jp_title"),
-                        "title_translated": e.get("jp_title"),
-                        "translation_language": target_language(cfg),
-                        "authors": e["paper"]["authors"],
-                        "link": e["paper"]["link"],
-                        "primary": e["paper"]["primary"],
-                        "source_feed": e["paper"].get(
-                            "source_feed", e["paper"]["primary"]),
-                        "announce_type": e["paper"]["announce_type"],
-                        "genre_ids": [g["id"] for g in e["genres"] if g],
-                        "genre_names": [g["name"] for g in e["genres"] if g],
-                        "classifier": e.get("classifier", "tfidf"),
-                        "abstract_en": e["paper"]["abstract"],
-                        "abstract_ja": e["jp"],
-                        "abstract_translated": e["jp"],
-                    })
-                    paper_logged = True
+                channel_state["status"] = "delivered"
+                channel_state["delivered_at"] = time.strftime(
+                    "%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+                record_delivery_success(
+                    log, e, gid, genre_map, delivery, cfg)
+                persist_bot_state(
+                    state, completed, deliveries, cached_external_reviews,
+                    pending_external_reviews, external_cursors)
+                atomic_write_json(
+                    LOG_PATH, log[-5000:], ensure_ascii=False)
                 posted += 1
             else:
                 failed_channels.append(genre_name)
@@ -2252,6 +2664,20 @@ def main() -> None:
             posted_records.append({**record, "genre_names": posted_channels})
         if failed_channels:
             failed_records.append({**record, "genre_names": failed_channels})
+        target_ids = list(delivery.get("genre_ids", []))
+        channels = delivery.get("channels", {})
+        if target_ids and all(
+            isinstance(channels.get(gid), dict)
+            and channels[gid].get("status") == "delivered"
+            for gid in target_ids
+        ):
+            completed.add(pid)
+            deliveries.pop(pid, None)
+            strip_completed_external_papers(
+                cached_external_reviews, completed, set(deliveries))
+            persist_bot_state(
+                state, completed, deliveries, cached_external_reviews,
+                pending_external_reviews, external_cursors)
 
     if deferred > 0:
         dead = dead_translators(cfg)
@@ -2267,6 +2693,7 @@ def main() -> None:
         "posted": posted_records,
         "deferred": deferred_records,
         "failed": failed_records,
+        "source_failures": source_failures,
         "gemini": gemini_stats,
         "classifier_counts": dict(Counter(
             e.get("classifier", "tfidf") for e in entries)),
@@ -2276,18 +2703,16 @@ def main() -> None:
         "external_review": external_stats,
     }, cfg)
 
-    # Keep the state file bounded.
-    state["seen"] = sorted(seen)[-3000:]
-    state["external_reviews"] = dict(
-        list(cached_external_reviews.items())[-3000:])
-    state["external_pending"] = dict(
-        list(pending_external_reviews.items())[-1000:])
-    STATE_PATH.write_text(json.dumps(state, indent=1), encoding="utf-8")
-    LOG_PATH.write_text(
-        json.dumps(log[-5000:], indent=1, ensure_ascii=False), encoding="utf-8"
-    )
+    persist_bot_state(
+        state, completed, deliveries, cached_external_reviews,
+        pending_external_reviews, external_cursors)
+    atomic_write_json(LOG_PATH, log[-5000:], ensure_ascii=False)
     print(f"posted {posted} papers ({len(papers)} fetched, "
           f"{deferred} deferred for retry)")
+    if source_failures:
+        raise SystemExit(2)
+    if failed_records:
+        raise SystemExit(3)
 
 
 if __name__ == "__main__":

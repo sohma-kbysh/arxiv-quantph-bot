@@ -140,7 +140,14 @@
     "self-orthogonal code", "self-orthogonal codes",
     "syndrome decoding", "code equivalence",
     "code-based cryptography", "code based cryptography",
-    "decoding algorithm", "decoding algorithms"
+    "decoding algorithm", "decoding algorithms",
+    "source coding", "channel coding", "network coding",
+    "lossless coding", "lossy coding", "entropy coding",
+    "prefix code", "prefix codes", "prefix-free code", "prefix-free codes",
+    "erasure code", "erasure codes",
+    "convolutional code", "convolutional codes",
+    "polar code", "polar codes", "turbo code", "turbo codes",
+    "coding scheme", "coding schemes"
   ],
   "classify_secondary_ratio": 0.82,
   "fallback_title_phrase_bonus": 0.35,

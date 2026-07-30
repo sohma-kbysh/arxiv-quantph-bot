@@ -17,7 +17,7 @@ The checked-in `config.json` remains configured for the original Japanese Discor
 | --- | --- |
 | `arxiv_bot.py` | Main bot. Uses only the Python standard library |
 | `config.json` | All configuration: feeds, genre definitions, API behavior, classification parameters |
-| `seen_ids.json` | Posted arXiv ID state. Automatically committed by Actions, capped at 3000 IDs |
+| `seen_ids.json` | Durable completed-ID, per-channel delivery queue, external-review, and source-cursor state. Automatically committed by Actions |
 | `posted_log.json` | Metadata log for posted papers. JSON array, capped at 5000 entries |
 | `scirate_weekly.py` | Weekend bot that reposts popular weekly quant-ph papers from SciRate into the normal genre channels |
 | `scirate_weekly_state.json` | Posted arXiv ID state for the SciRate weekend bot |
@@ -47,7 +47,11 @@ GitHub Actions runs the main notifier **three times a day, Monday through Saturd
 
 The workflow can also be run manually (`workflow_dispatch`) with two options: `use_test_feed` reads `test_feed.xml` instead of the live RSS feed, and `test_emergency_alert` sends only a test message to the bot-emergency channel without running the notifier.
 
-`seen_ids.json` prevents duplicate posting, so the same paper is not posted multiple times across runs.
+`seen_ids.json` stores completed IDs and per-channel receipts, so retries normally
+skip channels already confirmed as delivered. Delivery is intentionally
+**at-least-once**: an unusual runner failure after Discord accepts a webhook but
+before its receipt is committed can produce a duplicate, because Discord
+webhooks do not provide an idempotency key.
 
 On weekends, a separate workflow posts a SciRate weekly popular-paper digest.
 
@@ -60,7 +64,7 @@ On weekends, a separate workflow posts a SciRate weekly popular-paper digest.
 ## Processing flow
 
 ```text
-Fetch RSS -> filter -> genre classification + translation -> Discord post -> save state -> run report to bot-emergency
+Fetch sources -> classify -> persist/commit delivery queue -> translate -> persist/commit queue -> Discord delivery -> persist/commit per-channel receipts
 ```
 
 ### 1. Fetch RSS
@@ -136,11 +140,14 @@ A cross-listed paper is excluded only when its primary category matches `cross_d
 
 **Cross-list classification policy**
 
-Even for cross-listed papers that remain eligible for posting, normal genre classification is limited by `cross_classify_primary_as_quantph`. Currently, only `quant-ph` and `cs.CR` are treated as quant-ph-equivalent.
-
-- primary is `quant-ph`: normal classification
-- primary is `cs.CR`: normal classification, to catch blind/verifiable/secure/delegation topics and PQC
-- primary is anything else: forced to `other`, regardless of Gemini or TF-IDF output
+Every paper obtained from the quant-ph RSS feed uses the normal AI
+classification and deterministic QEC/keyword policies, regardless of its
+primary category. Thus a `cs.IT`-primary paper cross-listed to quant-ph can
+reach QEC, QIT, or network instead of being overwritten to `other`.
+`cross_classify_primary_as_quantph` remains only as a compatibility safeguard
+for callers that explicitly classify a non-quant-ph source through the normal
+post-processing function; the adjacent-category API path uses its own strict
+review.
 
 ### 3. Genre classification + translation (two paths)
 
@@ -157,7 +164,7 @@ Before any Gemini call, every pending paper is first run through the same TF-IDF
 - The prompt includes the full natural-language `description` for every genre, so papers can be classified by meaning even when they do not contain fixed keywords
 - Output format: `<<<k|genre_id>>>` or `<<<k|id1,id2>>>` for multi-label classification
 - One paper can be assigned to multiple genres, including genres beyond its primary contribution whenever the paper has genuine value for that genre's readers too; see "Multi-label classification" below
-- Cross-listed papers whose primary category is not `quant-ph` or `cs.CR` are overwritten to `other` after Gemini classification
+- Quant-ph RSS cross-lists retain the LLM result and then receive the same deterministic QEC/keyword post-processing as primary quant-ph papers
 
 **Fallback path: TF-IDF cosine similarity + keyword evidence scores**
 
@@ -548,7 +555,7 @@ The run log prints Gemini usage. Example:
 
 Settings that help classify cross-listed papers from their primary category:
 
-- `cross_classify_primary_as_quantph`: only papers whose primary category is in this list are normally classified. In the default setup, only `quant-ph` and `cs.CR` are included. Papers cross-listed into quant-ph from other primary categories are classified as `other`
+- `cross_classify_primary_as_quantph`: compatibility restriction for explicitly non-quant-ph callers of normal post-processing. Papers actually obtained from the quant-ph RSS are normally classified regardless of primary category
 - `category_genre_hints`: category -> genre ID mapping. Matching papers receive +0.15 to the target genre score
 - `category_other_overrides`: additional primary categories to explicitly treat as `other`
 
@@ -611,7 +618,7 @@ untrusted server, malicious server, client-server
 - Azure Translator's F0 tier includes 2M free characters/month, which makes it a useful middle fallback before Google. For an Azure-only setup, use `translators: ["azure"]` and set `target_language` to an Azure-supported language code such as `fr`, `de`, `ko`, or `zh-Hans`.
 - Google Cloud Translation supports many target languages and remains the final fallback in the default chain. To reduce Google usage, papers posted only to `other`, `foundations`, `sensing`, and `nisq` are posted in English when DeepL/Azure cannot translate them first.
 - `gemini-2.5-pro` was removed from the Gemini API free tier (it now returns 429 with zero quota unless billing is enabled), which is why the default Gemini classification chain is `gemini-2.5-flash` -> `gemini-2.5-flash-lite`. Free-tier RPD (requests per day) quotas for the remaining models have also been repeatedly reduced -- some accounts report `gemini-2.5-flash` limited to as few as ~20 requests/day -- so check the current values for your account in [Google AI Studio](https://aistudio.google.com/) when setting it up. The per-model circuit breaker plus the `gemini-2.5-flash-lite` and `gpt-oss-120b` fallbacks keep classification working when the primary model's quota runs out mid-run.
-- `seen_ids.json` keeps the latest 3000 IDs and `posted_log.json` keeps the latest 5000 entries. Older entries are truncated automatically.
+- Completed IDs and unfinished per-channel deliveries in `seen_ids.json` are not truncated, because truncating them can cause missed retries or duplicate reposts. `posted_log.json` remains a bounded 5000-entry presentation/audit log.
 
 ---
 
@@ -754,7 +761,7 @@ arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1
 | --- | --- |
 | `arxiv_bot.py` | 本体。標準ライブラリのみ使用 |
 | `config.json` | 全設定(フィード、ジャンル定義、API挙動、分類パラメータ) |
-| `seen_ids.json` | 投稿済み arXiv ID の記録(Actions が自動 commit、最大3000件) |
+| `seen_ids.json` | 完了ID、チャンネル別の永続配信queue、外部審査、取得cursorの状態(Actions が自動commit) |
 | `posted_log.json` | 投稿済み論文のメタデータログ(最大5000件、JSON 配列) |
 | `scirate_weekly.py` | SciRate の週間人気 quant-ph 論文を通常ジャンルへ再投稿する週末用 bot |
 | `scirate_weekly_state.json` | SciRate 週末投稿済み arXiv ID の記録 |
@@ -784,7 +791,7 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 
 `workflow_dispatch` による手動実行では2つのオプションが使える。`use_test_feed` は本番 RSS の代わりに `test_feed.xml` を読み込み、`test_emergency_alert` は通知本体を動かさずに bot-emergency チャンネルへテスト送信だけを行う。
 
-`seen_ids.json` による重複排除があるため、同一論文が複数回実行で投稿されることはない。
+`seen_ids.json`に完了IDとチャンネル別receiptを保存するため、通常の再実行では配信済みチャンネルを飛ばして未完了だけを再試行する。ただし配信保証は意図的に**at-least-once**である。Discordがwebhookを受理した直後、receiptをGitへcommitする前にrunnerが異常終了した場合だけは、Discord webhookにidempotency keyがないため重複し得る。
 
 週末には SciRate の週間人気論文も別 workflow で投稿する。
 
@@ -857,11 +864,10 @@ primary カテゴリが `cross_deny_primary` リストに一致する場合の�
 
 **cross-list 分類ポリシー**
 
-投稿対象に残った cross-list 論文でも、通常のジャンル分類を行う primary は `cross_classify_primary_as_quantph` で制限する。現在は `quant-ph` と `cs.CR` のみを quant-ph と同列に扱う。
+quant-ph RSSから取得したcross-list論文は、primary categoryに関係なく通常のAI分類とQEC/keyword後処理を行う。したがって、primaryが`cs.IT`でもQEC・QIT・networkなどへ分類でき、`other`には上書きしない。`cross_classify_primary_as_quantph`は、quant-ph以外のsourceを通常後処理へ明示的に渡す互換経路だけの制限として残る。
 
-- primary が `quant-ph`: 通常分類
-- primary が `cs.CR`: 通常分類。blind/verifiable/secure/delegation 系や PQC を拾うため、quant-ph と同列に扱う
-- primary がそれ以外: Gemini/TF-IDF の結果に関係なく `other` に分類
+- quant-ph RSS由来: primaryに関係なく通常分類
+- 明示的な外部source: 専用の高recall検索と厳密LLM審査を通す
 
 ### 3. ジャンル分類 + 翻訳(2段構え)
 
@@ -878,7 +884,7 @@ Gemini を呼ぶ前に、後述の TF-IDF 分類器で全論文を一度事前�
 - プロンプトには各ジャンルの `description`(自然言語の定義文)を全文渡すため、定型キーワードを含まない論文も内容で分類される
 - 出力形式: `<<<k|genre_id>>>` または `<<<k|id1,id2>>>` (マルチラベルの場合)
 - 1論文に複数ジャンルを割り当てられる。主要な貢献ジャンルだけでなく、そのジャンルの読者にとっても論文が本当に価値を持つ場合は追加のジャンルも割り当てられる(詳細は後述の「マルチラベル分類」を参照)
-- primary が `quant-ph` / `cs.CR` 以外の cross-list 論文は、Gemini の分類後に `other` へ上書きされる
+- quant-ph RSS由来のcross-list論文はLLM結果を保持し、primary quant-ph論文と同じQEC/keyword後処理を受ける
 
 **フォールバック経路: TF-IDF コサイン類似度 + キーワード加点**
 
@@ -1269,7 +1275,7 @@ python3 arxiv_bot.py
 
 cross-list 論文の primary カテゴリから分類を補助する設定。
 
-- `cross_classify_primary_as_quantph`: primary がこのリストにある論文だけ通常分類する。デフォルト運用では `quant-ph` と `cs.CR` のみ。その他の primary から quant-ph へ cross-list された論文は `other` に分類される
+- `cross_classify_primary_as_quantph`: quant-ph以外のsourceを通常後処理へ明示的に渡す場合の互換制限。quant-ph RSSから実際に取得した論文はprimaryに関係なく通常分類する
 - `category_genre_hints`: カテゴリ → ジャンル ID のマッピング。該当カテゴリの論文は指定ジャンルのスコアが +0.15 される
 - `category_other_overrides`: 追加で明示的に `other` 扱いしたい primary カテゴリ
 
@@ -1332,7 +1338,7 @@ untrusted server, malicious server, client-server
 - Azure Translator の F0 は月200万文字まで無料なので、Google の前に挟む中間フォールバックとして有用。Azure のみで使う場合は `translators: ["azure"]` とし、`target_language` に `fr`, `de`, `ko`, `zh-Hans` などの Azure 対応言語コードを設定する。
 - Google Cloud Translation は多くの言語に対応しており、標準チェーンでは最後のフォールバックとして使う。Google 使用量を抑えるため、DeepL/Azure で翻訳できなかった `other`, `foundations`, `sensing`, `nisq` のみに投稿される論文は英語原文で投稿する。
 - `gemini-2.5-pro` は Gemini API の無料枠から外れ(課金を有効にしない限り 429・クォータ0を返すようになった)、そのためデフォルトの Gemini 分類チェーンは `gemini-2.5-flash` → `gemini-2.5-flash-lite` になっている。残ったモデルの無料枠 RPD(1日あたりリクエスト数)クォータもたびたび引き下げられており、`gemini-2.5-flash` が1日あたり約20リクエストしか使えないと報告するアカウントもあるため、導入時は [Google AI Studio](https://aistudio.google.com/) でそのアカウントの現行値を確認すること。モデルごとの circuit breaker と `gemini-2.5-flash-lite` / `gpt-oss-120b` フォールバックにより、実行途中でプライマリモデルのクォータが尽きても分類は継続する。
-- `seen_ids.json` は最新3000件、`posted_log.json` は最新5000件を保持し、それ以前のエントリは自動的に切り捨てられる。
+- `seen_ids.json`の完了IDと未完了のチャンネル別配信状態は、再送漏れ・古い論文の再投稿を防ぐため切り捨てない。表示・監査用の`posted_log.json`だけは最新5000件に制限する。
 
 ---
 

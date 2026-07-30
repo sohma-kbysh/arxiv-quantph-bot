@@ -4,7 +4,7 @@ on:
   schedule:
     # arXivの新着アナウンスは平日 00:00 UTC 頃(米東部20:00, JST 09:00頃)。
     # アナウンス直後と日中に複数回実行し、取りこぼしと遅延を緩和する。
-    # seen_ids.json により新着のみ投稿されるため、重複は発生しない。
+    # 永続queueとチャンネル別receiptにより未完了分だけを再試行する。
     - cron: "5 1 * * 1-6"    # UTC 01:05 = JST 10:05 (アナウンス直後)
     - cron: "0 4 * * 1-6"    # UTC 04:00 = JST 13:00
     - cron: "0 7 * * 1-6"    # UTC 07:00 = JST 16:00
@@ -51,8 +51,10 @@ jobs:
         run: |
           python3 -c "import arxiv_bot as ab; ab.notify_translation_outage(3, ['deepl','azure','google'])"
 
-      - name: Run notifier
+      - name: Discover and classify into durable queue
+        id: discover
         if: ${{ inputs.test_emergency_alert != true }}
+        continue-on-error: true
         env:
           DISCORD_WEBHOOK_GENERAL: ${{ secrets.DISCORD_WEBHOOK_GENERAL }}
           DISCORD_WEBHOOK_BOT_EMERGENCY: ${{ secrets.DISCORD_WEBHOOK_BOT_EMERGENCY }}
@@ -79,12 +81,76 @@ jobs:
           GOOGLE_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
           ARXIV_TEST_FEED: ${{ inputs.use_test_feed == true && 'test_feed.xml' || '' }}
           EXTERNAL_ARXIV_LOOKBACK_DAYS: ${{ inputs.external_backfill_days || '0' }}
-        run: python arxiv_bot.py
+        run: python arxiv_bot.py --discover-only
 
-      - name: Commit state
+      - name: Commit discovered delivery queue
+        if: ${{ inputs.test_emergency_alert != true }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add seen_ids.json
+          git diff --cached --quiet || git commit -m "checkpoint delivery queue [skip ci]"
+          git pull --rebase origin main
+          git push
+
+      - name: Translate queued papers
+        id: translate
+        if: ${{ inputs.test_emergency_alert != true }}
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          AZURE_TRANSLATOR_KEY: ${{ secrets.AZURE_TRANSLATOR_KEY }}
+          AZURE_TRANSLATOR_REGION: ${{ secrets.AZURE_TRANSLATOR_REGION }}
+          GOOGLE_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
+        run: python arxiv_bot.py --translate-only
+
+      - name: Commit translated delivery queue
+        if: ${{ inputs.test_emergency_alert != true }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add seen_ids.json
+          git diff --cached --quiet || git commit -m "update queued translations [skip ci]"
+          git pull --rebase origin main
+          git push
+
+      - name: Deliver queued papers
+        id: deliver
+        if: ${{ inputs.test_emergency_alert != true }}
+        continue-on-error: true
+        env:
+          DISCORD_WEBHOOK_GENERAL: ${{ secrets.DISCORD_WEBHOOK_GENERAL }}
+          DISCORD_WEBHOOK_BOT_EMERGENCY: ${{ secrets.DISCORD_WEBHOOK_BOT_EMERGENCY }}
+          DISCORD_WEBHOOK_QEC: ${{ secrets.DISCORD_WEBHOOK_QEC }}
+          DISCORD_WEBHOOK_FT: ${{ secrets.DISCORD_WEBHOOK_FT }}
+          DISCORD_WEBHOOK_ALGO: ${{ secrets.DISCORD_WEBHOOK_ALGO }}
+          DISCORD_WEBHOOK_COMPLEXITY: ${{ secrets.DISCORD_WEBHOOK_COMPLEXITY }}
+          DISCORD_WEBHOOK_NISQ: ${{ secrets.DISCORD_WEBHOOK_NISQ }}
+          DISCORD_WEBHOOK_SIM: ${{ secrets.DISCORD_WEBHOOK_SIM }}
+          DISCORD_WEBHOOK_QML: ${{ secrets.DISCORD_WEBHOOK_QML }}
+          DISCORD_WEBHOOK_QIT: ${{ secrets.DISCORD_WEBHOOK_QIT }}
+          DISCORD_WEBHOOK_NETWORK: ${{ secrets.DISCORD_WEBHOOK_NETWORK }}
+          DISCORD_WEBHOOK_CRYPTO: ${{ secrets.DISCORD_WEBHOOK_CRYPTO }}
+          DISCORD_WEBHOOK_PQC: ${{ secrets.DISCORD_WEBHOOK_PQC }}
+          DISCORD_WEBHOOK_HARDWARE: ${{ secrets.DISCORD_WEBHOOK_HARDWARE }}
+          DISCORD_WEBHOOK_SENSING: ${{ secrets.DISCORD_WEBHOOK_SENSING }}
+          DISCORD_WEBHOOK_FOUNDATIONS: ${{ secrets.DISCORD_WEBHOOK_FOUNDATIONS }}
+          DISCORD_WEBHOOK_OTHER: ${{ secrets.DISCORD_WEBHOOK_OTHER }}
+        run: python arxiv_bot.py --deliver-only
+
+      - name: Commit delivery receipts
+        if: ${{ inputs.test_emergency_alert != true }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add seen_ids.json posted_log.json
-          git diff --cached --quiet || git commit -m "update seen_ids [skip ci]"
+          git diff --cached --quiet || git commit -m "update delivery receipts [skip ci]"
+          git pull --rebase origin main
           git push
+
+      - name: Surface acquisition or delivery failure
+        if: ${{ inputs.test_emergency_alert != true && (steps.discover.outcome == 'failure' || steps.translate.outcome == 'failure' || steps.deliver.outcome == 'failure') }}
+        run: |
+          echo "One or more configured sources or Discord deliveries failed; see bot-emergency and step logs."
+          exit 1

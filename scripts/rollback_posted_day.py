@@ -11,10 +11,16 @@ import argparse
 import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+import sys
 from zoneinfo import ZoneInfo
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+import arxiv_bot  # noqa: E402
+
+
 LOG_PATH = ROOT / "posted_log.json"
 STATE_PATH = ROOT / "seen_ids.json"
 
@@ -69,15 +75,21 @@ def main() -> None:
 
     remaining_ids = {entry.get("id") for entry in kept_log if entry.get("id")}
     remove_from_seen = remove_ids - remaining_ids
-    old_seen = list(state.get("seen", []))
-    new_seen = [paper_id for paper_id in old_seen if paper_id not in remove_from_seen]
+    old_completed = list(
+        state.get("completed_ids", state.get("seen", [])))
+    new_completed = [
+        paper_id for paper_id in old_completed
+        if paper_id not in remove_from_seen
+    ]
 
     action = "write" if args.write else "dry-run"
     print(f"[summary] action={action} date={args.date} timezone={args.timezone}")
     print(f"[summary] utc_window={start.isoformat()}..{end.isoformat()}")
     print(f"[summary] posted_log remove={len(removed_log)} keep={len(kept_log)}")
     print(f"[summary] unique removed paper ids={len(remove_ids)}")
-    print(f"[summary] seen_ids remove={len(old_seen) - len(new_seen)} keep={len(new_seen)}")
+    print("[summary] completed_ids "
+          f"remove={len(old_completed) - len(new_completed)} "
+          f"keep={len(new_completed)}")
     for paper_id in sorted(remove_ids):
         print(f"[id] {paper_id}")
 
@@ -85,9 +97,11 @@ def main() -> None:
         print("[summary] no files written; rerun with --write to update state")
         return
 
-    LOG_PATH.write_text(json.dumps(kept_log, indent=1) + "\n", encoding="utf-8")
-    state["seen"] = new_seen
-    STATE_PATH.write_text(json.dumps(state, indent=1) + "\n", encoding="utf-8")
+    state["schema_version"] = max(2, int(state.get("schema_version", 1)))
+    state["completed_ids"] = new_completed
+    state["seen"] = new_completed
+    arxiv_bot.atomic_write_json(LOG_PATH, kept_log, ensure_ascii=False)
+    arxiv_bot.atomic_write_json(STATE_PATH, state)
     print("[summary] files updated")
 
 

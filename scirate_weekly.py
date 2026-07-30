@@ -56,10 +56,7 @@ def load_json(path: Path, default: Any) -> Any:
 
 
 def write_json(path: Path, data: Any) -> None:
-    path.write_text(
-        json.dumps(data, ensure_ascii=False, indent=1) + "\n",
-        encoding="utf-8",
-    )
+    arxiv_bot.atomic_write_json(path, data, ensure_ascii=False)
 
 
 def fetch_text(url: str, timeout: int = 60) -> str:
@@ -112,11 +109,9 @@ def fetch_arxiv_metadata(ids: list[str]) -> dict[str, dict]:
     try:
         raw = arxiv_bot.http_get(url, timeout=60)
     except urllib.error.HTTPError as exc:
-        print(f"[warn] arXiv API HTTP {exc.code}; skipping metadata fetch")
-        return {}
+        raise RuntimeError(f"arXiv API HTTP {exc.code}") from exc
     except Exception as exc:  # noqa: BLE001
-        print(f"[warn] arXiv API fetch failed: {exc}; skipping metadata fetch")
-        return {}
+        raise RuntimeError(f"arXiv API fetch failed: {exc}") from exc
     root = ET.fromstring(raw)
     papers: dict[str, dict] = {}
     for entry in root.findall("atom:entry", ATOM_NS):
@@ -221,6 +216,8 @@ def classify_entries(entries: list[dict], cfg: dict, genres: list[dict],
         if e.get("genres"):
             continue
         e["genres"] = arxiv_bot.classify_multi(e["paper"], genres, cfg)
+        e["genres"] = arxiv_bot.postprocess_genres(
+            e["paper"], e["genres"], genres, cfg)
         e["classified_by"] = "tfidf"
         fallback += 1
     return attempted, classified, fallback
@@ -257,8 +254,18 @@ def translate_entries(entries: list[dict], cfg: dict) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--discover-only", action="store_true")
+    parser.add_argument("--translate-only", action="store_true")
+    parser.add_argument("--deliver-only", action="store_true")
     parser.add_argument("--html-file", help="Use a local SciRate HTML file")
     args = parser.parse_args()
+    phase_flags = [
+        args.discover_only, args.translate_only, args.deliver_only]
+    if sum(phase_flags) > 1:
+        raise SystemExit("SciRate phase flags are mutually exclusive")
+    if args.dry_run and any(phase_flags):
+        raise SystemExit("--dry-run cannot be combined with phase flags")
+    resume_only = args.translate_only or args.deliver_only
 
     cfg = load_json(arxiv_bot.CONFIG_PATH, {})
     genres = cfg.get("genres", [])
@@ -268,52 +275,105 @@ def main() -> None:
 
     state = load_json(STATE_PATH, {"posted": {}})
     weekly_seen = set(state.get("posted", {}).get(str(range_days), []))
+    all_deliveries = state.setdefault("deliveries", {})
+    if not isinstance(all_deliveries, dict):
+        all_deliveries = {}
+        state["deliveries"] = all_deliveries
+    weekly_deliveries = all_deliveries.setdefault(str(range_days), {})
+    if not isinstance(weekly_deliveries, dict):
+        weekly_deliveries = {}
+        all_deliveries[str(range_days)] = weekly_deliveries
     log: list[dict] = load_json(arxiv_bot.LOG_PATH, [])
     previous = log_index(log)
 
-    try:
-        html_text = (
-            Path(args.html_file).read_text(encoding="utf-8")
-            if args.html_file else fetch_text(url)
-        )
-    except urllib.error.HTTPError as exc:
-        print(f"[warn] SciRate HTTP {exc.code}; skipping weekly digest")
-        return
-    except Exception as exc:  # noqa: BLE001
-        print(f"[warn] SciRate fetch failed: {exc}; skipping weekly digest")
-        return
-
-    candidates = parse_scirate_candidates(html_text, min_scites)
-    candidates = [c for c in candidates if c["id"] not in weekly_seen]
-    metadata = fetch_arxiv_metadata([c["id"] for c in candidates])
-
+    candidates: list[dict] = []
     entries: list[dict] = []
     reused = 0
-    for cand in candidates:
-        paper = metadata.get(cand["id"])
-        if not paper:
-            continue
-        paper["announce_type"] = f"scirate weekly · {cand['scites']} Scites"
-        prev = previous.get(cand["id"], {})
-        reusable_translation = (
-            prev if arxiv_bot.translation_log_matches(prev, cfg) else {}
-        )
-        genre_list = genres_from_log(prev, genres)
-        if genre_list:
-            genre_list = arxiv_bot.postprocess_genres(paper, genre_list, genres, cfg)
-            reused += 1
-        entries.append({
-            "paper": paper,
-            "scites": cand["scites"],
-            "genres": genre_list,
-            "jp": arxiv_bot.log_abstract_translation(reusable_translation),
-            "jp_title": arxiv_bot.log_title_translation(reusable_translation),
-            "classified_by": "posted_log" if genre_list else None,
-        })
+    if not resume_only:
+        try:
+            html_text = (
+                Path(args.html_file).read_text(encoding="utf-8")
+                if args.html_file else fetch_text(url)
+            )
+        except urllib.error.HTTPError as exc:
+            message = f"SciRate HTTP {exc.code}"
+            arxiv_bot.notify_run_report({
+                "source": "SciRate週間ダイジェスト",
+                "fetched": 0, "candidates": 0, "messages": 0,
+                "posted": [], "deferred": [], "failed": [],
+                "source_failures": [{"source": "SciRate", "error": message}],
+            }, cfg)
+            raise SystemExit(2) from exc
+        except Exception as exc:  # noqa: BLE001
+            message = f"SciRate fetch failed: {exc}"
+            arxiv_bot.notify_run_report({
+                "source": "SciRate週間ダイジェスト",
+                "fetched": 0, "candidates": 0, "messages": 0,
+                "posted": [], "deferred": [], "failed": [],
+                "source_failures": [{"source": "SciRate", "error": message}],
+            }, cfg)
+            raise SystemExit(2) from exc
 
-    to_classify = [e for e in entries if not e.get("genres")]
-    attempted, classified, fallback = classify_entries(
-        to_classify, cfg, genres, args.dry_run)
+        candidates = parse_scirate_candidates(html_text, min_scites)
+        candidates = [
+            c for c in candidates
+            if c["id"] not in weekly_seen and c["id"] not in weekly_deliveries
+        ]
+        try:
+            metadata = fetch_arxiv_metadata([c["id"] for c in candidates])
+        except Exception as exc:  # noqa: BLE001
+            message = str(exc)
+            arxiv_bot.notify_run_report({
+                "source": "SciRate週間ダイジェスト",
+                "fetched": len(candidates), "candidates": 0, "messages": 0,
+                "posted": [], "deferred": [], "failed": [],
+                "source_failures": [{
+                    "source": "arXiv metadata API", "error": message}],
+            }, cfg)
+            raise SystemExit(2) from exc
+
+        for cand in candidates:
+            paper = metadata.get(cand["id"])
+            if not paper:
+                continue
+            paper["announce_type"] = (
+                f"scirate weekly · {cand['scites']} Scites")
+            prev = previous.get(cand["id"], {})
+            reusable_translation = (
+                prev if arxiv_bot.translation_log_matches(prev, cfg) else {}
+            )
+            genre_list = genres_from_log(prev, genres)
+            if genre_list:
+                genre_list = arxiv_bot.postprocess_genres(
+                    paper, genre_list, genres, cfg)
+                reused += 1
+            entries.append({
+                "paper": paper,
+                "scites": cand["scites"],
+                "genres": genre_list,
+                "jp": arxiv_bot.log_abstract_translation(
+                    reusable_translation),
+                "jp_title": arxiv_bot.log_title_translation(
+                    reusable_translation),
+                "classified_by": "posted_log" if genre_list else None,
+            })
+
+    genre_map = {genre["id"]: genre for genre in genres}
+    for delivery in weekly_deliveries.values():
+        if not isinstance(delivery, dict) or not isinstance(
+                delivery.get("paper"), dict):
+            continue
+        restored = arxiv_bot.entry_from_delivery(delivery, genre_map)
+        restored["scites"] = int(delivery.get("scites", 0))
+        restored["classified_by"] = delivery.get(
+            "classifier", "persisted-delivery")
+        entries.append(restored)
+
+    attempted = classified = fallback = 0
+    if not resume_only:
+        to_classify = [e for e in entries if not e.get("genres")]
+        attempted, classified, fallback = classify_entries(
+            to_classify, cfg, genres, args.dry_run)
 
     print(
         "[info] SciRate weekly: "
@@ -331,7 +391,31 @@ def main() -> None:
             print(f"      {e['paper']['link']}")
         return
 
-    translate_entries(entries, cfg)
+    # Persist discovery/classification before invoking any translator. The
+    # workflow commits this checkpoint in a separate phase.
+    for entry in entries:
+        pid = entry["paper"]["id"]
+        delivery = arxiv_bot.merge_entry_into_delivery(
+            entry, weekly_deliveries.get(pid))
+        delivery["scites"] = entry["scites"]
+        weekly_deliveries[pid] = delivery
+    write_json(STATE_PATH, state)
+    if args.discover_only:
+        print(f"discovered {len(entries)} queued SciRate paper(s)")
+        return
+
+    if not args.deliver_only:
+        translate_entries(entries, cfg)
+        for entry in entries:
+            pid = entry["paper"]["id"]
+            delivery = arxiv_bot.merge_entry_into_delivery(
+                entry, weekly_deliveries.get(pid))
+            delivery["scites"] = entry["scites"]
+            weekly_deliveries[pid] = delivery
+        write_json(STATE_PATH, state)
+    if args.translate_only:
+        print(f"translated {len(entries)} queued SciRate paper(s)")
+        return
 
     require_translation = cfg.get("require_translation", True)
     posted = deferred = 0
@@ -340,6 +424,10 @@ def main() -> None:
     deferred_records: list[dict] = []
     failed_records: list[dict] = []
     for e in entries:
+        pid = e["paper"]["id"]
+        delivery = weekly_deliveries.get(pid)
+        if not isinstance(delivery, dict):
+            continue
         if require_translation and e["paper"].get("abstract") and e.get("jp") is None:
             deferred += 1
             deferred_records.append({
@@ -349,14 +437,28 @@ def main() -> None:
                 "genre_names": [g["name"] for g in e["genres"] if g],
             })
             continue
-        posted_webhooks: set[str] = set()
         posted_channels: list[str] = []
         failed_channels: list[str] = []
         # Footer shows every assigned genre, not just the channel posted to.
         genre_label = ", ".join(g["name"] for g in e["genres"] if g)
+        webhook_counts = Counter(
+            webhook
+            for genre in e["genres"]
+            for webhook, _ in [arxiv_bot.resolve_webhook(genre)]
+            if webhook
+        )
         for genre in e["genres"]:
+            gid = genre["id"]
+            channel_state = delivery.setdefault("channels", {}).setdefault(
+                gid, {"status": "pending"})
+            if channel_state.get("status") == "delivered":
+                continue
             webhook, genre_name = arxiv_bot.resolve_webhook(genre)
-            if not webhook or webhook in posted_webhooks:
+            if not webhook:
+                failed_channels.append(f"{genre_name}(webhook未設定)")
+                continue
+            if webhook_counts[webhook] > 1:
+                failed_channels.append(f"{genre_name}(webhook重複)")
                 continue
             fields = [{
                 "name": "SciRate",
@@ -366,10 +468,12 @@ def main() -> None:
                 webhook, e["paper"], genre_label or genre_name, e.get("jp"),
                 e.get("jp_title"), cfg, extra_fields=fields,
             ):
-                posted_webhooks.add(webhook)
                 posted += 1
-                posted_ids.add(e["paper"]["id"])
                 posted_channels.append(genre_name)
+                channel_state["status"] = "delivered"
+                channel_state["delivered_at"] = time.strftime(
+                    "%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+                write_json(STATE_PATH, state)
             else:
                 failed_channels.append(genre_name)
             time.sleep(1.2)
@@ -383,9 +487,20 @@ def main() -> None:
         if failed_channels:
             failed_records.append({**record, "genre_names": failed_channels})
 
-        if e["paper"]["id"] in posted_ids:
+        target_ids = list(delivery.get("genre_ids", []))
+        channels = delivery.get("channels", {})
+        complete = bool(target_ids) and all(
+            isinstance(channels.get(gid), dict)
+            and channels[gid].get("status") == "delivered"
+            for gid in target_ids
+        )
+        if complete:
+            posted_ids.add(pid)
+            weekly_deliveries.pop(pid, None)
+            weekly_seen.add(pid)
+            write_json(STATE_PATH, state)
             log.append({
-                "id": e["paper"]["id"],
+                "id": pid,
                 "posted_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                 "source": "scirate_weekly",
                 "scirate_scites": e["scites"],
@@ -397,7 +512,7 @@ def main() -> None:
                 "link": e["paper"]["link"],
                 "primary": e["paper"]["primary"],
                 "announce_type": e["paper"]["announce_type"],
-                "genre_ids": [g["id"] for g in e["genres"] if g],
+                "genre_ids": target_ids,
                 "genre_names": [g["name"] for g in e["genres"] if g],
                 "abstract_en": e["paper"]["abstract"],
                 "abstract_ja": e.get("jp"),
@@ -406,7 +521,7 @@ def main() -> None:
 
     state.setdefault("posted", {})
     prior = set(state["posted"].get(str(range_days), []))
-    state["posted"][str(range_days)] = sorted((prior | posted_ids))[-1000:]
+    state["posted"][str(range_days)] = sorted(prior | posted_ids)
     write_json(STATE_PATH, state)
     write_json(arxiv_bot.LOG_PATH, log[-5000:])
 
@@ -433,6 +548,8 @@ def main() -> None:
         f"posted {posted} SciRate weekly posts "
         f"({len(candidates)} candidates, {deferred} deferred for retry)"
     )
+    if failed_records:
+        raise SystemExit(3)
 
 
 if __name__ == "__main__":

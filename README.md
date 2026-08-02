@@ -419,6 +419,52 @@ no production HTML fallback, CAPTCHA solver, proxy rotation, origin-IP access,
 or User-Agent bypass for a 403. A relay must publish normalized JSON rather
 than expose browser cookies or Cloudflare clearance tokens.
 
+### Manual snapshots while SciRate has no public API
+
+SciRate currently answers every automated client with a Cloudflare Managed
+Challenge. This was verified for `curl` with a full browser header set, for
+HTTP/2, for Python `urllib`, and for a real Chrome driven by Playwright in both
+headless and headed modes -- the last one stayed on the challenge page for 60
+seconds without progressing. An ordinary browser opened by hand on the same
+network loads the site normally. The block therefore targets automation itself,
+not the network, and defeating it would mean disguising an automated client as
+a human one. This bot does not do that.
+
+The supported bridge keeps a human in the loop: you open SciRate yourself, and
+a bookmarklet turns the page you are already looking at into a relay snapshot.
+
+1. Create a bookmark whose URL is `javascript:` followed by the minified
+   contents of `tools/scirate_snapshot_bookmarklet.js`.
+2. Open the period you want, for example
+   `https://scirate.com/arxiv/quant-ph?date=2026-08-03&range=1` for a daily
+   batch or `...&range=7` for a weekly one.
+3. Press the bookmark. It reads the scite counts already rendered on screen and
+   copies a snapshot to the clipboard. If the lowest score on the page is still
+   at or above the threshold (1 daily, 30 weekly), the period continues onto the
+   next page: go there and press it again. Rows accumulate in `localStorage`
+   until the period genuinely ends, which is the only point at which the
+   snapshot may declare `"complete": true`.
+4. Run `python3 tools/scirate_snapshot.py`. It validates the clipboard through
+   the bot's own acceptance path, then writes, commits, and pushes
+   `quant-ph/{date}-{days}d.json` to the snapshot repository.
+
+```bash
+python3 tools/scirate_snapshot.py              # clipboard -> validate -> publish
+python3 tools/scirate_snapshot.py --dry-run    # validate only
+python3 tools/scirate_snapshot.py --repo ~/scirate-snapshots
+```
+
+The validator is not a re-implementation: it calls
+`fetch_scirate_candidates_api` with the same flags the digest uses, so whatever
+this script accepts is guaranteed to be accepted at digest time, and whatever it
+rejects is reported with the bot's own message.
+
+Missing snapshots are harmless. The relay URL simply 404s, the period stays in
+`pending_discovery`, and up to `scirate_backlog_max_periods` older periods are
+retried on later runs. Skipping a day delays that day's Top 3 rather than losing
+the week. When the official API ships, it is probed first on every run and takes
+over automatically; the snapshot repository can then be abandoned.
+
 ---
 
 ## Genre list (15 genres)
@@ -1245,6 +1291,27 @@ python3 scirate_weekly.py --mode weekly --date 2026-08-09 --dry-run
 ```
 
 `--html-file PATH` はローカルfixtureによるparser確認専用として残している。本番ではHTML fallback、CAPTCHA solver、proxy rotation、origin IP直撃、403回避用のUser-Agent偽装は行わない。中継にはbrowser cookieやCloudflare clearance tokenではなく、正規化したJSONだけを置く。
+
+### 公式APIが無い間の手動スナップショット
+
+SciRate は現在、自動クライアントすべてに Cloudflare Managed Challenge を返す。ブラウザ相当のヘッダを全部付けた `curl`、HTTP/2、Python `urllib`、さらに Playwright で操作した実 Chrome（headless・通常ウィンドウ両方）で確認済みで、最後のケースは60秒待ってもチャレンジ画面から進まなかった。同じ回線で人が手で開いたブラウザは普通に表示される。つまりこの遮断はネットワークではなく**自動化そのもの**を狙っており、突破するには自動クライアントを人間に見せかける必要がある。このbotはそれを行わない。
+
+サポートする回避策は人を介在させ続ける形である。あなたが自分で SciRate を開き、いま見ている画面を bookmarklet が relay スナップショットへ変換する。
+
+1. `tools/scirate_snapshot_bookmarklet.js` を最小化した内容を `javascript:` に続けた URL のブックマークを作る。
+2. 対象期間を開く。日次なら `https://scirate.com/arxiv/quant-ph?date=2026-08-03&range=1`、週次なら `...&range=7`。
+3. ブックマークを押す。画面に既に描画されている Scite 数を読み取り、スナップショットをクリップボードへコピーする。そのページの最小スコアがまだしきい値（日次1、週次30）以上なら期間は次ページへ続いているので、移動してもう一度押す。行は `localStorage` に蓄積され、期間が本当に終わった時点でのみ `"complete": true` を宣言できる。
+4. `python3 tools/scirate_snapshot.py` を実行する。クリップボードの内容を bot 自身の受理経路で検証し、`quant-ph/{date}-{days}d.json` をスナップショットリポジトリへ書き出し・commit・pushする。
+
+```bash
+python3 tools/scirate_snapshot.py              # クリップボード → 検証 → 公開
+python3 tools/scirate_snapshot.py --dry-run    # 検証のみ
+python3 tools/scirate_snapshot.py --repo ~/scirate-snapshots
+```
+
+この検証は再実装ではない。ダイジェストが使うのと同じフラグで `fetch_scirate_candidates_api` を呼ぶため、このスクリプトが受理したものは本番でも必ず受理され、拒否されたものは bot 自身のメッセージで報告される。
+
+スナップショットが無い日があっても壊れない。relay URL が404を返すだけで、その期間は `pending_discovery` に残り、以後の実行で `scirate_backlog_max_periods` 件までの過去期間が再試行される。1日飛ばしてもその日のTop 3が遅れるだけで、週次が失われることはない。公式APIが公開されれば毎回そちらを先に試すので自動的に切り替わり、スナップショットリポジトリは不要になる。
 
 ---
 

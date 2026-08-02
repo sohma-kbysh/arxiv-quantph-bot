@@ -202,14 +202,27 @@ def read_http_error_body(exc: urllib.error.HTTPError) -> bytes:
         exc.close()
 
 
+class _NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Turn redirects into HTTPError so credentials cannot cross origins."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
 def http_get(url: str, timeout: int = 30,
-             headers: dict[str, str] | None = None) -> bytes:
+             headers: dict[str, str] | None = None,
+             *, allow_redirects: bool = True) -> bytes:
     request_headers = {"User-Agent": USER_AGENT}
     if headers:
         request_headers.update(headers)
     req = urllib.request.Request(url, headers=request_headers)
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
+        if allow_redirects:
+            response = urllib.request.urlopen(req, timeout=timeout)
+        else:
+            response = urllib.request.build_opener(
+                _NoRedirectHandler()).open(req, timeout=timeout)
+        with response as resp:
             return resp.read()
     except urllib.error.HTTPError as exc:
         body = read_http_error_body(exc)

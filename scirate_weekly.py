@@ -6,9 +6,9 @@ The weekly digest reposts every paper in one completed seven-day window whose
 Scite count reaches the configured threshold.  Both use one dedicated webhook;
 SciRate content is never routed back into the normal genre channels.
 
-Production probes SciRate's anticipated JSON feed API.  Until the public JSON
-endpoint is deployed, SciRate remains an optional inactive source and the bot
-never falls back to HTML scraping.
+Production always probes SciRate's anticipated JSON feed API first.  An
+operator-provided JSON relay with the same papers schema can be used only when
+that official request fails; the bot never falls back to HTML scraping.
 """
 
 from __future__ import annotations
@@ -191,6 +191,11 @@ def fetch_scirate_candidates_api(
     target_date: str | None = None,
     limit: int | None = None,
     require_pubdate: bool = False,
+    require_response_date: bool = False,
+    bearer_token: str = "",
+    require_complete_snapshot: bool = False,
+    require_period_metadata: bool = False,
+    require_https: bool = False,
 ) -> tuple[list[dict], int]:
     """Fetch every relevant JSON page, stopping below the score threshold."""
     if not template:
@@ -205,6 +210,15 @@ def fetch_scirate_candidates_api(
     for page in range(1, max_pages + 1):
         url = scirate_api_page_url(
             template, days, page, target_date=target_date)
+        parsed_url = urllib.parse.urlsplit(url)
+        if require_https and (
+            parsed_url.scheme != "https"
+            or not parsed_url.hostname
+            or parsed_url.username is not None
+            or parsed_url.password is not None
+        ):
+            raise SciRateAPIError(
+                "trusted SciRate relay URL must be credential-free HTTPS")
         headers = {
             "Accept": "application/json",
             "User-Agent": (
@@ -213,8 +227,18 @@ def fetch_scirate_candidates_api(
                 "SciRate JSON digest client)"
             ),
         }
+        if bearer_token:
+            headers["Authorization"] = f"Bearer {bearer_token}"
         try:
-            raw = arxiv_bot.http_get(url, timeout=timeout, headers=headers)
+            if require_https or bearer_token:
+                raw = arxiv_bot.http_get(
+                    url, timeout=timeout, headers=headers,
+                    allow_redirects=False)
+            else:
+                raw = arxiv_bot.http_get(
+                    url, timeout=timeout, headers=headers)
+        except SciRateAPIError:
+            raise
         except urllib.error.HTTPError as exc:
             raise SciRateAPIError(f"SciRate JSON API HTTP {exc.code}") from exc
         except Exception as exc:  # noqa: BLE001
@@ -231,30 +255,68 @@ def fetch_scirate_candidates_api(
 
         page_rows, row_count = parse_scirate_json_page(payload)
         pages_fetched += 1
+        snapshot_complete = bool(
+            isinstance(payload, dict) and payload.get("complete") is True)
+        if require_complete_snapshot and not snapshot_complete:
+            raise SciRateAPIError(
+                "trusted SciRate relay snapshot must declare complete=true")
         if target_date:
             response_date = (
                 str(payload.get("date") or "")
                 if isinstance(payload, dict) else ""
             )
+            if require_response_date and not response_date:
+                raise SciRateAPIError(
+                    "SciRate JSON response has no date; requested period "
+                    "cannot be verified")
             if response_date and response_date[:10] != target_date:
                 raise SciRateAPIError(
                     "SciRate JSON response date does not match requested "
                     f"date {target_date}: {response_date}")
+            if require_period_metadata:
+                target_day = date.fromisoformat(target_date)
+                expected_start = (
+                    target_day - timedelta(days=max(1, days) - 1)
+                ).isoformat()
+                raw_range = payload.get("range_days")
+                raw_start = str(payload.get("period_start") or "")
+                raw_end = str(payload.get("period_end") or "")
+                try:
+                    snapshot_days = int(raw_range)
+                except (TypeError, ValueError):
+                    snapshot_days = -1
+                if (
+                    snapshot_days != days
+                    or raw_start[:10] != expected_start
+                    or raw_end[:10] != target_date
+                ):
+                    raise SciRateAPIError(
+                        "trusted SciRate relay period metadata does not "
+                        "match requested period "
+                        f"{expected_start}..{target_date} (days={days})")
         if require_pubdate:
             missing_dates = [row["id"] for row in page_rows if not row["pubdate"]]
             if missing_dates:
                 raise SciRateAPIError(
                     "SciRate JSON rows have no pubdate; exact daily batch "
                     "selection is unsafe")
-        if target_date:
-            wrong_dates = [
-                row for row in page_rows
-                if row["pubdate"] and row["pubdate"][:10] != target_date
-            ]
-            if wrong_dates and days == 1:
+        if target_date and require_pubdate:
+            target_day = date.fromisoformat(target_date)
+            first_day = target_day - timedelta(days=max(1, days) - 1)
+            wrong_dates: list[dict] = []
+            for row in page_rows:
+                try:
+                    row_day = date.fromisoformat(row["pubdate"][:10])
+                except (TypeError, ValueError):
+                    wrong_dates.append(row)
+                    continue
+                if not first_day <= row_day <= target_day:
+                    wrong_dates.append(row)
+            if wrong_dates:
+                label = "daily batch" if days == 1 else "requested period"
                 raise SciRateAPIError(
                     "SciRate JSON returned papers outside the requested "
-                    f"daily batch {target_date}")
+                    f"{label} {first_day.isoformat()}..{target_date}")
         scores = [row["scites"] for row in page_rows]
         if any(left < right for left, right in zip(scores, scores[1:])):
             raise SciRateAPIError(
@@ -267,17 +329,29 @@ def fetch_scirate_candidates_api(
         if scores:
             previous_score = scores[-1]
         for candidate in page_rows:
+            if candidate["id"] in by_id:
+                raise SciRateAPIError(
+                    "SciRate JSON contains duplicate paper id "
+                    f"{candidate['id']}; snapshot completeness is ambiguous")
             if candidate["scites"] >= min_scites:
-                prior = by_id.get(candidate["id"])
-                if prior is None or candidate["scites"] > prior["scites"]:
-                    by_id[candidate["id"]] = candidate
-                    if prior is None:
-                        ordered.append(candidate)
+                by_id[candidate["id"]] = candidate
+                ordered.append(candidate)
+            else:
+                # Keep below-threshold IDs too so a duplicate on a later page
+                # cannot be hidden merely by crossing the score boundary.
+                by_id[candidate["id"]] = candidate
 
         # SciRate's response is already deterministically ordered by score,
         # comments, dates, and arXiv id.  Once Top N is present, later pages
         # cannot change that ranking.
         if limit is not None and len(ordered) >= max(0, int(limit)):
+            break
+
+        # A trusted relay may publish a normalized, complete snapshot rather
+        # than emulating SciRate's pagination.  This marker is deliberately
+        # ignored for the official endpoint and is trusted only by the relay
+        # call site below.
+        if require_complete_snapshot and snapshot_complete:
             break
 
         # The feed is sorted by scites_count descending in SciRate. Once a
@@ -291,12 +365,67 @@ def fetch_scirate_candidates_api(
             f"SciRate JSON API exceeded max_pages={max_pages} before a "
             "complete threshold boundary; refusing a partial digest")
 
-    candidates = [by_id[row["id"]] for row in ordered]
+    candidates = ordered
     if limit is not None:
         candidates = candidates[:max(0, int(limit))]
     for rank, candidate in enumerate(candidates, start=1):
         candidate["rank"] = rank
     return candidates, pages_fetched
+
+
+def fetch_scirate_candidates_with_fallback(
+    official_template: str,
+    relay_template: str,
+    days: int,
+    min_scites: int,
+    *,
+    max_pages: int = 20,
+    page_size: int = 50,
+    timeout: int = 60,
+    target_date: str | None = None,
+    limit: int | None = None,
+    require_pubdate: bool = False,
+    relay_bearer_token: str = "",
+) -> tuple[list[dict], int, str, str]:
+    """Fetch official SciRate JSON first, then an optional JSON relay.
+
+    The final string is the official failure message when the relay was used.
+    Keeping it separate from the successful relay result makes the fallback
+    visible in state without ever persisting the relay credential.
+    """
+    common = {
+        "max_pages": max_pages,
+        "page_size": page_size,
+        "timeout": timeout,
+        "target_date": target_date,
+        "limit": limit,
+        "require_pubdate": require_pubdate,
+        "require_response_date": bool(target_date),
+    }
+    try:
+        candidates, pages = fetch_scirate_candidates_api(
+            official_template, days, min_scites, **common)
+    except SciRateAPIError as official_error:
+        if not relay_template:
+            raise
+        try:
+            candidates, pages = fetch_scirate_candidates_api(
+                relay_template,
+                days,
+                min_scites,
+                **common,
+                bearer_token=relay_bearer_token,
+                require_complete_snapshot=True,
+                require_period_metadata=True,
+                require_https=True,
+            )
+        except SciRateAPIError as relay_error:
+            raise SciRateAPIError(
+                "official SciRate JSON failed: "
+                f"{official_error}; configured relay failed: {relay_error}"
+            ) from relay_error
+        return candidates, pages, "relay", str(official_error)
+    return candidates, pages, "official", ""
 
 
 def fetch_arxiv_metadata(ids: list[str], batch_size: int = 50) -> dict[str, dict]:
@@ -430,6 +559,38 @@ def period_details(mode: str, target: date) -> tuple[str, str, int]:
     start = target - timedelta(days=6)
     key = f"{start.isoformat()}_{target.isoformat()}"
     return key, f"{start.isoformat()}〜{target.isoformat()}", 7
+
+
+def ordered_discovery_targets(
+    pending: dict,
+    period_key: str,
+    target: date,
+    backlog_max_periods: int,
+) -> list[tuple[str, date]]:
+    """Put the due period first, then fairly rotate pending backlog."""
+    backlog: list[tuple[str, date, str]] = []
+    for pending_key, record in pending.items():
+        if pending_key == period_key or not isinstance(record, dict):
+            continue
+        try:
+            pending_target = date.fromisoformat(str(record.get("target_date")))
+        except ValueError:
+            continue
+        last_attempt = str(record.get("last_attempt_at") or "")
+        backlog.append((pending_key, pending_target, last_attempt))
+    # Never-attempted periods sort first. Afterwards, retry the least recently
+    # attempted periods so a permanently broken snapshot cannot monopolize the
+    # bounded backlog budget forever.
+    backlog.sort(key=lambda item: (
+        bool(item[2]), item[2], item[1], item[0]))
+    return [
+        (period_key, target),
+        *[
+            (pending_key, pending_target)
+            for pending_key, pending_target, _last_attempt in
+            backlog[:max(0, backlog_max_periods)]
+        ],
+    ]
 
 
 def normalize_state(raw: Any) -> dict:
@@ -598,15 +759,45 @@ def source_report_fields(source_status: dict) -> tuple[list[dict], list[dict]]:
     notices: list[dict] = []
     failures: list[dict] = []
     if source_status.get("status") == "waiting_for_api":
+        detail = str(source_status.get(
+            "last_error", "公式JSON endpointから有効な応答なし"))
         notices.append({
             "source": "SciRate JSON API",
-            "message": "公開API待ち; HTMLスクレイピングは無効",
+            "message": (
+                f"取得待ち: {detail}; 対象期間は再取得待ちに保存済み。"
+                "HTML直取得もCloudflare Managed Challengeで拒否されるため"
+                "使用していません"
+            ),
+        })
+    elif source_status.get("status") == "waiting_for_source":
+        detail = str(source_status.get(
+            "last_error", "公式JSON・設定済みrelayから有効な応答なし"))
+        notices.append({
+            "source": "SciRate JSON sources",
+            "message": (
+                f"取得待ち: {detail}; 対象期間は再取得待ちに保存済み。"
+                "HTML直取得もCloudflare Managed Challengeで拒否されるため"
+                "使用していません"
+            ),
         })
     elif source_status.get("status") == "degraded":
         failures.append({
-            "source": "SciRate JSON API",
+            "source": "SciRate discovery",
             "error": str(source_status.get(
                 "last_error", "previously available API is unavailable")),
+        })
+    elif (
+        source_status.get("status") == "available"
+        and source_status.get("provider") == "relay"
+    ):
+        primary_error = str(source_status.get(
+            "last_primary_error", "公式JSON endpointは利用不可"))
+        notices.append({
+            "source": "SciRate trusted relay",
+            "message": (
+                f"公式JSON失敗 ({primary_error}); "
+                "検証済みrelay snapshotで取得"
+            ),
         })
     return notices, failures
 
@@ -617,8 +808,11 @@ def update_source_failure(
     template: str,
     days: int,
     target_date: str,
+    relay_configured: bool = False,
 ) -> None:
     ever_available = bool(source_status.get("api_ever_available", False))
+    source_ever_available = bool(
+        source_status.get("source_ever_available", ever_available))
     try:
         endpoint = arxiv_bot.redact_url(scirate_api_page_url(
             template, days, 1, target_date=target_date))
@@ -626,7 +820,11 @@ def update_source_failure(
         endpoint = arxiv_bot.redact_url(template)
     source_status.update({
         "api_ever_available": ever_available,
-        "status": "degraded" if ever_available else "waiting_for_api",
+        "source_ever_available": source_ever_available,
+        "status": (
+            "degraded" if source_ever_available
+            else "waiting_for_source" if relay_configured
+            else "waiting_for_api"),
         "last_probe_at": _now_utc(),
         "last_error": str(exc),
         "last_endpoint": endpoint,
@@ -675,6 +873,10 @@ def main() -> None:
         or str(cfg.get(
             "scirate_api_url_template", SCIRATE_API_URL_TEMPLATE)).strip()
     )
+    relay_template = os.environ.get(
+        "SCIRATE_RELAY_URL_TEMPLATE", "").strip()
+    relay_bearer_token = os.environ.get(
+        "SCIRATE_RELAY_BEARER_TOKEN", "").strip()
     max_pages = int(
         os.environ.get("SCIRATE_API_MAX_PAGES", "").strip()
         or cfg.get("scirate_api_max_pages", 20)
@@ -683,6 +885,10 @@ def main() -> None:
         os.environ.get("SCIRATE_API_PAGE_SIZE", "").strip()
         or cfg.get("scirate_api_page_size", 50)
     )
+    backlog_max_periods = max(0, int(
+        os.environ.get("SCIRATE_BACKLOG_MAX_PERIODS", "").strip()
+        or cfg.get("scirate_backlog_max_periods", 8)
+    ))
 
     state = normalize_state(load_json(STATE_PATH, {}))
     source_status = state["source_status"]
@@ -691,6 +897,7 @@ def main() -> None:
     genre_map = {g["id"]: g for g in cfg.get("genres", [])}
     candidates: list[dict] = []
     pages_fetched = 0
+    discovery_failures: dict[str, str] = {}
 
     if not resume_only:
         if args.html_file and mode != "weekly":
@@ -699,24 +906,16 @@ def main() -> None:
         deliveries_by_period = state[f"{mode}_deliveries"]
         pending = state["pending_discovery"][mode]
 
-        # Once the API has worked, every later source/metadata outage is a
-        # correctness-critical missed snapshot.  Record it before I/O so the
-        # next run of the same mode automatically catches it up.
-        if source_status.get("api_ever_available"):
-            pending.setdefault(period_key, {
-                "target_date": target.isoformat(), "queued_at": _now_utc()})
-        target_dates: dict[str, date] = {}
-        for pending_key, record in pending.items():
-            raw_date = record.get("target_date") if isinstance(record, dict) else ""
-            try:
-                target_dates[pending_key] = date.fromisoformat(str(raw_date))
-            except ValueError:
-                continue
-        target_dates[period_key] = target
+        # Persist every target before I/O.  In particular, an initial 403 must
+        # not erase a period merely because no source has succeeded before.
+        pending.setdefault(period_key, {
+            "target_date": target.isoformat(), "queued_at": _now_utc()})
+        ordered_targets = ordered_discovery_targets(
+            pending, period_key, target, backlog_max_periods)
         if not args.dry_run:
             write_json(STATE_PATH, state)
 
-        for discover_key, discover_target in sorted(target_dates.items()):
+        for discover_key, discover_target in ordered_targets:
             current_key, _label, discover_days = period_details(
                 mode, discover_target)
             if current_key != discover_key:
@@ -725,6 +924,15 @@ def main() -> None:
             if discover_key in posted_periods:
                 pending.pop(discover_key, None)
                 continue
+            attempt_record = pending.setdefault(discover_key, {
+                "target_date": discover_target.isoformat(),
+                "queued_at": _now_utc(),
+            })
+            attempt_record["last_attempt_at"] = _now_utc()
+            attempt_record["attempts"] = int(
+                attempt_record.get("attempts", 0)) + 1
+            if not args.dry_run:
+                write_json(STATE_PATH, state)
             if args.html_file:
                 period_candidates = parse_scirate_candidates(
                     Path(args.html_file).read_text(encoding="utf-8"),
@@ -732,29 +940,29 @@ def main() -> None:
                 period_pages = 0
             else:
                 try:
-                    period_candidates, period_pages = (
-                        fetch_scirate_candidates_api(
-                            template,
-                            discover_days,
-                            min_scites,
-                            max_pages=max_pages,
-                            page_size=page_size,
-                            target_date=discover_target.isoformat(),
-                            limit=top_n if mode == "daily" else None,
-                            require_pubdate=(mode == "daily"),
-                        )
+                    (
+                        period_candidates,
+                        period_pages,
+                        provider,
+                        primary_error,
+                    ) = fetch_scirate_candidates_with_fallback(
+                        template,
+                        relay_template,
+                        discover_days,
+                        min_scites,
+                        max_pages=max_pages,
+                        page_size=page_size,
+                        target_date=discover_target.isoformat(),
+                        limit=top_n if mode == "daily" else None,
+                        require_pubdate=True,
+                        relay_bearer_token=relay_bearer_token,
                     )
                 except SciRateAPIError as exc:
-                    was_available = bool(
-                        source_status.get("api_ever_available"))
+                    discovery_failures[discover_key] = str(exc)
                     update_source_failure(
                         source_status, exc, template, discover_days,
-                        discover_target.isoformat())
-                    if was_available:
-                        pending.setdefault(discover_key, {
-                            "target_date": discover_target.isoformat(),
-                            "queued_at": _now_utc(),
-                        })
+                        discover_target.isoformat(),
+                        relay_configured=bool(relay_template))
                     arxiv_bot.save_error_diagnostic(
                         "optional_source_unavailable", method="GET",
                         body=traceback.format_exc(), exception=exc)
@@ -763,18 +971,31 @@ def main() -> None:
                         f"queue only ({exc})", file=sys.stderr)
                     if not args.dry_run:
                         write_json(STATE_PATH, state)
-                    break
+                    # A current snapshot can be briefly unavailable while
+                    # older relay snapshots are valid, and one old snapshot
+                    # can expire while newer backlog is valid. Continue within
+                    # the bounded backlog budget so neither direction starves.
+                    continue
                 else:
                     pages_fetched += period_pages
+                    selected_template = (
+                        template if provider == "official"
+                        else relay_template
+                    )
                     source_status.update({
-                        "api_ever_available": True,
+                        "api_ever_available": bool(
+                            source_status.get("api_ever_available"))
+                            or provider == "official",
+                        "source_ever_available": True,
                         "status": "available",
+                        "provider": provider,
                         "last_probe_at": _now_utc(),
                         "last_success_at": _now_utc(),
                         "last_error": "",
+                        "last_primary_error": primary_error,
                         "last_endpoint": arxiv_bot.redact_url(
                             scirate_api_page_url(
-                                template, discover_days, 1,
+                                selected_template, discover_days, 1,
                                 target_date=discover_target.isoformat())),
                         "pages_fetched": period_pages,
                     })
@@ -803,19 +1024,16 @@ def main() -> None:
                         "arXiv metadata API omitted candidate(s): "
                         + ", ".join(missing[:10]))
             except Exception as exc:  # noqa: BLE001
+                discovery_failures[discover_key] = (
+                    f"arXiv metadata API: {exc}")
                 arxiv_bot.save_error_diagnostic(
                     "source_error", method="GET", body=traceback.format_exc(),
                     exception=exc)
+                if not queued:
+                    deliveries_by_period.pop(discover_key, None)
                 if not args.dry_run:
                     write_json(STATE_PATH, state)
-                arxiv_bot.notify_run_report({
-                    "source": f"SciRate {mode} digest",
-                    "fetched": len(period_candidates), "candidates": 0,
-                    "messages": 0, "posted": [], "deferred": [],
-                    "failed": [], "source_failures": [{
-                        "source": "arXiv metadata API", "error": str(exc)}],
-                }, cfg)
-                raise SystemExit(2) from exc
+                continue
             for candidate in period_candidates:
                 entry = entry_from_candidate(
                     candidate, metadata[candidate["id"]],
@@ -830,6 +1048,26 @@ def main() -> None:
                     "ids": [], "checked_at": _now_utc(), "empty": True}
             if not args.dry_run:
                 write_json(STATE_PATH, state)
+
+        # A later successful backlog fetch must not erase an earlier missed
+        # period from the operational report. Keep every per-period error
+        # visible and leave those periods pending for a future retry.
+        if discovery_failures:
+            source_status["pending_errors"] = dict(discovery_failures)
+            source_status["last_error"] = "; ".join(
+                f"{key}: {error}"
+                for key, error in sorted(discovery_failures.items())
+            )
+            source_status["status"] = (
+                "degraded"
+                if source_status.get("source_ever_available")
+                else "waiting_for_source" if relay_template
+                else "waiting_for_api"
+            )
+        else:
+            source_status.pop("pending_errors", None)
+        if not args.dry_run:
+            write_json(STATE_PATH, state)
 
     queued_entries = pending_entries(state, mode)
     print(

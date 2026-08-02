@@ -341,20 +341,64 @@ mark papers that already appeared in a daily Top 3.
 Production does **not** scrape SciRate HTML. It probes the JSON endpoint
 proposed by upstream PR `scirate/scirate#535`, currently
 `https://scirate.com/arxiv/quant-ph.json?date=YYYY-MM-DD&range=N&page=1`.
-Until it returns a valid `papers` array, the source is `waiting_for_api`, only
-durable queued deliveries are processed, and the workflow exits successfully
-with a bot-emergency notice. The first valid response enables the feature
-automatically. A later outage becomes `degraded`; missed daily or weekly
-periods are stored in `pending_discovery` and caught up automatically by the
-next run of the same mode. Already discovered posts and translations are also
-durable across runs.
+The official endpoint is always attempted first. If it is unavailable, an
+optional trusted JSON relay can be configured with
+`SCIRATE_RELAY_URL_TEMPLATE`; it must expose the same `papers` schema and
+publish a complete single-page snapshot with mandatory `"complete": true`
+and exact period metadata. If the relay requires authentication, store its
+token as the Actions secret
+`SCIRATE_RELAY_BEARER_TOKEN`; the bearer header is sent only to the relay.
+This is intended for a low-rate snapshot produced by an already-authorized
+lab or institutional environment, not for a Cloudflare-bypass proxy.
 
-The client verifies the response date, requires `pubdate` for an exact daily
-batch, checks global descending score order, and rejects a weekly result if it
+Until either source returns a valid `papers` array, the source is
+`waiting_for_api` (official only) or `waiting_for_source` (relay configured);
+only durable queued deliveries are processed, and the workflow exits
+successfully with a bot-emergency notice. Every due period is
+stored in `pending_discovery` before acquisition, including the very first
+outage, and is caught up by the next run of the same mode. The official API is
+probed again on every run, so it automatically takes precedence as soon as it
+works. Already discovered posts and translations are also durable across
+runs.
+
+The client verifies the response date, requires `pubdate` within the exact
+requested daily or weekly period, checks global descending score order, and
+rejects a weekly result if it
 cannot reach the 30-Scite boundary within `scirate_api_max_pages`. Set the
 repository variable `SCIRATE_API_URL_TEMPLATE` if SciRate publishes a
 different path; `{date}`, `{days}`, and `{page}` are supported. Pagination can
 be adjusted with `SCIRATE_API_PAGE_SIZE` and `SCIRATE_API_MAX_PAGES`.
+`SCIRATE_RELAY_URL_TEMPLATE` supports the same placeholders. Do not put a
+credential in either URL; use the relay bearer-token secret instead.
+The due period is tried first, followed by up to
+`scirate_backlog_max_periods` (default 8) older pending periods. A failure in
+either direction remains visible and cannot permanently starve the other.
+For a complete one-file snapshot, the relay response can be as small as:
+
+```json
+{
+  "date": "2026-08-03",
+  "complete": true,
+  "range_days": 1,
+  "period_start": "2026-08-03",
+  "period_end": "2026-08-03",
+  "papers": [
+    {
+      "uid": "2608.01234",
+      "scites_count": 7,
+      "pubdate": "2026-08-03",
+      "submit_date": "2026-08-02"
+    }
+  ]
+}
+```
+
+`range_days`, `period_start`, and `period_end` must exactly match the requested
+period; a weekly snapshot therefore declares 7 and the full Monday-Sunday
+window. Rows must be in SciRate order (descending Scite count, including its
+tie order). The bot rejects malformed rows, mismatched period metadata, a
+wrong `pubdate`, duplicates, or a non-descending snapshot rather than silently
+posting a partial ranking.
 
 `scirate_weekly_state.json` owns daily/weekly deduplication and retry state.
 The three durable phases remain `--discover-only`, `--translate-only`, and
@@ -371,7 +415,9 @@ python3 scirate_weekly.py --mode weekly --date 2026-08-09 --dry-run
 ```
 
 `--html-file PATH` remains available only for local parser fixtures. There is
-no production HTML fallback, proxy rotation, or User-Agent bypass for a 403.
+no production HTML fallback, CAPTCHA solver, proxy rotation, origin-IP access,
+or User-Agent bypass for a 403. A relay must publish normalized JSON rather
+than expose browser cookies or Cloudflare clearance tokens.
 
 ---
 
@@ -471,6 +517,16 @@ DISCORD_WEBHOOK_SENSING
 DISCORD_WEBHOOK_FOUNDATIONS
 DISCORD_WEBHOOK_OTHER
 ```
+
+Optional SciRate relay authentication:
+
+```text
+SCIRATE_RELAY_BEARER_TOKEN      # sent only to the exact HTTPS relay URL
+```
+
+Set the relay endpoint separately as the repository variable
+`SCIRATE_RELAY_URL_TEMPLATE`. Redirects are rejected, and the token is never
+sent to the official SciRate endpoint.
 
 **API keys (only the ones you use)**
 
@@ -682,6 +738,7 @@ Matching is a prefix-tolerant word match over the whole title and abstract, so s
 | `scirate_api_url_template` | SciRate PR #535 path | JSON API template; supports `{date}`, `{days}`, and `{page}` |
 | `scirate_api_max_pages` | `20` | Safety ceiling; exceeding it before the score boundary rejects a partial digest |
 | `scirate_api_page_size` | `50` | Expected upstream page size used to detect the final page |
+| `scirate_backlog_max_periods` | `8` | Older failed periods retried per run after the due period |
 | `gemini_model` | `"gemini-2.5-flash"` | Legacy default model; now used only as the Gemini-as-translator model on the combined translate-and-classify path. Classification uses `gemini_model_primary` / `gemini_model_secondary` instead |
 | `gemini_min_interval_sec` | `7` | Minimum interval between Gemini requests, in seconds (fallback when a model has no entry in `gemini_min_intervals`) |
 | `gemini_max_retries` | `4` | Maximum retries for temporary errors |
@@ -1168,9 +1225,15 @@ python3 scripts/repost_missing_channels.py --plan repost_plan.json --dry-run
 
 日次の同点順位はSciRate自身の決定的な並びをそのまま使う。1 Scite以上が3本未満なら、0 Sciteの論文で埋めずに該当本数だけ投稿する。APIが空なら、その日は対象となる発表バッチなしとしてチャンネル投稿を行わない。週次カードには現在のScite数を付け、日次Top 3に掲載済みならその旨も表示する。
 
-本番ではSciRateのHTMLをスクレイピングしない。upstream PR `scirate/scirate#535` で提案されているJSON endpoint（現在は `https://scirate.com/arxiv/quant-ph.json?date=YYYY-MM-DD&range=N&page=1`）を確認する。有効な `papers` 配列が返るまでは `waiting_for_api` とし、永続キューだけを処理してbot-emergencyに案内を出し、正常終了する。最初の有効なレスポンスから自動的に有効化する。一度利用可能になった後の障害は `degraded` とし、未取得の日次・週次期間を `pending_discovery` に保存して、同じmodeの次回実行で自動的に追いつく。取得済み投稿と翻訳も永続キューから再開する。
+本番ではSciRateのHTMLをスクレイピングしない。upstream PR `scirate/scirate#535` で提案されているJSON endpoint（現在は `https://scirate.com/arxiv/quant-ph.json?date=YYYY-MM-DD&range=N&page=1`）を毎回最優先で確認する。公式endpointが利用できない場合に限り、同じ`papers` schemaを返す信頼済みJSON中継をRepository Variable `SCIRATE_RELAY_URL_TEMPLATE`で指定できる。1ページで完結するsnapshotには`"complete": true`と厳密な期間metadataを必須とする。認証が必要ならActions Secret `SCIRATE_RELAY_BEARER_TOKEN`を使い、Bearer headerは中継先にだけ送信する。これは姉妹研究室など、通常に取得できる環境が1日1回生成する低頻度snapshot用であり、Cloudflare回避proxy用ではない。
 
-日次ではresponse dateと各行の`pubdate`を検証する。全体のスコア降順も検証し、週次で`scirate_api_max_pages`以内に30 Scitesの境界まで取得できなければ、不完全な結果を投稿せず失敗させる。SciRateが別pathを公開した場合はRepository Variable `SCIRATE_API_URL_TEMPLATE`を変更する。`{date}`・`{days}`・`{page}`を使用できる。paginationは`SCIRATE_API_PAGE_SIZE`と`SCIRATE_API_MAX_PAGES`で調整できる。
+有効な`papers`配列が返らない間は、公式のみなら`waiting_for_api`、中継設定済みなら`waiting_for_source`とし、永続キューだけを処理してbot-emergencyに案内を出し、正常終了する。初回障害を含め、取得前に対象期間を必ず`pending_discovery`へ保存するため、後続runで自動的に追いつく。公式APIは毎回先に再試行するので、利用可能になった時点で中継から自動復帰する。取得済み投稿と翻訳も永続キューから再開する。
+
+日次ではresponse dateと各行の`pubdate`を検証する。全体のスコア降順も検証し、週次で`scirate_api_max_pages`以内に30 Scitesの境界まで取得できなければ、不完全な結果を投稿せず失敗させる。SciRateが別pathを公開した場合はRepository Variable `SCIRATE_API_URL_TEMPLATE`を変更する。`{date}`・`{days}`・`{page}`を使用できる。paginationは`SCIRATE_API_PAGE_SIZE`と`SCIRATE_API_MAX_PAGES`で調整できる。中継URLも同じplaceholderを使う。URLにcredentialを埋め込まず、Bearer token secretを使う。
+
+各runでは当期を最初に試し、その後`scirate_backlog_max_periods`（既定8）件まで古いpending期間を再試行する。当期だけ未生成でも過去分を回収でき、壊れた過去1件が当期を塞ぐこともない。どちらの失敗も後続成功で消さず、運用レポートと`pending_discovery`に残す。
+
+1ファイルで完結する中継snapshotは、上記英語節のJSON例のように`date`・`complete: true`・`range_days`・`period_start`・`period_end`・`papers`を返す。週次なら7および月曜〜日曜の全期間と厳密一致させる。各行には最低限`uid`・`scites_count`・`pubdate`を入れ、SciRateの順序（Scite数降順および同点順）を保持する。不正な行、期間metadata不一致、`pubdate`範囲外、重複ID、降順崩れは不完全投稿せずsnapshot全体を拒否する。
 
 日次・週次の重複排除とretryは`scirate_weekly_state.json`が管理する。3フェーズ（`--discover-only` / `--translate-only` / `--deliver-only`）は維持する。`posted_log.json`に翻訳・分類表示名があれば再利用し、翻訳がなければ通常の翻訳chainを使う。投稿先は常にSciRate専用チャンネルなので、新たなAI分類は呼ばない。運用レポートだけは引き続きbot-emergencyへ送る。
 
@@ -1181,7 +1244,7 @@ python3 scirate_weekly.py --mode daily --date 2026-08-03 --dry-run
 python3 scirate_weekly.py --mode weekly --date 2026-08-09 --dry-run
 ```
 
-`--html-file PATH` はローカルfixtureによるparser確認専用として残している。本番ではHTML fallback、proxy rotation、403回避用のUser-Agent偽装は行わない。
+`--html-file PATH` はローカルfixtureによるparser確認専用として残している。本番ではHTML fallback、CAPTCHA solver、proxy rotation、origin IP直撃、403回避用のUser-Agent偽装は行わない。中継にはbrowser cookieやCloudflare clearance tokenではなく、正規化したJSONだけを置く。
 
 ---
 
@@ -1281,6 +1344,16 @@ DISCORD_WEBHOOK_SENSING
 DISCORD_WEBHOOK_FOUNDATIONS
 DISCORD_WEBHOOK_OTHER
 ```
+
+SciRate中継に認証が必要な場合のみ、次のSecretも登録する。
+
+```text
+SCIRATE_RELAY_BEARER_TOKEN      # 指定したHTTPS中継URLにだけ送信
+```
+
+中継endpointはSecretではなくRepository Variable
+`SCIRATE_RELAY_URL_TEMPLATE`へ分離して登録する。redirectは拒否し、tokenを
+公式SciRate endpointへ送ることはない。
 
 **API キー(使うもののみ)**
 
@@ -1492,6 +1565,7 @@ verifiable delegation, untrusted server, malicious server, client-server
 | `scirate_api_url_template` | SciRate PR #535 path | JSON API template。`{date}`・`{days}`・`{page}`を使用可能 |
 | `scirate_api_max_pages` | `20` | threshold境界前の不完全取得を拒否するための安全上限 |
 | `scirate_api_page_size` | `50` | 最終ページ判定に使う想定upstream page size |
+| `scirate_backlog_max_periods` | `8` | 当期取得後に1 runで再試行する過去の失敗期間数 |
 | `gemini_model` | `"gemini-2.5-flash"` | レガシーなデフォルト値。Gemini が翻訳も兼ねる「翻訳+分類」経路でのみ使用される。分類には `gemini_model_primary` / `gemini_model_secondary` を使う |
 | `gemini_min_interval_sec` | `7` | Gemini リクエスト間の最小間隔(秒)。`gemini_min_intervals` に該当モデルの指定がない場合のフォールバック値 |
 | `gemini_max_retries` | `4` | 一時的エラー時のリトライ上限回数 |

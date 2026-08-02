@@ -418,6 +418,7 @@
   "scirate_api_url_template": "https://scirate.com/arxiv/quant-ph.json?date={date}&range={days}&page={page}",
   "scirate_api_max_pages": 20,
   "scirate_api_page_size": 50,
+  "scirate_backlog_max_periods": 8,
 
   "genres": [
     {

@@ -9,7 +9,12 @@
  },
  "pending_discovery": {
   "daily": {},
-  "weekly": {}
+  "weekly": {
+   "2026-07-27_2026-08-02": {
+    "target_date": "2026-08-02",
+    "queued_at": "2026-08-02T22:37:08Z"
+   }
+  }
  },
  "daily_posted": {},
  "weekly_posted": {},

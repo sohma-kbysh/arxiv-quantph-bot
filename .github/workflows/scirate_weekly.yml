@@ -56,6 +56,11 @@ jobs:
           SCIRATE_API_URL_TEMPLATE: ${{ vars.SCIRATE_API_URL_TEMPLATE }}
           SCIRATE_API_PAGE_SIZE: ${{ vars.SCIRATE_API_PAGE_SIZE }}
           SCIRATE_API_MAX_PAGES: ${{ vars.SCIRATE_API_MAX_PAGES }}
+          SCIRATE_BACKLOG_MAX_PERIODS: ${{ vars.SCIRATE_BACKLOG_MAX_PERIODS }}
+          # Optional trusted mirror produced by an environment that can read
+          # SciRate normally. The official API is always attempted first.
+          SCIRATE_RELAY_URL_TEMPLATE: ${{ vars.SCIRATE_RELAY_URL_TEMPLATE }}
+          SCIRATE_RELAY_BEARER_TOKEN: ${{ secrets.SCIRATE_RELAY_BEARER_TOKEN }}
         run: python scirate_weekly.py --discover-only
 
       - name: Commit discovered SciRate digest queue

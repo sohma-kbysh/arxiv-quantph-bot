@@ -223,6 +223,188 @@ class SciRateReliabilityTests(unittest.TestCase):
                     "https://api.test/feed?page={page}", 7, 30,
                     max_pages=1)
 
+        duplicate = {
+            "papers": [
+                {"uid": PAPER_ID, "scites_count": 40},
+                {"uid": PAPER_ID, "scites_count": 39},
+            ],
+        }
+        with patch.object(
+                arxiv_bot, "http_get",
+                return_value=json.dumps(duplicate).encode()):
+            with self.assertRaisesRegex(
+                    scirate_weekly.SciRateAPIError, "duplicate"):
+                scirate_weekly.fetch_scirate_candidates_api(
+                    "https://api.test/feed?page={page}", 7, 30)
+
+    def test_relay_complete_snapshot_gets_token_only_after_official_failure(
+            self) -> None:
+        requests: list[tuple[str, dict[str, str]]] = []
+
+        def fetch(url: str, *, timeout: int,
+                  headers: dict[str, str],
+                  allow_redirects: bool = True) -> bytes:
+            del timeout
+            captured = dict(headers)
+            captured["X-Test-Allow-Redirects"] = str(allow_redirects)
+            requests.append((url, captured))
+            if "official.test" in url:
+                raise OSError("official HTTP 403")
+            return json.dumps({
+                "complete": True,
+                "date": "2026-08-02",
+                "range_days": 7,
+                "period_start": "2026-07-27",
+                "period_end": "2026-08-02",
+                "papers": [{
+                    "uid": PAPER_ID,
+                    "scites_count": 30,
+                    "pubdate": "2026-07-30",
+                }],
+            }).encode()
+
+        with patch.object(arxiv_bot, "http_get", side_effect=fetch):
+            candidates, pages, provider, primary_error = (
+                scirate_weekly.fetch_scirate_candidates_with_fallback(
+                    "https://official.test/feed?page={page}",
+                    "https://relay.test/snapshot?page={page}",
+                    7,
+                    30,
+                    max_pages=1,
+                    page_size=1,
+                    target_date="2026-08-02",
+                    relay_bearer_token="relay-secret",
+                )
+            )
+
+        self.assertEqual([row["id"] for row in candidates], [PAPER_ID])
+        self.assertEqual(pages, 1)
+        self.assertEqual(provider, "relay")
+        self.assertIn("HTTP 403", primary_error)
+        self.assertEqual(len(requests), 2)
+        self.assertNotIn("Authorization", requests[0][1])
+        self.assertEqual(
+            requests[1][1]["Authorization"], "Bearer relay-secret")
+        self.assertEqual(
+            requests[1][1]["X-Test-Allow-Redirects"], "False")
+
+    def test_authenticated_relay_requires_credential_free_https(self) -> None:
+        with patch.object(
+                arxiv_bot, "http_get",
+                side_effect=AssertionError("unsafe URL must not be fetched")):
+            with self.assertRaisesRegex(
+                    scirate_weekly.SciRateAPIError,
+                    "credential-free HTTPS"):
+                scirate_weekly.fetch_scirate_candidates_api(
+                    "http://relay.test/feed?page={page}",
+                    7,
+                    30,
+                    bearer_token="relay-secret",
+                    require_https=True,
+                )
+
+    def test_relay_requires_complete_marker_and_response_date(self) -> None:
+        without_complete = {
+            "date": "2026-08-02",
+            "range_days": 7,
+            "period_start": "2026-07-27",
+            "period_end": "2026-08-02",
+            "papers": [{
+                "uid": PAPER_ID, "scites_count": 30,
+                "pubdate": "2026-07-30",
+            }],
+        }
+        with patch.object(
+                arxiv_bot, "http_get",
+                return_value=json.dumps(without_complete).encode()):
+            with self.assertRaisesRegex(
+                    scirate_weekly.SciRateAPIError, "complete=true"):
+                scirate_weekly.fetch_scirate_candidates_api(
+                    "https://relay.test/feed?page={page}", 7, 30,
+                    target_date="2026-08-02",
+                    require_pubdate=True,
+                    require_response_date=True,
+                    require_complete_snapshot=True,
+                    require_period_metadata=True,
+                    require_https=True,
+                )
+
+        without_date = {"complete": True, "papers": []}
+        with patch.object(
+                arxiv_bot, "http_get",
+                return_value=json.dumps(without_date).encode()):
+            with self.assertRaisesRegex(
+                    scirate_weekly.SciRateAPIError, "has no date"):
+                scirate_weekly.fetch_scirate_candidates_api(
+                    "https://relay.test/feed?page={page}", 7, 30,
+                    target_date="2026-08-02",
+                    require_pubdate=True,
+                    require_response_date=True,
+                    require_complete_snapshot=True,
+                    require_period_metadata=True,
+                    require_https=True,
+                )
+
+        wrong_period = {
+            "date": "2026-08-02",
+            "complete": True,
+            "range_days": 1,
+            "period_start": "2026-08-02",
+            "period_end": "2026-08-02",
+            "papers": [],
+        }
+        with patch.object(
+                arxiv_bot, "http_get",
+                return_value=json.dumps(wrong_period).encode()):
+            with self.assertRaisesRegex(
+                    scirate_weekly.SciRateAPIError, "period metadata"):
+                scirate_weekly.fetch_scirate_candidates_api(
+                    "https://relay.test/feed?page={page}", 7, 30,
+                    target_date="2026-08-02",
+                    require_pubdate=True,
+                    require_response_date=True,
+                    require_complete_snapshot=True,
+                    require_period_metadata=True,
+                    require_https=True,
+                )
+
+    def test_weekly_snapshot_rejects_papers_outside_period(self) -> None:
+        payload = {
+            "date": "2026-08-02",
+            "complete": True,
+            "range_days": 7,
+            "period_start": "2026-07-27",
+            "period_end": "2026-08-02",
+            "papers": [{
+                "uid": PAPER_ID, "scites_count": 30,
+                "pubdate": "2026-07-26",
+            }],
+        }
+        with patch.object(
+                arxiv_bot, "http_get",
+                return_value=json.dumps(payload).encode()):
+            with self.assertRaisesRegex(
+                    scirate_weekly.SciRateAPIError, "outside"):
+                scirate_weekly.fetch_scirate_candidates_api(
+                    "https://relay.test/feed?page={page}", 7, 30,
+                    target_date="2026-08-02",
+                    require_pubdate=True,
+                    require_response_date=True,
+                    require_complete_snapshot=True,
+                    require_period_metadata=True,
+                    require_https=True,
+                )
+
+    def test_no_relay_preserves_official_failure_without_retry(self) -> None:
+        api = Mock(side_effect=scirate_weekly.SciRateAPIError("official 403"))
+        with patch.object(
+                scirate_weekly, "fetch_scirate_candidates_api", new=api):
+            with self.assertRaisesRegex(
+                    scirate_weekly.SciRateAPIError, "official 403"):
+                scirate_weekly.fetch_scirate_candidates_with_fallback(
+                    "https://official.test/feed", "", 7, 30)
+        self.assertEqual(api.call_count, 1)
+
     def test_auto_schedule_uses_jst_weekdays_and_sunday(self) -> None:
         self.assertEqual(
             scirate_weekly.resolve_mode("auto", date(2026, 8, 3)), "daily")
@@ -271,6 +453,133 @@ class SciRateReliabilityTests(unittest.TestCase):
         self.assertEqual(api.call_args.kwargs["target_date"], "2026-08-03")
         self.assertEqual(api.call_args.kwargs["limit"], 3)
 
+    def test_official_failure_uses_relay_and_records_provider(self) -> None:
+        candidate = {
+            "id": PAPER_ID, "scites": 7, "rank": 1,
+            "pubdate": "2026-08-03", "submit_date": "2026-08-02",
+        }
+        api = Mock(side_effect=[
+            scirate_weekly.SciRateAPIError("official HTTP 403"),
+            ([candidate], 1),
+        ])
+        metadata = Mock(return_value={PAPER_ID: scirate_paper()})
+        state_after, _report = self._run_main(
+            scirate_weekly.normalize_state({}),
+            ["scirate_weekly.py", "--mode", "daily", "--date",
+             "2026-08-03", "--discover-only"],
+            env={
+                "SCIRATE_RELAY_URL_TEMPLATE": (
+                    "https://relay.test/feed?date={date}&page={page}"),
+                "SCIRATE_RELAY_BEARER_TOKEN": "relay-secret",
+            },
+            patches=(
+                patch.object(
+                    scirate_weekly, "fetch_scirate_candidates_api", new=api),
+                patch.object(
+                    scirate_weekly, "fetch_arxiv_metadata", new=metadata),
+            ))
+
+        status = state_after["source_status"]
+        self.assertEqual(status["provider"], "relay")
+        self.assertFalse(status["api_ever_available"])
+        self.assertTrue(status["source_ever_available"])
+        self.assertEqual(status["last_primary_error"], "official HTTP 403")
+        self.assertNotIn(
+            "2026-08-03", state_after["pending_discovery"]["daily"])
+        self.assertEqual(api.call_count, 2)
+        self.assertNotIn("bearer_token", api.call_args_list[0].kwargs)
+        self.assertEqual(
+            api.call_args_list[1].kwargs["bearer_token"], "relay-secret")
+        self.assertTrue(
+            api.call_args_list[1].kwargs["require_complete_snapshot"])
+        self.assertTrue(
+            api.call_args_list[1].kwargs["require_period_metadata"])
+        self.assertTrue(api.call_args_list[1].kwargs["require_https"])
+
+    def test_backlog_rotation_reaches_never_attempted_periods(self) -> None:
+        pending = {}
+        for day in range(1, 11):
+            key = f"2026-08-{day:02d}"
+            pending[key] = {
+                "target_date": key,
+                "queued_at": f"2026-08-{day:02d}T14:30:00Z",
+            }
+            if day <= 8:
+                pending[key]["last_attempt_at"] = (
+                    f"2026-08-20T14:{day:02d}:00Z")
+
+        ordered = scirate_weekly.ordered_discovery_targets(
+            pending, "2026-08-11", date(2026, 8, 11), 8)
+        selected = [key for key, _target in ordered]
+
+        self.assertEqual(selected[0], "2026-08-11")
+        self.assertIn("2026-08-09", selected)
+        self.assertIn("2026-08-10", selected)
+        self.assertNotIn("2026-08-08", selected)
+
+    def test_all_sources_fail_and_initial_period_remains_pending(self) -> None:
+        api = Mock(side_effect=[
+            scirate_weekly.SciRateAPIError("official HTTP 403"),
+            scirate_weekly.SciRateAPIError("relay HTTP 503"),
+        ])
+        state_after, _report = self._run_main(
+            scirate_weekly.normalize_state({}),
+            ["scirate_weekly.py", "--mode", "weekly", "--date",
+             "2026-08-02", "--discover-only"],
+            env={
+                "SCIRATE_RELAY_URL_TEMPLATE": (
+                    "https://relay.test/feed?date={date}&page={page}"),
+            },
+            patches=(patch.object(
+                scirate_weekly, "fetch_scirate_candidates_api", new=api),))
+
+        period = "2026-07-27_2026-08-02"
+        self.assertEqual(
+            state_after["pending_discovery"]["weekly"][period][
+                "target_date"],
+            "2026-08-02",
+        )
+        self.assertNotIn(period, state_after["weekly_posted"])
+        self.assertEqual(
+            state_after["source_status"]["status"], "waiting_for_source")
+        self.assertIn(
+            "relay HTTP 503", state_after["source_status"]["last_error"])
+
+    def test_official_recovery_is_preferred_over_configured_relay(self) -> None:
+        state = scirate_weekly.normalize_state({})
+        state["source_status"] = {
+            "status": "available",
+            "provider": "relay",
+            "api_ever_available": False,
+            "source_ever_available": True,
+        }
+        candidate = {
+            "id": PAPER_ID, "scites": 7, "rank": 1,
+            "pubdate": "2026-08-03", "submit_date": "2026-08-02",
+        }
+        api = Mock(return_value=([candidate], 1))
+        metadata = Mock(return_value={PAPER_ID: scirate_paper()})
+        state_after, _report = self._run_main(
+            state,
+            ["scirate_weekly.py", "--mode", "daily", "--date",
+             "2026-08-03", "--discover-only"],
+            env={
+                "SCIRATE_RELAY_URL_TEMPLATE": "https://relay.test/feed",
+                "SCIRATE_RELAY_BEARER_TOKEN": "relay-secret",
+            },
+            patches=(
+                patch.object(
+                    scirate_weekly, "fetch_scirate_candidates_api", new=api),
+                patch.object(
+                    scirate_weekly, "fetch_arxiv_metadata", new=metadata),
+            ))
+
+        self.assertEqual(api.call_count, 1)
+        self.assertNotIn("bearer_token", api.call_args.kwargs)
+        self.assertEqual(state_after["source_status"]["provider"], "official")
+        self.assertTrue(state_after["source_status"]["api_ever_available"])
+        self.assertEqual(state_after["source_status"]["last_primary_error"], "")
+
     def test_degraded_daily_period_is_caught_up_on_next_daily_run(self) -> None:
         state = scirate_weekly.normalize_state({})
         state["source_status"] = {
@@ -292,10 +601,113 @@ class SciRateReliabilityTests(unittest.TestCase):
 
         self.assertEqual(
             [call.kwargs["target_date"] for call in api.call_args_list],
-            ["2026-08-03", "2026-08-04"])
+            ["2026-08-04", "2026-08-03"])
         self.assertEqual(state_after["pending_discovery"]["daily"], {})
         self.assertTrue(state_after["daily_posted"]["2026-08-03"]["empty"])
         self.assertTrue(state_after["daily_posted"]["2026-08-04"]["empty"])
+
+    def test_broken_old_backlog_does_not_starve_due_period(self) -> None:
+        state = scirate_weekly.normalize_state({})
+        state["source_status"] = {
+            "status": "available", "api_ever_available": True,
+            "source_ever_available": True,
+        }
+        state["pending_discovery"]["daily"]["2026-08-03"] = {
+            "target_date": "2026-08-03",
+            "queued_at": "2026-08-03T14:30:00Z",
+        }
+        api = Mock(side_effect=[
+            ([], 1),
+            scirate_weekly.SciRateAPIError("old snapshot expired"),
+        ])
+        metadata = Mock(return_value={})
+        state_after, _report = self._run_main(
+            state,
+            ["scirate_weekly.py", "--mode", "daily", "--date",
+             "2026-08-04", "--discover-only"],
+            patches=(
+                patch.object(
+                    scirate_weekly, "fetch_scirate_candidates_api", new=api),
+                patch.object(
+                    scirate_weekly, "fetch_arxiv_metadata", new=metadata),
+            ))
+
+        self.assertEqual(
+            [call.kwargs["target_date"] for call in api.call_args_list],
+            ["2026-08-04", "2026-08-03"],
+        )
+        self.assertTrue(state_after["daily_posted"]["2026-08-04"]["empty"])
+        self.assertIn(
+            "2026-08-03", state_after["pending_discovery"]["daily"])
+
+    def test_missing_due_period_does_not_starve_valid_backlog(self) -> None:
+        state = scirate_weekly.normalize_state({})
+        state["pending_discovery"]["daily"]["2026-08-03"] = {
+            "target_date": "2026-08-03",
+            "queued_at": "2026-08-03T14:30:00Z",
+        }
+        api = Mock(side_effect=[
+            scirate_weekly.SciRateAPIError("current snapshot not ready"),
+            ([], 1),
+        ])
+        metadata = Mock(return_value={})
+        state_after, _report = self._run_main(
+            state,
+            ["scirate_weekly.py", "--mode", "daily", "--date",
+             "2026-08-04", "--discover-only"],
+            patches=(
+                patch.object(
+                    scirate_weekly, "fetch_scirate_candidates_api", new=api),
+                patch.object(
+                    scirate_weekly, "fetch_arxiv_metadata", new=metadata),
+            ))
+
+        self.assertEqual(
+            [call.kwargs["target_date"] for call in api.call_args_list],
+            ["2026-08-04", "2026-08-03"],
+        )
+        self.assertIn(
+            "2026-08-04", state_after["pending_discovery"]["daily"])
+        self.assertTrue(state_after["daily_posted"]["2026-08-03"]["empty"])
+        self.assertEqual(state_after["source_status"]["status"], "degraded")
+        self.assertIn(
+            "2026-08-04", state_after["source_status"]["pending_errors"])
+
+    def test_metadata_failure_does_not_starve_other_periods(self) -> None:
+        state = scirate_weekly.normalize_state({})
+        state["pending_discovery"]["daily"]["2026-08-03"] = {
+            "target_date": "2026-08-03",
+            "queued_at": "2026-08-03T14:30:00Z",
+        }
+        candidate = {
+            "id": PAPER_ID, "scites": 7, "rank": 1,
+            "pubdate": "2026-08-04", "submit_date": "2026-08-03",
+        }
+        api = Mock(side_effect=[([candidate], 1), ([], 1)])
+        metadata = Mock(side_effect=[
+            RuntimeError("arXiv omitted current paper"),
+            {},
+        ])
+        state_after, _report = self._run_main(
+            state,
+            ["scirate_weekly.py", "--mode", "daily", "--date",
+             "2026-08-04", "--discover-only"],
+            patches=(
+                patch.object(
+                    scirate_weekly, "fetch_scirate_candidates_api", new=api),
+                patch.object(
+                    scirate_weekly, "fetch_arxiv_metadata", new=metadata),
+            ))
+
+        self.assertEqual(api.call_count, 2)
+        self.assertIn(
+            "2026-08-04", state_after["pending_discovery"]["daily"])
+        self.assertTrue(state_after["daily_posted"]["2026-08-03"]["empty"])
+        self.assertEqual(state_after["source_status"]["status"], "degraded")
+        self.assertIn(
+            "arXiv metadata API",
+            state_after["source_status"]["pending_errors"]["2026-08-04"],
+        )
 
     def test_daily_delivery_is_one_message_to_dedicated_webhook(self) -> None:
         state = digest_state("daily")
@@ -388,6 +800,8 @@ class SciRateReliabilityTests(unittest.TestCase):
                 env={"DISCORD_WEBHOOK_SCIRATE": "https://discord.test/scirate"})
         self.assertEqual(report["source_notices"][0]["source"],
                          "SciRate JSON API")
+        self.assertIn(
+            "再取得待ち", report["source_notices"][0]["message"])
         self.assertEqual(report["source_failures"], [])
 
         degraded = scirate_weekly.normalize_state({})
@@ -399,7 +813,17 @@ class SciRateReliabilityTests(unittest.TestCase):
             ["scirate_weekly.py", "--mode", "weekly", "--date",
              "2026-08-02", "--deliver-only"])
         self.assertEqual(report["source_failures"][0]["source"],
-                         "SciRate JSON API")
+                         "SciRate discovery")
+
+    def test_report_discloses_when_relay_replaced_failed_official(self) -> None:
+        notices, failures = scirate_weekly.source_report_fields({
+            "status": "available",
+            "provider": "relay",
+            "last_primary_error": "SciRate JSON API HTTP 403",
+        })
+        self.assertEqual(failures, [])
+        self.assertEqual(notices[0]["source"], "SciRate trusted relay")
+        self.assertIn("HTTP 403", notices[0]["message"])
 
 
 if __name__ == "__main__":

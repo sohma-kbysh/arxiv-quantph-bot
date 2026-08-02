@@ -1,6 +1,12 @@
 {
  "schema_version": 2,
- "source_status": {},
+ "source_status": {
+  "api_ever_available": false,
+  "status": "waiting_for_api",
+  "last_probe_at": "2026-08-02T22:37:08Z",
+  "last_error": "SciRate JSON API HTTP 403",
+  "last_endpoint": "https://scirate.com/arxiv/quant-ph.json?<redacted>"
+ },
  "pending_discovery": {
   "daily": {},
   "weekly": {}

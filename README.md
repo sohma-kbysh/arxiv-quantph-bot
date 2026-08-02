@@ -1,7 +1,10 @@
 # New arXiv quant-ph paper -> Discord notification bot (with configurable translation)
 
 This bot fetches the official arXiv RSS feed (`rss.arxiv.org/rss/quant-ph`) three times a day (Monday-Saturday), classifies each paper into one or more of 15 genres, and posts it to every corresponding Discord channel through webhooks with a translated title and abstract. The embed footer of each post lists **all** genres assigned to the paper, so a multi-genre paper shows its full classification in every channel it appears in.
-In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Azure Translator -> Google Cloud Translation. Because Gemini only returns genre IDs, this setup uses less API quota than asking Gemini to translate as well. Classification itself is routed across two Gemini models by a TF-IDF pre-screen: most papers go to the primary model `gemini-2.5-flash`, with the rest falling to the secondary model `gemini-2.5-flash-lite` under budget or rate-limit pressure. If both Gemini models fail or hit quota, the classifier can fall through to an OpenAI-compatible fallback, currently configured as Cerebras `gpt-oss-120b`. The bot uses **only the Python standard library**; `pip install` is not required.
+
+In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Azure Translator -> Google Cloud Translation. Because Gemini only returns genre IDs, this setup uses less API quota than asking Gemini to translate as well. Classification itself is routed across two Gemini models by a TF-IDF pre-screen: most papers go to the primary model `gemini-2.5-flash`, with the rest falling to the secondary model `gemini-2.5-flash-lite` under budget or rate-limit pressure. If both Gemini models fail or hit quota, the classifier falls through to an OpenAI-compatible fallback, currently configured as Cerebras `gpt-oss-120b`. The bot uses **only the Python standard library**; `pip install` is not required.
+
+Completeness is the primary design goal. Every run is split into three durable phases (discover -> translate -> deliver), and the delivery state is tracked **per paper and per channel**, so a partial failure retries only the channels that have not been confirmed yet. See "Execution phases and durable state" below.
 
 After every run, the bot posts a **run report in Japanese to the bot-emergency channel** (`DISCORD_WEBHOOK_BOT_EMERGENCY`), including successful runs: which papers were posted to which channels, what was deferred for translation, and what failed. See "Monitoring: bot-emergency channel" below.
 
@@ -17,21 +20,26 @@ The checked-in `config.json` remains configured for the original Japanese Discor
 | --- | --- |
 | `arxiv_bot.py` | Main bot. Uses only the Python standard library |
 | `config.json` | All configuration: feeds, genre definitions, API behavior, classification parameters |
-| `seen_ids.json` | Durable completed-ID, per-channel delivery queue, external-review, and source-cursor state. Automatically committed by Actions |
+| `seen_ids.json` | Durable state: completed IDs, per-channel delivery queue, external-review cache, unreviewed external candidates, and per-source fetch cursors. Automatically committed by Actions |
 | `posted_log.json` | Metadata log for posted papers. JSON array, capped at 5000 entries |
 | `scirate_weekly.py` | Weekend bot that reposts popular weekly quant-ph papers from SciRate into the normal genre channels |
-| `scirate_weekly_state.json` | Posted arXiv ID state for the SciRate weekend bot |
+| `scirate_weekly_state.json` | Durable state for the SciRate weekend bot (same three-phase structure) |
 | `test_feed.xml` | Sample RSS feed for local testing |
+| `tests/test_external_arxiv.py` | Tests for adjacent-category API queries, external review, and the QEC policy |
+| `tests/test_delivery_reliability.py` | Tests for per-channel delivery receipts, resumable phases, and webhook error handling |
+| `tests/test_repost_reliability.py` | Tests for repost idempotency and webhook validation |
+| `tests/test_scirate_reliability.py` | Tests for the SciRate three-phase pipeline |
 | `scripts/clean_discord_urls.py` | Helper script to find or delete arXiv URL posts in Discord channels |
 | `scripts/lock_discord_channels.py` | Helper script to make selected Discord channels read/reaction-only for non-admin users |
 | `scripts/rollback_posted_day.py` | Helper script to remove one local day from `posted_log.json` and `seen_ids.json` before reposting |
 | `scripts/audit_classification.py` | Helper script that re-runs Gemini classification for already-posted papers and prints only the differences |
 | `scripts/repost_missing_channels.py` | Posts already-published papers to genre channels missed by the original classification, reusing stored translations |
 | `repost_plan.json` | Repost plan (paper id -> channels to add), generated from a classification audit |
+| `DESIGN_BACKLOG.md` | Open design decisions and their proposed order of work |
 | `.github/workflows/notify.yml` | GitHub Actions schedule and secret references for the main notifier |
 | `.github/workflows/scirate_weekly.yml` | GitHub Actions schedule for the SciRate weekend digest |
 | `.github/workflows/classification_audit.yml` | Manually triggered workflow that audits one day of past classifications |
-| `.github/workflows/repost.yml` | Manually triggered workflow that posts papers to missing channels per repost_plan.json |
+| `.github/workflows/repost.yml` | Manually triggered workflow that posts papers to missing channels per a repost plan |
 
 ---
 
@@ -45,13 +53,13 @@ GitHub Actions runs the main notifier **three times a day, Monday through Saturd
 | 04:00 | 13:00 | Cover missed or delayed items |
 | 07:00 | 16:00 | Same as above |
 
-The workflow can also be run manually (`workflow_dispatch`) with two options: `use_test_feed` reads `test_feed.xml` instead of the live RSS feed, and `test_emergency_alert` sends only a test message to the bot-emergency channel without running the notifier.
+The workflow can also be run manually (`workflow_dispatch`) with three inputs.
 
-`seen_ids.json` stores completed IDs and per-channel receipts, so retries normally
-skip channels already confirmed as delivered. Delivery is intentionally
-**at-least-once**: an unusual runner failure after Discord accepts a webhook but
-before its receipt is committed can produce a duplicate, because Discord
-webhooks do not provide an idempotency key.
+| Input | Default | Description |
+| --- | --- | --- |
+| `use_test_feed` | `false` | Read `test_feed.xml` instead of the live RSS feed |
+| `test_emergency_alert` | `false` | Send only a test message to the bot-emergency channel without running the notifier |
+| `external_backfill_days` | `"0"` | One-time lookback in days for the adjacent-category API sources only. `0` keeps the configured window |
 
 On weekends, a separate workflow posts a SciRate weekly popular-paper digest.
 
@@ -61,66 +69,58 @@ On weekends, a separate workflow posts a SciRate weekly popular-paper digest.
 
 ---
 
-## Processing flow
+## Execution phases and durable state
+
+Each run is split into three phases, and the state file is committed to the repository between phases. Every phase can be resumed independently, so an interrupted run continues from where it stopped instead of restarting.
 
 ```text
-Fetch sources -> classify -> persist/commit delivery queue -> translate -> persist/commit queue -> Discord delivery -> persist/commit per-channel receipts
+discover + classify -> commit -> translate -> commit -> deliver -> commit per-channel receipts
 ```
 
-### 1. Fetch RSS
+| Phase | Command | What it does |
+| --- | --- | --- |
+| Discover | `python3 arxiv_bot.py --discover-only` | Fetch RSS and adjacent-category API sources, classify, and write the delivery queue |
+| Translate | `python3 arxiv_bot.py --translate-only` | Translate queued papers and store the translations in the queue |
+| Deliver | `python3 arxiv_bot.py --deliver-only` | Post to Discord and record a receipt for every channel |
 
-The bot fetches RSS feeds for the categories listed in `config.json` under `feeds` (for example, `"quant-ph"`) and deduplicates papers by ID. If the same paper appears in multiple feeds, the first configured feed wins.
+`--prepare-only` runs discovery and translation together. The phase flags are mutually exclusive, and none of them can be combined with `--dry-run`. Running `arxiv_bot.py` with no flag performs all three phases in one process, which is the usual way to run it locally.
 
-In addition, `external_arxiv_queries` retrieves mechanically narrowed
-candidates whose primary category is adjacent to quant-ph and which are not
-already cross-listed to quant-ph, through custom Atom API queries:
+What this buys:
 
-- `cs.CR` -> usually `pqc` / `crypto`
-- `cs.CC` -> usually `complexity` / `algo`
-- `cs.IT` -> usually `qit` / `qec` / `network`
+- **Per-channel retries.** If a paper is delivered to `qec` but the `crypto` post fails, only `crypto` is retried on the next run. The paper is not marked complete until every assigned channel has a receipt.
+- **Translation failures survive the feed.** Papers whose translation failed stay in the durable queue, so they are still retried after they drop off the arXiv RSS feed.
+- **Unreviewed external candidates survive the lookback window.** Candidates without a completed review are stored with their metadata in `external_pending`.
+- **Fetch cursors close outage gaps.** Each adjacent-category source records the timestamp of its last successful fetch in `external_cursors`. The next run expands its lookback to cover the elapsed time plus `cursor_overlap_days` (default 2), so an Actions or arXiv API outage longer than the normal window cannot silently skip papers.
 
-The configured search terms are deliberately recall-oriented. Matching an API
-query never causes a post by itself. Candidates go through a separate strict
-review using the same configured classifier chain as normal classification
-(primary Gemini, secondary Gemini, then configured OpenAI-compatible
-fallbacks). Long term lists are split across short API queries, each query is
-paged until it crosses the configured lookback boundary, and the combined
-results are deduplicated. This avoids both unreliable oversized requests and
-silent truncation at one API result page.
+Delivery is intentionally **at-least-once**: an unusual runner failure after Discord accepts a webhook but before its receipt is committed can produce a duplicate, because Discord webhooks do not provide an idempotency key. The design prefers a rare duplicate over a silent loss.
 
-The source mappings above are soft hints, not output restrictions. External
-review can select any configured genre except `other`, up to
-`external_classify_max_genres`. Its prompt is completeness-oriented: a
-substantive secondary contribution or nontrivial application is enough, and
-`skip` is appropriate only when the connection appears solely in background,
-motivation, future work, citations, or comparison. A rejection is cached only
-after `external_skip_consensus` models independently return `skip`; if any
-reviewer selects a genre, the paper is accepted. A lone skip with no second
-working reviewer remains unreviewed for retry. Unresolved candidates are saved
-with their paper metadata in `external_pending`, so they continue to be
-reviewed even after the API lookback window expires. Accepted papers are also
-retryable until they are actually posted. Unlike normal quant-ph classification,
-an external candidate is never posted through TF-IDF or routed to `other` when
-LLM review cannot reach a decision.
+---
 
-The `qec` channel intentionally includes coding theory broadly whenever a
-paper has a non-incidental quantum, quantum-communication, or PQC connection.
-The code itself may be classical. High-signal code-construction and decoding
-terms add `qec` deterministically after classification, covering examples such
-as rank-metric and Gabidulin codes used in code-based cryptography.
+## Processing flow
 
-Normal quant-ph papers always consume classifier and translation capacity
-first. External strict review starts only after quant-ph classification is
-finished, and every quant-ph translation is sorted ahead of every external
-translation regardless of genre priority.
+### 1. Fetch sources
 
-External decisions are cached in `seen_ids.json` under `external_reviews`.
-Rejected IDs are not put in the global `seen` set, so the paper can still be
-processed normally if it is later cross-listed to quant-ph. `lookback_days`
-prevents a large historical backfill when an external query is enabled for the
-first time. For a one-time manual backfill, set
-`EXTERNAL_ARXIV_LOOKBACK_DAYS` (or the matching Actions workflow input) to the
-desired number of days; the configured normal window remains unchanged.
+The bot fetches RSS feeds for the categories listed in `config.json` under `feeds` (currently `"quant-ph"`) and deduplicates papers by ID. If the same paper appears in multiple feeds, the first configured feed wins.
+
+In addition, `external_arxiv_queries` retrieves mechanically narrowed candidates whose primary category is adjacent to quant-ph and which are not already cross-listed to quant-ph, through custom Atom API queries:
+
+| Source | Usual destinations | Search terms |
+| --- | --- | --- |
+| `cs.CR` | `pqc` / `crypto` | 50 |
+| `cs.CC` | `complexity` / `algo` | 9 |
+| `cs.IT` | `qit` / `qec` / `network` | 6 |
+
+The configured search terms are deliberately recall-oriented. Matching an API query never causes a post by itself. Long term lists are split across short API queries (`terms_per_query`, default 8), each query is paged until it crosses the configured lookback boundary, and the combined results are deduplicated. This avoids both unreliable oversized requests and silent truncation at one API result page.
+
+Candidates go through a separate strict review using the same configured classifier chain as normal classification (primary Gemini, secondary Gemini, then configured OpenAI-compatible fallbacks). The source mappings above are soft hints, not output restrictions: `allow_all_genres` is enabled for every source, so external review can select any configured genre except those listed in `excluded_genres` (currently `other`), up to `external_classify_max_genres`.
+
+The review prompt is completeness-oriented: a substantive secondary contribution or nontrivial application is enough, and `skip` is appropriate only when the connection appears solely in background, motivation, future work, citations, or comparison. A rejection is cached only after `external_skip_consensus` models independently return `skip`; if any reviewer selects a genre, the paper is accepted. A lone skip with no second working reviewer remains unreviewed for retry. Unlike normal quant-ph classification, an external candidate is never posted through TF-IDF or routed to `other` when LLM review cannot reach a decision.
+
+The `qec` channel intentionally includes coding theory broadly whenever a paper has a non-incidental quantum, quantum-communication, or PQC connection. The code itself may be classical. `qec_adjacent_coding_terms` (currently 53 phrases such as `linear code`, `rank-metric code`, `syndrome decoding`, `self-orthogonal`) adds `qec` deterministically after classification, covering examples such as rank-metric and Gabidulin codes used in code-based cryptography.
+
+Normal quant-ph papers always consume classifier and translation capacity first. External strict review starts only after quant-ph classification is finished, and every quant-ph translation is sorted ahead of every external translation regardless of genre priority.
+
+External decisions are cached in `seen_ids.json` under `external_reviews`. Rejected IDs are not put in the global completed-ID set, so the paper can still be processed normally if it is later cross-listed to quant-ph. `lookback_days` prevents a large historical backfill when an external query is enabled for the first time. For a one-time manual backfill, set `EXTERNAL_ARXIV_LOOKBACK_DAYS` (or the matching `external_backfill_days` Actions input) to the desired number of days; the configured normal window remains unchanged.
 
 ### 2. Filtering
 
@@ -140,14 +140,12 @@ A cross-listed paper is excluded only when its primary category matches `cross_d
 
 **Cross-list classification policy**
 
-Every paper obtained from the quant-ph RSS feed uses the normal AI
-classification and deterministic QEC/keyword policies, regardless of its
-primary category. Thus a `cs.IT`-primary paper cross-listed to quant-ph can
-reach QEC, QIT, or network instead of being overwritten to `other`.
-`cross_classify_primary_as_quantph` remains only as a compatibility safeguard
-for callers that explicitly classify a non-quant-ph source through the normal
-post-processing function; the adjacent-category API path uses its own strict
-review.
+Every paper obtained from the quant-ph RSS feed uses the normal AI classification and deterministic QEC/keyword policies, regardless of its primary category. Thus a `cs.IT`-primary paper cross-listed to quant-ph can reach QEC, QIT, or network instead of being overwritten to `other`.
+
+- Papers from the quant-ph RSS feed: classified normally regardless of primary category
+- Explicit external sources: high-recall search plus a strict LLM review of their own
+
+`cross_classify_primary_as_quantph` and `category_other_overrides` remain only as a compatibility safeguard for callers that explicitly classify a non-quant-ph source through the normal post-processing function; the adjacent-category API path uses its own strict review.
 
 ### 3. Genre classification + translation (two paths)
 
@@ -159,7 +157,7 @@ Before any Gemini call, every pending paper is first run through the same TF-IDF
 
 - Papers whose pre-screen genres touch none of `prescreen_defer_genres` (default: `nisq`, `hardware`, `sensing`, `foundations`, `other`) form the **priority group** and are always classified with the primary model `gemini_model_primary` (`gemini-2.5-flash`)
 - The rest form the **deferred group**. They are also classified with the primary model as long as the estimated number of Gemini requests for the run (priority batches + deferred batches) fits `gemini_primary_run_budget` (default: 20); otherwise the deferred group uses the secondary model `gemini_model_secondary` (`gemini-2.5-flash-lite`) to stay inside the free-tier daily quota
-- Each model has its own circuit breaker: persistent 429s or repeated 500/503s mark only that model dead for the rest of the run, and any papers still pending automatically fall through to the next classifier (`gemini-2.5-flash` -> `gemini-2.5-flash-lite` -> configured OpenAI-compatible fallbacks such as `gpt-oss-120b`). Only when every LLM classifier is unavailable does the bot post the TF-IDF pre-screen result directly (emergency fallback, as before)
+- Each model has its own circuit breaker: persistent 429s or repeated 500/503s mark only that model dead for the rest of the run, and any papers still pending automatically fall through to the next classifier (`gemini-2.5-flash` -> `gemini-2.5-flash-lite` -> configured OpenAI-compatible fallbacks such as `gpt-oss-120b`). Only when every LLM classifier is unavailable does the bot post the TF-IDF pre-screen result directly (emergency fallback)
 - `gemini_min_intervals` paces `gemini-2.5-flash` at 7s and `gemini-2.5-flash-lite` at 5s between requests; see "Notes" below for the underlying free-tier RPD/RPM limits
 - The prompt includes the full natural-language `description` for every genre, so papers can be classified by meaning even when they do not contain fixed keywords
 - Output format: `<<<k|genre_id>>>` or `<<<k|id1,id2>>>` for multi-label classification
@@ -168,12 +166,13 @@ Before any Gemini call, every pending paper is first run through the same TF-IDF
 
 **Fallback path: TF-IDF cosine similarity + keyword evidence scores**
 
-Used when Gemini is unavailable due to quota exhaustion or similar failures, or when Gemini does not return a result for an individual entry.
+Used when every LLM classifier is unavailable due to quota exhaustion or similar failures, or when the models do not return a result for an individual entry.
 
 - Vectorizes each genre's `description` plus its single-word `keywords` with TF-IDF (multi-word keyword phrases are excluded from the vector and scored separately, see below)
 - Computes cosine similarity against the paper's `title + abstract`
 - Applies arXiv category hints from `category_genre_hints` (+0.15 to the target genre) and forced `other` handling from `category_other_overrides` (+1.0 to `other`)
 - Words that appear in every genre get IDF=0 and do not affect the score; generic terms such as "quantum", "qubit", "state", and "system" are also stopworded out
+- The tokenizer keeps ASCII words only, so the fallback effectively scores English text; Japanese genre descriptions contribute almost nothing to it
 
 On top of the cosine similarity, **keyword evidence scores** are added for direct keyword hits in the paper text:
 
@@ -186,17 +185,14 @@ On top of the cosine similarity, **keyword evidence scores** are added for direc
 
 `fallback_keyword_boosts` in `config.json` defines additional per-genre phrase lists (for example "cat qubit" -> `qec`, "barren plateau" -> `nisq`) that receive the phrase bonuses above. This lets the fallback catch papers whose wording does not overlap with the genre descriptions.
 
-Translation on the fallback path uses the backends listed in `translators`. The current standard order is DeepL -> Azure Translator -> Google Cloud Translation.
-
 ### 4. Multi-label classification
 
 One paper can be classified into multiple genres and posted to each corresponding channel.
 
-- `classify_max_genres` (default: 2): maximum number of genres assigned to one paper
+- `classify_max_genres` (default: 2): the genre count requested in the LLM prompt, and a hard cut on the TF-IDF path
 - `classify_secondary_ratio` (default: 0.7; current config: 0.82, TF-IDF fallback only): secondary genres are accepted only when their score is at least this fraction of the top genre score, preventing weak accidental matches from causing multi-channel posts
-- On the Gemini path, the prompt instructs the LLM to first choose the genre of the paper's primary contribution, then add further genres (up to `classify_max_genres`) whenever the paper also has genuine value for researchers following that genre's channel -- for example, new error-correcting codes designed for transversal/fault-tolerant logic belong in both `qec` and `ft` -- but never to add a genre that is merely used as a tool or demonstration platform (e.g. a well-known algorithm simply run on quantum hardware is `hardware`, not `algo`). Duplicate genre IDs returned by the model are deduplicated while preserving order
-- `force_genre_keywords`: adds a configured genre when specified words appear in the title or abstract
-- Duplicate posts to the same webhook are removed with the `posted_webhooks` set
+- On the Gemini path, the prompt instructs the LLM to first choose the genre of the paper's primary contribution, then add further genres whenever the paper also has genuine value for researchers following that genre's channel -- for example, new error-correcting codes designed for transversal/fault-tolerant logic belong in both `qec` and `ft` -- but never to add a genre that is merely used as a tool or demonstration platform (e.g. a well-known algorithm simply run on quantum hardware is `hardware`, not `algo`). Duplicate genre IDs returned by the model are deduplicated while preserving order
+- Deterministic post-processing can add genres after classification: `force_genre_keywords` and the broad `qec` coding-theory rule. Because of this, a posted paper can carry more genres than `classify_max_genres`
 - **The embed footer of every post lists all assigned genres** (for example `quant-ph | 量子複雑性理論, 量子アルゴリズム | new`), so readers in one channel can see the paper's other classifications too
 
 ### 5. Translation fallback chain
@@ -209,13 +205,20 @@ DeepL -> Azure Translator -> Google Cloud Translation
 
 - Backends are tried in order; once one succeeds, the bot moves to the next paper
 - For papers whose abstract translation succeeds, the same translation chain also creates a translated title separately from the English title
-- Backends where quota exhaustion is detected (Gemini: persistent 429, DeepL: 456, Google: 403/429) are skipped for the rest of that run (**circuit breaker**)
-- If DeepL and Azure fail, Google is used only for papers outside `google_skip_translation_genres`. Papers that belong only to those skipped genres are posted in English instead of being deferred.
-- If every allowed backend fails and `require_translation: true` (default), the paper is not posted and is retried on the next run
+- Backends where quota exhaustion is detected (DeepL: 456, Google: 403/429, Gemini as translator: persistent 429) are skipped for the rest of that run (**circuit breaker**)
+- If DeepL and Azure fail, Google is used only for papers outside `google_skip_translation_genres`. Papers that belong only to those skipped genres are posted in English instead of being deferred
+- If every allowed backend fails and `require_translation: true` (default), the paper is not posted. It stays in the durable queue and is retried on the next run, even after it disappears from the RSS feed
 
-### 6. Discord posting
+### 6. Discord delivery
 
 For each paper, the bot posts once for each assigned genre. It waits 1.2 seconds between posts to leave headroom for Discord webhook rate limits. The embed footer shows `primary category | all assigned genre names | announce_type`, so a paper classified into two genres shows both names in both channels.
+
+Delivery is verified per channel:
+
+- A receipt (`status: delivered` plus a timestamp) is written for each channel immediately after Discord accepts the post, and the state file is flushed at that point
+- **A genre whose webhook secret is missing is treated as a delivery failure, not a silent success.** The bot does not fall back to another channel; the paper stays pending and the run report lists the channel as `(webhook未設定)`
+- **Two genres resolving to the same webhook URL is also treated as a failure** (`(webhook重複)`), because a single post would otherwise be mistaken for two successful deliveries
+- `DISCORD_WEBHOOK_GENERAL` is used only as a last-resort destination for a paper that ended up with no genre at all
 
 `posted_log.json` records metadata for posted papers. Example entry:
 
@@ -240,7 +243,7 @@ For each paper, the bot posts once for each assigned genre. It waits 1.2 seconds
 }
 ```
 
-`classifier` records which model produced the classification: `"gemini-2.5-flash"`, `"gemini-2.5-flash-lite"`, `"gpt-oss-120b"`, or `"tfidf"` (emergency fallback).
+`classifier` records which model produced the classification: `"gemini-2.5-flash"`, `"gemini-2.5-flash-lite"`, `"gpt-oss-120b"`, or `"tfidf"` (emergency fallback). It records the model only; genres added afterwards by deterministic post-processing are not distinguished in the log today.
 
 `title_translated`, `abstract_translated`, and `translation_language` are the language-neutral fields. `title_ja` and `abstract_ja` are still written for backward compatibility with older logs and the existing Japanese workflow.
 
@@ -258,6 +261,17 @@ The embed is green when everything succeeded, orange when papers were deferred, 
 
 ---
 
+## Failure handling
+
+A source that cannot be fetched is never reported as "no new papers".
+
+- Each phase runs with `continue-on-error`, so a failure in discovery still lets the workflow record what it has and surface the problem
+- If discovery, translation, or delivery failed, a final workflow step **fails the run explicitly** (`exit 1`), so the Actions run shows red rather than a misleading green
+- RSS and arXiv API failures are collected per source and reported to the bot-emergency channel
+- Secrets are stripped from logs: URL query strings and Discord webhook path segments are redacted, and any environment variable whose name contains `SECRET`, `PASSWORD`, or `WEBHOOK`, or ends with `_KEY` or `_TOKEN`, is replaced with `<redacted>` inside error text before it is printed
+
+---
+
 ## Monitoring: bot-emergency channel
 
 The `DISCORD_WEBHOOK_BOT_EMERGENCY` webhook receives operational messages, all in Japanese:
@@ -266,6 +280,7 @@ The `DISCORD_WEBHOOK_BOT_EMERGENCY` webhook receives operational messages, all i
 | --- | --- |
 | ✅ / 🟡 / 🚨 Run report | Every run of the main notifier and the SciRate weekend digest |
 | ⚠️ Translation outage alert | When every translator backend in the chain has given up for the run and papers are being silently deferred |
+| 🚨 Source or delivery failure | When an RSS feed, an arXiv API query, or a Discord delivery failed during the run |
 
 To send a test message without running the notifier, run the `notify.yml` workflow manually with the `test_emergency_alert` input checked.
 
@@ -291,7 +306,11 @@ export GEMINI_API_KEY="..."
 python3 scripts/audit_classification.py --date 2026-07-03 --timezone Asia/Tokyo
 ```
 
-After an audit, papers that gained genres can be posted to just those missing channels with the repost workflow (`repost.yml`, manual `workflow_dispatch`, inputs: `plan` path defaulting to `repost_plan.json` and `dry_run` defaulting to `true`). It reuses `title_translated` / `abstract_translated` from `posted_log.json` for each paper (no translation API calls), posts one embed per missing channel with the corrected full genre list in the footer, and updates the log entry's `genre_ids` / `genre_names` to the corrected classification (recording `repost_channels` and `reposted_at`). It never touches `seen_ids.json`, and deliberately skips channels whose webhook secret is missing instead of falling back to the general channel. A run report in Japanese is sent to the bot-emergency channel.
+Note that the audit script applies the normal quant-ph post-processing to every paper, including papers that were originally accepted through the adjacent-category external path. Differences reported for those papers can therefore be artifacts of the audit rather than real classification changes.
+
+After an audit, papers that gained genres can be posted to just those missing channels with the repost workflow (`repost.yml`, manual `workflow_dispatch`, inputs: `plan` path defaulting to `repost_plan.json` and `dry_run` defaulting to `true`). It reuses `title_translated` / `abstract_translated` from `posted_log.json` for each paper (no translation API calls), posts one embed per missing channel with the corrected full genre list in the footer, and updates the log entry's `genre_ids` / `genre_names` to the corrected classification (recording `repost_channels`, `repost_genre_ids`, and `reposted_at`).
+
+The repost script is idempotent: channels already recorded as reposted are skipped, so re-running the same plan does not duplicate posts. It never touches `seen_ids.json`, deliberately skips channels whose webhook secret is missing instead of falling back to the general channel, and refuses channels that resolve to the same webhook URL. A run report in Japanese is sent to the bot-emergency channel.
 
 Local equivalent:
 
@@ -307,7 +326,7 @@ The weekend workflow `.github/workflows/scirate_weekly.yml` fetches `https://sci
 
 Unlike the normal new-paper notifier, the SciRate weekend digest deduplicates with `scirate_weekly_state.json` instead of `seen_ids.json`. This allows papers that were already posted on weekdays to be reposted on the weekend as popular papers.
 
-It uses the same genres and webhooks as the normal notifier.
+It uses the same genres and webhooks as the normal notifier, and the same three-phase durable pipeline (`--discover-only` / `--translate-only` / `--deliver-only`), so an interrupted digest resumes instead of depending on the weekly page still listing the same papers.
 
 - If `posted_log.json` already has classification history for the same arXiv ID, saved `genre_ids` are reused
 - If no classification history exists, Gemini classify-only is used
@@ -331,7 +350,7 @@ Some environments receive HTTP 403 when accessing SciRate directly. In that case
 
 | ID | Name | Main topics |
 | --- | --- | --- |
-| `qec` | 誤り訂正・符号理論 | Stabilizer codes, surface codes, LDPC, decoder design |
+| `qec` | 誤り訂正・符号理論 | Stabilizer codes, surface codes, LDPC, decoder design, and quantum-adjacent classical coding theory |
 | `ft` | フォールトトレラント計算 | Magic-state distillation, lattice surgery, resource estimates |
 | `algo` | 量子アルゴリズム | Grover, Shor, quantum walks, phase estimation, HHL |
 | `complexity` | 量子複雑性理論 | BQP, QMA, query complexity, local Hamiltonian |
@@ -347,7 +366,7 @@ Some environments receive HTTP 403 when accessing SciRate directly. In that case
 | `foundations` | 量子基礎・測定理論 | Bell inequalities, decoherence, quantum thermodynamics |
 | `other` | その他・異分野 | Papers outside quantum information, such as hep-*, gr-qc, nucl-*, and general cond-mat |
 
-If none of the genres match, the paper is sent to `DISCORD_WEBHOOK_GENERAL` as a fallback.
+A paper that matches none of the genres is routed to `other`. `DISCORD_WEBHOOK_GENERAL` is only the last-resort destination when a paper ends up with no genre object at all.
 
 ---
 
@@ -381,7 +400,7 @@ For each destination channel, create a webhook from "Channel Settings -> Integra
 
 If you do not want fine-grained genre channels, setting only `DISCORD_WEBHOOK_GENERAL` is enough; all papers will go there.
 
-For genre-specific routing, create one webhook per channel and store each URL in the matching `DISCORD_WEBHOOK_*` secret. Keep webhook URLs and API keys out of committed files.
+For genre-specific routing, create one webhook per channel and store each URL in the matching `DISCORD_WEBHOOK_*` secret. Give each genre its own webhook: two genres sharing one URL are rejected as a configuration error. Keep webhook URLs and API keys out of committed files.
 
 ### 2. Get API keys
 
@@ -434,7 +453,7 @@ AZURE_TRANSLATOR_REGION  # optional unless your Azure resource requires it
 GOOGLE_TRANSLATE_API_KEY # optional
 ```
 
-Posting to genres whose Secret is missing is skipped automatically.
+A genre whose webhook secret is missing is reported as a delivery failure and retried, so register a webhook for every genre you actually classify into, or remove that genre from `config.json`.
 
 ### 4. Test the workflow
 
@@ -444,9 +463,17 @@ Open the Actions tab -> `workflow_dispatch` -> "Run workflow" to run it manually
 
 ## Local checks
 
-### dry-run mode (recommended, no API usage)
+### Unit tests
 
-This mode does not call Discord or any translation API. It prints only TF-IDF classification results to stdout.
+```bash
+python3 -m pytest tests/ -q
+```
+
+The same suite runs as the first step of both scheduled workflows, so a broken change fails before it can post anything.
+
+### dry-run mode (no API usage)
+
+This mode does not call Discord, any LLM, or any translation API. It prints only TF-IDF classification results to stdout, so it checks plumbing rather than production classification.
 
 ```bash
 python3 arxiv_bot.py --dry-run
@@ -489,7 +516,7 @@ unset ARXIV_TEST_FEED
 
 ### Full Discord test with test_feed.xml
 
-This reads a local RSS file and exercises the full path, including translation and Discord posting.
+This reads a local RSS file and exercises the full path, including translation and Discord posting. Note that `ARXIV_TEST_FEED` changes the input only: posts still go to the configured production webhooks and still update the production state files.
 
 ```bash
 export GEMINI_API_KEY="..."
@@ -511,13 +538,13 @@ Edit the `genres` array in `config.json`. Fields for each genre object:
 
 | Key | Required | Description |
 | --- | --- | --- |
-| `id` | yes | Alphanumeric characters and underscores only. Must be unique. Also used as Gemini's output ID |
+| `id` | yes | Alphanumeric characters and underscores only. Must be unique. Also used as the LLM's output ID |
 | `name` | yes | Genre name shown in the Discord embed. The default config uses Japanese names |
-| `description` | yes | **Decision basis for Gemini classification**. Detailed descriptions with clear boundaries against other genres improve classification accuracy |
+| `description` | yes | **Decision basis for LLM classification**. Detailed descriptions with clear boundaries against other genres improve classification accuracy |
 | `webhook_env` | yes | Environment variable name registered as a Secret, for example `"DISCORD_WEBHOOK_QEC"` |
 | `keywords` | yes | Word list used by the TF-IDF fallback |
 
-When adding a genre, also register the corresponding Discord channel webhook as a Secret and add it to the `env:` section in `.github/workflows/notify.yml`.
+When adding a genre, also register the corresponding Discord channel webhook as a Secret and add it to the `env:` section in `.github/workflows/notify.yml`, `scirate_weekly.yml`, and `repost.yml`.
 
 ### Classification parameters
 
@@ -527,9 +554,10 @@ Classification-related settings in `config.json`:
 | --- | --- | --- |
 | `classify_with_llm` | `true` | Use TF-IDF fallback every time when set to `false` |
 | `classify_min_score` | `0.05` (`0.08`) | Minimum TF-IDF score to accept |
-| `classify_max_genres` | `2` | Maximum number of genres assigned to one paper |
+| `classify_max_genres` | `2` | Genre count requested from the LLM, and a hard cut on the TF-IDF path |
 | `classify_secondary_ratio` | `0.7` (`0.82`) | Minimum score ratio for secondary genres when using TF-IDF |
 | `force_genre_keywords` | `{}` | Add the target genre when specified words appear in the title or abstract |
+| `qec_adjacent_coding_terms` | 53 phrases | Coding-theory phrases that deterministically add `qec` after classification |
 | `fallback_keyword_boosts` | `{}` | Per-genre phrase lists that add keyword evidence scores on the TF-IDF fallback path |
 | `fallback_title_phrase_bonus` | `0.35` | Score bonus for a keyword phrase found in the title |
 | `fallback_abstract_phrase_bonus` | `0.18` | Score bonus for a keyword phrase found in the abstract |
@@ -545,7 +573,22 @@ Classification-related settings in `config.json`:
 | `external_skip_consensus` | `2` | Independent LLM `skip` votes required before an external paper is rejected |
 | `external_arxiv_queries` | three adjacent-category queries | Per-category custom arXiv terms, soft genre hints, recency window, API page size, query chunk size, and review criteria. Set `enabled: false` to disable one source |
 
-The run log prints Gemini usage. Example:
+Per-source keys inside `external_arxiv_queries`:
+
+| Key | Default | Description |
+| --- | --- | --- |
+| `enabled` | `true` | Disable this source without deleting its configuration |
+| `candidate_genres` | per source | Soft hints named in the review prompt, not an output restriction |
+| `allow_all_genres` | `true` | Allow the review to select any genre outside `excluded_genres` |
+| `excluded_genres` | `["other"]` | Genres the external review may never select |
+| `lookback_days` | `4` | Normal recency window |
+| `cursor_overlap_days` | `2` | Extra days added on top of the gap since the last successful fetch |
+| `max_results` | `100` | arXiv API page size |
+| `terms_per_query` | `8` | Number of search terms per API request |
+| `terms` | per source | Recall-oriented search terms |
+| `review_instructions` | per source | Source-specific guidance appended to the review prompt |
+
+The run log prints LLM usage. Example:
 
 ```text
 [info] Gemini usage: mode=classify-only, model=gemini-2.5-flash+gemini-2.5-flash-lite+gpt-oss-120b, requests=17, classified=82/82, tfidf_fallback=0, disabled_models=None
@@ -555,19 +598,21 @@ The run log prints Gemini usage. Example:
 
 Settings that help classify cross-listed papers from their primary category:
 
-- `cross_classify_primary_as_quantph`: compatibility restriction for explicitly non-quant-ph callers of normal post-processing. Papers actually obtained from the quant-ph RSS are normally classified regardless of primary category
+- `cross_classify_primary_as_quantph`: compatibility restriction for explicitly non-quant-ph callers of normal post-processing. Papers actually obtained from the quant-ph RSS are classified regardless of primary category
 - `category_genre_hints`: category -> genre ID mapping. Matching papers receive +0.15 to the target genre score
-- `category_other_overrides`: additional primary categories to explicitly treat as `other`
+- `category_other_overrides`: additional primary categories to explicitly treat as `other` on the compatibility path
 
 ### Forced crypto keywords
 
-If a word listed in `force_genre_keywords.crypto` appears in the title or abstract, `crypto` is added to the Gemini/TF-IDF result. The current list includes terms such as the following to avoid missing topics around verifiable quantum computation, blind quantum computation, secure quantum computation, and delegated quantum computation.
+If a word listed in `force_genre_keywords.crypto` appears in the title or abstract, `crypto` is added to the LLM/TF-IDF result. The current list aims to avoid missing topics around verifiable, blind, secure, and delegated quantum computation:
 
 ```text
-blind, verifiable, secure, delegated quantum computation,
-secure delegation, blind delegation, verifiable delegation,
-untrusted server, malicious server, client-server
+blind, blindness, verifiable, verifiability, secure, securely, security,
+delegated quantum computation, secure delegation, blind delegation,
+verifiable delegation, untrusted server, malicious server, client-server
 ```
+
+Matching is a prefix-tolerant word match over the whole title and abstract, so single generic words in this list (`blind`, `secure`, `security`, `verifiable`) can also fire on unrelated papers. See `DESIGN_BACKLOG.md` for the open decision on narrowing this list.
 
 ### Cross-list filtering
 
@@ -582,7 +627,7 @@ untrusted server, malicious server, client-server
 | --- | --- | --- |
 | `translators` | `["deepl","azure","google"]` | Translation backend order |
 | `target_language` | `"ja"` | Translation target language code. Passed to each translation backend unless overridden |
-| `target_language_name` | `"Japanese"` | Human-readable target language name used in Gemini translation prompts |
+| `target_language_name` | `"Japanese"` | Human-readable target language name used in LLM translation prompts |
 | `deepl_target_language` | unset | Optional DeepL-specific target language code, such as `JA`, `EN-US`, or `PT-BR` |
 | `azure_target_language` | unset | Optional Azure-specific target language code. Defaults to `target_language` |
 | `azure_translator_endpoint` | unset | Optional Azure endpoint. Defaults to `https://api.cognitive.microsofttranslator.com` |
@@ -594,7 +639,7 @@ untrusted server, malicious server, client-server
 | `azure_max_retries` | `4` | Retries for Azure Translator 429 rate-limit responses |
 | `google_min_interval_sec` | `1.2` | Minimum spacing between Google Translate requests |
 | `google_max_retries` | `3` | Retries for Google Translate 429 / user-rate-limit responses |
-| `translation_priority_genres` | `["ft","qec","complexity","qml","crypto","pqc","network","algo","sim","nisq","hardware","sensing","qit","foundations","other"]` | Genre priority used after classification when choosing translation/posting order |
+| `translation_priority_genres` | 15 genre IDs | Genre priority used after classification when choosing translation/posting order |
 | `translate_only_matched` | `false` | When `true`, papers with no classified genre are not translated, saving API usage |
 | `google_skip_translation_genres` | `["other","foundations","sensing","nisq"]` | When only Google remains, papers whose genres are all in this list are posted in English to save Google quota |
 | `require_translation` | `true` | `true`: papers whose translation failed are retried later / `false`: post in English |
@@ -603,22 +648,35 @@ untrusted server, malicious server, client-server
 | `include_replacements` | `false` | Post replacement papers when set to `true` |
 | `scirate_range_days` | `7` | Date range used by the SciRate weekend digest |
 | `scirate_min_scites` | `30` | Minimum Scite count for the SciRate weekend digest |
-| `gemini_model` | `"gemini-2.5-flash"` | Legacy default model; now used only as the Gemini-as-translator model on path A (translate-and-classify). Classification uses `gemini_model_primary` / `gemini_model_secondary` instead |
+| `gemini_model` | `"gemini-2.5-flash"` | Legacy default model; now used only as the Gemini-as-translator model on the combined translate-and-classify path. Classification uses `gemini_model_primary` / `gemini_model_secondary` instead |
 | `gemini_min_interval_sec` | `7` | Minimum interval between Gemini requests, in seconds (fallback when a model has no entry in `gemini_min_intervals`) |
 | `gemini_max_retries` | `4` | Maximum retries for temporary errors |
 | `gemini_overload_giveup` | `2` | Open the circuit breaker after this many consecutive overload errors |
 
 ---
 
+## Security
+
+- No credential is stored in this repository. Every webhook URL and API key is supplied at runtime through GitHub Actions Secrets or local environment variables
+- `.gitignore` excludes `.env` and `error_diagnostics.jsonl`, which are the two files most likely to capture live values locally
+- All Discord IDs shown in this README and in the helper scripts are placeholders, not real channels or servers
+- Error logs are redacted before printing: URL query strings are removed, Discord webhook path segments become `<redacted>`, and any environment variable whose name contains `SECRET`, `PASSWORD`, or `WEBHOOK`, or ends with `_KEY` or `_TOKEN`, is stripped out of error text
+- `posted_log.json` and `seen_ids.json` are committed to the repository. They contain arXiv metadata (IDs, titles, authors, abstracts, translations) only, and no operational credentials. If you fork this bot for a private Discord community, keep in mind that this log makes the bot's full posting history public
+- If a webhook URL is ever committed by accident, rotate it in Discord immediately; rewriting the git history is not sufficient, because the old value may already be cached
+
+---
+
 ## Notes
 
 - The bot treats the first RSS `<category>` element as the primary category. This is a heuristic from observed RSS behavior, not an arXiv API guarantee.
-- Genre classification is heuristic, using Gemini as the primary path and TF-IDF as fallback, so misclassification is unavoidable. The quality of `description` directly affects Gemini classification accuracy; for genres with fuzzy boundaries, write explicit boundary conditions.
+- Genre classification is heuristic, using an LLM chain as the primary path and TF-IDF as fallback, so misclassification is unavoidable. The quality of `description` directly affects classification accuracy; for genres with fuzzy boundaries, write explicit boundary conditions.
+- The final genre set is not decided by the LLM alone. Deterministic post-processing can add `crypto` and the broad `qec` coding-theory label after classification, and the log does not currently distinguish those additions from the model's own output.
 - The default checked-in configuration is intentionally Japanese. Multilingual behavior is opt-in through `target_language` and related settings, so changing the code does not change the default Japanese Discord workflow.
 - Azure Translator's F0 tier includes 2M free characters/month, which makes it a useful middle fallback before Google. For an Azure-only setup, use `translators: ["azure"]` and set `target_language` to an Azure-supported language code such as `fr`, `de`, `ko`, or `zh-Hans`.
 - Google Cloud Translation supports many target languages and remains the final fallback in the default chain. To reduce Google usage, papers posted only to `other`, `foundations`, `sensing`, and `nisq` are posted in English when DeepL/Azure cannot translate them first.
 - `gemini-2.5-pro` was removed from the Gemini API free tier (it now returns 429 with zero quota unless billing is enabled), which is why the default Gemini classification chain is `gemini-2.5-flash` -> `gemini-2.5-flash-lite`. Free-tier RPD (requests per day) quotas for the remaining models have also been repeatedly reduced -- some accounts report `gemini-2.5-flash` limited to as few as ~20 requests/day -- so check the current values for your account in [Google AI Studio](https://aistudio.google.com/) when setting it up. The per-model circuit breaker plus the `gemini-2.5-flash-lite` and `gpt-oss-120b` fallbacks keep classification working when the primary model's quota runs out mid-run.
-- Completed IDs and unfinished per-channel deliveries in `seen_ids.json` are not truncated, because truncating them can cause missed retries or duplicate reposts. `posted_log.json` remains a bounded 5000-entry presentation/audit log.
+- Completed IDs, unfinished per-channel deliveries, external reviews, pending candidates, and fetch cursors in `seen_ids.json` are not truncated, because truncating them can cause missed retries or duplicate reposts. `posted_log.json` remains a bounded 5000-entry presentation/audit log.
+- Adjacent-category completeness currently covers papers whose **primary** category is `cs.CR`, `cs.CC`, or `cs.IT`. Papers primary to other categories, such as `math.IT` or `cs.DS`, are only picked up when they are cross-listed to quant-ph.
 
 ---
 
@@ -745,7 +803,10 @@ Note: users with `Administrator` bypass channel permission overwrites. Webhooks 
 # arXiv quant-ph → Discord 通知 bot(翻訳付き)
 
 arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1日3回取得し、論文を15ジャンルのうち1つ以上に分類して、翻訳済みタイトル・abstract 訳とともに対応する Discord の各チャンネルへ Webhook で投稿する。各投稿の embed footer には、投稿先チャンネルのジャンルだけでなく**その論文に割り当てられた全ジャンル名**が表示されるため、複数ジャンルの論文はどのチャンネルで見ても分類の全体が分かる。
+
 現在の標準運用では、Gemini は**分類のみ**に使い、翻訳は DeepL → Azure Translator → Google Cloud Translation の順に試行する。Gemini の出力はジャンル ID だけなので、翻訳まで Gemini に任せる構成より API 消費を抑えやすい。分類自体は TF-IDF による事前分類で2つの Gemini モデルへ振り分けられ、多くの論文はプライマリモデル `gemini-2.5-flash` で、予算やレート制限の圧迫時は残りがセカンダリモデル `gemini-2.5-flash-lite` で分類される。両方の Gemini モデルが失敗・quota 到達した場合は、OpenAI 互換 API のフォールバックへ流れ、現在は Cerebras `gpt-oss-120b` が設定されている。**標準ライブラリのみで動作し、`pip install` は不要。**
+
+設計上の最優先事項は completeness(取りこぼさないこと)である。実行は「発見 → 翻訳 → 配信」の3つの永続フェーズに分割され、配信状態は**論文ごと・チャンネルごと**に記録される。したがって一部が失敗しても、まだ確認できていないチャンネルだけを再試行する。詳細は後述の「実行フェーズと永続状態」を参照。
 
 また、毎回の実行後に **bot-emergency チャンネル(`DISCORD_WEBHOOK_BOT_EMERGENCY`)へ日本語の実行レポート**を投稿する。成功時も含めて毎回投稿されるため、どの論文がどのチャンネルへ送られたか・翻訳持ち越し・投稿失敗を実行ログとして追える。詳細は後述の「監視: bot-emergency チャンネル」を参照。
 
@@ -761,21 +822,26 @@ arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1
 | --- | --- |
 | `arxiv_bot.py` | 本体。標準ライブラリのみ使用 |
 | `config.json` | 全設定(フィード、ジャンル定義、API挙動、分類パラメータ) |
-| `seen_ids.json` | 完了ID、チャンネル別の永続配信queue、外部審査、取得cursorの状態(Actions が自動commit) |
+| `seen_ids.json` | 永続状態: 完了ID、チャンネル別配信queue、外部審査キャッシュ、未審査の外部候補、取得元別cursor(Actions が自動commit) |
 | `posted_log.json` | 投稿済み論文のメタデータログ(最大5000件、JSON 配列) |
 | `scirate_weekly.py` | SciRate の週間人気 quant-ph 論文を通常ジャンルへ再投稿する週末用 bot |
-| `scirate_weekly_state.json` | SciRate 週末投稿済み arXiv ID の記録 |
+| `scirate_weekly_state.json` | SciRate 週末 bot の永続状態(同じ3フェーズ構造) |
 | `test_feed.xml` | ローカルテスト用のサンプル RSS |
+| `tests/test_external_arxiv.py` | 隣接カテゴリAPIクエリ・外部審査・QECポリシーのテスト |
+| `tests/test_delivery_reliability.py` | チャンネル別receipt、フェーズ再開、webhookエラー処理のテスト |
+| `tests/test_repost_reliability.py` | 追い投稿の冪等性とwebhook検証のテスト |
+| `tests/test_scirate_reliability.py` | SciRate 3フェーズパイプラインのテスト |
 | `scripts/clean_discord_urls.py` | Discord チャンネル内の arXiv URL 投稿を検索・削除する補助スクリプト |
 | `scripts/lock_discord_channels.py` | 指定した Discord チャンネルを非管理者には閲覧・リアクション専用にする補助スクリプト |
 | `scripts/rollback_posted_day.py` | 再投稿前に `posted_log.json` と `seen_ids.json` から指定日の状態を戻す補助スクリプト |
 | `scripts/audit_classification.py` | 投稿済み論文の Gemini 分類を再実行し、差分だけを表示する補助スクリプト |
 | `scripts/repost_missing_channels.py` | 分類修正後、取り逃したジャンルチャンネルへ保存済み翻訳を使って追い投稿する補助スクリプト |
 | `repost_plan.json` | 追い投稿プラン(論文ID → 追加チャンネル)。分類監査の結果から生成 |
+| `DESIGN_BACKLOG.md` | 未決の設計判断と、その着手順序の構想 |
 | `.github/workflows/notify.yml` | 実行スケジュールと Secret 参照の定義 |
 | `.github/workflows/scirate_weekly.yml` | SciRate 週末ダイジェストの実行スケジュール |
 | `.github/workflows/classification_audit.yml` | 過去1日分の分類を監査する手動実行ワークフロー |
-| `.github/workflows/repost.yml` | repost_plan.json に従って不足チャンネルへ追い投稿する手動実行ワークフロー |
+| `.github/workflows/repost.yml` | 追い投稿プランに従って不足チャンネルへ投稿する手動実行ワークフロー |
 
 ---
 
@@ -789,9 +855,13 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 | 04:00 | 13:00 | 取りこぼし・遅延の補完 |
 | 07:00 | 16:00 | 同上 |
 
-`workflow_dispatch` による手動実行では2つのオプションが使える。`use_test_feed` は本番 RSS の代わりに `test_feed.xml` を読み込み、`test_emergency_alert` は通知本体を動かさずに bot-emergency チャンネルへテスト送信だけを行う。
+`workflow_dispatch` による手動実行では3つの入力が使える。
 
-`seen_ids.json`に完了IDとチャンネル別receiptを保存するため、通常の再実行では配信済みチャンネルを飛ばして未完了だけを再試行する。ただし配信保証は意図的に**at-least-once**である。Discordがwebhookを受理した直後、receiptをGitへcommitする前にrunnerが異常終了した場合だけは、Discord webhookにidempotency keyがないため重複し得る。
+| 入力 | デフォルト | 説明 |
+| --- | --- | --- |
+| `use_test_feed` | `false` | 本番 RSS の代わりに `test_feed.xml` を読み込む |
+| `test_emergency_alert` | `false` | 通知本体を動かさず、bot-emergency チャンネルへテスト送信だけを行う |
+| `external_backfill_days` | `"0"` | 隣接カテゴリAPIの取得元だけを指定日数まで遡る一回限りの設定。`0` なら通常の設定値のまま |
 
 週末には SciRate の週間人気論文も別 workflow で投稿する。
 
@@ -801,50 +871,58 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 
 ---
 
+## 実行フェーズと永続状態
+
+各実行は3つのフェーズに分割され、フェーズの合間に状態ファイルをリポジトリへ commit する。各フェーズは独立して再開できるため、途中で中断した実行は最初からやり直さずに続きから再開する。
+
+```text
+発見 + 分類 → commit → 翻訳 → commit → 配信 → チャンネル別receiptをcommit
+```
+
+| フェーズ | コマンド | 処理内容 |
+| --- | --- | --- |
+| 発見 | `python3 arxiv_bot.py --discover-only` | RSS と隣接カテゴリAPIを取得して分類し、配信queueを書き出す |
+| 翻訳 | `python3 arxiv_bot.py --translate-only` | queue の論文を翻訳し、翻訳結果を queue に保存する |
+| 配信 | `python3 arxiv_bot.py --deliver-only` | Discord へ投稿し、チャンネルごとに receipt を記録する |
+
+`--prepare-only` は発見と翻訳をまとめて実行する。フェーズフラグは排他であり、いずれも `--dry-run` と併用できない。フラグなしで `arxiv_bot.py` を実行すると1プロセスで3フェーズすべてを行う(ローカル実行の通常形)。
+
+これにより得られるもの:
+
+- **チャンネル単位の再試行。** ある論文が `qec` には配信できて `crypto` で失敗した場合、次回は `crypto` だけを再試行する。割り当てられた全チャンネルの receipt が揃うまで、その論文は完了扱いにしない。
+- **翻訳失敗がフィードより長生きする。** 翻訳に失敗した論文は永続queueに残るため、arXiv の RSS から消えた後も再試行される。
+- **未審査の外部候補が取得日数を過ぎても残る。** 審査が完了していない候補は、論文メタデータごと `external_pending` に保存される。
+- **取得cursorが障害の穴を埋める。** 隣接カテゴリの各取得元は、最後に取得へ成功した時刻を `external_cursors` に記録する。次回はその経過時間に `cursor_overlap_days`(デフォルト2日)を足した日数まで遡るため、Actions や arXiv API の障害が通常の取得窓を超えても、論文が黙って抜け落ちることはない。
+
+配信保証は意図的に **at-least-once** である。Discord が webhook を受理した直後、receipt を commit する前に runner が異常終了した場合だけは、Discord webhook に idempotency key がないため重複し得る。まれな重複よりも、黙った欠落を避ける設計を優先している。
+
+---
+
 ## 処理フロー
 
-```
-RSS 取得 → フィルタリング → ジャンル分類 + 翻訳 → Discord 投稿 → 状態保存 → bot-emergency へ実行レポート
-```
+### 1. 取得
 
-### 1. RSS 取得
+`config.json` の `feeds` に列挙したカテゴリ(現在は `"quant-ph"`)の RSS を順に取得し、論文を ID でまとめる。複数フィードで同一論文が登場した場合は、設定上先にあるフィードを優先する。
 
-`config.json` の `feeds` に列挙したカテゴリ(`"quant-ph"` 等)の RSS を順に取得し、論文を ID でまとめる。複数フィードで同一論文が登場した場合は、設定上先にあるフィードを優先する。
+加えて `external_arxiv_queries` により、arXiv API のカスタム Atom クエリから、primary が隣接カテゴリで、かつ quant-ph へ cross-list されていない候補を機械的に絞って取得する。
 
-加えて `external_arxiv_queries` により、arXiv API のカスタム Atom
-クエリから、primary が隣接カテゴリで、かつ quant-ph へ cross-list
-されていない候補を機械的に絞って取得する。
+| 取得元 | 主な行き先 | 検索語数 |
+| --- | --- | --- |
+| `cs.CR` | `pqc` / `crypto` | 50 |
+| `cs.CC` | `complexity` / `algo` | 9 |
+| `cs.IT` | `qit` / `qec` / `network` | 6 |
 
-- `cs.CR` → 主に `pqc` / `crypto`
-- `cs.CC` → 主に `complexity` / `algo`
-- `cs.IT` → 主に `qit` / `qec` / `network`
+検索語は取りこぼしを抑えるため再現率寄りに設定してあり、検索に一致しただけでは投稿しない。長い検索語リストは短いAPIクエリへ分割し(`terms_per_query`、デフォルト8)、各クエリを取得日数の境界までページングしてから重複排除する。これにより長すぎるURLによる取得不安定と、APIの1ページ上限による欠落の両方を避ける。
 
-検索語は取りこぼしを抑えるため再現率寄りに設定してあり、検索に一致しただけでは投稿しない。長い検索語リストは短いAPIクエリへ分割し、各クエリを取得日数の境界までページングしてから重複排除する。これにより長すぎるURLによる取得不安定と、APIの1ページ上限による欠落の両方を避ける。候補は通常分類と同じ分類器チェーン（プライマリ Gemini → セカンダリ Gemini → 設定済み OpenAI 互換フォールバック）による独立審査へ送られる。
+候補は通常分類と同じ分類器チェーン(プライマリ Gemini → セカンダリ Gemini → 設定済み OpenAI 互換フォールバック)による独立審査へ送られる。上記の取得元別ジャンルは優先ヒントであり、出力制限ではない。全取得元で `allow_all_genres` が有効なため、外部審査では `excluded_genres`(現在は `other`)以外の全ジャンルから `external_classify_max_genres` 件まで選べる。
 
-上記の取得元別ジャンルは優先ヒントであり、出力制限ではない。外部審査では
-`other` 以外の全ジャンルから `external_classify_max_genres` 件まで選べる。
-プロンプトは completeness 優先で、実質的な副次貢献や非自明な応用も採用し、
-量子との関係が背景・動機・将来課題・引用・比較だけの場合に限って `skip`
-する。却下を保存するには `external_skip_consensus` 個のモデルが独立に
-`skip` する必要があり、1モデルでもジャンルを選べば採用する。1件の
-`skip` しか得られず再審査モデルが使えない場合は却下せず、論文情報を
-`external_pending` に保存して、APIの取得日数を過ぎても決着まで再審査する。
-採用後に翻訳やDiscord投稿が失敗した論文も、実際に投稿されるまで再試行できる。
+審査プロンプトは completeness 優先で、実質的な副次貢献や非自明な応用も採用し、量子との関係が背景・動機・将来課題・引用・比較だけの場合に限って `skip` する。却下を保存するには `external_skip_consensus` 個のモデルが独立に `skip` する必要があり、1モデルでもジャンルを選べば採用する。1件の `skip` しか得られず再審査モデルが使えない場合は却下せず、未審査のまま残す。通常の quant-ph 分類とは異なり、外部候補については LLM 審査が決着しない場合に TF-IDF で投稿したり `other` へ流したりしない。
 
-`qec` は量子誤り訂正符号だけでなく、量子計算・量子通信・PQCとの
-非自明な接点がある符号理論全般を含む。符号自体は古典でもよい。
-rank-metric・Gabidulin符号やcode-based cryptographyのように、符号構成や
-復号が技術的貢献である論文は、分類後にも決定的ルールで`qec`を補う。
+`qec` は量子誤り訂正符号だけでなく、量子計算・量子通信・PQCとの非自明な接点がある符号理論全般を含む。符号自体は古典でもよい。`qec_adjacent_coding_terms`(現在53語。`linear code`, `rank-metric code`, `syndrome decoding`, `self-orthogonal` など)に一致した場合、分類後に決定的ルールで `qec` を補う。これにより、code-based cryptography で使われる rank-metric・Gabidulin 符号のような論文も拾える。
 
-外部候補については、すべての LLM が利用できない場合も TF-IDF
-で投稿したり `other` へ流したりせず、未審査のまま次回へ残す。判定結果は
-`seen_ids.json` の `external_reviews` に保存する。却下した ID は通常の
-`seen` には入れないため、後日 quant-ph に cross-list された場合は通常どおり処理できる。`lookback_days` は初回有効化時の大量の過去論文投稿を防ぐ。
-一回限り遡る場合は `EXTERNAL_ARXIV_LOOKBACK_DAYS`（Actionsの同名入力）
-に日数を指定でき、通常設定の取得日数は変更されない。
+分類器と翻訳APIの容量は常に通常の quant-ph 論文を優先する。外部候補の厳密審査は quant-ph の分類がすべて完了した後に開始し、翻訳もジャンル優先度にかかわらず全 quant-ph 論文を全外部論文より先に処理する。
 
-分類器と翻訳APIの容量は常に通常の quant-ph 論文を優先する。外部候補の
-厳密審査は quant-ph の分類がすべて完了した後に開始し、翻訳もジャンル優先度にかかわらず全 quant-ph 論文を全外部論文より先に処理する。
+判定結果は `seen_ids.json` の `external_reviews` に保存する。却下した ID は全体の完了IDには入れないため、後日 quant-ph に cross-list された場合は通常どおり処理できる。`lookback_days` は初回有効化時の大量の過去論文投稿を防ぐ。一回限り遡る場合は `EXTERNAL_ARXIV_LOOKBACK_DAYS`(Actions の `external_backfill_days` 入力)に日数を指定でき、通常設定の取得日数は変更されない。
 
 ### 2. フィルタリング
 
@@ -864,10 +942,12 @@ primary カテゴリが `cross_deny_primary` リストに一致する場合の�
 
 **cross-list 分類ポリシー**
 
-quant-ph RSSから取得したcross-list論文は、primary categoryに関係なく通常のAI分類とQEC/keyword後処理を行う。したがって、primaryが`cs.IT`でもQEC・QIT・networkなどへ分類でき、`other`には上書きしない。`cross_classify_primary_as_quantph`は、quant-ph以外のsourceを通常後処理へ明示的に渡す互換経路だけの制限として残る。
+quant-ph RSS から取得した論文は、primary category に関係なく通常のAI分類と決定的なQEC/keyword後処理を行う。したがって、primary が `cs.IT` でも QEC・QIT・network などへ分類でき、`other` には上書きしない。
 
-- quant-ph RSS由来: primaryに関係なく通常分類
+- quant-ph RSS 由来: primary に関係なく通常分類
 - 明示的な外部source: 専用の高recall検索と厳密LLM審査を通す
+
+`cross_classify_primary_as_quantph` と `category_other_overrides` は、quant-ph 以外の source を通常後処理へ明示的に渡す互換経路だけの制限として残る。隣接カテゴリAPI経路は独自の厳密審査を使う。
 
 ### 3. ジャンル分類 + 翻訳(2段構え)
 
@@ -879,21 +959,22 @@ Gemini を呼ぶ前に、後述の TF-IDF 分類器で全論文を一度事前�
 
 - 事前分類のジャンルが `prescreen_defer_genres`(デフォルト: `nisq`, `hardware`, `sensing`, `foundations`, `other`)のいずれにも触れない論文は**優先グループ**となり、常にプライマリモデル `gemini_model_primary`(`gemini-2.5-flash`)で分類する
 - 残りは**繰り延べグループ**。この実行での推定リクエスト数(優先グループのバッチ数+繰り延べグループのバッチ数)が `gemini_primary_run_budget`(デフォルト20)以内であれば、繰り延べグループもプライマリモデルで分類する。超える場合はセカンダリモデル `gemini_model_secondary`(`gemini-2.5-flash-lite`)を使い、無料枠の日次クォータ内に収める
-- モデルごとに独立した circuit breaker を持つ: 持続的な 429、または 500/503 の連続発生は、そのモデルのみをこの実行で停止させる。未分類の論文は自動的に次の分類器へフォールスルーする(`gemini-2.5-flash` → `gemini-2.5-flash-lite` → `gpt-oss-120b` などの OpenAI 互換フォールバック)。すべての LLM 分類器が利用不可の場合のみ、TF-IDF 事前分類の結果をそのまま投稿する(従来通りの緊急フォールバック)
+- モデルごとに独立した circuit breaker を持つ: 持続的な 429、または 500/503 の連続発生は、そのモデルのみをこの実行で停止させる。未分類の論文は自動的に次の分類器へフォールスルーする(`gemini-2.5-flash` → `gemini-2.5-flash-lite` → `gpt-oss-120b` などの OpenAI 互換フォールバック)。すべての LLM 分類器が利用不可の場合のみ、TF-IDF 事前分類の結果をそのまま投稿する(緊急フォールバック)
 - `gemini_min_intervals` により `gemini-2.5-flash` は7秒間隔、`gemini-2.5-flash-lite` は5秒間隔でペーシングされる。無料枠の RPD/RPM の詳細は後述の「留意事項」を参照
 - プロンプトには各ジャンルの `description`(自然言語の定義文)を全文渡すため、定型キーワードを含まない論文も内容で分類される
 - 出力形式: `<<<k|genre_id>>>` または `<<<k|id1,id2>>>` (マルチラベルの場合)
 - 1論文に複数ジャンルを割り当てられる。主要な貢献ジャンルだけでなく、そのジャンルの読者にとっても論文が本当に価値を持つ場合は追加のジャンルも割り当てられる(詳細は後述の「マルチラベル分類」を参照)
-- quant-ph RSS由来のcross-list論文はLLM結果を保持し、primary quant-ph論文と同じQEC/keyword後処理を受ける
+- quant-ph RSS 由来の cross-list 論文は LLM 結果を保持し、primary quant-ph 論文と同じ QEC/keyword 後処理を受ける
 
 **フォールバック経路: TF-IDF コサイン類似度 + キーワード加点**
 
-Gemini がクォータ枯渇等で利用不可の場合、または個別エントリを Gemini が返さなかった場合に使用する。
+すべての LLM 分類器がクォータ枯渇等で利用不可の場合、または個別エントリをモデルが返さなかった場合に使用する。
 
 - ジャンルの `description` + `keywords` のうち1単語のキーワードを TF-IDF ベクトル化(複数語のフレーズはベクトルから除外し、後述の加点で別途評価する)
 - 論文の `title + abstract` との余弦類似度を各ジャンルで計算
 - `category_genre_hints` による arXiv カテゴリヒント(スコアに +0.15)と `category_other_overrides` による強制 other 判定(スコアに +1.0)を適用
 - 全ジャンルに出現する語は IDF=0 になりスコアに寄与しない。さらに "quantum", "qubit", "state", "system" のような一般語はストップワードとして除外される
+- トークナイザは ASCII の語のみを拾うため、実質的に英語テキストのスコアリングになる。日本語のジャンル説明文はほとんど寄与しない
 
 余弦類似度に加えて、論文本文中のキーワード直接ヒットに対する**キーワード加点**が入る:
 
@@ -906,36 +987,40 @@ Gemini がクォータ枯渇等で利用不可の場合、または個別エン�
 
 `config.json` の `fallback_keyword_boosts` には、ジャンルごとの追加フレーズリスト(例: "cat qubit" → `qec`、"barren plateau" → `nisq`)を定義でき、上記のフレーズ加点が適用される。これにより、ジャンル `description` と語彙が重ならない論文もフォールバック経路で拾える。
 
-フォールバック経路での翻訳は、`translators` に設定された順に処理される。現在の標準設定は DeepL → Azure Translator → Google Cloud Translation。
-
 ### 4. マルチラベル分類
 
 1論文を複数ジャンルに分類し、それぞれのチャンネルへ投稿できる。
 
-- `classify_max_genres`(デフォルト2): 1論文に割り当てる最大ジャンル数
+- `classify_max_genres`(デフォルト2): LLM プロンプトで要求するジャンル数であり、TF-IDF 経路では上限として実際に切る
 - `classify_secondary_ratio`(デフォルト0.7、現行設定0.82。TF-IDF フォールバック時のみ適用): 2番目以降のジャンルを採用するのは、そのスコアが最上位ジャンルのスコアのこの比率以上の場合のみ。弱い偶発的マッチで多チャンネルに投稿されることを防ぐ
-- Gemini 経路では、まず論文の主要な貢献に該当するジャンルを選ばせ、そのうえでそのジャンルのチャンネル読者にとっても論文が本当に価値を持つ場合に限り、さらにジャンルを追加させる(`classify_max_genres` まで)。例えばトランスバーサル/フォールトトレラント論理のために設計された新しい誤り訂正符号は `qec` と `ft` の両方に該当する。ただし、単にツールやデモの土台として使われているだけのジャンルは追加しない(例: 既知のアルゴリズムを量子ハードウェア上で実行しただけの論文は `algo` ではなく `hardware`)。モデルが同じ ID を重複して返した場合は、順序を保ったまま重複排除される
-- `force_genre_keywords`: タイトル/abstract に指定語が含まれる場合、LLM/TF-IDF の結果に指定ジャンルを追加する
-- 同一 Webhook への重複投稿は `posted_webhooks` セットで排除される
+- Gemini 経路では、まず論文の主要な貢献に該当するジャンルを選ばせ、そのうえでそのジャンルのチャンネル読者にとっても論文が本当に価値を持つ場合に限り、さらにジャンルを追加させる。例えばトランスバーサル/フォールトトレラント論理のために設計された新しい誤り訂正符号は `qec` と `ft` の両方に該当する。ただし、単にツールやデモの土台として使われているだけのジャンルは追加しない(例: 既知のアルゴリズムを量子ハードウェア上で実行しただけの論文は `algo` ではなく `hardware`)。モデルが同じ ID を重複して返した場合は、順序を保ったまま重複排除される
+- 分類後の決定的な後処理がジャンルを追加することがある(`force_genre_keywords` と広義 `qec` の符号理論ルール)。このため、投稿された論文が `classify_max_genres` より多いジャンルを持つことがある
 - **各投稿の embed footer には割り当てられた全ジャンル名が表示される**(例: `quant-ph | 量子複雑性理論, 量子アルゴリズム | new`)。あるチャンネルの読者にも、その論文の他の分類が分かる
 
 ### 5. 翻訳フォールバックチェーン
 
 現在の標準設定:
 
-```
+```text
 DeepL → Azure Translator → Google Cloud Translation
 ```
 
 - 先頭から順に試行し、成功した時点で次の論文へ移る
 - abstract の翻訳に成功した投稿対象論文について、英語タイトルとは別に翻訳済みタイトルも同じ翻訳チェーンで作成する
-- クォータ枯渇を検知したバックエンド(Gemini: 持続的 429、DeepL: 456、Google: 403/429)はその実行回では以後スキップされる(**circuit breaker**)
-- DeepL と Azure が失敗した場合、Google は `google_skip_translation_genres` の対象外論文にだけ使う。対象ジャンルだけに属する論文は、持ち越さず英語原文で投稿する。
-- 許可された全段で翻訳できなかった論文は `require_translation: true`(デフォルト)の場合は投稿せず次回に持ち越す
+- クォータ枯渇を検知したバックエンド(DeepL: 456、Google: 403/429、翻訳役の Gemini: 持続的 429)はその実行回では以後スキップされる(**circuit breaker**)
+- DeepL と Azure が失敗した場合、Google は `google_skip_translation_genres` の対象外論文にだけ使う。対象ジャンルだけに属する論文は、持ち越さず英語原文で投稿する
+- 許可された全段で翻訳できなかった論文は `require_translation: true`(デフォルト)の場合は投稿しない。永続queueに残り、RSS から消えた後も次回以降に再試行される
 
-### 6. Discord 投稿
+### 6. Discord 配信
 
 論文ごとに分類されたジャンル数分の投稿を行う。各投稿間隔は1.2秒(Discord レート制限対策)。embed footer は `primaryカテゴリ | 割り当てられた全ジャンル名 | announce_type` の形式で、2ジャンルに分類された論文はどちらのチャンネルでも両方のジャンル名が表示される。
+
+配信はチャンネルごとに検証される:
+
+- Discord が投稿を受理した直後にチャンネルごとの receipt(`status: delivered` と時刻)を書き込み、その時点で状態ファイルを書き出す
+- **Webhook secret が未設定のジャンルは、黙って成功扱いにせず配信失敗として扱う。** 他チャンネルへのフォールバックはせず、その論文は未完了のまま残り、実行レポートには `(webhook未設定)` と表示される
+- **2つのジャンルが同じ Webhook URL に解決される場合も失敗として扱う**(`(webhook重複)`)。1件しか投稿されないのに2チャンネル配信成功と誤認されるのを防ぐため
+- `DISCORD_WEBHOOK_GENERAL` は、ジャンルが1つも付かなかった論文に対する最後の逃し先としてのみ使う
 
 `posted_log.json` に投稿済み論文のメタデータを記録する。記録内容:
 
@@ -960,7 +1045,7 @@ DeepL → Azure Translator → Google Cloud Translation
 }
 ```
 
-`classifier` はどのモデルが分類したかを記録する: `"gemini-2.5-flash"`、`"gemini-2.5-flash-lite"`、または `"tfidf"`(緊急フォールバック)のいずれか。
+`classifier` はどのモデルが分類したかを記録する: `"gemini-2.5-flash"`、`"gemini-2.5-flash-lite"`、`"gpt-oss-120b"`、`"tfidf"`(緊急フォールバック)のいずれか。記録されるのはモデル名だけで、分類後に決定的な後処理が追加したジャンルは現状ログ上で区別できない。
 
 `title_translated`, `abstract_translated`, `translation_language` は多言語対応用の汎用フィールド。`title_ja` と `abstract_ja` は、既存の日本語ログや従来運用との互換性のために引き続き保存される。
 
@@ -978,6 +1063,17 @@ embed の色は、全成功なら緑、持ち越しありなら橙、Discord 投
 
 ---
 
+## 失敗時の扱い
+
+取得できなかった取得元を「新着なし」として報告することはない。
+
+- 各フェーズは `continue-on-error` で実行されるため、発見フェーズが失敗しても、取得できた分を記録しつつ問題を表面化できる
+- 発見・翻訳・配信のいずれかが失敗した場合、最後のワークフローステップが**明示的に run を失敗させる**(`exit 1`)。したがって Actions の実行結果が誤って緑にならない
+- RSS と arXiv API の失敗は取得元ごとに集計され、bot-emergency チャンネルへ報告される
+- ログからは secret が除去される。URL のクエリ文字列と Discord webhook のパス要素は伏字にし、環境変数名に `SECRET` / `PASSWORD` / `WEBHOOK` を含むもの、または `_KEY` / `_TOKEN` で終わるものの値は、出力前にエラーテキスト中で `<redacted>` に置換される
+
+---
+
 ## 監視: bot-emergency チャンネル
 
 `DISCORD_WEBHOOK_BOT_EMERGENCY` の Webhook には、運用メッセージがすべて日本語で届く。
@@ -986,6 +1082,7 @@ embed の色は、全成功なら緑、持ち越しありなら橙、Discord 投
 | --- | --- |
 | ✅ / 🟡 / 🚨 実行レポート | 通常通知と SciRate 週末ダイジェストの毎回の実行後 |
 | ⚠️ 翻訳全停止アラート | チェーン内の全翻訳バックエンドがその実行で停止し、論文が黙って持ち越されているとき |
+| 🚨 取得・配信失敗 | RSS フィード、arXiv API クエリ、Discord 配信のいずれかがその実行で失敗したとき |
 
 通知本体を動かさずにテスト送信したい場合は、`notify.yml` を手動実行して `test_emergency_alert` にチェックを入れる。
 
@@ -1011,7 +1108,11 @@ export GEMINI_API_KEY="..."
 python3 scripts/audit_classification.py --date 2026-07-03 --timezone Asia/Tokyo
 ```
 
-監査の結果、ジャンルが追加された論文は、追い投稿ワークフロー(`repost.yml`、手動 `workflow_dispatch`、入力: `plan` パス(デフォルト `repost_plan.json`)、`dry_run`(デフォルト `true`))で不足チャンネルにだけ投稿できる。`posted_log.json` の `title_translated` / `abstract_translated` を再利用するため翻訳 API は呼び出さず、不足チャンネルごとに、footer に修正後の全ジャンル一覧を載せた embed を1件投稿する。ログエントリの `genre_ids` / `genre_names` は修正後の分類に更新され(`repost_channels` と `reposted_at` を記録)、`seen_ids.json` には一切触れない。Webhook secret が未設定のチャンネルは general チャンネルへのフォールバックはせず、意図的にスキップされる。実行後は日本語の実行レポートが bot-emergency チャンネルへ送られる。
+なお、監査スクリプトは全論文に通常の quant-ph 後処理を適用する。隣接カテゴリの外部経路で採用された論文も同様に扱われるため、それらの論文で報告される差分は、実際の分類変更ではなく監査側の見かけ上の差分である場合がある。
+
+監査の結果、ジャンルが追加された論文は、追い投稿ワークフロー(`repost.yml`、手動 `workflow_dispatch`、入力: `plan` パス(デフォルト `repost_plan.json`)、`dry_run`(デフォルト `true`))で不足チャンネルにだけ投稿できる。`posted_log.json` の `title_translated` / `abstract_translated` を再利用するため翻訳 API は呼び出さず、不足チャンネルごとに、footer に修正後の全ジャンル一覧を載せた embed を1件投稿する。ログエントリの `genre_ids` / `genre_names` は修正後の分類に更新される(`repost_channels`、`repost_genre_ids`、`reposted_at` を記録)。
+
+追い投稿スクリプトは冪等である。追い投稿済みとして記録されたチャンネルはスキップされるため、同じプランを再実行しても重複投稿しない。`seen_ids.json` には一切触れず、Webhook secret が未設定のチャンネルは general チャンネルへのフォールバックはせず意図的にスキップし、同じ Webhook URL に解決されるチャンネルは拒否する。実行後は日本語の実行レポートが bot-emergency チャンネルへ送られる。
 
 ローカルでの実行:
 
@@ -1027,7 +1128,7 @@ python3 scripts/repost_missing_channels.py --plan repost_plan.json --dry-run
 
 通常の新着通知とは違い、SciRate 週末ダイジェストは `seen_ids.json` ではなく `scirate_weekly_state.json` で重複排除する。これにより、平日にすでに投稿済みの論文でも、週末に「人気論文」として再掲できる。
 
-分類は通常通知と同じジャンル・Webhookを使う。
+分類は通常通知と同じジャンル・Webhook を使い、同じ3フェーズの永続パイプライン(`--discover-only` / `--translate-only` / `--deliver-only`)で動く。したがって途中で中断しても、週間ページに同じ論文が残っていることに依存せず再開できる。
 
 - `posted_log.json` に同じ arXiv ID の分類履歴がある場合は、保存済みの `genre_ids` を再利用する
 - 分類履歴がない場合は Gemini classify-only を使う
@@ -1035,7 +1136,7 @@ python3 scripts/repost_missing_channels.py --plan repost_plan.json --dry-run
 - 同じ `translation_language` の `title_translated` / `abstract_translated` が `posted_log.json` にあれば再利用する
 - 未翻訳の場合は通常通知と同じ DeepL → Azure Translator → Google Cloud Translation チェーンで翻訳する
 
-SciRate投稿には通常の embed に加えて `SciRate` フィールドが付き、直近7日での Scite 数を表示する。通常通知と同様に、embed footer には割り当てられた全ジャンル名が表示され、毎回の実行後に bot-emergency チャンネルへ実行レポートが送られる。
+SciRate 投稿には通常の embed に加えて `SciRate` フィールドが付き、直近7日での Scite 数を表示する。通常通知と同様に、embed footer には割り当てられた全ジャンル名が表示され、毎回の実行後に bot-emergency チャンネルへ実行レポートが送られる。
 
 ローカル確認:
 
@@ -1043,7 +1144,7 @@ SciRate投稿には通常の embed に加えて `SciRate` フィールドが付�
 python3 scirate_weekly.py --dry-run
 ```
 
-SciRate が直接取得できない環境では HTTP 403 になることがある。その場合は警告を出して終了し、Discord投稿や状態更新は行わない。
+SciRate が直接取得できない環境では HTTP 403 になることがある。その場合は警告を出して終了し、Discord 投稿や状態更新は行わない。
 
 ---
 
@@ -1051,7 +1152,7 @@ SciRate が直接取得できない環境では HTTP 403 になることがあ�
 
 | ID | 名称 | 主なトピック |
 | --- | --- | --- |
-| `qec` | 誤り訂正・符号理論 | 安定化符号・表面符号・LDPC・デコーダ設計 |
+| `qec` | 誤り訂正・符号理論 | 安定化符号・表面符号・LDPC・デコーダ設計、および量子隣接の古典符号理論 |
 | `ft` | フォールトトレラント計算 | マジックステート蒸留・格子手術・資源推定 |
 | `algo` | 量子アルゴリズム | Grover・Shor・量子ウォーク・位相推定・HHL |
 | `complexity` | 量子複雑性理論 | BQP・QMA・クエリ複雑性・局所ハミルトニアン |
@@ -1067,7 +1168,7 @@ SciRate が直接取得できない環境では HTTP 403 になることがあ�
 | `foundations` | 量子基礎・測定理論 | Bell不等式・デコヒーレンス・量子熱力学 |
 | `other` | その他・異分野 | hep-*・gr-qc・nucl-*・cond-mat(一般)など量子情報外の論文 |
 
-上記のどのジャンルにも該当しない場合は `DISCORD_WEBHOOK_GENERAL` へ送られる(フォールバック)。
+どのジャンルにも該当しない論文は `other` へ送られる。`DISCORD_WEBHOOK_GENERAL` は、ジャンルオブジェクトが1つも付かなかった場合の最後の逃し先としてのみ使われる。
 
 ---
 
@@ -1101,7 +1202,7 @@ SciRate が直接取得できない環境では HTTP 403 になることがあ�
 
 ジャンルを細かく分けずに運用する場合は `DISCORD_WEBHOOK_GENERAL` のみ設定すれば全論文がそこへ届く。
 
-ジャンル別に振り分けたい場合は、チャンネルごとに Webhook を作り、対応する `DISCORD_WEBHOOK_*` secret に URL を入れる。Webhook URL や API キーは repository に commit しないこと。
+ジャンル別に振り分けたい場合は、チャンネルごとに Webhook を作り、対応する `DISCORD_WEBHOOK_*` secret に URL を入れる。ジャンルごとに別々の Webhook を用意すること。2つのジャンルが同じ URL を共有している場合は設定エラーとして拒否される。Webhook URL や API キーは repository に commit しないこと。
 
 ### 2. API キーの取得
 
@@ -1110,7 +1211,7 @@ SciRate が直接取得できない環境では HTTP 403 になることがあ�
 | バックエンド | 用途 | 無料枠 | Secret 名 |
 | --- | --- | --- | --- |
 | Gemini | 分類のみ | 無料枠あり(カード登録不要) | `GEMINI_API_KEY` |
-| Cerebras `gpt-oss-120b` | 分類のみ(Gemini 後のフォールバック) | Free tier あり | `CEREBRAS_API_KEY` |
+| Cerebras `gpt-oss-120b` | 分類のみ(Gemini 後のフォールバック) | 無料枠あり | `CEREBRAS_API_KEY` |
 | DeepL | 翻訳 | 月50万文字まで無料 | `DEEPL_API_KEY` |
 | Azure Translator | 翻訳 | F0 で月200万文字まで無料 | `AZURE_TRANSLATOR_KEY` + `AZURE_TRANSLATOR_REGION` |
 | Google Cloud Translation | 翻訳 | 月50万文字まで無料(**請求先アカウント必須**) | `GOOGLE_TRANSLATE_API_KEY` |
@@ -1123,9 +1224,9 @@ Gemini API キーは [Google AI Studio](https://aistudio.google.com/) で発行�
 
 **Webhook (全15ジャンル + general + bot-emergency)**
 
-```
+```text
 DISCORD_WEBHOOK_GENERAL
-DISCORD_WEBHOOK_BOT_EMERGENCY   # 実行レポート・翻訳全停止アラート用(推奨)
+DISCORD_WEBHOOK_BOT_EMERGENCY   # 実行レポート・障害アラート用(推奨)
 DISCORD_WEBHOOK_QEC
 DISCORD_WEBHOOK_FT
 DISCORD_WEBHOOK_ALGO
@@ -1145,7 +1246,7 @@ DISCORD_WEBHOOK_OTHER
 
 **API キー(使うもののみ)**
 
-```
+```text
 GEMINI_API_KEY
 CEREBRAS_API_KEY         # gpt-oss-120b 分類フォールバック用、省略可
 DEEPL_API_KEY            # 省略可
@@ -1154,7 +1255,7 @@ AZURE_TRANSLATOR_REGION  # Azure resource が要求する場合に設定
 GOOGLE_TRANSLATE_API_KEY # 省略可
 ```
 
-Secret が未設定のジャンルへの投稿は自動的にスキップされる。
+Webhook secret が未設定のジャンルは配信失敗として報告され再試行されるため、実際に分類先となるジャンルにはすべて Webhook を登録するか、そのジャンルを `config.json` から削除すること。
 
 ### 4. 動作確認
 
@@ -1164,9 +1265,17 @@ Actions タブ → `workflow_dispatch` → 「Run workflow」で手動実行す�
 
 ## ローカル動作確認
 
-### dry-run モード(推奨・API不使用)
+### ユニットテスト
 
-Discord や翻訳 API を一切呼び出さず、TF-IDF による分類結果だけを標準出力に表示する。
+```bash
+python3 -m pytest tests/ -q
+```
+
+同じテストは両方の定期ワークフローの最初のステップでも実行されるため、壊れた変更は投稿が起きる前に失敗する。
+
+### dry-run モード(API不使用)
+
+Discord・LLM・翻訳 API を一切呼び出さず、TF-IDF による分類結果だけを標準出力に表示する。本番の分類そのものではなく、配管の確認用である。
 
 ```bash
 python3 arxiv_bot.py --dry-run
@@ -1209,7 +1318,7 @@ unset ARXIV_TEST_FEED
 
 ### test_feed.xml を使った Discord フルテスト
 
-ローカルの RSS ファイルを読み込み、翻訳・Discord 投稿まで含む全経路を確認できる。
+ローカルの RSS ファイルを読み込み、翻訳・Discord 投稿まで含む全経路を確認できる。ただし `ARXIV_TEST_FEED` が変えるのは入力だけであり、投稿先は設定済みの本番 Webhook、更新されるのも本番の状態ファイルである点に注意。
 
 ```bash
 export GEMINI_API_KEY="..."
@@ -1231,13 +1340,13 @@ python3 arxiv_bot.py
 
 | キー | 必須 | 説明 |
 | --- | --- | --- |
-| `id` | ○ | 英数字・アンダースコアのみ。重複不可。Gemini の出力 ID としても使われる |
+| `id` | ○ | 英数字・アンダースコアのみ。重複不可。LLM の出力 ID としても使われる |
 | `name` | ○ | Discord embed に表示されるジャンル名。標準設定では日本語名称 |
-| `description` | ○ | **Gemini 分類の判定根拠**。詳細かつ他ジャンルとの境界を明示する文が分類精度を高める |
+| `description` | ○ | **LLM 分類の判定根拠**。詳細かつ他ジャンルとの境界を明示する文が分類精度を高める |
 | `webhook_env` | ○ | Secret に登録した環境変数名(例: `"DISCORD_WEBHOOK_QEC"`) |
 | `keywords` | ○ | TF-IDF フォールバック時に使用する語のリスト |
 
-ジャンルを追加した場合は対応する Discord チャンネルの Webhook を Secret に登録し、`.github/workflows/notify.yml` の `env:` セクションにも追記すること。
+ジャンルを追加した場合は対応する Discord チャンネルの Webhook を Secret に登録し、`.github/workflows/notify.yml`、`scirate_weekly.yml`、`repost.yml` の `env:` セクションにも追記すること。
 
 ### 分類パラメータ
 
@@ -1247,9 +1356,10 @@ python3 arxiv_bot.py
 | --- | --- | --- |
 | `classify_with_llm` | `true` | `false` にすると常に TF-IDF フォールバックを使用 |
 | `classify_min_score` | `0.05`(`0.08`) | TF-IDF スコアの採用下限 |
-| `classify_max_genres` | `2` | 1論文に割り当てる最大ジャンル数 |
+| `classify_max_genres` | `2` | LLM に要求するジャンル数。TF-IDF 経路では上限として実際に切る |
 | `classify_secondary_ratio` | `0.7`(`0.82`) | TF-IDF 使用時、2番目以降のジャンルを採用するための最低スコア比率 |
 | `force_genre_keywords` | `{}` | 指定語がタイトル/abstractに出た場合、分類結果へ該当ジャンルを追加 |
+| `qec_adjacent_coding_terms` | 53語 | 分類後に決定的に `qec` を追加する符号理論の語句 |
 | `fallback_keyword_boosts` | `{}` | TF-IDF フォールバック時にキーワード加点するジャンル別フレーズリスト |
 | `fallback_title_phrase_bonus` | `0.35` | タイトル中のキーワードフレーズへの加点 |
 | `fallback_abstract_phrase_bonus` | `0.18` | abstract 中のキーワードフレーズへの加点 |
@@ -1265,7 +1375,22 @@ python3 arxiv_bot.py
 | `external_skip_consensus` | `2` | 外部論文の却下に必要な独立LLMの`skip`票数 |
 | `external_arxiv_queries` | 隣接3カテゴリのクエリ | カテゴリごとのAPI検索語、ジャンルの優先ヒント、取得日数、APIページサイズ、クエリ分割数、審査基準。個別に止める場合は `enabled: false` |
 
-実行ログには Gemini の利用状況が出力される。例:
+`external_arxiv_queries` の取得元ごとのキー:
+
+| キー | デフォルト | 説明 |
+| --- | --- | --- |
+| `enabled` | `true` | 設定を消さずにこの取得元だけ停止する |
+| `candidate_genres` | 取得元ごと | 審査プロンプトで示す優先ヒント。出力制限ではない |
+| `allow_all_genres` | `true` | `excluded_genres` 以外の全ジャンルを審査で選べるようにする |
+| `excluded_genres` | `["other"]` | 外部審査が決して選べないジャンル |
+| `lookback_days` | `4` | 通常の取得日数 |
+| `cursor_overlap_days` | `2` | 最後に取得成功してからの経過日数に上乗せする日数 |
+| `max_results` | `100` | arXiv API のページサイズ |
+| `terms_per_query` | `8` | 1リクエストあたりの検索語数 |
+| `terms` | 取得元ごと | 再現率寄りの検索語 |
+| `review_instructions` | 取得元ごと | 審査プロンプトに追加する取得元固有の指示 |
+
+実行ログには LLM の利用状況が出力される。例:
 
 ```text
 [info] Gemini usage: mode=classify-only, model=gemini-2.5-flash+gemini-2.5-flash-lite+gpt-oss-120b, requests=17, classified=82/82, tfidf_fallback=0, disabled_models=None
@@ -1275,19 +1400,21 @@ python3 arxiv_bot.py
 
 cross-list 論文の primary カテゴリから分類を補助する設定。
 
-- `cross_classify_primary_as_quantph`: quant-ph以外のsourceを通常後処理へ明示的に渡す場合の互換制限。quant-ph RSSから実際に取得した論文はprimaryに関係なく通常分類する
+- `cross_classify_primary_as_quantph`: quant-ph 以外の source を通常後処理へ明示的に渡す場合の互換制限。quant-ph RSS から実際に取得した論文は primary に関係なく通常分類する
 - `category_genre_hints`: カテゴリ → ジャンル ID のマッピング。該当カテゴリの論文は指定ジャンルのスコアが +0.15 される
-- `category_other_overrides`: 追加で明示的に `other` 扱いしたい primary カテゴリ
+- `category_other_overrides`: 互換経路で追加で明示的に `other` 扱いしたい primary カテゴリ
 
 ### crypto 強制キーワード
 
-`force_genre_keywords.crypto` に含まれる語がタイトルまたは abstract に出た場合、Gemini/TF-IDF の結果に `crypto` を追加する。現在は、verifiable quantum computation / blind quantum computation / secure quantum computation / delegated quantum computation 周辺の取り漏らしを避けるため、以下のような語を入れている。
+`force_genre_keywords.crypto` に含まれる語がタイトルまたは abstract に出た場合、LLM/TF-IDF の結果に `crypto` を追加する。現在は、verifiable / blind / secure / delegated quantum computation 周辺の取り漏らしを避けることを狙って、以下の語を入れている。
 
 ```text
-blind, verifiable, secure, delegated quantum computation,
-secure delegation, blind delegation, verifiable delegation,
-untrusted server, malicious server, client-server
+blind, blindness, verifiable, verifiability, secure, securely, security,
+delegated quantum computation, secure delegation, blind delegation,
+verifiable delegation, untrusted server, malicious server, client-server
 ```
+
+マッチングはタイトルと abstract 全体に対する前方一致寄りの単語一致であるため、このリスト中の単独の一般語(`blind`, `secure`, `security`, `verifiable`)は無関係な論文でも発火し得る。このリストを絞るかどうかの未決事項は `DESIGN_BACKLOG.md` を参照。
 
 ### cross-list フィルタ
 
@@ -1302,7 +1429,7 @@ untrusted server, malicious server, client-server
 | --- | --- | --- |
 | `translators` | `["deepl","azure","google"]` | 翻訳バックエンドの試行順 |
 | `target_language` | `"ja"` | 翻訳先言語コード。個別指定がない場合は各翻訳バックエンドに渡される |
-| `target_language_name` | `"Japanese"` | Gemini 翻訳プロンプトで使う翻訳先言語名 |
+| `target_language_name` | `"Japanese"` | LLM 翻訳プロンプトで使う翻訳先言語名 |
 | `deepl_target_language` | 未設定 | DeepL 専用の翻訳先言語コード。例: `JA`, `EN-US`, `PT-BR` |
 | `azure_target_language` | 未設定 | Azure 専用の翻訳先言語コード。未設定時は `target_language` を使う |
 | `azure_translator_endpoint` | 未設定 | Azure endpoint。未設定時は `https://api.cognitive.microsofttranslator.com` |
@@ -1314,7 +1441,7 @@ untrusted server, malicious server, client-server
 | `azure_max_retries` | `4` | Azure Translator の 429 rate limit 応答に対するリトライ回数 |
 | `google_min_interval_sec` | `1.2` | Google Translate リクエスト間の最小間隔(秒) |
 | `google_max_retries` | `3` | Google Translate の 429 / user-rate-limit 応答に対するリトライ回数 |
-| `translation_priority_genres` | `["ft","qec","complexity","qml","crypto","pqc","network","algo","sim","nisq","hardware","sensing","qit","foundations","other"]` | 分類後に翻訳・投稿するジャンル優先順 |
+| `translation_priority_genres` | 15ジャンルID | 分類後に翻訳・投稿するジャンル優先順 |
 | `translate_only_matched` | `false` | `true` にするとジャンル未分類論文は翻訳しない(API節約) |
 | `google_skip_translation_genres` | `["other","foundations","sensing","nisq"]` | Google だけが残った場合、このリスト内のジャンルだけに属する論文は英語原文で投稿して Google quota を節約する |
 | `require_translation` | `true` | `true`: 翻訳失敗論文は次回へ持ち越す / `false`: 英語のまま投稿 |
@@ -1323,22 +1450,35 @@ untrusted server, malicious server, client-server
 | `include_replacements` | `false` | `true` にすると差替え論文(replace)も投稿する |
 | `scirate_range_days` | `7` | SciRate 週末ダイジェストで見る期間 |
 | `scirate_min_scites` | `30` | SciRate 週末ダイジェストで投稿対象にする最低 Scite 数 |
-| `gemini_model` | `"gemini-2.5-flash"` | レガシーなデフォルト値。Gemini が翻訳も兼ねる path A(翻訳+分類)でのみ使用される。分類には `gemini_model_primary` / `gemini_model_secondary` を使う |
+| `gemini_model` | `"gemini-2.5-flash"` | レガシーなデフォルト値。Gemini が翻訳も兼ねる「翻訳+分類」経路でのみ使用される。分類には `gemini_model_primary` / `gemini_model_secondary` を使う |
 | `gemini_min_interval_sec` | `7` | Gemini リクエスト間の最小間隔(秒)。`gemini_min_intervals` に該当モデルの指定がない場合のフォールバック値 |
 | `gemini_max_retries` | `4` | 一時的エラー時のリトライ上限回数 |
 | `gemini_overload_giveup` | `2` | 過負荷エラーが連続したら circuit breaker を開く閾値 |
 
 ---
 
+## セキュリティ
+
+- このリポジトリに認証情報は一切保存されていない。Webhook URL と API キーはすべて、実行時に GitHub Actions Secrets またはローカルの環境変数から渡される
+- `.gitignore` は `.env` と `error_diagnostics.jsonl` を除外している。ローカルで実際の値を含みやすいのはこの2ファイルである
+- この README と補助スクリプトに出てくる Discord ID はすべてプレースホルダであり、実在のチャンネルやサーバーではない
+- エラーログは出力前に伏字化される。URL のクエリ文字列は除去され、Discord webhook のパス要素は `<redacted>` になり、環境変数名に `SECRET` / `PASSWORD` / `WEBHOOK` を含むもの、または `_KEY` / `_TOKEN` で終わるものの値はエラーテキストから取り除かれる
+- `posted_log.json` と `seen_ids.json` はリポジトリに commit される。内容は arXiv のメタデータ(ID、タイトル、著者、abstract、翻訳)だけで、運用上の認証情報は含まれない。ただし非公開の Discord コミュニティ向けに fork する場合、このログによって bot の投稿履歴が全部公開される点は意識しておくこと
+- 万一 Webhook URL を commit してしまった場合は、ただちに Discord 側で再発行すること。古い値がすでにキャッシュされている可能性があるため、git 履歴の書き換えだけでは不十分である
+
+---
+
 ## 留意事項
 
 - RSS の `<category>` 要素の先頭を primary カテゴリとみなすヒューリスティックを使用している(arXiv API の保証ではなく経験則)。
-- ジャンル分類は Gemini(主)と TF-IDF(フォールバック)によるヒューリスティックであり、誤分類は不可避。`description` の記述精度が Gemini 分類の精度に直結するため、境界が曖昧なジャンルは境界条件を明示した文章にすること。
-- チェックインされている標準設定は意図的に日本語運用のまま。多言語動作は `target_language` と関連設定を変更した場合のみ有効になるため、今回の多言語対応は既存の日本語 Discord ワークフローを変更しない。
+- ジャンル分類は LLM チェーン(主)と TF-IDF(フォールバック)によるヒューリスティックであり、誤分類は不可避。`description` の記述精度が分類精度に直結するため、境界が曖昧なジャンルは境界条件を明示した文章にすること。
+- 最終的なジャンルは LLM だけで決まっているわけではない。分類後の決定的な後処理が `crypto` と広義 `qec` の符号理論ラベルを追加することがあり、ログ上ではその追加分とモデル自身の出力を現状区別できない。
+- チェックインされている標準設定は意図的に日本語運用のまま。多言語動作は `target_language` と関連設定を変更した場合のみ有効になるため、多言語対応は既存の日本語 Discord ワークフローを変更しない。
 - Azure Translator の F0 は月200万文字まで無料なので、Google の前に挟む中間フォールバックとして有用。Azure のみで使う場合は `translators: ["azure"]` とし、`target_language` に `fr`, `de`, `ko`, `zh-Hans` などの Azure 対応言語コードを設定する。
 - Google Cloud Translation は多くの言語に対応しており、標準チェーンでは最後のフォールバックとして使う。Google 使用量を抑えるため、DeepL/Azure で翻訳できなかった `other`, `foundations`, `sensing`, `nisq` のみに投稿される論文は英語原文で投稿する。
 - `gemini-2.5-pro` は Gemini API の無料枠から外れ(課金を有効にしない限り 429・クォータ0を返すようになった)、そのためデフォルトの Gemini 分類チェーンは `gemini-2.5-flash` → `gemini-2.5-flash-lite` になっている。残ったモデルの無料枠 RPD(1日あたりリクエスト数)クォータもたびたび引き下げられており、`gemini-2.5-flash` が1日あたり約20リクエストしか使えないと報告するアカウントもあるため、導入時は [Google AI Studio](https://aistudio.google.com/) でそのアカウントの現行値を確認すること。モデルごとの circuit breaker と `gemini-2.5-flash-lite` / `gpt-oss-120b` フォールバックにより、実行途中でプライマリモデルのクォータが尽きても分類は継続する。
-- `seen_ids.json`の完了IDと未完了のチャンネル別配信状態は、再送漏れ・古い論文の再投稿を防ぐため切り捨てない。表示・監査用の`posted_log.json`だけは最新5000件に制限する。
+- `seen_ids.json` の完了ID、未完了のチャンネル別配信状態、外部審査、未審査候補、取得cursorは、再送漏れ・古い論文の再投稿を防ぐため切り捨てない。表示・監査用の `posted_log.json` だけは最新5000件に制限する。
+- 隣接カテゴリの completeness が現在カバーするのは、**primary** が `cs.CR`, `cs.CC`, `cs.IT` の論文である。`math.IT` や `cs.DS` など他カテゴリが primary の論文は、quant-ph へ cross-list された場合にのみ拾われる。
 
 ---
 
@@ -1449,11 +1589,11 @@ python3 scripts/lock_discord_channels.py --names \
   --apply
 ```
 
-`random` だけを開けたまま全テキストチャンネルを一括ロックする場合:
+`random` だけ開けたまま全チャンネルをロックする場合:
 
 ```bash
 python3 scripts/lock_discord_channels.py --all-text-channels --exclude-names random
 python3 scripts/lock_discord_channels.py --all-text-channels --exclude-names random --apply
 ```
 
-注意: `Administrator` 権限を持つユーザーはチャンネル権限上書きをバイパスする。既存 Webhook は、そのチャンネルへ引き続き投稿できる。
+注意: `Administrator` 権限を持つユーザーはチャンネル権限の上書きを回避する。Webhook は引き続き自分のチャンネルへ投稿できる。

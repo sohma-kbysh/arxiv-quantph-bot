@@ -69,8 +69,21 @@ def main() -> int:
         return 0
 
     if args.model:
-        chain = [{"provider": "gemini", "model": m, "name": m}
-                 for m in args.model]
+        configured_specs = arxiv_bot.classifier_model_specs(cfg)
+        chain = []
+        for model in args.model:
+            matched = next((
+                spec for spec in configured_specs
+                if model in {
+                    arxiv_bot.classifier_spec_name(spec),
+                    str(spec.get("model", "")),
+                }
+            ), None)
+            chain.append(matched or {
+                "provider": "gemini",
+                "model": model,
+                "name": model,
+            })
     else:
         chain = arxiv_bot.classifier_model_specs(cfg)
     seen_models: set[tuple[str, str]] = set()

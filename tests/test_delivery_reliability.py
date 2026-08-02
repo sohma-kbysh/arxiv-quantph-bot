@@ -121,17 +121,58 @@ class DeliveryReliabilityTests(unittest.TestCase):
     def test_http_error_log_never_contains_secret_url(self) -> None:
         stream = io.StringIO()
         url = "https://example.test/v1/model?key=super-secret"
-        with (
-            patch.object(
-                arxiv_bot.urllib.request, "urlopen",
-                side_effect=urllib.error.URLError("offline"),
-            ),
-            patch.object(sys, "stderr", stream),
-        ):
-            status, _ = arxiv_bot.http_post_json(url, {})
+        with tempfile.TemporaryDirectory() as tmpdir:
+            with (
+                patch.object(
+                    arxiv_bot.urllib.request, "urlopen",
+                    side_effect=urllib.error.URLError("offline"),
+                ),
+                patch.object(
+                    arxiv_bot, "DIAGNOSTICS_PATH",
+                    Path(tmpdir) / "diagnostics.jsonl",
+                ),
+                patch.object(sys, "stderr", stream),
+            ):
+                status, _ = arxiv_bot.http_post_json(url, {})
         self.assertEqual(status, 0)
         self.assertNotIn("super-secret", stream.getvalue())
         self.assertIn("<redacted>", stream.getvalue())
+
+    def test_http_error_diagnostic_keeps_safe_details_and_redacts_secrets(
+            self) -> None:
+        url = "https://example.test/api/query?key=super-secret&q=quantum"
+        body = b'upstream policy: token "super-secret" is not acceptable'
+        headers = {
+            "Content-Type": "text/plain",
+            "X-Request-Id": "request-123",
+            "Set-Cookie": "session=must-not-be-saved",
+        }
+        error = urllib.error.HTTPError(
+            url, 406, "Not Acceptable", headers, io.BytesIO(body))
+        with tempfile.TemporaryDirectory() as tmpdir:
+            diagnostic_path = Path(tmpdir) / "diagnostics.jsonl"
+            with (
+                patch.object(
+                    arxiv_bot.urllib.request, "urlopen", side_effect=error),
+                patch.object(
+                    arxiv_bot, "DIAGNOSTICS_PATH", diagnostic_path),
+                patch.dict(os.environ, {"GEMINI_API_KEY": "super-secret"}),
+                self.assertRaises(urllib.error.HTTPError),
+            ):
+                arxiv_bot.http_get(url)
+
+            record = json.loads(
+                diagnostic_path.read_text(encoding="utf-8").splitlines()[0])
+
+        self.assertEqual(record["kind"], "http_error")
+        self.assertEqual(record["status"], 406)
+        self.assertEqual(record["method"], "GET")
+        self.assertIn("<redacted>", record["url"])
+        self.assertNotIn("super-secret", json.dumps(record))
+        self.assertIn("upstream policy", record["response_body"])
+        self.assertEqual(
+            record["response_headers"]["x-request-id"], "request-123")
+        self.assertNotIn("set-cookie", record["response_headers"])
 
     def test_cursor_expands_lookback_after_outage(self) -> None:
         now = datetime(2026, 7, 30, tzinfo=timezone.utc)
@@ -178,6 +219,9 @@ class DeliveryReliabilityTests(unittest.TestCase):
             with (
                 patch.object(arxiv_bot, "STATE_PATH", state_path),
                 patch.object(arxiv_bot, "LOG_PATH", log_path),
+                patch.object(
+                    arxiv_bot, "DIAGNOSTICS_PATH",
+                    Path(tmp) / "diagnostics.jsonl"),
                 patch.object(
                     arxiv_bot, "post_to_discord",
                     side_effect=post_results,
@@ -257,6 +301,9 @@ class DeliveryReliabilityTests(unittest.TestCase):
             with (
                 patch.object(arxiv_bot, "STATE_PATH", state_path),
                 patch.object(arxiv_bot, "LOG_PATH", log_path),
+                patch.object(
+                    arxiv_bot, "DIAGNOSTICS_PATH",
+                    Path(tmp) / "diagnostics.jsonl"),
                 patch.object(
                     arxiv_bot, "fetch_feed",
                     side_effect=RuntimeError("RSS offline"),

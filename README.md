@@ -23,7 +23,7 @@ The checked-in `config.json` remains configured for the original Japanese Discor
 | `seen_ids.json` | Durable state: completed IDs, per-channel delivery queue, external-review cache, unreviewed external candidates, and per-source fetch cursors. Automatically committed by Actions |
 | `posted_log.json` | Metadata log for posted papers. JSON array, capped at 5000 entries |
 | `scirate_weekly.py` | Weekend bot that reposts popular weekly quant-ph papers from SciRate into the normal genre channels |
-| `scirate_weekly_state.json` | Durable state for the SciRate weekend bot (same three-phase structure) |
+| `scirate_weekly_state.json` | Durable state for daily/weekly SciRate discovery, translation, delivery, and deduplication |
 | `test_feed.xml` | Sample RSS feed for local testing |
 | `tests/test_external_arxiv.py` | Tests for adjacent-category API queries, external review, and the QEC policy |
 | `tests/test_delivery_reliability.py` | Tests for per-channel delivery receipts, resumable phases, and webhook error handling |
@@ -37,7 +37,7 @@ The checked-in `config.json` remains configured for the original Japanese Discor
 | `repost_plan.json` | Repost plan (paper id -> channels to add), generated from a classification audit |
 | `DESIGN_BACKLOG.md` | Open design decisions and their proposed order of work |
 | `.github/workflows/notify.yml` | GitHub Actions schedule and secret references for the main notifier |
-| `.github/workflows/scirate_weekly.yml` | GitHub Actions schedule for the SciRate weekend digest |
+| `.github/workflows/scirate_weekly.yml` | GitHub Actions schedule for the SciRate daily Top 3 and Sunday weekly 30+ digest |
 | `.github/workflows/classification_audit.yml` | Manually triggered workflow that audits one day of past classifications |
 | `.github/workflows/repost.yml` | Manually triggered workflow that posts papers to missing channels per a repost plan |
 
@@ -61,7 +61,7 @@ The workflow can also be run manually (`workflow_dispatch`) with three inputs.
 | `test_emergency_alert` | `false` | Send only a test message to the bot-emergency channel without running the notifier |
 | `external_backfill_days` | `"0"` | One-time lookback in days for the adjacent-category API sources only. `0` keeps the configured window |
 
-On weekends, a separate workflow posts a SciRate weekly popular-paper digest.
+A separate workflow posts SciRate's weekday Top 3 and Sunday weekly 30+ digest to one dedicated channel.
 
 | UTC | JST | Purpose |
 | --- | --- | --- |
@@ -278,7 +278,7 @@ The `DISCORD_WEBHOOK_BOT_EMERGENCY` webhook receives operational messages, all i
 
 | Message | When |
 | --- | --- |
-| ✅ / 🟡 / 🚨 Run report | Every run of the main notifier and the SciRate weekend digest |
+| ✅ / 🟡 / 🚨 Run report | Every run of the main notifier and the SciRate daily/weekly digest |
 | ⚠️ Translation outage alert | When every translator backend in the chain has given up for the run and papers are being silently deferred |
 | 🚨 Source or delivery failure | When an RSS feed, an arXiv API query, or a Discord delivery failed during the run |
 
@@ -320,29 +320,58 @@ python3 scripts/repost_missing_channels.py --plan repost_plan.json --dry-run
 
 ---
 
-## SciRate weekend digest
+## SciRate daily and weekly channel
 
-The weekend workflow `.github/workflows/scirate_weekly.yml` fetches `https://scirate.com/arxiv/quant-ph?range=7` and targets only papers whose `Scite!` count is at least `scirate_min_scites`. The default threshold is 30.
+`.github/workflows/scirate_weekly.yml` sends all SciRate editorial content to
+one dedicated webhook, `DISCORD_WEBHOOK_SCIRATE`. It never reposts SciRate
+content into QEC, QIT, or any other normal genre channel.
 
-Unlike the normal new-paper notifier, the SciRate weekend digest deduplicates with `scirate_weekly_state.json` instead of `seen_ids.json`. This allows papers that were already posted on weekdays to be reposted on the weekend as popular papers.
+| JST schedule | Selection | Discord format |
+| --- | --- | --- |
+| Monday-Friday 23:30 | Exact `pubdate` batch for that day; first three papers with at least `scirate_daily_min_scites` (default 1) | One Top 3 ranking embed |
+| Sunday 23:30 | The seven-day window ending Sunday; every paper with at least `scirate_min_scites` (default 30) | One normal paper embed per qualifying paper |
+| Saturday | No run | None |
 
-It uses the same genres and webhooks as the normal notifier, and the same three-phase durable pipeline (`--discover-only` / `--translate-only` / `--deliver-only`), so an interrupted digest resumes instead of depending on the weekly page still listing the same papers.
+Daily ties preserve SciRate's own deterministic order. If fewer than three
+papers have a positive Scite count, the digest posts only those papers. An
+empty daily API result means there was no eligible announcement batch and
+produces no channel post. Weekly cards include their current Scite count and
+mark papers that already appeared in a daily Top 3.
 
-- If `posted_log.json` already has classification history for the same arXiv ID, saved `genre_ids` are reused
-- If no classification history exists, Gemini classify-only is used
-- If Gemini is unavailable, the bot falls back to TF-IDF
-- If translated `title_translated` / `abstract_translated` values exist in `posted_log.json` for the same `translation_language`, they are reused
-- If no translation exists, the same DeepL -> Azure Translator -> Google Cloud Translation chain is used
+Production does **not** scrape SciRate HTML. It probes the JSON endpoint
+proposed by upstream PR `scirate/scirate#535`, currently
+`https://scirate.com/arxiv/quant-ph.json?date=YYYY-MM-DD&range=N&page=1`.
+Until it returns a valid `papers` array, the source is `waiting_for_api`, only
+durable queued deliveries are processed, and the workflow exits successfully
+with a bot-emergency notice. The first valid response enables the feature
+automatically. A later outage becomes `degraded`; missed daily or weekly
+periods are stored in `pending_discovery` and caught up automatically by the
+next run of the same mode. Already discovered posts and translations are also
+durable across runs.
 
-SciRate posts add a `SciRate` field to the normal embed and show the number of Scites from the last 7 days. Like the main notifier, the digest lists all assigned genres in the embed footer and sends a run report to the bot-emergency channel after every run.
+The client verifies the response date, requires `pubdate` for an exact daily
+batch, checks global descending score order, and rejects a weekly result if it
+cannot reach the 30-Scite boundary within `scirate_api_max_pages`. Set the
+repository variable `SCIRATE_API_URL_TEMPLATE` if SciRate publishes a
+different path; `{date}`, `{days}`, and `{page}` are supported. Pagination can
+be adjusted with `SCIRATE_API_PAGE_SIZE` and `SCIRATE_API_MAX_PAGES`.
+
+`scirate_weekly_state.json` owns daily/weekly deduplication and retry state.
+The three durable phases remain `--discover-only`, `--translate-only`, and
+`--deliver-only`. Existing translations and genre labels are reused from
+`posted_log.json`; missing translations use the normal translation chain.
+There is no new AI classification call because routing is always the dedicated
+SciRate channel. Operational reports still go to bot-emergency.
 
 Local check:
 
 ```bash
-python3 scirate_weekly.py --dry-run
+python3 scirate_weekly.py --mode daily --date 2026-08-03 --dry-run
+python3 scirate_weekly.py --mode weekly --date 2026-08-09 --dry-run
 ```
 
-Some environments receive HTTP 403 when accessing SciRate directly. In that case, the script prints a warning and exits without posting to Discord or updating state.
+`--html-file PATH` remains available only for local parser fixtures. There is
+no production HTML fallback, proxy rotation, or User-Agent bypass for a 403.
 
 ---
 
@@ -420,11 +449,12 @@ You can create a Gemini API key in [Google AI Studio](https://aistudio.google.co
 
 Register the following under `Settings -> Secrets and variables -> Actions -> New repository secret`.
 
-**Webhooks (all 15 genres + general + bot-emergency)**
+**Webhooks (all 15 genres + general + bot-emergency + SciRate)**
 
 ```text
 DISCORD_WEBHOOK_GENERAL
 DISCORD_WEBHOOK_BOT_EMERGENCY   # run reports and outage alerts (recommended)
+DISCORD_WEBHOOK_SCIRATE         # daily Top 3 and weekly 30+ digests
 DISCORD_WEBHOOK_QEC
 DISCORD_WEBHOOK_FT
 DISCORD_WEBHOOK_ALGO
@@ -646,8 +676,12 @@ Matching is a prefix-tolerant word match over the whole title and abstract, so s
 | `show_translated_title` | `true` | Show the translated title at the beginning of the Discord embed body |
 | `show_original_abstract` | `false` | Include the English abstract in addition to the translated abstract |
 | `include_replacements` | `false` | Post replacement papers when set to `true` |
-| `scirate_range_days` | `7` | Date range used by the SciRate weekend digest |
-| `scirate_min_scites` | `30` | Minimum Scite count for the SciRate weekend digest |
+| `scirate_daily_top_n` | `3` | Number of papers in the weekday SciRate ranking |
+| `scirate_daily_min_scites` | `1` | Daily minimum; zero-score papers do not fill empty ranks |
+| `scirate_min_scites` | `30` | Minimum Scite count for the Sunday weekly digest |
+| `scirate_api_url_template` | SciRate PR #535 path | JSON API template; supports `{date}`, `{days}`, and `{page}` |
+| `scirate_api_max_pages` | `20` | Safety ceiling; exceeding it before the score boundary rejects a partial digest |
+| `scirate_api_page_size` | `50` | Expected upstream page size used to detect the final page |
 | `gemini_model` | `"gemini-2.5-flash"` | Legacy default model; now used only as the Gemini-as-translator model on the combined translate-and-classify path. Classification uses `gemini_model_primary` / `gemini_model_secondary` instead |
 | `gemini_min_interval_sec` | `7` | Minimum interval between Gemini requests, in seconds (fallback when a model has no entry in `gemini_min_intervals`) |
 | `gemini_max_retries` | `4` | Maximum retries for temporary errors |
@@ -824,8 +858,8 @@ arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1
 | `config.json` | 全設定(フィード、ジャンル定義、API挙動、分類パラメータ) |
 | `seen_ids.json` | 永続状態: 完了ID、チャンネル別配信queue、外部審査キャッシュ、未審査の外部候補、取得元別cursor(Actions が自動commit) |
 | `posted_log.json` | 投稿済み論文のメタデータログ(最大5000件、JSON 配列) |
-| `scirate_weekly.py` | SciRate の週間人気 quant-ph 論文を通常ジャンルへ再投稿する週末用 bot |
-| `scirate_weekly_state.json` | SciRate 週末 bot の永続状態(同じ3フェーズ構造) |
+| `scirate_weekly.py` | SciRateの日次Top 3と週次30+を専用チャンネルへ投稿するbot |
+| `scirate_weekly_state.json` | SciRateの日次・週次取得、翻訳、配信、重複排除の永続状態 |
 | `test_feed.xml` | ローカルテスト用のサンプル RSS |
 | `tests/test_external_arxiv.py` | 隣接カテゴリAPIクエリ・外部審査・QECポリシーのテスト |
 | `tests/test_delivery_reliability.py` | チャンネル別receipt、フェーズ再開、webhookエラー処理のテスト |
@@ -839,7 +873,7 @@ arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1
 | `repost_plan.json` | 追い投稿プラン(論文ID → 追加チャンネル)。分類監査の結果から生成 |
 | `DESIGN_BACKLOG.md` | 未決の設計判断と、その着手順序の構想 |
 | `.github/workflows/notify.yml` | 実行スケジュールと Secret 参照の定義 |
-| `.github/workflows/scirate_weekly.yml` | SciRate 週末ダイジェストの実行スケジュール |
+| `.github/workflows/scirate_weekly.yml` | SciRate平日Top 3・日曜週次30+の実行スケジュール |
 | `.github/workflows/classification_audit.yml` | 過去1日分の分類を監査する手動実行ワークフロー |
 | `.github/workflows/repost.yml` | 追い投稿プランに従って不足チャンネルへ投稿する手動実行ワークフロー |
 
@@ -863,7 +897,7 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 | `test_emergency_alert` | `false` | 通知本体を動かさず、bot-emergency チャンネルへテスト送信だけを行う |
 | `external_backfill_days` | `"0"` | 隣接カテゴリAPIの取得元だけを指定日数まで遡る一回限りの設定。`0` なら通常の設定値のまま |
 
-週末には SciRate の週間人気論文も別 workflow で投稿する。
+別workflowが、SciRateの平日Top 3と日曜の週次30+を1つの専用チャンネルへ投稿する。
 
 | UTC | JST | 目的 |
 | --- | --- | --- |
@@ -1080,7 +1114,7 @@ embed の色は、全成功なら緑、持ち越しありなら橙、Discord 投
 
 | メッセージ | タイミング |
 | --- | --- |
-| ✅ / 🟡 / 🚨 実行レポート | 通常通知と SciRate 週末ダイジェストの毎回の実行後 |
+| ✅ / 🟡 / 🚨 実行レポート | 通常通知とSciRate日次・週次ダイジェストの毎回の実行後 |
 | ⚠️ 翻訳全停止アラート | チェーン内の全翻訳バックエンドがその実行で停止し、論文が黙って持ち越されているとき |
 | 🚨 取得・配信失敗 | RSS フィード、arXiv API クエリ、Discord 配信のいずれかがその実行で失敗したとき |
 
@@ -1122,29 +1156,32 @@ python3 scripts/repost_missing_channels.py --plan repost_plan.json --dry-run
 
 ---
 
-## SciRate 週末ダイジェスト
+## SciRate 日次・週次専用チャンネル
 
-週末用の `.github/workflows/scirate_weekly.yml` は、`https://scirate.com/arxiv/quant-ph?range=7` を取得し、`Scite!` 数が `scirate_min_scites` 以上の論文だけを対象にする。デフォルトは30以上。
+`.github/workflows/scirate_weekly.yml` は SciRate の編集コンテンツをすべて `DISCORD_WEBHOOK_SCIRATE` の1チャンネルへ送る。QEC・QITなど通常の分類チャンネルには再投稿しない。
 
-通常の新着通知とは違い、SciRate 週末ダイジェストは `seen_ids.json` ではなく `scirate_weekly_state.json` で重複排除する。これにより、平日にすでに投稿済みの論文でも、週末に「人気論文」として再掲できる。
+| 日本時間 | 対象 | 投稿形式 |
+| --- | --- | --- |
+| 月〜金 23:30 | その日の `pubdate` と厳密に一致し、`scirate_daily_min_scites`（既定1）以上の上位3本 | Top 3を1件のランキングembedに集約 |
+| 日曜 23:30 | 日曜を終端とする7日間で `scirate_min_scites`（既定30）以上の全論文 | 論文ごとに通常形式のembedを1件 |
+| 土曜 | 実行なし | なし |
 
-分類は通常通知と同じジャンル・Webhook を使い、同じ3フェーズの永続パイプライン(`--discover-only` / `--translate-only` / `--deliver-only`)で動く。したがって途中で中断しても、週間ページに同じ論文が残っていることに依存せず再開できる。
+日次の同点順位はSciRate自身の決定的な並びをそのまま使う。1 Scite以上が3本未満なら、0 Sciteの論文で埋めずに該当本数だけ投稿する。APIが空なら、その日は対象となる発表バッチなしとしてチャンネル投稿を行わない。週次カードには現在のScite数を付け、日次Top 3に掲載済みならその旨も表示する。
 
-- `posted_log.json` に同じ arXiv ID の分類履歴がある場合は、保存済みの `genre_ids` を再利用する
-- 分類履歴がない場合は Gemini classify-only を使う
-- Gemini が使えない場合は TF-IDF にフォールバックする
-- 同じ `translation_language` の `title_translated` / `abstract_translated` が `posted_log.json` にあれば再利用する
-- 未翻訳の場合は通常通知と同じ DeepL → Azure Translator → Google Cloud Translation チェーンで翻訳する
+本番ではSciRateのHTMLをスクレイピングしない。upstream PR `scirate/scirate#535` で提案されているJSON endpoint（現在は `https://scirate.com/arxiv/quant-ph.json?date=YYYY-MM-DD&range=N&page=1`）を確認する。有効な `papers` 配列が返るまでは `waiting_for_api` とし、永続キューだけを処理してbot-emergencyに案内を出し、正常終了する。最初の有効なレスポンスから自動的に有効化する。一度利用可能になった後の障害は `degraded` とし、未取得の日次・週次期間を `pending_discovery` に保存して、同じmodeの次回実行で自動的に追いつく。取得済み投稿と翻訳も永続キューから再開する。
 
-SciRate 投稿には通常の embed に加えて `SciRate` フィールドが付き、直近7日での Scite 数を表示する。通常通知と同様に、embed footer には割り当てられた全ジャンル名が表示され、毎回の実行後に bot-emergency チャンネルへ実行レポートが送られる。
+日次ではresponse dateと各行の`pubdate`を検証する。全体のスコア降順も検証し、週次で`scirate_api_max_pages`以内に30 Scitesの境界まで取得できなければ、不完全な結果を投稿せず失敗させる。SciRateが別pathを公開した場合はRepository Variable `SCIRATE_API_URL_TEMPLATE`を変更する。`{date}`・`{days}`・`{page}`を使用できる。paginationは`SCIRATE_API_PAGE_SIZE`と`SCIRATE_API_MAX_PAGES`で調整できる。
+
+日次・週次の重複排除とretryは`scirate_weekly_state.json`が管理する。3フェーズ（`--discover-only` / `--translate-only` / `--deliver-only`）は維持する。`posted_log.json`に翻訳・分類表示名があれば再利用し、翻訳がなければ通常の翻訳chainを使う。投稿先は常にSciRate専用チャンネルなので、新たなAI分類は呼ばない。運用レポートだけは引き続きbot-emergencyへ送る。
 
 ローカル確認:
 
 ```bash
-python3 scirate_weekly.py --dry-run
+python3 scirate_weekly.py --mode daily --date 2026-08-03 --dry-run
+python3 scirate_weekly.py --mode weekly --date 2026-08-09 --dry-run
 ```
 
-SciRate が直接取得できない環境では HTTP 403 になることがある。その場合は警告を出して終了し、Discord 投稿や状態更新は行わない。
+`--html-file PATH` はローカルfixtureによるparser確認専用として残している。本番ではHTML fallback、proxy rotation、403回避用のUser-Agent偽装は行わない。
 
 ---
 
@@ -1222,11 +1259,12 @@ Gemini API キーは [Google AI Studio](https://aistudio.google.com/) で発行�
 
 `Settings → Secrets and variables → Actions → New repository secret` に以下を登録する。
 
-**Webhook (全15ジャンル + general + bot-emergency)**
+**Webhook (全15ジャンル + general + bot-emergency + SciRate)**
 
 ```text
 DISCORD_WEBHOOK_GENERAL
 DISCORD_WEBHOOK_BOT_EMERGENCY   # 実行レポート・障害アラート用(推奨)
+DISCORD_WEBHOOK_SCIRATE         # 日次Top 3・週次30+専用
 DISCORD_WEBHOOK_QEC
 DISCORD_WEBHOOK_FT
 DISCORD_WEBHOOK_ALGO
@@ -1448,8 +1486,12 @@ verifiable delegation, untrusted server, malicious server, client-server
 | `show_translated_title` | `true` | `true` にすると Discord embed 本文の先頭に翻訳済みタイトルを表示する |
 | `show_original_abstract` | `false` | `true` にすると翻訳文に加えて英語 abstract も embed に含める |
 | `include_replacements` | `false` | `true` にすると差替え論文(replace)も投稿する |
-| `scirate_range_days` | `7` | SciRate 週末ダイジェストで見る期間 |
-| `scirate_min_scites` | `30` | SciRate 週末ダイジェストで投稿対象にする最低 Scite 数 |
+| `scirate_daily_top_n` | `3` | 平日の日次ランキングに載せる本数 |
+| `scirate_daily_min_scites` | `1` | 日次の最低Scite数。0件の論文で空き順位を埋めない |
+| `scirate_min_scites` | `30` | 日曜の週次ダイジェストで投稿する最低Scite数 |
+| `scirate_api_url_template` | SciRate PR #535 path | JSON API template。`{date}`・`{days}`・`{page}`を使用可能 |
+| `scirate_api_max_pages` | `20` | threshold境界前の不完全取得を拒否するための安全上限 |
+| `scirate_api_page_size` | `50` | 最終ページ判定に使う想定upstream page size |
 | `gemini_model` | `"gemini-2.5-flash"` | レガシーなデフォルト値。Gemini が翻訳も兼ねる「翻訳+分類」経路でのみ使用される。分類には `gemini_model_primary` / `gemini_model_secondary` を使う |
 | `gemini_min_interval_sec` | `7` | Gemini リクエスト間の最小間隔(秒)。`gemini_min_intervals` に該当モデルの指定がない場合のフォールバック値 |
 | `gemini_max_retries` | `4` | 一時的エラー時のリトライ上限回数 |

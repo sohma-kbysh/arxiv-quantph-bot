@@ -31,6 +31,7 @@ import os
 import re
 import sys
 import time
+import traceback
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -54,15 +55,28 @@ ATOM_NS = {
 }
 
 USER_AGENT = "arxiv-quantph-discord-bot/1.0 (personal research notifier)"
+DIAGNOSTICS_PATH = Path(os.environ.get(
+    "ERROR_DIAGNOSTICS_PATH", BASE_DIR / "error_diagnostics.jsonl"))
+DIAGNOSTIC_BODY_LIMIT = 4096
+DIAGNOSTIC_RESPONSE_HEADERS = {
+    "age",
+    "cf-ray",
+    "content-length",
+    "content-type",
+    "date",
+    "retry-after",
+    "server",
+    "via",
+    "x-cloud-trace-context",
+    "x-correlation-id",
+    "x-ratelimit-limit",
+    "x-ratelimit-remaining",
+    "x-ratelimit-reset",
+    "x-request-id",
+}
 
 
 # ---------------------------------------------------------------- utilities
-
-def http_get(url: str, timeout: int = 30) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return resp.read()
-
 
 def redact_url(url: str) -> str:
     """Return a log-safe URL with credentials and query values removed."""
@@ -81,17 +95,137 @@ def redact_url(url: str) -> str:
 
 def redact_request_error(value: Any, url: str) -> str:
     """Remove the request URL and configured credentials from error text."""
-    text = str(value).replace(url, redact_url(url))
-    for name in (
-        "GEMINI_API_KEY",
-        "GOOGLE_TRANSLATE_API_KEY",
-        "DISCORD_WEBHOOK_GENERAL",
-        "DISCORD_WEBHOOK_BOT_EMERGENCY",
-    ):
-        secret = os.environ.get(name, "")
-        if secret:
+    text = str(value)
+    if url:
+        text = text.replace(url, redact_url(url))
+    for name, secret in os.environ.items():
+        upper_name = name.upper()
+        sensitive = (
+            "SECRET" in upper_name
+            or "PASSWORD" in upper_name
+            or "WEBHOOK" in upper_name
+            or upper_name.endswith("_KEY")
+            or upper_name.endswith("_TOKEN")
+        )
+        if sensitive and len(secret) >= 4:
             text = text.replace(secret, "<redacted>")
     return text
+
+
+def _diagnostic_body(body: bytes | str | None, url: str) -> str:
+    """Return a bounded, log-safe representation of a response body."""
+    if body is None:
+        return ""
+    if isinstance(body, bytes):
+        text = body[:DIAGNOSTIC_BODY_LIMIT].decode("utf-8", errors="replace")
+        truncated = len(body) > DIAGNOSTIC_BODY_LIMIT
+    else:
+        text = body[:DIAGNOSTIC_BODY_LIMIT]
+        truncated = len(body) > DIAGNOSTIC_BODY_LIMIT
+    text = redact_request_error(text, url)
+    return text + ("\n<truncated>" if truncated else "")
+
+
+def _diagnostic_headers(headers: Any, url: str) -> dict[str, str]:
+    """Keep only response headers useful for debugging and safe to retain."""
+    if not headers:
+        return {}
+    try:
+        items = headers.items()
+    except AttributeError:
+        return {}
+    return {
+        str(name).lower(): redact_request_error(str(value)[:1000], url)
+        for name, value in items
+        if str(name).lower() in DIAGNOSTIC_RESPONSE_HEADERS
+    }
+
+
+def save_error_diagnostic(
+    kind: str,
+    *,
+    url: str = "",
+    method: str = "",
+    status: int | None = None,
+    reason: Any = "",
+    headers: Any = None,
+    body: bytes | str | None = None,
+    exception: BaseException | None = None,
+) -> str:
+    """Append one sanitized diagnostic record without masking the real error.
+
+    The JSONL file is uploaded by GitHub Actions as a retained artifact.  A
+    failure to write diagnostics is reported but never replaces the original
+    network/application failure.
+    """
+    diagnostic_id = f"diag-{os.getpid()}-{time.time_ns()}"
+    safe_url = redact_url(url) if url else ""
+    record = {
+        "id": diagnostic_id,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "kind": kind,
+        "method": method,
+        "url": safe_url,
+        "status": status,
+        "reason": redact_request_error(reason, url) if reason else "",
+        "response_headers": _diagnostic_headers(headers, url),
+        "response_body": _diagnostic_body(body, url),
+        "exception_type": type(exception).__name__ if exception else "",
+        "exception": (
+            redact_request_error(exception, url) if exception else ""
+        ),
+    }
+    try:
+        DIAGNOSTICS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with DIAGNOSTICS_PATH.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+        print(
+            f"[diagnostic] {diagnostic_id} saved: kind={kind} "
+            f"status={status if status is not None else '-'} "
+            f"url={safe_url or '-'} body={record['response_body'][:500]!r}",
+            file=sys.stderr,
+        )
+    except Exception as diagnostic_error:  # noqa: BLE001
+        print(
+            "[warn] could not save sanitized error diagnostic: "
+            f"{type(diagnostic_error).__name__}: {diagnostic_error}",
+            file=sys.stderr,
+        )
+    return diagnostic_id
+
+
+def read_http_error_body(exc: urllib.error.HTTPError) -> bytes:
+    """Consume and close an HTTPError response body."""
+    try:
+        return exc.read()
+    finally:
+        exc.close()
+
+
+def http_get(url: str, timeout: int = 30,
+             headers: dict[str, str] | None = None) -> bytes:
+    request_headers = {"User-Agent": USER_AGENT}
+    if headers:
+        request_headers.update(headers)
+    req = urllib.request.Request(url, headers=request_headers)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.read()
+    except urllib.error.HTTPError as exc:
+        body = read_http_error_body(exc)
+        save_error_diagnostic(
+            "http_error", url=url, method="GET", status=exc.code,
+            reason=exc.reason, headers=exc.headers, body=body, exception=exc)
+        raise
+    except urllib.error.URLError as exc:
+        save_error_diagnostic(
+            "connection_error", url=url, method="GET", reason=exc.reason,
+            exception=exc)
+        raise
+    except Exception as exc:
+        save_error_diagnostic(
+            "request_error", url=url, method="GET", exception=exc)
+        raise
 
 
 def http_post_json(url: str, payload: dict, headers: dict | None = None,
@@ -105,13 +239,22 @@ def http_post_json(url: str, payload: dict, headers: dict | None = None,
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             return resp.status, resp.read()
     except urllib.error.HTTPError as e:
-        return e.code, e.read()
+        body = read_http_error_body(e)
+        save_error_diagnostic(
+            "http_error", url=url, method="POST", status=e.code,
+            reason=e.reason, headers=e.headers, body=body, exception=e)
+        return e.code, body
     except urllib.error.URLError as e:
+        save_error_diagnostic(
+            "connection_error", url=url, method="POST", reason=e.reason,
+            exception=e)
         print(f"[warn] Connection error for {redact_url(url)}: "
               f"{redact_request_error(e.reason, url)}",
               file=sys.stderr)
         return 0, b""
     except Exception as e:
+        save_error_diagnostic(
+            "request_error", url=url, method="POST", exception=e)
         print(f"[warn] Unexpected request error for {redact_url(url)}: "
               f"{redact_request_error(e, url)}",
               file=sys.stderr)
@@ -724,6 +867,9 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
                 return (data["candidates"][0]["content"]["parts"][0]["text"]
                         .strip())
             except (KeyError, IndexError, json.JSONDecodeError):
+                save_error_diagnostic(
+                    "invalid_response", url=url, method="POST", status=200,
+                    body=body)
                 return None
         if status in (429, 500, 503) and attempt < max_retries:
             backoff = min(60, 10 * (2 ** attempt))
@@ -817,7 +963,12 @@ def _openai_compat_request(prompt: str, cfg: dict, spec: dict) -> str | None:
             with urllib.request.urlopen(req, timeout=90) as resp:
                 body = resp.read().decode("utf-8")
         except urllib.error.HTTPError as exc:
-            body = exc.read().decode("utf-8", errors="replace")
+            raw_body = read_http_error_body(exc)
+            body = raw_body.decode("utf-8", errors="replace")
+            save_error_diagnostic(
+                "http_error", url=url, method="POST", status=exc.code,
+                reason=exc.reason, headers=exc.headers, body=raw_body,
+                exception=exc)
             if exc.code in (429, 500, 503) and attempt < max_retries:
                 backoff = min(60, 10 * (2 ** attempt))
                 print(f"[warn] {name} HTTP {exc.code}; retry in {backoff}s "
@@ -834,6 +985,9 @@ def _openai_compat_request(prompt: str, cfg: dict, spec: dict) -> str | None:
                       file=sys.stderr)
             return None
         except urllib.error.URLError as exc:
+            save_error_diagnostic(
+                "connection_error", url=url, method="POST",
+                reason=exc.reason, exception=exc)
             print(f"[warn] {name} request failed: {exc}", file=sys.stderr)
             return None
 
@@ -841,6 +995,9 @@ def _openai_compat_request(prompt: str, cfg: dict, spec: dict) -> str | None:
             data = json.loads(body)
             return data["choices"][0]["message"]["content"].strip()
         except (KeyError, IndexError, json.JSONDecodeError):
+            save_error_diagnostic(
+                "invalid_response", url=url, method="POST", status=200,
+                body=body)
             print(f"[warn] {name} returned an unexpected response: "
                   f"{body[:500]!r}", file=sys.stderr)
             return None
@@ -1454,9 +1611,14 @@ def translate_deepl(text: str, cfg: dict) -> str | None:
     )
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
-            body = json.loads(resp.read())
+            raw_body = resp.read()
+            body = json.loads(raw_body)
             return body["translations"][0]["text"].strip()
     except urllib.error.HTTPError as e:
+        error_body = read_http_error_body(e)
+        save_error_diagnostic(
+            "http_error", url=req.full_url, method="POST", status=e.code,
+            reason=e.reason, headers=e.headers, body=error_body, exception=e)
         print(f"[warn] DeepL HTTP {e.code}", file=sys.stderr)
         if e.code == 456:  # monthly quota exhausted on the free plan
             print("[warn] DeepL monthly quota exhausted; "
@@ -1464,6 +1626,9 @@ def translate_deepl(text: str, cfg: dict) -> str | None:
             _deepl_dead = True
         return None
     except Exception as e:  # noqa: BLE001
+        save_error_diagnostic(
+            "translation_error", url=req.full_url, method="POST",
+            body=locals().get("raw_body"), exception=e)
         print(f"[warn] DeepL error: {e}", file=sys.stderr)
         return None
 
@@ -1492,6 +1657,9 @@ def translate_google(text: str, cfg: dict) -> str | None:
                 data = json.loads(body)
                 return data["data"]["translations"][0]["translatedText"].strip()
             except (KeyError, IndexError, json.JSONDecodeError):
+                save_error_diagnostic(
+                    "invalid_response", url=url, method="POST", status=200,
+                    body=body)
                 return None
         retryable = status == 429 or (
             status == 403 and b"User Rate Limit Exceeded" in body
@@ -1561,6 +1729,9 @@ def translate_azure(text: str, cfg: dict) -> str | None:
                 data = json.loads(body)
                 return data[0]["translations"][0]["text"].strip()
             except (KeyError, IndexError, json.JSONDecodeError):
+                save_error_diagnostic(
+                    "invalid_response", url=azure_translate_url(cfg),
+                    method="POST", status=200, body=body)
                 return None
         if status == 429 and attempt < max_retries:
             backoff = min(60, 10 * (2 ** attempt))
@@ -1612,6 +1783,9 @@ def translate_batch(texts: list[str], cfg: dict,
         elif backend == "google":
             sub = [translate_google(t, cfg) for t in subset]
         else:
+            save_error_diagnostic(
+                "configuration_error",
+                body=f"unknown translator backend: {backend}")
             print(f"[warn] unknown translator '{backend}'", file=sys.stderr)
             continue
         ok = sum(1 for r in sub if r)
@@ -1706,6 +1880,7 @@ def notify_run_report(report: dict, cfg: dict) -> None:
     deferred = report.get("deferred", [])
     failed = report.get("failed", [])
     source_failures = report.get("source_failures", [])
+    source_notices = report.get("source_notices", [])
 
     lines = [
         f"📥 フィード取得: {report.get('fetched', 0)}件 / "
@@ -1720,6 +1895,14 @@ def notify_run_report(report: dict, cfg: dict) -> None:
                 f"{item.get('source', '?')}: "
                 f"{truncate(str(item.get('error', 'unknown error')), 120)}"
                 for item in source_failures
+            )
+        )
+    if source_notices:
+        lines.append(
+            "ℹ️ 補助ソース: " + " / ".join(
+                f"{item.get('source', '?')}: "
+                f"{truncate(str(item.get('message', '')), 160)}"
+                for item in source_notices
             )
         )
     gemini = report.get("gemini")
@@ -1790,7 +1973,7 @@ def notify_run_report(report: dict, cfg: dict) -> None:
 
     if failed or source_failures:
         icon, color = "🚨", 0xE74C3C
-    elif deferred:
+    elif deferred or source_notices:
         icon, color = "🟡", 0xE67E22
     else:
         icon, color = "✅", 0x2ECC71
@@ -2103,6 +2286,9 @@ def main() -> None:
                     papers.setdefault(p["id"], p)
             except Exception as err:  # noqa: BLE001
                 message = str(err)
+                save_error_diagnostic(
+                    "source_error", method="GET", body=traceback.format_exc(),
+                    exception=err)
                 source_failures.append({
                     "source": f"RSS:{cat}", "error": message})
                 print(f"[error] feed {cat} failed: {message}",
@@ -2141,6 +2327,9 @@ def main() -> None:
                       f"lookback_days={effective_rule['lookback_days']}")
             except Exception as err:  # noqa: BLE001
                 message = str(err)
+                save_error_diagnostic(
+                    "source_error", method="GET", body=traceback.format_exc(),
+                    exception=err)
                 source_failures.append({
                     "source": f"arXiv API:{cat}", "error": message})
                 print(f"[error] external query {cat} failed: {message}",
@@ -2632,9 +2821,23 @@ def main() -> None:
                 continue
             webhook, genre_name = resolve_webhook(genre)
             if not webhook:
+                save_error_diagnostic(
+                    "configuration_error",
+                    body=json.dumps({
+                        "paper_id": pid,
+                        "genre_id": gid,
+                        "error": "destination webhook is not configured",
+                    }))
                 failed_channels.append(f"{genre_name}(webhook未設定)")
                 continue
             if webhook_counts[webhook] > 1:
+                save_error_diagnostic(
+                    "configuration_error",
+                    body=json.dumps({
+                        "paper_id": pid,
+                        "genre_id": gid,
+                        "error": "destination webhook is duplicated",
+                    }))
                 failed_channels.append(f"{genre_name}(webhook重複)")
                 continue
             if post_to_discord(
@@ -2716,4 +2919,11 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        save_error_diagnostic(
+            "unhandled_exception", body=traceback.format_exc(), exception=exc)
+        raise

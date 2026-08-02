@@ -412,8 +412,12 @@
   "require_translation": true,
   "show_translated_title": true,
   "show_original_abstract": false,
-  "scirate_range_days": 7,
   "scirate_min_scites": 30,
+  "scirate_daily_top_n": 3,
+  "scirate_daily_min_scites": 1,
+  "scirate_api_url_template": "https://scirate.com/arxiv/quant-ph.json?date={date}&range={days}&page={page}",
+  "scirate_api_max_pages": 20,
+  "scirate_api_page_size": 50,
 
   "genres": [
     {

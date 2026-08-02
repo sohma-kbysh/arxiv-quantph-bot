@@ -1,11 +1,26 @@
-name: SciRate weekly quant-ph digest
+name: SciRate daily and weekly quant-ph digest
 
 on:
   schedule:
-    # Weekend digest for the previous 7 days.
-    # UTC 00:30 Sunday = JST 09:30 Sunday.
-    - cron: "30 0 * * 0"
+    # Daily Top 3 at 23:30 JST on normal arXiv announcement weekdays.
+    - cron: "30 14 * * 1-5"
+    # Weekly 30+ digest at 23:30 JST on Sunday.
+    - cron: "30 14 * * 0"
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Digest mode (auto follows the JST weekday)
+        required: true
+        default: auto
+        type: choice
+        options:
+          - auto
+          - daily
+          - weekly
+      date:
+        description: Target end date in JST (YYYY-MM-DD; blank = today)
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -17,6 +32,9 @@ concurrency:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    env:
+      SCIRATE_DIGEST_MODE: ${{ github.event.inputs.mode || 'auto' }}
+      SCIRATE_TARGET_DATE: ${{ github.event.inputs.date || '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -27,16 +45,20 @@ jobs:
       - name: Run tests
         run: python -m unittest discover -s tests -v
 
-      - name: Discover and classify SciRate papers
+      - name: Discover SciRate digest papers
         id: discover
         continue-on-error: true
         env:
           DISCORD_WEBHOOK_BOT_EMERGENCY: ${{ secrets.DISCORD_WEBHOOK_BOT_EMERGENCY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          # Optional repo variable. Blank uses the anticipated upstream #535
+          # URL from config.json; set it if SciRate publishes another path.
+          # Supported placeholders: {date}, {days}, and {page}.
+          SCIRATE_API_URL_TEMPLATE: ${{ vars.SCIRATE_API_URL_TEMPLATE }}
+          SCIRATE_API_PAGE_SIZE: ${{ vars.SCIRATE_API_PAGE_SIZE }}
+          SCIRATE_API_MAX_PAGES: ${{ vars.SCIRATE_API_MAX_PAGES }}
         run: python scirate_weekly.py --discover-only
 
-      - name: Commit discovered SciRate queue
+      - name: Commit discovered SciRate digest queue
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -45,7 +67,7 @@ jobs:
           git pull --rebase origin main
           git push
 
-      - name: Translate queued SciRate papers
+      - name: Translate queued SciRate digest papers
         id: translate
         continue-on-error: true
         env:
@@ -56,7 +78,7 @@ jobs:
           GOOGLE_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
         run: python scirate_weekly.py --translate-only
 
-      - name: Commit translated SciRate queue
+      - name: Commit translated SciRate digest queue
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -65,34 +87,19 @@ jobs:
           git pull --rebase origin main
           git push
 
-      - name: Deliver queued SciRate papers
+      - name: Deliver queued SciRate digest papers
         id: deliver
         continue-on-error: true
         env:
-          DISCORD_WEBHOOK_GENERAL: ${{ secrets.DISCORD_WEBHOOK_GENERAL }}
+          DISCORD_WEBHOOK_SCIRATE: ${{ secrets.DISCORD_WEBHOOK_SCIRATE }}
           DISCORD_WEBHOOK_BOT_EMERGENCY: ${{ secrets.DISCORD_WEBHOOK_BOT_EMERGENCY }}
-          DISCORD_WEBHOOK_QEC: ${{ secrets.DISCORD_WEBHOOK_QEC }}
-          DISCORD_WEBHOOK_FT: ${{ secrets.DISCORD_WEBHOOK_FT }}
-          DISCORD_WEBHOOK_ALGO: ${{ secrets.DISCORD_WEBHOOK_ALGO }}
-          DISCORD_WEBHOOK_COMPLEXITY: ${{ secrets.DISCORD_WEBHOOK_COMPLEXITY }}
-          DISCORD_WEBHOOK_NISQ: ${{ secrets.DISCORD_WEBHOOK_NISQ }}
-          DISCORD_WEBHOOK_SIM: ${{ secrets.DISCORD_WEBHOOK_SIM }}
-          DISCORD_WEBHOOK_QML: ${{ secrets.DISCORD_WEBHOOK_QML }}
-          DISCORD_WEBHOOK_QIT: ${{ secrets.DISCORD_WEBHOOK_QIT }}
-          DISCORD_WEBHOOK_NETWORK: ${{ secrets.DISCORD_WEBHOOK_NETWORK }}
-          DISCORD_WEBHOOK_CRYPTO: ${{ secrets.DISCORD_WEBHOOK_CRYPTO }}
-          DISCORD_WEBHOOK_PQC: ${{ secrets.DISCORD_WEBHOOK_PQC }}
-          DISCORD_WEBHOOK_HARDWARE: ${{ secrets.DISCORD_WEBHOOK_HARDWARE }}
-          DISCORD_WEBHOOK_SENSING: ${{ secrets.DISCORD_WEBHOOK_SENSING }}
-          DISCORD_WEBHOOK_FOUNDATIONS: ${{ secrets.DISCORD_WEBHOOK_FOUNDATIONS }}
-          DISCORD_WEBHOOK_OTHER: ${{ secrets.DISCORD_WEBHOOK_OTHER }}
         run: python scirate_weekly.py --deliver-only
 
-      - name: Commit SciRate delivery receipts
+      - name: Commit SciRate digest delivery receipts
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add scirate_weekly_state.json posted_log.json
+          git add scirate_weekly_state.json
           git diff --cached --quiet || git commit -m "update scirate receipts [skip ci]"
           git pull --rebase origin main
           git push
@@ -102,3 +109,12 @@ jobs:
         run: |
           echo "SciRate discovery, translation, or delivery failed; see the preceding step logs."
           exit 1
+
+      - name: Upload sanitized error diagnostics
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: error_diagnostics.jsonl
+          if-no-files-found: ignore
+          retention-days: 30

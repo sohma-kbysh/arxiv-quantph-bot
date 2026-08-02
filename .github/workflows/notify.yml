@@ -154,3 +154,12 @@ jobs:
         run: |
           echo "One or more configured sources or Discord deliveries failed; see bot-emergency and step logs."
           exit 1
+
+      - name: Upload sanitized error diagnostics
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: error_diagnostics.jsonl
+          if-no-files-found: ignore
+          retention-days: 30

@@ -3,13 +3,14 @@
  "source_status": {
   "api_ever_available": false,
   "status": "waiting_for_source",
-  "last_probe_at": "2026-08-04T16:25:57Z",
-  "last_error": "2026-08-04: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-08-05: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+  "last_probe_at": "2026-08-05T16:13:48Z",
+  "last_error": "2026-08-04: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-08-05: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-08-06: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
   "last_endpoint": "https://scirate.com/arxiv/quant-ph.json?<redacted>",
   "source_ever_available": false,
   "pending_errors": {
-   "2026-08-05": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
-   "2026-08-04": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404"
+   "2026-08-06": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-08-04": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-08-05": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404"
   }
  },
  "pending_discovery": {
@@ -17,13 +18,19 @@
    "2026-08-04": {
     "target_date": "2026-08-04",
     "queued_at": "2026-08-03T16:44:46Z",
-    "last_attempt_at": "2026-08-04T16:25:57Z",
-    "attempts": 2
+    "last_attempt_at": "2026-08-05T16:13:48Z",
+    "attempts": 3
    },
    "2026-08-05": {
     "target_date": "2026-08-05",
     "queued_at": "2026-08-04T16:25:56Z",
-    "last_attempt_at": "2026-08-04T16:25:57Z",
+    "last_attempt_at": "2026-08-05T16:13:48Z",
+    "attempts": 2
+   },
+   "2026-08-06": {
+    "target_date": "2026-08-06",
+    "queued_at": "2026-08-05T16:13:48Z",
+    "last_attempt_at": "2026-08-05T16:13:48Z",
     "attempts": 1
    }
   },

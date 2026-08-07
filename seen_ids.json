@@ -2938,6 +2938,32 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-06T04:27:06Z"
+  },
+  "cs.CR:2608.05836": {
+   "genre_ids": [
+    "crypto",
+    "nisq"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-07T03:56:40Z"
+  },
+  "cs.CR:2608.05831": {
+   "genre_ids": [
+    "crypto",
+    "nisq"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-07T03:56:40Z"
+  },
+  "cs.CC:2608.06256": {
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-07T03:56:45Z"
   }
  },
  "external_pending": {},
@@ -5496,10 +5522,126 @@
   "2608.05140",
   "2608.05147"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.05836": {
+   "paper": {
+    "id": "2608.05836",
+    "title": "An End-to-End Threat Model for the Quantum-as-a-Service Pipeline",
+    "link": "https://arxiv.org/abs/2608.05836v1",
+    "authors": "Badhon Rahman, Majid Haghparast, Tommi Mikkonen",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Cloud-based accessing of Quantum-as-a-Service (QaaS) platforms such as IBM Quantum, IonQ Cloud, and Amazon Braket is becoming popular day by day. Hybrid quantum-classical algorithms (VQE, QAOA, QML) transfer data via a long layered pipeline of orchestration, compilation, and execution. Recent works have demonstrated various critical attacks at individual stages: Calibration tampering, SWAP attacks, QubitHammer, and so on. However, these attacks remain separated because of their own terminology, and existing STRIDE-based threat modeling in the context of quantum lacks a structured view towards the QaaS stack itself. We address this concern by decomposing the workflow into six-stage model with STRIDE threat modeling. Our matrix demonstrated attack vectors in quantum-specific, inherited classical, and plausible tiers for each of the stages. We further investigate the underexplored sections (repudiation and elevation-of-privilege) and distinguish three different cross-stage attack chains with higher impacts.",
+    "published": "2026-08-06T10:04:59Z",
+    "updated": "2026-08-06T10:04:59Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "crypto",
+     "nisq"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "crypto",
+    "nisq"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "crypto": {
+     "status": "pending"
+    },
+    "nisq": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-07T03:56:45Z"
+  },
+  "2608.05831": {
+   "paper": {
+    "id": "2608.05831",
+    "title": "On the Figures of Merit for Quantum Software Security: Toward a Benchmarking Rubric",
+    "link": "https://arxiv.org/abs/2608.05831v1",
+    "authors": "Badhon Rahman, Majid Haghparast, Tommi Mikkonen",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Quantum software is increasingly provided through multi-tenant and cloud-based Quantum-as-a-Service (QaaS) stacks. A growing concern about the diverse attack vectors across the pipeline has been demonstrated in recent research. Yet the community has converged on three mature pillars: Scale (Qubit Count), Quality (Quantum Volume), and Speed (Circuit Layer Operations per Second (CLOPS)) for the merit performance figures. Moreover, it has also begun to define software-quality metrics. However, the security of quantum software remains largely unmeasured. A few quantitative security indicators, such as Total Variation Distance (TVD) and Degree of Functional Corruption (DFC), exist. Although they were introduced ad hoc for individual circuit obfuscation techniques, they are incompatible. We assert that the security of quantum software deserves the same attention as the performance: an explicit set of Security Figures of Merit (S-FoMs). The research of this paper is threefold: (i) characterizes a three-layer measurement gap, (ii) proposes a structured S-FoM set organized by ISO/IEC 25010 security sub-characteristics, QaaS pipeline mapping, and measurement maturity, and (iii) defines a benchmarking rubric that normalizes and aggregates S-FoMs into a combined Quantum Software Security Posture (QSSP) score. Additionally, an illustrative reanalysis of published obfuscation techniques has been presented. Our aim is a first step toward security-aware benchmarking of the Quantum Software Stack (QSS).",
+    "published": "2026-08-06T09:59:49Z",
+    "updated": "2026-08-06T09:59:49Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "crypto",
+     "nisq"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "crypto",
+    "nisq"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "crypto": {
+     "status": "pending"
+    },
+    "nisq": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-07T03:56:45Z"
+  },
+  "2608.06256": {
+   "paper": {
+    "id": "2608.06256",
+    "title": "A Paturi Theorem for Signed Subcube Representations",
+    "link": "https://arxiv.org/abs/2608.06256v1",
+    "authors": "Hangyu liu",
+    "announce_type": "external",
+    "categories": [
+     "cs.CC"
+    ],
+    "primary": "cs.CC",
+    "abstract": "We obtain exponential upper bounds on approximate generalized weight and generalized sparsity in terms of the deepest transition depth D(F), and show that these bounds are optimal up to constant factors in the exponent. We further characterize approximate generalized sparsity, establish a dual lower-bound framework based on exponential restriction profiles, and derive a Paturi-type characterization relating approximate generalized weight to quantum query complexity.",
+    "published": "2026-08-06T16:45:20Z",
+    "updated": "2026-08-06T16:45:20Z",
+    "source_feed": "cs.CC",
+    "external_genre_ids": [
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-07T03:56:45Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-06T09:42:59Z",
-  "cs.CC": "2026-08-06T09:43:08Z",
-  "cs.IT": "2026-08-06T09:43:12Z"
+  "cs.CR": "2026-08-07T03:56:07Z",
+  "cs.CC": "2026-08-07T03:56:15Z",
+  "cs.IT": "2026-08-07T03:56:19Z"
  }
 }

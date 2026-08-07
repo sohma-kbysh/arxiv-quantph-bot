@@ -64925,5 +64925,118 @@
   "abstract_ja": "現代のソフトウェアシステムは、データ保護、認証、および信頼確立のために暗号化に依存していますが、組織はソースコード、構成、依存関係、および暗号化ファイル全体に展開されている暗号化の構造化されたビューを欠いていることがよくあります。この可視性の欠如は、セキュリティガバナンスとポスト量子移行計画を複雑にします。本稿では、ソフトウェアシステム内の暗号化資産を検出および評価するための静的アプローチを紹介します。暗号化マテリアル、暗号化アーティファクト、および暗号化呼び出しの分類を導入し、そこから拡張可能なスキャナ非依存ルールリポジトリを導出し、これらのルールを適用してCBOM指向の出力を生成する静的スキャナを実装します。既知のグラウンドトゥルースを持つ合成ベンチマークと、展開された10のサービスからなる実世界のインフラストラクチャでこのアプローチを評価します。スキャナは、資産検出でF1スコア0.75を達成し、予想される弱点と脆弱性の91%を正しく注釈付けします。実際の環境では、57,610個のファイルを6分未満で処理し、6件のCVE関連脆弱性と52件のポスト量子移行候補を含む370個の暗号資産を検出しました。実際のカバレッジは、網羅的なリストではなく、手動で作成された参照リストに基づいて評価されています。これらの結果は、分類主導型の静的検出が、ガバナンスとポスト量子移行計画において実用的な暗号学的透明性を提供できることを示しています。",
   "abstract_translated": "現代のソフトウェアシステムは、データ保護、認証、および信頼確立のために暗号化に依存していますが、組織はソースコード、構成、依存関係、および暗号化ファイル全体に展開されている暗号化の構造化されたビューを欠いていることがよくあります。この可視性の欠如は、セキュリティガバナンスとポスト量子移行計画を複雑にします。本稿では、ソフトウェアシステム内の暗号化資産を検出および評価するための静的アプローチを紹介します。暗号化マテリアル、暗号化アーティファクト、および暗号化呼び出しの分類を導入し、そこから拡張可能なスキャナ非依存ルールリポジトリを導出し、これらのルールを適用してCBOM指向の出力を生成する静的スキャナを実装します。既知のグラウンドトゥルースを持つ合成ベンチマークと、展開された10のサービスからなる実世界のインフラストラクチャでこのアプローチを評価します。スキャナは、資産検出でF1スコア0.75を達成し、予想される弱点と脆弱性の91%を正しく注釈付けします。実際の環境では、57,610個のファイルを6分未満で処理し、6件のCVE関連脆弱性と52件のポスト量子移行候補を含む370個の暗号資産を検出しました。実際のカバレッジは、網羅的なリストではなく、手動で作成された参照リストに基づいて評価されています。これらの結果は、分類主導型の静的検出が、ガバナンスとポスト量子移行計画において実用的な暗号学的透明性を提供できることを示しています。",
   "last_delivered_at": "2026-08-06T04:32:25Z"
+ },
+ {
+  "delivery_id": "main:2608.06256",
+  "id": "2608.06256",
+  "posted_at": "2026-08-07T03:56:55Z",
+  "title": "A Paturi Theorem for Signed Subcube Representations",
+  "title_ja": "符号付きサブキューブ表現に関するパトゥリの定理",
+  "title_translated": "符号付きサブキューブ表現に関するパトゥリの定理",
+  "translation_language": "ja",
+  "authors": "Hangyu liu",
+  "link": "https://arxiv.org/abs/2608.06256v1",
+  "primary": "cs.CC",
+  "categories": [
+   "cs.CC"
+  ],
+  "source_feed": "cs.CC",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "complexity"
+  ],
+  "genre_names": [
+   "量子複雑性理論"
+  ],
+  "target_genre_ids": [
+   "complexity"
+  ],
+  "target_genre_names": [
+   "量子複雑性理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We obtain exponential upper bounds on approximate generalized weight and generalized sparsity in terms of the deepest transition depth D(F), and show that these bounds are optimal up to constant factors in the exponent. We further characterize approximate generalized sparsity, establish a dual lower-bound framework based on exponential restriction profiles, and derive a Paturi-type characterization relating approximate generalized weight to quantum query complexity.",
+  "abstract_ja": "我々は、最深遷移深度 D(F) に関して、近似一般化重みと一般化スパース性に対する指数関数的な上限値を取得し、これらの上限値が指数の定数係数を除いて最適であることを示す。さらに、近似一般化スパース性を特徴付け、指数関数的な制限プロファイルに基づく双対下限フレームワークを確立し、近似一般化重みと量子クエリ複雑度を関連付けるパトゥリ型の特徴付けを導出する。",
+  "abstract_translated": "我々は、最深遷移深度 D(F) に関して、近似一般化重みと一般化スパース性に対する指数関数的な上限値を取得し、これらの上限値が指数の定数係数を除いて最適であることを示す。さらに、近似一般化スパース性を特徴付け、指数関数的な制限プロファイルに基づく双対下限フレームワークを確立し、近似一般化重みと量子クエリ複雑度を関連付けるパトゥリ型の特徴付けを導出する。",
+  "last_delivered_at": "2026-08-07T03:56:55Z"
+ },
+ {
+  "delivery_id": "main:2608.05831",
+  "id": "2608.05831",
+  "posted_at": "2026-08-07T03:56:57Z",
+  "title": "On the Figures of Merit for Quantum Software Security: Toward a Benchmarking Rubric",
+  "title_ja": "量子ソフトウェアセキュリティの評価指標について：ベンチマーク評価基準に向けて",
+  "title_translated": "量子ソフトウェアセキュリティの評価指標について：ベンチマーク評価基準に向けて",
+  "translation_language": "ja",
+  "authors": "Badhon Rahman, Majid Haghparast, Tommi Mikkonen",
+  "link": "https://arxiv.org/abs/2608.05831v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "crypto",
+   "nisq"
+  ],
+  "genre_names": [
+   "暗号・セキュリティ",
+   "変分・NISQアルゴリズム"
+  ],
+  "target_genre_ids": [
+   "crypto",
+   "nisq"
+  ],
+  "target_genre_names": [
+   "暗号・セキュリティ",
+   "変分・NISQアルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Quantum software is increasingly provided through multi-tenant and cloud-based Quantum-as-a-Service (QaaS) stacks. A growing concern about the diverse attack vectors across the pipeline has been demonstrated in recent research. Yet the community has converged on three mature pillars: Scale (Qubit Count), Quality (Quantum Volume), and Speed (Circuit Layer Operations per Second (CLOPS)) for the merit performance figures. Moreover, it has also begun to define software-quality metrics. However, the security of quantum software remains largely unmeasured. A few quantitative security indicators, such as Total Variation Distance (TVD) and Degree of Functional Corruption (DFC), exist. Although they were introduced ad hoc for individual circuit obfuscation techniques, they are incompatible. We assert that the security of quantum software deserves the same attention as the performance: an explicit set of Security Figures of Merit (S-FoMs). The research of this paper is threefold: (i) characterizes a three-layer measurement gap, (ii) proposes a structured S-FoM set organized by ISO/IEC 25010 security sub-characteristics, QaaS pipeline mapping, and measurement maturity, and (iii) defines a benchmarking rubric that normalizes and aggregates S-FoMs into a combined Quantum Software Security Posture (QSSP) score. Additionally, an illustrative reanalysis of published obfuscation techniques has been presented. Our aim is a first step toward security-aware benchmarking of the Quantum Software Stack (QSS).",
+  "abstract_ja": "量子ソフトウェアは、マルチテナント型およびクラウドベースのQuantum-as-a-Service（QaaS）スタックを通じて提供されることが増えています。パイプライン全体にわたる多様な攻撃ベクトルに対する懸念が、近年の研究で明らかになっています。しかし、コミュニティは、性能評価指標として、スケール（量子ビット数）、品質（量子ボリューム）、速度（1秒あたりの回路層操作数（CLOPS））という3つの成熟した柱に収束しています。さらに、ソフトウェア品質指標の定義も始まっています。しかし、量子ソフトウェアのセキュリティは、依然としてほとんど測定されていません。全変動距離（TVD）や機能的破損度（DFC）などの定量的なセキュリティ指標はいくつか存在しますが、これらは個々の回路難読化技術のためにアドホックに導入されたものであり、互換性がありません。私たちは、量子ソフトウェアのセキュリティは、性能と同様に注目に値すると主張します。つまり、明確なセキュリティ評価指標（S-FoM）のセットが必要です。本論文の研究は、(i) 3層構造の測定ギャップを特徴づけ、(ii) ISO/IEC 25010セキュリティサブ特性、QaaSパイプラインマッピング、および測定成熟度に基づいて構成された構造化S-FoMセットを提案し、(iii) S-FoMを正規化および集約して量子ソフトウェアセキュリティ態勢（QSSP）スコアを算出するベンチマーク評価基準を定義する、という3つの柱から成ります。さらに、公開されている難読化技術の例示的な再分析も提示しています。私たちの目標は、量子ソフトウェアスタック（QSS）のセキュリティを考慮したベンチマークに向けた第一歩を踏み出すことです。",
+  "abstract_translated": "量子ソフトウェアは、マルチテナント型およびクラウドベースのQuantum-as-a-Service（QaaS）スタックを通じて提供されることが増えています。パイプライン全体にわたる多様な攻撃ベクトルに対する懸念が、近年の研究で明らかになっています。しかし、コミュニティは、性能評価指標として、スケール（量子ビット数）、品質（量子ボリューム）、速度（1秒あたりの回路層操作数（CLOPS））という3つの成熟した柱に収束しています。さらに、ソフトウェア品質指標の定義も始まっています。しかし、量子ソフトウェアのセキュリティは、依然としてほとんど測定されていません。全変動距離（TVD）や機能的破損度（DFC）などの定量的なセキュリティ指標はいくつか存在しますが、これらは個々の回路難読化技術のためにアドホックに導入されたものであり、互換性がありません。私たちは、量子ソフトウェアのセキュリティは、性能と同様に注目に値すると主張します。つまり、明確なセキュリティ評価指標（S-FoM）のセットが必要です。本論文の研究は、(i) 3層構造の測定ギャップを特徴づけ、(ii) ISO/IEC 25010セキュリティサブ特性、QaaSパイプラインマッピング、および測定成熟度に基づいて構成された構造化S-FoMセットを提案し、(iii) S-FoMを正規化および集約して量子ソフトウェアセキュリティ態勢（QSSP）スコアを算出するベンチマーク評価基準を定義する、という3つの柱から成ります。さらに、公開されている難読化技術の例示的な再分析も提示しています。私たちの目標は、量子ソフトウェアスタック（QSS）のセキュリティを考慮したベンチマークに向けた第一歩を踏み出すことです。",
+  "last_delivered_at": "2026-08-07T03:56:58Z"
+ },
+ {
+  "delivery_id": "main:2608.05836",
+  "id": "2608.05836",
+  "posted_at": "2026-08-07T03:57:00Z",
+  "title": "An End-to-End Threat Model for the Quantum-as-a-Service Pipeline",
+  "title_ja": "量子コンピューティング・サービス・パイプラインのエンドツーエンド脅威モデル",
+  "title_translated": "量子コンピューティング・サービス・パイプラインのエンドツーエンド脅威モデル",
+  "translation_language": "ja",
+  "authors": "Badhon Rahman, Majid Haghparast, Tommi Mikkonen",
+  "link": "https://arxiv.org/abs/2608.05836v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "crypto",
+   "nisq"
+  ],
+  "genre_names": [
+   "暗号・セキュリティ",
+   "変分・NISQアルゴリズム"
+  ],
+  "target_genre_ids": [
+   "crypto",
+   "nisq"
+  ],
+  "target_genre_names": [
+   "暗号・セキュリティ",
+   "変分・NISQアルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Cloud-based accessing of Quantum-as-a-Service (QaaS) platforms such as IBM Quantum, IonQ Cloud, and Amazon Braket is becoming popular day by day. Hybrid quantum-classical algorithms (VQE, QAOA, QML) transfer data via a long layered pipeline of orchestration, compilation, and execution. Recent works have demonstrated various critical attacks at individual stages: Calibration tampering, SWAP attacks, QubitHammer, and so on. However, these attacks remain separated because of their own terminology, and existing STRIDE-based threat modeling in the context of quantum lacks a structured view towards the QaaS stack itself. We address this concern by decomposing the workflow into six-stage model with STRIDE threat modeling. Our matrix demonstrated attack vectors in quantum-specific, inherited classical, and plausible tiers for each of the stages. We further investigate the underexplored sections (repudiation and elevation-of-privilege) and distinguish three different cross-stage attack chains with higher impacts.",
+  "abstract_ja": "IBM Quantum、IonQ Cloud、Amazon BraketなどのQuantum-as-a-Service（QaaS）プラットフォームへのクラウドベースのアクセスは、日々普及が進んでいます。ハイブリッド量子古典アルゴリズム（VQE、QAOA、QML）は、オーケストレーション、コンパイル、実行の長い階層化されたパイプラインを介してデータを転送します。最近の研究では、キャリブレーション改ざん、SWAP攻撃、QubitHammerなど、各段階でさまざまな重大な攻撃が実証されています。しかし、これらの攻撃は独自の用語のため分離されたままであり、量子のコンテキストにおける既存のSTRIDEベースの脅威モデリングには、QaaSスタック自体に対する構造化されたビューが欠けています。私たちは、ワークフローをSTRIDE脅威モデリングを使用して6段階モデルに分解することで、この懸念に対処します。私たちのマトリックスは、各段階における量子固有の階層、継承された古典的階層、および妥当な階層における攻撃ベクトルを示しています。さらに、十分に調査されていないセクション（否認と特権昇格）を調査し、より大きな影響を伴う3つの異なる段階間攻撃チェーンを区別します。",
+  "abstract_translated": "IBM Quantum、IonQ Cloud、Amazon BraketなどのQuantum-as-a-Service（QaaS）プラットフォームへのクラウドベースのアクセスは、日々普及が進んでいます。ハイブリッド量子古典アルゴリズム（VQE、QAOA、QML）は、オーケストレーション、コンパイル、実行の長い階層化されたパイプラインを介してデータを転送します。最近の研究では、キャリブレーション改ざん、SWAP攻撃、QubitHammerなど、各段階でさまざまな重大な攻撃が実証されています。しかし、これらの攻撃は独自の用語のため分離されたままであり、量子のコンテキストにおける既存のSTRIDEベースの脅威モデリングには、QaaSスタック自体に対する構造化されたビューが欠けています。私たちは、ワークフローをSTRIDE脅威モデリングを使用して6段階モデルに分解することで、この懸念に対処します。私たちのマトリックスは、各段階における量子固有の階層、継承された古典的階層、および妥当な階層における攻撃ベクトルを示しています。さらに、十分に調査されていないセクション（否認と特権昇格）を調査し、より大きな影響を伴う3つの異なる段階間攻撃チェーンを区別します。",
+  "last_delivered_at": "2026-08-07T03:57:02Z"
  }
 ]

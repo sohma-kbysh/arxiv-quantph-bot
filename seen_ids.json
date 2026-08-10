@@ -3055,6 +3055,32 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-07T03:56:45Z"
+  },
+  "cs.CR:2608.06826": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-10T03:16:35Z"
+  },
+  "cs.CC:2608.07309": {
+   "genre_ids": [
+    "algo",
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-10T03:16:39Z"
+  },
+  "cs.IT:2608.06854": {
+   "genre_ids": [
+    "qec",
+    "qit"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-10T03:16:49Z"
   }
  },
  "external_pending": {},
@@ -5704,10 +5730,126 @@
   "2608.06345",
   "2608.06359"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.06826": {
+   "paper": {
+    "id": "2608.06826",
+    "title": "POKEx: Performance analysis of POKE-key exchange and SIDH-variants",
+    "link": "https://arxiv.org/abs/2608.06826v1",
+    "authors": "Hyeonhak Kim, Suhri Kim",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "In this paper, we present a comparative performance analysis of the POKE-based key exchange and SIDH variants. SIDH gained attention for its small key size and efficient performance, and has been selected as an alternate candidate in NIST PQC Round 4. However, following the key recovery attack by Castryck and Decru in 2022, SIDH was shown to be vulnerable to polynomial-time attacks on classical computers, undermining its security and removing it from consideration. Given that SIDH was regarded as the leading isogeny-based algorithm, several countermeasures, such as MSIDH, MD-SIDH, and bin/terSIDH have been proposed. However, these approaches still face performance limitations. Meanwhile, POKE, proposed by Basso and Maino at Eurocrypt 2025, is an isogeny-based public key encryption scheme that combines a SIDH-like protocol with higher-dimensional isogenies and has drawn attention for its efficient performance. In this work, we adapt POKE into a key exchange algorithm and benchmark it against M-SIDH, terSIDH, and CSIDH. Targeting NIST security level 1, POKE-based KEM is approximately 21.21 times faster than terSIDH and 64.97 times faster than CSIDH, showing that the POKE-based KEM is currently the most promising isogeny-based key exchange candidate.",
+    "published": "2026-08-07T05:36:59Z",
+    "updated": "2026-08-07T05:36:59Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-10T03:16:49Z"
+  },
+  "2608.07309": {
+   "paper": {
+    "id": "2608.07309",
+    "title": "Improved Quantum Algorithms for Subset Sum and $k$-SUM",
+    "link": "https://arxiv.org/abs/2608.07309v1",
+    "authors": "Nikolai Chukhin, Alexander S. Kulikov, Maksim Levitskii, Ivan Mihajlin",
+    "announce_type": "external",
+    "categories": [
+     "cs.CC"
+    ],
+    "primary": "cs.CC",
+    "abstract": "The Subset Sum problem asks whether, given $n$ integers and a target, some subset of the integers sums to the target. Its best known worst-case running time is $O^*(2^{n/2})$ (Horowitz and Sahni, 1974), whereas the best quantum upper bound is $O^*(2^{n/3})$ (Bernstein, Jeffery, Lange, and Meurer, 2013). The $k$-SUM problem is a parameterized version of Subset Sum asking whether there are $k$ integers that sum to the target. The best classical upper bound for it is $\\widetilde O(n^{\\lceil k/2\\rceil})$, whereas the best quantum running time is $\\widetilde O(n^{k/3})$ (Tani, 2009). For random instances, a quantum algorithm with running time $\\widetilde O(n^{\u03a6_k})$ is known, where $$ \u03a6_k=\\frac{2k-\\lfloor k/7\\rfloor-\\lfloor (k+3)/7\\rfloor}{6} $$ (Schrottenloher, 2021). We present a new quantum algorithm solving worst-case $k$-SUM in time $\\widetilde O(n^{\u03a8_k})$, where $$ \u03a8_k=\u03a6_k-\\frac{[k\\equiv 3\\bmod 7]}{9}-\\frac{[k\\equiv 6\\bmod 7]}{18}. $$ The algorithm is not only faster for all $k$ congruent to $3$ or $6$ modulo $7$, but also gives a worst-case guarantee rather than a guarantee restricted to single-solution random instances. Combining our algorithm for $7$-SUM with the standard block reduction technique yields an $O^*(2^{2n/7})$ quantum algorithm for Subset Sum, improving the previously known $O^*(2^{n/3})$ algorithm.",
+    "published": "2026-08-07T15:04:27Z",
+    "updated": "2026-08-07T15:04:27Z",
+    "source_feed": "cs.CC",
+    "external_genre_ids": [
+     "algo",
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "algo",
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "algo": {
+     "status": "pending"
+    },
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-10T03:16:49Z"
+  },
+  "2608.06854": {
+   "paper": {
+    "id": "2608.06854",
+    "title": "Entanglement-Assisted Quantum Locally Recoverable Codes: Bounds, Optimal Constructions, and Achievability",
+    "link": "https://arxiv.org/abs/2608.06854v1",
+    "authors": "Vijay Kumar, Ramakrishna Bandi",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "This paper studies entanglement-assisted quantum locally recoverable codes (EA-qLRCs) built via a CSS-like stabilizer construction from pairs of classical locally recoverable codes (cLRCs), without requiring dual-containment. We define such codes through local recovery channels, give a sufficient stabilizer criterion for the construction, and derive Singleton-, Griesmer-, Plotkin-, and sphere-packing-like converse bounds on the parameters of the resulting pure CSS-like EA-qLRCs, along with a Cadambe--Mazumdar-like bound that, as in the classical case, lacks a closed form, plus a comparison of their relative tightness across finite-length and asymptotic regimes. We give necessary and sufficient conditions for a pure CSS-like EA-qLRC to attain the Singleton-like bound with equality; for the single-code case $\\mathcal{C}_1=\\mathcal{C}_2=\\mathcal{C}$, this reduces to a simple condition on the hull dimension $s=\\dim(\\mathcal{C}\\cap\\mathcal{C}^\\perp)$, which also fixes the entanglement count via $c=n-k-s$. We present CSS-like EA-qLRC constructions from classical LRC families---Tamo--Barg and cyclic codes---and characterize when these attain the Singleton-like bound, showing the cyclic families yield optimal codes while the Tamo--Barg construction, though valid, attains the bound only in the degenerate regime $k \\le r$, where locality is vacuous. We complement these constructions with two Gilbert--Varshamov-like achievability bounds, via a classical parity-check augmentation and a sharper concatenated-code construction, and show both hold unconditionally for field size $q>3$ via a monomial-equivalence argument. Finally, we unify all bounds---converse and achievability alike---under a common maximally entangled regime, giving a single comparison of the achievable and forbidden rate--distance--locality region for CSS-like EA-qLRCs.",
+    "published": "2026-08-07T06:26:28Z",
+    "updated": "2026-08-07T06:26:28Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec",
+     "qit"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "qec",
+    "qit"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qec": {
+     "status": "pending"
+    },
+    "qit": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-10T03:16:49Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-08T07:53:00Z",
-  "cs.CC": "2026-08-08T07:53:12Z",
-  "cs.IT": "2026-08-08T07:53:17Z"
+  "cs.CR": "2026-08-10T03:16:13Z",
+  "cs.CC": "2026-08-10T03:16:21Z",
+  "cs.IT": "2026-08-10T03:16:25Z"
  }
 }

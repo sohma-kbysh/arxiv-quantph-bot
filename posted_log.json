@@ -68409,5 +68409,118 @@
   "abstract_ja": null,
   "abstract_translated": null,
   "last_delivered_at": "2026-08-07T05:55:08Z"
+ },
+ {
+  "delivery_id": "main:2608.06854",
+  "id": "2608.06854",
+  "posted_at": "2026-08-10T03:17:01Z",
+  "title": "Entanglement-Assisted Quantum Locally Recoverable Codes: Bounds, Optimal Constructions, and Achievability",
+  "title_ja": "量子もつれを利用した局所的に回復可能な量子符号：限界、最適構成、および実現可能性",
+  "title_translated": "量子もつれを利用した局所的に回復可能な量子符号：限界、最適構成、および実現可能性",
+  "translation_language": "ja",
+  "authors": "Vijay Kumar, Ramakrishna Bandi",
+  "link": "https://arxiv.org/abs/2608.06854v1",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec",
+   "qit"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論",
+   "量子情報理論"
+  ],
+  "target_genre_ids": [
+   "qec",
+   "qit"
+  ],
+  "target_genre_names": [
+   "誤り訂正・符号理論",
+   "量子情報理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "This paper studies entanglement-assisted quantum locally recoverable codes (EA-qLRCs) built via a CSS-like stabilizer construction from pairs of classical locally recoverable codes (cLRCs), without requiring dual-containment. We define such codes through local recovery channels, give a sufficient stabilizer criterion for the construction, and derive Singleton-, Griesmer-, Plotkin-, and sphere-packing-like converse bounds on the parameters of the resulting pure CSS-like EA-qLRCs, along with a Cadambe--Mazumdar-like bound that, as in the classical case, lacks a closed form, plus a comparison of their relative tightness across finite-length and asymptotic regimes. We give necessary and sufficient conditions for a pure CSS-like EA-qLRC to attain the Singleton-like bound with equality; for the single-code case $\\mathcal{C}_1=\\mathcal{C}_2=\\mathcal{C}$, this reduces to a simple condition on the hull dimension $s=\\dim(\\mathcal{C}\\cap\\mathcal{C}^\\perp)$, which also fixes the entanglement count via $c=n-k-s$. We present CSS-like EA-qLRC constructions from classical LRC families---Tamo--Barg and cyclic codes---and characterize when these attain the Singleton-like bound, showing the cyclic families yield optimal codes while the Tamo--Barg construction, though valid, attains the bound only in the degenerate regime $k \\le r$, where locality is vacuous. We complement these constructions with two Gilbert--Varshamov-like achievability bounds, via a classical parity-check augmentation and a sharper concatenated-code construction, and show both hold unconditionally for field size $q>3$ via a monomial-equivalence argument. Finally, we unify all bounds---converse and achievability alike---under a common maximally entangled regime, giving a single comparison of the achievable and forbidden rate--distance--locality region for CSS-like EA-qLRCs.",
+  "abstract_ja": "この論文では、双対包含を必要とせずに、CSS のような安定化構成を介して古典的な局所回復可能コード (cLRC) のペアから構築されるエンタングルメント支援型量子局所回復可能コード (EA-qLRC) を研究します。局所回復チャネルを介してこのようなコードを定義し、構成のための十分な安定化基準を与え、結果として得られる純粋な CSS のような EA-qLRC のパラメータに対するシングルトン、グリースマー、プロトキン、および球体充填のような逆境界を導出します。また、古典的な場合と同様に閉じた形式を持たない Cadambe--Mazumdar のような境界と、有限長および漸近領域全体にわたるそれらの相対的なタイトさの比較も示します。純粋な CSS のような EA-qLRC が等号でシングルトンのような境界を達成するための必要十分条件を与えます。単一コードの場合、$\\mathcal{C}_1=\\mathcal{C}_2=\\mathcal{C}$ では、これはハル次元 $s=\\dim(\\mathcal{C}\\cap\\mathcal{C}^\\perp)$ に関する単純な条件に帰着し、これにより $c=n-k-s$ を介してエンタングルメント数も固定されます。古典的な LRC ファミリー (Tamo-Barg コードと巡回コード) から CSS のような EA-qLRC 構成を提示し、これらがシングルトンのような境界に達するタイミングを特徴付け、巡回ファミリーが最適なコードを生成する一方、Tamo-Barg 構成は有効ではあるものの、局所性が空虚な退化領域 $k \\le r$ でのみ境界に達することを示します。これらの構成を補完するために、古典的なパリティチェック拡張とよりシャープな連結コード構成による、ギルバート・ヴァルシャモフ型の達成可能性境界を2つ示し、単項式同値論証によって、体サイズ $q>3$ に対して両方が無条件に成り立つことを示します。最後に、逆境界と達成可能性境界の両方を共通の最大エンタングルド領域の下に統一し、CSS 型 EA-qLRC の達成可能および禁止レート・距離・局所性領域を単一の比較で示します。",
+  "abstract_translated": "この論文では、双対包含を必要とせずに、CSS のような安定化構成を介して古典的な局所回復可能コード (cLRC) のペアから構築されるエンタングルメント支援型量子局所回復可能コード (EA-qLRC) を研究します。局所回復チャネルを介してこのようなコードを定義し、構成のための十分な安定化基準を与え、結果として得られる純粋な CSS のような EA-qLRC のパラメータに対するシングルトン、グリースマー、プロトキン、および球体充填のような逆境界を導出します。また、古典的な場合と同様に閉じた形式を持たない Cadambe--Mazumdar のような境界と、有限長および漸近領域全体にわたるそれらの相対的なタイトさの比較も示します。純粋な CSS のような EA-qLRC が等号でシングルトンのような境界を達成するための必要十分条件を与えます。単一コードの場合、$\\mathcal{C}_1=\\mathcal{C}_2=\\mathcal{C}$ では、これはハル次元 $s=\\dim(\\mathcal{C}\\cap\\mathcal{C}^\\perp)$ に関する単純な条件に帰着し、これにより $c=n-k-s$ を介してエンタングルメント数も固定されます。古典的な LRC ファミリー (Tamo-Barg コードと巡回コード) から CSS のような EA-qLRC 構成を提示し、これらがシングルトンのような境界に達するタイミングを特徴付け、巡回ファミリーが最適なコードを生成する一方、Tamo-Barg 構成は有効ではあるものの、局所性が空虚な退化領域 $k \\le r$ でのみ境界に達することを示します。これらの構成を補完するために、古典的なパリティチェック拡張とよりシャープな連結コード構成による、ギルバート・ヴァルシャモフ型の達成可能性境界を2つ示し、単項式同値論証によって、体サイズ $q>3$ に対して両方が無条件に成り立つことを示します。最後に、逆境界と達成可能性境界の両方を共通の最大エンタングルド領域の下に統一し、CSS 型 EA-qLRC の達成可能および禁止レート・距離・局所性領域を単一の比較で示します。",
+  "last_delivered_at": "2026-08-10T03:17:02Z"
+ },
+ {
+  "delivery_id": "main:2608.07309",
+  "id": "2608.07309",
+  "posted_at": "2026-08-10T03:17:04Z",
+  "title": "Improved Quantum Algorithms for Subset Sum and $k$-SUM",
+  "title_ja": "部分集合和とk-和のための改良された量子アルゴリズム",
+  "title_translated": "部分集合和とk-和のための改良された量子アルゴリズム",
+  "translation_language": "ja",
+  "authors": "Nikolai Chukhin, Alexander S. Kulikov, Maksim Levitskii, Ivan Mihajlin",
+  "link": "https://arxiv.org/abs/2608.07309v1",
+  "primary": "cs.CC",
+  "categories": [
+   "cs.CC"
+  ],
+  "source_feed": "cs.CC",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "algo",
+   "complexity"
+  ],
+  "genre_names": [
+   "量子アルゴリズム",
+   "量子複雑性理論"
+  ],
+  "target_genre_ids": [
+   "algo",
+   "complexity"
+  ],
+  "target_genre_names": [
+   "量子アルゴリズム",
+   "量子複雑性理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "The Subset Sum problem asks whether, given $n$ integers and a target, some subset of the integers sums to the target. Its best known worst-case running time is $O^*(2^{n/2})$ (Horowitz and Sahni, 1974), whereas the best quantum upper bound is $O^*(2^{n/3})$ (Bernstein, Jeffery, Lange, and Meurer, 2013). The $k$-SUM problem is a parameterized version of Subset Sum asking whether there are $k$ integers that sum to the target. The best classical upper bound for it is $\\widetilde O(n^{\\lceil k/2\\rceil})$, whereas the best quantum running time is $\\widetilde O(n^{k/3})$ (Tani, 2009). For random instances, a quantum algorithm with running time $\\widetilde O(n^{Φ_k})$ is known, where $$ Φ_k=\\frac{2k-\\lfloor k/7\\rfloor-\\lfloor (k+3)/7\\rfloor}{6} $$ (Schrottenloher, 2021). We present a new quantum algorithm solving worst-case $k$-SUM in time $\\widetilde O(n^{Ψ_k})$, where $$ Ψ_k=Φ_k-\\frac{[k\\equiv 3\\bmod 7]}{9}-\\frac{[k\\equiv 6\\bmod 7]}{18}. $$ The algorithm is not only faster for all $k$ congruent to $3$ or $6$ modulo $7$, but also gives a worst-case guarantee rather than a guarantee restricted to single-solution random instances. Combining our algorithm for $7$-SUM with the standard block reduction technique yields an $O^*(2^{2n/7})$ quantum algorithm for Subset Sum, improving the previously known $O^*(2^{n/3})$ algorithm.",
+  "abstract_ja": "部分集合和問題は、n 個の整数と目標値が与えられたとき、整数のサブセットの合計が目標値になるかどうかを問う問題です。既知の最悪実行時間は $O^*(2^{n/2})$ (Horowitz と Sahni、1974 年) ですが、量子力学による最良上限は $O^*(2^{n/3})$ (Bernstein、Jeffery、Lange、および Meurer、2013 年) です。k 和問題は、k 個の整数の合計が目標値になるかどうかを問う部分集合和のパラメータ化されたバージョンです。古典力学による最良上限は $\\widetilde O(n^{\\lceil k/2\\rceil})$ ですが、量子力学による最良実行時間は $\\widetilde O(n^{k/3})$ (Tani、2009 年) です。ランダムなインスタンスの場合、実行時間 $\\widetilde O(n^{Φ_k})$ の量子アルゴリズムが知られています。ここで、$$ Φ_k=\\frac{2k-\\lfloor k/7\\rfloor-\\lfloor (k+3)/7\\rfloor}{6} $$ (Schrottenloher、2021)。我々は、最悪ケースの $k$-SUM を時間 $\\widetilde O(n^{Ψ_k})$ で解く新しい量子アルゴリズムを提示します。ここで、$$ Ψ_k=Φ_k-\\frac{[k\\equiv 3\\bmod 7]}{9}-\\frac{[k\\equiv 6\\bmod 7]}{18} $$ このアルゴリズムは、$7 を法として $3$ または $6$ に合同なすべての $k$ に対して高速であるだけでなく、単一の解を持つランダムなインスタンスに限定された保証ではなく、最悪ケースの保証も提供します。 7-SUM のアルゴリズムと標準的なブロック削減手法を組み合わせることで、部分集合和の量子アルゴリズムとして $O^*(2^{2n/7})$ が得られ、従来知られていた $O^*(2^{n/3})$ アルゴリズムが改善されます。",
+  "abstract_translated": "部分集合和問題は、n 個の整数と目標値が与えられたとき、整数のサブセットの合計が目標値になるかどうかを問う問題です。既知の最悪実行時間は $O^*(2^{n/2})$ (Horowitz と Sahni、1974 年) ですが、量子力学による最良上限は $O^*(2^{n/3})$ (Bernstein、Jeffery、Lange、および Meurer、2013 年) です。k 和問題は、k 個の整数の合計が目標値になるかどうかを問う部分集合和のパラメータ化されたバージョンです。古典力学による最良上限は $\\widetilde O(n^{\\lceil k/2\\rceil})$ ですが、量子力学による最良実行時間は $\\widetilde O(n^{k/3})$ (Tani、2009 年) です。ランダムなインスタンスの場合、実行時間 $\\widetilde O(n^{Φ_k})$ の量子アルゴリズムが知られています。ここで、$$ Φ_k=\\frac{2k-\\lfloor k/7\\rfloor-\\lfloor (k+3)/7\\rfloor}{6} $$ (Schrottenloher、2021)。我々は、最悪ケースの $k$-SUM を時間 $\\widetilde O(n^{Ψ_k})$ で解く新しい量子アルゴリズムを提示します。ここで、$$ Ψ_k=Φ_k-\\frac{[k\\equiv 3\\bmod 7]}{9}-\\frac{[k\\equiv 6\\bmod 7]}{18} $$ このアルゴリズムは、$7 を法として $3$ または $6$ に合同なすべての $k$ に対して高速であるだけでなく、単一の解を持つランダムなインスタンスに限定された保証ではなく、最悪ケースの保証も提供します。 7-SUM のアルゴリズムと標準的なブロック削減手法を組み合わせることで、部分集合和の量子アルゴリズムとして $O^*(2^{2n/7})$ が得られ、従来知られていた $O^*(2^{n/3})$ アルゴリズムが改善されます。",
+  "last_delivered_at": "2026-08-10T03:17:05Z"
+ },
+ {
+  "delivery_id": "main:2608.06826",
+  "id": "2608.06826",
+  "posted_at": "2026-08-10T03:17:07Z",
+  "title": "POKEx: Performance analysis of POKE-key exchange and SIDH-variants",
+  "title_ja": "POKEx：POKE鍵交換とSIDHバリアントのパフォーマンス分析",
+  "title_translated": "POKEx：POKE鍵交換とSIDHバリアントのパフォーマンス分析",
+  "translation_language": "ja",
+  "authors": "Hyeonhak Kim, Suhri Kim",
+  "link": "https://arxiv.org/abs/2608.06826v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "In this paper, we present a comparative performance analysis of the POKE-based key exchange and SIDH variants. SIDH gained attention for its small key size and efficient performance, and has been selected as an alternate candidate in NIST PQC Round 4. However, following the key recovery attack by Castryck and Decru in 2022, SIDH was shown to be vulnerable to polynomial-time attacks on classical computers, undermining its security and removing it from consideration. Given that SIDH was regarded as the leading isogeny-based algorithm, several countermeasures, such as MSIDH, MD-SIDH, and bin/terSIDH have been proposed. However, these approaches still face performance limitations. Meanwhile, POKE, proposed by Basso and Maino at Eurocrypt 2025, is an isogeny-based public key encryption scheme that combines a SIDH-like protocol with higher-dimensional isogenies and has drawn attention for its efficient performance. In this work, we adapt POKE into a key exchange algorithm and benchmark it against M-SIDH, terSIDH, and CSIDH. Targeting NIST security level 1, POKE-based KEM is approximately 21.21 times faster than terSIDH and 64.97 times faster than CSIDH, showing that the POKE-based KEM is currently the most promising isogeny-based key exchange candidate.",
+  "abstract_ja": "本稿では、POKE ベースの鍵交換と SIDH のバリアントの比較性能分析を提示します。SIDH は鍵サイズが小さく、効率的な性能で注目を集め、NIST PQC ラウンド 4 の代替候補として選ばれました。しかし、2022 年に Castryck と Decru による鍵回復攻撃の後、SIDH は古典コンピュータに対する多項式時間攻撃に対して脆弱であることが示され、そのセキュリティが損なわれ、検討対象から外されました。SIDH は主要な同種写像ベースのアルゴリズムと見なされていたため、MSIDH、MD-SIDH、bin/terSIDH などのいくつかの対策が提案されています。しかし、これらのアプローチは依然として性能上の制限に直面しています。一方、Eurocrypt 2025 で Basso と Maino によって提案された POKE は、SIDH に似たプロトコルと高次元同種写像を組み合わせた同種写像ベースの公開鍵暗号方式であり、その効率的な性能で注目を集めています。本研究では、POKEを鍵交換アルゴリズムに適用し、M-SIDH、terSIDH、CSIDHと比較評価しました。NISTセキュリティレベル1を目標とした場合、POKEベースのKEMはterSIDHより約21.21倍、CSIDHより約64.97倍高速であり、POKEベースのKEMが現在最も有望な同種写像ベースの鍵交換候補であることが示されました。",
+  "abstract_translated": "本稿では、POKE ベースの鍵交換と SIDH のバリアントの比較性能分析を提示します。SIDH は鍵サイズが小さく、効率的な性能で注目を集め、NIST PQC ラウンド 4 の代替候補として選ばれました。しかし、2022 年に Castryck と Decru による鍵回復攻撃の後、SIDH は古典コンピュータに対する多項式時間攻撃に対して脆弱であることが示され、そのセキュリティが損なわれ、検討対象から外されました。SIDH は主要な同種写像ベースのアルゴリズムと見なされていたため、MSIDH、MD-SIDH、bin/terSIDH などのいくつかの対策が提案されています。しかし、これらのアプローチは依然として性能上の制限に直面しています。一方、Eurocrypt 2025 で Basso と Maino によって提案された POKE は、SIDH に似たプロトコルと高次元同種写像を組み合わせた同種写像ベースの公開鍵暗号方式であり、その効率的な性能で注目を集めています。本研究では、POKEを鍵交換アルゴリズムに適用し、M-SIDH、terSIDH、CSIDHと比較評価しました。NISTセキュリティレベル1を目標とした場合、POKEベースのKEMはterSIDHより約21.21倍、CSIDHより約64.97倍高速であり、POKEベースのKEMが現在最も有望な同種写像ベースの鍵交換候補であることが示されました。",
+  "last_delivered_at": "2026-08-10T03:17:07Z"
  }
 ]

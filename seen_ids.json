@@ -3139,6 +3139,24 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-10T03:16:49Z"
+  },
+  "cs.IT:2608.09364": {
+   "genre_ids": [
+    "network",
+    "qit",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-11T03:08:35Z"
+  },
+  "cs.IT:2608.08039": {
+   "genre_ids": [
+    "qit"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-11T03:08:35Z"
   }
  },
  "external_pending": {},
@@ -5846,10 +5864,93 @@
   "2608.07465",
   "2608.07467"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.09364": {
+   "paper": {
+    "id": "2608.09364",
+    "title": "Quantum-Classical Coexistence Network Tomography",
+    "link": "https://arxiv.org/abs/2608.09364v1",
+    "authors": "Xuchuang Wang, Joseph C. Chapman, Aneesh Ramaswamy, Matheus Guedes de Andrade, Yu-Zhen Janice Chen, Joseph M. Lukens, Gayane Vardoyan, Don Towsley",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT",
+     "cs.NI"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Quantum-classical coexistence networks (QCNs) share optical fiber between quantum and classical signals via wavelength-division multiplexing, offering a practical path to quantum communication over existing telecom infrastructure. However, co- and counter-propagating classical traffic introduce distinct depolarization noise, complicating channel characterization. We develop a tomography framework that infers per-link channel parameters of a QCN from end-to-end measurements alone. We first model each coexisting fiber by decomposing the signal evolution into photon loss, successful transmission, and three direction-dependent depolarization components. We then derive closed-form link-level estimators, and extend the approach to star-topology networks through a system of multiplicative equations across end-node pairs, together with a simple classical-signal-direction-switching protocol that resolves the remaining unknowns. On single-link experimental testbed data, we recover per-link depolarization probabilities accurately, with estimated process fidelities closely tracking the Bayesian-process-tomography baseline across multiple fiber lengths and wavelengths; residual gaps reflect the depolarization-only approximation. Absent a multi-link coexistence testbed, we validate the star-network estimators on emulated paths built from measured single-link channels. We further extend the framework in two directions: (i) a channel model that factorizes the coexisting fiber into a depolarizing-with-loss signal channel and a Raman-noise-injection channel on separate optical modes -- a completely-positive, trace-preserving tensor product -- whose link observables reduce exactly to our basic model; and (ii) a generalization to arbitrary topologies via a peeling algorithm (trees) and a least-squares estimator (meshes), validated by Monte-Carlo simulations on tree and cyclic-mesh networks.",
+    "published": "2026-08-10T09:42:05Z",
+    "updated": "2026-08-10T09:42:05Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "network",
+     "qit",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "network",
+    "qit",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "network": {
+     "status": "pending"
+    },
+    "qit": {
+     "status": "pending"
+    },
+    "algo": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-11T03:08:35Z"
+  },
+  "2608.08039": {
+   "paper": {
+    "id": "2608.08039",
+    "title": "Shapes and Norms of Random Pairs",
+    "link": "https://arxiv.org/abs/2608.08039v1",
+    "authors": "Rostislav Matveev",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT",
+     "math.PR"
+    ],
+    "primary": "cs.IT",
+    "abstract": "The shape function of a pair of finite-valued random variables was introduced in arXiv:2606.23849, where it was used to derive a spectral bound on the entanglement of the pair, a quantity measuring the extent to which their mutual information can be extracted. In this article, we further develop the theory of shape functions for pairs of random variables. We prove that, when $(X,Y)$ is uniformly supported on the edges of a biregular bipartite graph, the value of the shape function $\\mathcal{S}(X,Y)(\u03b1,\u03b2)$ equals the logarithm of the operator norm of the graph's incidence matrix with respect to Lebesgue exponents determined by $(\u03b1,\u03b2)$.This identification, in particular, enables the numerical approximation of the shape function and, by duality, of the extension profile, also known as the tension region, of the pair. We also establish a collection of relations and inequalities satisfied by shape functions, including convexity and monotonicity properties, composition inequalities, and relations describing their behavior under conditioning and the adjoining of variables.",
+    "published": "2026-08-08T09:50:08Z",
+    "updated": "2026-08-08T09:50:08Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qit"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "qit"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qit": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-11T03:08:35Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-10T08:42:49Z",
-  "cs.CC": "2026-08-10T08:42:57Z",
-  "cs.IT": "2026-08-10T08:43:02Z"
+  "cs.CR": "2026-08-11T03:08:07Z",
+  "cs.CC": "2026-08-11T03:08:15Z",
+  "cs.IT": "2026-08-11T03:08:20Z"
  }
 }

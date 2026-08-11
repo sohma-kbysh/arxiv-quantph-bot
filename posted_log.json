@@ -70573,5 +70573,85 @@
   "abstract_ja": null,
   "abstract_translated": null,
   "last_delivered_at": "2026-08-10T05:43:30Z"
+ },
+ {
+  "delivery_id": "main:2608.09364",
+  "id": "2608.09364",
+  "posted_at": "2026-08-11T03:08:43Z",
+  "title": "Quantum-Classical Coexistence Network Tomography",
+  "title_ja": "量子古典共存ネットワークトモグラフィー",
+  "title_translated": "量子古典共存ネットワークトモグラフィー",
+  "translation_language": "ja",
+  "authors": "Xuchuang Wang, Joseph C. Chapman, Aneesh Ramaswamy, Matheus Guedes de Andrade, Yu-Zhen Janice Chen, Joseph M. Lukens, Gayane Vardoyan, Don Towsley",
+  "link": "https://arxiv.org/abs/2608.09364v1",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT",
+   "cs.NI"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "network",
+   "qit",
+   "algo"
+  ],
+  "genre_names": [
+   "量子ネットワーク・通信",
+   "量子情報理論",
+   "量子アルゴリズム"
+  ],
+  "target_genre_ids": [
+   "network",
+   "qit",
+   "algo"
+  ],
+  "target_genre_names": [
+   "量子ネットワーク・通信",
+   "量子情報理論",
+   "量子アルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Quantum-classical coexistence networks (QCNs) share optical fiber between quantum and classical signals via wavelength-division multiplexing, offering a practical path to quantum communication over existing telecom infrastructure. However, co- and counter-propagating classical traffic introduce distinct depolarization noise, complicating channel characterization. We develop a tomography framework that infers per-link channel parameters of a QCN from end-to-end measurements alone. We first model each coexisting fiber by decomposing the signal evolution into photon loss, successful transmission, and three direction-dependent depolarization components. We then derive closed-form link-level estimators, and extend the approach to star-topology networks through a system of multiplicative equations across end-node pairs, together with a simple classical-signal-direction-switching protocol that resolves the remaining unknowns. On single-link experimental testbed data, we recover per-link depolarization probabilities accurately, with estimated process fidelities closely tracking the Bayesian-process-tomography baseline across multiple fiber lengths and wavelengths; residual gaps reflect the depolarization-only approximation. Absent a multi-link coexistence testbed, we validate the star-network estimators on emulated paths built from measured single-link channels. We further extend the framework in two directions: (i) a channel model that factorizes the coexisting fiber into a depolarizing-with-loss signal channel and a Raman-noise-injection channel on separate optical modes -- a completely-positive, trace-preserving tensor product -- whose link observables reduce exactly to our basic model; and (ii) a generalization to arbitrary topologies via a peeling algorithm (trees) and a least-squares estimator (meshes), validated by Monte-Carlo simulations on tree and cyclic-mesh networks.",
+  "abstract_ja": "量子・古典共存ネットワーク（QCN）は、波長分割多重方式を用いて量子信号と古典信号の間で光ファイバーを共有し、既存の通信インフラ上で量子通信を実現する実用的な方法を提供します。しかし、同方向および逆方向に伝搬する古典トラフィックは、それぞれ異なる偏光解消ノイズを発生させ、チャネル特性評価を複雑化させます。本稿では、エンドツーエンドの測定のみからQCNのリンクごとのチャネルパラメータを推定するトモグラフィーフレームワークを開発します。まず、各共存ファイバーをモデル化し、信号の進化を光子損失、伝送成功、および3つの方向依存偏光解消成分に分解します。次に、閉形式のリンクレベル推定器を導出し、エンドノードペア間の乗法方程式系と、残りの未知数を解決する単純な古典信号方向切り替えプロトコルを用いて、このアプローチをスター型トポロジーネットワークに拡張します。単一リンクの実験テストベッドデータでは、リンクごとの偏光解消確率を正確に復元し、推定されたプロセス忠実度は、複数のファイバー長と波長にわたってベイズプロセス断層撮影のベースラインに密接に追従します。残差ギャップは、偏光解消のみの近似を反映しています。マルチリンク共存テストベッドがないため、測定された単一リンクチャネルから構築されたエミュレートされたパスでスターネットワーク推定器を検証します。さらに、フレームワークを2つの方向に拡張します。(i) 共存ファイバーを、損失を伴う偏光解消信号チャネルと、別々の光モード上のラマンノイズ注入チャネルに因数分解するチャネルモデル（完全に正でトレース保存テンソル積）で、リンク観測量は基本モデルに正確に還元されます。(ii) ピーリングアルゴリズム（ツリー）と最小二乗推定器（メッシュ）による任意のトポロジへの一般化で、ツリーおよびサイクリックメッシュネットワークでのモンテカルロシミュレーションによって検証されています。",
+  "abstract_translated": "量子・古典共存ネットワーク（QCN）は、波長分割多重方式を用いて量子信号と古典信号の間で光ファイバーを共有し、既存の通信インフラ上で量子通信を実現する実用的な方法を提供します。しかし、同方向および逆方向に伝搬する古典トラフィックは、それぞれ異なる偏光解消ノイズを発生させ、チャネル特性評価を複雑化させます。本稿では、エンドツーエンドの測定のみからQCNのリンクごとのチャネルパラメータを推定するトモグラフィーフレームワークを開発します。まず、各共存ファイバーをモデル化し、信号の進化を光子損失、伝送成功、および3つの方向依存偏光解消成分に分解します。次に、閉形式のリンクレベル推定器を導出し、エンドノードペア間の乗法方程式系と、残りの未知数を解決する単純な古典信号方向切り替えプロトコルを用いて、このアプローチをスター型トポロジーネットワークに拡張します。単一リンクの実験テストベッドデータでは、リンクごとの偏光解消確率を正確に復元し、推定されたプロセス忠実度は、複数のファイバー長と波長にわたってベイズプロセス断層撮影のベースラインに密接に追従します。残差ギャップは、偏光解消のみの近似を反映しています。マルチリンク共存テストベッドがないため、測定された単一リンクチャネルから構築されたエミュレートされたパスでスターネットワーク推定器を検証します。さらに、フレームワークを2つの方向に拡張します。(i) 共存ファイバーを、損失を伴う偏光解消信号チャネルと、別々の光モード上のラマンノイズ注入チャネルに因数分解するチャネルモデル（完全に正でトレース保存テンソル積）で、リンク観測量は基本モデルに正確に還元されます。(ii) ピーリングアルゴリズム（ツリー）と最小二乗推定器（メッシュ）による任意のトポロジへの一般化で、ツリーおよびサイクリックメッシュネットワークでのモンテカルロシミュレーションによって検証されています。",
+  "last_delivered_at": "2026-08-11T03:08:47Z"
+ },
+ {
+  "delivery_id": "main:2608.08039",
+  "id": "2608.08039",
+  "posted_at": "2026-08-11T03:08:48Z",
+  "title": "Shapes and Norms of Random Pairs",
+  "title_ja": "ランダムペアの形状と規範",
+  "title_translated": "ランダムペアの形状と規範",
+  "translation_language": "ja",
+  "authors": "Rostislav Matveev",
+  "link": "https://arxiv.org/abs/2608.08039v1",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT",
+   "math.PR"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "target_genre_ids": [
+   "qit"
+  ],
+  "target_genre_names": [
+   "量子情報理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "The shape function of a pair of finite-valued random variables was introduced in arXiv:2606.23849, where it was used to derive a spectral bound on the entanglement of the pair, a quantity measuring the extent to which their mutual information can be extracted. In this article, we further develop the theory of shape functions for pairs of random variables. We prove that, when $(X,Y)$ is uniformly supported on the edges of a biregular bipartite graph, the value of the shape function $\\mathcal{S}(X,Y)(α,β)$ equals the logarithm of the operator norm of the graph's incidence matrix with respect to Lebesgue exponents determined by $(α,β)$.This identification, in particular, enables the numerical approximation of the shape function and, by duality, of the extension profile, also known as the tension region, of the pair. We also establish a collection of relations and inequalities satisfied by shape functions, including convexity and monotonicity properties, composition inequalities, and relations describing their behavior under conditioning and the adjoining of variables.",
+  "abstract_ja": "有限値確率変数のペアの形状関数はarXiv:2606.23849で導入され、そこではペアのエンタングルメントのスペクトル境界を導出するために使用されました。エンタングルメントとは、それらの相互情報をどの程度抽出できるかを測定する量です。本稿では、確率変数のペアの形状関数の理論をさらに発展させます。二部グラフのエッジ上で$(X,Y)$が均一にサポートされている場合、形状関数$\\mathcal{S}(X,Y)(α,β)$の値は、$(α,β)$によって決定されるルベーグ指数に関するグラフの接続行列の演算子ノルムの対数に等しいことを証明します。特に、この同一視により、形状関数の数値近似が可能になり、双対性により、ペアの拡張プロファイル（張力領域とも呼ばれる）の数値近似も可能になります。また、凸性や単調性といった特性、合成不等式、条件付けや変数の隣接の下での挙動を記述する関係など、形状関数が満たす一連の関係と不等式を確立します。",
+  "abstract_translated": "有限値確率変数のペアの形状関数はarXiv:2606.23849で導入され、そこではペアのエンタングルメントのスペクトル境界を導出するために使用されました。エンタングルメントとは、それらの相互情報をどの程度抽出できるかを測定する量です。本稿では、確率変数のペアの形状関数の理論をさらに発展させます。二部グラフのエッジ上で$(X,Y)$が均一にサポートされている場合、形状関数$\\mathcal{S}(X,Y)(α,β)$の値は、$(α,β)$によって決定されるルベーグ指数に関するグラフの接続行列の演算子ノルムの対数に等しいことを証明します。特に、この同一視により、形状関数の数値近似が可能になり、双対性により、ペアの拡張プロファイル（張力領域とも呼ばれる）の数値近似も可能になります。また、凸性や単調性といった特性、合成不等式、条件付けや変数の隣接の下での挙動を記述する関係など、形状関数が満たす一連の関係と不等式を確立します。",
+  "last_delivered_at": "2026-08-11T03:08:48Z"
  }
 ]

@@ -75629,5 +75629,48 @@
   "abstract_ja": null,
   "abstract_translated": null,
   "last_delivered_at": "2026-08-11T05:28:26Z"
+ },
+ {
+  "delivery_id": "main:2608.10736",
+  "id": "2608.10736",
+  "posted_at": "2026-08-12T03:28:10Z",
+  "title": "A Lightweight Fault-Detection Scheme for Barrett Modular Multiplication Using Multiple Conditional Reduction Paths",
+  "title_ja": "複数の条件付き還元パスを用いたバレットモジュラー乗算のための軽量故障検出方式",
+  "title_translated": "複数の条件付き還元パスを用いたバレットモジュラー乗算のための軽量故障検出方式",
+  "translation_language": "ja",
+  "authors": "Rourab Paul, Paresh Baidya, Krishnendu Guha, Amlan Chakrabarti",
+  "link": "https://arxiv.org/abs/2608.10736v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "hardware",
+   "crypto"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装",
+   "暗号・セキュリティ"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "hardware",
+   "crypto"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Polynomial multiplication is the most resource-, time-, and energy-critical operation in lattice-based Post-Quantum Cryptography (PQC) and Fully Homomorphic Encryption (FHE) schemes. Lattice-based PQC schemes such as Kyber and Dilithium have already been standardized, while lattice- based FHE schemes such as BGV, BFV, and CKKS are widely recognized as leading candidate in FHE area. Barrett Modular Multiplication (BMM) for polynomial multiplication is widely adopted in PQC and FHE hardware accelerators due to its hardware friendly nature and efficient modular reduction capabilities. However, Side-Channel Attacks (SCAs) and Hardware Trojans may introduce intentional faults, while aging and various other factors can cause unintentional faults. These faults may target the BM M unit, one of the most critical components of PQC and FHE infrastructures, potentially leading to information leakage and compromising system security. In this paper, we employ a Statistical Reduction Monitoring (SRM) method to protect the BM M unit against such adversarial conditions. The proposed approach incurs minimal hardware overhead while providing efficient detection of both random and bur",
+  "abstract_ja": "多項式乗算は、格子ベースのポスト量子暗号(PQC)および完全準同型暗号(FHE)スキームにおいて、最もリソース、時間、エネルギーに重要な操作です。カイバーやディリチウムなどの格子ベースのPQCスキームはすでに標準化されており、BGV、BFV、CKKSなどの格子ベースのFHEスキームはFHE分野で広く認知されています。多項式乗算のためのバレット・モジュラー乗算(BMM)は、ハードウェアに友好的で効率的なモジュラー還元機能により、PQCやFHEハードウェアアクセラレータで広く採用されています。しかし、サイドチャネル攻撃(SCA)やハードウェアトロイの木馬は意図的な故障を引き起こす可能性があり、経年劣化やその他の要因が意図しない故障を引き起こすことがあります。これらの障害は、PQCおよびFHEインフラの最も重要なコンポーネントの一つであるBM Mユニットを標的にし、情報漏洩やシステムセキュリティの危険につながる可能性があります。本論文では、BM Mユニットをこのような敵対的な状況から保護するために統計的削減モニタリング(SRM)手法を用いています。提案されたアプローチは、ハードウェアのオーバーヘッドを最小限に抑えつつ、ランダムおよびバーの両方を効率的に検出できます",
+  "abstract_translated": "多項式乗算は、格子ベースのポスト量子暗号(PQC)および完全準同型暗号(FHE)スキームにおいて、最もリソース、時間、エネルギーに重要な操作です。カイバーやディリチウムなどの格子ベースのPQCスキームはすでに標準化されており、BGV、BFV、CKKSなどの格子ベースのFHEスキームはFHE分野で広く認知されています。多項式乗算のためのバレット・モジュラー乗算(BMM)は、ハードウェアに友好的で効率的なモジュラー還元機能により、PQCやFHEハードウェアアクセラレータで広く採用されています。しかし、サイドチャネル攻撃(SCA)やハードウェアトロイの木馬は意図的な故障を引き起こす可能性があり、経年劣化やその他の要因が意図しない故障を引き起こすことがあります。これらの障害は、PQCおよびFHEインフラの最も重要なコンポーネントの一つであるBM Mユニットを標的にし、情報漏洩やシステムセキュリティの危険につながる可能性があります。本論文では、BM Mユニットをこのような敵対的な状況から保護するために統計的削減モニタリング(SRM)手法を用いています。提案されたアプローチは、ハードウェアのオーバーヘッドを最小限に抑えつつ、ランダムおよびバーの両方を効率的に検出できます",
+  "last_delivered_at": "2026-08-12T03:28:14Z"
  }
 ]

@@ -3290,6 +3290,16 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-11T03:08:35Z"
+  },
+  "cs.CR:2608.10736": {
+   "genre_ids": [
+    "pqc",
+    "hardware",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-12T03:28:03Z"
   }
  },
  "external_pending": {},
@@ -6130,10 +6140,56 @@
   "2608.09922",
   "2608.09924"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.10736": {
+   "paper": {
+    "id": "2608.10736",
+    "title": "A Lightweight Fault-Detection Scheme for Barrett Modular Multiplication Using Multiple Conditional Reduction Paths",
+    "link": "https://arxiv.org/abs/2608.10736v1",
+    "authors": "Rourab Paul, Paresh Baidya, Krishnendu Guha, Amlan Chakrabarti",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Polynomial multiplication is the most resource-, time-, and energy-critical operation in lattice-based Post-Quantum Cryptography (PQC) and Fully Homomorphic Encryption (FHE) schemes. Lattice-based PQC schemes such as Kyber and Dilithium have already been standardized, while lattice- based FHE schemes such as BGV, BFV, and CKKS are widely recognized as leading candidate in FHE area. Barrett Modular Multiplication (BMM) for polynomial multiplication is widely adopted in PQC and FHE hardware accelerators due to its hardware friendly nature and efficient modular reduction capabilities. However, Side-Channel Attacks (SCAs) and Hardware Trojans may introduce intentional faults, while aging and various other factors can cause unintentional faults. These faults may target the BM M unit, one of the most critical components of PQC and FHE infrastructures, potentially leading to information leakage and compromising system security. In this paper, we employ a Statistical Reduction Monitoring (SRM) method to protect the BM M unit against such adversarial conditions. The proposed approach incurs minimal hardware overhead while providing efficient detection of both random and bur",
+    "published": "2026-08-11T09:55:24Z",
+    "updated": "2026-08-11T09:55:24Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "hardware",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    },
+    "crypto": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-12T03:28:03Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-11T08:11:46Z",
-  "cs.CC": "2026-08-11T08:11:58Z",
-  "cs.IT": "2026-08-11T08:12:04Z"
+  "cs.CR": "2026-08-12T03:27:33Z",
+  "cs.CC": "2026-08-12T03:27:41Z",
+  "cs.IT": "2026-08-12T03:27:46Z"
  }
 }

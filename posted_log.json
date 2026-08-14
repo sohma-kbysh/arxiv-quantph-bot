@@ -80876,5 +80876,40 @@
   "abstract_ja": "我々は、非アーベル位相を含む一般の2+1次元位相で凝縮可能アニオンを増殖させる相転移を構築します。この問題に体系的にアプローチを提供する中心的なツールは対称位相場理論(SymTFT)です。与えられた位相順序に対して、凝縮可能なアニオンによって生成される透明な直線から関連する対称性を特定し、3+1次元SymTFTサンドイッチの観点から位相的順序を実現します。増殖相転移は、SymTFTの対称境界上に純粋にアニオンにスカラー場を結合させることで実現されます。アーベル理論および非アーベル理論、$D(S_3)$および$SU(2)_k$ Chern-Simons理論の構成を示し、これを異常なアニオンにも拡張します。",
   "abstract_translated": "我々は、非アーベル位相を含む一般の2+1次元位相で凝縮可能アニオンを増殖させる相転移を構築します。この問題に体系的にアプローチを提供する中心的なツールは対称位相場理論(SymTFT)です。与えられた位相順序に対して、凝縮可能なアニオンによって生成される透明な直線から関連する対称性を特定し、3+1次元SymTFTサンドイッチの観点から位相的順序を実現します。増殖相転移は、SymTFTの対称境界上に純粋にアニオンにスカラー場を結合させることで実現されます。アーベル理論および非アーベル理論、$D(S_3)$および$SU(2)_k$ Chern-Simons理論の構成を示し、これを異常なアニオンにも拡張します。",
   "last_delivered_at": "2026-08-13T05:53:23Z"
+ },
+ {
+  "delivery_id": "main:2608.13138",
+  "id": "2608.13138",
+  "posted_at": "2026-08-14T03:28:32Z",
+  "title": "A Commitment-Based Hybrid Post-Quantum Cryptographic Model for Multi-File Cloud Storage",
+  "title_ja": "マルチファイルクラウドストレージのためのコミットメントベースのハイブリッドポクォンタム暗号モデル",
+  "title_translated": "マルチファイルクラウドストレージのためのコミットメントベースのハイブリッドポクォンタム暗号モデル",
+  "translation_language": "ja",
+  "authors": "Lemdi Frank Prikutse, Regina Esi Turkson, Alimatu-Saadia Yussiff, Abdul-Lateef Yussiff, Maame G. Asante-Mensah",
+  "link": "https://arxiv.org/abs/2608.13138v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Cloud storage clients increasingly require authentication that remains secure against future quantum-capable adversaries, motivating hybrid constructions that combine classical primitives with standardized post-quantum alternatives. Extended naively to multi-file upload, such constructions incur a per-file lattice signing cost that dominates authentication time and becomes prohibitive at realistic batch sizes. This paper presents a commitment-based hybrid post-quantum model that addresses this bottleneck. It comprises AES-256-GCM bulk encryption, a hybrid X25519 with ML-KEM-768 key encapsulation mechanism, and a hybrid Ed25519 with ML-DSA-65 dual signature, computed over a SHA3-256 batch commitment. The commitment binds all ciphertexts in a batch to a single fixed-size digest that is signed once, reducing the number of post-quantum signature invocations per batch from n to one, independent of batch size; the remaining encryption and hashing is bounded by fast symmetric throughput. On a commodity client platform, averaged over 20 repetitions, this holds signing-phase time near-constant as the batch grows while the per-file baseline scales linearly. At n = 1000, the model reduces signing-phase time by factors of 629, 606, and 725 for 100 KB, 1 MB, and 10 MB files respectively, against a per-file dual-signing baseline sharing every other primitive.",
+  "abstract_ja": "クラウドストレージクライアントは将来の量子対応の敵対者に対して安全な認証を求めており、古典的なプリミティブと標準化されたポスト量子代替を組み合わせたハイブリッド構築が動機付けられています。単純にマルチファイルアップロードに拡張すると、これらの構成はファイルごとの格子署名コストがかかり、認証時間を支配し、現実的なバッチサイズでは困難になります。本論文はこのボトルネックに対処するコミットメントベースのハイブリッドポスト量子モデルを提示します。これはAES-256-GCMのバルク暗号化、ML-KEM-768鍵カプセル化機構を備えたハイブリッドX25519、そしてSHA3-256バッチコミットメント上で計算されるML-DSA-65デュアル署名のハイブリッドEd25519で構成されています。コミットメントはバッチ内のすべての暗号文を、1回署名される固定サイズのダイジェストに結合し、バッチサイズに依存しない1回のポストア量子署名呼び出し数をnから1に減らします。残りの暗号化とハッシュは高速対称スループットによって制限されます。20回以上の繰り返しを平均する汎用クライアントプラットフォームでは、バッチが成長するにつれて署名フェーズ時間はほぼ一定に保たれ、ファイルあたりのベースラインは線形にスケールします。n=1000の場合、モデルは100 KB、1 MB、10 MBファイルに対して署名フェーズ時間をそれぞれ629倍、606倍、725倍に短縮し、1ファイルごとにデュアル署名ベースラインが他のプリミティブを共有する場合と比べて短縮されます。",
+  "abstract_translated": "クラウドストレージクライアントは将来の量子対応の敵対者に対して安全な認証を求めており、古典的なプリミティブと標準化されたポスト量子代替を組み合わせたハイブリッド構築が動機付けられています。単純にマルチファイルアップロードに拡張すると、これらの構成はファイルごとの格子署名コストがかかり、認証時間を支配し、現実的なバッチサイズでは困難になります。本論文はこのボトルネックに対処するコミットメントベースのハイブリッドポスト量子モデルを提示します。これはAES-256-GCMのバルク暗号化、ML-KEM-768鍵カプセル化機構を備えたハイブリッドX25519、そしてSHA3-256バッチコミットメント上で計算されるML-DSA-65デュアル署名のハイブリッドEd25519で構成されています。コミットメントはバッチ内のすべての暗号文を、1回署名される固定サイズのダイジェストに結合し、バッチサイズに依存しない1回のポストア量子署名呼び出し数をnから1に減らします。残りの暗号化とハッシュは高速対称スループットによって制限されます。20回以上の繰り返しを平均する汎用クライアントプラットフォームでは、バッチが成長するにつれて署名フェーズ時間はほぼ一定に保たれ、ファイルあたりのベースラインは線形にスケールします。n=1000の場合、モデルは100 KB、1 MB、10 MBファイルに対して署名フェーズ時間をそれぞれ629倍、606倍、725倍に短縮し、1ファイルごとにデュアル署名ベースラインが他のプリミティブを共有する場合と比べて短縮されます。",
+  "last_delivered_at": "2026-08-14T03:28:32Z"
  }
 ]

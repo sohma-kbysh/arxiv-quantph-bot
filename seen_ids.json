@@ -3439,6 +3439,14 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-12T03:28:03Z"
+  },
+  "cs.CR:2608.13138": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-14T03:28:25Z"
   }
  },
  "external_pending": {},
@@ -6418,10 +6426,46 @@
   "2608.12312",
   "2608.12317"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.13138": {
+   "paper": {
+    "id": "2608.13138",
+    "title": "A Commitment-Based Hybrid Post-Quantum Cryptographic Model for Multi-File Cloud Storage",
+    "link": "https://arxiv.org/abs/2608.13138v1",
+    "authors": "Lemdi Frank Prikutse, Regina Esi Turkson, Alimatu-Saadia Yussiff, Abdul-Lateef Yussiff, Maame G. Asante-Mensah",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Cloud storage clients increasingly require authentication that remains secure against future quantum-capable adversaries, motivating hybrid constructions that combine classical primitives with standardized post-quantum alternatives. Extended naively to multi-file upload, such constructions incur a per-file lattice signing cost that dominates authentication time and becomes prohibitive at realistic batch sizes. This paper presents a commitment-based hybrid post-quantum model that addresses this bottleneck. It comprises AES-256-GCM bulk encryption, a hybrid X25519 with ML-KEM-768 key encapsulation mechanism, and a hybrid Ed25519 with ML-DSA-65 dual signature, computed over a SHA3-256 batch commitment. The commitment binds all ciphertexts in a batch to a single fixed-size digest that is signed once, reducing the number of post-quantum signature invocations per batch from n to one, independent of batch size; the remaining encryption and hashing is bounded by fast symmetric throughput. On a commodity client platform, averaged over 20 repetitions, this holds signing-phase time near-constant as the batch grows while the per-file baseline scales linearly. At n = 1000, the model reduces signing-phase time by factors of 629, 606, and 725 for 100 KB, 1 MB, and 10 MB files respectively, against a per-file dual-signing baseline sharing every other primitive.",
+    "published": "2026-08-13T12:14:54Z",
+    "updated": "2026-08-13T12:14:54Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-14T03:28:25Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-13T08:24:48Z",
-  "cs.CC": "2026-08-13T08:24:57Z",
-  "cs.IT": "2026-08-13T08:25:01Z"
+  "cs.CR": "2026-08-14T03:27:58Z",
+  "cs.CC": "2026-08-14T03:28:06Z",
+  "cs.IT": "2026-08-14T03:28:11Z"
  }
 }

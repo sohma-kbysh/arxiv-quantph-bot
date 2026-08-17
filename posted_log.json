@@ -83646,5 +83646,80 @@
   "abstract_ja": "パッチ行列積法を用いて、KlobasとProsenによって導入された2つの可逆な三状態相互作用の面を回すセルラーオートマトンを研究します[J. Phys.A 55, 094003 (2022)] - 種保存規則と種反転規則 - とそれらの間に補間される整合性量子変形です。明示的な平行移動不変アンサッツの中で、2つの古典規則は補助次元3の実現を持つ準局所保存則の1パラメータ族を共有します。すべての正則メンバーはまた、単位可観測量を通過する解析的補助次元2族の第一中心対数微分でもあります。この族の閉じた広間と3つの基本局所電荷において、ゼロでないオイラー速度は$\\pm\\sqrt{3/23}$だけです。したがって、$\\sqrt{3/23}$は、より大きな保存セクターにおける最大オイラー速度の厳密な下限です。種反転則については、この値はクロバスとプロセンの外挿値$0.361$と一致し、既知の音活性電荷の完全性を強く支持します。種保存規則はさらに、対数微分が無限の厳局所電荷の塔を形成する段階生成族を許容します。量子変形において、同じ代数的構造は正確な低結合次元不変状態(スカー候補)、指数関数的に長寿命の準局所準モード、そして3つの初等局所電荷から離れた射影後に非ゼロのマズール境界を生成する対角準局所電荷を生み出します。",
   "abstract_translated": "パッチ行列積法を用いて、KlobasとProsenによって導入された2つの可逆な三状態相互作用の面を回すセルラーオートマトンを研究します[J. Phys.A 55, 094003 (2022)] - 種保存規則と種反転規則 - とそれらの間に補間される整合性量子変形です。明示的な平行移動不変アンサッツの中で、2つの古典規則は補助次元3の実現を持つ準局所保存則の1パラメータ族を共有します。すべての正則メンバーはまた、単位可観測量を通過する解析的補助次元2族の第一中心対数微分でもあります。この族の閉じた広間と3つの基本局所電荷において、ゼロでないオイラー速度は$\\pm\\sqrt{3/23}$だけです。したがって、$\\sqrt{3/23}$は、より大きな保存セクターにおける最大オイラー速度の厳密な下限です。種反転則については、この値はクロバスとプロセンの外挿値$0.361$と一致し、既知の音活性電荷の完全性を強く支持します。種保存規則はさらに、対数微分が無限の厳局所電荷の塔を形成する段階生成族を許容します。量子変形において、同じ代数的構造は正確な低結合次元不変状態(スカー候補)、指数関数的に長寿命の準局所準モード、そして3つの初等局所電荷から離れた射影後に非ゼロのマズール境界を生成する対角準局所電荷を生み出します。",
   "last_delivered_at": "2026-08-14T05:52:56Z"
+ },
+ {
+  "delivery_id": "main:2608.13784",
+  "id": "2608.13784",
+  "posted_at": "2026-08-17T02:23:37Z",
+  "title": "A Reproducibility Protocol for Cross-Implementation Evaluation of Post-Quantum ACVP Test Vectors",
+  "title_ja": "ポスト量子ACVPテストベクターのクロス実装評価のための再現性プロトコル",
+  "title_translated": "ポスト量子ACVPテストベクターのクロス実装評価のための再現性プロトコル",
+  "translation_language": "ja",
+  "authors": "Christopher M. Frost",
+  "link": "https://arxiv.org/abs/2608.13784v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.SE"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Independent implementations of a cryptographic standard should reproduce the same known-answer results, yet agreement is meaningful only when the corpus, revisions, public interfaces, exclusions, and evidence are precisely stated. This study defines a product-neutral reproducibility protocol for three public implementations of NIST ML-KEM against a pinned public Automated Cryptographic Validation Protocol corpus. Protocol v2 freezes provider-specific capabilities, applies one validation-error taxonomy symmetrically, preserves every selected case, and separates bytes, validation verdicts, unsupported operations, and adapter errors. The source-built experiment evaluated @noble/post-quantum 0.7.0, liboqs 0.16.0, and Go 1.26.4. Across three repetitions, the required Cartesian product comprised 2,160 base records: all 1,650 declared executable evaluations matched the NIST oracle, and all 510 unsupported records matched Go's predeclared capability boundary. Pairwise agreement was complete on every executable overlap: 720 of 720 noble-liboqs records and 210 of 210 records for each Go pairing. A separate keyGen-ek-projection diagnostic matched all 150 Go encapsulation-key projections without counting them as full key generation. Three frozen controls independently exercised byte comparison, verdict comparison, and malformed-response error separation; each produced its exact predeclared outcome. No base failure, adapter error, or status instability occurred. The evidence establishes bounded author-run repeatability and exposes a practical standards gap: public ML-KEM packages provide materially different deterministic and validation-test surfaces. Independent external reproduction remains unobserved. The results do not establish certification, exhaustive correctness, side-channel resistance, secure integration, or production assurance.",
+  "abstract_ja": "暗号標準の独立した実装は同じ既知の回答結果を再現すべきですが、合意はコーパス、リビジョン、公開インターフェース、除外、証拠が正確に明示されている場合に限り意味を持ちます。本研究は、ピン留めされた公開自動暗号検証プロトコルコーパスに対して、3つの公開実装に対する製品中立の再現性プロトコルを定義します。プロトコルv2はプロバイダー固有の機能を凍結し、1つの検証エラー分類を対称的に適用し、すべての選択ケースを保持し、バイト、検証判定、サポートされていない操作、アダプターエラーを分離します。ソースビルドの実験は@noble/ポスト量子0.7.0、liboqs 0.16.0、Go 1.26.4を評価しました。3回の繰り返しで、必要なデカルト積は2,160のベースレコードで構成されました。宣言された1,650の実行可能評価はすべてNISTオラクルと一致し、510の非サポートレコードはすべてGoの事前宣言された能力境界と一致しました。ペアワイズアシオはすべての実行可能重複で完全で、720のノーブルリボックレコード中720件、210件中210件のレコードが各Goペアリングで一致しました。別のkeyGen-ek-projection診断で、150件のGoカプセル化キー投影すべてを完全な鍵生成とはカウントせずにマッチングしました。3つの凍結コントロールは独立して実行され、バイト比較、判定比較、誤答エラー分離を行いました。それぞれが事前宣言された正確な結果を生み出しました。ベース故障、アダプターエラー、状態不安定性は発生しませんでした。証拠は、限定された著者主導の再現性を確立し、実用的な標準のギャップを明らかにしています。すなわち、公開されたML-KEMパッケージは決定論的および検証テストの表面が実質的に異なるものを提供します。独立した外部再現は依然として観察されていません。結果は認証、網羅的な正確性、サイドチャネル抵抗、安全な統合、または生産保証を確立するものではありません。",
+  "abstract_translated": "暗号標準の独立した実装は同じ既知の回答結果を再現すべきですが、合意はコーパス、リビジョン、公開インターフェース、除外、証拠が正確に明示されている場合に限り意味を持ちます。本研究は、ピン留めされた公開自動暗号検証プロトコルコーパスに対して、3つの公開実装に対する製品中立の再現性プロトコルを定義します。プロトコルv2はプロバイダー固有の機能を凍結し、1つの検証エラー分類を対称的に適用し、すべての選択ケースを保持し、バイト、検証判定、サポートされていない操作、アダプターエラーを分離します。ソースビルドの実験は@noble/ポスト量子0.7.0、liboqs 0.16.0、Go 1.26.4を評価しました。3回の繰り返しで、必要なデカルト積は2,160のベースレコードで構成されました。宣言された1,650の実行可能評価はすべてNISTオラクルと一致し、510の非サポートレコードはすべてGoの事前宣言された能力境界と一致しました。ペアワイズアシオはすべての実行可能重複で完全で、720のノーブルリボックレコード中720件、210件中210件のレコードが各Goペアリングで一致しました。別のkeyGen-ek-projection診断で、150件のGoカプセル化キー投影すべてを完全な鍵生成とはカウントせずにマッチングしました。3つの凍結コントロールは独立して実行され、バイト比較、判定比較、誤答エラー分離を行いました。それぞれが事前宣言された正確な結果を生み出しました。ベース故障、アダプターエラー、状態不安定性は発生しませんでした。証拠は、限定された著者主導の再現性を確立し、実用的な標準のギャップを明らかにしています。すなわち、公開されたML-KEMパッケージは決定論的および検証テストの表面が実質的に異なるものを提供します。独立した外部再現は依然として観察されていません。結果は認証、網羅的な正確性、サイドチャネル抵抗、安全な統合、または生産保証を確立するものではありません。",
+  "last_delivered_at": "2026-08-17T02:23:37Z"
+ },
+ {
+  "delivery_id": "main:2608.13948",
+  "id": "2608.13948",
+  "posted_at": "2026-08-17T02:23:39Z",
+  "title": "Vectorized SQIsign Implementation Using AVX-512",
+  "title_ja": "AVX-512を用いたベクトル化されたSQIsign実装",
+  "title_translated": "AVX-512を用いたベクトル化されたSQIsign実装",
+  "translation_language": "ja",
+  "authors": "Weize Wang, Chutong Wang, Yu Wu, Qifan Xue, Jieyu Zheng, Yunlei Zhao",
+  "link": "https://arxiv.org/abs/2608.13948v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "hardware"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "hardware"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "SQIsign is the sole isogeny-based digital signature scheme submitted to the NIST Post-Quantum Cryptography standardization process, distinguished by its foundation on the hardness of the endomorphism ring problem for supersingular elliptic curves. While offering compact key and signature sizes, SQIsign's practical deployment is hindered by computationally intensive signing procedures. This paper presents the first comprehensive vectorized implementation of SQIsign utilizing the AVX-512 Integer Fused Multiply-Add (IFMA) instruction set architecture. By systematically redesigning the computational stack---encompassing prime-field and extension-field arithmetic, elliptic curve operations including batched point doubling and scalar multiplication, as well as pairing computations via cubical arithmetic and two-dimensional isogeny evaluations---we achieve substantial performance improvements over the reference implementation. When combined with Qlapoti technology, our implementation attains a $2.69\\times$ speedup for signing and a $3.18\\times$ improvement for verification at NIST security level I. Contrary to misconceptions regarding the obsolescence of AVX-512, we emphasize that Intel's AVX10 instruction set architecture (revision 10.2, scheduled for widespread deployment in late 2026) will standardize AVX-512 capabilities---including IFMA instructions---across both performance and efficiency cores, ensuring long-term viability of these optimization techniques. Furthermore, our vectorization strategies are architecture-agnostic and provide a methodological foundation applicable to broader isogeny-based cryptographic constructions. This work demonstrates that SIMD vectorization represents a critical yet underexplored optimization dimension for post-quantum isogeny-based schemes, independent of recent algorithmic advances.",
+  "abstract_ja": "SQIsignは、超特異楕円曲線の自己同型環問題の難易度を基盤とし、NISTポスト量子暗号標準化プロセスに提出された唯一の同性生成ベースのデジタル署名方式です。コンパクトな鍵と署名サイズを提供する一方で、SQIsignの実用的な展開は計算負荷の高い署名手続きにより妨げられています。本論文は、AVX-512整数融合乗算加算(IFMA)命令セットアーキテクチャを用いたSQIsignの初の包括的なベクトル化実装を提示します。計算スタックを体系的に再設計することで---素体および拡張場の算術、バッチ点倍増やスカラー乗法を含む楕円曲線演算、さらに立方算術や二次元アイソジェニー評価によるペア計算を含みます---基準実装に比べて大幅な性能向上を実現しています。Qlapoti技術と組み合わせることで、我々の実装は署名時に$2.69××$の高速化を実現し、NISTセキュリティレベルIでの検証において$3.18×××$の向上を実現しています。AVX-512の時代遅れに関する誤解とは異なり、IntelのAVX10命令セットアーキテクチャ(リビジョン10.2、2026年末に広く展開予定)が、AVX-512の機能---IFMA命令を含む---パフォーマンスコアと効率の両方で標準化し、これらの最適化手法の長期的な実用性を保証します。さらに、当社のベクトル化戦略はアーキテクチャに依存しず、より広範なアイソジェニーベースの暗号構造に適用可能な方法論的基盤を提供します。本研究は、SIMDベクトリゼーションがポスト量子アイソジェニーベーススキームにおいて重要でありながら、最近のアルゴリズムの進歩とは独立して重要でありながら十分に探求されていない最適化の次元であることを示しています。",
+  "abstract_translated": "SQIsignは、超特異楕円曲線の自己同型環問題の難易度を基盤とし、NISTポスト量子暗号標準化プロセスに提出された唯一の同性生成ベースのデジタル署名方式です。コンパクトな鍵と署名サイズを提供する一方で、SQIsignの実用的な展開は計算負荷の高い署名手続きにより妨げられています。本論文は、AVX-512整数融合乗算加算(IFMA)命令セットアーキテクチャを用いたSQIsignの初の包括的なベクトル化実装を提示します。計算スタックを体系的に再設計することで---素体および拡張場の算術、バッチ点倍増やスカラー乗法を含む楕円曲線演算、さらに立方算術や二次元アイソジェニー評価によるペア計算を含みます---基準実装に比べて大幅な性能向上を実現しています。Qlapoti技術と組み合わせることで、我々の実装は署名時に$2.69××$の高速化を実現し、NISTセキュリティレベルIでの検証において$3.18×××$の向上を実現しています。AVX-512の時代遅れに関する誤解とは異なり、IntelのAVX10命令セットアーキテクチャ(リビジョン10.2、2026年末に広く展開予定)が、AVX-512の機能---IFMA命令を含む---パフォーマンスコアと効率の両方で標準化し、これらの最適化手法の長期的な実用性を保証します。さらに、当社のベクトル化戦略はアーキテクチャに依存しず、より広範なアイソジェニーベースの暗号構造に適用可能な方法論的基盤を提供します。本研究は、SIMDベクトリゼーションがポスト量子アイソジェニーベーススキームにおいて重要でありながら、最近のアルゴリズムの進歩とは独立して重要でありながら十分に探求されていない最適化の次元であることを示しています。",
+  "last_delivered_at": "2026-08-17T02:23:41Z"
  }
 ]

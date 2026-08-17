@@ -3520,6 +3520,23 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-14T03:28:25Z"
+  },
+  "cs.CR:2608.13948": {
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-17T02:23:27Z"
+  },
+  "cs.CR:2608.13784": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-17T02:23:27Z"
   }
  },
  "external_pending": {},
@@ -6572,10 +6589,87 @@
   "2608.13551",
   "2608.13561"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.13948": {
+   "paper": {
+    "id": "2608.13948",
+    "title": "Vectorized SQIsign Implementation Using AVX-512",
+    "link": "https://arxiv.org/abs/2608.13948v1",
+    "authors": "Weize Wang, Chutong Wang, Yu Wu, Qifan Xue, Jieyu Zheng, Yunlei Zhao",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "SQIsign is the sole isogeny-based digital signature scheme submitted to the NIST Post-Quantum Cryptography standardization process, distinguished by its foundation on the hardness of the endomorphism ring problem for supersingular elliptic curves. While offering compact key and signature sizes, SQIsign's practical deployment is hindered by computationally intensive signing procedures. This paper presents the first comprehensive vectorized implementation of SQIsign utilizing the AVX-512 Integer Fused Multiply-Add (IFMA) instruction set architecture. By systematically redesigning the computational stack---encompassing prime-field and extension-field arithmetic, elliptic curve operations including batched point doubling and scalar multiplication, as well as pairing computations via cubical arithmetic and two-dimensional isogeny evaluations---we achieve substantial performance improvements over the reference implementation. When combined with Qlapoti technology, our implementation attains a $2.69\\times$ speedup for signing and a $3.18\\times$ improvement for verification at NIST security level I. Contrary to misconceptions regarding the obsolescence of AVX-512, we emphasize that Intel's AVX10 instruction set architecture (revision 10.2, scheduled for widespread deployment in late 2026) will standardize AVX-512 capabilities---including IFMA instructions---across both performance and efficiency cores, ensuring long-term viability of these optimization techniques. Furthermore, our vectorization strategies are architecture-agnostic and provide a methodological foundation applicable to broader isogeny-based cryptographic constructions. This work demonstrates that SIMD vectorization represents a critical yet underexplored optimization dimension for post-quantum isogeny-based schemes, independent of recent algorithmic advances.",
+    "published": "2026-08-14T04:39:36Z",
+    "updated": "2026-08-14T04:39:36Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-17T02:23:27Z"
+  },
+  "2608.13784": {
+   "paper": {
+    "id": "2608.13784",
+    "title": "A Reproducibility Protocol for Cross-Implementation Evaluation of Post-Quantum ACVP Test Vectors",
+    "link": "https://arxiv.org/abs/2608.13784v1",
+    "authors": "Christopher M. Frost",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.SE"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Independent implementations of a cryptographic standard should reproduce the same known-answer results, yet agreement is meaningful only when the corpus, revisions, public interfaces, exclusions, and evidence are precisely stated. This study defines a product-neutral reproducibility protocol for three public implementations of NIST ML-KEM against a pinned public Automated Cryptographic Validation Protocol corpus. Protocol v2 freezes provider-specific capabilities, applies one validation-error taxonomy symmetrically, preserves every selected case, and separates bytes, validation verdicts, unsupported operations, and adapter errors. The source-built experiment evaluated @noble/post-quantum 0.7.0, liboqs 0.16.0, and Go 1.26.4. Across three repetitions, the required Cartesian product comprised 2,160 base records: all 1,650 declared executable evaluations matched the NIST oracle, and all 510 unsupported records matched Go's predeclared capability boundary. Pairwise agreement was complete on every executable overlap: 720 of 720 noble-liboqs records and 210 of 210 records for each Go pairing. A separate keyGen-ek-projection diagnostic matched all 150 Go encapsulation-key projections without counting them as full key generation. Three frozen controls independently exercised byte comparison, verdict comparison, and malformed-response error separation; each produced its exact predeclared outcome. No base failure, adapter error, or status instability occurred. The evidence establishes bounded author-run repeatability and exposes a practical standards gap: public ML-KEM packages provide materially different deterministic and validation-test surfaces. Independent external reproduction remains unobserved. The results do not establish certification, exhaustive correctness, side-channel resistance, secure integration, or production assurance.",
+    "published": "2026-08-13T21:29:59Z",
+    "updated": "2026-08-13T21:29:59Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-17T02:23:27Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-15T07:34:49Z",
-  "cs.CC": "2026-08-15T07:34:59Z",
-  "cs.IT": "2026-08-15T07:35:04Z"
+  "cs.CR": "2026-08-17T02:23:02Z",
+  "cs.CC": "2026-08-17T02:23:11Z",
+  "cs.IT": "2026-08-17T02:23:16Z"
  }
 }

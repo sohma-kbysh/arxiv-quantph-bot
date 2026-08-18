@@ -3104,7 +3104,11 @@
   "2608.14476",
   "2608.14493",
   "2608.14508",
-  "2608.14544"
+  "2608.14544",
+  "2608.15030",
+  "2608.16598",
+  "2608.16761",
+  "2608.16854"
  ],
  "external_reviews": {
   "cs.CR:2607.23614": {
@@ -6739,161 +6743,13 @@
   "2608.14476",
   "2608.14493",
   "2608.14508",
-  "2608.14544"
+  "2608.14544",
+  "2608.15030",
+  "2608.16598",
+  "2608.16761",
+  "2608.16854"
  ],
- "deliveries": {
-  "2608.16598": {
-   "paper": {
-    "id": "2608.16598",
-    "title": "Rigorous Statements and Proofs of the Lemmas in Simon's Algorithm for the Dihedral Coset Problem and Their Underlying Hypothesis",
-    "link": "https://arxiv.org/abs/2608.16598v1",
-    "authors": "Yuchen Guo, Shuo Yang",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "In a recent preprint, Simon proposed a polynomial-time quantum algorithm for the Dihedral Coset Problem and rested the analysis on four lemmas. Three of them carry only proof sketches, and this paper gives each of those three a statement that admits a single reading together with a complete proof. Lemma 1 follows from an exact second-moment computation for the subset-sum counts, and it holds with probability tending to one in place of the constant originally claimed. The amplitude bound of Lemma 3 follows from an exact Parseval identity on the cube of measurement outcomes and holds at every threshold with no well-behavedness hypothesis, so that predicate leaves the argument entirely. For Lemma 4, we compute both balls-in-bins covariances exactly and find that the second carries a term a fixed ball count leaves out. The assumption that the distinguished group contains no faulty samples can also be dropped. The two branch amplitudes share a signed prefactor, so the counting estimates control their difference and not the ratio the lemma states. We prove the additive form and show that the closing argument consumes nothing more than that. A single hypothesis survives all of this. It asks that the partition into the two sides be fixed independently of the measured string, and the rule the algorithm gives for choosing that partition does not supply it. Establishing these four lemmas therefore does not by itself establish the correctness of the algorithm.",
-    "published": "2026-08-17T13:53:36Z",
-    "updated": "2026-08-17T13:53:36Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "algo",
-     "complexity"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "algo",
-    "complexity"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "\u6700\u8fd1\u306e\u30d7\u30ec\u30d7\u30ea\u30f3\u30c8\u3067\u3001\u30b5\u30a4\u30e2\u30f3\u306f\u4e8c\u9762\u4f53\u4f59\u96c6\u554f\u984c\u306b\u5bfe\u3059\u308b\u591a\u9805\u5f0f\u6642\u9593\u91cf\u5b50\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u3092\u63d0\u6848\u3057\u3001\u89e3\u6790\u30924\u3064\u306e\u88dc\u984c\u306b\u57fa\u3065\u3044\u3066\u884c\u3044\u307e\u3057\u305f\u3002\u305d\u306e\u3046\u30613\u3064\u306b\u306f\u8a3c\u660e\u30b9\u30b1\u30c3\u30c1\u306e\u307f\u304c\u8f09\u3063\u3066\u304a\u308a\u3001\u672c\u8ad6\u6587\u306f\u305d\u308c\u305e\u308c\u306b\u5358\u4e00\u306e\u89e3\u91c8\u3068\u5b8c\u5168\u306a\u8a3c\u660e\u3092\u8a8d\u3081\u308b\u58f0\u660e\u3092\u4e0e\u3048\u3066\u3044\u307e\u3059\u3002\u88dc\u984c1\u306f\u90e8\u5206\u96c6\u5408\u306e\u548c\u306e\u6b63\u78ba\u306a\u4e8c\u6b21\u30e2\u30fc\u30e1\u30f3\u30c8\u8a08\u7b97\u304b\u3089\u5c0e\u304b\u308c\u3001\u5b9a\u6570\u306e\u4ee3\u308f\u308a\u306b1\u306b\u5bc4\u308b\u78ba\u7387\u3067\u6210\u308a\u7acb\u3064\u3002\u88dc\u984c3\u306e\u632f\u5e45\u4e0a\u9650\u306f\u3001\u6e2c\u5b9a\u7d50\u679c\u306e\u7acb\u65b9\u4f53\u306e\u6b63\u78ba\u306a\u30d1\u30fc\u30bb\u30d0\u30eb\u5358\u4f4d\u5f0f\u304b\u3089\u5c0e\u304b\u308c\u3001\u826f\u597d\u306a\u6319\u52d5\u4eee\u8aac\u304c\u306a\u3051\u308c\u3070\u3059\u3079\u3066\u306e\u95be\u5024\u3067\u6210\u308a\u7acb\u3064\u305f\u3081\u3001\u8ff0\u8a9e\u306f\u8b70\u8ad6\u3092\u5b8c\u5168\u306b\u9664\u5916\u3057\u307e\u3059\u3002\u88dc\u984c4\u3067\u306f\u3001\u4e21\u65b9\u306e\u30d3\u30f3\u5185\u306e\u30dc\u30fc\u30eb\u306e\u5171\u5206\u6563\u3092\u6b63\u78ba\u306b\u8a08\u7b97\u3057\u30012\u756a\u76ee\u306e\u9805\u306b\u306f\u56fa\u5b9a\u3055\u308c\u305f\u30dc\u30fc\u30eb\u30ab\u30a6\u30f3\u30c8\u304c\u7701\u7565\u3055\u308c\u3066\u3044\u308b\u3053\u3068\u3092\u767a\u898b\u3057\u307e\u3059\u3002\u307e\u305f\u3001\u533a\u5225\u3055\u308c\u305f\u30b0\u30eb\u30fc\u30d7\u306b\u6b20\u9665\u30b5\u30f3\u30d7\u30eb\u304c\u542b\u307e\u308c\u3066\u3044\u306a\u3044\u3068\u3044\u3046\u4eee\u5b9a\u3082\u9664\u5916\u3067\u304d\u307e\u3059\u30022\u3064\u306e\u679d\u306e\u632f\u5e45\u306f\u7b26\u53f7\u4ed8\u304d\u524d\u56e0\u6570\u3092\u5171\u6709\u3057\u3066\u3044\u308b\u305f\u3081\u3001\u30ab\u30a6\u30f3\u30c8\u63a8\u5b9a\u5024\u306f\u88dc\u984c\u306e\u6bd4\u7387\u3067\u306f\u306a\u304f\u5dee\u3092\u5236\u5fa1\u3057\u307e\u3059\u3002\u52a0\u6cd5\u5f62\u5f0f\u3092\u8a3c\u660e\u3057\u3001\u6700\u7d42\u8ad6\u304c\u305d\u308c\u4ee5\u4e0a\u3092\u6d88\u8cbb\u3057\u306a\u3044\u3053\u3068\u3092\u793a\u3057\u307e\u3059\u3002\u3053\u308c\u3089\u3059\u3079\u3066\u3092\u4e57\u308a\u8d8a\u3048\u305f\u306e\u306f\u4e00\u3064\u306e\u4eee\u8aac\u3060\u3051\u3067\u3059\u3002\u3053\u306e\u898f\u5247\u306f\u3001\u6e2c\u5b9a\u3055\u308c\u305f\u6587\u5b57\u5217\u3068\u306f\u72ec\u7acb\u3057\u3066\u4e21\u8fba\u306e\u5206\u5272\u3092\u56fa\u5b9a\u3059\u308b\u3053\u3068\u3092\u6c42\u3081\u3066\u304a\u308a\u3001\u305d\u306e\u5206\u5272\u3092\u9078\u629e\u3059\u308b\u305f\u3081\u306e\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u306e\u30eb\u30fc\u30eb\u306f\u305d\u308c\u3092\u63d0\u4f9b\u3057\u307e\u305b\u3093\u3002\u3057\u305f\u304c\u3063\u3066\u3001\u3053\u308c\u30894\u3064\u306e\u88dc\u984c\u3092\u78ba\u7acb\u3059\u308b\u3060\u3051\u3067\u306f\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u306e\u6b63\u3057\u3055\u3092\u78ba\u7acb\u3067\u304d\u307e\u305b\u3093\u3002",
-   "title_translated": "\u30b5\u30a4\u30e2\u30f3\u306e\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u306b\u304a\u3051\u308b\u4e8c\u9762\u4f53\u4f59\u96c6\u554f\u984c\u306e\u88dc\u984c\u306e\u53b3\u5bc6\u306a\u547d\u984c\u3068\u8a3c\u660e\u3068\u305d\u306e\u57fa\u790e\u4eee\u8aac",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "algo": {
-     "status": "pending"
-    },
-    "complexity": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-08-18T02:21:42Z"
-  },
-  "2608.15030": {
-   "paper": {
-    "id": "2608.15030",
-    "title": "Tensor--Action Ko--Lee Cryptography: A Framework and Structural Cryptanalysis of Commuting Subgroup Constructions",
-    "link": "https://arxiv.org/abs/2608.15030v1",
-    "authors": "Ziyan Chen, Yuqiao Wang",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "Tensor isomorphism has been studied as an algebraic problem relevant to post-quantum cryptography, while its use in public-key encryption remains open. In this paper, we formulate a Ko--Lee-style framework for public-key encryption from cubic tensor actions and prove its formal correctness. We then show that the framework is generically insecure when the commuting matrix subgroups are given by public finite generating sets. Viewing a cubic tensor as a vector in a $d^3$-dimensional space, a linear decomposition attack recovers the shared tensor from the public transcript in polynomial time without recovering either secret action. We also cryptanalyze three natural commuting-subgroup constructions---field-extension, block-diagonal, and tensor-product constructions---and give toy-scale experiments illustrating their specific structural leakage. Finally, we examine the lower-dimensional leakage caused by scaled-block structure. The contribution is therefore a framework proposal together with its cryptanalysis; it does not provide a secure public-key encryption scheme.",
-    "published": "2026-08-15T04:32:02Z",
-    "updated": "2026-08-15T04:32:02Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "\u30c6\u30f3\u30bd\u30eb\u540c\u578b\u306f\u30dd\u30b9\u30c8\u91cf\u5b50\u6697\u53f7\u5b66\u306b\u95a2\u9023\u3059\u308b\u4ee3\u6570\u7684\u554f\u984c\u3068\u3057\u3066\u7814\u7a76\u3055\u308c\u3066\u304d\u307e\u3057\u305f\u304c\u3001\u516c\u958b\u9375\u6697\u53f7\u3067\u306e\u5229\u7528\u306f\u307e\u3060\u672a\u89e3\u6c7a\u306e\u307e\u307e\u3067\u3059\u3002\u672c\u8ad6\u6587\u3067\u306f\u3001\u7acb\u65b9\u4f53\u30c6\u30f3\u30bd\u30eb\u4f5c\u7528\u304b\u3089\u516c\u958b\u9375\u6697\u53f7\u306e\u305f\u3081\u306eKo-Lee\u30b9\u30bf\u30a4\u30eb\u306e\u67a0\u7d44\u307f\u3092\u5b9a\u5f0f\u5316\u3057\u3001\u305d\u306e\u5f62\u5f0f\u7684\u6b63\u78ba\u6027\u3092\u8a3c\u660e\u3057\u307e\u3059\u3002\u6b21\u306b\u3001\u53ef\u63db\u884c\u5217\u90e8\u5206\u7fa4\u304c\u516c\u958b\u6709\u9650\u751f\u6210\u96c6\u5408\u306b\u3088\u3063\u3066\u4e0e\u3048\u3089\u308c\u308b\u3068\u304d\u3001\u3053\u306e\u67a0\u7d44\u307f\u304c\u4e00\u822c\u7684\u306b\u4e0d\u5b89\u5168\u3067\u3042\u308b\u3053\u3068\u3092\u793a\u3057\u307e\u3059\u3002\u7acb\u65b9\u30c6\u30f3\u30bd\u30eb\u3092$d^3$\u6b21\u5143\u7a7a\u9593\u306e\u30d9\u30af\u30c8\u30eb\u3068\u3057\u3066\u898b\u308b\u3068\u3001\u7dda\u5f62\u5206\u89e3\u653b\u6483\u306f\u516c\u958b\u3055\u308c\u305f\u8ee2\u5199\u304b\u3089\u5171\u6709\u30c6\u30f3\u30bd\u30eb\u3092\u591a\u9805\u5f0f\u6642\u9593\u3067\u5fa9\u5143\u3057\u3001\u3069\u3061\u3089\u306e\u79d8\u5bc6\u884c\u52d5\u3082\u5fa9\u5143\u3057\u307e\u305b\u3093\u3002\u307e\u305f\u30013\u3064\u306e\u81ea\u7136\u53ef\u63db\u90e8\u5206\u7fa4\u69cb\u6210---\u4f53\u62e1\u5927\u3001\u30d6\u30ed\u30c3\u30af\u5bfe\u89d2\u3001\u30c6\u30f3\u30bd\u30eb\u7a4d\u69cb\u6210)\u3092\u6697\u53f7\u89e3\u6790\u3057---\u305d\u308c\u3089\u306e\u7279\u7570\u7684\u306a\u69cb\u9020\u7684\u30ea\u30fc\u30af\u3092\u793a\u3059\u73a9\u5177\u898f\u6a21\u306e\u5b9f\u9a13\u3082\u884c\u3044\u307e\u3059\u3002\u6700\u5f8c\u306b\u3001\u30b9\u30b1\u30fc\u30eb\u30d6\u30ed\u30c3\u30af\u69cb\u9020\u306b\u3088\u308b\u4f4e\u6b21\u5143\u306e\u30ea\u30fc\u30af\u3092\u691c\u8a3c\u3057\u307e\u3059\u3002\u3057\u305f\u304c\u3063\u3066\u3001\u3053\u306e\u8ca2\u732e\u306f\u6697\u53f7\u89e3\u6790\u3068\u3068\u3082\u306b\u30d5\u30ec\u30fc\u30e0\u30ef\u30fc\u30af\u63d0\u6848\u3067\u3042\u308a\u3001\u5b89\u5168\u306a\u516c\u958b\u9375\u6697\u53f7\u5316\u65b9\u5f0f\u3092\u63d0\u4f9b\u3057\u307e\u305b\u3093\u3002",
-   "title_translated": "\u30c6\u30f3\u30bd\u30eb--\u30a2\u30af\u30b7\u30e7\u30f3\u30fb\u30b3--\u30ea\u30fc\u6697\u53f7\u5b66:\u53ef\u63db\u90e8\u5206\u7fa4\u69cb\u9020\u306e\u67a0\u7d44\u307f\u3068\u69cb\u9020\u7684\u6697\u53f7\u89e3\u6790",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-08-18T02:21:42Z"
-  },
-  "2608.16854": {
-   "paper": {
-    "id": "2608.16854",
-    "title": "Superlogarithmic Gap Result for LCLs on Trees in Quantum-LOCAL",
-    "link": "https://arxiv.org/abs/2608.16854v1",
-    "authors": "Francesco d'Amore, Henrik Lievonen",
-    "announce_type": "external",
-    "categories": [
-     "cs.CC",
-     "cs.DC"
-    ],
-    "primary": "cs.CC",
-    "abstract": "We show that, on trees, any locally checkable labeling problem (LCL) $\u03a0$ that can be solved by an $n^{o(1)}$-dependent distribution can also be solved by an $O(\\log n)$-round deterministic LOCAL algorithm. The result is obtained through a rake-and-compress-style decomposition of the input tree, and local simulations of the bounded dependent distribution on the components of the decomposition. As a corollary to our result, any LCL problem on trees can either be solved by an $O(\\log n)$ deterministic LOCAL algorithm, or requires $n^{\u03a9(1)}$ rounds to solve by a quantum-LOCAL algorithm.",
-    "published": "2026-08-17T17:38:02Z",
-    "updated": "2026-08-17T17:38:02Z",
-    "source_feed": "cs.CC",
-    "external_genre_ids": [
-     "complexity"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "complexity"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "\u6728\u4e0a\u3067\u3001\u5c40\u6240\u7684\u306b\u691c\u8a3c\u53ef\u80fd\u306a\u30e9\u30d9\u30eb\u4ed8\u3051\u554f\u984c(LCL)$\u03a0$ \u3067\u3001$n^{o(1)}$\u4f9d\u5b58\u5206\u5e03\u3067\u89e3\u3051\u308b\u3082\u306e\u306f\u3001$O(\\log n)$\u30e9\u30a6\u30f3\u30c9\u6c7a\u5b9a\u6027\u5c40\u6240\u7684\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u3067\u3082\u89e3\u3051\u308b\u3053\u3068\u3092\u793a\u3059\u3002\u7d50\u679c\u306f\u3001\u5165\u529b\u6728\u306e\u30ec\u30fc\u30af&\u30b3\u30f3\u30d7\u30ec\u30c3\u30b7\u30e7\u30f3\u65b9\u5f0f\u306e\u5206\u89e3\u3068\u3001\u5206\u89e3\u6210\u5206\u306b\u5bfe\u3059\u308b\u6709\u754c\u5f93\u5c5e\u5206\u5e03\u306e\u5c40\u6240\u30b7\u30df\u30e5\u30ec\u30fc\u30b7\u30e7\u30f3\u306b\u3088\u3063\u3066\u5f97\u3089\u308c\u307e\u3059\u3002\u7d50\u679c\u306e\u5e30\u7d50\u3068\u3057\u3066\u3001\u6728\u4e0a\u306eLCL\u554f\u984c\u306f$O(\\log n)$\u6c7a\u5b9a\u7684\u5c40\u6240\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u3067\u89e3\u3051\u308b\u304b\u3001\u91cf\u5b50\u5c40\u6240\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u3067\u89e3\u304f\u306b\u306f$n^{\u03a9(1)}$\u30e9\u30a6\u30f3\u30c9\u304c\u5fc5\u8981)\u3067\u3042\u308b\u3002",
-   "title_translated": "\u91cf\u5b50\u5c40\u6240\u306b\u304a\u3051\u308b\u6a39\u6728\u4e0a\u306eLCL\u306e\u8d85\u5bfe\u6570\u30ae\u30e3\u30c3\u30d7\u7d50\u679c",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "complexity": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-08-18T02:21:42Z"
-  },
-  "2608.16761": {
-   "paper": {
-    "id": "2608.16761",
-    "title": "Non-Binary Quasi-Cyclic LDPC Codes with Entanglement Assistance",
-    "link": "https://arxiv.org/abs/2608.16761v1",
-    "authors": "Pavan Kumar, Shayan Srinivasa Garani",
-    "announce_type": "external",
-    "categories": [
-     "cs.IT"
-    ],
-    "primary": "cs.IT",
-    "abstract": "We construct two families of non-binary entanglement assisted (EA) quasi-cyclic (QC) quantum low-density parity-check (QLDPC) codes over arbitrary finite fields, each possessing a precisely determined code rate. The first family is derived from a pair of non-binary classical QC-LDPC codes, designed such that the unassisted portion of the overall Tanner graph of the resulting EA-QC-QLDPC code is free of 4-cycles. The second family, on the other hand, is constructed from a single non-binary classical QC-LDPC code whose Tanner graph itself is 4-cycle-free. In developing the codes belonging to the first family, we employ a \\emph{single Bell pair} to establish entanglement between the transmitter and the receiver, thereby minimizing the required entanglement resources. Furthermore, these constructions demonstrate that careful graph-based design can effectively balance error-correction performance with entanglement consumption, providing a practical approach for realizing efficient non-binary EA-QC-QLDPC codes.",
-    "published": "2026-08-17T16:08:03Z",
-    "updated": "2026-08-17T16:08:03Z",
-    "source_feed": "cs.IT",
-    "external_genre_ids": [
-     "qec",
-     "qit"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "qec",
-    "qit"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "\u4efb\u610f\u306e\u6709\u9650\u5834\u4e0a\u3067\u3001\u6b63\u78ba\u306b\u6c7a\u5b9a\u3055\u308c\u305f\u7b26\u53f7\u7387\u3092\u6301\u3064\u975e\u4e8c\u5024\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u652f\u63f4(EA)\u6e96\u5de1\u56de(QC)\u91cf\u5b50\u4f4e\u5bc6\u5ea6\u30d1\u30ea\u30c6\u30a3\u30c1\u30a7\u30c3\u30af(QLDPC)\u30b3\u30fc\u30c9\u306e2\u3064\u306e\u30d5\u30a1\u30df\u30ea\u30fc\u3092\u69cb\u7bc9\u3057\u307e\u3059\u3002\u6700\u521d\u306e\u30d5\u30a1\u30df\u30ea\u30fc\u306f\u3001\u975e\u4e8c\u5024\u306e\u53e4\u5178\u7684QC-LDPC\u30b3\u30fc\u30c9\u306e\u30da\u30a2\u304b\u3089\u6d3e\u751f\u3057\u3066\u304a\u308a\u3001\u7d50\u679c\u3068\u3057\u3066\u5f97\u3089\u308c\u308bEA-QC-QLDPC\u30b3\u30fc\u30c9\u306e\u5168\u4f53\u30bf\u30ca\u30fc\u30b0\u30e9\u30d5\u306e\u88dc\u52a9\u306a\u3057\u90e8\u5206\u304c4\u30b5\u30a4\u30af\u30eb\u3092\u542b\u307e\u306a\u3044\u3088\u3046\u306b\u8a2d\u8a08\u3055\u308c\u3066\u3044\u307e\u3059\u3002\u4e00\u65b9\u30012\u3064\u76ee\u306e\u30d5\u30a1\u30df\u30ea\u30fc\u306f\u3001\u30bf\u30ca\u30fc\u30b0\u30e9\u30d5\u81ea\u4f53\u304c4\u30b5\u30a4\u30af\u30eb\u30d5\u30ea\u30fc\u3067\u3042\u308b\u5358\u4e00\u306e\u975e\u4e8c\u9032\u53e4\u5178\u7684QC-LDPC\u30b3\u30fc\u30c9\u304b\u3089\u69cb\u6210\u3055\u308c\u307e\u3059\u3002\u7b2c\u4e00\u30d5\u30a1\u30df\u30ea\u30fc\u306b\u5c5e\u3059\u308b\u7b26\u53f7\u3092\u958b\u767a\u3059\u308b\u969b\u306b\u306f\u3001\u9001\u4fe1\u5074\u3068\u53d7\u4fe1\u5074\u306e\u9593\u306b\u3082\u3064\u308c\u3092\u78ba\u7acb\u3059\u308b\u305f\u3081\u306b\\emph{\u5358\u4e00\u306e\u30d9\u30eb\u30da\u30a2}\u3092\u7528\u3044\u3001\u5fc5\u8981\u306a\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u8cc7\u6e90\u3092\u6700\u5c0f\u5316\u3057\u307e\u3059\u3002\u3055\u3089\u306b\u3001\u3053\u308c\u3089\u306e\u69cb\u6210\u306f\u3001\u614e\u91cd\u306a\u30b0\u30e9\u30d5\u30d9\u30fc\u30b9\u8a2d\u8a08\u304c\u8aa4\u308a\u8a02\u6b63\u6027\u80fd\u3068\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u6d88\u8cbb\u306e\u30d0\u30e9\u30f3\u30b9\u3092\u52b9\u679c\u7684\u306b\u4e21\u7acb\u3067\u304d\u308b\u3053\u3068\u3092\u793a\u3057\u3001\u52b9\u7387\u7684\u306a\u975e\u4e8c\u5143EA-QC-QLDPC\u30b3\u30fc\u30c9\u3092\u5b9f\u73fe\u3059\u308b\u5b9f\u7528\u7684\u306a\u30a2\u30d7\u30ed\u30fc\u30c1\u3092\u63d0\u4f9b\u3057\u307e\u3059\u3002",
-   "title_translated": "\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u652f\u63f4\u4ed8\u304d\u975e\u4e8c\u5143\u6e96\u5de1\u56deLDPC\u7b26\u53f7",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "qec": {
-     "status": "pending"
-    },
-    "qit": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-08-18T02:21:42Z"
-  }
- },
+ "deliveries": {},
  "external_cursors": {
   "cs.CR": "2026-08-18T02:19:03Z",
   "cs.CC": "2026-08-18T02:19:11Z",

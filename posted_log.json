@@ -85866,5 +85866,154 @@
   "abstract_ja": "GPU上で、運動量ジャンプフリー理論に基づく混合量子古典Liouville分子動力学シミュレーションを実装しました。以前CPUでサンプリング強化のために実装されていた軌道スポーンは、スレッド発散やGPU上の動的メモリ割り当てのオーバーヘッドを避けるために廃止されました。これにより、スポーン時のCPU計算に比べて桁違いに高速化され、サンプリング軌道数に対して線形スケーリングが実現しました。",
   "abstract_translated": "GPU上で、運動量ジャンプフリー理論に基づく混合量子古典Liouville分子動力学シミュレーションを実装しました。以前CPUでサンプリング強化のために実装されていた軌道スポーンは、スレッド発散やGPU上の動的メモリ割り当てのオーバーヘッドを避けるために廃止されました。これにより、スポーン時のCPU計算に比べて桁違いに高速化され、サンプリング軌道数に対して線形スケーリングが実現しました。",
   "last_delivered_at": "2026-08-17T04:53:42Z"
+ },
+ {
+  "delivery_id": "main:2608.16761",
+  "id": "2608.16761",
+  "posted_at": "2026-08-18T02:21:56Z",
+  "title": "Non-Binary Quasi-Cyclic LDPC Codes with Entanglement Assistance",
+  "title_ja": "エンタングルメント支援付き非二元準巡回LDPC符号",
+  "title_translated": "エンタングルメント支援付き非二元準巡回LDPC符号",
+  "translation_language": "ja",
+  "authors": "Pavan Kumar, Shayan Srinivasa Garani",
+  "link": "https://arxiv.org/abs/2608.16761v1",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec",
+   "qit"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論",
+   "量子情報理論"
+  ],
+  "target_genre_ids": [
+   "qec",
+   "qit"
+  ],
+  "target_genre_names": [
+   "誤り訂正・符号理論",
+   "量子情報理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We construct two families of non-binary entanglement assisted (EA) quasi-cyclic (QC) quantum low-density parity-check (QLDPC) codes over arbitrary finite fields, each possessing a precisely determined code rate. The first family is derived from a pair of non-binary classical QC-LDPC codes, designed such that the unassisted portion of the overall Tanner graph of the resulting EA-QC-QLDPC code is free of 4-cycles. The second family, on the other hand, is constructed from a single non-binary classical QC-LDPC code whose Tanner graph itself is 4-cycle-free. In developing the codes belonging to the first family, we employ a \\emph{single Bell pair} to establish entanglement between the transmitter and the receiver, thereby minimizing the required entanglement resources. Furthermore, these constructions demonstrate that careful graph-based design can effectively balance error-correction performance with entanglement consumption, providing a practical approach for realizing efficient non-binary EA-QC-QLDPC codes.",
+  "abstract_ja": "任意の有限場上で、正確に決定された符号率を持つ非二値エンタングルメント支援(EA)準巡回(QC)量子低密度パリティチェック(QLDPC)コードの2つのファミリーを構築します。最初のファミリーは、非二値の古典的QC-LDPCコードのペアから派生しており、結果として得られるEA-QC-QLDPCコードの全体タナーグラフの補助なし部分が4サイクルを含まないように設計されています。一方、2つ目のファミリーは、タナーグラフ自体が4サイクルフリーである単一の非二進古典的QC-LDPCコードから構成されます。第一ファミリーに属する符号を開発する際には、送信側と受信側の間にもつれを確立するために\\emph{単一のベルペア}を用い、必要なエンタングルメント資源を最小化します。さらに、これらの構成は、慎重なグラフベース設計が誤り訂正性能とエンタングルメント消費のバランスを効果的に両立できることを示し、効率的な非二元EA-QC-QLDPCコードを実現する実用的なアプローチを提供します。",
+  "abstract_translated": "任意の有限場上で、正確に決定された符号率を持つ非二値エンタングルメント支援(EA)準巡回(QC)量子低密度パリティチェック(QLDPC)コードの2つのファミリーを構築します。最初のファミリーは、非二値の古典的QC-LDPCコードのペアから派生しており、結果として得られるEA-QC-QLDPCコードの全体タナーグラフの補助なし部分が4サイクルを含まないように設計されています。一方、2つ目のファミリーは、タナーグラフ自体が4サイクルフリーである単一の非二進古典的QC-LDPCコードから構成されます。第一ファミリーに属する符号を開発する際には、送信側と受信側の間にもつれを確立するために\\emph{単一のベルペア}を用い、必要なエンタングルメント資源を最小化します。さらに、これらの構成は、慎重なグラフベース設計が誤り訂正性能とエンタングルメント消費のバランスを効果的に両立できることを示し、効率的な非二元EA-QC-QLDPCコードを実現する実用的なアプローチを提供します。",
+  "last_delivered_at": "2026-08-18T02:21:58Z"
+ },
+ {
+  "delivery_id": "main:2608.16598",
+  "id": "2608.16598",
+  "posted_at": "2026-08-18T02:22:00Z",
+  "title": "Rigorous Statements and Proofs of the Lemmas in Simon's Algorithm for the Dihedral Coset Problem and Their Underlying Hypothesis",
+  "title_ja": "サイモンのアルゴリズムにおける二面体余集問題の補題の厳密な命題と証明とその基礎仮説",
+  "title_translated": "サイモンのアルゴリズムにおける二面体余集問題の補題の厳密な命題と証明とその基礎仮説",
+  "translation_language": "ja",
+  "authors": "Yuchen Guo, Shuo Yang",
+  "link": "https://arxiv.org/abs/2608.16598v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "algo",
+   "complexity"
+  ],
+  "genre_names": [
+   "量子アルゴリズム",
+   "量子複雑性理論"
+  ],
+  "target_genre_ids": [
+   "algo",
+   "complexity"
+  ],
+  "target_genre_names": [
+   "量子アルゴリズム",
+   "量子複雑性理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "In a recent preprint, Simon proposed a polynomial-time quantum algorithm for the Dihedral Coset Problem and rested the analysis on four lemmas. Three of them carry only proof sketches, and this paper gives each of those three a statement that admits a single reading together with a complete proof. Lemma 1 follows from an exact second-moment computation for the subset-sum counts, and it holds with probability tending to one in place of the constant originally claimed. The amplitude bound of Lemma 3 follows from an exact Parseval identity on the cube of measurement outcomes and holds at every threshold with no well-behavedness hypothesis, so that predicate leaves the argument entirely. For Lemma 4, we compute both balls-in-bins covariances exactly and find that the second carries a term a fixed ball count leaves out. The assumption that the distinguished group contains no faulty samples can also be dropped. The two branch amplitudes share a signed prefactor, so the counting estimates control their difference and not the ratio the lemma states. We prove the additive form and show that the closing argument consumes nothing more than that. A single hypothesis survives all of this. It asks that the partition into the two sides be fixed independently of the measured string, and the rule the algorithm gives for choosing that partition does not supply it. Establishing these four lemmas therefore does not by itself establish the correctness of the algorithm.",
+  "abstract_ja": "最近のプレプリントで、サイモンは二面体余集問題に対する多項式時間量子アルゴリズムを提案し、解析を4つの補題に基づいて行いました。そのうち3つには証明スケッチのみが載っており、本論文はそれぞれに単一の解釈と完全な証明を認める声明を与えています。補題1は部分集合の和の正確な二次モーメント計算から導かれ、定数の代わりに1に寄る確率で成り立つ。補題3の振幅上限は、測定結果の立方体の正確なパーセバル単位式から導かれ、良好な挙動仮説がなければすべての閾値で成り立つため、述語は議論を完全に除外します。補題4では、両方のビン内のボールの共分散を正確に計算し、2番目の項には固定されたボールカウントが省略されていることを発見します。また、区別されたグループに欠陥サンプルが含まれていないという仮定も除外できます。2つの枝の振幅は符号付き前因数を共有しているため、カウント推定値は補題の比率ではなく差を制御します。加法形式を証明し、最終論がそれ以上を消費しないことを示します。これらすべてを乗り越えたのは一つの仮説だけです。この規則は、測定された文字列とは独立して両辺の分割を固定することを求めており、その分割を選択するためのアルゴリズムのルールはそれを提供しません。したがって、これら4つの補題を確立するだけではアルゴリズムの正しさを確立できません。",
+  "abstract_translated": "最近のプレプリントで、サイモンは二面体余集問題に対する多項式時間量子アルゴリズムを提案し、解析を4つの補題に基づいて行いました。そのうち3つには証明スケッチのみが載っており、本論文はそれぞれに単一の解釈と完全な証明を認める声明を与えています。補題1は部分集合の和の正確な二次モーメント計算から導かれ、定数の代わりに1に寄る確率で成り立つ。補題3の振幅上限は、測定結果の立方体の正確なパーセバル単位式から導かれ、良好な挙動仮説がなければすべての閾値で成り立つため、述語は議論を完全に除外します。補題4では、両方のビン内のボールの共分散を正確に計算し、2番目の項には固定されたボールカウントが省略されていることを発見します。また、区別されたグループに欠陥サンプルが含まれていないという仮定も除外できます。2つの枝の振幅は符号付き前因数を共有しているため、カウント推定値は補題の比率ではなく差を制御します。加法形式を証明し、最終論がそれ以上を消費しないことを示します。これらすべてを乗り越えたのは一つの仮説だけです。この規則は、測定された文字列とは独立して両辺の分割を固定することを求めており、その分割を選択するためのアルゴリズムのルールはそれを提供しません。したがって、これら4つの補題を確立するだけではアルゴリズムの正しさを確立できません。",
+  "last_delivered_at": "2026-08-18T02:22:02Z"
+ },
+ {
+  "delivery_id": "main:2608.16854",
+  "id": "2608.16854",
+  "posted_at": "2026-08-18T02:22:03Z",
+  "title": "Superlogarithmic Gap Result for LCLs on Trees in Quantum-LOCAL",
+  "title_ja": "量子局所における樹木上のLCLの超対数ギャップ結果",
+  "title_translated": "量子局所における樹木上のLCLの超対数ギャップ結果",
+  "translation_language": "ja",
+  "authors": "Francesco d'Amore, Henrik Lievonen",
+  "link": "https://arxiv.org/abs/2608.16854v1",
+  "primary": "cs.CC",
+  "categories": [
+   "cs.CC",
+   "cs.DC"
+  ],
+  "source_feed": "cs.CC",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "complexity"
+  ],
+  "genre_names": [
+   "量子複雑性理論"
+  ],
+  "target_genre_ids": [
+   "complexity"
+  ],
+  "target_genre_names": [
+   "量子複雑性理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We show that, on trees, any locally checkable labeling problem (LCL) $Π$ that can be solved by an $n^{o(1)}$-dependent distribution can also be solved by an $O(\\log n)$-round deterministic LOCAL algorithm. The result is obtained through a rake-and-compress-style decomposition of the input tree, and local simulations of the bounded dependent distribution on the components of the decomposition. As a corollary to our result, any LCL problem on trees can either be solved by an $O(\\log n)$ deterministic LOCAL algorithm, or requires $n^{Ω(1)}$ rounds to solve by a quantum-LOCAL algorithm.",
+  "abstract_ja": "木上で、局所的に検証可能なラベル付け問題(LCL)$Π$ で、$n^{o(1)}$依存分布で解けるものは、$O(\\log n)$ラウンド決定性局所的アルゴリズムでも解けることを示す。結果は、入力木のレーク&コンプレッション方式の分解と、分解成分に対する有界従属分布の局所シミュレーションによって得られます。結果の帰結として、木上のLCL問題は$O(\\log n)$決定的局所アルゴリズムで解けるか、量子局所アルゴリズムで解くには$n^{Ω(1)}$ラウンドが必要)である。",
+  "abstract_translated": "木上で、局所的に検証可能なラベル付け問題(LCL)$Π$ で、$n^{o(1)}$依存分布で解けるものは、$O(\\log n)$ラウンド決定性局所的アルゴリズムでも解けることを示す。結果は、入力木のレーク&コンプレッション方式の分解と、分解成分に対する有界従属分布の局所シミュレーションによって得られます。結果の帰結として、木上のLCL問題は$O(\\log n)$決定的局所アルゴリズムで解けるか、量子局所アルゴリズムで解くには$n^{Ω(1)}$ラウンドが必要)である。",
+  "last_delivered_at": "2026-08-18T02:22:03Z"
+ },
+ {
+  "delivery_id": "main:2608.15030",
+  "id": "2608.15030",
+  "posted_at": "2026-08-18T02:22:05Z",
+  "title": "Tensor--Action Ko--Lee Cryptography: A Framework and Structural Cryptanalysis of Commuting Subgroup Constructions",
+  "title_ja": "テンソル--アクション・コ--リー暗号学:可換部分群構造の枠組みと構造的暗号解析",
+  "title_translated": "テンソル--アクション・コ--リー暗号学:可換部分群構造の枠組みと構造的暗号解析",
+  "translation_language": "ja",
+  "authors": "Ziyan Chen, Yuqiao Wang",
+  "link": "https://arxiv.org/abs/2608.15030v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Tensor isomorphism has been studied as an algebraic problem relevant to post-quantum cryptography, while its use in public-key encryption remains open. In this paper, we formulate a Ko--Lee-style framework for public-key encryption from cubic tensor actions and prove its formal correctness. We then show that the framework is generically insecure when the commuting matrix subgroups are given by public finite generating sets. Viewing a cubic tensor as a vector in a $d^3$-dimensional space, a linear decomposition attack recovers the shared tensor from the public transcript in polynomial time without recovering either secret action. We also cryptanalyze three natural commuting-subgroup constructions---field-extension, block-diagonal, and tensor-product constructions---and give toy-scale experiments illustrating their specific structural leakage. Finally, we examine the lower-dimensional leakage caused by scaled-block structure. The contribution is therefore a framework proposal together with its cryptanalysis; it does not provide a secure public-key encryption scheme.",
+  "abstract_ja": "テンソル同型はポスト量子暗号学に関連する代数的問題として研究されてきましたが、公開鍵暗号での利用はまだ未解決のままです。本論文では、立方体テンソル作用から公開鍵暗号のためのKo-Leeスタイルの枠組みを定式化し、その形式的正確性を証明します。次に、可換行列部分群が公開有限生成集合によって与えられるとき、この枠組みが一般的に不安全であることを示します。立方テンソルを$d^3$次元空間のベクトルとして見ると、線形分解攻撃は公開された転写から共有テンソルを多項式時間で復元し、どちらの秘密行動も復元しません。また、3つの自然可換部分群構成---体拡大、ブロック対角、テンソル積構成)を暗号解析し---それらの特異的な構造的リークを示す玩具規模の実験も行います。最後に、スケールブロック構造による低次元のリークを検証します。したがって、この貢献は暗号解析とともにフレームワーク提案であり、安全な公開鍵暗号化方式を提供しません。",
+  "abstract_translated": "テンソル同型はポスト量子暗号学に関連する代数的問題として研究されてきましたが、公開鍵暗号での利用はまだ未解決のままです。本論文では、立方体テンソル作用から公開鍵暗号のためのKo-Leeスタイルの枠組みを定式化し、その形式的正確性を証明します。次に、可換行列部分群が公開有限生成集合によって与えられるとき、この枠組みが一般的に不安全であることを示します。立方テンソルを$d^3$次元空間のベクトルとして見ると、線形分解攻撃は公開された転写から共有テンソルを多項式時間で復元し、どちらの秘密行動も復元しません。また、3つの自然可換部分群構成---体拡大、ブロック対角、テンソル積構成)を暗号解析し---それらの特異的な構造的リークを示す玩具規模の実験も行います。最後に、スケールブロック構造による低次元のリークを検証します。したがって、この貢献は暗号解析とともにフレームワーク提案であり、安全な公開鍵暗号化方式を提供しません。",
+  "last_delivered_at": "2026-08-18T02:22:05Z"
  }
 ]

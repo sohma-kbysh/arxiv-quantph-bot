@@ -3596,6 +3596,40 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-17T02:23:27Z"
+  },
+  "cs.CR:2608.16598": {
+   "genre_ids": [
+    "algo",
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-18T02:19:28Z"
+  },
+  "cs.CR:2608.15030": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-18T02:19:28Z"
+  },
+  "cs.CC:2608.16854": {
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-18T02:20:28Z"
+  },
+  "cs.IT:2608.16761": {
+   "genre_ids": [
+    "qec",
+    "qit"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-18T02:21:42Z"
   }
  },
  "external_pending": {},
@@ -6707,10 +6741,162 @@
   "2608.14508",
   "2608.14544"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.16598": {
+   "paper": {
+    "id": "2608.16598",
+    "title": "Rigorous Statements and Proofs of the Lemmas in Simon's Algorithm for the Dihedral Coset Problem and Their Underlying Hypothesis",
+    "link": "https://arxiv.org/abs/2608.16598v1",
+    "authors": "Yuchen Guo, Shuo Yang",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "In a recent preprint, Simon proposed a polynomial-time quantum algorithm for the Dihedral Coset Problem and rested the analysis on four lemmas. Three of them carry only proof sketches, and this paper gives each of those three a statement that admits a single reading together with a complete proof. Lemma 1 follows from an exact second-moment computation for the subset-sum counts, and it holds with probability tending to one in place of the constant originally claimed. The amplitude bound of Lemma 3 follows from an exact Parseval identity on the cube of measurement outcomes and holds at every threshold with no well-behavedness hypothesis, so that predicate leaves the argument entirely. For Lemma 4, we compute both balls-in-bins covariances exactly and find that the second carries a term a fixed ball count leaves out. The assumption that the distinguished group contains no faulty samples can also be dropped. The two branch amplitudes share a signed prefactor, so the counting estimates control their difference and not the ratio the lemma states. We prove the additive form and show that the closing argument consumes nothing more than that. A single hypothesis survives all of this. It asks that the partition into the two sides be fixed independently of the measured string, and the rule the algorithm gives for choosing that partition does not supply it. Establishing these four lemmas therefore does not by itself establish the correctness of the algorithm.",
+    "published": "2026-08-17T13:53:36Z",
+    "updated": "2026-08-17T13:53:36Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "algo",
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "algo",
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "algo": {
+     "status": "pending"
+    },
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-18T02:21:42Z"
+  },
+  "2608.15030": {
+   "paper": {
+    "id": "2608.15030",
+    "title": "Tensor--Action Ko--Lee Cryptography: A Framework and Structural Cryptanalysis of Commuting Subgroup Constructions",
+    "link": "https://arxiv.org/abs/2608.15030v1",
+    "authors": "Ziyan Chen, Yuqiao Wang",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Tensor isomorphism has been studied as an algebraic problem relevant to post-quantum cryptography, while its use in public-key encryption remains open. In this paper, we formulate a Ko--Lee-style framework for public-key encryption from cubic tensor actions and prove its formal correctness. We then show that the framework is generically insecure when the commuting matrix subgroups are given by public finite generating sets. Viewing a cubic tensor as a vector in a $d^3$-dimensional space, a linear decomposition attack recovers the shared tensor from the public transcript in polynomial time without recovering either secret action. We also cryptanalyze three natural commuting-subgroup constructions---field-extension, block-diagonal, and tensor-product constructions---and give toy-scale experiments illustrating their specific structural leakage. Finally, we examine the lower-dimensional leakage caused by scaled-block structure. The contribution is therefore a framework proposal together with its cryptanalysis; it does not provide a secure public-key encryption scheme.",
+    "published": "2026-08-15T04:32:02Z",
+    "updated": "2026-08-15T04:32:02Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-18T02:21:42Z"
+  },
+  "2608.16854": {
+   "paper": {
+    "id": "2608.16854",
+    "title": "Superlogarithmic Gap Result for LCLs on Trees in Quantum-LOCAL",
+    "link": "https://arxiv.org/abs/2608.16854v1",
+    "authors": "Francesco d'Amore, Henrik Lievonen",
+    "announce_type": "external",
+    "categories": [
+     "cs.CC",
+     "cs.DC"
+    ],
+    "primary": "cs.CC",
+    "abstract": "We show that, on trees, any locally checkable labeling problem (LCL) $\u03a0$ that can be solved by an $n^{o(1)}$-dependent distribution can also be solved by an $O(\\log n)$-round deterministic LOCAL algorithm. The result is obtained through a rake-and-compress-style decomposition of the input tree, and local simulations of the bounded dependent distribution on the components of the decomposition. As a corollary to our result, any LCL problem on trees can either be solved by an $O(\\log n)$ deterministic LOCAL algorithm, or requires $n^{\u03a9(1)}$ rounds to solve by a quantum-LOCAL algorithm.",
+    "published": "2026-08-17T17:38:02Z",
+    "updated": "2026-08-17T17:38:02Z",
+    "source_feed": "cs.CC",
+    "external_genre_ids": [
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-18T02:21:42Z"
+  },
+  "2608.16761": {
+   "paper": {
+    "id": "2608.16761",
+    "title": "Non-Binary Quasi-Cyclic LDPC Codes with Entanglement Assistance",
+    "link": "https://arxiv.org/abs/2608.16761v1",
+    "authors": "Pavan Kumar, Shayan Srinivasa Garani",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "We construct two families of non-binary entanglement assisted (EA) quasi-cyclic (QC) quantum low-density parity-check (QLDPC) codes over arbitrary finite fields, each possessing a precisely determined code rate. The first family is derived from a pair of non-binary classical QC-LDPC codes, designed such that the unassisted portion of the overall Tanner graph of the resulting EA-QC-QLDPC code is free of 4-cycles. The second family, on the other hand, is constructed from a single non-binary classical QC-LDPC code whose Tanner graph itself is 4-cycle-free. In developing the codes belonging to the first family, we employ a \\emph{single Bell pair} to establish entanglement between the transmitter and the receiver, thereby minimizing the required entanglement resources. Furthermore, these constructions demonstrate that careful graph-based design can effectively balance error-correction performance with entanglement consumption, providing a practical approach for realizing efficient non-binary EA-QC-QLDPC codes.",
+    "published": "2026-08-17T16:08:03Z",
+    "updated": "2026-08-17T16:08:03Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec",
+     "qit"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "qec",
+    "qit"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qec": {
+     "status": "pending"
+    },
+    "qit": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-18T02:21:42Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-17T07:55:43Z",
-  "cs.CC": "2026-08-17T07:55:55Z",
-  "cs.IT": "2026-08-17T07:56:03Z"
+  "cs.CR": "2026-08-18T02:19:03Z",
+  "cs.CC": "2026-08-18T02:19:11Z",
+  "cs.IT": "2026-08-18T02:19:15Z"
  }
 }

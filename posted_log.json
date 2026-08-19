@@ -90453,5 +90453,81 @@
   "abstract_ja": "移動環(MR)は、拡張状態と局所状態を隔てる複素エネルギー面の臨界境界であり、非エルミート(NH)無秩序系におけるアンダーソン遷移を理解する上で基本的な役割を果たします。MRは一次元(1次元)NH準周期モデルで広く研究されていますが、1次元を超えた厳密な解析フレームワークは依然として極めて不足しています。ここでは、複素非可比なポテンシャルを格子頂点に選択的に適用する2次元(2D)準周期的装飾リーブ格子(QDLL)のクラスを調査します。これらの2次元構造を正確にNH一般化オーブリー・アンドレ・アンドレ・ハーパー(AAH)モデルに写像し、拡張局所化遷移点を活用することで、リャプノフ指数を解析的に導出し、MRの正確な式を得ます。これらの正確な理論的境界は、波動関数フラクタル次元や実空間確率分布の数値計算によって強く裏付けられています。さらに、準周期的ポテンシャル強さによって駆動されるMRの異なる進化的挙動が明らかになります。すなわち、$\\kappa=2$のシステムは単一のMRを持ち、$\\kappa=3$のシステムは単一の統合環から2つの独立した環へと動的に逐次進化します。2次元MRの正確な結果が、高次元NHシステムにおけるアンダーソン局在化およびMRの研究に役立つことを期待しています。",
   "abstract_translated": "移動環(MR)は、拡張状態と局所状態を隔てる複素エネルギー面の臨界境界であり、非エルミート(NH)無秩序系におけるアンダーソン遷移を理解する上で基本的な役割を果たします。MRは一次元(1次元)NH準周期モデルで広く研究されていますが、1次元を超えた厳密な解析フレームワークは依然として極めて不足しています。ここでは、複素非可比なポテンシャルを格子頂点に選択的に適用する2次元(2D)準周期的装飾リーブ格子(QDLL)のクラスを調査します。これらの2次元構造を正確にNH一般化オーブリー・アンドレ・アンドレ・ハーパー(AAH)モデルに写像し、拡張局所化遷移点を活用することで、リャプノフ指数を解析的に導出し、MRの正確な式を得ます。これらの正確な理論的境界は、波動関数フラクタル次元や実空間確率分布の数値計算によって強く裏付けられています。さらに、準周期的ポテンシャル強さによって駆動されるMRの異なる進化的挙動が明らかになります。すなわち、$\\kappa=2$のシステムは単一のMRを持ち、$\\kappa=3$のシステムは単一の統合環から2つの独立した環へと動的に逐次進化します。2次元MRの正確な結果が、高次元NHシステムにおけるアンダーソン局在化およびMRの研究に役立つことを期待しています。",
   "last_delivered_at": "2026-08-18T04:55:26Z"
+ },
+ {
+  "delivery_id": "main:2608.17539",
+  "id": "2608.17539",
+  "posted_at": "2026-08-19T02:22:53Z",
+  "title": "Software Defined Networks Key Relay for Large-Scale Quantum Key Distribution Networks",
+  "title_ja": "大規模量子鍵配布ネットワーク向けソフトウェア定義ネットワークキーリレー",
+  "title_translated": "大規模量子鍵配布ネットワーク向けソフトウェア定義ネットワークキーリレー",
+  "translation_language": "ja",
+  "authors": "Stephan Laschet, Gergely Lendvay, Thomas Lorünser, Paul James, Luca Torresetti, Alessandro Colombo",
+  "link": "https://arxiv.org/abs/2608.17539v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "network",
+   "crypto"
+  ],
+  "genre_names": [
+   "量子ネットワーク・通信",
+   "暗号・セキュリティ"
+  ],
+  "target_genre_ids": [
+   "network",
+   "crypto"
+  ],
+  "target_genre_names": [
+   "量子ネットワーク・通信",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "This work addresses the orchestration of large-scale Quantum Key Distribution Networks (QKDNs) using Software Defined Networking (SDN). Building on ETSI and ITU specifications, common best practices and architectures are outlined. The main task of the SDN Controller is to aggregate technical key performance indicators (KPI) from the network and, based on these, select the optimal path. Multiple path selection algorithms, based on Dijkstra or a maximum-minimum capacity algorithm, with built-in load balancing are presented. The algorithms were tested in simulations and their performances, and tradeoffs, are discussed. Additional critical aspects related to SDN controlled QKDNs are discussed, such as query batching, multi-path selection and group key capabilities. An oblivious multi-party protocol is proposed for relay path selection in a multi-domain scenario, so providers don't have to disclose sensitive information about their QKDN. These contributions aim to enhance scalability, resilience and interoperability in quantum-secure network infrastructures.",
+  "abstract_ja": "本研究は、ソフトウェア定義ネットワーキング(SDN)を用いて大規模な量子鍵配布ネットワーク(QKDN)のオーケストレーションに取り組んでいます。ETSIおよびITU仕様に基づき、共通のベストプラクティスとアーキテクチャが概説されています。SDNコントローラーの主な役割は、ネットワークから技術的な主要業績評価指標(KPI)を集約し、それに基づいて最適な経路を選択することです。ダイクストラまたは最大最小容量アルゴリズムに基づく多重経路選択アルゴリズムが、負荷分散機能を組み込みました。アルゴリズムはシミュレーションでテストされ、その性能やトレードオフについて議論されます。SDN制御QKDNに関連する追加の重要な側面、例えばクエリバッチ処理、マルチパス選択、グループキー機能についても議論されます。マルチドメインシナリオにおけるリレー経路選択には、プロバイダーがQKDNに関する機密情報を開示しなくて済むように、無意識な多方プロトコルが提案されています。これらの貢献は、量子安全ネットワークインフラにおけるスケーラビリティ、レジリエンス、相互運用性の向上を目指しています。",
+  "abstract_translated": "本研究は、ソフトウェア定義ネットワーキング(SDN)を用いて大規模な量子鍵配布ネットワーク(QKDN)のオーケストレーションに取り組んでいます。ETSIおよびITU仕様に基づき、共通のベストプラクティスとアーキテクチャが概説されています。SDNコントローラーの主な役割は、ネットワークから技術的な主要業績評価指標(KPI)を集約し、それに基づいて最適な経路を選択することです。ダイクストラまたは最大最小容量アルゴリズムに基づく多重経路選択アルゴリズムが、負荷分散機能を組み込みました。アルゴリズムはシミュレーションでテストされ、その性能やトレードオフについて議論されます。SDN制御QKDNに関連する追加の重要な側面、例えばクエリバッチ処理、マルチパス選択、グループキー機能についても議論されます。マルチドメインシナリオにおけるリレー経路選択には、プロバイダーがQKDNに関する機密情報を開示しなくて済むように、無意識な多方プロトコルが提案されています。これらの貢献は、量子安全ネットワークインフラにおけるスケーラビリティ、レジリエンス、相互運用性の向上を目指しています。",
+  "last_delivered_at": "2026-08-19T02:22:54Z"
+ },
+ {
+  "delivery_id": "main:2608.16961",
+  "id": "2608.16961",
+  "posted_at": "2026-08-19T02:22:56Z",
+  "title": "Quantum-Safe Web Service Architecture Using Time-Based One-Time Passwords",
+  "title_ja": "時間ベースのワンタイムパスワードを用いた量子安全なウェブサービスアーキテクチャ",
+  "title_translated": "時間ベースのワンタイムパスワードを用いた量子安全なウェブサービスアーキテクチャ",
+  "translation_language": "ja",
+  "authors": "Abel C. H. Chen",
+  "link": "https://arxiv.org/abs/2608.16961v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.NI",
+   "cs.PF"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "One-Time Passwords (OTPs) have become a common option for multi-factor authentication in several applications. For instance, during website login processes, OTPs are often used in conjunction with traditional text-based usernames and passwords to verify whether the access request originates from a legitimate human user rather than an automated agent. However, in scenarios involving automated connections and system-to-system interoperability, Time-Based One-Time Passwords (TOTPs) may be required to establish secure connections and access Web Services (WSs). Therefore, this study focuses on exploring the development of a quantum-safe web service architecture. The proposed approach achieves transmission security management by implementing Transport Layer Security (TLS) and HyperText Transfer Protocol Secure (HTTPS) based on Post-Quantum Cryptography (PQC). Furthermore, web service security management is realized through the construction of keyed-Hash Message Authentication Code (HMAC)-driven TOTPs. Within the experimental environment, this study evaluates and compares the computational performance of the Secure Hash Algorithm-2 (SHA-2), SHA-3, Ascon-Hash256, and SM3. The required computation time under different hardware resource conditions is analyzed for future web service deployment.",
+  "abstract_ja": "ワンタイムパスワード(OTP)は、多くのアプリケーションで多要素認証の一般的な選択肢となっています。例えば、ウェブサイトのログインプロセス中、OTPは従来のテキストベースのユーザー名やパスワードと組み合わせて使用され、アクセスリクエストが自動化されたエージェントではなく正当な人間のユーザーから発信されたものかを検証します。しかし、自動化接続やシステム間の相互運用性が求められるシナリオでは、安全な接続の確立やWebサービス(WS)へのアクセスのために、時間ベースのワンタイムパスワード(TOTP)が必要になることがあります。したがって、本研究は量子安全なウェブサービスアーキテクチャの開発を探ることに焦点を当てます。提案されたアプローチは、ポスト量子暗号(PQC)に基づくトランスポート層セキュリティ(TLS)およびハイパーテキスト転送プロトコルセキュア(HTTPS)を実装することで、伝送セキュリティ管理を実現します。さらに、Webサービスのセキュリティ管理は、キー付きハッシュメッセージ認証コード(HMAC)駆動のTOTP(TOTP)の構築を通じて実現されています。実験環境内で、本研究はSecure Hash Algorithm-2(SHA-2)、SHA-3、Ascon-Hash256、SM3の計算性能を評価・比較します。異なるハードウェアリソース条件下での計算時間は、将来のウェブサービス展開のために分析されます。",
+  "abstract_translated": "ワンタイムパスワード(OTP)は、多くのアプリケーションで多要素認証の一般的な選択肢となっています。例えば、ウェブサイトのログインプロセス中、OTPは従来のテキストベースのユーザー名やパスワードと組み合わせて使用され、アクセスリクエストが自動化されたエージェントではなく正当な人間のユーザーから発信されたものかを検証します。しかし、自動化接続やシステム間の相互運用性が求められるシナリオでは、安全な接続の確立やWebサービス(WS)へのアクセスのために、時間ベースのワンタイムパスワード(TOTP)が必要になることがあります。したがって、本研究は量子安全なウェブサービスアーキテクチャの開発を探ることに焦点を当てます。提案されたアプローチは、ポスト量子暗号(PQC)に基づくトランスポート層セキュリティ(TLS)およびハイパーテキスト転送プロトコルセキュア(HTTPS)を実装することで、伝送セキュリティ管理を実現します。さらに、Webサービスのセキュリティ管理は、キー付きハッシュメッセージ認証コード(HMAC)駆動のTOTP(TOTP)の構築を通じて実現されています。実験環境内で、本研究はSecure Hash Algorithm-2(SHA-2)、SHA-3、Ascon-Hash256、SM3の計算性能を評価・比較します。異なるハードウェアリソース条件下での計算時間は、将来のウェブサービス展開のために分析されます。",
+  "last_delivered_at": "2026-08-19T02:22:56Z"
  }
 ]

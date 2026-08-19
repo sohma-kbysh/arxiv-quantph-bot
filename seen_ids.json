@@ -3750,6 +3750,23 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-18T02:21:42Z"
+  },
+  "cs.CR:2608.17539": {
+   "genre_ids": [
+    "network",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-19T02:22:43Z"
+  },
+  "cs.CR:2608.16961": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-19T02:22:43Z"
   }
  },
  "external_pending": {},
@@ -6981,10 +6998,88 @@
   "2608.16857",
   "2608.16860"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.17539": {
+   "paper": {
+    "id": "2608.17539",
+    "title": "Software Defined Networks Key Relay for Large-Scale Quantum Key Distribution Networks",
+    "link": "https://arxiv.org/abs/2608.17539v1",
+    "authors": "Stephan Laschet, Gergely Lendvay, Thomas Lor\u00fcnser, Paul James, Luca Torresetti, Alessandro Colombo",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "This work addresses the orchestration of large-scale Quantum Key Distribution Networks (QKDNs) using Software Defined Networking (SDN). Building on ETSI and ITU specifications, common best practices and architectures are outlined. The main task of the SDN Controller is to aggregate technical key performance indicators (KPI) from the network and, based on these, select the optimal path. Multiple path selection algorithms, based on Dijkstra or a maximum-minimum capacity algorithm, with built-in load balancing are presented. The algorithms were tested in simulations and their performances, and tradeoffs, are discussed. Additional critical aspects related to SDN controlled QKDNs are discussed, such as query batching, multi-path selection and group key capabilities. An oblivious multi-party protocol is proposed for relay path selection in a multi-domain scenario, so providers don't have to disclose sensitive information about their QKDN. These contributions aim to enhance scalability, resilience and interoperability in quantum-secure network infrastructures.",
+    "published": "2026-08-18T09:01:32Z",
+    "updated": "2026-08-18T09:01:32Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "network",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "network",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "network": {
+     "status": "pending"
+    },
+    "crypto": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-19T02:22:43Z"
+  },
+  "2608.16961": {
+   "paper": {
+    "id": "2608.16961",
+    "title": "Quantum-Safe Web Service Architecture Using Time-Based One-Time Passwords",
+    "link": "https://arxiv.org/abs/2608.16961v1",
+    "authors": "Abel C. H. Chen",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.NI",
+     "cs.PF"
+    ],
+    "primary": "cs.CR",
+    "abstract": "One-Time Passwords (OTPs) have become a common option for multi-factor authentication in several applications. For instance, during website login processes, OTPs are often used in conjunction with traditional text-based usernames and passwords to verify whether the access request originates from a legitimate human user rather than an automated agent. However, in scenarios involving automated connections and system-to-system interoperability, Time-Based One-Time Passwords (TOTPs) may be required to establish secure connections and access Web Services (WSs). Therefore, this study focuses on exploring the development of a quantum-safe web service architecture. The proposed approach achieves transmission security management by implementing Transport Layer Security (TLS) and HyperText Transfer Protocol Secure (HTTPS) based on Post-Quantum Cryptography (PQC). Furthermore, web service security management is realized through the construction of keyed-Hash Message Authentication Code (HMAC)-driven TOTPs. Within the experimental environment, this study evaluates and compares the computational performance of the Secure Hash Algorithm-2 (SHA-2), SHA-3, Ascon-Hash256, and SM3. The required computation time under different hardware resource conditions is analyzed for future web service deployment.",
+    "published": "2026-08-17T04:58:23Z",
+    "updated": "2026-08-17T04:58:23Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-19T02:22:43Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-18T07:41:48Z",
-  "cs.CC": "2026-08-18T07:41:56Z",
-  "cs.IT": "2026-08-18T07:42:01Z"
+  "cs.CR": "2026-08-19T02:22:16Z",
+  "cs.CC": "2026-08-19T02:22:24Z",
+  "cs.IT": "2026-08-19T02:22:29Z"
  }
 }

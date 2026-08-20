@@ -93654,5 +93654,158 @@
   "abstract_ja": "フェルミオンリザーバーと結合した相互作用するナノ構造のリアルタイムシミュレーションでは、長期相関を保持するために環境自由度の増加が必要になることがあります。テープレコーダー粗粒化を導入し、非相互作用のリードを入出力モード、アクティブモード、出力モードに再編成します。デバイスはアクティブモードとともに伝播し、出力モードは確率的にサンプリングされ、残りの積分結合が所定の閾値を下回った時点で除去されます。各出力モード切断に対して、任意の規定された有限区間における正確なデバイス状態と切断された全デバイス状態の不忠実度に関する非摂動的上限を導出します。この上限はモードの残りの結合重みと有限区間応答因子に依存します。数値的には、アクティブモードカウントは固定された相対閾値で時間的に飽和し、閾値が縮小されるにつれて対数的に増加します。この手法は、温度ゼロかつ最大バイアスがゼロの2サイト量子点接触でベンチマークを行います。ローレンツ貯留層の場合、動力学は収束HEOM計算および定常状態電流とLandauer--B\\\"uttiker結果と一致します。代数的に相関が減衰するフラットバンド貯留層では、有限サイズ再発前の直接的なSchr\\\"odinger進化と一致し、Landauer--B\\\"uttiker定常電流を再現し、有限指数関数的なHEOM分解は収束しません。相互作用する接触に対しては、この手法はクーロン遮断ピーク分裂をもたらします。非相互作用駆動極限では、正確なFloquet Green関数計算と一致し、有限クーロン反発で持続する周期駆動下でのコヒーレント電流抑制を再現します。これらのベンチマークを合わせると、テープレコーダーの粗粒度処理が相互作用するフェルミオン輸送における装置-貯留層状態の実用的な長期シミュレーションを可能にすることを示しています。",
   "abstract_translated": "フェルミオンリザーバーと結合した相互作用するナノ構造のリアルタイムシミュレーションでは、長期相関を保持するために環境自由度の増加が必要になることがあります。テープレコーダー粗粒化を導入し、非相互作用のリードを入出力モード、アクティブモード、出力モードに再編成します。デバイスはアクティブモードとともに伝播し、出力モードは確率的にサンプリングされ、残りの積分結合が所定の閾値を下回った時点で除去されます。各出力モード切断に対して、任意の規定された有限区間における正確なデバイス状態と切断された全デバイス状態の不忠実度に関する非摂動的上限を導出します。この上限はモードの残りの結合重みと有限区間応答因子に依存します。数値的には、アクティブモードカウントは固定された相対閾値で時間的に飽和し、閾値が縮小されるにつれて対数的に増加します。この手法は、温度ゼロかつ最大バイアスがゼロの2サイト量子点接触でベンチマークを行います。ローレンツ貯留層の場合、動力学は収束HEOM計算および定常状態電流とLandauer--B\\\"uttiker結果と一致します。代数的に相関が減衰するフラットバンド貯留層では、有限サイズ再発前の直接的なSchr\\\"odinger進化と一致し、Landauer--B\\\"uttiker定常電流を再現し、有限指数関数的なHEOM分解は収束しません。相互作用する接触に対しては、この手法はクーロン遮断ピーク分裂をもたらします。非相互作用駆動極限では、正確なFloquet Green関数計算と一致し、有限クーロン反発で持続する周期駆動下でのコヒーレント電流抑制を再現します。これらのベンチマークを合わせると、テープレコーダーの粗粒度処理が相互作用するフェルミオン輸送における装置-貯留層状態の実用的な長期シミュレーションを可能にすることを示しています。",
   "last_delivered_at": "2026-08-19T04:55:20Z"
+ },
+ {
+  "delivery_id": "main:2608.19122",
+  "id": "2608.19122",
+  "posted_at": "2026-08-20T02:21:58Z",
+  "title": "Toward Quantum Advantage in Learning Parities with Structured Noise via Lower Bound Optimization of the Condition Number",
+  "title_ja": "条件数の下限最適化による構造化ノイズのパリティ学習における量子優位性への道",
+  "title_translated": "条件数の下限最適化による構造化ノイズのパリティ学習における量子優位性への道",
+  "translation_language": "ja",
+  "authors": "Yusen Han, Xuelian Li, Juntao Gao, Bo Song",
+  "link": "https://arxiv.org/abs/2608.19122v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "algo",
+   "complexity"
+  ],
+  "genre_names": [
+   "量子アルゴリズム",
+   "量子複雑性理論"
+  ],
+  "target_genre_ids": [
+   "algo",
+   "complexity"
+  ],
+  "target_genre_names": [
+   "量子アルゴリズム",
+   "量子複雑性理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Learning Parities with Structured Noise (LPSN) can be reduced to solving nonlinear Boolean systems. In quantum computing, such systems are typically transformed into Macaulay linear systems and solved via quantum linear system algorithms, a process severely limited by the condition number. To address this, we propose a novel reduction method for Macaulay linear systems. Under the assumptions of Ding et al., we derive a condition number lower bound incorporating a scaling factor. This reduction not only guarantees efficient quantum state preparation but also exhibits a distinct advantage regarding the condition number interval relative to the reduced right-hand side vector, thereby reducing the lower bound of the condition number and ultimately optimizing the upper bound on the time complexity of the quantum algorithm for solving Boolean systems. Furthermore, applying this improved quantum algorithm to LPSN significantly reduces sample complexity by exploiting the Macaulay system's solution structure. We further provide a concrete logical-level quantum resource estimate, demonstrating that the optimized condition number translates directly into a reduction in circuit width, depth, and gate count. Finally, we establish an algorithm selection strategy by systematically comparing quantum and classical approaches across noise pattern adaptability, sample complexity, and time complexity. Results demonstrate that our quantum algorithm exhibits the potential to outperform classical counterparts under specific parameter regimes.",
+  "abstract_ja": "構造化ノイズ(LPSN)によるパリティ学習は、非線形ブール系の解法に還元できます。量子コンピューティングでは、このような系は通常マコーレー線形系に変換され、条件数によって大きく制限される量子線形系アルゴリズムで解かれます。これに対処するため、マコーレー線形系のための新しい還元法を提案します。Dingらの仮定のもと、スケーリング係数を含む条件数の下限を導出します。この還元は効率的な量子状態準備を保証するだけでなく、条件数区間が右辺ベクトルに対して減少した際の明確な利点を示し、条件数の下限を低減し、最終的にブール系を解く量子アルゴリズムの時間計算量の上限を最適化します。さらに、この改良された量子アルゴリズムをLPSNに適用することで、マコーレー系の解構造を活用することでサンプルの計算量を大幅に削減できます。さらに、最適化された条件数が回路幅、深さ、ゲート数の減少に直接結びつくことを示す具体的な論理レベルの量子資源推定を示します。最後に、ノイズパターンの適応性、サンプル複雑度、時間計算量の面で量子法と古典法を体系的に比較し、アルゴリズム選択戦略を確立します。結果は、我々の量子アルゴリズムが特定のパラメータ領域において古典的アルゴリズムを上回る可能性を示すことを示しています。",
+  "abstract_translated": "構造化ノイズ(LPSN)によるパリティ学習は、非線形ブール系の解法に還元できます。量子コンピューティングでは、このような系は通常マコーレー線形系に変換され、条件数によって大きく制限される量子線形系アルゴリズムで解かれます。これに対処するため、マコーレー線形系のための新しい還元法を提案します。Dingらの仮定のもと、スケーリング係数を含む条件数の下限を導出します。この還元は効率的な量子状態準備を保証するだけでなく、条件数区間が右辺ベクトルに対して減少した際の明確な利点を示し、条件数の下限を低減し、最終的にブール系を解く量子アルゴリズムの時間計算量の上限を最適化します。さらに、この改良された量子アルゴリズムをLPSNに適用することで、マコーレー系の解構造を活用することでサンプルの計算量を大幅に削減できます。さらに、最適化された条件数が回路幅、深さ、ゲート数の減少に直接結びつくことを示す具体的な論理レベルの量子資源推定を示します。最後に、ノイズパターンの適応性、サンプル複雑度、時間計算量の面で量子法と古典法を体系的に比較し、アルゴリズム選択戦略を確立します。結果は、我々の量子アルゴリズムが特定のパラメータ領域において古典的アルゴリズムを上回る可能性を示すことを示しています。",
+  "last_delivered_at": "2026-08-20T02:22:00Z"
+ },
+ {
+  "delivery_id": "main:2608.18572",
+  "id": "2608.18572",
+  "posted_at": "2026-08-20T02:22:01Z",
+  "title": "VQC-ZTI: Variational Quantum Control for Zero Trust Protection of the Tactile Internet",
+  "title_ja": "VQC-ZTI:触覚インターネットのゼロトラスト保護のための変分量子制御",
+  "title_translated": "VQC-ZTI:触覚インターネットのゼロトラスト保護のための変分量子制御",
+  "translation_language": "ja",
+  "authors": "Mubassir Serneabat Sudipto, Shakil Ahmed, Ashfaq Khokhar",
+  "link": "https://arxiv.org/abs/2608.18572v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.NI"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "nisq",
+   "qml"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム",
+   "量子機械学習"
+  ],
+  "target_genre_ids": [
+   "nisq",
+   "qml"
+  ],
+  "target_genre_names": [
+   "変分・NISQアルゴリズム",
+   "量子機械学習"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Tactile Internet services couple cyber events directly to physical actuation, so security decisions must improve risk discrimination without perturbing the control path. This paper presents VQC-ZTI, a split-plane Variational Quantum Classifier framework for zero-trust protection of Tactile Internet services, in which an off-path VQC analyzes encrypted-flow telemetry while an on-path policy engine applies cached deterministic grant, restrict, step-up, and deny actions. By decoupling anomaly scoring from enforcement, VQC-ZTI preserves predictable control behavior and allows detector sensitivity and policy aggressiveness to be tuned independently. We evaluate the framework on CESNET-derived aggregated traffic using random, entity-group, and temporal holdouts with a hybrid PyTorch-PennyLane implementation. The full-hybrid Quantum Neural Network achieves mean areas under the receiver operating characteristic curve of 0.9981, 0.9974, and 0.9941 and reduces the false-positive rate relative to ExtraTrees by 44.6%, 49.6%, and 67.9%, respectively. A representative component-timing decomposition further illustrates that batched VQC scoring remains in the asynchronous evidence path rather than the immediate enforcement path.",
+  "abstract_ja": "触覚インターネットサービスはサイバーイベントを物理的なアクチュエーションと直接結びつけるため、セキュリティ判断は制御経路を乱すことなくリスク識別を改善しなければなりません。本論文は、触覚インターネットサービスのゼロトラスト保護のための分割平面変分量子分類器フレームワークVQC-ZTIを紹介します。ここでは、オフパスのVQCが暗号化されたフローテレメトリを解析し、オンパスポリシーエンジンがキャッシュされた決定的な付与、制限、ステップアップ、拒否アクションを適用します。異常スコアリングを強制から切り離すことで、VQC-ZTIは予測可能な制御挙動を維持し、検出機の感度とポリシーの積極性を独立して調整できるようにします。PyTorch-PennyLaneのハイブリッド実装を用いて、ランダム、エンティティグループ、時間的ホールドアウトを用いてCESNET由来の集約トラフィックのフレームワークを評価します。フルハイブリッド量子ニューラルネットワークは、受信者の動作特性曲線下の平均面積を0.9981、0.9974、0.9941と達成し、ExtraTreeと比較して偽陽性率をそれぞれ44.6%、49.6%、67.9%削減します。代表的なコンポーネントタイミング分解は、バッチVQCスコアリングが即時執行経路ではなく非同期証拠経路に留まることをさらに示しています。",
+  "abstract_translated": "触覚インターネットサービスはサイバーイベントを物理的なアクチュエーションと直接結びつけるため、セキュリティ判断は制御経路を乱すことなくリスク識別を改善しなければなりません。本論文は、触覚インターネットサービスのゼロトラスト保護のための分割平面変分量子分類器フレームワークVQC-ZTIを紹介します。ここでは、オフパスのVQCが暗号化されたフローテレメトリを解析し、オンパスポリシーエンジンがキャッシュされた決定的な付与、制限、ステップアップ、拒否アクションを適用します。異常スコアリングを強制から切り離すことで、VQC-ZTIは予測可能な制御挙動を維持し、検出機の感度とポリシーの積極性を独立して調整できるようにします。PyTorch-PennyLaneのハイブリッド実装を用いて、ランダム、エンティティグループ、時間的ホールドアウトを用いてCESNET由来の集約トラフィックのフレームワークを評価します。フルハイブリッド量子ニューラルネットワークは、受信者の動作特性曲線下の平均面積を0.9981、0.9974、0.9941と達成し、ExtraTreeと比較して偽陽性率をそれぞれ44.6%、49.6%、67.9%削減します。代表的なコンポーネントタイミング分解は、バッチVQCスコアリングが即時執行経路ではなく非同期証拠経路に留まることをさらに示しています。",
+  "last_delivered_at": "2026-08-20T02:22:03Z"
+ },
+ {
+  "delivery_id": "main:2608.18605",
+  "id": "2608.18605",
+  "posted_at": "2026-08-20T02:22:05Z",
+  "title": "Finality Before Disclosure for Ledger Authenticators in the Quantum Random Oracle Model",
+  "title_ja": "量子ランダムオラクルモデルにおける台帳認証器の開示前の最終性",
+  "title_translated": "量子ランダムオラクルモデルにおける台帳認証器の開示前の最終性",
+  "translation_language": "ja",
+  "authors": "Maja Lie, Benjamin Marsh",
+  "link": "https://arxiv.org/abs/2608.18605v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "crypto"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "crypto"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Public ledgers increasingly authorize state transitions using prior transactions, finalized state, timing, and ordering rather than only a public key, message, and portable signature. We introduce ledger authenticators and $\\LAEUF$, an unforgeability experiment for reactive authorization protocols whose public judgment algorithm reads a finalized transcript. The model separates authentication safety from ledger liveness and captures canonical transition freshness, adaptive corruption, exposure before inclusion, censorship, and adversarial ordering. We identify two conditional resource boundaries. An authenticator satisfying our single event conditions yields a contextual one-time signature. Within our rebindable reveal class, safety requires computational post-disclosure non-admissibility. When precursor admission uses only public computation and ledger scheduling, this condition is enforced by closing the evidence eligible to use a disclosed credential. If newly constructed evidence remains admissible after disclosure, censoring the honest reveal gives a forgery. We then define a joint ledger and quantum random oracle execution model in which quantum state persists across classical finalization cuts and oracle evaluations made through the ledger are charged. For a closed finalized target set of size at most $K$, we prove the bound $3β_{\\mathsf{cut}}^2+3c_{\\mathsf{co}}KQ^2/2^λ+6\\ell/2^λ$, where $β_{\\mathsf{cut}}$ accounts for fresh openings already present at the cut. A commit, close, reveal authenticator instantiates the framework and obtains a multi-user lifetime QROM bound.",
+  "abstract_ja": "公開台帳は、公開鍵、メッセージ、ポータブル署名だけでなく、事前取引、最終状態、タイミング、順序付けを用いて状態遷移を承認することが増えています。私たちは台帳認証器と$\\LAEUF$を導入します。これは、最終的なトランスクリプトを読み取る反応的認可プロトコルの偽造不可実験です。このモデルは認証の安全性と台帳のライブネスを分離し、正準遷移の新鮮性、適応的破損、包含前の露出、検閲、対抗的順序付けを捉えます。私たちは2つの条件付きリソース境界を特定します。単一のイベント条件を満たす認証器は文脈的なワンタイム署名を得ます。再結合可能なリビールクラス内で、安全性は計算上の開示後の非許容性を必要とします。前段階の承認が公開計算と台帳スケジューリングのみを使用する場合、この条件は開示資格のある証拠を閉鎖することで強制されます。新たに構築された証拠が開示後も証拠として認められる場合、正直な暴露を検閲すると偽造となります。次に、量子状態が古典的な最終化カットを超えて持続し、台帳を通じて行われたオラクル評価が課される共同台帳と量子ランダムオラクル実行モデルを定義します。最大$Kドルの閉じた最終目標セットの場合、境界$3β_{\\mathsf{cut}}^2+3c_{\\mathsf{co}}KQ^2/2^λ+6\\ell/2^λ$を証明します。ここで$β_{\\mathsf{cut}}$は切断時に既に存在する新規開口を考慮します。コミット・クローズ・リヴェイル認証器はフレームワークをインスタンス化し、マルチユーザー生涯のQROMバウンドを取得します。",
+  "abstract_translated": "公開台帳は、公開鍵、メッセージ、ポータブル署名だけでなく、事前取引、最終状態、タイミング、順序付けを用いて状態遷移を承認することが増えています。私たちは台帳認証器と$\\LAEUF$を導入します。これは、最終的なトランスクリプトを読み取る反応的認可プロトコルの偽造不可実験です。このモデルは認証の安全性と台帳のライブネスを分離し、正準遷移の新鮮性、適応的破損、包含前の露出、検閲、対抗的順序付けを捉えます。私たちは2つの条件付きリソース境界を特定します。単一のイベント条件を満たす認証器は文脈的なワンタイム署名を得ます。再結合可能なリビールクラス内で、安全性は計算上の開示後の非許容性を必要とします。前段階の承認が公開計算と台帳スケジューリングのみを使用する場合、この条件は開示資格のある証拠を閉鎖することで強制されます。新たに構築された証拠が開示後も証拠として認められる場合、正直な暴露を検閲すると偽造となります。次に、量子状態が古典的な最終化カットを超えて持続し、台帳を通じて行われたオラクル評価が課される共同台帳と量子ランダムオラクル実行モデルを定義します。最大$Kドルの閉じた最終目標セットの場合、境界$3β_{\\mathsf{cut}}^2+3c_{\\mathsf{co}}KQ^2/2^λ+6\\ell/2^λ$を証明します。ここで$β_{\\mathsf{cut}}$は切断時に既に存在する新規開口を考慮します。コミット・クローズ・リヴェイル認証器はフレームワークをインスタンス化し、マルチユーザー生涯のQROMバウンドを取得します。",
+  "last_delivered_at": "2026-08-20T02:22:07Z"
+ },
+ {
+  "delivery_id": "main:2608.19191",
+  "id": "2608.19191",
+  "posted_at": "2026-08-20T02:22:09Z",
+  "title": "The Structured Totient Preimage Problem: Reconstruction, Collisions, and Cryptographic Implications",
+  "title_ja": "構造化トイエント原像問題:再構成、衝突、そして暗号学的意味",
+  "title_translated": "構造化トイエント原像問題:再構成、衝突、そして暗号学的意味",
+  "translation_language": "ja",
+  "authors": "Luis Adrián Lizama-Pérez",
+  "link": "https://arxiv.org/abs/2608.19191v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash-lite",
+  "abstract_en": "We define and study the Structured Totient Preimage (STP) problem as a restricted reconstruction relation with a direct cryptographic motivation. Let $p_1,\\ldots,p_k$ be distinct primes of the same bit length and reveal only $x=\\prod_{i=1}^k(p_i-1)$. Given $(x,λ,k)$, STP asks for any set of $k$ distinct $λ$-bit primes satisfying this product. The relation is efficiently verifiable, but its reconstruction complexity is not known. We establish three concrete results. First, for factored $x$ we derive the exact number of ordered exponent allocations and a bound showing that direct reconstruction is polynomial for fixed $k$ when $Ω(x)=O(\\logλ)$; this rules out that regime as a basis for a strong hardness claim. Second, we give exhaustive algorithms for reconstruction and collision analysis. Third, we exhaustively evaluate 28 parameter pairs, with $2\\leq k\\leq5$, up to $λ=16$ for pairs and 4,588,935 prime sets in the largest census. The data quantify non-injectivity through collision participation, maximum multiplicity, and conditional ambiguity in bits. These results isolate STP from general inverse-totient computation and motivate a Structured Totient Preimage Assumption for explicitly growing parameter families. Under such an assumption, STP becomes a candidate preimage-resistant relation whose implications for commitments, proofs of knowledge of multiplicative witnesses, and authentication can be stated precisely. The paper establishes the computational foundation and parameter constraints for those constructions; it does not claim a security reduction or post-quantum hardness.",
+  "abstract_ja": "構造化トティエント原像(STP)問題を、直接的な暗号動機を持つ制限された再構成関係として定義し、研究します。$p_1とします。 \\ldots,p_k$は同じビット長の異なる素数であり、$x=\\prod_{i=1}^k(p_i-1)$のみを明らかにします。$(x,λ,k)$が与えられたとき、STPはこの積を満たす$k$の異なる$λ$-素数の任意の集合を求めます。この関係は効率的に検証可能ですが、その再構成の複雑さは不明です。3つの具体的な結果を確立します。まず、因数分解$x$に対して、順序付き指数割り当ての正確な数と、直接再構成が固定$k$に対して多項式であることを示す上限を導出します。この場合に$Ω(x)=O(\\logλ)$;これにより、その領域は強い硬度主張の基礎として除外されます。次に、再構成および衝突解析のための網羅的なアルゴリズムを示します。第三に、最大国勢調査における4,588,935個の素集合とペアに対して$2\\leq k\\leq5$を含み、$2\\leq k\\leq5$から$λ=16$まで網羅的に評価します。データは衝突参加、最大重複率、ビット単位の条件付き曖昧さを通じて非単射性を定量化します。これらの結果により、STPは一般的な逆トリュー計算から切り離され、明示的に成長するパラメータファミリーに対する構造化トイエント原像仮定を動機付けます。この仮定の下で、STPはコミットメント、乗法証人の知識証明、認証に対する含意を正確に述べられる候補原像耐性関係となります。本論文はこれらの構成の計算基盤とパラメータ制約を確立します。セキュリティ削減やポスト量子硬さを主張するものではありません。",
+  "abstract_translated": "構造化トティエント原像(STP)問題を、直接的な暗号動機を持つ制限された再構成関係として定義し、研究します。$p_1とします。 \\ldots,p_k$は同じビット長の異なる素数であり、$x=\\prod_{i=1}^k(p_i-1)$のみを明らかにします。$(x,λ,k)$が与えられたとき、STPはこの積を満たす$k$の異なる$λ$-素数の任意の集合を求めます。この関係は効率的に検証可能ですが、その再構成の複雑さは不明です。3つの具体的な結果を確立します。まず、因数分解$x$に対して、順序付き指数割り当ての正確な数と、直接再構成が固定$k$に対して多項式であることを示す上限を導出します。この場合に$Ω(x)=O(\\logλ)$;これにより、その領域は強い硬度主張の基礎として除外されます。次に、再構成および衝突解析のための網羅的なアルゴリズムを示します。第三に、最大国勢調査における4,588,935個の素集合とペアに対して$2\\leq k\\leq5$を含み、$2\\leq k\\leq5$から$λ=16$まで網羅的に評価します。データは衝突参加、最大重複率、ビット単位の条件付き曖昧さを通じて非単射性を定量化します。これらの結果により、STPは一般的な逆トリュー計算から切り離され、明示的に成長するパラメータファミリーに対する構造化トイエント原像仮定を動機付けます。この仮定の下で、STPはコミットメント、乗法証人の知識証明、認証に対する含意を正確に述べられる候補原像耐性関係となります。本論文はこれらの構成の計算基盤とパラメータ制約を確立します。セキュリティ削減やポスト量子硬さを主張するものではありません。",
+  "last_delivered_at": "2026-08-20T02:22:09Z"
  }
 ]

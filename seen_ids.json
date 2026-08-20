@@ -3851,6 +3851,43 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-19T02:22:43Z"
+  },
+  "cs.CR:2608.19191": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash-lite",
+   "skip_votes": [
+    "gemini-2.5-flash"
+   ],
+   "reviewed_at": "2026-08-20T02:21:44Z"
+  },
+  "cs.CR:2608.19122": {
+   "genre_ids": [
+    "algo",
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-20T02:21:44Z"
+  },
+  "cs.CR:2608.18605": {
+   "genre_ids": [
+    "pqc",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-20T02:21:44Z"
+  },
+  "cs.CR:2608.18572": {
+   "genre_ids": [
+    "nisq",
+    "qml"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-20T02:21:44Z"
   }
  },
  "external_pending": {},
@@ -7166,10 +7203,167 @@
   "2608.18070",
   "2608.18071"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.19191": {
+   "paper": {
+    "id": "2608.19191",
+    "title": "The Structured Totient Preimage Problem: Reconstruction, Collisions, and Cryptographic Implications",
+    "link": "https://arxiv.org/abs/2608.19191v1",
+    "authors": "Luis Adri\u00e1n Lizama-P\u00e9rez",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "We define and study the Structured Totient Preimage (STP) problem as a restricted reconstruction relation with a direct cryptographic motivation. Let $p_1,\\ldots,p_k$ be distinct primes of the same bit length and reveal only $x=\\prod_{i=1}^k(p_i-1)$. Given $(x,\u03bb,k)$, STP asks for any set of $k$ distinct $\u03bb$-bit primes satisfying this product. The relation is efficiently verifiable, but its reconstruction complexity is not known. We establish three concrete results. First, for factored $x$ we derive the exact number of ordered exponent allocations and a bound showing that direct reconstruction is polynomial for fixed $k$ when $\u03a9(x)=O(\\log\u03bb)$; this rules out that regime as a basis for a strong hardness claim. Second, we give exhaustive algorithms for reconstruction and collision analysis. Third, we exhaustively evaluate 28 parameter pairs, with $2\\leq k\\leq5$, up to $\u03bb=16$ for pairs and 4,588,935 prime sets in the largest census. The data quantify non-injectivity through collision participation, maximum multiplicity, and conditional ambiguity in bits. These results isolate STP from general inverse-totient computation and motivate a Structured Totient Preimage Assumption for explicitly growing parameter families. Under such an assumption, STP becomes a candidate preimage-resistant relation whose implications for commitments, proofs of knowledge of multiplicative witnesses, and authentication can be stated precisely. The paper establishes the computational foundation and parameter constraints for those constructions; it does not claim a security reduction or post-quantum hardness.",
+    "published": "2026-08-19T17:57:18Z",
+    "updated": "2026-08-19T17:57:18Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash-lite"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash-lite",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-20T02:21:44Z"
+  },
+  "2608.19122": {
+   "paper": {
+    "id": "2608.19122",
+    "title": "Toward Quantum Advantage in Learning Parities with Structured Noise via Lower Bound Optimization of the Condition Number",
+    "link": "https://arxiv.org/abs/2608.19122v1",
+    "authors": "Yusen Han, Xuelian Li, Juntao Gao, Bo Song",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Learning Parities with Structured Noise (LPSN) can be reduced to solving nonlinear Boolean systems. In quantum computing, such systems are typically transformed into Macaulay linear systems and solved via quantum linear system algorithms, a process severely limited by the condition number. To address this, we propose a novel reduction method for Macaulay linear systems. Under the assumptions of Ding et al., we derive a condition number lower bound incorporating a scaling factor. This reduction not only guarantees efficient quantum state preparation but also exhibits a distinct advantage regarding the condition number interval relative to the reduced right-hand side vector, thereby reducing the lower bound of the condition number and ultimately optimizing the upper bound on the time complexity of the quantum algorithm for solving Boolean systems. Furthermore, applying this improved quantum algorithm to LPSN significantly reduces sample complexity by exploiting the Macaulay system's solution structure. We further provide a concrete logical-level quantum resource estimate, demonstrating that the optimized condition number translates directly into a reduction in circuit width, depth, and gate count. Finally, we establish an algorithm selection strategy by systematically comparing quantum and classical approaches across noise pattern adaptability, sample complexity, and time complexity. Results demonstrate that our quantum algorithm exhibits the potential to outperform classical counterparts under specific parameter regimes.",
+    "published": "2026-08-19T17:17:31Z",
+    "updated": "2026-08-19T17:17:31Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "algo",
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "algo",
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "algo": {
+     "status": "pending"
+    },
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-20T02:21:44Z"
+  },
+  "2608.18605": {
+   "paper": {
+    "id": "2608.18605",
+    "title": "Finality Before Disclosure for Ledger Authenticators in the Quantum Random Oracle Model",
+    "link": "https://arxiv.org/abs/2608.18605v1",
+    "authors": "Maja Lie, Benjamin Marsh",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Public ledgers increasingly authorize state transitions using prior transactions, finalized state, timing, and ordering rather than only a public key, message, and portable signature. We introduce ledger authenticators and $\\LAEUF$, an unforgeability experiment for reactive authorization protocols whose public judgment algorithm reads a finalized transcript. The model separates authentication safety from ledger liveness and captures canonical transition freshness, adaptive corruption, exposure before inclusion, censorship, and adversarial ordering. We identify two conditional resource boundaries. An authenticator satisfying our single event conditions yields a contextual one-time signature. Within our rebindable reveal class, safety requires computational post-disclosure non-admissibility. When precursor admission uses only public computation and ledger scheduling, this condition is enforced by closing the evidence eligible to use a disclosed credential. If newly constructed evidence remains admissible after disclosure, censoring the honest reveal gives a forgery. We then define a joint ledger and quantum random oracle execution model in which quantum state persists across classical finalization cuts and oracle evaluations made through the ledger are charged. For a closed finalized target set of size at most $K$, we prove the bound $3\u03b2_{\\mathsf{cut}}^2+3c_{\\mathsf{co}}KQ^2/2^\u03bb+6\\ell/2^\u03bb$, where $\u03b2_{\\mathsf{cut}}$ accounts for fresh openings already present at the cut. A commit, close, reveal authenticator instantiates the framework and obtains a multi-user lifetime QROM bound.",
+    "published": "2026-08-19T06:49:05Z",
+    "updated": "2026-08-19T06:49:05Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "crypto": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-20T02:21:44Z"
+  },
+  "2608.18572": {
+   "paper": {
+    "id": "2608.18572",
+    "title": "VQC-ZTI: Variational Quantum Control for Zero Trust Protection of the Tactile Internet",
+    "link": "https://arxiv.org/abs/2608.18572v1",
+    "authors": "Mubassir Serneabat Sudipto, Shakil Ahmed, Ashfaq Khokhar",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.NI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Tactile Internet services couple cyber events directly to physical actuation, so security decisions must improve risk discrimination without perturbing the control path. This paper presents VQC-ZTI, a split-plane Variational Quantum Classifier framework for zero-trust protection of Tactile Internet services, in which an off-path VQC analyzes encrypted-flow telemetry while an on-path policy engine applies cached deterministic grant, restrict, step-up, and deny actions. By decoupling anomaly scoring from enforcement, VQC-ZTI preserves predictable control behavior and allows detector sensitivity and policy aggressiveness to be tuned independently. We evaluate the framework on CESNET-derived aggregated traffic using random, entity-group, and temporal holdouts with a hybrid PyTorch-PennyLane implementation. The full-hybrid Quantum Neural Network achieves mean areas under the receiver operating characteristic curve of 0.9981, 0.9974, and 0.9941 and reduces the false-positive rate relative to ExtraTrees by 44.6%, 49.6%, and 67.9%, respectively. A representative component-timing decomposition further illustrates that batched VQC scoring remains in the asynchronous evidence path rather than the immediate enforcement path.",
+    "published": "2026-08-19T06:08:41Z",
+    "updated": "2026-08-19T06:08:41Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "nisq",
+     "qml"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "nisq",
+    "qml"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "nisq": {
+     "status": "pending"
+    },
+    "qml": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-20T02:21:44Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-19T07:42:49Z",
-  "cs.CC": "2026-08-19T07:42:57Z",
-  "cs.IT": "2026-08-19T07:43:01Z"
+  "cs.CR": "2026-08-20T02:21:13Z",
+  "cs.CC": "2026-08-20T02:21:21Z",
+  "cs.IT": "2026-08-20T02:21:25Z"
  }
 }

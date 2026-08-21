@@ -96451,5 +96451,41 @@
   "abstract_ja": "最近の双極子分子のボース・アインシュタイン凝縮(BEC)の創出は、双極子相互作用が新しい自己組織化現象を駆動できる多体量子系に新たなフロンティアを開きました。ここでは、異方性双極子相互作用によって駆動される分子BECにおける電気収縮を観察します。私たちは、$\\sigma$および$\\pi$偏極場を用いた二重マイクロ波ドレッシングを用いて、非軸対称の双極子相互作用を制御します。電致収縮の実験観測を拡張グロス・ピタエフスキー方程式に基づくモデルと比較し、弱い相互作用から中程度の相互作用領域において非常に一致していることを明らかにしました。電気収縮を用いて、分子BECは楕円形の$\\シグマ$マイクロ波場の向きを動的に変化させることでトルクをかけられることを示しました。これにより、分子量子気体を回転させる道筋が開かれ、強双極子物質の渦度、超流動性、超固体性を探る機会が開かれます。",
   "abstract_translated": "最近の双極子分子のボース・アインシュタイン凝縮(BEC)の創出は、双極子相互作用が新しい自己組織化現象を駆動できる多体量子系に新たなフロンティアを開きました。ここでは、異方性双極子相互作用によって駆動される分子BECにおける電気収縮を観察します。私たちは、$\\sigma$および$\\pi$偏極場を用いた二重マイクロ波ドレッシングを用いて、非軸対称の双極子相互作用を制御します。電致収縮の実験観測を拡張グロス・ピタエフスキー方程式に基づくモデルと比較し、弱い相互作用から中程度の相互作用領域において非常に一致していることを明らかにしました。電気収縮を用いて、分子BECは楕円形の$\\シグマ$マイクロ波場の向きを動的に変化させることでトルクをかけられることを示しました。これにより、分子量子気体を回転させる道筋が開かれ、強双極子物質の渦度、超流動性、超固体性を探る機会が開かれます。",
   "last_delivered_at": "2026-08-20T04:51:38Z"
+ },
+ {
+  "delivery_id": "main:2608.19401",
+  "id": "2608.19401",
+  "posted_at": "2026-08-21T02:27:00Z",
+  "title": "Redactable blockchains and polynomial equations",
+  "title_ja": "編集可能なブロックチェーンと多項式方程式",
+  "title_translated": "編集可能なブロックチェーンと多項式方程式",
+  "translation_language": "ja",
+  "authors": "Alexander Demin, Alexey Ovchinnikov, Vladimir Shpilrain",
+  "link": "https://arxiv.org/abs/2608.19401v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.NI"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We develop new tools for constructing redactable authenticated data structures with post-quantum security. In our construction, inverting the proposed one-way function means solving a polynomial equation (or a system of polynomial equations) in more than one variable. This is presently considered quantum-safe, i.e., there is no known quantum algorithm that could solve this problem efficiently if parameters are chosen wisely.",
+  "abstract_ja": "ポスト量子セキュリティを備えた可再生認証データ構造を構築するための新しいツールを開発します。私たちの構成では、提案された一方向関数を逆にすると、複数の変数で多項式方程式(または多項式方程式系)を解くことを意味します。これは現在、量子安全とみなされており、パラメータを賢く選ばせば効率的にこの問題を解決できる量子アルゴリズムは知られていません。",
+  "abstract_translated": "ポスト量子セキュリティを備えた可再生認証データ構造を構築するための新しいツールを開発します。私たちの構成では、提案された一方向関数を逆にすると、複数の変数で多項式方程式(または多項式方程式系)を解くことを意味します。これは現在、量子安全とみなされており、パラメータを賢く選ばせば効率的にこの問題を解決できる量子アルゴリズムは知られていません。",
+  "last_delivered_at": "2026-08-21T02:27:00Z"
  }
 ]

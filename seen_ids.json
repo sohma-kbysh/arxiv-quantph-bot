@@ -3961,6 +3961,14 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-20T02:21:44Z"
+  },
+  "cs.CR:2608.19401": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-21T02:26:52Z"
   }
  },
  "external_pending": {},
@@ -7349,10 +7357,47 @@
   "2608.19180",
   "2608.19191"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.19401": {
+   "paper": {
+    "id": "2608.19401",
+    "title": "Redactable blockchains and polynomial equations",
+    "link": "https://arxiv.org/abs/2608.19401v1",
+    "authors": "Alexander Demin, Alexey Ovchinnikov, Vladimir Shpilrain",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.NI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "We develop new tools for constructing redactable authenticated data structures with post-quantum security. In our construction, inverting the proposed one-way function means solving a polynomial equation (or a system of polynomial equations) in more than one variable. This is presently considered quantum-safe, i.e., there is no known quantum algorithm that could solve this problem efficiently if parameters are chosen wisely.",
+    "published": "2026-08-19T19:34:36Z",
+    "updated": "2026-08-19T19:34:36Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-21T02:26:52Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-20T07:45:11Z",
-  "cs.CC": "2026-08-20T07:45:19Z",
-  "cs.IT": "2026-08-20T07:45:24Z"
+  "cs.CR": "2026-08-21T02:26:32Z",
+  "cs.CC": "2026-08-21T02:26:40Z",
+  "cs.IT": "2026-08-21T02:26:45Z"
  }
 }

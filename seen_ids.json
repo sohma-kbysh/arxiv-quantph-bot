@@ -4073,6 +4073,14 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-21T02:26:52Z"
+  },
+  "cs.CR:2608.20580": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-24T02:26:53Z"
   }
  },
  "external_pending": {},
@@ -7565,10 +7573,47 @@
   "2608.20332",
   "2608.20340"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.20580": {
+   "paper": {
+    "id": "2608.20580",
+    "title": "Keyed Provenance Watermarking with Complementary Lattice-Based Secure Aggregation for Federated Learning",
+    "link": "https://arxiv.org/abs/2608.20580v1",
+    "authors": "Xinyun Liu, Zhi Lu, Yu Chen, Ronghua Xu",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.LG"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Federated learning (FL) is vulnerable to multi-level attacks. However, existing methods address them separately, leaving FL exposed to data leakage, unauthorized reuse, and malicious gradient manipulation. In this work, we propose an FL framework that couples keyed context-provenance watermarking with verifiable lattice-based secure aggregation of Real-World Anchored Watermarking and Lattice-Based Zero-Knowledge Secure Aggregation. At the data layer, we propose a Kerckhoffs-compliant scheme that utilizes Physical Anchor Metadata (PAM) to ensure data provenance. PAM is defined as a context-provenance token derived from trusted infrastructure data (time, location, and server ID) and then subjected to a keyed HMAC-SHA-256 transformation to produce a watermark payload that cannot be generated without the client's secret key. We further design FMGAN, a GAN-based robust image watermarking framework that embeds this transformed payload using a feature fusion module and a Mamba-guided linear attention mechanism. At the computation layer, we adopt a lattice-based zero-knowledge secure aggregation (LZKSA) protocol that verifies key correctness, L2 norm bounds, and cosine similarity constraints over committed gradients without revealing private updates. The RLWE-based design guarantees post-quantum security. Extensive experiments validate the complementary protection of the two layers under composite attack scenarios. To our knowledge, no prior verification workflow has jointly evaluated both layers in a hybrid, end-to-end trustworthy FL framework.",
+    "published": "2026-08-20T21:26:31Z",
+    "updated": "2026-08-20T21:26:31Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-24T02:26:53Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-22T07:36:20Z",
-  "cs.CC": "2026-08-22T07:36:30Z",
-  "cs.IT": "2026-08-22T07:36:35Z"
+  "cs.CR": "2026-08-24T02:26:20Z",
+  "cs.CC": "2026-08-24T02:26:29Z",
+  "cs.IT": "2026-08-24T02:26:34Z"
  }
 }

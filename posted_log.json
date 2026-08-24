@@ -100492,5 +100492,41 @@
   "abstract_ja": "光学マイクロキャビティ内の強い光と物質の相互作用は、ポラリトンと呼ばれるハイブリッド光-物質状態を生じさせます。現代技術では積極的に利用されていますが、これらのシステムの理論的記述はしばしば単一励起の場合に限定されており、多励起物理を捉える能力が制限され、さらなる技術進歩を妨げています。ここでは、量子エミッターの組合せ構造を活用し、任意の励起数を持つタビス・カミングスモデルを調査します。その固有系の構造と性質を導き出し、現実的なサイズスケールの系における許容される放射遷移を特定します。我々の研究は、少数励起領域では到達できない新たな挙動を明らかにし、指数関数的に増加するヒルベルト空間を持つ類似系の計算複雑さを低減する枠組みも提供します。",
   "abstract_translated": "光学マイクロキャビティ内の強い光と物質の相互作用は、ポラリトンと呼ばれるハイブリッド光-物質状態を生じさせます。現代技術では積極的に利用されていますが、これらのシステムの理論的記述はしばしば単一励起の場合に限定されており、多励起物理を捉える能力が制限され、さらなる技術進歩を妨げています。ここでは、量子エミッターの組合せ構造を活用し、任意の励起数を持つタビス・カミングスモデルを調査します。その固有系の構造と性質を導き出し、現実的なサイズスケールの系における許容される放射遷移を特定します。我々の研究は、少数励起領域では到達できない新たな挙動を明らかにし、指数関数的に増加するヒルベルト空間を持つ類似系の計算複雑さを低減する枠組みも提供します。",
   "last_delivered_at": "2026-08-21T04:55:39Z"
+ },
+ {
+  "delivery_id": "main:2608.20580",
+  "id": "2608.20580",
+  "posted_at": "2026-08-24T02:26:58Z",
+  "title": "Keyed Provenance Watermarking with Complementary Lattice-Based Secure Aggregation for Federated Learning",
+  "title_ja": "フェデレーテッドラーニングのための、相補的な格子ベースのセキュア集約を伴う鍵付き来歴透かし",
+  "title_translated": "フェデレーテッドラーニングのための、相補的な格子ベースのセキュア集約を伴う鍵付き来歴透かし",
+  "translation_language": "ja",
+  "authors": "Xinyun Liu, Zhi Lu, Yu Chen, Ronghua Xu",
+  "link": "https://arxiv.org/abs/2608.20580v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.LG"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Federated learning (FL) is vulnerable to multi-level attacks. However, existing methods address them separately, leaving FL exposed to data leakage, unauthorized reuse, and malicious gradient manipulation. In this work, we propose an FL framework that couples keyed context-provenance watermarking with verifiable lattice-based secure aggregation of Real-World Anchored Watermarking and Lattice-Based Zero-Knowledge Secure Aggregation. At the data layer, we propose a Kerckhoffs-compliant scheme that utilizes Physical Anchor Metadata (PAM) to ensure data provenance. PAM is defined as a context-provenance token derived from trusted infrastructure data (time, location, and server ID) and then subjected to a keyed HMAC-SHA-256 transformation to produce a watermark payload that cannot be generated without the client's secret key. We further design FMGAN, a GAN-based robust image watermarking framework that embeds this transformed payload using a feature fusion module and a Mamba-guided linear attention mechanism. At the computation layer, we adopt a lattice-based zero-knowledge secure aggregation (LZKSA) protocol that verifies key correctness, L2 norm bounds, and cosine similarity constraints over committed gradients without revealing private updates. The RLWE-based design guarantees post-quantum security. Extensive experiments validate the complementary protection of the two layers under composite attack scenarios. To our knowledge, no prior verification workflow has jointly evaluated both layers in a hybrid, end-to-end trustworthy FL framework.",
+  "abstract_ja": "フェデレーテッドラーニング（FL）は、多段階の攻撃に対して脆弱である。しかし、既存の手法ではこれらを個別に扱っているため、FLはデータ漏洩、不正な再利用、悪意のある勾配操作のリスクにさらされたままである。 本研究では、キー付きコンテキスト・プロヴェナンス・ウォーターマーキングと、「Real-World Anchored Watermarking」および「Lattice-Based Zero-Knowledge Secure Aggregation」による検証可能な格子ベースのセキュア集約を組み合わせたFLフレームワークを提案する。 データ層においては、データの出所を保証するために物理アンカーメタデータ（PAM）を利用する、ケルクホフスの原則に準拠したスキームを提案する。 PAM は、信頼できるインフラストラクチャデータ（時間、場所、サーバー ID）から導出されたコンテキスト・プロヴァンス・トークンとして定義され、キー付き HMAC-SHA-256 変換が施されることで、クライアントの秘密鍵なしでは生成できない透かしペイロードが生成されます。 さらに、特徴融合モジュールと Mamba による線形アテンションメカニズムを用いて、この変換されたペイロードを埋め込む、GAN ベースの堅牢な画像透かしフレームワークである FMGAN を設計した。 計算層では、プライベートな更新情報を開示することなく、コミットされた勾配に対する鍵の正当性、L2ノルムの境界、およびコサイン類似性制約を検証する、格子ベースのゼロ知識セキュア集約（LZKSA）プロトコルを採用している。 RLWEに基づくこの設計は、ポスト量子セキュリティを保証する。広範な実験により、複合攻撃シナリオ下における2つの層の相補的な保護効果が実証された。我々の知る限り、ハイブリッドなエンドツーエンドの信頼性のあるFLフレームワークにおいて、両方の層を共同で評価した検証ワークフローはこれまで存在しなかった。",
+  "abstract_translated": "フェデレーテッドラーニング（FL）は、多段階の攻撃に対して脆弱である。しかし、既存の手法ではこれらを個別に扱っているため、FLはデータ漏洩、不正な再利用、悪意のある勾配操作のリスクにさらされたままである。 本研究では、キー付きコンテキスト・プロヴェナンス・ウォーターマーキングと、「Real-World Anchored Watermarking」および「Lattice-Based Zero-Knowledge Secure Aggregation」による検証可能な格子ベースのセキュア集約を組み合わせたFLフレームワークを提案する。 データ層においては、データの出所を保証するために物理アンカーメタデータ（PAM）を利用する、ケルクホフスの原則に準拠したスキームを提案する。 PAM は、信頼できるインフラストラクチャデータ（時間、場所、サーバー ID）から導出されたコンテキスト・プロヴァンス・トークンとして定義され、キー付き HMAC-SHA-256 変換が施されることで、クライアントの秘密鍵なしでは生成できない透かしペイロードが生成されます。 さらに、特徴融合モジュールと Mamba による線形アテンションメカニズムを用いて、この変換されたペイロードを埋め込む、GAN ベースの堅牢な画像透かしフレームワークである FMGAN を設計した。 計算層では、プライベートな更新情報を開示することなく、コミットされた勾配に対する鍵の正当性、L2ノルムの境界、およびコサイン類似性制約を検証する、格子ベースのゼロ知識セキュア集約（LZKSA）プロトコルを採用している。 RLWEに基づくこの設計は、ポスト量子セキュリティを保証する。広範な実験により、複合攻撃シナリオ下における2つの層の相補的な保護効果が実証された。我々の知る限り、ハイブリッドなエンドツーエンドの信頼性のあるFLフレームワークにおいて、両方の層を共同で評価した検証ワークフローはこれまで存在しなかった。",
+  "last_delivered_at": "2026-08-24T02:26:58Z"
  }
 ]

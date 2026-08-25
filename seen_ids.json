@@ -4146,6 +4146,74 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-08-24T02:26:53Z"
+  },
+  "cs.CR:2608.22924": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-25T02:22:01Z"
+  },
+  "cs.CR:2608.22683": {
+   "genre_ids": [
+    "pqc",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-25T02:22:01Z"
+  },
+  "cs.CR:2608.22645": {
+   "genre_ids": [
+    "pqc",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-25T02:22:01Z"
+  },
+  "cs.CR:2608.22123": {
+   "genre_ids": [
+    "pqc",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-25T02:22:01Z"
+  },
+  "cs.CR:2608.21974": {
+   "genre_ids": [
+    "crypto",
+    "qit"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-25T02:22:01Z"
+  },
+  "cs.CR:2608.21989": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-25T02:26:12Z"
+  },
+  "cs.CR:2608.21615": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-25T02:26:12Z"
+  },
+  "cs.IT:2608.21852": {
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-08-25T02:26:20Z"
   }
  },
  "external_pending": {},
@@ -7703,10 +7771,312 @@
   "2608.21342",
   "2608.21361"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2608.22924": {
+   "paper": {
+    "id": "2608.22924",
+    "title": "Cryptocurrencies in the Quantum Age: Migration Paths to PQC",
+    "link": "https://arxiv.org/abs/2608.22924v1",
+    "authors": "Aleksei Kodukhov",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Quantum computers pose a fundamental threat to blockchain systems that rely on elliptic-curve cryptography. This work reviews the quantum vulnerabilities and associated economic risks of major blockchain platforms, with a focus on Bitcoin, Ethereum, and Solana. We distinguish between at-rest, on-spend, and on-setup attacks and identify the blockchain components most exposed to quantum adversaries. We further review practical migration strategies toward post-quantum security, including NIST-standardized digital signatures and emerging solutions for Solana, Algorand, and Ethereum.",
+    "published": "2026-08-24T07:58:29Z",
+    "updated": "2026-08-24T07:58:29Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-25T02:26:20Z"
+  },
+  "2608.22683": {
+   "paper": {
+    "id": "2608.22683",
+    "title": "The Colossus with Feet of Clay: Debunking Encrypted Traffic Classifiers under PQC Evolution",
+    "link": "https://arxiv.org/abs/2608.22683v1",
+    "authors": "Bingzhen Li, Lingjia Meng, Runhan Song, Chuanzhou Pan, Tongjun Pu, Ziqiang Ma, Yupeng Jiang, Lei Cui, Zhiyu Hao",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Encrypted traffic classifiers often achieve high accuracy under matched training and testing conditions, implicitly assuming that deployment traffic follows the training distribution. TLS migration toward post-quantum cryptography (PQC) challenges this assumption because hybrid key establishment can reshape observable traffic without changing application labels. We frame this change as PQC-induced protocol drift and study its effects through closed-world HTTPS website fingerprinting using the deployed TLS~1.3 Hybrid-PQC group \\texttt{\\detokenize{X25519MLKEM768}}. We build a controlled, PQC-aware benchmark pairing Traditional (Non-PQC) and Hybrid-PQC traffic, then evaluate five representative classifiers and side-channel representations under matched-domain, cross-domain, and deployment-ratio settings. Collectively, the experiments show that PQC evolution does not remove learnable website information. Instead, it changes how that information appears in traffic, causing classifiers and feature combinations that perform well in-domain to lose reliability across cryptographic domains. By exposing the fragility of matched-domain evaluation, we offer strategic guidance, identify cross-domain robustness as a research priority, and recommend protocol-aware practices for dependable real-world encrypted traffic classification. The code is available at http://anonymous.4open.science/r/PQ-WF-Eval.",
+    "published": "2026-08-24T00:51:11Z",
+    "updated": "2026-08-24T00:51:11Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "network"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "network": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-25T02:26:20Z"
+  },
+  "2608.22645": {
+   "paper": {
+    "id": "2608.22645",
+    "title": "Obscura-PQ: Post-Quantum Privacy-Preserving Protocol for the Algorand Blockchain Using Lattice-Based Linkable Ring Signatures",
+    "link": "https://arxiv.org/abs/2608.22645v1",
+    "authors": "Navid Azimi",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Public blockchains expose the complete transaction graph, and the privacy protocols deployed to obscure it rely almost exclusively on elliptic-curve cryptography, whose discrete-logarithm foundations fall to Shor's algorithm. Because ledgers are immutable, every anonymity set published today under classical assumptions can be retroactively deanonymized by a future quantum adversary. Transitioning to post-quantum alternatives remains challenging, as strict smart-contract resource limits prohibit native on-chain verification of computationally intensive post-quantum proofs. To address these challenges, we present \\emph{Obscura-PQ}, a decentralized, non-custodial post-quantum privacy protocol that verifies natively on the Algorand blockchain. Its core is a setup-free lattice linkable ring signature over the cyclotomic ring $\\mathcal{R}_q = \\mathbb{Z}_q[X]/(X^{512}+1)$. A deposit is a Ring-SIS binding commitment to a short secret; a withdrawal proves knowledge of a ring opening via an AOS/Borromean-style challenge chain over two response-sharing linear relations with rejection-sampled short responses, while publishing a deterministic Ring-LWE serial number for double-spend detection. We reduce double-spend soundness and linkability to Ring-SIS, theft resistance to Ring-SIS for honestly generated deposits, and anonymity to Ring-LWE and an explicit decisional linking assumption in the classical random-oracle model. To overcome strict on-chain opcode and storage limits, Obscura-PQ evaluates verification relations entirely in the NTT domain. We split forward NTTs across opcode-pooled execution phases and stream oversized proofs through refundable box storage, enabling $O(1)$ membership and double-spend checks. We provide a complete Algorand testnet implementation, demonstrating native on-chain verification of a post-quantum privacy protocol under strict smart-contract limits.",
+    "published": "2026-08-23T23:03:51Z",
+    "updated": "2026-08-23T23:03:51Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "crypto": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-25T02:26:20Z"
+  },
+  "2608.22123": {
+   "paper": {
+    "id": "2608.22123",
+    "title": "A Lightweight and Post-Quantum Secure Framework for IEC 61869-9 Sampled Value Communication",
+    "link": "https://arxiv.org/abs/2608.22123v1",
+    "authors": "S. M. Suhail Hussain, Arman Ahmad, Mohammad Tayyab, Shaik Mullapathi Farooq",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "eess.SY"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Securing IEC 61869-9 Sampled Values (SV) is challenging because process-bus communication must satisfy stringent real-time constraints while supporting standardized high-rate publication profiles. This paper presents an experimentally validated security framework that combines lightweight per-frame authentication for operational SV traffic with post-quantum-capable key establishment protocol. For message integrity, the proposed method applies field-selective authentication employing optimized Chaskey-12 to reduce per-packet computational overhead. For trust establishment, the paper introduces an ML-KEM-based pairwise authentication and key-establishment procedure. The pairwise protocol is analyzed in the Quantum Random Oracle Model and is also verified with AVISPA tool under the Dolev-Yao adversarial model. A C-based publisher/subscriber prototype is implemented on a two-node process-bus testbed. Performance is evaluated across the eight IEC 61869-9 SV packet profiles using HMAC-256, AES-GMAC-128, Blake-2s, Chaskey-12, and a compiler-optimized Chaskey-12 implementations. These results indicate that optimized Chaskey-12 achieves ~90% lower latency than HMAC on SV packets. The proposed security framework is a practical and scalable candidate for protecting IEC 61869-9 SV traffic on resource-constrained digital-substation devices.",
+    "published": "2026-08-22T22:35:04Z",
+    "updated": "2026-08-22T22:35:04Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "network"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "network": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-25T02:26:20Z"
+  },
+  "2608.21974": {
+   "paper": {
+    "id": "2608.21974",
+    "title": "A Loss-Robust Disturbance Certificate for Minimal-Receiver Quantum Key Distribution",
+    "link": "https://arxiv.org/abs/2608.21974v1",
+    "authors": "Roberto Di Pietro",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Quantum Key Distribution (QKD) enjoys information-theoretic security, yet the most damaging attacks against deployed systems exploit the receiver, where the key bit is encoded in which one of a pair of never-identical detectors clicks. The minimal receiver, one rotatable polarizer and one threshold detector, removes that attack surface, and single-detector BB84 demonstrations already run sampled error estimation; the structure of its zero-probability error subensemble, however, has remained uncharacterized. We characterize exactly that structure, introducing a deterministic impossible-event certificate: a click behind a polarizer set orthogonal to the transmitted state has probability exactly zero on an ideal channel, so a single occurrence is a probability-one witness of disturbance; and, since loss deletes clicks and never creates them, the certificate is loss-robust. We prove it sound but incomplete over three polarization states, and show that the four BB84 states close the gap: a fixed-basis intercept-resend attack yields an ideal trip probability of $1/4$ per orthogonal round ($\u03b7/4$ observed at detection efficiency $\u03b7$), independent of the interception angle. An illustrative finite-size budget yields 256 retained bits from $\\approx 62{,}000$ transmitted rounds at $\u03b7= 0.1$; under realistic detector noise ($q_0 = 10^{-6}$ per opened gate), each trip retains $\\approx 12$ bits of evidence at a sub-percent honest false-abort probability per session. The core ideal trip-probability predictions are numerically verified on the Qiskit circuit simulator, via a released, seed-fixed implementation. Overall, by endowing the minimal-detector receiver of polarization QKD with a conclusive, loss-robust disturbance alarm, our solution lowers the hardware entry cost of security-monitored QKD, hence fostering its adoption at the cost-sensitive network edge.",
+    "published": "2026-08-22T14:22:25Z",
+    "updated": "2026-08-22T14:22:25Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "crypto",
+     "qit"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "crypto",
+    "qit"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "crypto": {
+     "status": "pending"
+    },
+    "qit": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-25T02:26:20Z"
+  },
+  "2608.21989": {
+   "paper": {
+    "id": "2608.21989",
+    "title": "Key Recovery from Residue-Confined Errors in Pradhan CRT-RLWE",
+    "link": "https://arxiv.org/abs/2608.21989v1",
+    "authors": "Lukasz Olejnik, Bartosz Naskrecki",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "We show that the CRT-FHE scheme of Pradhan et al.\\ is insecure for laws within its assumed error distribution range. The secret key follows from the public key by a single ring inversion whenever the public multiplier is a unit. The plaintext is recovered from any ciphertext under such a law without the secret key, for every multiplier, giving chosen-plaintext advantage $1/2$. We further show that the transformation from ordinary Ring-LWE to CRT-RLWE does not preserve the error distribution, so it does not establish that CRT-RLWE is at least as hard as Ring-LWE. One mechanism underlies both. The Chinese remainder theorem (CRT) function is reduced modulo $p_1p_2$ while its output is used modulo a coprime modulus $q$, so under every zero-preserving section an error in $p_2\\R$ encodes to zero. The law $p_2B_1$ is so confined, meets the stated conditions, and decrypts correctly. Confinement is not a weakness of scale: scaling any baseline law by $p_2$ leaves its ordinary Ring-LWE problem exactly equivalent, while the reduced encoder destroys every error it produces. The reduction discrepancy is a multiple of $p_1p_2$ and not of $q$, so the small-error premise of the proof cannot remove it, and at the reported parameters a single error coefficient refutes the identity while satisfying that premise. The centered binomial $B_2$ separates the coefficient laws at total variation distance $3/8$, and at the reported dimension that distance between the induced polynomial laws is exponentially close to one.",
+    "published": "2026-08-22T14:42:59Z",
+    "updated": "2026-08-22T14:42:59Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-25T02:26:20Z"
+  },
+  "2608.21615": {
+   "paper": {
+    "id": "2608.21615",
+    "title": "Hiding Directions, Leaking Structure: Breaking ArrowCloak through Low-Rank Structure",
+    "link": "https://arxiv.org/abs/2608.21615v1",
+    "authors": "Beijie Liu, Junyi Ouyang, Haoxuan Xu, Vincent Quentin Ulitzsch, Potung Yu, Yajie Zhao, Mengyuan Li",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "TEE-shielded inference keeps sensitive state in a trusted execution environment (TEE) while offloading linear algebra to an untrusted accelerator. Wang et al., in Game of Arrows (USENIX Security 2025), showed that five widely adopted lightweight defenses preserve vector directions and introduced ArrowMatch to exploit this leakage. They then proposed ArrowCloak, which adds a different multiple of one shared mask direction to each vector and bases its weight-recovery hardness argument on Learning with Errors (LWE). ArrowCloak successfully reduces ArrowMatch to near-black-box levels. In this paper, we revisit ArrowCloak from cryptographic and structural perspectives. Its LWE formulation does not by itself establish standard LWE hardness: the reduction direction, quantized arithmetic, and joint instance distribution do not meet the required conditions. Reusing one mask direction leaves a recoverable rank-one component across the released matrix. We exploit this structure with our proposed attack, an end-to-end, query-free recovery attack. Given a public checkpoint and the obfuscated weights, the attack removes the masking subspace, recovers the hidden one-to-one correspondence, and reconstructs protected weights without transformation secrets, victim queries, or fine-tuning data. Across six model-task pairs spanning classification, segmentation, and diffusion, the attack recovers 99.92%-100% of hidden vector correspondences. Reconstructed classification models achieve 94.39%-99.54% victim agreement and differ by at most 1.59 percentage points in accuracy; the recovered segmentation model achieves 98.35% output agreement. These findings suggest that lightweight protection should address both per-vector geometry and joint structure across released weights.",
+    "published": "2026-08-21T20:30:26Z",
+    "updated": "2026-08-21T20:30:26Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-25T02:26:20Z"
+  },
+  "2608.21852": {
+   "paper": {
+    "id": "2608.21852",
+    "title": "Quantum Locally Repairable Codes from Negacyclic and Repeated-Root Cyclic Codes over Small Fields",
+    "link": "https://arxiv.org/abs/2608.21852v1",
+    "authors": "Ruipan Yang, Qiang Fu, Liangdong Lu",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Quantum locally recoverable codes (qLRCs), introduced recently by Golowich and Guruswami, allow any single-qudit erasure to be recovered from a small set of other qudits. Most known constructions require a large alphabet. We systematically investigate qLRCs obtained, via the CSS construction, from classical constacyclic codes over small fields $\\Ff_q$ with $q\\in\\{2,3,4,5,7\\}$. First, we prove that a nonzero dual-containing $\u03bb$-constacyclic code exists only when $\u03bb^2=1$, so that negacyclic and (repeated-root) cyclic codes exhaust the constacyclic route to qLRCs. Second, we show that the locality of a constacyclic code equals the minimum distance of its dual minus one, and we give a simple purity criterion for the resulting quantum codes. Third, we show that odd-like duadic codes whose splitting is given by $\u03bc_{-1}$ yield pure qLRCs; specializing to $q$-ary quadratic residue codes of prime length $p\\equiv 3 \\pmod 4$ gives an infinite family of pure qLRCs with unbounded minimum distance and certified locality. Finally, by means of concrete computations, we obtain a classification of qLRCs from cyclic, negacyclic, and repeated-root cyclic codes of moderate lengths, which contains the first binary qLRCs from repeated-root cyclic codes and many parameter sets that cyclic codes cannot attain.",
+    "published": "2026-08-22T08:53:18Z",
+    "updated": "2026-08-22T08:53:18Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-08-25T02:26:20Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-08-24T08:00:12Z",
-  "cs.CC": "2026-08-24T08:00:22Z",
-  "cs.IT": "2026-08-24T08:00:28Z"
+  "cs.CR": "2026-08-25T02:21:26Z",
+  "cs.CC": "2026-08-25T02:21:34Z",
+  "cs.IT": "2026-08-25T02:21:39Z"
  }
 }

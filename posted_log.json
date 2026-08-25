@@ -102918,5 +102918,302 @@
   "abstract_ja": "レヴィン・ウェンモデルは、与えられたユニタリー融合圏に関連付けられた位相的順序の格子上の実現を提供する。長年の未解決問題の一つは、事前の圏論的対称性データやハミルトニアンを仮定することなく、レヴィン・ウェンの基底状態波動関数を本質的に特徴づけることである。 我々は、複数のスケールにおける格子上で定義される波動関数の族について、6つの公理を提案することで、この問題に取り組む。これらの公理により、基礎となるユニタリ融合圏を再構築することが可能となり、その結果得られる波動関数が、創発的な圏におけるゼロでないレヴィン・ウェン基底状態ベクトルに写像されることを証明する。",
   "abstract_translated": "レヴィン・ウェンモデルは、与えられたユニタリー融合圏に関連付けられた位相的順序の格子上の実現を提供する。長年の未解決問題の一つは、事前の圏論的対称性データやハミルトニアンを仮定することなく、レヴィン・ウェンの基底状態波動関数を本質的に特徴づけることである。 我々は、複数のスケールにおける格子上で定義される波動関数の族について、6つの公理を提案することで、この問題に取り組む。これらの公理により、基礎となるユニタリ融合圏を再構築することが可能となり、その結果得られる波動関数が、創発的な圏におけるゼロでないレヴィン・ウェン基底状態ベクトルに写像されることを証明する。",
   "last_delivered_at": "2026-08-24T04:57:56Z"
+ },
+ {
+  "delivery_id": "main:2608.21852",
+  "id": "2608.21852",
+  "posted_at": "2026-08-25T02:26:37Z",
+  "title": "Quantum Locally Repairable Codes from Negacyclic and Repeated-Root Cyclic Codes over Small Fields",
+  "title_ja": "小体上のネガサイクリック符号および根が繰り返されるサイクリック符号から得られる、局所的に修復可能な量子符号",
+  "title_translated": "小体上のネガサイクリック符号および根が繰り返されるサイクリック符号から得られる、局所的に修復可能な量子符号",
+  "translation_language": "ja",
+  "authors": "Ruipan Yang, Qiang Fu, Liangdong Lu",
+  "link": "https://arxiv.org/abs/2608.21852v1",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "target_genre_ids": [
+   "qec"
+  ],
+  "target_genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Quantum locally recoverable codes (qLRCs), introduced recently by Golowich and Guruswami, allow any single-qudit erasure to be recovered from a small set of other qudits. Most known constructions require a large alphabet. We systematically investigate qLRCs obtained, via the CSS construction, from classical constacyclic codes over small fields $\\Ff_q$ with $q\\in\\{2,3,4,5,7\\}$. First, we prove that a nonzero dual-containing $λ$-constacyclic code exists only when $λ^2=1$, so that negacyclic and (repeated-root) cyclic codes exhaust the constacyclic route to qLRCs. Second, we show that the locality of a constacyclic code equals the minimum distance of its dual minus one, and we give a simple purity criterion for the resulting quantum codes. Third, we show that odd-like duadic codes whose splitting is given by $μ_{-1}$ yield pure qLRCs; specializing to $q$-ary quadratic residue codes of prime length $p\\equiv 3 \\pmod 4$ gives an infinite family of pure qLRCs with unbounded minimum distance and certified locality. Finally, by means of concrete computations, we obtain a classification of qLRCs from cyclic, negacyclic, and repeated-root cyclic codes of moderate lengths, which contains the first binary qLRCs from repeated-root cyclic codes and many parameter sets that cyclic codes cannot attain.",
+  "abstract_ja": "GolowichとGuruswamiによって最近導入された量子局所復元可能符号（qLRC）は、任意の単一クディットの消去を、他の少数のクディットから復元することを可能にする。既知の構成法のほとんどは、大規模なアルファベットを必要とする。 本論文では、$q\\in\\{2,3,4,5,7\\}$ である小さな体 $\\Ff_q$ 上の古典的定周期コードから、CSS 構成法を用いて得られる qLRC を体系的に調査する。 まず、非零のデュアルを含む$λ$-定周期コードが存在するのは$λ^2=1$の場合に限られることを証明する。したがって、負周期コードおよび（根の繰り返しを持つ）周期コードが、qLRCへの定周期経路を網羅することになる。 次に、コンスタサイクリック符号の局所性が、その双対の最小距離から1を引いた値に等しいことを示し、その結果得られる量子符号に対する単純な純度基準を提示する。 第三に、$μ_{-1}$ によって分割が与えられる奇数型デュアディック符号が純粋な qLRC を生じること示す。これを、素数長 $p\\equiv 3 \\pmod 4$ の $q$ 進二次剰余符号に特化すると、最小距離が無限大で、局所性が保証された純粋な qLRC の無限族が得られる。 最後に、具体的な計算を通じて、中程度の長さの巡回符号、非巡回符号、および繰り返し根巡回符号からのqLRCの分類を導出する。これには、繰り返し根巡回符号から得られる最初の2進qLRCや、巡回符号では達成できない多くのパラメータセットが含まれている。",
+  "abstract_translated": "GolowichとGuruswamiによって最近導入された量子局所復元可能符号（qLRC）は、任意の単一クディットの消去を、他の少数のクディットから復元することを可能にする。既知の構成法のほとんどは、大規模なアルファベットを必要とする。 本論文では、$q\\in\\{2,3,4,5,7\\}$ である小さな体 $\\Ff_q$ 上の古典的定周期コードから、CSS 構成法を用いて得られる qLRC を体系的に調査する。 まず、非零のデュアルを含む$λ$-定周期コードが存在するのは$λ^2=1$の場合に限られることを証明する。したがって、負周期コードおよび（根の繰り返しを持つ）周期コードが、qLRCへの定周期経路を網羅することになる。 次に、コンスタサイクリック符号の局所性が、その双対の最小距離から1を引いた値に等しいことを示し、その結果得られる量子符号に対する単純な純度基準を提示する。 第三に、$μ_{-1}$ によって分割が与えられる奇数型デュアディック符号が純粋な qLRC を生じること示す。これを、素数長 $p\\equiv 3 \\pmod 4$ の $q$ 進二次剰余符号に特化すると、最小距離が無限大で、局所性が保証された純粋な qLRC の無限族が得られる。 最後に、具体的な計算を通じて、中程度の長さの巡回符号、非巡回符号、および繰り返し根巡回符号からのqLRCの分類を導出する。これには、繰り返し根巡回符号から得られる最初の2進qLRCや、巡回符号では達成できない多くのパラメータセットが含まれている。",
+  "last_delivered_at": "2026-08-25T02:26:37Z"
+ },
+ {
+  "delivery_id": "main:2608.21974",
+  "id": "2608.21974",
+  "posted_at": "2026-08-25T02:26:39Z",
+  "title": "A Loss-Robust Disturbance Certificate for Minimal-Receiver Quantum Key Distribution",
+  "title_ja": "最小受信機型量子鍵配送のための損失ロバストな外乱証明書",
+  "title_translated": "最小受信機型量子鍵配送のための損失ロバストな外乱証明書",
+  "translation_language": "ja",
+  "authors": "Roberto Di Pietro",
+  "link": "https://arxiv.org/abs/2608.21974v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "crypto",
+   "qit"
+  ],
+  "genre_names": [
+   "暗号・セキュリティ",
+   "量子情報理論"
+  ],
+  "target_genre_ids": [
+   "crypto",
+   "qit"
+  ],
+  "target_genre_names": [
+   "暗号・セキュリティ",
+   "量子情報理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Quantum Key Distribution (QKD) enjoys information-theoretic security, yet the most damaging attacks against deployed systems exploit the receiver, where the key bit is encoded in which one of a pair of never-identical detectors clicks. The minimal receiver, one rotatable polarizer and one threshold detector, removes that attack surface, and single-detector BB84 demonstrations already run sampled error estimation; the structure of its zero-probability error subensemble, however, has remained uncharacterized. We characterize exactly that structure, introducing a deterministic impossible-event certificate: a click behind a polarizer set orthogonal to the transmitted state has probability exactly zero on an ideal channel, so a single occurrence is a probability-one witness of disturbance; and, since loss deletes clicks and never creates them, the certificate is loss-robust. We prove it sound but incomplete over three polarization states, and show that the four BB84 states close the gap: a fixed-basis intercept-resend attack yields an ideal trip probability of $1/4$ per orthogonal round ($η/4$ observed at detection efficiency $η$), independent of the interception angle. An illustrative finite-size budget yields 256 retained bits from $\\approx 62{,}000$ transmitted rounds at $η= 0.1$; under realistic detector noise ($q_0 = 10^{-6}$ per opened gate), each trip retains $\\approx 12$ bits of evidence at a sub-percent honest false-abort probability per session. The core ideal trip-probability predictions are numerically verified on the Qiskit circuit simulator, via a released, seed-fixed implementation. Overall, by endowing the minimal-detector receiver of polarization QKD with a conclusive, loss-robust disturbance alarm, our solution lowers the hardware entry cost of security-monitored QKD, hence fostering its adoption at the cost-sensitive network edge.",
+  "abstract_ja": "量子鍵配送（QKD）は情報理論的な安全性を持つが、実稼働システムに対する最も破壊的な攻撃は、受信機を悪用するものである。この攻撃では、決して同一にならない2つの検出器のどちらが反応するかに鍵ビットが符号化されている。 回転可能な偏光板1つと閾値検出器1つからなる最小限の受信機は、その攻撃面を取り除き、単一検出器を用いたBB84の実証実験ではすでにサンプリング誤差推定が行われている。しかし、そのゼロ確率誤差部分集合の構造については、これまで特徴付けられていなかった。 我々は、その構造を正確に特徴づけ、決定論的な「不可能な事象の証明書」を導入する。すなわち、送信状態に直交するように設定された偏光子の背後でクリックが発生する確率は、理想的なチャネル上では厳密にゼロであるため、単一の発生は干渉の確率1の証左となる。また、損失はクリックを削除するだけで決して生成しないため、この証明書は損失に対して頑健である。 我々は、3つの偏光状態において、この証明が妥当であるが不完全であることを示し、4つのBB84状態がそのギャップを埋めることを示す。すなわち、固定基底の傍受・再送信攻撃では、傍受角度に依存せず、直交ラウンドごとに理想的なトリップ確率が$1/4$（検出効率$η$において$η/4$が観測される）となる。 例示的な有限サイズの予算では、$η= 0.1$ の条件下で、約 62,000 回の送信ラウンドから 256 ビットが保持される。 現実的な検出器ノイズ（ゲート1つあたり$q_0 = 10^{-6}$）の下では、各トリップで約12ビットの証拠が保持され、セッションあたりの誠実な誤中止確率は1％未満となる。 極限的なトリップ確率の予測は、公開済みのシード固定実装を用いて、Qiskit回路シミュレータ上で数値的に検証された。 全体として、偏光QKDの最小検出器受信機に、決定的かつ損失に強い干渉アラームを付与することで、本ソリューションはセキュリティ監視付きQKDのハードウェア導入コストを低減し、その結果、コストに敏感なネットワークエッジにおけるその採用を促進する。",
+  "abstract_translated": "量子鍵配送（QKD）は情報理論的な安全性を持つが、実稼働システムに対する最も破壊的な攻撃は、受信機を悪用するものである。この攻撃では、決して同一にならない2つの検出器のどちらが反応するかに鍵ビットが符号化されている。 回転可能な偏光板1つと閾値検出器1つからなる最小限の受信機は、その攻撃面を取り除き、単一検出器を用いたBB84の実証実験ではすでにサンプリング誤差推定が行われている。しかし、そのゼロ確率誤差部分集合の構造については、これまで特徴付けられていなかった。 我々は、その構造を正確に特徴づけ、決定論的な「不可能な事象の証明書」を導入する。すなわち、送信状態に直交するように設定された偏光子の背後でクリックが発生する確率は、理想的なチャネル上では厳密にゼロであるため、単一の発生は干渉の確率1の証左となる。また、損失はクリックを削除するだけで決して生成しないため、この証明書は損失に対して頑健である。 我々は、3つの偏光状態において、この証明が妥当であるが不完全であることを示し、4つのBB84状態がそのギャップを埋めることを示す。すなわち、固定基底の傍受・再送信攻撃では、傍受角度に依存せず、直交ラウンドごとに理想的なトリップ確率が$1/4$（検出効率$η$において$η/4$が観測される）となる。 例示的な有限サイズの予算では、$η= 0.1$ の条件下で、約 62,000 回の送信ラウンドから 256 ビットが保持される。 現実的な検出器ノイズ（ゲート1つあたり$q_0 = 10^{-6}$）の下では、各トリップで約12ビットの証拠が保持され、セッションあたりの誠実な誤中止確率は1％未満となる。 極限的なトリップ確率の予測は、公開済みのシード固定実装を用いて、Qiskit回路シミュレータ上で数値的に検証された。 全体として、偏光QKDの最小検出器受信機に、決定的かつ損失に強い干渉アラームを付与することで、本ソリューションはセキュリティ監視付きQKDのハードウェア導入コストを低減し、その結果、コストに敏感なネットワークエッジにおけるその採用を促進する。",
+  "last_delivered_at": "2026-08-25T02:26:41Z"
+ },
+ {
+  "delivery_id": "main:2608.22645",
+  "id": "2608.22645",
+  "posted_at": "2026-08-25T02:26:43Z",
+  "title": "Obscura-PQ: Post-Quantum Privacy-Preserving Protocol for the Algorand Blockchain Using Lattice-Based Linkable Ring Signatures",
+  "title_ja": "Obscura-PQ：格子ベースの連結可能リング署名を用いた、アルゴランド・ブロックチェーン向けのポスト量子プライバシー保護プロトコル",
+  "title_translated": "Obscura-PQ：格子ベースの連結可能リング署名を用いた、アルゴランド・ブロックチェーン向けのポスト量子プライバシー保護プロトコル",
+  "translation_language": "ja",
+  "authors": "Navid Azimi",
+  "link": "https://arxiv.org/abs/2608.22645v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "crypto"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "crypto"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Public blockchains expose the complete transaction graph, and the privacy protocols deployed to obscure it rely almost exclusively on elliptic-curve cryptography, whose discrete-logarithm foundations fall to Shor's algorithm. Because ledgers are immutable, every anonymity set published today under classical assumptions can be retroactively deanonymized by a future quantum adversary. Transitioning to post-quantum alternatives remains challenging, as strict smart-contract resource limits prohibit native on-chain verification of computationally intensive post-quantum proofs. To address these challenges, we present \\emph{Obscura-PQ}, a decentralized, non-custodial post-quantum privacy protocol that verifies natively on the Algorand blockchain. Its core is a setup-free lattice linkable ring signature over the cyclotomic ring $\\mathcal{R}_q = \\mathbb{Z}_q[X]/(X^{512}+1)$. A deposit is a Ring-SIS binding commitment to a short secret; a withdrawal proves knowledge of a ring opening via an AOS/Borromean-style challenge chain over two response-sharing linear relations with rejection-sampled short responses, while publishing a deterministic Ring-LWE serial number for double-spend detection. We reduce double-spend soundness and linkability to Ring-SIS, theft resistance to Ring-SIS for honestly generated deposits, and anonymity to Ring-LWE and an explicit decisional linking assumption in the classical random-oracle model. To overcome strict on-chain opcode and storage limits, Obscura-PQ evaluates verification relations entirely in the NTT domain. We split forward NTTs across opcode-pooled execution phases and stream oversized proofs through refundable box storage, enabling $O(1)$ membership and double-spend checks. We provide a complete Algorand testnet implementation, demonstrating native on-chain verification of a post-quantum privacy protocol under strict smart-contract limits.",
+  "abstract_ja": "パブリックブロックチェーンは取引グラフ全体を公開しており、それを隠蔽するために導入されたプライバシープロトコルは、ほぼ例外なく楕円曲線暗号に依存しています。しかし、その基礎となる離散対数問題は、ショアのアルゴリズムによって解かれてしまいます。 台帳は不変であるため、従来の仮定の下で今日公開されたすべての匿名性セットは、将来の量子攻撃者によって遡及的に匿名化が解除される可能性があります。スマートコントラクトのリソース制限が厳しいため、計算負荷の高いポスト量子証明をオンチェーンでネイティブに検証することができず、ポスト量子代替手段への移行は依然として困難な課題となっています。 これらの課題に対処するため、我々は、Algorandブロックチェーン上でネイティブに検証可能な、分散型かつ非カストディアルなポスト量子プライバシープロトコル「\\emph{Obscura-PQ}」を提案する。 その中核をなすのは、循環体環 $\\mathcal{R}_q = \\mathbb{Z}_q[X]/(X^{512}+1)$ 上の、セットアップ不要な格子連結型リング署名である。 デポジットは、短い秘密鍵に対するRing-SISバインディングコミットメントである。引き出しは、リジェクションサンプリングされた短い応答を持つ2つの応答共有線形関係にわたるAOS／ボロメオ式チャレンジチェーンを通じてリングオープニングの知識を証明すると同時に、二重支払いの検出のために決定論的なRing-LWEシリアル番号を公開する。 我々は、二重支出の健全性とリンク可能性をRing-SISに、盗難耐性を（誠実に生成されたデポジットに対する）Ring-SISに、そして匿名性をRing-LWEおよび古典的なランダムオラクルモデルにおける明示的な決定的リンク仮定に還元する。 厳格なオンチェーンのオペコードおよびストレージの制限を克服するため、Obscura-PQは検証関係を完全にNTTドメイン内で評価する。 フォワードNTTをオペコードプール化された実行フェーズに分割し、サイズ超過の証明を返金可能なボックスストレージを通じてストリーム処理することで、$O(1)$のメンバーシップチェックおよび二重支払いのチェックを可能にします。我々はAlgorandテストネット向けの完全な実装を提供し、厳格なスマートコントラクトの制限下における、ポスト量子プライバシープロトコルのネイティブなオンチェーン検証を実証します。",
+  "abstract_translated": "パブリックブロックチェーンは取引グラフ全体を公開しており、それを隠蔽するために導入されたプライバシープロトコルは、ほぼ例外なく楕円曲線暗号に依存しています。しかし、その基礎となる離散対数問題は、ショアのアルゴリズムによって解かれてしまいます。 台帳は不変であるため、従来の仮定の下で今日公開されたすべての匿名性セットは、将来の量子攻撃者によって遡及的に匿名化が解除される可能性があります。スマートコントラクトのリソース制限が厳しいため、計算負荷の高いポスト量子証明をオンチェーンでネイティブに検証することができず、ポスト量子代替手段への移行は依然として困難な課題となっています。 これらの課題に対処するため、我々は、Algorandブロックチェーン上でネイティブに検証可能な、分散型かつ非カストディアルなポスト量子プライバシープロトコル「\\emph{Obscura-PQ}」を提案する。 その中核をなすのは、循環体環 $\\mathcal{R}_q = \\mathbb{Z}_q[X]/(X^{512}+1)$ 上の、セットアップ不要な格子連結型リング署名である。 デポジットは、短い秘密鍵に対するRing-SISバインディングコミットメントである。引き出しは、リジェクションサンプリングされた短い応答を持つ2つの応答共有線形関係にわたるAOS／ボロメオ式チャレンジチェーンを通じてリングオープニングの知識を証明すると同時に、二重支払いの検出のために決定論的なRing-LWEシリアル番号を公開する。 我々は、二重支出の健全性とリンク可能性をRing-SISに、盗難耐性を（誠実に生成されたデポジットに対する）Ring-SISに、そして匿名性をRing-LWEおよび古典的なランダムオラクルモデルにおける明示的な決定的リンク仮定に還元する。 厳格なオンチェーンのオペコードおよびストレージの制限を克服するため、Obscura-PQは検証関係を完全にNTTドメイン内で評価する。 フォワードNTTをオペコードプール化された実行フェーズに分割し、サイズ超過の証明を返金可能なボックスストレージを通じてストリーム処理することで、$O(1)$のメンバーシップチェックおよび二重支払いのチェックを可能にします。我々はAlgorandテストネット向けの完全な実装を提供し、厳格なスマートコントラクトの制限下における、ポスト量子プライバシープロトコルのネイティブなオンチェーン検証を実証します。",
+  "last_delivered_at": "2026-08-25T02:26:45Z"
+ },
+ {
+  "delivery_id": "main:2608.21615",
+  "id": "2608.21615",
+  "posted_at": "2026-08-25T02:26:46Z",
+  "title": "Hiding Directions, Leaking Structure: Breaking ArrowCloak through Low-Rank Structure",
+  "title_ja": "隠された方向、漏れる構造：低ランクの構造を通じた「ブレイキング・アロー・クローク」の解明",
+  "title_translated": "隠された方向、漏れる構造：低ランクの構造を通じた「ブレイキング・アロー・クローク」の解明",
+  "translation_language": "ja",
+  "authors": "Beijie Liu, Junyi Ouyang, Haoxuan Xu, Vincent Quentin Ulitzsch, Potung Yu, Yajie Zhao, Mengyuan Li",
+  "link": "https://arxiv.org/abs/2608.21615v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "TEE-shielded inference keeps sensitive state in a trusted execution environment (TEE) while offloading linear algebra to an untrusted accelerator. Wang et al., in Game of Arrows (USENIX Security 2025), showed that five widely adopted lightweight defenses preserve vector directions and introduced ArrowMatch to exploit this leakage. They then proposed ArrowCloak, which adds a different multiple of one shared mask direction to each vector and bases its weight-recovery hardness argument on Learning with Errors (LWE). ArrowCloak successfully reduces ArrowMatch to near-black-box levels. In this paper, we revisit ArrowCloak from cryptographic and structural perspectives. Its LWE formulation does not by itself establish standard LWE hardness: the reduction direction, quantized arithmetic, and joint instance distribution do not meet the required conditions. Reusing one mask direction leaves a recoverable rank-one component across the released matrix. We exploit this structure with our proposed attack, an end-to-end, query-free recovery attack. Given a public checkpoint and the obfuscated weights, the attack removes the masking subspace, recovers the hidden one-to-one correspondence, and reconstructs protected weights without transformation secrets, victim queries, or fine-tuning data. Across six model-task pairs spanning classification, segmentation, and diffusion, the attack recovers 99.92%-100% of hidden vector correspondences. Reconstructed classification models achieve 94.39%-99.54% victim agreement and differ by at most 1.59 percentage points in accuracy; the recovered segmentation model achieves 98.35% output agreement. These findings suggest that lightweight protection should address both per-vector geometry and joint structure across released weights.",
+  "abstract_ja": "TEEシールド型推論は、機密性の高い状態を信頼実行環境（TEE）内に保持しつつ、線形代数演算を信頼できないアクセラレータにオフロードする手法である。Wangらは、「Game of Arrows」（USENIX Security 2025）において、広く採用されている5つの軽量防御手法がベクトルの方向を保持してしまうことを示し、この情報漏洩を悪用するための手法「ArrowMatch」を提案した。 続いて彼らは、各ベクトルに共有されたマスク方向の異なる倍数を加える「ArrowCloak」を提案し、その重み復元困難性の論拠を「Learning with Errors（LWE）」に基づいて構築した。ArrowCloakは、ArrowMatchをほぼブラックボックスレベルまで低減することに成功した。 本論文では、暗号学的および構造的な観点からArrowCloakを再検討する。そのLWE定式化は、それ自体では標準的なLWEの困難性を確立していない。すなわち、還元方向、量子化算術、および共同インスタンス分布が、必要な条件を満たしていないからである。1つのマスク方向を再利用することで、公開された行列全体に復元可能なランク1の成分が残される。 我々は、この構造を、提案するエンドツーエンドのクエリ不要な復元攻撃に活用する。公開されたチェックポイントと難読化された重みが与えられると、この攻撃はマスキング部分空間を除去し、隠された一対一対応を復元し、変換の秘密、被害者のクエリ、または微調整データを使用せずに保護された重みを再構築する。 分類、セグメンテーション、拡散処理にわたる6つのモデル・タスクの組み合わせにおいて、本攻撃は隠れたベクトル対応関係の99.92%～100%を復元する。 再構築された分類モデルは、94.39%～99.54%の被害者一致率を達成し、精度は最大1.59パーセントポイントの差にとどまります。また、復元されたセグメンテーションモデルは、98.35%の出力一致率を達成しています。これらの知見は、軽量な保護手法においては、ベクトルごとの幾何学的構造と、公開された重み全体にわたる結合構造の両方に対処する必要があることを示唆しています。",
+  "abstract_translated": "TEEシールド型推論は、機密性の高い状態を信頼実行環境（TEE）内に保持しつつ、線形代数演算を信頼できないアクセラレータにオフロードする手法である。Wangらは、「Game of Arrows」（USENIX Security 2025）において、広く採用されている5つの軽量防御手法がベクトルの方向を保持してしまうことを示し、この情報漏洩を悪用するための手法「ArrowMatch」を提案した。 続いて彼らは、各ベクトルに共有されたマスク方向の異なる倍数を加える「ArrowCloak」を提案し、その重み復元困難性の論拠を「Learning with Errors（LWE）」に基づいて構築した。ArrowCloakは、ArrowMatchをほぼブラックボックスレベルまで低減することに成功した。 本論文では、暗号学的および構造的な観点からArrowCloakを再検討する。そのLWE定式化は、それ自体では標準的なLWEの困難性を確立していない。すなわち、還元方向、量子化算術、および共同インスタンス分布が、必要な条件を満たしていないからである。1つのマスク方向を再利用することで、公開された行列全体に復元可能なランク1の成分が残される。 我々は、この構造を、提案するエンドツーエンドのクエリ不要な復元攻撃に活用する。公開されたチェックポイントと難読化された重みが与えられると、この攻撃はマスキング部分空間を除去し、隠された一対一対応を復元し、変換の秘密、被害者のクエリ、または微調整データを使用せずに保護された重みを再構築する。 分類、セグメンテーション、拡散処理にわたる6つのモデル・タスクの組み合わせにおいて、本攻撃は隠れたベクトル対応関係の99.92%～100%を復元する。 再構築された分類モデルは、94.39%～99.54%の被害者一致率を達成し、精度は最大1.59パーセントポイントの差にとどまります。また、復元されたセグメンテーションモデルは、98.35%の出力一致率を達成しています。これらの知見は、軽量な保護手法においては、ベクトルごとの幾何学的構造と、公開された重み全体にわたる結合構造の両方に対処する必要があることを示唆しています。",
+  "last_delivered_at": "2026-08-25T02:26:46Z"
+ },
+ {
+  "delivery_id": "main:2608.21989",
+  "id": "2608.21989",
+  "posted_at": "2026-08-25T02:26:48Z",
+  "title": "Key Recovery from Residue-Confined Errors in Pradhan CRT-RLWE",
+  "title_ja": "Pradhan CRT-RLWEにおける残留値に限定された誤差からのキー復元",
+  "title_translated": "Pradhan CRT-RLWEにおける残留値に限定された誤差からのキー復元",
+  "translation_language": "ja",
+  "authors": "Lukasz Olejnik, Bartosz Naskrecki",
+  "link": "https://arxiv.org/abs/2608.21989v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We show that the CRT-FHE scheme of Pradhan et al.\\ is insecure for laws within its assumed error distribution range. The secret key follows from the public key by a single ring inversion whenever the public multiplier is a unit. The plaintext is recovered from any ciphertext under such a law without the secret key, for every multiplier, giving chosen-plaintext advantage $1/2$. We further show that the transformation from ordinary Ring-LWE to CRT-RLWE does not preserve the error distribution, so it does not establish that CRT-RLWE is at least as hard as Ring-LWE. One mechanism underlies both. The Chinese remainder theorem (CRT) function is reduced modulo $p_1p_2$ while its output is used modulo a coprime modulus $q$, so under every zero-preserving section an error in $p_2\\R$ encodes to zero. The law $p_2B_1$ is so confined, meets the stated conditions, and decrypts correctly. Confinement is not a weakness of scale: scaling any baseline law by $p_2$ leaves its ordinary Ring-LWE problem exactly equivalent, while the reduced encoder destroys every error it produces. The reduction discrepancy is a multiple of $p_1p_2$ and not of $q$, so the small-error premise of the proof cannot remove it, and at the reported parameters a single error coefficient refutes the identity while satisfying that premise. The centered binomial $B_2$ separates the coefficient laws at total variation distance $3/8$, and at the reported dimension that distance between the induced polynomial laws is exponentially close to one.",
+  "abstract_ja": "我々は、PradhanらによるCRT-FHE方式が、その仮定する誤差分布範囲内の法則については安全ではないことを示す。 公開乗数が単位である場合、秘密鍵は公開鍵から単一のリング逆演算によって導出される。この法則の下では、あらゆる乗数について、秘密鍵を持たずに任意の暗号文から平文を復元することができ、これにより「選択平文」の利得は $1/2$ となる。 さらに、通常のRing-LWEからCRT-RLWEへの変換は誤差分布を保持しないため、CRT-RLWEがRing-LWEと同等以上の難しさを持つことを立証するものではないことを示す。両者には共通のメカニズムが存在する。 中国剰余定理（CRT）関数は $p_1p_2$ を法として還元される一方、その出力は互いに素な法 $q$ を法として使用されるため、ゼロを保存するすべての断面において、$p_2\\R$ 内の誤りはゼロとして符号化される。 法則 $p_2B_1$ はこのように限定されており、規定された条件を満たし、正しく復号を行う。この限定はスケールの弱点ではない。任意のベースライン法則を $p_2$ 倍しても、その通常の Ring-LWE 問題は完全に同値のままであり、一方、還元されたエンコーダは、それ自体が生み出すあらゆる誤りを破壊する。 還元による不一致は $q$ の倍数ではなく $p_1p_2$ の倍数であるため、証明の「誤差が小さい」という前提ではこれを除去できず、報告されたパラメータでは、単一の誤差係数がその前提を満たしつつも同値性を反証してしまう。 中心化二項分布 $B_2$ は、総変動距離 $3/8$ で係数法則を分離し、報告された次元において、誘導された多項式法則間のその距離は、1に指数関数的に近い。",
+  "abstract_translated": "我々は、PradhanらによるCRT-FHE方式が、その仮定する誤差分布範囲内の法則については安全ではないことを示す。 公開乗数が単位である場合、秘密鍵は公開鍵から単一のリング逆演算によって導出される。この法則の下では、あらゆる乗数について、秘密鍵を持たずに任意の暗号文から平文を復元することができ、これにより「選択平文」の利得は $1/2$ となる。 さらに、通常のRing-LWEからCRT-RLWEへの変換は誤差分布を保持しないため、CRT-RLWEがRing-LWEと同等以上の難しさを持つことを立証するものではないことを示す。両者には共通のメカニズムが存在する。 中国剰余定理（CRT）関数は $p_1p_2$ を法として還元される一方、その出力は互いに素な法 $q$ を法として使用されるため、ゼロを保存するすべての断面において、$p_2\\R$ 内の誤りはゼロとして符号化される。 法則 $p_2B_1$ はこのように限定されており、規定された条件を満たし、正しく復号を行う。この限定はスケールの弱点ではない。任意のベースライン法則を $p_2$ 倍しても、その通常の Ring-LWE 問題は完全に同値のままであり、一方、還元されたエンコーダは、それ自体が生み出すあらゆる誤りを破壊する。 還元による不一致は $q$ の倍数ではなく $p_1p_2$ の倍数であるため、証明の「誤差が小さい」という前提ではこれを除去できず、報告されたパラメータでは、単一の誤差係数がその前提を満たしつつも同値性を反証してしまう。 中心化二項分布 $B_2$ は、総変動距離 $3/8$ で係数法則を分離し、報告された次元において、誘導された多項式法則間のその距離は、1に指数関数的に近い。",
+  "last_delivered_at": "2026-08-25T02:26:48Z"
+ },
+ {
+  "delivery_id": "main:2608.22123",
+  "id": "2608.22123",
+  "posted_at": "2026-08-25T02:26:51Z",
+  "title": "A Lightweight and Post-Quantum Secure Framework for IEC 61869-9 Sampled Value Communication",
+  "title_ja": "IEC 61869-9 サンプリング値通信のための、軽量かつポスト量子セキュリティ対応のフレームワーク",
+  "title_translated": "IEC 61869-9 サンプリング値通信のための、軽量かつポスト量子セキュリティ対応のフレームワーク",
+  "translation_language": "ja",
+  "authors": "S. M. Suhail Hussain, Arman Ahmad, Mohammad Tayyab, Shaik Mullapathi Farooq",
+  "link": "https://arxiv.org/abs/2608.22123v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "eess.SY"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "network"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ネットワーク・通信"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "network"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "量子ネットワーク・通信"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Securing IEC 61869-9 Sampled Values (SV) is challenging because process-bus communication must satisfy stringent real-time constraints while supporting standardized high-rate publication profiles. This paper presents an experimentally validated security framework that combines lightweight per-frame authentication for operational SV traffic with post-quantum-capable key establishment protocol. For message integrity, the proposed method applies field-selective authentication employing optimized Chaskey-12 to reduce per-packet computational overhead. For trust establishment, the paper introduces an ML-KEM-based pairwise authentication and key-establishment procedure. The pairwise protocol is analyzed in the Quantum Random Oracle Model and is also verified with AVISPA tool under the Dolev-Yao adversarial model. A C-based publisher/subscriber prototype is implemented on a two-node process-bus testbed. Performance is evaluated across the eight IEC 61869-9 SV packet profiles using HMAC-256, AES-GMAC-128, Blake-2s, Chaskey-12, and a compiler-optimized Chaskey-12 implementations. These results indicate that optimized Chaskey-12 achieves ~90% lower latency than HMAC on SV packets. The proposed security framework is a practical and scalable candidate for protecting IEC 61869-9 SV traffic on resource-constrained digital-substation devices.",
+  "abstract_ja": "IEC 61869-9のサンプリング値（SV）のセキュリティ確保は、プロセスバス通信が、標準化された高レート公開プロファイルに対応しつつ、厳しいリアルタイム制約を満たさなければならないため、困難を伴います。本論文では、運用上のSVトラフィックに対する軽量なフレーム単位の認証と、ポスト量子耐性を持つ鍵確立プロトコルを組み合わせた、実験的に検証済みのセキュリティフレームワークを提案します。 メッセージの完全性を確保するため、提案手法では、パケットごとの計算オーバーヘッドを低減するために最適化されたChaskey-12を用いたフィールド選択型認証を適用する。信頼関係の確立については、ML-KEMに基づくペアワイズ認証および鍵確立手順を導入する。 このペアワイズプロトコルは、量子ランダムオラクルモデルで解析され、Dolev-Yao敵対モデル下でAVISPAツールを用いて検証もされている。C言語ベースのパブリッシャー／サブスクライバープロトタイプは、2ノードのプロセスバス・テストベッド上で実装された。 性能評価は、HMAC-256、AES-GMAC-128、Blake-2s、Chaskey-12、およびコンパイラ最適化されたChaskey-12の実装を用いて、8つのIEC 61869-9 SVパケットプロファイル全体で実施された。 これらの結果から、最適化されたChaskey-12は、SVパケットにおいてHMACよりも約90％低い遅延を実現することが示された。提案されたセキュリティフレームワークは、リソースに制約のあるデジタル変電所デバイス上でIEC 61869-9 SVトラフィックを保護するための、実用的かつスケーラブルな候補である。",
+  "abstract_translated": "IEC 61869-9のサンプリング値（SV）のセキュリティ確保は、プロセスバス通信が、標準化された高レート公開プロファイルに対応しつつ、厳しいリアルタイム制約を満たさなければならないため、困難を伴います。本論文では、運用上のSVトラフィックに対する軽量なフレーム単位の認証と、ポスト量子耐性を持つ鍵確立プロトコルを組み合わせた、実験的に検証済みのセキュリティフレームワークを提案します。 メッセージの完全性を確保するため、提案手法では、パケットごとの計算オーバーヘッドを低減するために最適化されたChaskey-12を用いたフィールド選択型認証を適用する。信頼関係の確立については、ML-KEMに基づくペアワイズ認証および鍵確立手順を導入する。 このペアワイズプロトコルは、量子ランダムオラクルモデルで解析され、Dolev-Yao敵対モデル下でAVISPAツールを用いて検証もされている。C言語ベースのパブリッシャー／サブスクライバープロトタイプは、2ノードのプロセスバス・テストベッド上で実装された。 性能評価は、HMAC-256、AES-GMAC-128、Blake-2s、Chaskey-12、およびコンパイラ最適化されたChaskey-12の実装を用いて、8つのIEC 61869-9 SVパケットプロファイル全体で実施された。 これらの結果から、最適化されたChaskey-12は、SVパケットにおいてHMACよりも約90％低い遅延を実現することが示された。提案されたセキュリティフレームワークは、リソースに制約のあるデジタル変電所デバイス上でIEC 61869-9 SVトラフィックを保護するための、実用的かつスケーラブルな候補である。",
+  "last_delivered_at": "2026-08-25T02:26:53Z"
+ },
+ {
+  "delivery_id": "main:2608.22683",
+  "id": "2608.22683",
+  "posted_at": "2026-08-25T02:26:54Z",
+  "title": "The Colossus with Feet of Clay: Debunking Encrypted Traffic Classifiers under PQC Evolution",
+  "title_ja": "「粘土の足を持つ巨人」：PQCの進化に伴う暗号化トラフィック分類アルゴリズムの虚像を暴く",
+  "title_translated": "「粘土の足を持つ巨人」：PQCの進化に伴う暗号化トラフィック分類アルゴリズムの虚像を暴く",
+  "translation_language": "ja",
+  "authors": "Bingzhen Li, Lingjia Meng, Runhan Song, Chuanzhou Pan, Tongjun Pu, Ziqiang Ma, Yupeng Jiang, Lei Cui, Zhiyu Hao",
+  "link": "https://arxiv.org/abs/2608.22683v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "network"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ネットワーク・通信"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "network"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "量子ネットワーク・通信"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Encrypted traffic classifiers often achieve high accuracy under matched training and testing conditions, implicitly assuming that deployment traffic follows the training distribution. TLS migration toward post-quantum cryptography (PQC) challenges this assumption because hybrid key establishment can reshape observable traffic without changing application labels. We frame this change as PQC-induced protocol drift and study its effects through closed-world HTTPS website fingerprinting using the deployed TLS~1.3 Hybrid-PQC group \\texttt{\\detokenize{X25519MLKEM768}}. We build a controlled, PQC-aware benchmark pairing Traditional (Non-PQC) and Hybrid-PQC traffic, then evaluate five representative classifiers and side-channel representations under matched-domain, cross-domain, and deployment-ratio settings. Collectively, the experiments show that PQC evolution does not remove learnable website information. Instead, it changes how that information appears in traffic, causing classifiers and feature combinations that perform well in-domain to lose reliability across cryptographic domains. By exposing the fragility of matched-domain evaluation, we offer strategic guidance, identify cross-domain robustness as a research priority, and recommend protocol-aware practices for dependable real-world encrypted traffic classification. The code is available at http://anonymous.4open.science/r/PQ-WF-Eval.",
+  "abstract_ja": "暗号化トラフィックの分類器は、学習環境とテスト環境が一致している場合、高い精度を達成することが多い。これは、本番環境のトラフィックが学習時の分布に従うことを暗黙の前提としているためである。しかし、ポスト量子暗号（PQC）へのTLS移行は、この前提に疑問を投げかける。なぜなら、ハイブリッド鍵確立により、アプリケーションのラベルを変更することなく、観測可能なトラフィックの形状が変化し得るからである。 我々は、この変化を「PQCに起因するプロトコルドリフト」と位置づけ、実稼働中のTLS~1.3ハイブリッドPQCグループ \\texttt{\\detokenize{X25519MLKEM768}} を用いたクローズドワールドHTTPSウェブサイトフィンガープリントを通じて、その影響を調査する。 我々は、従来型（非PQC）トラフィックとハイブリッド-PQCトラフィックを組み合わせた、制御されたPQC対応ベンチマークを構築し、マッチドドメイン、クロスドメイン、および導入比率の設定下で、5つの代表的な分類器とサイドチャネル表現を評価した。実験の結果、PQCの進化によって学習可能なウェブサイト情報が消失するわけではないことが示された。 むしろ、PQCの進化は、その情報がトラフィックに現れる様相を変え、同一ドメイン内で良好な性能を発揮する分類器や特徴量の組み合わせが、異なる暗号ドメイン間では信頼性を失う原因となっている。同一ドメイン評価の脆弱性を明らかにすることで、我々は戦略的な指針を示し、クロスドメインの堅牢性を研究の優先課題として特定するとともに、実世界における信頼性の高い暗号化トラフィック分類のためのプロトコルを意識した実践手法を推奨する。 コードは http://anonymous.4open.science/r/PQ-WF-Eval で公開されている。",
+  "abstract_translated": "暗号化トラフィックの分類器は、学習環境とテスト環境が一致している場合、高い精度を達成することが多い。これは、本番環境のトラフィックが学習時の分布に従うことを暗黙の前提としているためである。しかし、ポスト量子暗号（PQC）へのTLS移行は、この前提に疑問を投げかける。なぜなら、ハイブリッド鍵確立により、アプリケーションのラベルを変更することなく、観測可能なトラフィックの形状が変化し得るからである。 我々は、この変化を「PQCに起因するプロトコルドリフト」と位置づけ、実稼働中のTLS~1.3ハイブリッドPQCグループ \\texttt{\\detokenize{X25519MLKEM768}} を用いたクローズドワールドHTTPSウェブサイトフィンガープリントを通じて、その影響を調査する。 我々は、従来型（非PQC）トラフィックとハイブリッド-PQCトラフィックを組み合わせた、制御されたPQC対応ベンチマークを構築し、マッチドドメイン、クロスドメイン、および導入比率の設定下で、5つの代表的な分類器とサイドチャネル表現を評価した。実験の結果、PQCの進化によって学習可能なウェブサイト情報が消失するわけではないことが示された。 むしろ、PQCの進化は、その情報がトラフィックに現れる様相を変え、同一ドメイン内で良好な性能を発揮する分類器や特徴量の組み合わせが、異なる暗号ドメイン間では信頼性を失う原因となっている。同一ドメイン評価の脆弱性を明らかにすることで、我々は戦略的な指針を示し、クロスドメインの堅牢性を研究の優先課題として特定するとともに、実世界における信頼性の高い暗号化トラフィック分類のためのプロトコルを意識した実践手法を推奨する。 コードは http://anonymous.4open.science/r/PQ-WF-Eval で公開されている。",
+  "last_delivered_at": "2026-08-25T02:26:56Z"
+ },
+ {
+  "delivery_id": "main:2608.22924",
+  "id": "2608.22924",
+  "posted_at": "2026-08-25T02:26:58Z",
+  "title": "Cryptocurrencies in the Quantum Age: Migration Paths to PQC",
+  "title_ja": "量子時代の暗号資産：PQCへの移行経路",
+  "title_translated": "量子時代の暗号資産：PQCへの移行経路",
+  "translation_language": "ja",
+  "authors": "Aleksei Kodukhov",
+  "link": "https://arxiv.org/abs/2608.22924v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Quantum computers pose a fundamental threat to blockchain systems that rely on elliptic-curve cryptography. This work reviews the quantum vulnerabilities and associated economic risks of major blockchain platforms, with a focus on Bitcoin, Ethereum, and Solana. We distinguish between at-rest, on-spend, and on-setup attacks and identify the blockchain components most exposed to quantum adversaries. We further review practical migration strategies toward post-quantum security, including NIST-standardized digital signatures and emerging solutions for Solana, Algorand, and Ethereum.",
+  "abstract_ja": "量子コンピュータは、楕円曲線暗号に依存するブロックチェーンシステムに対して根本的な脅威をもたらします。本稿では、ビットコイン、イーサリアム、ソラナに焦点を当て、主要なブロックチェーンプラットフォームの量子脆弱性およびそれに関連する経済的リスクについて検討します。 本稿では、「保存時（at-rest）」「送金時（on-spend）」「セットアップ時（on-setup）」の各攻撃を区別し、量子攻撃者に最もさらされやすいブロックチェーンの構成要素を特定する。さらに、NIST標準化されたデジタル署名や、ソラナ、アルゴランド、イーサリアム向けの新たなソリューションなど、ポスト量子セキュリティに向けた実践的な移行戦略についても検討する。",
+  "abstract_translated": "量子コンピュータは、楕円曲線暗号に依存するブロックチェーンシステムに対して根本的な脅威をもたらします。本稿では、ビットコイン、イーサリアム、ソラナに焦点を当て、主要なブロックチェーンプラットフォームの量子脆弱性およびそれに関連する経済的リスクについて検討します。 本稿では、「保存時（at-rest）」「送金時（on-spend）」「セットアップ時（on-setup）」の各攻撃を区別し、量子攻撃者に最もさらされやすいブロックチェーンの構成要素を特定する。さらに、NIST標準化されたデジタル署名や、ソラナ、アルゴランド、イーサリアム向けの新たなソリューションなど、ポスト量子セキュリティに向けた実践的な移行戦略についても検討する。",
+  "last_delivered_at": "2026-08-25T02:26:58Z"
  }
 ]

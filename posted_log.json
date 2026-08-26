@@ -107276,5 +107276,79 @@
   "abstract_ja": "本研究では、最大1つの励起が存在する2準位原子の連続体に結合した、有効質量を持つ準粒子場の1次元スカラーモデルを扱う。原子密度が一定で符号正の空間的に局在した摂動下における束縛状態の存在に関する一般定理を証明し、いくつかの厳密に解ける例について束縛状態を解析する。",
   "abstract_translated": "本研究では、最大1つの励起が存在する2準位原子の連続体に結合した、有効質量を持つ準粒子場の1次元スカラーモデルを扱う。原子密度が一定で符号正の空間的に局在した摂動下における束縛状態の存在に関する一般定理を証明し、いくつかの厳密に解ける例について束縛状態を解析する。",
   "last_delivered_at": "2026-08-25T04:55:02Z"
+ },
+ {
+  "delivery_id": "main:2608.23785",
+  "id": "2608.23785",
+  "posted_at": "2026-08-26T02:38:58Z",
+  "title": "A Scenario-Based Evaluation of CRQC+AI Vulnerability Spectrum for TLS 1.3 Cryptographic Dependencies",
+  "title_ja": "TLS 1.3の暗号依存性に対するCRQC+AI脆弱性スペクトルのシナリオに基づく評価",
+  "title_translated": "TLS 1.3の暗号依存性に対するCRQC+AI脆弱性スペクトルのシナリオに基づく評価",
+  "translation_language": "ja",
+  "authors": "Noel Grover, Mussie Haile, Brad Pedersen, Eric Uner, Bradley J Erickson",
+  "link": "https://arxiv.org/abs/2608.23785v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "This paper evaluates quantum and AI-accelerated risks to TLS 1.3 cryptographic dependencies under an evidence-tiered model, distinguishing mechanism-backed threats (Shor algorithm against RSA and ECC) from contingency-backed risks to lattice-based post-quantum cryptography (PQC) and hypothesis-only risks to hash-based and symmetric primitives. We do not identify any known breaks of ML-KEM, ML-DSA, SLH-DSA, or AES-256. Instead, we use explicit scenario assumptions, organized as a four-scenario capability model with parameters and pseudocode for reproducibility, to stress-test migration timelines accompanied by parameter sensitivity analysis and explicit falsification analysis. The primary methodological contribution is a reproducible scenario-estimation instrument together with its explicit update mechanics: every parameter is a named, anchored quantity that can be varied and the model rerun; a stated protocol maps observed conformance to, or deviation from, the modeled curves onto revisions of specific parameters, so progressive refinements can be tested against accumulating historical data. The paper is a methodological companion to quantum resource-estimation studies and to expert-elicitation timeline surveys such as the Global Risk Institute quantum threat reports, with its revision rules stated explicitly. As of mid-2026, the model does not show any NIST-approved algorithms as broken. Instead, the vulnerability spectrum under different scenarios shows RSA risk crossing the 50% threshold between 2030-2032 and the PQC risk becoming a non-zero risk after 2032-2035 under contingency scenarios conditional on the unproven dimension-collapse. We urge PQC migration as mandatory per the 2030 and 2031 federal deadlines and by Mosca HNDL reasoning, and that crypto-agility and hybrid cryptographic deployment be considered necessary complements to any PQC migration efforts.",
+  "abstract_ja": "本論文では、証拠階層モデルに基づき、TLS 1.3 の暗号依存関係に対する量子および AI による加速リスクを評価する。その際、メカニズムに基づく脅威 （RSAおよびECCに対するショアアルゴリズム）と、格子ベースのポスト量子暗号（PQC）に対する不測の事態に基づくリスク、ならびにハッシュベースおよび対称プリミティブに対する仮説のみに基づくリスクを区別している。 ML-KEM、ML-DSA、SLH-DSA、またはAES-256に対する既知の破り方は確認されていない。 その代わりに、再現性を確保するためにパラメータと擬似コードを備えた 4 つのシナリオからなる能力モデルとして整理された明確なシナリオの仮定を用いて、パラメータの感度分析および明確な反証分析を伴う移行スケジュールに対するストレステストを実施した。 方法論上の主な貢献は、再現可能なシナリオ推定ツールとその明示的な更新メカニズムである。すべてのパラメータは、名前が付けられ、基準値が設定された量であり、これを変更してモデルを再実行することができる。また、規定されたプロトコルにより、観測された適合度やモデル化された曲線からの逸脱が、特定のパラメータの改訂値にマッピングされるため、蓄積された履歴データに対して段階的な改良を検証することが可能となる。 本論文は、量子リソース推定研究や、グローバル・リスク・インスティテュートの量子脅威報告書のような専門家意見聴取によるタイムライン調査に対する方法論的な補足資料であり、その改訂ルールが明示されている。2026年半ばの時点で、本モデルはNIST承認アルゴリズムのいずれについても破綻を示していない。 その代わりに、さまざまなシナリオにおける脆弱性のスペクトルからは、RSAのリスクが2030年から2032年の間に50％の閾値を超え、また、未証明の次元崩壊を条件とする緊急事態シナリオ下では、PQCのリスクが2032年から2035年以降にゼロではないリスクとなることが示されている。 我々は、2030年および2031年の連邦政府による期限、ならびにモスカ（Mosca）のHNDL理論に基づき、PQCへの移行を義務化することを強く推奨するとともに、暗号の俊敏性（crypto-agility）およびハイブリッド暗号の導入を、あらゆるPQC移行の取り組みにおいて不可欠な補完策として検討すべきである。",
+  "abstract_translated": "本論文では、証拠階層モデルに基づき、TLS 1.3 の暗号依存関係に対する量子および AI による加速リスクを評価する。その際、メカニズムに基づく脅威 （RSAおよびECCに対するショアアルゴリズム）と、格子ベースのポスト量子暗号（PQC）に対する不測の事態に基づくリスク、ならびにハッシュベースおよび対称プリミティブに対する仮説のみに基づくリスクを区別している。 ML-KEM、ML-DSA、SLH-DSA、またはAES-256に対する既知の破り方は確認されていない。 その代わりに、再現性を確保するためにパラメータと擬似コードを備えた 4 つのシナリオからなる能力モデルとして整理された明確なシナリオの仮定を用いて、パラメータの感度分析および明確な反証分析を伴う移行スケジュールに対するストレステストを実施した。 方法論上の主な貢献は、再現可能なシナリオ推定ツールとその明示的な更新メカニズムである。すべてのパラメータは、名前が付けられ、基準値が設定された量であり、これを変更してモデルを再実行することができる。また、規定されたプロトコルにより、観測された適合度やモデル化された曲線からの逸脱が、特定のパラメータの改訂値にマッピングされるため、蓄積された履歴データに対して段階的な改良を検証することが可能となる。 本論文は、量子リソース推定研究や、グローバル・リスク・インスティテュートの量子脅威報告書のような専門家意見聴取によるタイムライン調査に対する方法論的な補足資料であり、その改訂ルールが明示されている。2026年半ばの時点で、本モデルはNIST承認アルゴリズムのいずれについても破綻を示していない。 その代わりに、さまざまなシナリオにおける脆弱性のスペクトルからは、RSAのリスクが2030年から2032年の間に50％の閾値を超え、また、未証明の次元崩壊を条件とする緊急事態シナリオ下では、PQCのリスクが2032年から2035年以降にゼロではないリスクとなることが示されている。 我々は、2030年および2031年の連邦政府による期限、ならびにモスカ（Mosca）のHNDL理論に基づき、PQCへの移行を義務化することを強く推奨するとともに、暗号の俊敏性（crypto-agility）およびハイブリッド暗号の導入を、あらゆるPQC移行の取り組みにおいて不可欠な補完策として検討すべきである。",
+  "last_delivered_at": "2026-08-26T02:38:58Z"
+ },
+ {
+  "delivery_id": "main:2608.24447",
+  "id": "2608.24447",
+  "posted_at": "2026-08-26T02:39:00Z",
+  "title": "A Drop-in KEM Replacement for Client Signatures in Post-Quantum SSH",
+  "title_ja": "ポスト量子SSHにおけるクライアント署名用の、KEMの即座に導入可能な代替手段",
+  "title_translated": "ポスト量子SSHにおけるクライアント署名用の、KEMの即座に導入可能な代替手段",
+  "translation_language": "ja",
+  "authors": "Hongbo Liu, Yufan Su, Jiangxia Ge, Qionglu Zhang, Zhaoxuan Li, Xianhui Lu, Li Song, Wenhua Gao, Li Zhou",
+  "link": "https://arxiv.org/abs/2608.24447v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "network"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ネットワーク・通信"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "network"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "量子ネットワーク・通信"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "The transition to post-quantum cryptography is reshaping the Secure Shell (SSH) protocol for remote administration. Post-quantum key exchange has been deployed in OpenSSH and is being standardized, while SSH authentication largely remains a signature-replacement effort. This path preserves the familiar public-key credential model, but inherits the size and computation overhead of post-quantum signatures, which can increase latency, traffic, and server-side load. KEM-based authentication offers a natural alternative to this signature-centric path, and SSH makes this especially attractive at the user-authentication layer, which is method-extensible, separated from transport-layer key exchange and host-key authentication, and already protected by the established channel. We present a drop-in KEM-based user-authentication method for SSH that replaces client public-key signatures with a session-bound challenge-response proof. The method fits into SSH's existing user-authentication framework, preserving the public-key credential model and enabling incremental deployment alongside existing methods. We provide a reduction-based security argument in the post-quantum ACCE framework, implement the design in OpenSSH using liboqs, and evaluate it under representative RTTs, TCP initial-window settings, and post-quantum migration configurations. Our results show that KEM-based authentication is competitive with compact signature-based authentication under representative network settings, while reducing median handshake latency by up to about 10% against large-signature hybrid baselines. The advantages are clearer when post-quantum signatures stress transmission or computation: median latency under small TCP initial windows falls by up to 7.3% versus ML-DSA and 17.9% versus SLH-DSA, while server-side online cryptographic cost is 59.1% lower than that for ML-DSA in the same NIST category.",
+  "abstract_ja": "ポスト量子暗号への移行により、リモート管理用のSecure Shell（SSH）プロトコルは新たな形へと変化しつつあります。 OpenSSHではポスト量子鍵交換が導入され、標準化が進められている一方、SSH認証は依然として主に署名置換の手法に依存している。このアプローチは、慣れ親しんだ公開鍵認証モデルを維持する一方で、ポスト量子署名の持つサイズや計算オーバーヘッドを継承しており、これにより遅延、トラフィック、およびサーバー側の負荷が増加する可能性がある。 KEM（Key Exchange Mechanism）ベースの認証は、この署名中心のアプローチに対する自然な代替案を提供する。特にSSHにおいては、ユーザー認証レイヤーにおいてこのアプローチが極めて魅力的である。なぜなら、このレイヤーは手法の拡張が可能であり、トランスポート層の鍵交換やホスト鍵認証から分離されており、確立された通信チャネルによって既に保護されているからである。 本稿では、クライアントの公開鍵署名をセッションに紐付いたチャレンジ・レスポンス証明に置き換える、SSH向けのドロップイン型のKEMベースのユーザー認証手法を提案する。この手法はSSHの既存のユーザー認証フレームワークに適合し、公開鍵認証モデルを維持しつつ、既存の手法と並行して段階的な導入を可能にする。 我々は、ポスト量子ACCEフレームワークにおける還元に基づくセキュリティ論証を提供し、liboqsを用いてOpenSSHにこの設計を実装し、代表的なRTT、TCP初期ウィンドウ設定、およびポスト量子移行構成の下で評価を行った。 我々の結果によると、KEMベースの認証は、代表的なネットワーク設定下においてコンパクトな署名ベースの認証と同等の性能を発揮すると同時に、大規模な署名を使用するハイブリッドベースラインと比較して、ハンドシェイクの遅延の中央値を最大で約10％低減することが示された。これらの利点は、ポスト量子署名が伝送または演算に負荷をかける場合にさらに明確になる： 小さなTCP初期ウィンドウ下での中央値の遅延は、ML-DSAと比較して最大7.3%、SLH-DSAと比較して17.9%低下する一方で、サーバー側のオンライン暗号処理コストは、同じNISTカテゴリのML-DSAと比較して59.1%低減している。",
+  "abstract_translated": "ポスト量子暗号への移行により、リモート管理用のSecure Shell（SSH）プロトコルは新たな形へと変化しつつあります。 OpenSSHではポスト量子鍵交換が導入され、標準化が進められている一方、SSH認証は依然として主に署名置換の手法に依存している。このアプローチは、慣れ親しんだ公開鍵認証モデルを維持する一方で、ポスト量子署名の持つサイズや計算オーバーヘッドを継承しており、これにより遅延、トラフィック、およびサーバー側の負荷が増加する可能性がある。 KEM（Key Exchange Mechanism）ベースの認証は、この署名中心のアプローチに対する自然な代替案を提供する。特にSSHにおいては、ユーザー認証レイヤーにおいてこのアプローチが極めて魅力的である。なぜなら、このレイヤーは手法の拡張が可能であり、トランスポート層の鍵交換やホスト鍵認証から分離されており、確立された通信チャネルによって既に保護されているからである。 本稿では、クライアントの公開鍵署名をセッションに紐付いたチャレンジ・レスポンス証明に置き換える、SSH向けのドロップイン型のKEMベースのユーザー認証手法を提案する。この手法はSSHの既存のユーザー認証フレームワークに適合し、公開鍵認証モデルを維持しつつ、既存の手法と並行して段階的な導入を可能にする。 我々は、ポスト量子ACCEフレームワークにおける還元に基づくセキュリティ論証を提供し、liboqsを用いてOpenSSHにこの設計を実装し、代表的なRTT、TCP初期ウィンドウ設定、およびポスト量子移行構成の下で評価を行った。 我々の結果によると、KEMベースの認証は、代表的なネットワーク設定下においてコンパクトな署名ベースの認証と同等の性能を発揮すると同時に、大規模な署名を使用するハイブリッドベースラインと比較して、ハンドシェイクの遅延の中央値を最大で約10％低減することが示された。これらの利点は、ポスト量子署名が伝送または演算に負荷をかける場合にさらに明確になる： 小さなTCP初期ウィンドウ下での中央値の遅延は、ML-DSAと比較して最大7.3%、SLH-DSAと比較して17.9%低下する一方で、サーバー側のオンライン暗号処理コストは、同じNISTカテゴリのML-DSAと比較して59.1%低減している。",
+  "last_delivered_at": "2026-08-26T02:39:02Z"
  }
 ]

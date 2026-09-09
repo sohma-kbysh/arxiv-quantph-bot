@@ -5398,121 +5398,72 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-09-07T06:05:00Z"
-  }
- },
- "external_pending": {
+  },
   "cs.CR:2609.07849": {
-   "id": "2609.07849",
-   "title": "Nothing Breaks: No Single Peer Can Soundly Gate Post-Quantum Delivery",
-   "link": "https://arxiv.org/abs/2609.07849v1",
-   "authors": "Yunze Han",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR"
+   "genre_ids": [
+    "pqc"
    ],
-   "primary": "cs.CR",
-   "abstract": "Post-quantum protection is delivered to a peer, not declared in a file: whether a session is quantum-resistant is a relation between a server's configuration and the clients that reach it. We show that no single peer can soundly gate that relation. Shipped SSH clients are not ordered: two of their post-quantum capability classes are minimal and incomparable, so a check pinned to either misses the other family's withdrawal. A peer taking both fares no better: it falls back and misses both, or, where classical outranks one family, catches just that one. No case flags both. Nothing above the wire carries the relation either. An artifact-side instrument cannot encode it, because a peer population is not one of its inputs; and across seven configurations on two protocols we find that not one of the five scalars deployed auditors expose to automation moves, while unrelated degradation moves the ones that discriminate at all: the auditors do compute the delivered algorithm, and discard it at the interface automation reads. Nothing else catches the loss either, because nothing breaks: removing a hybrid key exchange starts the daemon, validates the configuration, passes the tests and serves the client, and the adversary it defends against does not exist yet, so no functional signal can carry the loss even in principle. We then show that agents make that state reachable at scale, driving a validated downgrade in 40 of 40 episodes from ordinary engineering prose, against 0 of 40 on a matched neutral document.",
-   "published": "2026-09-07T18:08:08Z",
-   "updated": "2026-09-07T18:08:08Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-09T08:49:13Z"
   },
   "cs.CR:2609.07754": {
-   "id": "2609.07754",
-   "title": "Do AI Coding Assistants Check Before They Install? A Pre-Registered Demand-Side Audit of Trust Signals in the Research Software Supply Chain",
-   "link": "https://arxiv.org/abs/2609.07754v1",
-   "authors": "Pengyin Shan",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR",
-    "cs.AI",
-    "cs.SE"
+   "genre_ids": [
+    "pqc",
+    "crypto"
    ],
-   "primary": "cs.CR",
-   "abstract": "AI coding assistants now select, install, and configure software, and attackers have exploited that position through invented package names, compromised maintainer accounts, and manipulated repository text. In response, the supply-chain community publishes machine-checkable trust signals: software bills of materials, signed releases, build provenance attestations, and declared official channels. Whether coding assistants read or act on those signals has not been measured for any of these classes on research software. We pre-registered and ran a controlled study on six open-source research software projects (three HPC, three quantum computing) drawn from an 87-project corpus, with protocol, seed, panel, and analysis plan deposited with a DOI before any trial. W created nine modified copies for each project: no signal, one per signal class, two with a signature or attestation from the wrong issuer, one with all four signals, and one reproducing documented conflicts in the project's own metadata. Three models under two ways of operating an assistant, with and without an approval step, gave 1,920 registered trials, plus a supplement on three frontier models. We scored behavior from container logs rather than from what the assistant said, and recorded the cost of every trial. Verification was rare under every condition: in 9 of 1,920 registered trials (0.5%), the assistant opened any provenance signal before installing in 0 of 384 control trials, and no trial ran a verification command, so signal presence had no measurable effect. We drew three conclusions: publishing signals is necessary but not sufficient; price did not buy verification (the model that verified most often costs $0.10 per trial; the most capable, at $1.00, verified nothing); verification must be built into the program that runs the assistant. We release the per-trial cost ledger, the protocol, and every log.",
-   "published": "2026-09-07T16:55:19Z",
-   "updated": "2026-09-07T16:55:19Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash-lite",
+   "skip_votes": [
+    "gemini-2.5-flash"
+   ],
+   "reviewed_at": "2026-09-09T08:49:13Z"
   },
   "cs.CR:2609.07701": {
-   "id": "2609.07701",
-   "title": "SoK: Secure Software-Based Multi-Domain Data Segregation",
-   "link": "https://arxiv.org/abs/2609.07701v1",
-   "authors": "Quang Cao, Peter Vinci, Nick Georghiou, Shane Phillips, Mathieu Philippe, Nalin Arachchilage",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR"
+   "genre_ids": [
+    "pqc"
    ],
-   "primary": "cs.CR",
-   "abstract": "Modern mission-critical coordination demands seamless communication across multiple domains. Traditionally, Voice Communication Systems (VCS) have relied on physically separated Red/Black architectures to ensure voice and data segregation. While these hardware-based methods provide strong security assurances and remain foundational in high-security contexts, they can introduce significant complexity and scalability challenges as mission parameters expand into highly dynamic, multi-domain integrations. As defence, emergency response, and critical infrastructure operations increasingly require interoperable, flexible, and cost-efficient communication environments, there is a growing need to understand whether software-based approaches can provide comparable assurance while supporting modern operational requirements. This SoK characterises a transition to software-based Multi-Domain Data Segregation (MDDS) by integrating systems security, networking, and cryptography. Its goal is to consolidate existing research, identify shared architectural patterns, and address the security challenges facing next-generation high-assurance software-based VCS architectures. By assessing software-defined and virtualized approaches, this SoK supports the development of scalable, high-assurance VCS architectures that facilitate secure real-time coordination across diverse operational domains. Specifically, this SoK examines the security implications of Software-Defined Networking, Network Slicing, Separation Kernels, and Cross-Domain Solutions while addressing challenges posed by quantum computing through Post-Quantum Cryptography (PQC). This SoK provides a comprehensive analysis of the shift from hardware isolation to software segregation, serving as a crucial foundation for researchers and industry stakeholders aiming to enhance secure and adaptable VCS infrastructures for mission-critical operations.",
-   "published": "2026-09-07T16:18:09Z",
-   "updated": "2026-09-07T16:18:09Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-09T08:49:13Z"
   },
   "cs.CR:2609.06412": {
-   "id": "2609.06412",
-   "title": "FoldNTT: A Multiplier- and Twiddle-Lean NTT Core with Formally Verified Arithmetic for Proth Primes",
-   "link": "https://arxiv.org/abs/2609.06412v1",
-   "authors": "Masato Kamba",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR"
+   "genre_ids": [
+    "pqc",
+    "hardware"
    ],
-   "primary": "cs.CR",
-   "abstract": "Hardware for lattice-based post-quantum cryptography spends a large share of its area on the number-theoretic transform (NTT), dominated by modular multipliers and twiddle storage. FoldNTT is a redesign of the released radix-2 CFNTT accelerator (TCHES 2022) for the Falcon / FN-DSA prime q = 12289 with one hardware multiplier per butterfly instead of three and about half the stored twiddle constants. The Proth shape q = 3*2^12 + 1 turns modular reduction into shift-and-add K-RED folds, and the bit-reversed twiddle table obeys w[N/2+j] = psi*w[j], so half the table is derived without a multiplier. Checking the released RTL against the mathematics also exposed a bug: its inverse transform omits a per-stage halving and returns 2^10*x, which the retrofit corrects. Every arithmetic block is proven by exact-width SMT and compositional SymbiYosys proofs, control-safety invariants by k-induction; the proofs are mutation-tested and the composed transform is validated by simulation, all rerun by CI. On Artix-7 in a fully open flow, the retrofit costs 3->1 DSP48 per butterfly and -50% stored twiddle bits at a whole-core Fmax cost of about 4% (best of three seeds; within the seed-to-seed spread), measured on the released datapath driven by a controller we reconstructed (the reference FSM was never released) and validated by full-core simulation; a sequential core with our own controller builds to a timing-gated Basys-3 bitstream.",
-   "published": "2026-09-06T06:09:50Z",
-   "updated": "2026-09-06T06:09:50Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-09T08:49:13Z"
   },
   "cs.IT:2609.08520": {
-   "id": "2609.08520",
-   "title": "Quantum Matrix-Product Codes: CSS-T Characterization and Maximality",
-   "link": "https://arxiv.org/abs/2609.08520v1",
-   "authors": "Delio Jaramillo-Velez, Alessandro Neri, Adway Patra, Diego Ruano, Flavio Salizzoni",
-   "announce_type": "external",
-   "categories": [
-    "cs.IT"
+   "genre_ids": [
+    "qec",
+    "ft"
    ],
-   "primary": "cs.IT",
-   "abstract": "CSS-T codes are quantum error-correcting codes that play an important role in fault-tolerant quantum computation, as they help mitigate the proliferation of errors. They admit a transversal T-gate and are defined from a pair of nested classical binary linear codes satisfying a specific algebraic condition expressed in terms of their Schur square. We extend this algebraic characterization to the propagation rule known as the $(u \\mid u+v)$-construction, that is, the matrix-product code constructed from two constituent codes. Moreover, for cyclic constituent codes, we provide an explicit characterization in terms of the defining cyclotomic sets, which extends existing results for cyclic codes. This framework allows the construction of new and longer CSS-T codes.",
-   "published": "2026-09-08T10:06:13Z",
-   "updated": "2026-09-08T10:06:13Z",
-   "source_feed": "cs.IT"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-09T08:49:27Z"
   },
   "cs.IT:2609.07769": {
-   "id": "2609.07769",
-   "title": "A Note on Binary Quadratic Systems and their relation to complexity theory",
-   "link": "https://arxiv.org/abs/2609.07769v1",
-   "authors": "Gabriele Radici, Massimiliano Sala",
-   "announce_type": "external",
-   "categories": [
-    "cs.IT",
-    "cs.CC",
-    "cs.CR",
-    "math.AC",
-    "math.AG"
+   "genre_ids": [
+    "pqc",
+    "complexity",
+    "qec"
    ],
-   "primary": "cs.IT",
-   "abstract": "Deciding whether a system of multivariate quadratic equations over $\\mathbb F_2$ has a solution is a classical NP-complete problem, and remains so for square systems, with as many equations as variables. The hardness of this problem is one of the cornerstones of nowadays post-quantum cryptography. Let $\\MQ_0(n)$ and $\\MQ_1(n)$ denote the sets of square quadratic systems in $n$ variables having respectively no solutions and exactly one solution. $\\cup_{n\\geq 2} \\MQ_0(n)$ is a coNP-complete language, while $\\cup_{n\\geq 2} \\MQ_1(n)$ lies in DP. It is known that $\\lim_{n\\to \\infty} |\\MQ_1(n)|/|\\MQ_0(n)|=1$. Here we prove the explicit finite-$n$ bounds \\[ |\\MQ_0(n)|<|\\MQ_1(n)| \\le \\left(1+\\frac{1}{2^n-1}\\right)|\\MQ_0(n)|, \\] More generally, let $Q_d$ be the space of polynomial functions $(\\FF_2)^n\\to\\mathbb F_2$ of degree at most $d$, and let $\u03b1_k$ count square systems in $(Q_d)^n$ having exactly $k$ solutions. Then \\[ \u03b1_0<\u03b1_1 \\le \\left(1+\\frac{1}{2^n-1}\\right)\u03b1_0\\,, \\qquad 2\\le d\\le n \\,. \\] The proof combines matroid and coding-theoretic methods. We interpret $(\\FF_2)^n$ as the ground set of the evaluation matroid of $Q_d$, express $\u03b1_0$ and $\u03b1_1$ through characteristic polynomials, and use a Whitney-type sign-reversing involution to show that the only terms that can push $\u03b1_1-\u03b1_0$ below $\u03b1_1/2^n$ come from the elements of a matroid port. These are identified with minimal-support words of the Reed--Muller code $\\RM(n-d-1,n)=\\RM(d,n)^\\perp$; the required estimate then follows from the MacWilliams identity, the minimum-distance bound $2^{d+1}$, and the even-weight structure of the code.",
-   "published": "2026-09-07T17:19:05Z",
-   "updated": "2026-09-07T17:19:05Z",
-   "source_feed": "cs.IT"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-09T08:49:27Z"
   },
   "cs.IT:2609.07181": {
-   "id": "2609.07181",
-   "title": "Cyclic Codes of Length 7_p^s over F_p^m + uF_p^m : Characterization, Duals, and Applications to Quantum and LCD Codes",
-   "link": "https://arxiv.org/abs/2609.07181v1",
-   "authors": "Payel Chandra, Kalyan Hansda",
-   "announce_type": "external",
-   "categories": [
-    "cs.IT"
+   "genre_ids": [
+    "qec"
    ],
-   "primary": "cs.IT",
-   "abstract": "Let $R_2 = \\mathbb{F}_{p^m} + u\\mathbb{F}_{p^m}$ ($u^2 = 0$), where $p$ is an odd prime and $m, s \\in \\mathbb{N}$. For $p \\equiv 3, 5 \\pmod 7$ with $\\gcd(m, 6) = 1$, the cyclotomic polynomial $\u03a6_7(x)$ is irreducible over $\\mathbb{F}_{p^m}$. This yields a direct sum decomposition $C = C_1 \\oplus C_2$ for any cyclic code $C$ of length $7p^s$ over $R_2$, where $C_1$ has length $p^s$ and $C_2$ is a $7$-cyclotomic code of length $6p^s$. We classify $7$-cyclotomic codes into four disjoint generator-based types and calculate exact cardinalities using residue and torsion subcodes. Furthermore, explicit generators for the Euclidean dual codes $C^\\perp$ are determined. As operational applications of these classified codes, we construct new families of quantum stabilizer codes via the CSS framework and establish parameter criteria for linear codes with complementary duals (LCD codes).",
-   "published": "2026-09-07T08:13:46Z",
-   "updated": "2026-09-07T08:13:46Z",
-   "source_feed": "cs.IT"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-09T08:49:27Z"
   }
  },
+ "external_pending": {},
  "schema_version": 2,
  "completed_ids": [
   "1506.05785",
@@ -10098,10 +10049,287 @@
   "2609.09139",
   "2609.09147"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2609.07849": {
+   "paper": {
+    "id": "2609.07849",
+    "title": "Nothing Breaks: No Single Peer Can Soundly Gate Post-Quantum Delivery",
+    "link": "https://arxiv.org/abs/2609.07849v1",
+    "authors": "Yunze Han",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Post-quantum protection is delivered to a peer, not declared in a file: whether a session is quantum-resistant is a relation between a server's configuration and the clients that reach it. We show that no single peer can soundly gate that relation. Shipped SSH clients are not ordered: two of their post-quantum capability classes are minimal and incomparable, so a check pinned to either misses the other family's withdrawal. A peer taking both fares no better: it falls back and misses both, or, where classical outranks one family, catches just that one. No case flags both. Nothing above the wire carries the relation either. An artifact-side instrument cannot encode it, because a peer population is not one of its inputs; and across seven configurations on two protocols we find that not one of the five scalars deployed auditors expose to automation moves, while unrelated degradation moves the ones that discriminate at all: the auditors do compute the delivered algorithm, and discard it at the interface automation reads. Nothing else catches the loss either, because nothing breaks: removing a hybrid key exchange starts the daemon, validates the configuration, passes the tests and serves the client, and the adversary it defends against does not exist yet, so no functional signal can carry the loss even in principle. We then show that agents make that state reachable at scale, driving a validated downgrade in 40 of 40 episodes from ordinary engineering prose, against 0 of 40 on a matched neutral document.",
+    "published": "2026-09-07T18:08:08Z",
+    "updated": "2026-09-07T18:08:08Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-09T08:49:27Z"
+  },
+  "2609.07754": {
+   "paper": {
+    "id": "2609.07754",
+    "title": "Do AI Coding Assistants Check Before They Install? A Pre-Registered Demand-Side Audit of Trust Signals in the Research Software Supply Chain",
+    "link": "https://arxiv.org/abs/2609.07754v1",
+    "authors": "Pengyin Shan",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.AI",
+     "cs.SE"
+    ],
+    "primary": "cs.CR",
+    "abstract": "AI coding assistants now select, install, and configure software, and attackers have exploited that position through invented package names, compromised maintainer accounts, and manipulated repository text. In response, the supply-chain community publishes machine-checkable trust signals: software bills of materials, signed releases, build provenance attestations, and declared official channels. Whether coding assistants read or act on those signals has not been measured for any of these classes on research software. We pre-registered and ran a controlled study on six open-source research software projects (three HPC, three quantum computing) drawn from an 87-project corpus, with protocol, seed, panel, and analysis plan deposited with a DOI before any trial. W created nine modified copies for each project: no signal, one per signal class, two with a signature or attestation from the wrong issuer, one with all four signals, and one reproducing documented conflicts in the project's own metadata. Three models under two ways of operating an assistant, with and without an approval step, gave 1,920 registered trials, plus a supplement on three frontier models. We scored behavior from container logs rather than from what the assistant said, and recorded the cost of every trial. Verification was rare under every condition: in 9 of 1,920 registered trials (0.5%), the assistant opened any provenance signal before installing in 0 of 384 control trials, and no trial ran a verification command, so signal presence had no measurable effect. We drew three conclusions: publishing signals is necessary but not sufficient; price did not buy verification (the model that verified most often costs $0.10 per trial; the most capable, at $1.00, verified nothing); verification must be built into the program that runs the assistant. We release the per-trial cost ledger, the protocol, and every log.",
+    "published": "2026-09-07T16:55:19Z",
+    "updated": "2026-09-07T16:55:19Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash-lite"
+   },
+   "genre_ids": [
+    "pqc",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash-lite",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "crypto": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-09T08:49:27Z"
+  },
+  "2609.07701": {
+   "paper": {
+    "id": "2609.07701",
+    "title": "SoK: Secure Software-Based Multi-Domain Data Segregation",
+    "link": "https://arxiv.org/abs/2609.07701v1",
+    "authors": "Quang Cao, Peter Vinci, Nick Georghiou, Shane Phillips, Mathieu Philippe, Nalin Arachchilage",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Modern mission-critical coordination demands seamless communication across multiple domains. Traditionally, Voice Communication Systems (VCS) have relied on physically separated Red/Black architectures to ensure voice and data segregation. While these hardware-based methods provide strong security assurances and remain foundational in high-security contexts, they can introduce significant complexity and scalability challenges as mission parameters expand into highly dynamic, multi-domain integrations. As defence, emergency response, and critical infrastructure operations increasingly require interoperable, flexible, and cost-efficient communication environments, there is a growing need to understand whether software-based approaches can provide comparable assurance while supporting modern operational requirements. This SoK characterises a transition to software-based Multi-Domain Data Segregation (MDDS) by integrating systems security, networking, and cryptography. Its goal is to consolidate existing research, identify shared architectural patterns, and address the security challenges facing next-generation high-assurance software-based VCS architectures. By assessing software-defined and virtualized approaches, this SoK supports the development of scalable, high-assurance VCS architectures that facilitate secure real-time coordination across diverse operational domains. Specifically, this SoK examines the security implications of Software-Defined Networking, Network Slicing, Separation Kernels, and Cross-Domain Solutions while addressing challenges posed by quantum computing through Post-Quantum Cryptography (PQC). This SoK provides a comprehensive analysis of the shift from hardware isolation to software segregation, serving as a crucial foundation for researchers and industry stakeholders aiming to enhance secure and adaptable VCS infrastructures for mission-critical operations.",
+    "published": "2026-09-07T16:18:09Z",
+    "updated": "2026-09-07T16:18:09Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-09T08:49:27Z"
+  },
+  "2609.06412": {
+   "paper": {
+    "id": "2609.06412",
+    "title": "FoldNTT: A Multiplier- and Twiddle-Lean NTT Core with Formally Verified Arithmetic for Proth Primes",
+    "link": "https://arxiv.org/abs/2609.06412v1",
+    "authors": "Masato Kamba",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Hardware for lattice-based post-quantum cryptography spends a large share of its area on the number-theoretic transform (NTT), dominated by modular multipliers and twiddle storage. FoldNTT is a redesign of the released radix-2 CFNTT accelerator (TCHES 2022) for the Falcon / FN-DSA prime q = 12289 with one hardware multiplier per butterfly instead of three and about half the stored twiddle constants. The Proth shape q = 3*2^12 + 1 turns modular reduction into shift-and-add K-RED folds, and the bit-reversed twiddle table obeys w[N/2+j] = psi*w[j], so half the table is derived without a multiplier. Checking the released RTL against the mathematics also exposed a bug: its inverse transform omits a per-stage halving and returns 2^10*x, which the retrofit corrects. Every arithmetic block is proven by exact-width SMT and compositional SymbiYosys proofs, control-safety invariants by k-induction; the proofs are mutation-tested and the composed transform is validated by simulation, all rerun by CI. On Artix-7 in a fully open flow, the retrofit costs 3->1 DSP48 per butterfly and -50% stored twiddle bits at a whole-core Fmax cost of about 4% (best of three seeds; within the seed-to-seed spread), measured on the released datapath driven by a controller we reconstructed (the reference FSM was never released) and validated by full-core simulation; a sequential core with our own controller builds to a timing-gated Basys-3 bitstream.",
+    "published": "2026-09-06T06:09:50Z",
+    "updated": "2026-09-06T06:09:50Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-09T08:49:27Z"
+  },
+  "2609.08520": {
+   "paper": {
+    "id": "2609.08520",
+    "title": "Quantum Matrix-Product Codes: CSS-T Characterization and Maximality",
+    "link": "https://arxiv.org/abs/2609.08520v1",
+    "authors": "Delio Jaramillo-Velez, Alessandro Neri, Adway Patra, Diego Ruano, Flavio Salizzoni",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "CSS-T codes are quantum error-correcting codes that play an important role in fault-tolerant quantum computation, as they help mitigate the proliferation of errors. They admit a transversal T-gate and are defined from a pair of nested classical binary linear codes satisfying a specific algebraic condition expressed in terms of their Schur square. We extend this algebraic characterization to the propagation rule known as the $(u \\mid u+v)$-construction, that is, the matrix-product code constructed from two constituent codes. Moreover, for cyclic constituent codes, we provide an explicit characterization in terms of the defining cyclotomic sets, which extends existing results for cyclic codes. This framework allows the construction of new and longer CSS-T codes.",
+    "published": "2026-09-08T10:06:13Z",
+    "updated": "2026-09-08T10:06:13Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec",
+     "ft"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "qec",
+    "ft"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qec": {
+     "status": "pending"
+    },
+    "ft": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-09T08:49:27Z"
+  },
+  "2609.07769": {
+   "paper": {
+    "id": "2609.07769",
+    "title": "A Note on Binary Quadratic Systems and their relation to complexity theory",
+    "link": "https://arxiv.org/abs/2609.07769v1",
+    "authors": "Gabriele Radici, Massimiliano Sala",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT",
+     "cs.CC",
+     "cs.CR",
+     "math.AC",
+     "math.AG"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Deciding whether a system of multivariate quadratic equations over $\\mathbb F_2$ has a solution is a classical NP-complete problem, and remains so for square systems, with as many equations as variables. The hardness of this problem is one of the cornerstones of nowadays post-quantum cryptography. Let $\\MQ_0(n)$ and $\\MQ_1(n)$ denote the sets of square quadratic systems in $n$ variables having respectively no solutions and exactly one solution. $\\cup_{n\\geq 2} \\MQ_0(n)$ is a coNP-complete language, while $\\cup_{n\\geq 2} \\MQ_1(n)$ lies in DP. It is known that $\\lim_{n\\to \\infty} |\\MQ_1(n)|/|\\MQ_0(n)|=1$. Here we prove the explicit finite-$n$ bounds \\[ |\\MQ_0(n)|<|\\MQ_1(n)| \\le \\left(1+\\frac{1}{2^n-1}\\right)|\\MQ_0(n)|, \\] More generally, let $Q_d$ be the space of polynomial functions $(\\FF_2)^n\\to\\mathbb F_2$ of degree at most $d$, and let $\u03b1_k$ count square systems in $(Q_d)^n$ having exactly $k$ solutions. Then \\[ \u03b1_0<\u03b1_1 \\le \\left(1+\\frac{1}{2^n-1}\\right)\u03b1_0\\,, \\qquad 2\\le d\\le n \\,. \\] The proof combines matroid and coding-theoretic methods. We interpret $(\\FF_2)^n$ as the ground set of the evaluation matroid of $Q_d$, express $\u03b1_0$ and $\u03b1_1$ through characteristic polynomials, and use a Whitney-type sign-reversing involution to show that the only terms that can push $\u03b1_1-\u03b1_0$ below $\u03b1_1/2^n$ come from the elements of a matroid port. These are identified with minimal-support words of the Reed--Muller code $\\RM(n-d-1,n)=\\RM(d,n)^\\perp$; the required estimate then follows from the MacWilliams identity, the minimum-distance bound $2^{d+1}$, and the even-weight structure of the code.",
+    "published": "2026-09-07T17:19:05Z",
+    "updated": "2026-09-07T17:19:05Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "pqc",
+     "complexity",
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "complexity",
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "complexity": {
+     "status": "pending"
+    },
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-09T08:49:27Z"
+  },
+  "2609.07181": {
+   "paper": {
+    "id": "2609.07181",
+    "title": "Cyclic Codes of Length 7_p^s over F_p^m + uF_p^m : Characterization, Duals, and Applications to Quantum and LCD Codes",
+    "link": "https://arxiv.org/abs/2609.07181v1",
+    "authors": "Payel Chandra, Kalyan Hansda",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Let $R_2 = \\mathbb{F}_{p^m} + u\\mathbb{F}_{p^m}$ ($u^2 = 0$), where $p$ is an odd prime and $m, s \\in \\mathbb{N}$. For $p \\equiv 3, 5 \\pmod 7$ with $\\gcd(m, 6) = 1$, the cyclotomic polynomial $\u03a6_7(x)$ is irreducible over $\\mathbb{F}_{p^m}$. This yields a direct sum decomposition $C = C_1 \\oplus C_2$ for any cyclic code $C$ of length $7p^s$ over $R_2$, where $C_1$ has length $p^s$ and $C_2$ is a $7$-cyclotomic code of length $6p^s$. We classify $7$-cyclotomic codes into four disjoint generator-based types and calculate exact cardinalities using residue and torsion subcodes. Furthermore, explicit generators for the Euclidean dual codes $C^\\perp$ are determined. As operational applications of these classified codes, we construct new families of quantum stabilizer codes via the CSS framework and establish parameter criteria for linear codes with complementary duals (LCD codes).",
+    "published": "2026-09-07T08:13:46Z",
+    "updated": "2026-09-07T08:13:46Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-09T08:49:27Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-09-09T05:53:49Z",
-  "cs.CC": "2026-09-09T05:53:57Z",
-  "cs.IT": "2026-09-09T05:54:02Z"
+  "cs.CR": "2026-09-09T08:48:36Z",
+  "cs.CC": "2026-09-09T08:48:45Z",
+  "cs.IT": "2026-09-09T08:48:49Z"
  }
 }

@@ -6085,41 +6085,27 @@
    "classifier": "gemini-2.5-flash-lite",
    "skip_votes": [],
    "reviewed_at": "2026-09-16T06:03:18Z"
-  }
- },
- "external_pending": {
-  "cs.CR:2609.12145": {
-   "id": "2609.12145",
-   "title": "Hardware Fingerprinting FTQC via Quantum Decoder Timing",
-   "link": "https://arxiv.org/abs/2609.12145v1",
-   "authors": "Friedrich Doku, Jakub Szefer, Kaitlin N. Smith",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR"
-   ],
-   "primary": "cs.CR",
-   "abstract": "As the quantum computing field transitions toward Fault-Tolerant Quantum Computing (FTQC), intensive efforts are focused on scaling architectures and realizing active error correction. However, this shift introduces security surfaces that remain largely unexplored. Fault-tolerant quantum computers pair a quantum processor with a classical decoder that sits on the critical path of every syndrome-extraction round. For the first time, this work demonstrates that the wall-clock time each decoder takes to process a syndrome measurement and decoding round constitutes a novel, exploitable hardware side channel on physical quantum hardware. Using per-shot decoder timings from three IBM Heron processors collected over a 68-day window, the decode-time distribution alone allows a passive observer to (i) reconstruct the shot-by-shot detector-firing distribution and estimate the workload's logical error rate $p_L$, (ii) infer the code distance in use, and (iii) fingerprint the specific physical device with up to 89% accuracy (a random guess is 33%), with a pooled two-sample Kolmogorov-Smirnov test confirming the decode-time distributions are statistically distinct. In noisy simulation inspired by public data from Google's 105-qubit Willow processor, decoder timing further distinguishes 9 surface-code patches at different locations on the chip with 81% accuracy, showing the side channel persists on below-threshold fault-tolerant hardware from a different vendor and code family.",
-   "published": "2026-09-10T19:24:45Z",
-   "updated": "2026-09-10T19:24:45Z",
-   "source_feed": "cs.CR"
   },
   "cs.CR:2609.16403": {
-   "id": "2609.16403",
-   "title": "Implementing a White-Box Undetectable Backdoor for Random Fourier Features",
-   "link": "https://arxiv.org/abs/2609.16403v1",
-   "authors": "Michael Collins, Jada Cumberland, Brianne Dunn, Ross Gore, Samuel Jackson, Sachin Shetty",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR",
-    "cs.LG"
+   "genre_ids": [
+    "pqc"
    ],
-   "primary": "cs.CR",
-   "abstract": "Goldwasser et al. showed that undetectable backdoors can be planted in machine learning models trained with the Random Fourier Features (RFF) algorithm, under a hardness assumption tied to the Continuous Learning With Errors (CLWE) problem. Under standard cryptographic assumptions, even a full white-box audit of a model's weights cannot detect this class of backdoor. The construction is stated in terms of cryptographic reductions and probabilistic lemmas, without a reference implementation, and relies on secondary machinery such as the Sparse Gaussian Pancakes distribution and a homogeneous CLWE conditional density. Its realizability in ordinary numerical code is not obvious from the paper alone. This paper implements the white-box CLWE-RFF backdoor construction end to end using only numpy and scipy, to test whether this threat is realizable with commodity scientific-computing tools or requires specialized cryptographic infrastructure. We give two samplers for the core $GP_d(b_k)$ distribution. The first is a rejection-sampling proxy. The second is an exact closed-form sampler derived from the homogeneous CLWE density and verified against its own analytic form. Using this implementation, we run statistical indistinguishability tests, covering both weight-space and functional black-box comparisons. We find no evidence of detectable difference between backdoored and clean models across a range of sparsity ratios $\u03c1= d_{\\text{sparse}}/D$. We report which parts of the construction were straightforward to realize, which required derivation not spelled out in the paper. We also highlight which parts we did not attempt to reproduce, including the underlying lattice hardness reduction. We see this work as a contribution to understanding the practical realizability of the Goldwasser white-box CLWE core, not as a new theoretical result.",
-   "published": "2026-09-14T22:18:30Z",
-   "updated": "2026-09-14T22:18:30Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-16T09:11:08Z"
+  },
+  "cs.CR:2609.12145": {
+   "genre_ids": [
+    "ft",
+    "hardware",
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-16T09:11:08Z"
   }
  },
+ "external_pending": {},
  "schema_version": 2,
  "completed_ids": [
   "1506.05785",
@@ -11224,10 +11210,92 @@
   "2609.17501",
   "2609.17517"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2609.16403": {
+   "paper": {
+    "id": "2609.16403",
+    "title": "Implementing a White-Box Undetectable Backdoor for Random Fourier Features",
+    "link": "https://arxiv.org/abs/2609.16403v1",
+    "authors": "Michael Collins, Jada Cumberland, Brianne Dunn, Ross Gore, Samuel Jackson, Sachin Shetty",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.LG"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Goldwasser et al. showed that undetectable backdoors can be planted in machine learning models trained with the Random Fourier Features (RFF) algorithm, under a hardness assumption tied to the Continuous Learning With Errors (CLWE) problem. Under standard cryptographic assumptions, even a full white-box audit of a model's weights cannot detect this class of backdoor. The construction is stated in terms of cryptographic reductions and probabilistic lemmas, without a reference implementation, and relies on secondary machinery such as the Sparse Gaussian Pancakes distribution and a homogeneous CLWE conditional density. Its realizability in ordinary numerical code is not obvious from the paper alone. This paper implements the white-box CLWE-RFF backdoor construction end to end using only numpy and scipy, to test whether this threat is realizable with commodity scientific-computing tools or requires specialized cryptographic infrastructure. We give two samplers for the core $GP_d(b_k)$ distribution. The first is a rejection-sampling proxy. The second is an exact closed-form sampler derived from the homogeneous CLWE density and verified against its own analytic form. Using this implementation, we run statistical indistinguishability tests, covering both weight-space and functional black-box comparisons. We find no evidence of detectable difference between backdoored and clean models across a range of sparsity ratios $\u03c1= d_{\\text{sparse}}/D$. We report which parts of the construction were straightforward to realize, which required derivation not spelled out in the paper. We also highlight which parts we did not attempt to reproduce, including the underlying lattice hardness reduction. We see this work as a contribution to understanding the practical realizability of the Goldwasser white-box CLWE core, not as a new theoretical result.",
+    "published": "2026-09-14T22:18:30Z",
+    "updated": "2026-09-14T22:18:30Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-16T09:11:08Z"
+  },
+  "2609.12145": {
+   "paper": {
+    "id": "2609.12145",
+    "title": "Hardware Fingerprinting FTQC via Quantum Decoder Timing",
+    "link": "https://arxiv.org/abs/2609.12145v1",
+    "authors": "Friedrich Doku, Jakub Szefer, Kaitlin N. Smith",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "As the quantum computing field transitions toward Fault-Tolerant Quantum Computing (FTQC), intensive efforts are focused on scaling architectures and realizing active error correction. However, this shift introduces security surfaces that remain largely unexplored. Fault-tolerant quantum computers pair a quantum processor with a classical decoder that sits on the critical path of every syndrome-extraction round. For the first time, this work demonstrates that the wall-clock time each decoder takes to process a syndrome measurement and decoding round constitutes a novel, exploitable hardware side channel on physical quantum hardware. Using per-shot decoder timings from three IBM Heron processors collected over a 68-day window, the decode-time distribution alone allows a passive observer to (i) reconstruct the shot-by-shot detector-firing distribution and estimate the workload's logical error rate $p_L$, (ii) infer the code distance in use, and (iii) fingerprint the specific physical device with up to 89% accuracy (a random guess is 33%), with a pooled two-sample Kolmogorov-Smirnov test confirming the decode-time distributions are statistically distinct. In noisy simulation inspired by public data from Google's 105-qubit Willow processor, decoder timing further distinguishes 9 surface-code patches at different locations on the chip with 81% accuracy, showing the side channel persists on below-threshold fault-tolerant hardware from a different vendor and code family.",
+    "published": "2026-09-10T19:24:45Z",
+    "updated": "2026-09-10T19:24:45Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "ft",
+     "hardware",
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "ft",
+    "hardware",
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "ft": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    },
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-16T09:11:08Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-09-16T05:54:08Z",
-  "cs.CC": "2026-09-16T05:54:16Z",
-  "cs.IT": "2026-09-16T05:54:20Z"
+  "cs.CR": "2026-09-16T09:10:35Z",
+  "cs.CC": "2026-09-16T09:10:45Z",
+  "cs.IT": "2026-09-16T09:10:50Z"
  }
 }

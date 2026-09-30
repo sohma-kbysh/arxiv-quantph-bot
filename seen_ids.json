@@ -7242,6 +7242,32 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-09-29T06:55:14Z"
+  },
+  "cs.CR:2609.35883": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-30T06:36:12Z"
+  },
+  "cs.CC:2609.36072": {
+   "genre_ids": [
+    "complexity",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-30T06:36:25Z"
+  },
+  "cs.IT:2609.36465": {
+   "genre_ids": [
+    "qec",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-09-30T06:36:40Z"
   }
  },
  "external_pending": {},
@@ -13299,10 +13325,128 @@
   "2609.35702",
   "2609.35722"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2609.35883": {
+   "paper": {
+    "id": "2609.35883",
+    "title": "CipherGenome: Homomorphic Inference for Genomic Mixture-of-Experts",
+    "link": "https://arxiv.org/abs/2609.35883v1",
+    "authors": "Guang Yang, Fengchen Liu",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.LG",
+     "q-bio.GN"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Genome foundation models are growing into sparse mixture-of-experts (MoE) networks whose expert weights no longer fit on the machines that hold the sequences, yet sending a private genome to rented accelerators exposes it: we show that a single server hosting one expert recovers the input nucleotides with 99.8% top-1 accuracy. We present CipherGenome, a protocol that keeps the embedding, attention and router of a 15.1B-parameter MoE genome model on a trusted thin client and outsources every expert projection, 95.8% of the parameters, to untrusted and possibly colluding GPU servers under module-LWE encryption. The design exploits three structural facts: expert layers are linear between two SwiGLU gates, expert weights are public, and GPU integer tensor cores can evaluate a ciphertext-weight product exactly modulo $2^{48}$ in a single GEMM. The client evaluates the nonlinearity exactly and re-encrypts with fresh secrets, so no polynomial approximation or bootstrapping is ever needed. On 72 windows from 12 bacterial genomes, encryption adds $2.54 \\times 10^{-4}$ nats per token of KL divergence (95% CI upper bound $3.95 \\times 10^{-4}$), below a pre-registered non-inferiority margin and indistinguishable from bf16 inference, while the same inversion attack falls to chance level. A reusable public hint cuts end-to-end latency by 3.54 times, wire compression reduces traffic 6.8 times, per-layer padding reduces routing leakage from 54.9% to 8.9% accuracy, and HE-compatible int4 experts remain non-inferior to their plaintext counterparts. Per expert and token, the server-side cost is more than six orders of magnitude below a CKKS baseline.",
+    "published": "2026-09-27T00:26:27Z",
+    "updated": "2026-09-27T00:26:27Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-30T06:36:40Z"
+  },
+  "2609.36072": {
+   "paper": {
+    "id": "2609.36072",
+    "title": "Spectral Methods for the Complexity of Planar Graph Homomorphisms",
+    "link": "https://arxiv.org/abs/2609.36072v1",
+    "authors": "Ashwin Maran, Jin-Yi Cai, Zhuxiao Tang",
+    "announce_type": "external",
+    "categories": [
+     "cs.CC"
+    ],
+    "primary": "cs.CC",
+    "abstract": "We explore the frontier beyond the recently discovered barrier represented by the \\emph{quantum automorphism group} $qut(M)$ in the classification theory of planar graph homomorphisms $PlGH(M)$. We show that analyzing the spectral relations of $M$ can prove \\#P-hardness when traditional vertex separation and domain-reduction methods with planar edge gadgets provably fail due to the $\\qut(M)$ barrier. We prove two criteria of \\#P-hardness for $PlGH(M)$: a spectral criterion and a determinant criterion. It is known that the core problem for the classification of $PlGH(M)$ for nonnegative matrices $M$ is for positive definite entry-wise positive matrices. We use the spectral criterion to show that $PlGH(M)$ is \\#P-hard for all circulant matrices of prime order $q \\ge 3$, while for $q=2$ it is precisely the matchgate case and is P-time computable by the FKT algorithm (for planar perfect matching). We also prove a complexity dichotomy for $\\PlGH$ problems defined by tensor products of 2 by 2 matrices. This gives a complete complexity classification for this class of matrices, and the FKT algorithm together with a holographic transformation is \\emph{universal}---every $PlGH(M)$ is either (1) P-time computable over all graphs, or (2) \\#P-hard in general but P-time computable over planar graphs, or (3) \\#P-hard over planar graphs; furthermore, $PlGH(M)$ in (2) consists of precisely those computable by FKT with a holographic transformation.",
+    "published": "2026-09-28T18:22:45Z",
+    "updated": "2026-09-28T18:22:45Z",
+    "source_feed": "cs.CC",
+    "external_genre_ids": [
+     "complexity",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "complexity",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "complexity": {
+     "status": "pending"
+    },
+    "algo": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-30T06:36:40Z"
+  },
+  "2609.36465": {
+   "paper": {
+    "id": "2609.36465",
+    "title": "Singleton-Optimal Rank-Metric CSS Codes : Equality Structure and Exact Projected-Recovery Radii",
+    "link": "https://arxiv.org/abs/2609.36465v1",
+    "authors": "Myeongjun Kim, Suseong Lee, Jaeho Jeon, Young-Sik Kim",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Correlated faults from shared control can have dense physical support yet low rank over a base field, motivating rank-metric quantum codes for stacked architectures. We prove an asymmetric rank-metric Singleton bound for Calderbank--Shor--Steane codes, including degenerate codes, and characterize equality through commuting maximum-rank-distance matrix codes. Optimal pairs exist for every admissible parameter triple and are necessarily pure. Comparison with erasure bounds establishes an exact advantage in stacked rank distance for general stabilizer codes at fixed physical resources on certain tall layouts. We determine whether relaxing the recovery target enlarges the worst-case correctable radius. For Singleton-optimal pairs with positive logical dimension, the measured syndrome determines the projected error modulo stabilizers exactly at radii strictly below half the sector rank distance, on every layout and for every nonzero projector. The projected syndrome is recoverable at arbitrary radii exactly when the complementary check space is invariant under the adjoint projector; otherwise, the same radius limit applies. For nontrivial idempotents, this invariance requires more rows than columns or sector distance one. For trace-self-adjoint projectors, linear ambient projected-syndrome interfaces in both sectors exist exactly when the code splits as a tensor product across the projector. Designs placing the two check spaces in complementary projector images are necessarily one-sided whenever they encode logical information. Two explicit families realize the extreme cases of the equality structure, including a two-sided family with an efficient certifying decoder attaining the optimal unique-decoding radius.",
+    "published": "2026-09-29T01:24:17Z",
+    "updated": "2026-09-29T01:24:17Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "qec",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qec": {
+     "status": "pending"
+    },
+    "algo": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-09-30T06:36:40Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-09-29T13:54:09Z",
-  "cs.CC": "2026-09-29T13:54:18Z",
-  "cs.IT": "2026-09-29T13:54:23Z"
+  "cs.CR": "2026-09-30T06:35:43Z",
+  "cs.CC": "2026-09-30T06:35:51Z",
+  "cs.IT": "2026-09-30T06:35:56Z"
  }
 }

@@ -7528,6 +7528,33 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-09-30T06:36:40Z"
+  },
+  "cs.CR:2609.39774": {
+   "genre_ids": [
+    "crypto",
+    "qit",
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-01T10:51:24Z"
+  },
+  "cs.CR:2609.38668": {
+   "genre_ids": [
+    "pqc",
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-01T10:51:24Z"
+  },
+  "cs.CC:2609.38910": {
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-01T10:53:51Z"
   }
  },
  "external_pending": {},
@@ -13845,10 +13872,132 @@
   "2609.40351",
   "2609.40355"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2609.39774": {
+   "paper": {
+    "id": "2609.39774",
+    "title": "Path-Finding, Orbit State Preparation, and the Security of Invariant Quantum Money",
+    "link": "https://arxiv.org/abs/2609.39774v1",
+    "authors": "Hans Schmiedel, Jiangshan Yu",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "The security of quantum money from knots, and of its generalization to invariant money, is based on the assumption that path-finding, exhibiting a sequence of moves between two equivalent objects, is hard. No proof of security from that assumption alone is known. The existing proofs add knowledge-of-path assumptions, which assert that any efficient algorithm producing two objects with the same invariant implicitly knows a path between them. No attack can refute such an assumption, and it is not known to follow from security. We ask when path-finding is the right assumption. When each equivalence class is the orbit of an efficiently computable action of a group that can be superposed over, and every move acts as a group element, as for graphs, average-case hardness of path-finding is necessary for security. For knots no such group is known, and a path-finder only reduces forgery to an equally hard state-preparation problem. With or without a path-finder, a forger must prepare a state that verification accepts, and we take the hardness of that task as the assumption. For schemes whose verification walk mixes in polynomial time, the preparation assumption states that no efficient algorithm, given the serial number of a freshly minted banknote and one object measured from it, prepares such a state. It is falsifiable, and it is equivalent to security against forgers that measure their banknote first. The transfer assumption, which security implies, states that measuring first costs a forger at most a polynomial factor. Together the two are equivalent to security, so every proof of security must establish the preparation assumption. If the preparation assumption holds, no fully black-box reduction that calls the forger only at the serial number it is given can derive the transfer assumption from the preparation assumption.",
+    "published": "2026-09-30T14:01:07Z",
+    "updated": "2026-09-30T14:01:07Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "crypto",
+     "qit",
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "crypto",
+    "qit",
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "crypto": {
+     "status": "pending"
+    },
+    "qit": {
+     "status": "pending"
+    },
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-01T10:53:51Z"
+  },
+  "2609.38668": {
+   "paper": {
+    "id": "2609.38668",
+    "title": "Z-Sigil: A Public-Key Cryptosystem with Chained Selection over a Fiber Bundle of Module-Lattice Keys",
+    "link": "https://arxiv.org/abs/2609.38668v1",
+    "authors": "Andrea Rondelli",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.IT"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Z-Sigil is a public-key cryptosystem in which the plaintext selects successive keys from a fixed module-lattice family. Messages are length-prefixed, zero-padded and divided into 32-byte blocks. Each public vector is a shared public matrix applied to a small secret vector, plus a small error. Key indices label torsion points of a flat K\u00e4hler torus; the secret family forms a section of a key bundle over them. A public nonce initializes a hash state that selects each block's key and bit mask. The sender updates the state with the plaintext block; the receiver does so after recovering it. The stream and nonce determine a discrete walk along which decryption reads the secret section. We specify the algorithms, prove correctness under an explicit noise condition and bound decoding failure for messages chosen after the public key. Under stated decisional Module-LWE assumptions, we establish IND-CPA confidentiality for the chain without modelling the state hash as a random oracle. The reduction covers quantum adversaries under quantum hardness assumptions, with classical keys, messages and ciphertexts; no concrete security level is established. With independent uniform selectors, a restricted direct-decryption model quantifies reduced fragment recovery under partial key exposure, without improving full-message recovery probability over an independent-block baseline. Known-plaintext and candidate-message attacks, and parallel candidate-table decryption, delimit this result. Neither a universal sequential lower bound nor authentication or chosen-ciphertext security is established. Replacing an earlier scalar-exposing proposal, we give an augmented-lattice interpretation, integral-transport obstructions and a noise budget for research on curved, nontrivial bundles. A byte-level specification, pseudocode, test vectors and numerical checks support verification.",
+    "published": "2026-09-29T23:48:15Z",
+    "updated": "2026-09-29T23:48:15Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-01T10:53:51Z"
+  },
+  "2609.38910": {
+   "paper": {
+    "id": "2609.38910",
+    "title": "Frustration Free Stoquastic Local Hamiltonian with Sub-Constant Gap is in NP",
+    "link": "https://arxiv.org/abs/2609.38910v1",
+    "authors": "Eshan Chattopadhyay, Oren Renard, Nicholas Spooner",
+    "announce_type": "external",
+    "categories": [
+     "cs.CC"
+    ],
+    "primary": "cs.CC",
+    "abstract": "We continue the study of the Stoquastic Local Hamiltonian problem, a physically motivated restriction of the QMA-complete Local Hamiltonian problem (Kitaev, Shen, and Vyalyi, 2002). For the $\u03b2$-gapped, frustration-free case, Bravyi, Bessen, and Terhal (2006) showed that the problem is MA-complete when $\u03b2= 1/\\mathrm{poly}(n)$. Aharonov and Grilo (2019) derandomized this algorithm and proved membership in NP for constant gap $\u03b2= \u03a9(1)$. We present an improved algorithm and analysis, establishing membership in NP even when $\u03b2= \u03a9(1/(\\log\\log n))$. We complement our result with an explicit example demonstrating why the analysis does not extend directly to $\u03b2= o(1/\\log\\log n)$.",
+    "published": "2026-09-30T03:56:04Z",
+    "updated": "2026-09-30T03:56:04Z",
+    "source_feed": "cs.CC",
+    "external_genre_ids": [
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-01T10:53:51Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-09-30T13:29:17Z",
-  "cs.CC": "2026-09-30T13:29:25Z",
-  "cs.IT": "2026-09-30T13:29:30Z"
+  "cs.CR": "2026-10-01T10:47:46Z",
+  "cs.CC": "2026-10-01T10:47:54Z",
+  "cs.IT": "2026-10-01T10:47:59Z"
  }
 }

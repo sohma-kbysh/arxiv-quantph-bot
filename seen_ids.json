@@ -7741,6 +7741,23 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-10-01T10:53:51Z"
+  },
+  "cs.CR:2610.01960": {
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-02T13:42:52Z"
+  },
+  "cs.CR:2610.01872": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-02T13:42:52Z"
   }
  },
  "external_pending": {},
@@ -14244,10 +14261,88 @@
   "2610.02178",
   "2610.02183"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2610.01960": {
+   "paper": {
+    "id": "2610.01960",
+    "title": "System-Level Optimization Beyond Cryptographic Kernels: An ML-KEM Case Study on Arm Cortex-M7",
+    "link": "https://arxiv.org/abs/2610.01960v1",
+    "authors": "Mahmoud Abdelhafeez Sayed, Mostafa Taha, Gurp Nijjer",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Recent work on embedded post-quantum cryptography has focused primarily on instruction-level optimization, including arithmetic-kernel improvements, assembly tuning, register allocation, and instruction scheduling. Using the Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM) on an Arm Cortex-M7 as a case study, we examine the additional gains available from memory-hierarchy utilization, tightly coupled memory placement, peripheral integration, clock configuration, and deterministic public-data reuse. The evaluation starts from a state-of-the-art SLOTHY-optimized implementation and covers all three ML-KEM parameter sets. Without modifying the cryptographic algorithm or standardized wire formats, the evaluated profiles without auxiliary public state reduce cycles by up to 2.5%. A selected public-data-reuse profile reduces encapsulation and decapsulation cycles by up to 74.6% and 58.8%, respectively. These results demonstrate that substantial deployment gains remain after arithmetic-kernel optimization and motivate a two-stage methodology that also examines the surrounding execution system.",
+    "published": "2026-10-01T16:16:01Z",
+    "updated": "2026-10-01T16:16:01Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-02T13:42:52Z"
+  },
+  "2610.01872": {
+   "paper": {
+    "id": "2610.01872",
+    "title": "From Network Intrusion Detection to Blockchain-Backed Endpoint Detection and Response: Mapping the Landscape of Decentralized Detection-and-Response Architectures",
+    "link": "https://arxiv.org/abs/2610.01872v1",
+    "authors": "Yahya Shahsavari, Sara Rouhani, Kaiwen Zhang",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.AI",
+     "cs.NI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "While the literature on blockchain-assisted intrusion detection and prevention systems (IDS/IPS) for Internet of Things (IoT) and Industrial Internet of Things (IIoT) networks is mature, existing systematic reviews suffer from two critical limitations: they overlook the structural shift toward modern Endpoint Detection and Response (EDR) and Extended Detection and Response (XDR) architectures, and they conflate blockchain's distinct functional roles into a single monolithic category. This Systematization of Knowledge (SoK) addresses these gaps by proposing a three-axis taxonomy that classifies proposals by detection-system class (NIDS, HIDS, EDR/XDR), blockchain functional role, and response-automation maturity. Synthesizing research published in high-impact venues between 2019 and 2026, we provide a rigorous gap analysis exposing why a genuine per-endpoint blockchain-anchored response loop remains nearly nonexistent due to latency, deployment, and community mismatches. Furthermore, we evaluate structural, cross-cutting challenges persisting across the literature, including consensus latency on constrained devices, post-quantum cryptographic vulnerability, smart-contract attack surfaces, and the adversarial vulnerability of evolving LLM-based detection engines. Finally, we outline a comprehensive research agenda centered on hybrid on-chain/off-chain orchestration to bridge the gap between decentralized trust and rapid response automation.",
+    "published": "2026-10-01T15:30:31Z",
+    "updated": "2026-10-01T15:30:31Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-02T13:42:52Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-10-01T14:20:34Z",
-  "cs.CC": "2026-10-01T14:20:43Z",
-  "cs.IT": "2026-10-01T14:20:47Z"
+  "cs.CR": "2026-10-02T13:42:28Z",
+  "cs.CC": "2026-10-02T13:42:36Z",
+  "cs.IT": "2026-10-02T13:42:40Z"
  }
 }

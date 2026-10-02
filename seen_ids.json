@@ -6445,6 +6445,7 @@
   "2610.01860",
   "2610.01862",
   "2610.01869",
+  "2610.01872",
   "2610.01874",
   "2610.01878",
   "2610.01880",
@@ -6455,6 +6456,7 @@
   "2610.01940",
   "2610.01941",
   "2610.01954",
+  "2610.01960",
   "2610.01979",
   "2610.01987",
   "2610.01992",
@@ -14208,6 +14210,7 @@
   "2610.01860",
   "2610.01862",
   "2610.01869",
+  "2610.01872",
   "2610.01874",
   "2610.01878",
   "2610.01880",
@@ -14218,6 +14221,7 @@
   "2610.01940",
   "2610.01941",
   "2610.01954",
+  "2610.01960",
   "2610.01979",
   "2610.01987",
   "2610.01992",
@@ -14261,85 +14265,7 @@
   "2610.02178",
   "2610.02183"
  ],
- "deliveries": {
-  "2610.01960": {
-   "paper": {
-    "id": "2610.01960",
-    "title": "System-Level Optimization Beyond Cryptographic Kernels: An ML-KEM Case Study on Arm Cortex-M7",
-    "link": "https://arxiv.org/abs/2610.01960v1",
-    "authors": "Mahmoud Abdelhafeez Sayed, Mostafa Taha, Gurp Nijjer",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "Recent work on embedded post-quantum cryptography has focused primarily on instruction-level optimization, including arithmetic-kernel improvements, assembly tuning, register allocation, and instruction scheduling. Using the Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM) on an Arm Cortex-M7 as a case study, we examine the additional gains available from memory-hierarchy utilization, tightly coupled memory placement, peripheral integration, clock configuration, and deterministic public-data reuse. The evaluation starts from a state-of-the-art SLOTHY-optimized implementation and covers all three ML-KEM parameter sets. Without modifying the cryptographic algorithm or standardized wire formats, the evaluated profiles without auxiliary public state reduce cycles by up to 2.5%. A selected public-data-reuse profile reduces encapsulation and decapsulation cycles by up to 74.6% and 58.8%, respectively. These results demonstrate that substantial deployment gains remain after arithmetic-kernel optimization and motivate a two-stage methodology that also examines the surrounding execution system.",
-    "published": "2026-10-01T16:16:01Z",
-    "updated": "2026-10-01T16:16:01Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc",
-     "hardware"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc",
-    "hardware"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "\u7d44\u307f\u8fbc\u307f\u91cf\u5b50\u6697\u53f7\u306b\u95a2\u3059\u308b\u6700\u8fd1\u306e\u7814\u7a76\u306f\u4e3b\u306b\u547d\u4ee4\u30ec\u30d9\u30eb\u306e\u6700\u9069\u5316\u306b\u7126\u70b9\u3092\u5f53\u3066\u3066\u304a\u308a\u3001\u7b97\u8853\u30ab\u30fc\u30cd\u30eb\u306e\u6539\u826f\u3001\u30a2\u30bb\u30f3\u30d6\u30ea\u30c1\u30e5\u30fc\u30cb\u30f3\u30b0\u3001\u30ec\u30b8\u30b9\u30bf\u5272\u308a\u5f53\u3066\u3001\u547d\u4ee4\u30b9\u30b1\u30b8\u30e5\u30fc\u30ea\u30f3\u30b0\u306a\u3069\u304c\u542b\u307e\u308c\u307e\u3059\u3002Arm Cortex-M7\u4e0a\u306e\u30e2\u30b8\u30e5\u30fc\u30eb\u683c\u5b50\u30d9\u30fc\u30b9\u9375\u30ab\u30d7\u30bb\u30eb\u5316\u6a5f\u69cb(ML-KEM)\u3092\u30b1\u30fc\u30b9\u30b9\u30bf\u30c7\u30a3\u3068\u3057\u3066\u7528\u3044\u3001\u30e1\u30e2\u30ea\u968e\u5c64\u5229\u7528\u3001\u5bc6\u7d50\u5408\u30e1\u30e2\u30ea\u914d\u7f6e\u3001\u5468\u8fba\u6a5f\u5668\u7d71\u5408\u3001\u30af\u30ed\u30c3\u30af\u8a2d\u5b9a\u3001\u6c7a\u5b9a\u8ad6\u7684\u516c\u958b\u30c7\u30fc\u30bf\u306e\u518d\u5229\u7528\u304b\u3089\u5f97\u3089\u308c\u308b\u8ffd\u52a0\u7684\u306a\u5229\u70b9\u3092\u691c\u8a0e\u3057\u307e\u3059\u3002\u8a55\u4fa1\u306f\u6700\u5148\u7aef\u306eSLOTHY\u6700\u9069\u5316\u5b9f\u88c5\u304b\u3089\u59cb\u307e\u308a\u30013\u3064\u306eML-KEM\u30d1\u30e9\u30e1\u30fc\u30bf\u30bb\u30c3\u30c8\u3059\u3079\u3066\u3092\u30ab\u30d0\u30fc\u3057\u307e\u3059\u3002\u6697\u53f7\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u3084\u6a19\u6e96\u5316\u3055\u308c\u305f\u914d\u7dda\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u3092\u5909\u66f4\u3057\u306a\u3044\u5834\u5408\u3001\u88dc\u52a9\u516c\u958b\u72b6\u614b\u3092\u6301\u305f\u306a\u3044\u8a55\u4fa1\u30d7\u30ed\u30d5\u30a1\u30a4\u30eb\u306f\u6700\u59272.5%\u306e\u30b5\u30a4\u30af\u30eb\u524a\u6e1b\u304c\u53ef\u80fd\u3067\u3059\u3002\u9078\u629e\u3055\u308c\u305f\u516c\u958b\u30c7\u30fc\u30bf\u518d\u5229\u7528\u30d7\u30ed\u30d5\u30a1\u30a4\u30eb\u306f\u3001\u30ab\u30d7\u30bb\u30eb\u5316\u304a\u3088\u3073\u30ab\u30d7\u30bb\u30eb\u5316\u30b5\u30a4\u30af\u30eb\u3092\u305d\u308c\u305e\u308c\u6700\u592774.6%\u304a\u3088\u307358.8%\u524a\u6e1b\u3057\u307e\u3059\u3002\u3053\u308c\u3089\u306e\u7d50\u679c\u306f\u3001\u7b97\u8853\u30ab\u30fc\u30cd\u30eb\u6700\u9069\u5316\u5f8c\u3082\u5927\u5e45\u306a\u5c55\u958b\u5411\u4e0a\u304c\u6b8b\u308b\u3053\u3068\u3092\u793a\u3057\u3001\u5468\u56f2\u306e\u5b9f\u884c\u30b7\u30b9\u30c6\u30e0\u3082\u691c\u8a3c\u3059\u308b2\u6bb5\u968e\u306e\u624b\u6cd5\u3092\u52d5\u6a5f\u4ed8\u3051\u3066\u3044\u307e\u3059\u3002",
-   "title_translated": "\u6697\u53f7\u30ab\u30fc\u30cd\u30eb\u3092\u8d85\u3048\u305f\u30b7\u30b9\u30c6\u30e0\u30ec\u30d9\u30eb\u6700\u9069\u5316:Arm Cortex-M7\u306b\u304a\u3051\u308bML-KEM\u30b1\u30fc\u30b9\u30b9\u30bf\u30c7\u30a3",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    },
-    "hardware": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-10-02T13:42:52Z"
-  },
-  "2610.01872": {
-   "paper": {
-    "id": "2610.01872",
-    "title": "From Network Intrusion Detection to Blockchain-Backed Endpoint Detection and Response: Mapping the Landscape of Decentralized Detection-and-Response Architectures",
-    "link": "https://arxiv.org/abs/2610.01872v1",
-    "authors": "Yahya Shahsavari, Sara Rouhani, Kaiwen Zhang",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR",
-     "cs.AI",
-     "cs.NI"
-    ],
-    "primary": "cs.CR",
-    "abstract": "While the literature on blockchain-assisted intrusion detection and prevention systems (IDS/IPS) for Internet of Things (IoT) and Industrial Internet of Things (IIoT) networks is mature, existing systematic reviews suffer from two critical limitations: they overlook the structural shift toward modern Endpoint Detection and Response (EDR) and Extended Detection and Response (XDR) architectures, and they conflate blockchain's distinct functional roles into a single monolithic category. This Systematization of Knowledge (SoK) addresses these gaps by proposing a three-axis taxonomy that classifies proposals by detection-system class (NIDS, HIDS, EDR/XDR), blockchain functional role, and response-automation maturity. Synthesizing research published in high-impact venues between 2019 and 2026, we provide a rigorous gap analysis exposing why a genuine per-endpoint blockchain-anchored response loop remains nearly nonexistent due to latency, deployment, and community mismatches. Furthermore, we evaluate structural, cross-cutting challenges persisting across the literature, including consensus latency on constrained devices, post-quantum cryptographic vulnerability, smart-contract attack surfaces, and the adversarial vulnerability of evolving LLM-based detection engines. Finally, we outline a comprehensive research agenda centered on hybrid on-chain/off-chain orchestration to bridge the gap between decentralized trust and rapid response automation.",
-    "published": "2026-10-01T15:30:31Z",
-    "updated": "2026-10-01T15:30:31Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "IoT(\u30e2\u30ce\u306e\u30a4\u30f3\u30bf\u30fc\u30cd\u30c3\u30c8)\u304a\u3088\u3073\u7523\u696d\u7528IoT(IIoT)\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u5411\u3051\u306e\u30d6\u30ed\u30c3\u30af\u30c1\u30a7\u30fc\u30f3\u652f\u63f4\u4fb5\u5165\u691c\u77e5\u30fb\u9632\u6b62\u30b7\u30b9\u30c6\u30e0(IDS/IPS)\u306b\u95a2\u3059\u308b\u6587\u732e\u306f\u6210\u719f\u3057\u3066\u3044\u307e\u3059\u304c\u3001\u65e2\u5b58\u306e\u30b7\u30b9\u30c6\u30de\u30c6\u30a3\u30c3\u30af\u30ec\u30d3\u30e5\u30fc\u306b\u306f2\u3064\u306e\u91cd\u5927\u306a\u5236\u7d04\u304c\u3042\u308a\u307e\u3059\u3002\u3059\u306a\u308f\u3061\u3001\u73fe\u4ee3\u306e\u30a8\u30f3\u30c9\u30dd\u30a4\u30f3\u30c8\u691c\u77e5\u5fdc\u7b54(EDR)\u304a\u3088\u3073\u62e1\u5f35\u691c\u77e5\u5fdc\u7b54(XDR)\u30a2\u30fc\u30ad\u30c6\u30af\u30c1\u30e3\u3078\u306e\u69cb\u9020\u7684\u30b7\u30d5\u30c8\u3092\u898b\u843d\u3068\u3057\u3066\u3044\u308b\u3053\u3068\u3001\u305d\u3057\u3066\u30d6\u30ed\u30c3\u30af\u30c1\u30a7\u30fc\u30f3\u306e\u7570\u306a\u308b\u6a5f\u80fd\u7684\u5f79\u5272\u3092\u5358\u4e00\u306e\u30e2\u30ce\u30ea\u30b7\u30c3\u30af\u306a\u30ab\u30c6\u30b4\u30ea\u30fc\u306b\u7d71\u5408\u3057\u3066\u3044\u308b\u70b9\u3067\u3059\u3002\u3053\u306e\u77e5\u8b58\u306e\u4f53\u7cfb\u5316(SoK)\u306f\u3001\u63d0\u6848\u3092\u691c\u51fa\u30b7\u30b9\u30c6\u30e0\u30af\u30e9\u30b9(NIDS\u3001HIDS\u3001EDR/XDR)\u3001\u30d6\u30ed\u30c3\u30af\u30c1\u30a7\u30fc\u30f3\u306e\u6a5f\u80fd\u5f79\u5272\u3001\u5fdc\u7b54\u81ea\u52d5\u5316\u306e\u6210\u719f\u5ea6\u3067\u5206\u985e\u3059\u308b\u4e09\u8ef8\u306e\u5206\u985e\u6cd5\u3092\u63d0\u6848\u3059\u308b\u3053\u3068\u3067\u3001\u3053\u308c\u3089\u306e\u30ae\u30e3\u30c3\u30d7\u3092\u57cb\u3081\u3066\u3044\u307e\u3059\u30022019\u5e74\u304b\u30892026\u5e74\u306b\u304b\u3051\u3066\u767a\u8868\u3055\u308c\u305f\u5f71\u97ff\u529b\u306e\u9ad8\u3044\u7814\u7a76\u3092\u7d71\u5408\u3057\u3001\u9045\u5ef6\u3001\u5c55\u958b\u3001\u30b3\u30df\u30e5\u30cb\u30c6\u30a3\u30df\u30b9\u30de\u30c3\u30c1\u306e\u305f\u3081\u306b\u3001\u771f\u306e\u30a8\u30f3\u30c9\u30dd\u30a4\u30f3\u30c8\u3054\u3068\u306e\u30d6\u30ed\u30c3\u30af\u30c1\u30a7\u30fc\u30f3\u30a2\u30f3\u30ab\u30fc\u5fdc\u7b54\u30eb\u30fc\u30d7\u304c\u307b\u3068\u3093\u3069\u5b58\u5728\u3057\u306a\u3044\u7406\u7531\u3092\u660e\u3089\u304b\u306b\u3059\u308b\u53b3\u5bc6\u306a\u30ae\u30e3\u30c3\u30d7\u5206\u6790\u3092\u63d0\u4f9b\u3057\u307e\u3059\u3002\u3055\u3089\u306b\u3001\u5236\u7d04\u3092\u53d7\u3051\u305f\u30c7\u30d0\u30a4\u30b9\u306b\u304a\u3051\u308b\u30b3\u30f3\u30bb\u30f3\u30b5\u30b9\u9045\u5ef6\u3001\u30dd\u30b9\u30c8\u91cf\u5b50\u6697\u53f7\u5b66\u7684\u8106\u5f31\u6027\u3001\u30b9\u30de\u30fc\u30c8\u30b3\u30f3\u30c8\u30e9\u30af\u30c8\u653b\u6483\u9762\u3001\u9032\u5316\u3059\u308bLLM\u30d9\u30fc\u30b9\u306e\u691c\u51fa\u30a8\u30f3\u30b8\u30f3\u306e\u6575\u5bfe\u7684\u8106\u5f31\u6027\u306a\u3069\u3001\u6587\u732e\u5168\u4f53\u3067\u6839\u5f37\u304f\u6b8b\u308b\u69cb\u9020\u7684\u304b\u3064\u6a2a\u65ad\u7684\u306a\u8ab2\u984c\u3082\u8a55\u4fa1\u3057\u307e\u3059\u3002\u6700\u5f8c\u306b\u3001\u5206\u6563\u578b\u4fe1\u983c\u3068\u8fc5\u901f\u5fdc\u7b54\u81ea\u52d5\u5316\u306e\u30ae\u30e3\u30c3\u30d7\u3092\u57cb\u3081\u308b\u305f\u3081\u306e\u30cf\u30a4\u30d6\u30ea\u30c3\u30c9\u306a\u30aa\u30f3\u30c1\u30a7\u30fc\u30f3/\u30aa\u30d5\u30c1\u30a7\u30fc\u30f3\u30aa\u30fc\u30b1\u30b9\u30c8\u30ec\u30fc\u30b7\u30e7\u30f3\u306b\u7126\u70b9\u3092\u5f53\u3066\u305f\u5305\u62ec\u7684\u306a\u7814\u7a76\u8ab2\u984c\u3092\u6982\u8aac\u3057\u307e\u3059\u3002",
-   "title_translated": "\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u4fb5\u5165\u691c\u77e5\u304b\u3089\u30d6\u30ed\u30c3\u30af\u30c1\u30a7\u30fc\u30f3\u652f\u63f4\u578b\u30a8\u30f3\u30c9\u30dd\u30a4\u30f3\u30c8\u691c\u77e5\u30fb\u5fdc\u7b54\u307e\u3067:\u5206\u6563\u578b\u691c\u77e5\u30fb\u5fdc\u7b54\u30a2\u30fc\u30ad\u30c6\u30af\u30c1\u30e3\u306e\u30de\u30c3\u30d4\u30f3\u30b0",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-10-02T13:42:52Z"
-  }
- },
+ "deliveries": {},
  "external_cursors": {
   "cs.CR": "2026-10-02T13:42:28Z",
   "cs.CC": "2026-10-02T13:42:36Z",

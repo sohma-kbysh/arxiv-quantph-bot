@@ -8168,6 +8168,59 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-10-05T06:58:38Z"
+  },
+  "cs.CR:2610.06058": {
+   "genre_ids": [
+    "pqc",
+    "hardware",
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-06T11:06:38Z"
+  },
+  "cs.CR:2610.05835": {
+   "genre_ids": [
+    "qml",
+    "nisq"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-06T11:06:38Z"
+  },
+  "cs.CR:2610.04661": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-06T11:06:38Z"
+  },
+  "cs.CR:2610.04543": {
+   "genre_ids": [
+    "crypto",
+    "qml",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-06T11:06:38Z"
+  },
+  "cs.CC:2610.05430": {
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-06T11:06:56Z"
+  },
+  "cs.CC:2610.05385": {
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-06T11:06:56Z"
   }
  },
  "external_pending": {},
@@ -15064,10 +15117,249 @@
   "2610.06845",
   "2610.06849"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2610.06058": {
+   "paper": {
+    "id": "2610.06058",
+    "title": "Efficient HQC Implementations on RISC-V: A Cross-Layer Design Space Exploration",
+    "link": "https://arxiv.org/abs/2610.06058v1",
+    "authors": "Maximilian Sch\u00f6ffel, Johannes Feldmann, Elias Biehl, Norbert Wehn",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "RISC-V-based hardware/software co-design has become an established methodology for implementing post-quantum cryptography (PQC) on embedded devices. Its software programmability, extensible instruction-set architecture, and optional dedicated accelerators create a broad design space that offers the flexibility required for crypto-agility and post-deployment updates. For HQC, a PQC key-encapsulation mechanism selected for standardization, several RISC-V-based implementations have already been published. However, these works explore only a small subset of this design space. We present, to the best of our knowledge, the most comprehensive exploration of RISC-V-based HQC. Our exploration is centered around a new, parametrizable architecture framework on which we characterize 29,920 distinct architectural configurations across all three HQC security levels on FPGA. The Pareto-optimal configurations from this framework outperform the state-of-the-art RISC-V-based HQC implementation, ranging from 4.8x lower LUT utilization at 17% lower latency to 69.6x lower latency at 30% lower LUT utilization, while also requiring up to 10.6x fewer block RAMs.",
+    "published": "2026-10-05T09:51:42Z",
+    "updated": "2026-10-05T09:51:42Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware",
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "hardware",
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    },
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-06T11:06:56Z"
+  },
+  "2610.05835": {
+   "paper": {
+    "id": "2610.05835",
+    "title": "Adaptive-Shot Hybrid Quantum Anomaly Detection for Tactile Internet Security: Reliability-Aware Measurement Allocation Under Resource Constraints",
+    "link": "https://arxiv.org/abs/2610.05835v1",
+    "authors": "Mubassir Serneabat Sudipto, Shakil Ahmed, Ashfaq Khokhar, Samir M. Iqbal",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.LG",
+     "cs.NI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Tactile Internet (TI) security analytics must balance reliable thresholded decisions with constrained computational and measurement resources. We study this tension for finite-shot hybrid quantum anomaly inference and introduce the Adaptive-Shot Variational Quantum Circuit (AS-VQC) policy. This validation-calibrated policy begins each record at 128 shots and cumulatively escalates through 256, 512, and 1024 shots only when the finite-shot anomaly score remains close to a validation-selected security threshold. The quantum scorer is evaluated as an off-path security analytics component rather than part of the haptic critical path. Using a 4,875-record CESNET-TimeSeries24-derived aggregate-flow benchmark, leakage-safe random, entity-group-disjoint, and temporal holdouts, and five trained quantum neural network (QNN) checkpoints per holdout, the primary AS-VQC-95 (beta = 0.95) policy averages 129.2, 276.9, and 131.2 shots per record, saving 87.4%, 73.0%, and 87.2% of the uniform 1024-shot baseline (Fixed-1024), respectively. The decision disagreement with analytic (exact-expectation) inference is 0.771%, 0.409%, and 0.635%, lower than both the uniform 128-shot baseline (Fixed-128) and a matched-budget shuffled-allocation control. Fixed-1024 remains more decision-stable, establishing a measurable reliability-resource trade-off rather than cost-free equivalence. A more conservative AS-VQC-99 (beta = 0.99) further reduces disagreement while using fewer than 512 average shots across all holdouts. These results show that finite quantum measurements can be treated as an inference resource and concentrated on boundary-sensitive TI-security decisions while exposing checkpoint-dependent escalation under unseen-entity conditions.",
+    "published": "2026-10-05T05:38:18Z",
+    "updated": "2026-10-05T05:38:18Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "qml",
+     "nisq"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "qml",
+    "nisq"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qml": {
+     "status": "pending"
+    },
+    "nisq": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-06T11:06:56Z"
+  },
+  "2610.04661": {
+   "paper": {
+    "id": "2610.04661",
+    "title": "Post-Quantum Authentication Protocol for Internet of Medical Things",
+    "link": "https://arxiv.org/abs/2610.04661v1",
+    "authors": "Kartick Sutradhar, Ranjitha Venkatesh",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "IoMT communication systems should provide origin authentication and ensure integrity protection for the messages produced by patients' devices for transmission to gateways and further processing by other hospital services. With regard to IoMT, this paper discusses tampering, impersonation, and replay attacks on messages provided as medical reports. Long-term security of the communication system is also addressed considering potential quantum attacks. For this purpose, we design a protocol that meets requirements of practical implementation and employs an ISIS like lattice-based construction combined with concepts of the blockchain technology. Patients' devices generate a canonical JSON format medical report containing a timestamp and critical information. Using a nonce, the patients create a cryptographic signature of the message with a challenge generated from hash of a message. The gateway verifies signatures utilizing the public key of a trusted ledger associated with a particular patient and ensures freshness of the transmitted message. To optimize the performance in case when many devices interact with a gateway at once, the gateway performs batch signature validation using vectorized modular linear equations. The trusted ledger uses tamper-resistant REGISTER and TRUST UPDATE entries, maintaining a trust score of each registered patient and updating the value after each ACCEPT/REJECT operation. Our prototype application demonstrates registration procedure of a new patient, signing and verifying medical reports, auditing of the ledger, and performance assessment. Based on our experiments in the prototype, we argue that, when applied to large-scale systems, batch verification is superior to simple signature validation approach.",
+    "published": "2026-10-03T17:21:45Z",
+    "updated": "2026-10-03T17:21:45Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-06T11:06:56Z"
+  },
+  "2610.04543": {
+   "paper": {
+    "id": "2610.04543",
+    "title": "Quantum Machine Learning Protection of Military Quantum Key Distribution Against Cryptographically Camouflaged Attacks",
+    "link": "https://arxiv.org/abs/2610.04543v1",
+    "authors": "Muhammad Shaheer Bin Junaid",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.LG"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Quantum key distribution proves its protocol secure and says nothing about the hardware beneath it, so military and government operators fielding it for command-and-control keys monitor the channel for implementation attacks, and that monitoring has a blind spot. An adversary with a kleptographic foothold in the generator of a public per-block value \\(x=g^v \\pmod p\\) can hide attacked blocks in honest noise, gating them on a predicate of its discrete logarithm, making detection a discrete logarithm problem that defeats every efficient classical monitor yet yields to a quantum kernel recovering \\(v\\) through Shor's algorithm. I formalise these cryptographically camouflaged attacks, reduce their hardness to an established learning separation, prove a single-frequency fidelity kernel cannot represent an interval predicate, and test them on Ghillie, a decoy-state BB84 simulator with a positive key rate to 142 km. From 10- to 14-bit groups over two seeds, a classical monitor reads 0.458 to 0.516 on camouflaged attacks while the quantum kernel reads 1.000, and both catch overt attacks above 0.99. Finite-precision recovery under depolarising noise and a hardened predicate lower the quantum result to 0.916 through 0.983 with the classical monitor at chance, and a feasibility probe on IBM Heron processors tracks the exact kernel within 0.034. A defender can therefore discard precisely the compromised key material, although the advantage is asymptotic, awaits fault tolerance, and holds only when the feature map matches the adversary's predicate, since a low-frequency map reads 0.545 on a residue pattern and 0.982 once aligned.",
+    "published": "2026-10-03T14:16:59Z",
+    "updated": "2026-10-03T14:16:59Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "crypto",
+     "qml",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "crypto",
+    "qml",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "crypto": {
+     "status": "pending"
+    },
+    "qml": {
+     "status": "pending"
+    },
+    "algo": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-06T11:06:56Z"
+  },
+  "2610.05430": {
+   "paper": {
+    "id": "2610.05430",
+    "title": "Strong Refutation for Random Quantum 3-SAT at Constant Density",
+    "link": "https://arxiv.org/abs/2610.05430v1",
+    "authors": "Siu On Chan, Jeff Xu",
+    "announce_type": "external",
+    "categories": [
+     "cs.CC"
+    ],
+    "primary": "cs.CC",
+    "abstract": "We give a classical polynomial-time algorithm that strongly refutes random quantum $3$-SAT at sufficiently large constant constraint density, thereby disproving the quantum analogue of Feige's random $3$-SAT hypothesis. This stands in sharp contrast to classical random $3$-SAT, for which polynomial-time strong refutation is known only at constraint density $\u0394\\gtrsim n^{1/2}$. Although quantum $3$-SAT shares the pairwise-independence barrier of its classical counterpart, our SDP-based refutation overcomes this barrier by exploiting the noncommutativity of quantum constraints.",
+    "published": "2026-10-04T18:10:21Z",
+    "updated": "2026-10-04T18:10:21Z",
+    "source_feed": "cs.CC",
+    "external_genre_ids": [
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-06T11:06:56Z"
+  },
+  "2610.05385": {
+   "paper": {
+    "id": "2610.05385",
+    "title": "On the Computational Complexity of Problems: Formalizing Sensitivity to Uncertainty and Parametric Complexity Classes",
+    "link": "https://arxiv.org/abs/2610.05385v1",
+    "authors": "Yannis Tzitzikas",
+    "announce_type": "external",
+    "categories": [
+     "cs.CC"
+    ],
+    "primary": "cs.CC",
+    "abstract": "Is the classical question $P \\stackrel{?}{=} NP$ the right one for understanding the complexity of real-world computation? Traditional worst-case analysis characterizes complexity solely as a function of input size $n$. Yet tasks whose cost is exponential in general often run in polynomial or even linear time once specific structural constraints or partial inputs are known. For instance, the Partition Problem is solvable in linear time, a constant-time core step following linear-time verification, when its inputs satisfy a simple structural property, although no polynomial-time algorithm is known for it in general; Integer Factorization, by contrast, resists structural knowledge: no checkable property of the input is known to improve on the sub-exponential number-field-sieve bound. Classical worst-case analysis cannot explain this difference, because it collapses a whole spectrum of difficulty into a single pessimistic bound. This paper formally develops a comprehensive parametric and uncertainty-aware framework for computational complexity. We introduce the notion of \\emph{Sensitivity to Uncertainty} (SU) and formalize the cost variation $\u0394_P(n, K)$ under a given input property $K$; we define the uncertainty-vanishing metric $\u03a8(n, K)$ and prove a fundamental \\emph{Uncertainty Reduction Theorem} bridging cost variation and input uncertainty; and we introduce the parametric classes $P_U[K]$ and $NP_U[K]$ as a more practical, instance-level foundation, focused on certifiable structure, rather than distributional typicality, that resolves the gap between theoretical complexity and real-world tractability. We further show how the same uncertainty analysis supports practice: it enables deterministic SLA via Design-by-Contract informs tool-use and reasoning splits in agentic AI, and provides an explanation of when quantum computers achieve exponential speedup.",
+    "published": "2026-10-04T17:16:17Z",
+    "updated": "2026-10-04T17:16:17Z",
+    "source_feed": "cs.CC",
+    "external_genre_ids": [
+     "complexity"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-06T11:06:56Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-10-05T15:44:25Z",
-  "cs.CC": "2026-10-05T15:44:34Z",
-  "cs.IT": "2026-10-05T15:44:39Z"
+  "cs.CR": "2026-10-06T11:06:02Z",
+  "cs.CC": "2026-10-06T11:06:11Z",
+  "cs.IT": "2026-10-06T11:06:15Z"
  }
 }

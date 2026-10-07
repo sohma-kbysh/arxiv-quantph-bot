@@ -8323,6 +8323,24 @@
    "classifier": "gemini-2.5-flash-lite",
    "skip_votes": [],
    "reviewed_at": "2026-10-07T07:17:30Z"
+  },
+  "cs.CR:2610.07870": {
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-07T10:55:41Z"
+  },
+  "cs.CR:2610.07820": {
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-07T10:55:41Z"
   }
  },
  "external_pending": {},
@@ -15312,10 +15330,92 @@
   "2610.08769",
   "2610.08786"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2610.07870": {
+   "paper": {
+    "id": "2610.07870",
+    "title": "Plug-and-Play Quantum-Resistant BLE Pairing for Medical Implants via NFC Out-of-Band",
+    "link": "https://arxiv.org/abs/2610.07870v1",
+    "authors": "Muhammad Asim Javaid, Muhammad Shafay Tanveer Hassan, Faaiz Umer, Sotirios Panagiotou, Christos Strydis, Naveed Anwar Bhatti, Muhammad Adeel Pasha, Muhammad Ali Siddiqi",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Bluetooth Low Energy (BLE) pairing establishes the cryptographic foundation for secure device communication. However, mainstream man-in-the-middle (MITM)-resistant pairing methods, such as Numeric Comparison and Passkey Entry, require user interfaces that implantable medical devices (IMDs) inherently lack, making Near-Field Communication (NFC)-assisted Out-of-Band (OOB) pairing an attractive alternative. Existing NFC-assisted OOB schemes authenticate a classical BLE key exchange that remains vulnerable to quantum attacks, while the NFC channel itself is susceptible to eavesdropping and active injection under stronger threat models. To address these limitations, we propose a lightweight, plug-and-play NFC-based OOB pairing protocol that performs a post-quantum key encapsulation mechanism (KEM) entirely over the NFC channel, ensuring that no shared secret is transmitted over NFC while reducing long-range radio-frequency (RF) exposure during pairing. The proposed protocol requires no modifications to the BLE stack and inherently resists RF battery-depletion attacks. Evaluation on an IMD-class proof-of-concept testbed demonstrates that post-quantum OOB pairing is practical on resource-constrained devices, reducing projected battery life by less than 0.57\\% for Kyber-1024 and 0.56\\% for FireSABER under an operational usage model relative to the MITM-vulnerable Just Works method.",
+    "published": "2026-10-06T07:22:23Z",
+    "updated": "2026-10-06T07:22:23Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-07T10:55:41Z"
+  },
+  "2610.07820": {
+   "paper": {
+    "id": "2610.07820",
+    "title": "Efficient and Implementation-Hardened RBLWE on Commodity Cortex-M Microcontrollers",
+    "link": "https://arxiv.org/abs/2610.07820v1",
+    "authors": "Muhammad Asim Javaid, Muhammad Adeel Pasha, Muhammad Ali Siddiqi",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.AR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Efficient post-quantum cryptography on resource-constrained Internet-of-Things (IoT) devices requires implementations that exploit the target processor architecture while resisting practical implementation attacks. This paper presents an ISA-accelerated and implementation-hardened realization of Ring Binary Learning with Errors (RBLWE) encryption on a commodity ARM Cortex-M33 microcontroller. Packing four 8-bit polynomial coefficients into the byte lanes of a 32-bit register and processing them with SIMD-style instructions, together with a packed message codec, accelerates encryption and decryption, while a buffered hardware-TRNG entropy source drawn from the on-die Secure Element drives the key-generation gain. Together these give same-core cold-start speedups of $4.06\\times$, $3.35\\times$, and $3.01\\times$ for key generation, encryption, and decryption over a scalar baseline, and $3.52\\times$/$3.18\\times$ lower encryption/decryption cycle counts than a reference Cortex-M0 implementation. On top of this accelerated core, we add four staged countermeasures: constant-time execution, fault hardening against zeroing, random-corruption, and instruction-skip faults, a Fujisaki-Okamoto (FO)-style CCA2 transform, and first-order shared (masked) CPA decryption, reporting each layer's cost individually. Binary-level inspection confirms these countermeasures survive compilation and identifies a compiler-induced masking flaw resolved with a hand-written assembly replacement. Dudect-style timing tests, debugger-assisted fault-injection campaigns, and component-level TVLA then provide implementation-level evidence for the staged protections. The results demonstrate a practical acceleration-security tradeoff for RBLWE on off-the-shelf microcontrollers and reusable architecture-aware techniques for lightweight post-quantum implementations.",
+    "published": "2026-10-06T06:14:48Z",
+    "updated": "2026-10-06T06:14:48Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-07T10:55:41Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-10-06T14:02:45Z",
-  "cs.CC": "2026-10-06T14:02:55Z",
-  "cs.IT": "2026-10-07T07:07:57Z"
+  "cs.CR": "2026-10-07T10:55:08Z",
+  "cs.CC": "2026-10-07T10:55:17Z",
+  "cs.IT": "2026-10-07T10:55:22Z"
  }
 }

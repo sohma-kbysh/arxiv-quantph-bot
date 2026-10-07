@@ -6938,7 +6938,9 @@
   "2610.07775",
   "2610.07794",
   "2610.07806",
+  "2610.07820",
   "2610.07827",
+  "2610.07870",
   "2610.07921",
   "2610.07934",
   "2610.07944",
@@ -15284,7 +15286,9 @@
   "2610.07775",
   "2610.07794",
   "2610.07806",
+  "2610.07820",
   "2610.07827",
+  "2610.07870",
   "2610.07921",
   "2610.07934",
   "2610.07944",
@@ -15330,89 +15334,7 @@
   "2610.08769",
   "2610.08786"
  ],
- "deliveries": {
-  "2610.07870": {
-   "paper": {
-    "id": "2610.07870",
-    "title": "Plug-and-Play Quantum-Resistant BLE Pairing for Medical Implants via NFC Out-of-Band",
-    "link": "https://arxiv.org/abs/2610.07870v1",
-    "authors": "Muhammad Asim Javaid, Muhammad Shafay Tanveer Hassan, Faaiz Umer, Sotirios Panagiotou, Christos Strydis, Naveed Anwar Bhatti, Muhammad Adeel Pasha, Muhammad Ali Siddiqi",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "Bluetooth Low Energy (BLE) pairing establishes the cryptographic foundation for secure device communication. However, mainstream man-in-the-middle (MITM)-resistant pairing methods, such as Numeric Comparison and Passkey Entry, require user interfaces that implantable medical devices (IMDs) inherently lack, making Near-Field Communication (NFC)-assisted Out-of-Band (OOB) pairing an attractive alternative. Existing NFC-assisted OOB schemes authenticate a classical BLE key exchange that remains vulnerable to quantum attacks, while the NFC channel itself is susceptible to eavesdropping and active injection under stronger threat models. To address these limitations, we propose a lightweight, plug-and-play NFC-based OOB pairing protocol that performs a post-quantum key encapsulation mechanism (KEM) entirely over the NFC channel, ensuring that no shared secret is transmitted over NFC while reducing long-range radio-frequency (RF) exposure during pairing. The proposed protocol requires no modifications to the BLE stack and inherently resists RF battery-depletion attacks. Evaluation on an IMD-class proof-of-concept testbed demonstrates that post-quantum OOB pairing is practical on resource-constrained devices, reducing projected battery life by less than 0.57\\% for Kyber-1024 and 0.56\\% for FireSABER under an operational usage model relative to the MITM-vulnerable Just Works method.",
-    "published": "2026-10-06T07:22:23Z",
-    "updated": "2026-10-06T07:22:23Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc",
-     "hardware"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc",
-    "hardware"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "Bluetooth\u4f4e\u30a8\u30cd\u30eb\u30ae\u30fc(BLE)\u30da\u30a2\u30ea\u30f3\u30b0\u306f\u3001\u5b89\u5168\u306a\u30c7\u30d0\u30a4\u30b9\u901a\u4fe1\u306e\u6697\u53f7\u5b66\u7684\u57fa\u76e4\u3092\u7bc9\u304d\u307e\u3059\u3002\u3057\u304b\u3057\u3001\u6570\u5024\u6bd4\u8f03\u3084\u30d1\u30b9\u30ad\u30fc\u5165\u529b\u306a\u3069\u306e\u4e3b\u6d41\u306e\u4e2d\u9593\u8005(MITM)\u8010\u6027\u30da\u30a2\u30ea\u30f3\u30b0\u624b\u6cd5\u306f\u3001\u57cb\u3081\u8fbc\u307f\u578b\u533b\u7642\u6a5f\u5668(IMD)\u306b\u672c\u8cea\u7684\u306b\u306a\u3044\u30e6\u30fc\u30b6\u30fc\u30a4\u30f3\u30bf\u30fc\u30d5\u30a7\u30fc\u30b9\u3092\u5fc5\u8981\u3068\u3059\u308b\u305f\u3081\u3001\u8fd1\u8ddd\u96e2\u7121\u7dda\u901a\u4fe1(NFC)\u652f\u63f4\u306e\u30a2\u30a6\u30c8\u30aa\u30d6\u30d0\u30f3\u30c9(OOB)\u30da\u30a2\u30ea\u30f3\u30b0\u306f\u9b45\u529b\u7684\u306a\u4ee3\u66ff\u624b\u6bb5\u3068\u306a\u3063\u3066\u3044\u307e\u3059\u3002\u65e2\u5b58\u306eNFC\u652f\u63f4OOB\u65b9\u5f0f\u306f\u3001\u91cf\u5b50\u653b\u6483\u306b\u5bfe\u3057\u3066\u8106\u5f31\u306a\u53e4\u5178\u7684\u306aBLE\u9375\u4ea4\u63db\u3092\u8a8d\u8a3c\u3057\u3001\u3088\u308a\u5f37\u529b\u306a\u8105\u5a01\u30e2\u30c7\u30eb\u3067\u306fNFC\u30c1\u30e3\u30cd\u30eb\u81ea\u4f53\u304c\u76d7\u8074\u3084\u30a2\u30af\u30c6\u30a3\u30d6\u30a4\u30f3\u30b8\u30a7\u30af\u30b7\u30e7\u30f3\u306b\u5f31\u3044\u3067\u3059\u3002\u3053\u308c\u3089\u306e\u5236\u7d04\u306b\u5bfe\u51e6\u3059\u308b\u305f\u3081\u3001\u8efd\u91cf\u3067\u30d7\u30e9\u30b0\u30a2\u30f3\u30c9\u30d7\u30ec\u30a4\u306eNFC\u30d9\u30fc\u30b9\u306eOOB\u30da\u30a2\u30ea\u30f3\u30b0\u30d7\u30ed\u30c8\u30b3\u30eb\u3092\u63d0\u6848\u3057\u307e\u3059\u3002\u3053\u308c\u306f\u3001NFC\u30c1\u30e3\u30cd\u30eb\u4e0a\u3067\u5b8c\u5168\u306b\u91cf\u5b50\u9375\u30ab\u30d7\u30bb\u30eb\u5316\u6a5f\u69cb(KEM)\u3092\u884c\u3046\u3053\u3068\u3067\u3001\u5171\u6709\u79d8\u5bc6\u304cNFC\u4e0a\u3067\u9001\u4fe1\u3055\u308c\u305a\u3001\u30da\u30a2\u30ea\u30f3\u30b0\u4e2d\u306e\u9577\u8ddd\u96e2\u7121\u7dda\u5468\u6ce2\u6570(RF)\u9732\u51fa\u3092\u4f4e\u6e1b\u3057\u307e\u3059\u3002\u63d0\u6848\u3055\u308c\u305f\u30d7\u30ed\u30c8\u30b3\u30eb\u306fBLE\u30b9\u30bf\u30c3\u30af\u306e\u5909\u66f4\u3092\u5fc5\u8981\u3068\u3057\u305a\u3001RF\u30d0\u30c3\u30c6\u30ea\u30fc\u6d88\u8017\u653b\u6483\u306b\u672c\u8cea\u7684\u306b\u8010\u6027\u304c\u3042\u308a\u307e\u3059\u3002IMD\u30af\u30e9\u30b9\u306e\u6982\u5ff5\u5b9f\u8a3c\u30c6\u30b9\u30c8\u30d9\u30c3\u30c9\u3067\u306e\u8a55\u4fa1\u306b\u3088\u308a\u3001\u30dd\u30b9\u30c8\u91cf\u5b50OOB\u30da\u30a2\u30ea\u30f3\u30b0\u306f\u30ea\u30bd\u30fc\u30b9\u5236\u7d04\u306e\u3042\u308b\u30c7\u30d0\u30a4\u30b9\u3067\u3082\u5b9f\u7528\u7684\u3067\u3042\u308a\u3001\u904b\u7528\u30e2\u30c7\u30eb\u306b\u304a\u3044\u3066Kyber-1024\u306f0.57%\u672a\u6e80\u3001FireSABER\u306f0.56%\u672a\u6e80\u306e\u30d0\u30c3\u30c6\u30ea\u30fc\u5bff\u547d\u77ed\u7e2e\u304c\u3001MITM\u8106\u5f31\u6027\u306e\u3042\u308bJust Works\u624b\u6cd5\u3068\u6bd4\u8f03\u3057\u3066\u5b9f\u73fe\u3057\u307e\u3057\u305f\u3002",
-   "title_translated": "NFC\u30a2\u30a6\u30c8\u30aa\u30d6\u30d0\u30f3\u30c9\u306b\u3088\u308b\u533b\u7642\u7528\u30a4\u30f3\u30d7\u30e9\u30f3\u30c8\u7528\u306e\u30d7\u30e9\u30b0\u30a2\u30f3\u30c9\u30d7\u30ec\u30a4\u91cf\u5b50\u62b5\u6297BLE\u30da\u30a2\u30ea\u30f3\u30b0",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    },
-    "hardware": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-10-07T10:55:41Z"
-  },
-  "2610.07820": {
-   "paper": {
-    "id": "2610.07820",
-    "title": "Efficient and Implementation-Hardened RBLWE on Commodity Cortex-M Microcontrollers",
-    "link": "https://arxiv.org/abs/2610.07820v1",
-    "authors": "Muhammad Asim Javaid, Muhammad Adeel Pasha, Muhammad Ali Siddiqi",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR",
-     "cs.AR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "Efficient post-quantum cryptography on resource-constrained Internet-of-Things (IoT) devices requires implementations that exploit the target processor architecture while resisting practical implementation attacks. This paper presents an ISA-accelerated and implementation-hardened realization of Ring Binary Learning with Errors (RBLWE) encryption on a commodity ARM Cortex-M33 microcontroller. Packing four 8-bit polynomial coefficients into the byte lanes of a 32-bit register and processing them with SIMD-style instructions, together with a packed message codec, accelerates encryption and decryption, while a buffered hardware-TRNG entropy source drawn from the on-die Secure Element drives the key-generation gain. Together these give same-core cold-start speedups of $4.06\\times$, $3.35\\times$, and $3.01\\times$ for key generation, encryption, and decryption over a scalar baseline, and $3.52\\times$/$3.18\\times$ lower encryption/decryption cycle counts than a reference Cortex-M0 implementation. On top of this accelerated core, we add four staged countermeasures: constant-time execution, fault hardening against zeroing, random-corruption, and instruction-skip faults, a Fujisaki-Okamoto (FO)-style CCA2 transform, and first-order shared (masked) CPA decryption, reporting each layer's cost individually. Binary-level inspection confirms these countermeasures survive compilation and identifies a compiler-induced masking flaw resolved with a hand-written assembly replacement. Dudect-style timing tests, debugger-assisted fault-injection campaigns, and component-level TVLA then provide implementation-level evidence for the staged protections. The results demonstrate a practical acceleration-security tradeoff for RBLWE on off-the-shelf microcontrollers and reusable architecture-aware techniques for lightweight post-quantum implementations.",
-    "published": "2026-10-06T06:14:48Z",
-    "updated": "2026-10-06T06:14:48Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc",
-     "hardware"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc",
-    "hardware"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "\u30ea\u30bd\u30fc\u30b9\u5236\u7d04\u306eIoT\u30c7\u30d0\u30a4\u30b9\u4e0a\u3067\u52b9\u7387\u7684\u306a\u30dd\u30b9\u30c8\u91cf\u5b50\u6697\u53f7\u5b66\u3092\u5b9f\u73fe\u3059\u308b\u306b\u306f\u3001\u30bf\u30fc\u30b2\u30c3\u30c8\u30d7\u30ed\u30bb\u30c3\u30b5\u30a2\u30fc\u30ad\u30c6\u30af\u30c1\u30e3\u3092\u6d3b\u7528\u3057\u3064\u3064\u3001\u5b9f\u7528\u7684\u306a\u5b9f\u88c5\u653b\u6483\u306b\u62b5\u6297\u3059\u308b\u5b9f\u88c5\u304c\u5fc5\u8981\u3067\u3059\u3002\u672c\u8ad6\u6587\u306f\u3001\u6c4e\u7528ARM Cortex-M33\u30de\u30a4\u30af\u30ed\u30b3\u30f3\u30c8\u30ed\u30fc\u30e9\u4e0a\u3067Ring Binary Learning with Errors with Errors(RBLWE)\u6697\u53f7\u5316\u3092ISA\u52a0\u901f\u304b\u3064\u5b9f\u88c5\u5f37\u5316\u3057\u305f\u5b9f\u88c5\u3092\u63d0\u793a\u3057\u307e\u3059\u300232\u30d3\u30c3\u30c8\u30ec\u30b8\u30b9\u30bf\u306e\u30d0\u30a4\u30c8\u30ec\u30fc\u30f3\u306b4\u3064\u306e8\u30d3\u30c3\u30c8\u591a\u9805\u5f0f\u4fc2\u6570\u3092\u8a70\u3081\u8fbc\u307f\u3001SIMD\u30b9\u30bf\u30a4\u30eb\u306e\u547d\u4ee4\u3068\u30d1\u30c3\u30af\u3055\u308c\u305f\u30e1\u30c3\u30bb\u30fc\u30b8\u30b3\u30fc\u30c7\u30c3\u30af\u3067\u51e6\u7406\u3059\u308b\u3053\u3068\u3067\u6697\u53f7\u5316\u3068\u5fa9\u53f7\u304c\u52a0\u901f\u3055\u308c\u3001\u30aa\u30f3\u30c0\u30a4\u306eSecure Element\u304b\u3089\u5f97\u3089\u308c\u308b\u30d0\u30c3\u30d5\u30a1\u5316\u3055\u308c\u305f\u30cf\u30fc\u30c9\u30a6\u30a7\u30a2TRNG\u30a8\u30f3\u30c8\u30ed\u30d4\u30fc\u30bd\u30fc\u30b9\u304c\u9375\u751f\u6210\u306e\u5229\u5f97\u3092\u99c6\u52d5\u3057\u307e\u3059\u3002\u3053\u308c\u3089\u3092\u5408\u308f\u305b\u308b\u3068\u3001\u30b9\u30ab\u30e9\u30fc\u30d9\u30fc\u30b9\u30e9\u30a4\u30f3\u4e0a\u3067\u9375\u751f\u6210\u3001\u6697\u53f7\u5316\u3001\u5fa9\u53f7\u3067\u540c\u3058\u30b3\u30a2\u306e\u30b3\u30fc\u30eb\u30c9\u30b9\u30bf\u30fc\u30c8\u901f\u5ea6\u304c$4.06\\times$\u3001$3.35\\times$\u3001$3.01\\times$\u3068\u306a\u308a\u3001\u30ea\u30d5\u30a1\u30ec\u30f3\u30b9Cortex-M0\u5b9f\u88c5\u3088\u308a3.52\\times$/$3.18\\times$\u306e\u6697\u53f7\u5316\u30fb\u5fa9\u53f7\u30b5\u30a4\u30af\u30eb\u30ab\u30a6\u30f3\u30c8\u304c\u4f4e\u304f\u306a\u308a\u307e\u3059\u3002\u3053\u306e\u52a0\u901f\u3055\u308c\u305f\u30b3\u30a2\u306e\u4e0a\u306b\u30014\u3064\u306e\u6bb5\u968e\u7684\u306a\u30ab\u30a6\u30f3\u30bf\u30fc\u30e1\u30b8\u30e3\u30fc\u3092\u8ffd\u52a0\u3057\u3066\u3044\u307e\u3059:\u5b9a\u6642\u5b9f\u884c\u3001\u30bc\u30ed\u5316\u306b\u5bfe\u3059\u308b\u30d5\u30a9\u30fc\u30eb\u30c8\u30cf\u30fc\u30c9\u5316\u3001\u30e9\u30f3\u30c0\u30e0\u7834\u640d\u3001\u547d\u4ee4\u30b9\u30ad\u30c3\u30d7\u30d5\u30a9\u30eb\u30c8\u3001Fujisaki-Okamoto(FO)\u30b9\u30bf\u30a4\u30eb\u306eCCA2\u5909\u63db\u3001\u305d\u3057\u3066\u5404\u5c64\u306e\u30b3\u30b9\u30c8\u3092\u500b\u5225\u306b\u5831\u544a\u3059\u308b\u4e00\u6b21\u5171\u6709(\u30de\u30b9\u30af\u4ed8\u304d)CPA\u5fa9\u53f7\u3067\u3059\u3002\u30d0\u30a4\u30ca\u30ea\u30ec\u30d9\u30eb\u306e\u691c\u67fb\u306b\u3088\u308a\u3001\u3053\u308c\u3089\u306e\u30ab\u30a6\u30f3\u30bf\u30fc\u30e1\u30b8\u30e3\u30fc\u304c\u30b3\u30f3\u30d1\u30a4\u30eb\u3092\u7d4c\u3066\u3082\u751f\u304d\u6b8b\u308a\u3001\u624b\u66f8\u304d\u30a2\u30bb\u30f3\u30d6\u30ea\u4ee3\u66ff\u3067\u89e3\u6c7a\u3055\u308c\u305f\u30b3\u30f3\u30d1\u30a4\u30e9\u306b\u3088\u308b\u30de\u30b9\u30ad\u30f3\u30b0\u6b20\u9665\u3092\u7279\u5b9a\u3057\u307e\u3059\u3002Dudect\u30b9\u30bf\u30a4\u30eb\u306e\u30bf\u30a4\u30df\u30f3\u30b0\u30c6\u30b9\u30c8\u3001\u30c7\u30d0\u30c3\u30ac\u652f\u63f4\u306b\u3088\u308b\u30d5\u30a9\u30fc\u30eb\u30c8\u30a4\u30f3\u30b8\u30a7\u30af\u30b7\u30e7\u30f3\u30ad\u30e3\u30f3\u30da\u30fc\u30f3\u3001\u30b3\u30f3\u30dd\u30fc\u30cd\u30f3\u30c8\u30ec\u30d9\u30eb\u306eTVLA\u304c\u6bb5\u968e\u7684\u306a\u4fdd\u8b77\u306e\u5b9f\u88c5\u30ec\u30d9\u30eb\u306e\u8a3c\u62e0\u3092\u63d0\u4f9b\u3057\u307e\u3059\u3002\u7d50\u679c\u306f\u3001\u65e2\u88fd\u54c1\u30de\u30a4\u30af\u30ed\u30b3\u30f3\u30c8\u30ed\u30fc\u30e9\u306b\u304a\u3051\u308bRBLWE\u306e\u5b9f\u7528\u7684\u306a\u52a0\u901f\u3068\u30bb\u30ad\u30e5\u30ea\u30c6\u30a3\u306e\u30c8\u30ec\u30fc\u30c9\u30aa\u30d5\u3092\u793a\u3057\u3001\u8efd\u91cf\u306a\u30dd\u30b9\u30c8\u91cf\u5b50\u5b9f\u88c5\u306b\u304a\u3051\u308b\u518d\u5229\u7528\u53ef\u80fd\u306a\u30a2\u30fc\u30ad\u30c6\u30af\u30c1\u30e3\u8a8d\u8b58\u6280\u8853\u3092\u6d3b\u7528\u3057\u3066\u3044\u307e\u3059\u3002",
-   "title_translated": "\u30b3\u30e2\u30c7\u30a3\u30c6\u30a3Cortex-M\u30de\u30a4\u30af\u30ed\u30b3\u30f3\u30c8\u30ed\u30fc\u30e9\u306b\u304a\u3051\u308b\u52b9\u7387\u7684\u304b\u3064\u5b9f\u88c5\u5f37\u5316\u3055\u308c\u305fRBLWE",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    },
-    "hardware": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-10-07T10:55:41Z"
-  }
- },
+ "deliveries": {},
  "external_cursors": {
   "cs.CR": "2026-10-07T10:55:08Z",
   "cs.CC": "2026-10-07T10:55:17Z",

@@ -7096,6 +7096,7 @@
   "2610.10944",
   "2610.10948",
   "2610.10980",
+  "2610.10992",
   "2610.11001",
   "2610.11018",
   "2610.11026",
@@ -7104,12 +7105,14 @@
   "2610.11081",
   "2610.11094",
   "2610.11097",
+  "2610.11107",
   "2610.11121",
   "2610.11125",
   "2610.11195",
   "2610.11225",
   "2610.11234",
   "2610.11235",
+  "2610.11254",
   "2610.11261",
   "2610.11262",
   "2610.11321",
@@ -7124,6 +7127,7 @@
   "2610.11445",
   "2610.11466",
   "2610.11477",
+  "2610.11490",
   "2610.11495",
   "2610.11513",
   "2610.11533",
@@ -7147,6 +7151,7 @@
   "2610.12000",
   "2610.12001",
   "2610.12015",
+  "2610.12024",
   "2610.12045",
   "2610.12070",
   "2610.12098",
@@ -15702,6 +15707,7 @@
   "2610.10944",
   "2610.10948",
   "2610.10980",
+  "2610.10992",
   "2610.11001",
   "2610.11018",
   "2610.11026",
@@ -15710,12 +15716,14 @@
   "2610.11081",
   "2610.11094",
   "2610.11097",
+  "2610.11107",
   "2610.11121",
   "2610.11125",
   "2610.11195",
   "2610.11225",
   "2610.11234",
   "2610.11235",
+  "2610.11254",
   "2610.11261",
   "2610.11262",
   "2610.11321",
@@ -15730,6 +15738,7 @@
   "2610.11445",
   "2610.11466",
   "2610.11477",
+  "2610.11490",
   "2610.11495",
   "2610.11513",
   "2610.11533",
@@ -15753,6 +15762,7 @@
   "2610.12000",
   "2610.12001",
   "2610.12015",
+  "2610.12024",
   "2610.12045",
   "2610.12070",
   "2610.12098",
@@ -15778,209 +15788,7 @@
   "2610.12447",
   "2610.12454"
  ],
- "deliveries": {
-  "2610.12024": {
-   "paper": {
-    "id": "2610.12024",
-    "title": "HPQ-AKE: A Provably Secure Sign-Less Hybrid Authenticated Key Exchange Protocol for Bandwidth-Constrained IoT and Edge Networks",
-    "link": "https://arxiv.org/abs/2610.12024v1",
-    "authors": "Khiem Pham-Tuan, Minh Quang Le, Khuong Nguyen-An",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR",
-     "cs.NI"
-    ],
-    "primary": "cs.CR",
-    "abstract": "Securing bandwidth-constrained Internet of Things (IoT) and edge networks during post-quantum migration creates an authentication trade-off: ML-KEM provides post-quantum key establishment, whereas post-quantum signatures increase certificate-chain size, verification cost, and handshake latency. We present HPQ-AKE, a sign-less hybrid authenticated key exchange for RSA-enabled IoT gateways and edge/cloud services that replaces transcript signatures with dual KEMs. HPQ-AKE combines ML-KEM-768 for post-quantum session secrecy and forward secrecy with RSA-OAEP for implicit mutual authentication, preserving existing RSA-enabled infrastructure during migration. We analyze HPQ-AKE in an extended Bellare-Rogaway model, separating classical authentication in the Random Oracle Model from session-key secrecy in the Quantum Random Oracle Model. Under the Module-LWE and RSA assumptions, it establishes AKE security, forward secrecy, and conditional KCI resistance under the long-term-key-only exposure assumptions. Evaluation combines x86 micro-benchmarking, analytical latency modeling, and 10,000-iteration Monte Carlo simulation. HPQ-AKE reduces modeled handshake transmission from 13,009 to 5,668 Bytes, a 56.4% reduction relative to a Hybrid TLS 1.3 Full handshake, while requiring 7.11 ms of total local computation on the measured x86 testbed. Under a simulated 50 kbps satellite-like link with 600 ms RTT and stochastic jitter, median latency is 1,914 ms, 31.4% below the 2,791 ms baseline. At 20 ms RTT, modeled break-even thresholds are 0.31 Mbps against the pre-cached baseline and 4.08 Mbps against the full baseline; both decrease as RTT increases. These x86-based results motivate evaluation on gateway-class IoT and edge platforms; performance on ARM gateways and unaccelerated microcontrollers remains unvalidated.",
-    "published": "2026-10-08T14:21:41Z",
-    "updated": "2026-10-08T14:21:41Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc",
-     "network"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc",
-    "network"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "\u30dd\u30b9\u30c8\u91cf\u5b50\u79fb\u884c\u6642\u306b\u5e2f\u57df\u5e45\u5236\u7d04\u306e\u3042\u308bIoT(IoT)\u304a\u3088\u3073\u30a8\u30c3\u30b8\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u3092\u4fdd\u8b77\u3059\u308b\u3053\u3068\u306f\u8a8d\u8a3c\u306e\u30c8\u30ec\u30fc\u30c9\u30aa\u30d5\u3092\u751f\u307f\u51fa\u3057\u307e\u3059\u3002ML-KEM\u306f\u30dd\u30b9\u30c8\u91cf\u5b50\u9375\u78ba\u7acb\u3092\u63d0\u4f9b\u3057\u3001\u30dd\u30b9\u30c8\u91cf\u5b50\u7f72\u540d\u306f\u8a3c\u660e\u66f8\u30c1\u30a7\u30fc\u30f3\u306e\u30b5\u30a4\u30ba\u3001\u691c\u8a3c\u30b3\u30b9\u30c8\u3001\u30cf\u30f3\u30c9\u30b7\u30a7\u30a4\u30af\u9045\u5ef6\u3092\u5897\u52a0\u3055\u305b\u307e\u3059\u3002\u79c1\u305f\u3061\u306fHPQ-AKE\u3092\u7d39\u4ecb\u3057\u307e\u3059\u3002\u3053\u308c\u306fRSA\u5bfe\u5fdc\u306eIoT\u30b2\u30fc\u30c8\u30a6\u30a7\u30a4\u304a\u3088\u3073\u30a8\u30c3\u30b8/\u30af\u30e9\u30a6\u30c9\u30b5\u30fc\u30d3\u30b9\u5411\u3051\u306e\u7b26\u53f7\u306a\u3057\u30cf\u30a4\u30d6\u30ea\u30c3\u30c9\u8a8d\u8a3c\u30ad\u30fc\u4ea4\u63db\u3067\u3001\u30c8\u30e9\u30f3\u30b9\u30af\u30ea\u30d7\u30c8\u7f72\u540d\u3092\u30c7\u30e5\u30a2\u30ebKEM\u306b\u7f6e\u304d\u63db\u3048\u307e\u3059\u3002HPQ-AKE\u306f\u3001\u91cf\u5b50\u30bb\u30c3\u30b7\u30e7\u30f3\u5f8c\u79d8\u5bc6\u6027\u306e\u305f\u3081\u306eML-KEM-768\u3068\u3001\u6697\u9ed9\u7684\u76f8\u4e92\u8a8d\u8a3c\u306e\u305f\u3081\u306e\u524d\u65b9\u79d8\u5bc6\u6027\u3092RSA-OAEP\u3068\u7d44\u307f\u5408\u308f\u305b\u3001\u79fb\u884c\u6642\u306b\u65e2\u5b58\u306eRSA\u5bfe\u5fdc\u30a4\u30f3\u30d5\u30e9\u3092\u7dad\u6301\u3057\u3066\u3044\u307e\u3059\u3002HPQ-AKE\u3092\u62e1\u5f35\u3055\u308c\u305fBellare-Rogaway\u30e2\u30c7\u30eb\u3067\u5206\u6790\u3057\u3001\u30e9\u30f3\u30c0\u30e0\u30aa\u30e9\u30af\u30eb\u30e2\u30c7\u30eb\u306b\u304a\u3051\u308b\u53e4\u5178\u7684\u8a8d\u8a3c\u3068\u91cf\u5b50\u30e9\u30f3\u30c0\u30e0\u30aa\u30e9\u30af\u30eb\u30e2\u30c7\u30eb\u306b\u304a\u3051\u308b\u30bb\u30c3\u30b7\u30e7\u30f3\u9375\u79d8\u5bc6\u6027\u3092\u5206\u96e2\u3057\u3066\u3044\u307e\u3059\u3002Module-LWE\u304a\u3088\u3073RSA\u306e\u4eee\u5b9a\u306e\u4e0b\u3067\u3001\u9577\u671f\u9375\u306e\u307f\u9732\u51fa\u306e\u4eee\u5b9a\u306e\u4e0b\u3067AKE\u30bb\u30ad\u30e5\u30ea\u30c6\u30a3\u3001\u524d\u65b9\u79d8\u5bc6\u6027\u3001\u6761\u4ef6\u4ed8\u304dKCI\u62b5\u6297\u3092\u78ba\u7acb\u3057\u307e\u3059\u3002\u8a55\u4fa1\u306fx86\u30de\u30a4\u30af\u30ed\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u3001\u89e3\u6790\u30ec\u30a4\u30c6\u30f3\u30b7\u30e2\u30c7\u30ea\u30f3\u30b0\u300110,000\u56de\u306e\u30e2\u30f3\u30c6\u30ab\u30eb\u30ed\u30b7\u30df\u30e5\u30ec\u30fc\u30b7\u30e7\u30f3\u3092\u7d44\u307f\u5408\u308f\u305b\u3066\u3044\u307e\u3059\u3002HPQ-AKE\u306f\u30e2\u30c7\u30eb\u5316\u3055\u308c\u305f\u30cf\u30f3\u30c9\u30b7\u30a7\u30a4\u30af\u9001\u4fe1\u309213,009\u30d0\u30a4\u30c8\u304b\u30895,668\u30d0\u30a4\u30c8\u306b\u524a\u6e1b\u3057\u3001\u30cf\u30a4\u30d6\u30ea\u30c3\u30c9TLS 1.3\u30d5\u30eb\u30cf\u30f3\u30c9\u30b7\u30a7\u30a4\u30af\u3068\u6bd4\u8f03\u3057\u306656.4%\u524a\u6e1b\u3057\u307e\u3057\u305f\u304c\u3001\u6e2c\u5b9a\u3055\u308c\u305fx86\u30c6\u30b9\u30c8\u30d9\u30c3\u30c9\u3067\u306e\u7dcf\u30ed\u30fc\u30ab\u30eb\u8a08\u7b97\u306f7.11ms\u3092\u5fc5\u8981\u3068\u3057\u307e\u3059\u3002600ms RTT\u3068\u78ba\u7387\u7684\u30b8\u30c3\u30bf\u30fc\u3092\u6301\u306450 kbps\u885b\u661f\u578b\u30ea\u30f3\u30af\u306e\u30b7\u30df\u30e5\u30ec\u30fc\u30b7\u30e7\u30f3\u4e0b\u3067\u306f\u3001\u4e2d\u592e\u30ec\u30fc\u30c8\u30ec\u30a4\u30c6\u30f3\u30b7\u306f1,914 ms\u3067\u30012,791 ms\u306e\u30d9\u30fc\u30b9\u30e9\u30a4\u30f3\u3088\u308a31.4%\u4f4e\u304f\u306a\u3063\u3066\u3044\u307e\u3059\u300220ms RTT\u3067\u306f\u3001\u30e2\u30c7\u30eb\u5316\u3055\u308c\u305f\u640d\u76ca\u5206\u5c90\u70b9\u306e\u95be\u5024\u306f\u4e8b\u524d\u30ad\u30e3\u30c3\u30b7\u30e5\u30d9\u30fc\u30b9\u30e9\u30a4\u30f3\u306b\u5bfe\u3057\u30660.31 Mbps\u3001\u30d5\u30eb\u30d9\u30fc\u30b9\u30e9\u30a4\u30f3\u306b\u5bfe\u3057\u30664.08 Mbps\u3067\u3059\u3002\u3069\u3061\u3089\u3082RTT\u304c\u5897\u52a0\u3059\u308b\u306b\u3064\u308c\u3066\u4f4e\u4e0b\u3057\u307e\u3059\u3002\u3053\u308c\u3089\u306ex86\u30d9\u30fc\u30b9\u306e\u7d50\u679c\u306f\u3001\u30b2\u30fc\u30c8\u30a6\u30a7\u30a4\u30af\u30e9\u30b9\u306eIoT\u304a\u3088\u3073\u30a8\u30c3\u30b8\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u3067\u306e\u8a55\u4fa1\u3092\u52d5\u6a5f\u4ed8\u3051\u3066\u3044\u307e\u3059\u3002ARM\u30b2\u30fc\u30c8\u30a6\u30a7\u30a4\u304a\u3088\u3073\u975e\u52a0\u901f\u30de\u30a4\u30af\u30ed\u30b3\u30f3\u30c8\u30ed\u30fc\u30e9\u3067\u306e\u6027\u80fd\u306f\u672a\u691c\u8a3c\u306e\u307e\u307e\u3067\u3059\u3002",
-   "title_translated": "HPQ-AKE:\u5e2f\u57df\u5e45\u5236\u7d04\u306e\u3042\u308bIoT\u304a\u3088\u3073\u30a8\u30c3\u30b8\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u5411\u3051\u306e\u8a3c\u660e\u53ef\u80fd\u306a\u5b89\u5168\u306a\u7f72\u540d\u30ec\u30b9\u30cf\u30a4\u30d6\u30ea\u30c3\u30c9\u8a8d\u8a3c\u9375\u4ea4\u63db\u30d7\u30ed\u30c8\u30b3\u30eb",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    },
-    "network": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-10-09T14:16:26Z"
-  },
-  "2610.11490": {
-   "paper": {
-    "id": "2610.11490",
-    "title": "A Zero-Knowledge Signature Framework for Efficient Post-Quantum Message Authentication in Cooperative Automated Driving",
-    "link": "https://arxiv.org/abs/2610.11490v1",
-    "authors": "Takahito Yoshizawa, Aysajan Abidin, Edoardo Pena-Gonzalez, Bart Preneel",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "Connected and Automated Vehicles (CAV) rely on authenticated Vehicle-to-Everything (V2X) communications to exchange safety-critical information among vehicles and roadside infrastructure. As the automotive industry transitions toward post-quantum cryptography (PQC), the significantly larger public keys and signatures of standardized PQC digital signature algorithms introduce substantial communication overhead, which challenges the scalability of certificate-based V2X authentication, particularly for high-frequency cooperative awareness messages (CAM). This paper presents ZKS-PQC, a zero-knowledge signature framework that enables communication-efficient post-quantum message authentication for cooperative V2X systems. Instead of transmitting complete post-quantum public keys and signatures, the proposed framework replaces this authentication material with a compact Zero-Knowledge Proof (ZKP) while preserving compatibility with existing certificate-based trust architectures. This approach supports incremental migration and backward compatibility with the legacy ECDSA. The framework is implemented using the Open Quantum Safe (liboqs) and ZKP (Bulletproofs) libraries, and we evaluated the performance of standardized NIST PQC signature algorithms and additional candidate algorithms. Experimental validation on both a Linux platform and a commercial On-Board Unit (OBU) demonstrates substantial reductions in message size exceeding 95% for all algorithms, while limiting additional processing overhead by staying within the order of milliseconds at both sender and receiver in many algorithms, consistent with the latency requirements of real-time V2X operation. By decoupling communication overhead from the size characteristics of post-quantum signature algorithms, ZKS-PQC offers a practical migration strategy for scalable, quantum-resilient message authentication in future CAV systems.",
-    "published": "2026-10-08T08:31:51Z",
-    "updated": "2026-10-08T08:31:51Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc",
-     "network"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc",
-    "network"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "\u30b3\u30cd\u30af\u30c6\u30c3\u30c9&\u30aa\u30fc\u30c8\u30de\u30a4\u30f3\u30c9\u30d3\u30fc\u30af\u30eb(CAV)\u306f\u3001\u8eca\u4e21\u3084\u9053\u8def\u30a4\u30f3\u30d5\u30e9\u9593\u3067\u5b89\u5168\u306b\u91cd\u8981\u306a\u60c5\u5831\u3092\u4ea4\u63db\u3059\u308b\u305f\u3081\u306b\u8a8d\u8a3c\u6e08\u307f\u306e\u8eca\u4e21\u5bfe\u5168\u57df(V2X)\u901a\u4fe1\u306b\u4f9d\u5b58\u3057\u3066\u3044\u307e\u3059\u3002\u81ea\u52d5\u8eca\u696d\u754c\u304c\u30dd\u30b9\u30c8\u91cf\u5b50\u6697\u53f7(PQC)\u3078\u79fb\u884c\u3059\u308b\u4e2d\u3001\u6a19\u6e96\u5316\u3055\u308c\u305fPQC\u30c7\u30b8\u30bf\u30eb\u7f72\u540d\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u306e\u5927\u5e45\u306a\u516c\u958b\u9375\u3068\u7f72\u540d\u306f\u3001\u901a\u4fe1\u306b\u5927\u304d\u306a\u8ca0\u8377\u3092\u3082\u305f\u3089\u3057\u3001\u7279\u306b\u9ad8\u5468\u6ce2\u5354\u8abf\u8a8d\u8b58\u30e1\u30c3\u30bb\u30fc\u30b8(CAM)\u306b\u304a\u3044\u3066\u8a3c\u660e\u66f8\u30d9\u30fc\u30b9\u306eV2X\u8a8d\u8a3c\u306e\u30b9\u30b1\u30fc\u30e9\u30d3\u30ea\u30c6\u30a3\u306b\u6311\u6226\u3092\u751f\u307f\u51fa\u3057\u3066\u3044\u307e\u3059\u3002\u672c\u8ad6\u6587\u3067\u306f\u3001\u5354\u8abf\u578bV2X\u30b7\u30b9\u30c6\u30e0\u5411\u3051\u306b\u901a\u4fe1\u52b9\u7387\u306e\u9ad8\u3044\u30dd\u30b9\u30c8\u91cf\u5b50\u30e1\u30c3\u30bb\u30fc\u30b8\u8a8d\u8a3c\u3092\u53ef\u80fd\u306b\u3059\u308b\u30bc\u30ed\u77e5\u8b58\u7f72\u540d\u30d5\u30ec\u30fc\u30e0\u30ef\u30fc\u30afZKS-PQC\u3092\u7d39\u4ecb\u3057\u307e\u3059\u3002\u63d0\u6848\u3055\u308c\u305f\u30d5\u30ec\u30fc\u30e0\u30ef\u30fc\u30af\u306f\u3001\u5b8c\u5168\u306a\u30dd\u30b9\u30c8\u91cf\u5b50\u516c\u958b\u9375\u3068\u7f72\u540d\u3092\u9001\u4fe1\u3059\u308b\u4ee3\u308f\u308a\u306b\u3001\u65e2\u5b58\u306e\u8a3c\u660e\u66f8\u30d9\u30fc\u30b9\u306e\u4fe1\u983c\u30a2\u30fc\u30ad\u30c6\u30af\u30c1\u30e3\u3068\u306e\u4e92\u63db\u6027\u3092\u7dad\u6301\u3057\u3064\u3064\u3001\u3053\u306e\u8a8d\u8a3c\u8cc7\u6599\u3092\u30b3\u30f3\u30d1\u30af\u30c8\u306a\u30bc\u30ed\u77e5\u8b58\u8a3c\u660e(ZKP)\u306b\u7f6e\u304d\u63db\u3048\u307e\u3059\u3002\u3053\u306e\u30a2\u30d7\u30ed\u30fc\u30c1\u306f\u3001\u30ec\u30ac\u30b7\u30fcECDSA\u3068\u306e\u6f38\u9032\u7684\u79fb\u884c\u304a\u3088\u3073\u5f8c\u65b9\u4e92\u63db\u6027\u3092\u30b5\u30dd\u30fc\u30c8\u3057\u307e\u3059\u3002\u30d5\u30ec\u30fc\u30e0\u30ef\u30fc\u30af\u306fOpen Quantum Safe(liboqs)\u304a\u3088\u3073ZKP(Bulletproofs)\u30e9\u30a4\u30d6\u30e9\u30ea\u3092\u7528\u3044\u3066\u5b9f\u88c5\u3055\u308c\u3066\u304a\u308a\u3001\u6a19\u6e96\u5316\u3055\u308c\u305fNIST PQC\u7f72\u540d\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u304a\u3088\u3073\u8ffd\u52a0\u306e\u5019\u88dc\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u306e\u6027\u80fd\u3092\u8a55\u4fa1\u3057\u307e\u3057\u305f\u3002Linux\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u304a\u3088\u3073\u5546\u7528\u30aa\u30f3\u30dc\u30fc\u30c9\u30e6\u30cb\u30c3\u30c8(OBU)\u3067\u306e\u5b9f\u9a13\u7684\u691c\u8a3c\u3067\u306f\u3001\u3059\u3079\u3066\u306e\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u3067\u30e1\u30c3\u30bb\u30fc\u30b8\u30b5\u30a4\u30ba\u304c95%\u4ee5\u4e0a\u5927\u5e45\u306b\u524a\u6e1b\u3055\u308c\u3001\u591a\u304f\u306e\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u3067\u9001\u4fe1\u5074\u3068\u53d7\u4fe1\u5074\u306e\u4e21\u65b9\u3067\u30df\u30ea\u79d2\u5358\u4f4d\u306b\u6291\u3048\u3089\u308c\u3001\u30ea\u30a2\u30eb\u30bf\u30a4\u30e0V2X\u904b\u7528\u306e\u30ec\u30a4\u30c6\u30f3\u30b7\u8981\u4ef6\u306b\u6cbf\u3063\u305f\u8ffd\u52a0\u306e\u51e6\u7406\u30aa\u30fc\u30d0\u30fc\u30d8\u30c3\u30c9\u3092\u6291\u3048\u308b\u3053\u3068\u304c\u793a\u3055\u308c\u307e\u3057\u305f\u3002\u901a\u4fe1\u30aa\u30fc\u30d0\u30fc\u30d8\u30c3\u30c9\u3092\u30dd\u30b9\u30c8\u91cf\u5b50\u7f72\u540d\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u306e\u30b5\u30a4\u30ba\u7279\u6027\u304b\u3089\u5207\u308a\u96e2\u3059\u3053\u3068\u3067\u3001ZKS-PQC\u306f\u5c06\u6765\u306eCAV\u30b7\u30b9\u30c6\u30e0\u306b\u304a\u3051\u308b\u30b9\u30b1\u30fc\u30e9\u30d6\u30eb\u3067\u91cf\u5b50\u8010\u6027\u306e\u3042\u308b\u30e1\u30c3\u30bb\u30fc\u30b8\u8a8d\u8a3c\u306e\u305f\u3081\u306e\u5b9f\u7528\u7684\u306a\u79fb\u884c\u6226\u7565\u3092\u63d0\u4f9b\u3057\u307e\u3059\u3002",
-   "title_translated": "\u5354\u529b\u81ea\u52d5\u904b\u8ee2\u306b\u304a\u3051\u308b\u52b9\u7387\u7684\u306a\u30dd\u30b9\u30c8\u91cf\u5b50\u30e1\u30c3\u30bb\u30fc\u30b8\u8a8d\u8a3c\u306e\u305f\u3081\u306e\u30bc\u30ed\u77e5\u8b58\u7f72\u540d\u30d5\u30ec\u30fc\u30e0\u30ef\u30fc\u30af",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    },
-    "network": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-10-09T14:16:26Z"
-  },
-  "2610.11107": {
-   "paper": {
-    "id": "2610.11107",
-    "title": "Accelerating HQC for Post-Quantum TLS 1.3 on x86 IoT Gateways",
-    "link": "https://arxiv.org/abs/2610.11107v1",
-    "authors": "Jihoon Jang, Hyunju Park, Jebin Kim, Seokhie Hong, Suhri Kim",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "Post-quantum TLS at an IoT gateway must protect many device connections without large increases in handshake delay, CPU cost, or network traffic. HQC provides code-based diversity beyond ML-KEM, but its computation and ciphertext sizes can increase these costs. We optimize HQC for x86 processors with AVX2, AVX-512, and the Galois Field New Instructions (GFNI), and integrate the resulting implementations into TLS 1.3. We extend branch-free Toom-Cook/Karatsuba multiplication to AVX-512, accelerate Reed-Solomon decoding with GFNI, improve Reed-Muller decoding, accelerate SHA3-512 and fixed-weight sampling, and port Frobenius additive FFT (FAFFT) multiplication to AVX-512 + GFNI for HQC-5. On an Intel Core i5-1135G7 processor, our AVX2 implementation reduces decapsulation by 11.1-21.5% over the fastest prior AVX2 results. Our AVX-512 implementation reduces key generation by 24.9-29.5%, encapsulation by 10.4-11.1%, and decapsulation by 20.6-26.1% relative to Cabral et al. across the three HQC parameter sets. We evaluate the effects of these implementations on TLS 1.3 handshake latency and server and client CPU costs, as well as the effects of round-trip time (RTT) and bandwidth. In local loopback TLS measurements, our AVX-512 HQC-5 implementation reduces handshake latency from 3.22 ms to 2.92 ms compared with Cabral et al. On a constrained path with 1 Mbit/s bandwidth and an added RTT of 50 ms, the HQC-5 handshake takes 243 ms, compared with 87 ms for ML-KEM-1024. This indicates that HQC public-key and ciphertext sizes, rather than implementation speed, determine the remaining handshake cost on constrained links.",
-    "published": "2026-10-08T02:27:37Z",
-    "updated": "2026-10-08T02:27:37Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc",
-     "qec",
-     "hardware"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc",
-    "qec",
-    "hardware"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "IoT\u30b2\u30fc\u30c8\u30a6\u30a7\u30a4\u306b\u304a\u3051\u308b\u30dd\u30b9\u30c8\u91cf\u5b50TLS\u306f\u3001\u30cf\u30f3\u30c9\u30b7\u30a7\u30a4\u30af\u9045\u5ef6\u3001CPU\u30b3\u30b9\u30c8\u3001\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u30c8\u30e9\u30d5\u30a3\u30c3\u30af\u306e\u5927\u5e45\u306a\u5897\u52a0\u306a\u3057\u306b\u591a\u304f\u306e\u30c7\u30d0\u30a4\u30b9\u63a5\u7d9a\u3092\u4fdd\u8b77\u3057\u306a\u3051\u308c\u3070\u306a\u308a\u307e\u305b\u3093\u3002HQC\u306fML-KEM\u3092\u8d85\u3048\u305f\u30b3\u30fc\u30c9\u30d9\u30fc\u30b9\u306e\u591a\u69d8\u6027\u3092\u63d0\u4f9b\u3057\u307e\u3059\u304c\u3001\u305d\u306e\u8a08\u7b97\u91cf\u3084\u6697\u53f7\u6587\u30b5\u30a4\u30ba\u304c\u3053\u308c\u3089\u306e\u30b3\u30b9\u30c8\u3092\u5897\u52a0\u3055\u305b\u308b\u53ef\u80fd\u6027\u304c\u3042\u308a\u307e\u3059\u3002HQC\u306fAVX2\u3001AVX-512\u3001\u30ac\u30ed\u30a2\u30d5\u30a3\u30fc\u30eb\u30c9\u65b0\u547d\u4ee4(GFNI)\u3092\u642d\u8f09\u3057\u305fx86\u30d7\u30ed\u30bb\u30c3\u30b5\u5411\u3051\u306b\u6700\u9069\u5316\u3057\u3001\u305d\u306e\u7d50\u679c\u5f97\u3089\u308c\u305f\u5b9f\u88c5\u3092TLS 1.3\u306b\u7d71\u5408\u3057\u307e\u3059\u3002\u5206\u5c90\u30d5\u30ea\u30fc\u306eToom-Cook/Karatsuba\u4e57\u7b97\u3092AVX-512\u306b\u62e1\u5f35\u3057\u3001GFNI\u306b\u3088\u308b\u30ea\u30fc\u30c9\u30fb\u30bd\u30ed\u30e2\u30f3\u5fa9\u53f7\u3092\u52a0\u901f\u3057\u3001\u30ea\u30fc\u30c9\u30fb\u30df\u30e5\u30fc\u30e9\u30fc\u5fa9\u53f7\u3092\u6539\u5584\u3057\u3001SHA3-512\u304a\u3088\u3073\u56fa\u5b9a\u91cd\u307f\u30b5\u30f3\u30d7\u30ea\u30f3\u30b0\u3092\u52a0\u901f\u3057\u3001FAFFT(FAFFT)\u4e57\u7b97\u3092AVX-512+GFNI\u306b\u79fb\u690d\u3057\u307e\u3057\u305f\u3002Intel Core i5-1135G7\u30d7\u30ed\u30bb\u30c3\u30b5\u3067\u306f\u3001AVX2\u5b9f\u88c5\u306f\u5f93\u6765\u306eAVX2\u3088\u308a\u30c7\u30ab\u30d7\u30bb\u30eb\u5316\u309211.1\u301c21.5%\u524a\u6e1b\u3057\u3066\u3044\u307e\u3059\u3002AVX-512\u306e\u5b9f\u88c5\u306f\u3001Cabral\u3089\u306b\u6bd4\u3079\u3066\u30ad\u30fc\u751f\u6210\u309224.9\u301c29.5%\u3001\u30ab\u30d7\u30bb\u30eb\u5316\u309210.4\u301c11.1%\u3001\u30ab\u30d7\u30bb\u30eb\u5316\u309220.6\u301c26.1%\u524a\u6e1b\u3057\u3066\u3044\u307e\u3059\u3002\u3053\u308c\u3089\u306e\u5b9f\u88c5\u304cTLS 1.3\u30cf\u30f3\u30c9\u30b7\u30a7\u30a4\u30af\u30ec\u30a4\u30c6\u30f3\u30b7\u3084\u30b5\u30fc\u30d0\u30fc\u30fb\u30af\u30e9\u30a4\u30a2\u30f3\u30c8CPU\u30b3\u30b9\u30c8\u306b\u4e0e\u3048\u308b\u5f71\u97ff\u3001\u306a\u3089\u3073\u306b\u5f80\u5fa9\u6642\u9593(RTT)\u3084\u5e2f\u57df\u5e45\u306e\u5f71\u97ff\u3082\u8a55\u4fa1\u3057\u3066\u3044\u307e\u3059\u3002\u30ed\u30fc\u30ab\u30eb\u30eb\u30fc\u30d7\u30d0\u30c3\u30afTLS\u6e2c\u5b9a\u306b\u304a\u3044\u3066\u3001AVX-512 HQC-5\u5b9f\u88c5\u306fCabral\u3089\u3068\u6bd4\u8f03\u3057\u3066\u30cf\u30f3\u30c9\u30b7\u30a7\u30a4\u30af\u9045\u5ef6\u30923.22ms\u304b\u30892.92ms\u306b\u524a\u6e1b\u3057\u307e\u3057\u305f\u30021 Mbit/s\u5e2f\u57df\u5e45\u3068\u8ffd\u52a0RTT\u304c50 ms\u306e\u5236\u7d04\u30d1\u30b9\u3067\u306f\u3001HQC-5\u306e\u30cf\u30f3\u30c9\u30b7\u30a7\u30a4\u30af\u306f243ms\u304b\u304b\u308a\u307e\u3059\u304c\u3001ML-KEM-1024\u306e87ms\u3068\u6bd4\u3079\u3066\u9ad8\u304f\u306a\u308a\u307e\u3059\u3002\u3053\u308c\u306f\u3001\u5236\u9650\u3055\u308c\u305f\u30ea\u30f3\u30af\u3067\u306e\u6b8b\u308a\u306e\u30cf\u30f3\u30c9\u30b7\u30a7\u30a4\u30af\u30b3\u30b9\u30c8\u3092\u6c7a\u5b9a\u3059\u308b\u306e\u306f\u5b9f\u88c5\u901f\u5ea6\u3067\u306f\u306a\u304f\u3001\u516c\u958b\u9375\u304a\u3088\u3073\u6697\u53f7\u6587\u306e\u30b5\u30a4\u30ba\u3067\u3042\u308b\u3053\u3068\u3092\u793a\u3057\u3066\u3044\u307e\u3059\u3002",
-   "title_translated": "x86 IoT\u30b2\u30fc\u30c8\u30a6\u30a7\u30a4\u306b\u304a\u3051\u308bPost-Quantum TLS 1.3\u306eHQC\u52a0\u901f",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    },
-    "qec": {
-     "status": "pending"
-    },
-    "hardware": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-10-09T14:16:26Z"
-  },
-  "2610.11254": {
-   "paper": {
-    "id": "2610.11254",
-    "title": "Provable Subexponential Algorithms for NIST Third-Round Lattice Families",
-    "link": "https://arxiv.org/abs/2610.11254v1",
-    "authors": "Yiming Gao, Xuyuan Han, Honggang Hu",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "We give provable classical subexponential algorithms for secret recovery in growing parameter families associated with NIST third-round lattice candidates. For the Kyber/ML-KEM, FrodoKEM, SABER, NTRU LPRime, and Dilithium/ML-DSA families studied here, polynomial moduli and polylogarithmic coefficient scales yield recovery of the short secret component in expected time and space $2^{(1/2+o(1))n/\\ln\\ln n}$. For noisy or rounded linear relations, we exploit an exact gap in the squared Euclidean norm of a comparison vector defined by each coordinate guess. One Gaussian list suffices to identify every secret coordinate by binary search, without enumerating the others. We establish the required sampling guarantees through new geometric bounds for structured public operators over prime and power of two moduli. The construction builds on the Wagner-style Gaussian sampling framework of Ducas, Engelberts, and Loyer (CRYPTO 2025) and the low-error decision-LWE algorithm of Han, Gao, and Hu (2026). For quotient relations of NTRU type, we develop an affine slice search: fixing coordinates restricts candidate pairs to slices of the public lattice, and their estimated Gaussian masses guide the choice of each next coordinate. In the stated modulus window, Falcon's key generation quality condition supplies the required mass bound. The algorithm then recovers an equivalent signing key with high probability in time and space $2^{O(n/\\ln\\ln n)}$. The same search recovers the short key core for cyclic NTRU-HPS/HRSS. Together, these results give subexponential algorithms for problem families associated with all seven NIST third-round lattice candidates. Despite the subexponential complexity, our results do not establish a reduction in the concrete security of the currently specified parameter sets.",
-    "published": "2026-10-08T05:01:41Z",
-    "updated": "2026-10-08T05:01:41Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc",
-     "algo"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc",
-    "algo"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "NIST\u306e\u7b2c\u4e09\u30e9\u30a6\u30f3\u30c9\u683c\u5b50\u5019\u88dc\u306b\u95a2\u9023\u3059\u308b\u6210\u9577\u3059\u308b\u30d1\u30e9\u30e1\u30fc\u30bf\u30d5\u30a1\u30df\u30ea\u30fc\u306b\u304a\u3051\u308b\u79d8\u5bc6\u56de\u5fa9\u306e\u305f\u3081\u306e\u8a3c\u660e\u53ef\u80fd\u306a\u53e4\u5178\u7684\u90e8\u5206\u6307\u6570\u95a2\u6570\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u3092\u793a\u3057\u307e\u3059\u3002\u3053\u3053\u3067\u7814\u7a76\u3059\u308bKyber/ML-KEM\u3001FrodoKEM\u3001SABER\u3001NTRU LPRime\u3001\u304a\u3088\u3073Dilithium/ML-DSA\u30d5\u30a1\u30df\u30ea\u30fc\u306b\u304a\u3044\u3066\u3001\u591a\u9805\u5f0f\u30e2\u30b8\u30e5\u30e9\u30a4\u304a\u3088\u3073\u591a\u5bfe\u6570\u4fc2\u6570\u30b9\u30b1\u30fc\u30eb\u306b\u3088\u308a\u3001\u671f\u5f85\u6642\u9593\u3068\u7a7a\u9593\u3067\u77ed\u3044\u79d8\u5bc6\u6210\u5206\u306e\u56de\u5fa9\u304c\u5f97\u3089\u308c\u307e\u3059\u3002$2^{(1/2+o(1))n/\\ln\\ln n}$\u3002\u30ce\u30a4\u30ba\u591a\u3044\u307e\u305f\u306f\u4e38\u3081\u306e\u7dda\u5f62\u95a2\u4fc2\u306e\u5834\u5408\u3001\u5404\u5ea7\u6a19\u63a8\u6e2c\u3067\u5b9a\u7fa9\u3055\u308c\u308b\u6bd4\u8f03\u30d9\u30af\u30c8\u30eb\u306e\u4e8c\u4e57\u30e6\u30fc\u30af\u30ea\u30c3\u30c9\u30ce\u30eb\u30e0\u306e\u6b63\u78ba\u306a\u30ae\u30e3\u30c3\u30d7\u3092\u5229\u7528\u3057\u307e\u3059\u30021\u3064\u306e\u30ac\u30a6\u30b9\u30ea\u30b9\u30c8\u3067\u3001\u4ed6\u306e\u79d8\u5bc6\u5ea7\u6a19\u3092\u5217\u6319\u305b\u305a\u306b\u4e8c\u5206\u63a2\u7d22\u3067\u7279\u5b9a\u3067\u304d\u307e\u3059\u3002\u7d20\u6570\u304a\u3088\u30732\u306e\u3079\u304d\u4e57\u306b\u5bfe\u3059\u308b\u69cb\u9020\u5316\u516c\u958b\u6f14\u7b97\u5b50\u306e\u65b0\u3057\u3044\u5e7e\u4f55\u5b66\u7684\u5883\u754c\u3092\u901a\u3058\u3066\u5fc5\u8981\u306a\u30b5\u30f3\u30d7\u30ea\u30f3\u30b0\u4fdd\u8a3c\u3092\u78ba\u7acb\u3057\u307e\u3059\u3002\u3053\u306e\u69cb\u6210\u306f\u3001Ducas\u3001Engelberts\u3001Loyer(CRYPTO 2025)\u306b\u3088\u308bWagner\u30b9\u30bf\u30a4\u30eb\u306e\u30ac\u30a6\u30b9\u30b5\u30f3\u30d7\u30ea\u30f3\u30b0\u30d5\u30ec\u30fc\u30e0\u30ef\u30fc\u30af\u3068\u3001Han\u3001Gao\u3001Hu(2026)\u306b\u3088\u308b\u4f4e\u8aa4\u5dee\u6c7a\u5b9aLWE\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u306b\u57fa\u3065\u3044\u3066\u3044\u307e\u3059\u3002NTRU\u578b\u306e\u5546\u95a2\u4fc2\u306b\u3064\u3044\u3066\u306f\u3001\u30a2\u30d5\u30a3\u30f3\u30b9\u30e9\u30a4\u30b9\u63a2\u7d22\u3092\u958b\u767a\u3057\u307e\u3059\u3002\u5ea7\u6a19\u3092\u56fa\u5b9a\u3059\u308b\u3053\u3068\u3067\u5019\u88dc\u30da\u30a2\u306f\u516c\u958b\u683c\u5b50\u306e\u30b9\u30e9\u30a4\u30b9\u306b\u5236\u9650\u3055\u308c\u3001\u305d\u308c\u3089\u306e\u63a8\u5b9a\u30ac\u30a6\u30b9\u8cea\u91cf\u304c\u6b21\u306e\u5ea7\u6a19\u306e\u9078\u629e\u3092\u5c0e\u304d\u307e\u3059\u3002\u6307\u5b9a\u3055\u308c\u305f\u30e2\u30b8\u30e5\u30e9\u30b9\u30a6\u30a3\u30f3\u30c9\u30a6\u5185\u3067\u3001Falcon\u306e\u9375\u751f\u6210\u54c1\u8cea\u6761\u4ef6\u304c\u5fc5\u8981\u306a\u8cea\u91cf\u4e0a\u9650\u3092\u63d0\u4f9b\u3057\u307e\u3059\u3002\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u306f\u305d\u306e\u5f8c\u3001\u6642\u9593\u7a7a\u9593\u7684\u306b\u9ad8\u78ba\u7387\u3067\u540c\u7b49\u306e\u7f72\u540d\u9375\u3092$2^{O(n/\\ln\\ln n)}$\u3067\u5fa9\u5143\u3057\u307e\u3059\u3002\u540c\u3058\u63a2\u7d22\u3067\u5de1\u56de\u7684\u306aNTRU-HPS/HRSS\u306e\u30b7\u30e7\u30fc\u30c8\u30ad\u30fc\u30b3\u30a2\u3082\u5fa9\u5143\u3055\u308c\u307e\u3059\u3002\u3053\u308c\u3089\u306e\u7d50\u679c\u3092\u5408\u308f\u305b\u308b\u3068\u30017\u3064\u306eNIST\u7b2c3\u30e9\u30a6\u30f3\u30c9\u683c\u5b50\u5019\u88dc\u3059\u3079\u3066\u306b\u95a2\u9023\u3059\u308b\u554f\u984c\u30d5\u30a1\u30df\u30ea\u30fc\u306b\u5bfe\u3057\u3066\u90e8\u5206\u6307\u6570\u7684\u306a\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u304c\u5f97\u3089\u308c\u307e\u3059\u3002\u30b5\u30d6\u6307\u6570\u7684\u8907\u96d1\u6027\u306b\u3082\u304b\u304b\u308f\u3089\u305a\u3001\u6211\u3005\u306e\u7d50\u679c\u306f\u73fe\u5728\u6307\u5b9a\u3055\u308c\u3066\u3044\u308b\u30d1\u30e9\u30e1\u30fc\u30bf\u30bb\u30c3\u30c8\u306e\u5177\u4f53\u7684\u306a\u5b89\u5168\u6027\u306e\u6e1b\u5c11\u3092\u8a3c\u660e\u3057\u3066\u3044\u307e\u305b\u3093\u3002",
-   "title_translated": "NIST\u7b2c3\u30e9\u30a6\u30f3\u30c9\u683c\u5b50\u30d5\u30a1\u30df\u30ea\u30fc\u306e\u8a3c\u660e\u53ef\u80fd\u306a\u90e8\u5206\u6307\u6570\u95a2\u6570\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    },
-    "algo": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-10-09T14:16:26Z"
-  },
-  "2610.10992": {
-   "paper": {
-    "id": "2610.10992",
-    "title": "The Hint Weight of ML-DSA Signatures Is Key-Dependent: An Empirical Study across the Three FIPS 204 Parameter Sets",
-    "link": "https://arxiv.org/abs/2610.10992v1",
-    "authors": "Dominik Blain",
-    "announce_type": "external",
-    "categories": [
-     "cs.CR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "Every ML-DSA (FIPS 204) signature carries a public hint vector h. We find that the Hamming weight of each hint polynomial h_k depends on the signing key: to first order it measures the Euclidean norm of (t0)_k, the low-order part of t that key generation leaves out of the public key. A closed-form model predicts the per-key mean weight with Pearson r between 0.95 and 0.98; once the norm is accounted for, we detect no key-dependent signal above sampling noise. We measure the effect on the reference C implementation, with 200 keys and 2,000 signatures per key for each parameter set. A one-way ANOVA rejects key-independence of the total hint weight for ML-DSA-44, ML-DSA-65 and ML-DSA-87 (F = 30.1, 10.3, 11.1). The effect is weak: the key explains 0.5% to 1.5% of the variance of the total weight. A single signature identifies its key among 200 with 1.1 to 1.3 times chance accuracy from the total weight, and 1.5 to 1.8 times from the per-polynomial weight vector. A one-sided test at significance 0.001 separates two typical keys with probability one half after about 1,300 to 3,700 signatures per key. The hint weight does not endanger the signing key. The Dilithium designers do not treat t0 as secret, and t0 is known to be recoverable from signatures. The hint weight is, however, a weak statistical fingerprint: with enough signatures, it can be used to test whether they come from a common key, without the public key. Bounded-weight signing, a backward-compatible filter whose effect on the security argument we did not analyze, removes 86-91% of the between-key spread of the total weight but leaves the per-polynomial channel largely intact.",
-    "published": "2026-10-07T23:26:48Z",
-    "updated": "2026-10-07T23:26:48Z",
-    "source_feed": "cs.CR",
-    "external_genre_ids": [
-     "pqc"
-    ],
-    "external_classifier": "gemini-2.5-flash"
-   },
-   "genre_ids": [
-    "pqc"
-   ],
-   "classifier": "gemini-2.5-flash",
-   "abstract_translated": "\u3059\u3079\u3066\u306eML-DSA(FIPS 204)\u7f72\u540d\u306f\u516c\u958b\u30d2\u30f3\u30c8\u30d9\u30af\u30c8\u30ebh\u3092\u6301\u3061\u307e\u3059\u3002\u5404\u30d2\u30f3\u30c8\u591a\u9805\u5f0fh_k\u306e\u30cf\u30df\u30f3\u30b0\u91cd\u307f\u306f\u7f72\u540d\u30ad\u30fc\u306b\u4f9d\u5b58\u3057\u307e\u3059\u30021\u968e\u306f(t0)_k\u306e\u30e6\u30fc\u30af\u30ea\u30c3\u30c9\u30ce\u30eb\u30e0\u3092\u6e2c\u5b9a\u3057\u3001\u9375\u751f\u6210\u3067\u516c\u958b\u9375\u304b\u3089\u9664\u5916\u3055\u308c\u308bt\u306e\u4f4e\u968e\u90e8\u5206\u3067\u3059\u3002\u9589\u5f62\u5f0f\u30e2\u30c7\u30eb\u306f\u3001\u30d4\u30a2\u30bd\u30f3r\u304c0.95\u304b\u30890.98\u306e\u7bc4\u56f2\u3067\u30ad\u30fc\u3054\u3068\u306e\u5e73\u5747\u91cd\u307f\u3092\u4e88\u6e2c\u3057\u307e\u3059\u3002\u30ce\u30eb\u30e0\u304c\u8003\u616e\u3055\u308c\u308b\u3068\u3001\u30b5\u30f3\u30d7\u30ea\u30f3\u30b0\u30ce\u30a4\u30ba\u4ee5\u4e0a\u306e\u9375\u4f9d\u5b58\u4fe1\u53f7\u306f\u691c\u51fa\u3055\u308c\u307e\u305b\u3093\u3002\u53c2\u7167C\u306e\u5b9f\u88c5\u306b\u5bfe\u3059\u308b\u5f71\u97ff\u3092\u6e2c\u5b9a\u3057\u3001\u5404\u30d1\u30e9\u30e1\u30fc\u30bf\u30bb\u30c3\u30c8\u306b\u5bfe\u3057\u3066200\u9375\u30681\u9375\u3042\u305f\u308a2,000\u7f72\u540d\u3092\u7528\u3044\u307e\u3059\u3002\u4e00\u65b9\u884cANOVA\u306f\u3001ML-DSA-44\u3001ML-DSA-65\u3001ML-DSA-87\u306e\u7dcf\u30d2\u30f3\u30c8\u91cd\u307f\u306e\u9375\u72ec\u7acb\u6027\u3092\u5426\u5b9a\u3057\u307e\u3059(F = 30.1, 10.3, 11.1)\u3002\u52b9\u679c\u306f\u5f31\u304f\u3001\u9375\u306f\u7dcf\u91cd\u307f\u306e\u5206\u6563\u306e0.5%\u304b\u30891.5%\u3092\u8aac\u660e\u3067\u304d\u307e\u3059\u3002\u5358\u4e00\u306e\u7f72\u540d\u306f200\u306e\u9375\u306e\u4e2d\u304b\u3089\u3001\u7dcf\u91cd\u307f\u304b\u30891.1\u301c1.3\u500d\u306e\u78ba\u7387\u7cbe\u5ea6\u3001\u591a\u9805\u5f0f\u3042\u305f\u308a\u306e\u91cd\u307f\u30d9\u30af\u30c8\u30eb\u304b\u30891.5\u500d\u304b\u30891.8\u500d\u306e\u78ba\u7387\u3067\u8b58\u5225\u3057\u307e\u3059\u3002\u6709\u610f0.001\u306e\u7247\u5074\u691c\u5b9a\u306f\u30011\u9375\u3042\u305f\u308a\u7d041,300\u304b\u30893,700\u306e\u7f72\u540d\u306e\u78ba\u7387\u30672\u3064\u306e\u5178\u578b\u7684\u306a\u9375\u3092\u534a\u5206\u306e\u78ba\u7387\u3067\u5206\u96e2\u3057\u307e\u3059\u3002\u30d2\u30f3\u30c8\u306e\u91cd\u307f\u306f\u7f72\u540d\u9375\u3092\u5371\u967a\u306b\u3055\u3089\u3057\u307e\u305b\u3093\u3002\u30c7\u30a3\u30ea\u30c1\u30a6\u30e0\u8a2d\u8a08\u8005\u306ft0\u3092\u79d8\u5bc6\u3068\u306f\u898b\u306a\u3055\u305a\u3001t0\u306f\u7f72\u540d\u304b\u3089\u56de\u5fa9\u53ef\u80fd\u3067\u3042\u308b\u3053\u3068\u304c\u77e5\u3089\u308c\u3066\u3044\u307e\u3059\u3002\u3057\u304b\u3057\u3001\u30d2\u30f3\u30c8\u91cd\u307f\u306f\u5f31\u3044\u7d71\u8a08\u7684\u6307\u7d0b\u3067\u3042\u308a\u3001\u5341\u5206\u306a\u7f72\u540d\u304c\u3042\u308c\u3070\u3001\u516c\u958b\u9375\u306a\u3057\u3067\u5171\u901a\u9375\u304b\u3089\u6765\u3066\u3044\u308b\u304b\u3069\u3046\u304b\u3092\u691c\u8a3c\u3059\u308b\u305f\u3081\u306b\u4f7f\u7528\u3067\u304d\u307e\u3059\u3002\u6709\u754c\u91cd\u307f\u7f72\u540d\u306f\u3001\u30bb\u30ad\u30e5\u30ea\u30c6\u30a3\u8ad6\u8a3c\u306b\u5f71\u97ff\u3092\u4e0e\u3048\u306a\u304b\u3063\u305f\u5f8c\u65b9\u4e92\u63db\u30d5\u30a3\u30eb\u30bf\u30fc\u3067\u3001\u9375\u9593\u306e\u91cd\u307f\u306e86\u301c91%\u3092\u9664\u53bb\u3057\u307e\u3059\u304c\u3001\u591a\u9805\u5f0f\u30c1\u30e3\u30cd\u30eb\u306f\u307b\u307c\u305d\u306e\u307e\u307e\u6b8b\u3057\u307e\u3059\u3002",
-   "title_translated": "ML-DSA\u7f72\u540d\u306e\u30d2\u30f3\u30c8\u91cd\u307f\u306f\u30ad\u30fc\u4f9d\u5b58\u7684\u3067\u3042\u308b:3\u3064\u306eFIPS 204\u30d1\u30e9\u30e1\u30fc\u30bf\u30bb\u30c3\u30c8\u3092\u901a\u3058\u305f\u5b9f\u8a3c\u7684\u7814\u7a76",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-10-09T14:16:26Z"
-  }
- },
+ "deliveries": {},
  "external_cursors": {
   "cs.CR": "2026-10-09T14:15:48Z",
   "cs.CC": "2026-10-09T14:15:57Z",

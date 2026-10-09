@@ -8556,6 +8556,51 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-10-08T07:23:41Z"
+  },
+  "cs.CR:2610.12024": {
+   "genre_ids": [
+    "pqc",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-09T14:16:26Z"
+  },
+  "cs.CR:2610.11490": {
+   "genre_ids": [
+    "pqc",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-09T14:16:26Z"
+  },
+  "cs.CR:2610.11107": {
+   "genre_ids": [
+    "pqc",
+    "qec",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-09T14:16:26Z"
+  },
+  "cs.CR:2610.11254": {
+   "genre_ids": [
+    "pqc",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-09T14:16:26Z"
+  },
+  "cs.CR:2610.10992": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-09T14:16:26Z"
   }
  },
  "external_pending": {},
@@ -15733,10 +15778,212 @@
   "2610.12447",
   "2610.12454"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2610.12024": {
+   "paper": {
+    "id": "2610.12024",
+    "title": "HPQ-AKE: A Provably Secure Sign-Less Hybrid Authenticated Key Exchange Protocol for Bandwidth-Constrained IoT and Edge Networks",
+    "link": "https://arxiv.org/abs/2610.12024v1",
+    "authors": "Khiem Pham-Tuan, Minh Quang Le, Khuong Nguyen-An",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.NI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Securing bandwidth-constrained Internet of Things (IoT) and edge networks during post-quantum migration creates an authentication trade-off: ML-KEM provides post-quantum key establishment, whereas post-quantum signatures increase certificate-chain size, verification cost, and handshake latency. We present HPQ-AKE, a sign-less hybrid authenticated key exchange for RSA-enabled IoT gateways and edge/cloud services that replaces transcript signatures with dual KEMs. HPQ-AKE combines ML-KEM-768 for post-quantum session secrecy and forward secrecy with RSA-OAEP for implicit mutual authentication, preserving existing RSA-enabled infrastructure during migration. We analyze HPQ-AKE in an extended Bellare-Rogaway model, separating classical authentication in the Random Oracle Model from session-key secrecy in the Quantum Random Oracle Model. Under the Module-LWE and RSA assumptions, it establishes AKE security, forward secrecy, and conditional KCI resistance under the long-term-key-only exposure assumptions. Evaluation combines x86 micro-benchmarking, analytical latency modeling, and 10,000-iteration Monte Carlo simulation. HPQ-AKE reduces modeled handshake transmission from 13,009 to 5,668 Bytes, a 56.4% reduction relative to a Hybrid TLS 1.3 Full handshake, while requiring 7.11 ms of total local computation on the measured x86 testbed. Under a simulated 50 kbps satellite-like link with 600 ms RTT and stochastic jitter, median latency is 1,914 ms, 31.4% below the 2,791 ms baseline. At 20 ms RTT, modeled break-even thresholds are 0.31 Mbps against the pre-cached baseline and 4.08 Mbps against the full baseline; both decrease as RTT increases. These x86-based results motivate evaluation on gateway-class IoT and edge platforms; performance on ARM gateways and unaccelerated microcontrollers remains unvalidated.",
+    "published": "2026-10-08T14:21:41Z",
+    "updated": "2026-10-08T14:21:41Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "network"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "network": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-09T14:16:26Z"
+  },
+  "2610.11490": {
+   "paper": {
+    "id": "2610.11490",
+    "title": "A Zero-Knowledge Signature Framework for Efficient Post-Quantum Message Authentication in Cooperative Automated Driving",
+    "link": "https://arxiv.org/abs/2610.11490v1",
+    "authors": "Takahito Yoshizawa, Aysajan Abidin, Edoardo Pena-Gonzalez, Bart Preneel",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Connected and Automated Vehicles (CAV) rely on authenticated Vehicle-to-Everything (V2X) communications to exchange safety-critical information among vehicles and roadside infrastructure. As the automotive industry transitions toward post-quantum cryptography (PQC), the significantly larger public keys and signatures of standardized PQC digital signature algorithms introduce substantial communication overhead, which challenges the scalability of certificate-based V2X authentication, particularly for high-frequency cooperative awareness messages (CAM). This paper presents ZKS-PQC, a zero-knowledge signature framework that enables communication-efficient post-quantum message authentication for cooperative V2X systems. Instead of transmitting complete post-quantum public keys and signatures, the proposed framework replaces this authentication material with a compact Zero-Knowledge Proof (ZKP) while preserving compatibility with existing certificate-based trust architectures. This approach supports incremental migration and backward compatibility with the legacy ECDSA. The framework is implemented using the Open Quantum Safe (liboqs) and ZKP (Bulletproofs) libraries, and we evaluated the performance of standardized NIST PQC signature algorithms and additional candidate algorithms. Experimental validation on both a Linux platform and a commercial On-Board Unit (OBU) demonstrates substantial reductions in message size exceeding 95% for all algorithms, while limiting additional processing overhead by staying within the order of milliseconds at both sender and receiver in many algorithms, consistent with the latency requirements of real-time V2X operation. By decoupling communication overhead from the size characteristics of post-quantum signature algorithms, ZKS-PQC offers a practical migration strategy for scalable, quantum-resilient message authentication in future CAV systems.",
+    "published": "2026-10-08T08:31:51Z",
+    "updated": "2026-10-08T08:31:51Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "network"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "network": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-09T14:16:26Z"
+  },
+  "2610.11107": {
+   "paper": {
+    "id": "2610.11107",
+    "title": "Accelerating HQC for Post-Quantum TLS 1.3 on x86 IoT Gateways",
+    "link": "https://arxiv.org/abs/2610.11107v1",
+    "authors": "Jihoon Jang, Hyunju Park, Jebin Kim, Seokhie Hong, Suhri Kim",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Post-quantum TLS at an IoT gateway must protect many device connections without large increases in handshake delay, CPU cost, or network traffic. HQC provides code-based diversity beyond ML-KEM, but its computation and ciphertext sizes can increase these costs. We optimize HQC for x86 processors with AVX2, AVX-512, and the Galois Field New Instructions (GFNI), and integrate the resulting implementations into TLS 1.3. We extend branch-free Toom-Cook/Karatsuba multiplication to AVX-512, accelerate Reed-Solomon decoding with GFNI, improve Reed-Muller decoding, accelerate SHA3-512 and fixed-weight sampling, and port Frobenius additive FFT (FAFFT) multiplication to AVX-512 + GFNI for HQC-5. On an Intel Core i5-1135G7 processor, our AVX2 implementation reduces decapsulation by 11.1-21.5% over the fastest prior AVX2 results. Our AVX-512 implementation reduces key generation by 24.9-29.5%, encapsulation by 10.4-11.1%, and decapsulation by 20.6-26.1% relative to Cabral et al. across the three HQC parameter sets. We evaluate the effects of these implementations on TLS 1.3 handshake latency and server and client CPU costs, as well as the effects of round-trip time (RTT) and bandwidth. In local loopback TLS measurements, our AVX-512 HQC-5 implementation reduces handshake latency from 3.22 ms to 2.92 ms compared with Cabral et al. On a constrained path with 1 Mbit/s bandwidth and an added RTT of 50 ms, the HQC-5 handshake takes 243 ms, compared with 87 ms for ML-KEM-1024. This indicates that HQC public-key and ciphertext sizes, rather than implementation speed, determine the remaining handshake cost on constrained links.",
+    "published": "2026-10-08T02:27:37Z",
+    "updated": "2026-10-08T02:27:37Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "qec",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "qec",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "qec": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-09T14:16:26Z"
+  },
+  "2610.11254": {
+   "paper": {
+    "id": "2610.11254",
+    "title": "Provable Subexponential Algorithms for NIST Third-Round Lattice Families",
+    "link": "https://arxiv.org/abs/2610.11254v1",
+    "authors": "Yiming Gao, Xuyuan Han, Honggang Hu",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "We give provable classical subexponential algorithms for secret recovery in growing parameter families associated with NIST third-round lattice candidates. For the Kyber/ML-KEM, FrodoKEM, SABER, NTRU LPRime, and Dilithium/ML-DSA families studied here, polynomial moduli and polylogarithmic coefficient scales yield recovery of the short secret component in expected time and space $2^{(1/2+o(1))n/\\ln\\ln n}$. For noisy or rounded linear relations, we exploit an exact gap in the squared Euclidean norm of a comparison vector defined by each coordinate guess. One Gaussian list suffices to identify every secret coordinate by binary search, without enumerating the others. We establish the required sampling guarantees through new geometric bounds for structured public operators over prime and power of two moduli. The construction builds on the Wagner-style Gaussian sampling framework of Ducas, Engelberts, and Loyer (CRYPTO 2025) and the low-error decision-LWE algorithm of Han, Gao, and Hu (2026). For quotient relations of NTRU type, we develop an affine slice search: fixing coordinates restricts candidate pairs to slices of the public lattice, and their estimated Gaussian masses guide the choice of each next coordinate. In the stated modulus window, Falcon's key generation quality condition supplies the required mass bound. The algorithm then recovers an equivalent signing key with high probability in time and space $2^{O(n/\\ln\\ln n)}$. The same search recovers the short key core for cyclic NTRU-HPS/HRSS. Together, these results give subexponential algorithms for problem families associated with all seven NIST third-round lattice candidates. Despite the subexponential complexity, our results do not establish a reduction in the concrete security of the currently specified parameter sets.",
+    "published": "2026-10-08T05:01:41Z",
+    "updated": "2026-10-08T05:01:41Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "algo"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "algo"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "algo": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-09T14:16:26Z"
+  },
+  "2610.10992": {
+   "paper": {
+    "id": "2610.10992",
+    "title": "The Hint Weight of ML-DSA Signatures Is Key-Dependent: An Empirical Study across the Three FIPS 204 Parameter Sets",
+    "link": "https://arxiv.org/abs/2610.10992v1",
+    "authors": "Dominik Blain",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Every ML-DSA (FIPS 204) signature carries a public hint vector h. We find that the Hamming weight of each hint polynomial h_k depends on the signing key: to first order it measures the Euclidean norm of (t0)_k, the low-order part of t that key generation leaves out of the public key. A closed-form model predicts the per-key mean weight with Pearson r between 0.95 and 0.98; once the norm is accounted for, we detect no key-dependent signal above sampling noise. We measure the effect on the reference C implementation, with 200 keys and 2,000 signatures per key for each parameter set. A one-way ANOVA rejects key-independence of the total hint weight for ML-DSA-44, ML-DSA-65 and ML-DSA-87 (F = 30.1, 10.3, 11.1). The effect is weak: the key explains 0.5% to 1.5% of the variance of the total weight. A single signature identifies its key among 200 with 1.1 to 1.3 times chance accuracy from the total weight, and 1.5 to 1.8 times from the per-polynomial weight vector. A one-sided test at significance 0.001 separates two typical keys with probability one half after about 1,300 to 3,700 signatures per key. The hint weight does not endanger the signing key. The Dilithium designers do not treat t0 as secret, and t0 is known to be recoverable from signatures. The hint weight is, however, a weak statistical fingerprint: with enough signatures, it can be used to test whether they come from a common key, without the public key. Bounded-weight signing, a backward-compatible filter whose effect on the security argument we did not analyze, removes 86-91% of the between-key spread of the total weight but leaves the per-polynomial channel largely intact.",
+    "published": "2026-10-07T23:26:48Z",
+    "updated": "2026-10-07T23:26:48Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-09T14:16:26Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-10-08T14:28:48Z",
-  "cs.CC": "2026-10-09T07:19:16Z",
-  "cs.IT": "2026-10-09T07:19:22Z"
+  "cs.CR": "2026-10-09T14:15:48Z",
+  "cs.CC": "2026-10-09T14:15:57Z",
+  "cs.IT": "2026-10-09T14:16:02Z"
  }
 }

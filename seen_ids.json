@@ -8931,40 +8931,26 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-10-12T07:21:17Z"
-  }
- },
- "external_pending": {
+  },
   "cs.CR:2610.16100": {
-   "id": "2610.16100",
-   "title": "HDKEM: Authentication Allocation for Deniable Hybrid Key Exchange",
-   "link": "https://arxiv.org/abs/2610.16100v1",
-   "authors": "Kazi Hassan Shakib, Muhammad Asfand Hafeez, Arslan Munir",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR"
+   "genre_ids": [
+    "pqc",
+    "crypto"
    ],
-   "primary": "cs.CR",
-   "abstract": "Deniable authenticated key exchange (DAKE) establishes a shared key without leaving transferable evidence that a party participated. We study DAKE protocols that authenticate each fresh session with one ring signature and show that their deniability mechanisms fall into three authentication allocations: sharing an authentication witness, hiding the signing witness under a fixed ring, or varying the verified ring between real and simulated executions. For fixed-ring protocols, witness hiding yields a necessary relation between the ring signature's witness-indistinguishability gap and the protocol's $(\u03bc,\u03b4)$ deniability parameters. We instantiate witness hiding in HDKEM, a three-slot hybrid that combines ML-KEM-768, X25519, and an optional pairwise information-theoretic source through a split-key PRF. HDKEM binds all public session values, including a QKD key identifier when present, into authentication and key derivation. Under the stated component models, it achieves eCK key indistinguishability, forward secrecy, and strong local deniability. We evaluate HDKEM with FalconRS and Gandalf. Across 2,000 primitive operations, median signing/verification times are 9.20/1.02 ms for FalconRS and 18.61/0.97 ms for Gandalf in our reference environment. In source-backed mode, the corresponding TCP-application costs are 8,607 B and 8,555 B per handshake. A separate 500-session server experiment exercises the complete FalconRS source-backed path and reports a median server time of 16.29 ms including local I/O.",
-   "published": "2026-10-12T03:07:12Z",
-   "updated": "2026-10-12T03:07:12Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-14T12:46:37Z"
   },
   "cs.IT:2610.15857": {
-   "id": "2610.15857",
-   "title": "Low-Latency Belief-Propagation Decoding of Quantum LDPC Codes with Reinforcement-Learned Scheduling",
-   "link": "https://arxiv.org/abs/2610.15857v1",
-   "authors": "Mohsen Moradi, Ghilas Aissou, Taejoon Kim, Remi A. Chou, David G. M. Mitchell",
-   "announce_type": "external",
-   "categories": [
-    "cs.IT"
+   "genre_ids": [
+    "qec"
    ],
-   "primary": "cs.IT",
-   "abstract": "Belief propagation (BP) is attractive for quantum low-density parity-check (QLDPC) decoding because of its low complexity and low latency, but short cycles and degeneracy can limit its error-correction performance. Reinforcement-learned sequential scheduling (RL-S) substantially improves this performance by adapting the variable node (VN) update order, although Q-table storage and heap-based selection introduce additional overhead. We propose bucket RL-S (B-RL-S), which quantizes learned Q-values into integer priorities and schedules VN updates using dynamically maintained first-in, first-out buckets. Without retraining or changing the BP message updates, B-RL-S reduces policy storage and refreshes only priorities affected by local residual syndrome changes. A fixed number of priority levels enables constant-time VN selection and queue relocation. For the $[[288,12,18]]$ bivariate bicycle code over the depolarizing channel at $p=0.05$, B-RL-S with eight priority levels achieves approximately one fifth the block error rate (BLER) of flooding BP followed by order-10 ordered-statistics decoding. The respective caps are $1000$ sequential iterations for B-RL-S and $1000$ flooding iterations for the BP stage of the reference decoder. These results highlight strong error correction with inexpensive scheduling and no additional post-processing stage.",
-   "published": "2026-10-11T19:23:58Z",
-   "updated": "2026-10-11T19:23:58Z",
-   "source_feed": "cs.IT"
+   "classifier": "gemini-2.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-14T12:48:48Z"
   }
  },
+ "external_pending": {},
  "schema_version": 2,
  "completed_ids": [
   "1506.05785",
@@ -16441,10 +16427,86 @@
   "2610.18816",
   "2610.18827"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2610.16100": {
+   "paper": {
+    "id": "2610.16100",
+    "title": "HDKEM: Authentication Allocation for Deniable Hybrid Key Exchange",
+    "link": "https://arxiv.org/abs/2610.16100v1",
+    "authors": "Kazi Hassan Shakib, Muhammad Asfand Hafeez, Arslan Munir",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Deniable authenticated key exchange (DAKE) establishes a shared key without leaving transferable evidence that a party participated. We study DAKE protocols that authenticate each fresh session with one ring signature and show that their deniability mechanisms fall into three authentication allocations: sharing an authentication witness, hiding the signing witness under a fixed ring, or varying the verified ring between real and simulated executions. For fixed-ring protocols, witness hiding yields a necessary relation between the ring signature's witness-indistinguishability gap and the protocol's $(\u03bc,\u03b4)$ deniability parameters. We instantiate witness hiding in HDKEM, a three-slot hybrid that combines ML-KEM-768, X25519, and an optional pairwise information-theoretic source through a split-key PRF. HDKEM binds all public session values, including a QKD key identifier when present, into authentication and key derivation. Under the stated component models, it achieves eCK key indistinguishability, forward secrecy, and strong local deniability. We evaluate HDKEM with FalconRS and Gandalf. Across 2,000 primitive operations, median signing/verification times are 9.20/1.02 ms for FalconRS and 18.61/0.97 ms for Gandalf in our reference environment. In source-backed mode, the corresponding TCP-application costs are 8,607 B and 8,555 B per handshake. A separate 500-session server experiment exercises the complete FalconRS source-backed path and reports a median server time of 16.29 ms including local I/O.",
+    "published": "2026-10-12T03:07:12Z",
+    "updated": "2026-10-12T03:07:12Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "crypto": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-14T12:48:48Z"
+  },
+  "2610.15857": {
+   "paper": {
+    "id": "2610.15857",
+    "title": "Low-Latency Belief-Propagation Decoding of Quantum LDPC Codes with Reinforcement-Learned Scheduling",
+    "link": "https://arxiv.org/abs/2610.15857v1",
+    "authors": "Mohsen Moradi, Ghilas Aissou, Taejoon Kim, Remi A. Chou, David G. M. Mitchell",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Belief propagation (BP) is attractive for quantum low-density parity-check (QLDPC) decoding because of its low complexity and low latency, but short cycles and degeneracy can limit its error-correction performance. Reinforcement-learned sequential scheduling (RL-S) substantially improves this performance by adapting the variable node (VN) update order, although Q-table storage and heap-based selection introduce additional overhead. We propose bucket RL-S (B-RL-S), which quantizes learned Q-values into integer priorities and schedules VN updates using dynamically maintained first-in, first-out buckets. Without retraining or changing the BP message updates, B-RL-S reduces policy storage and refreshes only priorities affected by local residual syndrome changes. A fixed number of priority levels enables constant-time VN selection and queue relocation. For the $[[288,12,18]]$ bivariate bicycle code over the depolarizing channel at $p=0.05$, B-RL-S with eight priority levels achieves approximately one fifth the block error rate (BLER) of flooding BP followed by order-10 ordered-statistics decoding. The respective caps are $1000$ sequential iterations for B-RL-S and $1000$ flooding iterations for the BP stage of the reference decoder. These results highlight strong error correction with inexpensive scheduling and no additional post-processing stage.",
+    "published": "2026-10-11T19:23:58Z",
+    "updated": "2026-10-11T19:23:58Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash-lite"
+   },
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash-lite",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-14T12:48:48Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-10-14T09:22:29Z",
-  "cs.CC": "2026-10-14T09:22:37Z",
-  "cs.IT": "2026-10-14T09:22:46Z"
+  "cs.CR": "2026-10-14T12:46:10Z",
+  "cs.CC": "2026-10-14T12:46:19Z",
+  "cs.IT": "2026-10-14T12:46:24Z"
  }
 }

@@ -1,80 +1,5 @@
 [
  {
-  "delivery_id": "main:2608.02812",
-  "id": "2608.02812",
-  "posted_at": "2026-08-05T04:31:04Z",
-  "title": "Magneto-oscillations, nonlinearity, and nonreciprocity of Coulomb drag in quantum circuits",
-  "title_ja": null,
-  "title_translated": null,
-  "translation_language": "ja",
-  "authors": "Alex Levchenko, Mingyang Zheng, Dominique Laroche",
-  "link": "https://arxiv.org/abs/2608.02812",
-  "primary": "cond-mat.mes-hall",
-  "categories": [
-   "cond-mat.mes-hall",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "other"
-  ],
-  "genre_names": [
-   "その他・異分野"
-  ],
-  "target_genre_ids": [
-   "other"
-  ],
-  "target_genre_names": [
-   "その他・異分野"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We consider the problem of Coulomb drag in interactively coupled quantum circuits built of adiabatic constrictions: quantum point contacts and short quantum-wire channels. The interplay of spatial confinement and magnetic field leads to a rich oscillatory response of the drag current as a function of gate voltage and magnetic field: drag peaks track the depopulation of magnetoelectric subbands, are asymptotically periodic in inverse field, and their visibility is controlled by the competition of temperature with the field-sharpened tunneling width of the constriction. We derive a closed expression for the linear drag conductance whose interaction kernel simplifies dramatically in the experimentally relevant limit of a long thermal length compared with the range of the interwire coupling, investigate the drag in the nonlinear regime, where the drag current measures the transconductance of the drive channel at any field, and discuss physically motivated models of dissipation-induced nonreciprocity of the drag signal. Extensions accounting for Zeeman splitting, interaction renormalization of the barrier transmission, backscattering at high field, and the frequency structure of the circuit coupling delineate how each mechanism imprints itself on the temperature dependence and lineshapes of the drag oscillations.",
-  "abstract_ja": null,
-  "abstract_translated": null,
-  "last_delivered_at": "2026-08-05T04:31:04Z"
- },
- {
-  "delivery_id": "main:2608.02861",
-  "id": "2608.02861",
-  "posted_at": "2026-08-05T04:31:05Z",
-  "title": "Topological Recursion and Quantum Path Signatures",
-  "title_ja": null,
-  "title_translated": null,
-  "translation_language": "ja",
-  "authors": "In\\^es Aniceto, Thomas Cass, Samuel Crew",
-  "link": "https://arxiv.org/abs/2608.02861",
-  "primary": "math-ph",
-  "categories": [
-   "math-ph",
-   "hep-th",
-   "math.MP",
-   "math.PR",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "other"
-  ],
-  "genre_names": [
-   "その他・異分野"
-  ],
-  "target_genre_ids": [
-   "other"
-  ],
-  "target_genre_names": [
-   "その他・異分野"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We introduce a non-commutative Laplace transform between functionals on path space and formal series in a tensor algebra, under which a natural convolution of path functionals becomes an algebraic product of series. Applying it to a random unitary matrix-valued path development - the quantum path signature - we show that the governing planar loop equations take a non-commutative spectral form. We then extend the loop equations to a $1/N$ genus expansion, organised by topological recursion, and obtain a hierarchy of integral equations on path space for the corrections.",
-  "abstract_ja": null,
-  "abstract_translated": null,
-  "last_delivered_at": "2026-08-05T04:31:05Z"
- },
- {
   "delivery_id": "main:2608.03180",
   "id": "2608.03180",
   "posted_at": "2026-08-05T04:31:07Z",
@@ -190694,5 +190619,79 @@
   "abstract_ja": "硬壁ポテンシャル内に閉じ込められた零温のボース・アインシュタイン凝縮気体の回転特性を調査します。弱い相互作用では、気体は多重量子化の渦を通じて角運動量を運びます。結合が増加し、トラップの回転周波数が十分に遅い場合、多重量子化された渦状態は混合状態に対して不安定になります。強い結合では、トラップの角周波数が増加すると渦格子からトラップ中心に穴のある渦格子、そして最終的に巨大渦へと遷移します。弱い有効引力相互作用でも、多重量子化の渦が存在します。これらの状態は、結合がより負になるにつれて問題の軸対称性を破り、重心励起に似た状態に対して不安定になります。さらに、さらに魅力的な力に対しては、システムは崩壊に対して不安定になります。",
   "abstract_translated": "硬壁ポテンシャル内に閉じ込められた零温のボース・アインシュタイン凝縮気体の回転特性を調査します。弱い相互作用では、気体は多重量子化の渦を通じて角運動量を運びます。結合が増加し、トラップの回転周波数が十分に遅い場合、多重量子化された渦状態は混合状態に対して不安定になります。強い結合では、トラップの角周波数が増加すると渦格子からトラップ中心に穴のある渦格子、そして最終的に巨大渦へと遷移します。弱い有効引力相互作用でも、多重量子化の渦が存在します。これらの状態は、結合がより負になるにつれて問題の軸対称性を破り、重心励起に似た状態に対して不安定になります。さらに、さらに魅力的な力に対しては、システムは崩壊に対して不安定になります。",
   "last_delivered_at": "2026-10-14T10:03:26Z"
+ },
+ {
+  "delivery_id": "main:2610.15857",
+  "id": "2610.15857",
+  "posted_at": "2026-10-14T12:48:59Z",
+  "title": "Low-Latency Belief-Propagation Decoding of Quantum LDPC Codes with Reinforcement-Learned Scheduling",
+  "title_ja": "強化学習スケジューリングを用いた量子LDPC符号の低遅延信念伝播復号",
+  "title_translated": "強化学習スケジューリングを用いた量子LDPC符号の低遅延信念伝播復号",
+  "translation_language": "ja",
+  "authors": "Mohsen Moradi, Ghilas Aissou, Taejoon Kim, Remi A. Chou, David G. M. Mitchell",
+  "link": "https://arxiv.org/abs/2610.15857v1",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "target_genre_ids": [
+   "qec"
+  ],
+  "target_genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-2.5-flash-lite",
+  "abstract_en": "Belief propagation (BP) is attractive for quantum low-density parity-check (QLDPC) decoding because of its low complexity and low latency, but short cycles and degeneracy can limit its error-correction performance. Reinforcement-learned sequential scheduling (RL-S) substantially improves this performance by adapting the variable node (VN) update order, although Q-table storage and heap-based selection introduce additional overhead. We propose bucket RL-S (B-RL-S), which quantizes learned Q-values into integer priorities and schedules VN updates using dynamically maintained first-in, first-out buckets. Without retraining or changing the BP message updates, B-RL-S reduces policy storage and refreshes only priorities affected by local residual syndrome changes. A fixed number of priority levels enables constant-time VN selection and queue relocation. For the $[[288,12,18]]$ bivariate bicycle code over the depolarizing channel at $p=0.05$, B-RL-S with eight priority levels achieves approximately one fifth the block error rate (BLER) of flooding BP followed by order-10 ordered-statistics decoding. The respective caps are $1000$ sequential iterations for B-RL-S and $1000$ flooding iterations for the BP stage of the reference decoder. These results highlight strong error correction with inexpensive scheduling and no additional post-processing stage.",
+  "abstract_ja": "信念伝播(BP)は、その複雑さと遅延が低いため量子低密度パリティチェック(QLDPC)復号に魅力的ですが、短いサイクルや縮退性により誤り訂正性能が制限されることがあります。強化学習型逐次スケジューリング(RL-S)は可変ノード(VN)の更新順序を適応させることでこの性能を大幅に向上させますが、Qテーブルストレージやヒープベース選択は追加のオーバーヘッドを生じます。私たちは、学習済みQ値を整数優先度に量子化し、動的に保守された先入れ先出しバケットを用いてVN更新をスケジューリングするバケットRL-S(B-RL-S)を提案します。BPメッセージの更新を再学習または変更せずに、B-RL-Sはポリシーの保存を削減し、局所的な残留症候群の変化に影響を受ける優先度のみを更新します。一定数の優先度レベルで、一定時間のVN選択とキューの再配置を可能にします。脱分極チャネル上の$[[288,12,18]]$の二変量自転車コード($p=0.05$)では、8つの優先度レベルでのB-RL-Sは、BPのフラッディングと10次の順序統計復号の約5分の1のブロックエラー率(BLER)を達成します。それぞれの上限は、B-RL-Sの逐次反復1000ドル、参照デコーダのBP段階のフラッディング反復1000ドルです。これらの結果は、強力な誤り訂正と安価なスケジューリング、追加の後処理段階なしを示しています。",
+  "abstract_translated": "信念伝播(BP)は、その複雑さと遅延が低いため量子低密度パリティチェック(QLDPC)復号に魅力的ですが、短いサイクルや縮退性により誤り訂正性能が制限されることがあります。強化学習型逐次スケジューリング(RL-S)は可変ノード(VN)の更新順序を適応させることでこの性能を大幅に向上させますが、Qテーブルストレージやヒープベース選択は追加のオーバーヘッドを生じます。私たちは、学習済みQ値を整数優先度に量子化し、動的に保守された先入れ先出しバケットを用いてVN更新をスケジューリングするバケットRL-S(B-RL-S)を提案します。BPメッセージの更新を再学習または変更せずに、B-RL-Sはポリシーの保存を削減し、局所的な残留症候群の変化に影響を受ける優先度のみを更新します。一定数の優先度レベルで、一定時間のVN選択とキューの再配置を可能にします。脱分極チャネル上の$[[288,12,18]]$の二変量自転車コード($p=0.05$)では、8つの優先度レベルでのB-RL-Sは、BPのフラッディングと10次の順序統計復号の約5分の1のブロックエラー率(BLER)を達成します。それぞれの上限は、B-RL-Sの逐次反復1000ドル、参照デコーダのBP段階のフラッディング反復1000ドルです。これらの結果は、強力な誤り訂正と安価なスケジューリング、追加の後処理段階なしを示しています。",
+  "last_delivered_at": "2026-10-14T12:48:59Z"
+ },
+ {
+  "delivery_id": "main:2610.16100",
+  "id": "2610.16100",
+  "posted_at": "2026-10-14T12:49:01Z",
+  "title": "HDKEM: Authentication Allocation for Deniable Hybrid Key Exchange",
+  "title_ja": "HDKEM:否認可能なハイブリッド鍵交換のための認証割り当て",
+  "title_translated": "HDKEM:否認可能なハイブリッド鍵交換のための認証割り当て",
+  "translation_language": "ja",
+  "authors": "Kazi Hassan Shakib, Muhammad Asfand Hafeez, Arslan Munir",
+  "link": "https://arxiv.org/abs/2610.16100v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "crypto"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "crypto"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Deniable authenticated key exchange (DAKE) establishes a shared key without leaving transferable evidence that a party participated. We study DAKE protocols that authenticate each fresh session with one ring signature and show that their deniability mechanisms fall into three authentication allocations: sharing an authentication witness, hiding the signing witness under a fixed ring, or varying the verified ring between real and simulated executions. For fixed-ring protocols, witness hiding yields a necessary relation between the ring signature's witness-indistinguishability gap and the protocol's $(μ,δ)$ deniability parameters. We instantiate witness hiding in HDKEM, a three-slot hybrid that combines ML-KEM-768, X25519, and an optional pairwise information-theoretic source through a split-key PRF. HDKEM binds all public session values, including a QKD key identifier when present, into authentication and key derivation. Under the stated component models, it achieves eCK key indistinguishability, forward secrecy, and strong local deniability. We evaluate HDKEM with FalconRS and Gandalf. Across 2,000 primitive operations, median signing/verification times are 9.20/1.02 ms for FalconRS and 18.61/0.97 ms for Gandalf in our reference environment. In source-backed mode, the corresponding TCP-application costs are 8,607 B and 8,555 B per handshake. A separate 500-session server experiment exercises the complete FalconRS source-backed path and reports a median server time of 16.29 ms including local I/O.",
+  "abstract_ja": "否認可能認証鍵交換(DAKE)は、当事者が参加した証拠を残さずに共有鍵を確立します。各新しいセッションを1つのリング署名で認証するDAKEプロトコルを研究し、その否認可能性メカニズムは3つの認証割り当てに分かれることを示しています:認証証人の共有、署名証人を固定リング内で隠す、または検証されたリングを実際の実行とシミュレーション実行間で変化させることです。固定リングプロトコルにおいて、証人隠蔽はリング署名の証人識別不能ギャップとプロトコルの$(μ,δ)$否認可能性パラメータとの間に必要な関係をもたらします。私たちは、ML-KEM-768、X25519、そして分割鍵PRFによるオプションのペアワイズ情報理論ソースを組み合わせた3スロットハイブリッドHDKEMで証人隠匿を実装します。HDKEMはQKD鍵識別子を含むすべての公開セッション値を認証と鍵導出に結合します。指定のコンポーネントモデルでは、eCK鍵の区別不能性、前方秘密性、強力な局所否認性を実現しています。FalconRSとGandalfでHDKEMを評価します。2,000のプリミティブ操作において、FalconRSの中央値署名/検証時間は9.20/1.02ms、Gandalfの中央値時間は18.61/0.97msです。ソースバックモードでは、対応するTCPアプリケーションコストはハンドシェイクあたり8,607 Bおよび8,555 Bです。別の500セッションのサーバー実験では、FalconRSのソースバックパス全体を実行し、ローカルI/Oを含めると中央値サーバー時間は16.29 msと報告されています。",
+  "abstract_translated": "否認可能認証鍵交換(DAKE)は、当事者が参加した証拠を残さずに共有鍵を確立します。各新しいセッションを1つのリング署名で認証するDAKEプロトコルを研究し、その否認可能性メカニズムは3つの認証割り当てに分かれることを示しています:認証証人の共有、署名証人を固定リング内で隠す、または検証されたリングを実際の実行とシミュレーション実行間で変化させることです。固定リングプロトコルにおいて、証人隠蔽はリング署名の証人識別不能ギャップとプロトコルの$(μ,δ)$否認可能性パラメータとの間に必要な関係をもたらします。私たちは、ML-KEM-768、X25519、そして分割鍵PRFによるオプションのペアワイズ情報理論ソースを組み合わせた3スロットハイブリッドHDKEMで証人隠匿を実装します。HDKEMはQKD鍵識別子を含むすべての公開セッション値を認証と鍵導出に結合します。指定のコンポーネントモデルでは、eCK鍵の区別不能性、前方秘密性、強力な局所否認性を実現しています。FalconRSとGandalfでHDKEMを評価します。2,000のプリミティブ操作において、FalconRSの中央値署名/検証時間は9.20/1.02ms、Gandalfの中央値時間は18.61/0.97msです。ソースバックモードでは、対応するTCPアプリケーションコストはハンドシェイクあたり8,607 Bおよび8,555 Bです。別の500セッションのサーバー実験では、FalconRSのソースバックパス全体を実行し、ローカルI/Oを含めると中央値サーバー時間は16.29 msと報告されています。",
+  "last_delivered_at": "2026-10-14T12:49:03Z"
  }
 ]

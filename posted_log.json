@@ -1,150 +1,5 @@
 [
  {
-  "delivery_id": "main:2608.04115",
-  "id": "2608.04115",
-  "posted_at": "2026-08-06T04:32:23Z",
-  "title": "NEBULA: A Language - Independent Specification for Opaque Rotating Refresh Tokens",
-  "title_ja": "NEBULA：言語に依存しない不透明な回転式リフレッシュトークンの仕様",
-  "title_translated": "NEBULA：言語に依存しない不透明な回転式リフレッシュトークンの仕様",
-  "translation_language": "ja",
-  "authors": "Matteo Teodori",
-  "link": "https://arxiv.org/abs/2608.04115v1",
-  "primary": "cs.CR",
-  "categories": [
-   "cs.CR"
-  ],
-  "source_feed": "cs.CR",
-  "classification_context": "external",
-  "announce_type": "external",
-  "genre_ids": [
-   "pqc"
-  ],
-  "genre_names": [
-   "耐量子計算機暗号"
-  ],
-  "target_genre_ids": [
-   "pqc"
-  ],
-  "target_genre_names": [
-   "耐量子計算機暗号"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Refresh tokens are among the most sensitive credentials in modern authentication systems: long-lived, bearer-style, and sufficient to mint access tokens for days or weeks. RFC 9700, the current Best Current Practice for OAuth 2.0 security, mandates that refresh tokens issued to public clients be rotated on every use with replay (reuse) detection, or be sender-constrained. But the BCP specifies policy, not mechanism: it prescribes no wire format, no storage schema, no ordering of verification steps, no concurrency contract, and no semantics for edge cases such as lost-response retries or key rotation. Implementations may therefore diverge in precisely the corner cases that determine security outcomes. We present NEBULA, a precise, language-independent specification of the RFC 9700 refresh-token model, together with ten conformant reference implementations (TypeScript, Python, Go, Rust, Java, PHP, C#, Ruby, Elixir, Dart). NEBULA tokens are opaque -- a 128-bit public selector and a 256-bit secret verifier, both CSPRNG output, carrying no claims and no signature -- so token validity is a property of server-side state rather than of cryptographic verification. Its conformance methodology publishes the behavioural suite as data rather than as prose: 38 scenarios in one machine-readable file that every implementation executes through a thin per-language runner, so that drift by transcription is structurally excluded. We describe the specification -- including a compare-and-set rotation contract that closes a reproducible bypass of reuse detection under concurrent refresh -- analyse its security properties including its post-quantum posture, and report on cross-language conformance as a method for multi-implementation security specifications. The specification, implementations, and conformance artefacts are open source under the Apache License 2.0.",
-  "abstract_ja": "リフレッシュトークンは、現代の認証システムにおいて最も機密性の高い認証情報の一つです。有効期限が長く、ベアラートークンのような形式で、数日から数週間にわたってアクセストークンを発行するのに十分なものです。OAuth 2.0 セキュリティの現在のベストプラクティスである RFC 9700 では、パブリッククライアントに発行されるリフレッシュトークンは、リプレイ (再利用) 検出機能を備えて使用するたびにローテーションするか、送信者による制約を設けることが義務付けられています。しかし、この BCP はメカニズムではなくポリシーを規定しています。つまり、ワイヤフォーマット、ストレージスキーマ、検証手順の順序、並行性契約、応答喪失時の再試行やキーローテーションなどのエッジケースのセマンティクスは規定されていません。そのため、実装はセキュリティの結果を左右するまさにそのコーナーケースで異なる可能性があります。そこで、RFC 9700 のリフレッシュトークンモデルを言語に依存しない形で正確に規定した NEBULA と、それに準拠した 10 種類のリファレンス実装 (TypeScript、Python、Go、Rust、Java、PHP、C#、Ruby、Elixir、Dart) を紹介します。 NEBULAトークンは不透明です。128ビットの公開セレクタと256ビットの秘密検証器は、どちらもCSPRNGの出力であり、クレームも署名も含まれません。そのため、トークンの有効性は暗号学的検証ではなく、サーバー側の状態の特性となります。適合性検証手法では、動作スイートを散文ではなくデータとして公開します。38のシナリオが1つの機械可読ファイルに格納されており、各実装は言語ごとの薄いランナーを介して実行するため、転写によるドリフトは構造的に排除されます。本稿では、同時更新下での再利用検出の再現可能なバイパスを閉じる比較セット回転契約を含む仕様について説明し、ポスト量子耐性を含むセキュリティ特性を分析し、複数実装のセキュリティ仕様の手法としてのクロス言語適合性について報告します。仕様、実装、および適合性検証成果物は、Apache License 2.0の下でオープンソースとして公開されています。",
-  "abstract_translated": "リフレッシュトークンは、現代の認証システムにおいて最も機密性の高い認証情報の一つです。有効期限が長く、ベアラートークンのような形式で、数日から数週間にわたってアクセストークンを発行するのに十分なものです。OAuth 2.0 セキュリティの現在のベストプラクティスである RFC 9700 では、パブリッククライアントに発行されるリフレッシュトークンは、リプレイ (再利用) 検出機能を備えて使用するたびにローテーションするか、送信者による制約を設けることが義務付けられています。しかし、この BCP はメカニズムではなくポリシーを規定しています。つまり、ワイヤフォーマット、ストレージスキーマ、検証手順の順序、並行性契約、応答喪失時の再試行やキーローテーションなどのエッジケースのセマンティクスは規定されていません。そのため、実装はセキュリティの結果を左右するまさにそのコーナーケースで異なる可能性があります。そこで、RFC 9700 のリフレッシュトークンモデルを言語に依存しない形で正確に規定した NEBULA と、それに準拠した 10 種類のリファレンス実装 (TypeScript、Python、Go、Rust、Java、PHP、C#、Ruby、Elixir、Dart) を紹介します。 NEBULAトークンは不透明です。128ビットの公開セレクタと256ビットの秘密検証器は、どちらもCSPRNGの出力であり、クレームも署名も含まれません。そのため、トークンの有効性は暗号学的検証ではなく、サーバー側の状態の特性となります。適合性検証手法では、動作スイートを散文ではなくデータとして公開します。38のシナリオが1つの機械可読ファイルに格納されており、各実装は言語ごとの薄いランナーを介して実行するため、転写によるドリフトは構造的に排除されます。本稿では、同時更新下での再利用検出の再現可能なバイパスを閉じる比較セット回転契約を含む仕様について説明し、ポスト量子耐性を含むセキュリティ特性を分析し、複数実装のセキュリティ仕様の手法としてのクロス言語適合性について報告します。仕様、実装、および適合性検証成果物は、Apache License 2.0の下でオープンソースとして公開されています。",
-  "last_delivered_at": "2026-08-06T04:32:23Z"
- },
- {
-  "delivery_id": "main:2608.04857",
-  "id": "2608.04857",
-  "posted_at": "2026-08-06T04:32:25Z",
-  "title": "Hidden Ciphers and Where to Find Them: Static Discovery and Assessment of Cryptographic Assets in Software",
-  "title_ja": "隠された暗号とその発見場所：ソフトウェアにおける暗号資産の静的検出と評価",
-  "title_translated": "隠された暗号とその発見場所：ソフトウェアにおける暗号資産の静的検出と評価",
-  "translation_language": "ja",
-  "authors": "Christian Näther, Eduard Hirsch",
-  "link": "https://arxiv.org/abs/2608.04857v1",
-  "primary": "cs.CR",
-  "categories": [
-   "cs.CR",
-   "cs.SE"
-  ],
-  "source_feed": "cs.CR",
-  "classification_context": "external",
-  "announce_type": "external",
-  "genre_ids": [
-   "pqc"
-  ],
-  "genre_names": [
-   "耐量子計算機暗号"
-  ],
-  "target_genre_ids": [
-   "pqc"
-  ],
-  "target_genre_names": [
-   "耐量子計算機暗号"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Modern software systems rely on cryptography for data protection, authentication, and trust establishment, yet organizations often lack a structured view of the cryptography deployed across source code, configuration, dependencies, and cryptographic files. This lack of visibility complicates security governance and post-quantum migration planning. This paper presents a static approach for discovering and assessing cryptographic assets in software systems. We introduce a classification of Crypto-Material, Crypto-Artifacts, and Crypto-Invocations, derive an extensible scanner-independent rule repository from it, and implement a static scanner that applies these rules to produce CBOM-oriented output. We evaluate the approach on a synthetic benchmark with known ground truth and on a real-world infrastructure of ten deployed services. The scanner achieves an F1 score of 0.75 for asset discovery and correctly annotates 91% of expected weaknesses and vulnerabilities. In the realworld setting, it processes 57 610 files in under six minutes and discovers 370 cryptographic assets, including six CVE-linked vulnerabilities and 52 post-quantum migration candidates. Real-world coverage is assessed against a manually compiled reference list rather than an exhaustive one. These results show that classification-driven static discovery can provide practical cryptographic transparency for governance and post-quantum migration planning.",
-  "abstract_ja": "現代のソフトウェアシステムは、データ保護、認証、および信頼確立のために暗号化に依存していますが、組織はソースコード、構成、依存関係、および暗号化ファイル全体に展開されている暗号化の構造化されたビューを欠いていることがよくあります。この可視性の欠如は、セキュリティガバナンスとポスト量子移行計画を複雑にします。本稿では、ソフトウェアシステム内の暗号化資産を検出および評価するための静的アプローチを紹介します。暗号化マテリアル、暗号化アーティファクト、および暗号化呼び出しの分類を導入し、そこから拡張可能なスキャナ非依存ルールリポジトリを導出し、これらのルールを適用してCBOM指向の出力を生成する静的スキャナを実装します。既知のグラウンドトゥルースを持つ合成ベンチマークと、展開された10のサービスからなる実世界のインフラストラクチャでこのアプローチを評価します。スキャナは、資産検出でF1スコア0.75を達成し、予想される弱点と脆弱性の91%を正しく注釈付けします。実際の環境では、57,610個のファイルを6分未満で処理し、6件のCVE関連脆弱性と52件のポスト量子移行候補を含む370個の暗号資産を検出しました。実際のカバレッジは、網羅的なリストではなく、手動で作成された参照リストに基づいて評価されています。これらの結果は、分類主導型の静的検出が、ガバナンスとポスト量子移行計画において実用的な暗号学的透明性を提供できることを示しています。",
-  "abstract_translated": "現代のソフトウェアシステムは、データ保護、認証、および信頼確立のために暗号化に依存していますが、組織はソースコード、構成、依存関係、および暗号化ファイル全体に展開されている暗号化の構造化されたビューを欠いていることがよくあります。この可視性の欠如は、セキュリティガバナンスとポスト量子移行計画を複雑にします。本稿では、ソフトウェアシステム内の暗号化資産を検出および評価するための静的アプローチを紹介します。暗号化マテリアル、暗号化アーティファクト、および暗号化呼び出しの分類を導入し、そこから拡張可能なスキャナ非依存ルールリポジトリを導出し、これらのルールを適用してCBOM指向の出力を生成する静的スキャナを実装します。既知のグラウンドトゥルースを持つ合成ベンチマークと、展開された10のサービスからなる実世界のインフラストラクチャでこのアプローチを評価します。スキャナは、資産検出でF1スコア0.75を達成し、予想される弱点と脆弱性の91%を正しく注釈付けします。実際の環境では、57,610個のファイルを6分未満で処理し、6件のCVE関連脆弱性と52件のポスト量子移行候補を含む370個の暗号資産を検出しました。実際のカバレッジは、網羅的なリストではなく、手動で作成された参照リストに基づいて評価されています。これらの結果は、分類主導型の静的検出が、ガバナンスとポスト量子移行計画において実用的な暗号学的透明性を提供できることを示しています。",
-  "last_delivered_at": "2026-08-06T04:32:25Z"
- },
- {
-  "delivery_id": "main:2608.06256",
-  "id": "2608.06256",
-  "posted_at": "2026-08-07T03:56:55Z",
-  "title": "A Paturi Theorem for Signed Subcube Representations",
-  "title_ja": "符号付きサブキューブ表現に関するパトゥリの定理",
-  "title_translated": "符号付きサブキューブ表現に関するパトゥリの定理",
-  "translation_language": "ja",
-  "authors": "Hangyu liu",
-  "link": "https://arxiv.org/abs/2608.06256v1",
-  "primary": "cs.CC",
-  "categories": [
-   "cs.CC"
-  ],
-  "source_feed": "cs.CC",
-  "classification_context": "external",
-  "announce_type": "external",
-  "genre_ids": [
-   "complexity"
-  ],
-  "genre_names": [
-   "量子複雑性理論"
-  ],
-  "target_genre_ids": [
-   "complexity"
-  ],
-  "target_genre_names": [
-   "量子複雑性理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We obtain exponential upper bounds on approximate generalized weight and generalized sparsity in terms of the deepest transition depth D(F), and show that these bounds are optimal up to constant factors in the exponent. We further characterize approximate generalized sparsity, establish a dual lower-bound framework based on exponential restriction profiles, and derive a Paturi-type characterization relating approximate generalized weight to quantum query complexity.",
-  "abstract_ja": "我々は、最深遷移深度 D(F) に関して、近似一般化重みと一般化スパース性に対する指数関数的な上限値を取得し、これらの上限値が指数の定数係数を除いて最適であることを示す。さらに、近似一般化スパース性を特徴付け、指数関数的な制限プロファイルに基づく双対下限フレームワークを確立し、近似一般化重みと量子クエリ複雑度を関連付けるパトゥリ型の特徴付けを導出する。",
-  "abstract_translated": "我々は、最深遷移深度 D(F) に関して、近似一般化重みと一般化スパース性に対する指数関数的な上限値を取得し、これらの上限値が指数の定数係数を除いて最適であることを示す。さらに、近似一般化スパース性を特徴付け、指数関数的な制限プロファイルに基づく双対下限フレームワークを確立し、近似一般化重みと量子クエリ複雑度を関連付けるパトゥリ型の特徴付けを導出する。",
-  "last_delivered_at": "2026-08-07T03:56:55Z"
- },
- {
-  "delivery_id": "main:2608.05831",
-  "id": "2608.05831",
-  "posted_at": "2026-08-07T03:56:57Z",
-  "title": "On the Figures of Merit for Quantum Software Security: Toward a Benchmarking Rubric",
-  "title_ja": "量子ソフトウェアセキュリティの評価指標について：ベンチマーク評価基準に向けて",
-  "title_translated": "量子ソフトウェアセキュリティの評価指標について：ベンチマーク評価基準に向けて",
-  "translation_language": "ja",
-  "authors": "Badhon Rahman, Majid Haghparast, Tommi Mikkonen",
-  "link": "https://arxiv.org/abs/2608.05831v1",
-  "primary": "cs.CR",
-  "categories": [
-   "cs.CR"
-  ],
-  "source_feed": "cs.CR",
-  "classification_context": "external",
-  "announce_type": "external",
-  "genre_ids": [
-   "crypto",
-   "nisq"
-  ],
-  "genre_names": [
-   "暗号・セキュリティ",
-   "変分・NISQアルゴリズム"
-  ],
-  "target_genre_ids": [
-   "crypto",
-   "nisq"
-  ],
-  "target_genre_names": [
-   "暗号・セキュリティ",
-   "変分・NISQアルゴリズム"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Quantum software is increasingly provided through multi-tenant and cloud-based Quantum-as-a-Service (QaaS) stacks. A growing concern about the diverse attack vectors across the pipeline has been demonstrated in recent research. Yet the community has converged on three mature pillars: Scale (Qubit Count), Quality (Quantum Volume), and Speed (Circuit Layer Operations per Second (CLOPS)) for the merit performance figures. Moreover, it has also begun to define software-quality metrics. However, the security of quantum software remains largely unmeasured. A few quantitative security indicators, such as Total Variation Distance (TVD) and Degree of Functional Corruption (DFC), exist. Although they were introduced ad hoc for individual circuit obfuscation techniques, they are incompatible. We assert that the security of quantum software deserves the same attention as the performance: an explicit set of Security Figures of Merit (S-FoMs). The research of this paper is threefold: (i) characterizes a three-layer measurement gap, (ii) proposes a structured S-FoM set organized by ISO/IEC 25010 security sub-characteristics, QaaS pipeline mapping, and measurement maturity, and (iii) defines a benchmarking rubric that normalizes and aggregates S-FoMs into a combined Quantum Software Security Posture (QSSP) score. Additionally, an illustrative reanalysis of published obfuscation techniques has been presented. Our aim is a first step toward security-aware benchmarking of the Quantum Software Stack (QSS).",
-  "abstract_ja": "量子ソフトウェアは、マルチテナント型およびクラウドベースのQuantum-as-a-Service（QaaS）スタックを通じて提供されることが増えています。パイプライン全体にわたる多様な攻撃ベクトルに対する懸念が、近年の研究で明らかになっています。しかし、コミュニティは、性能評価指標として、スケール（量子ビット数）、品質（量子ボリューム）、速度（1秒あたりの回路層操作数（CLOPS））という3つの成熟した柱に収束しています。さらに、ソフトウェア品質指標の定義も始まっています。しかし、量子ソフトウェアのセキュリティは、依然としてほとんど測定されていません。全変動距離（TVD）や機能的破損度（DFC）などの定量的なセキュリティ指標はいくつか存在しますが、これらは個々の回路難読化技術のためにアドホックに導入されたものであり、互換性がありません。私たちは、量子ソフトウェアのセキュリティは、性能と同様に注目に値すると主張します。つまり、明確なセキュリティ評価指標（S-FoM）のセットが必要です。本論文の研究は、(i) 3層構造の測定ギャップを特徴づけ、(ii) ISO/IEC 25010セキュリティサブ特性、QaaSパイプラインマッピング、および測定成熟度に基づいて構成された構造化S-FoMセットを提案し、(iii) S-FoMを正規化および集約して量子ソフトウェアセキュリティ態勢（QSSP）スコアを算出するベンチマーク評価基準を定義する、という3つの柱から成ります。さらに、公開されている難読化技術の例示的な再分析も提示しています。私たちの目標は、量子ソフトウェアスタック（QSS）のセキュリティを考慮したベンチマークに向けた第一歩を踏み出すことです。",
-  "abstract_translated": "量子ソフトウェアは、マルチテナント型およびクラウドベースのQuantum-as-a-Service（QaaS）スタックを通じて提供されることが増えています。パイプライン全体にわたる多様な攻撃ベクトルに対する懸念が、近年の研究で明らかになっています。しかし、コミュニティは、性能評価指標として、スケール（量子ビット数）、品質（量子ボリューム）、速度（1秒あたりの回路層操作数（CLOPS））という3つの成熟した柱に収束しています。さらに、ソフトウェア品質指標の定義も始まっています。しかし、量子ソフトウェアのセキュリティは、依然としてほとんど測定されていません。全変動距離（TVD）や機能的破損度（DFC）などの定量的なセキュリティ指標はいくつか存在しますが、これらは個々の回路難読化技術のためにアドホックに導入されたものであり、互換性がありません。私たちは、量子ソフトウェアのセキュリティは、性能と同様に注目に値すると主張します。つまり、明確なセキュリティ評価指標（S-FoM）のセットが必要です。本論文の研究は、(i) 3層構造の測定ギャップを特徴づけ、(ii) ISO/IEC 25010セキュリティサブ特性、QaaSパイプラインマッピング、および測定成熟度に基づいて構成された構造化S-FoMセットを提案し、(iii) S-FoMを正規化および集約して量子ソフトウェアセキュリティ態勢（QSSP）スコアを算出するベンチマーク評価基準を定義する、という3つの柱から成ります。さらに、公開されている難読化技術の例示的な再分析も提示しています。私たちの目標は、量子ソフトウェアスタック（QSS）のセキュリティを考慮したベンチマークに向けた第一歩を踏み出すことです。",
-  "last_delivered_at": "2026-08-07T03:56:58Z"
- },
- {
   "delivery_id": "main:2608.05836",
   "id": "2608.05836",
   "posted_at": "2026-08-07T03:57:00Z",
@@ -190595,5 +190450,154 @@
   "abstract_ja": "ゼロ温度では、引力のある接触相互作用を持つ希薄なフェルミ気体がギャップされたフェルミオン励起を持つ超流動体を形成します。弱結合時のギャップは、相互作用強度および漸近的なゴルコフ-メリク-バルフダロフギャップのトランスシリーズ展開として組織化できることを示しています。低エネルギーの仮想準粒子は、ギャップ内で線形な補正を生成し、先行係数は他の既知の係数より約25$×倍の大きいです。これにより中間密度でのギャップが大幅に増加し、系統的な補正が定量的予測に不可欠であることが浮き彫りになります。",
   "abstract_translated": "ゼロ温度では、引力のある接触相互作用を持つ希薄なフェルミ気体がギャップされたフェルミオン励起を持つ超流動体を形成します。弱結合時のギャップは、相互作用強度および漸近的なゴルコフ-メリク-バルフダロフギャップのトランスシリーズ展開として組織化できることを示しています。低エネルギーの仮想準粒子は、ギャップ内で線形な補正を生成し、先行係数は他の既知の係数より約25$×倍の大きいです。これにより中間密度でのギャップが大幅に増加し、系統的な補正が定量的予測に不可欠であることが浮き彫りになります。",
   "last_delivered_at": "2026-10-15T06:02:06Z"
+ },
+ {
+  "delivery_id": "main:2610.19451",
+  "id": "2610.19451",
+  "posted_at": "2026-10-15T09:00:13Z",
+  "title": "High-Girth QLDPC Codes from Circulant and Affine Permutation Matrices",
+  "title_ja": "巡回行列およびアフィン置換行列から得られる高周長QLDPC符号",
+  "title_translated": "巡回行列およびアフィン置換行列から得られる高周長QLDPC符号",
+  "translation_language": "ja",
+  "authors": "Vahid Nourozi, Roxana Smarandache, David G. M. Mitchell†",
+  "link": "https://arxiv.org/abs/2610.19451v1",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT",
+   "math.QA"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "target_genre_ids": [
+   "qec"
+  ],
+  "target_genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We study two explicit constructions of binary Calderbank--Shor--Steane quantum low-density parity-check (QLDPC) codes with check weight six. The first uses a fixed circulant shift pattern and yields parameters $\\code{6N}{2N+2}{6}$ with Tanner graph girth twelve for $N=31$ and every $N\\ge37$. A graph incidence interpretation gives the ranks and girths, and a uniform weight six logical operator establishes the exact distance. The second construction uses fixed matrix polynomials with circulant and affine permutation coefficients. Here, a polynomial commutation identity guarantees orthogonality for every cyclic lift. Four realizations give $[[192,16,8]]$, $[[288,16,12]]$, $[[384,16,14]]$, and $[[576,32,20]]$, with Tanner girth eight and computationally certified distances. We give reproducible construction data, distinguish classical cycle distance from quantum distance, and identify the limitations of both families.",
+  "abstract_ja": "本稿では、チェック重みが 6 のバイナリ Calderbank--Shor--Steane 量子低密度パリティチェック (QLDPC) コードの 2 つの明示的な構成法を研究する。1 つ目の構成法は、固定された巡回シフトパターンを使用し、$N=31$ およびすべての $N\\ge37$ に対して Tanner グラフ周長が 12 のパラメータ $\\code{6N}{2N+2}{6}$ を生成する。グラフ接続解釈によりランクと周長が得られ、均一重み 6 の論理演算子により正確な距離が確立される。2 つ目の構成法は、巡回置換係数とアフィン置換係数を持つ固定行列多項式を使用する。ここでは、多項式の交換関係式により、すべての巡回リフトに対して直交性が保証される。 4つの実現例から、$[[192,16,8]]$、$[[288,16,12]]$、$[[384,16,14]]$、および$[[576,32,20]]$が得られ、タナー周長は8で、距離は計算によって検証済みです。再現可能な構成データを示し、古典的なサイクル距離と量子距離を区別し、両方のファミリーの限界を明らかにします。",
+  "abstract_translated": "本稿では、チェック重みが 6 のバイナリ Calderbank--Shor--Steane 量子低密度パリティチェック (QLDPC) コードの 2 つの明示的な構成法を研究する。1 つ目の構成法は、固定された巡回シフトパターンを使用し、$N=31$ およびすべての $N\\ge37$ に対して Tanner グラフ周長が 12 のパラメータ $\\code{6N}{2N+2}{6}$ を生成する。グラフ接続解釈によりランクと周長が得られ、均一重み 6 の論理演算子により正確な距離が確立される。2 つ目の構成法は、巡回置換係数とアフィン置換係数を持つ固定行列多項式を使用する。ここでは、多項式の交換関係式により、すべての巡回リフトに対して直交性が保証される。 4つの実現例から、$[[192,16,8]]$、$[[288,16,12]]$、$[[384,16,14]]$、および$[[576,32,20]]$が得られ、タナー周長は8で、距離は計算によって検証済みです。再現可能な構成データを示し、古典的なサイクル距離と量子距離を区別し、両方のファミリーの限界を明らかにします。",
+  "last_delivered_at": "2026-10-15T09:00:13Z"
+ },
+ {
+  "delivery_id": "main:2610.19039",
+  "id": "2610.19039",
+  "posted_at": "2026-10-15T09:00:17Z",
+  "title": "Combining Post-Quantum Cryptography and Quantum Key Distribution: Taxonomy, Constructions, Proofs, Standards, Deployments and Open Problems",
+  "title_ja": "ポスト量子暗号と量子鍵配送の組み合わせ：分類、構成、証明、標準、展開、および未解決問題",
+  "title_translated": "ポスト量子暗号と量子鍵配送の組み合わせ：分類、構成、証明、標準、展開、および未解決問題",
+  "translation_language": "ja",
+  "authors": "Mona Alotaibi, Noora Fetais, Saif Al-Kuwari",
+  "link": "https://arxiv.org/abs/2610.19039v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "crypto",
+   "network"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ",
+   "量子ネットワーク・通信"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "crypto",
+   "network"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ",
+   "量子ネットワーク・通信"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Post-quantum cryptography (PQC) and quantum key distribution (QKD) address the quantum threat from opposite directions: PQC replaces vulnerable public-key algorithms with schemes believed to resist quantum cryptanalysis, while QKD derives keys whose secrecy rests on physical assumptions rather than computational ones. Because each approach has a distinct failure mode, a growing body of work combines them so that a session key remains secure if either component holds. We first establish the deployed baseline, hybrid classical-plus-PQC key exchange, against which QKD-augmented designs must be judged. We then propose a taxonomy of hybrid PQC-QKD designs along eight dimensions (integration layer, combiner construction, authentication scope and source, QKD topology, trusted entities, key-delivery interface, classical component, and evidence type), and use it to compare published protocols, including Muckle and its successors, MACsec and TLS integrations, and IKEv2 mechanisms standardised in RFCs 8784, 9370, and 9867. We examine key-combiner constructions in light of the KEM-combiner literature and of NIST, ETSI, and ITU-T guidance, and map the security arguments for hybrid PQC-QKD protocols onto a common grid of security model, assumptions, permitted compromise, established guarantee, and limitations. We synthesise deployment evidence from metropolitan and national QKD networks, distinguishing the few testbeds that have run PQC in the key path from pure-QKD deployments, and summarise the standards and policy landscape, including the positions of national security agencies that recommend against relying on QKD alone. We close with open problems: authentication of the QKD classical channel, shared-infrastructure threat models, device certification versus formal proofs, formal verification of hybrid handshakes, and the lack of peer-reviewed deployment economics.",
+  "abstract_ja": "ポスト量子暗号（PQC）と量子鍵配送（QKD）は、量子脅威に対して正反対のアプローチで対処します。PQCは脆弱な公開鍵アルゴリズムを量子暗号解読に耐えられると考えられる方式に置き換える一方、QKDは計算上の仮定ではなく物理的な仮定に基づいて秘密性を確保する鍵を生成します。それぞれの方式には異なる障害モードがあるため、セッション鍵がどちらか一方の要素が機能すれば安全になるように、両者を組み合わせた研究が増えています。まず、QKDで拡張された設計を評価する基準となる、従来型の鍵交換方式とPQCを組み合わせたハイブリッド方式を確立します。次に、8 つの次元 (統合レイヤー、コンバイナ構造、認証範囲とソース、QKD トポロジ、信頼できるエンティティ、鍵配信インターフェース、古典的コンポーネント、および証拠タイプ) に沿ったハイブリッド PQC-QKD 設計の分類法を提案し、それを使用して、Muckle とその後継、MACsec および TLS 統合、RFC 8784、9370、および 9867 で標準化された IKEv2 メカニズムなど、公開されているプロトコルを比較します。KEM コンバイナに関する文献、および NIST、ETSI、ITU-T のガイダンスに照らして鍵コンバイナ構造を検討し、ハイブリッド PQC-QKD プロトコルのセキュリティに関する議論を、セキュリティ モデル、仮定、許容される侵害、確立された保証、および制限の共通グリッドにマッピングします。本稿では、都市圏および国家レベルのQKDネットワークにおける導入事例を統合し、鍵経路でPQCを実行した少数のテストベッドと純粋なQKD導入事例を区別するとともに、QKDのみに依存することに反対する国家安全保障機関の立場を含め、標準規格と政策の現状を概説する。最後に、QKD古典チャネルの認証、共有インフラストラクチャの脅威モデル、デバイス認証と形式的証明、ハイブリッドハンドシェイクの形式的検証、査読済みの導入経済性に関するデータの欠如といった未解決の問題を取り上げる。",
+  "abstract_translated": "ポスト量子暗号（PQC）と量子鍵配送（QKD）は、量子脅威に対して正反対のアプローチで対処します。PQCは脆弱な公開鍵アルゴリズムを量子暗号解読に耐えられると考えられる方式に置き換える一方、QKDは計算上の仮定ではなく物理的な仮定に基づいて秘密性を確保する鍵を生成します。それぞれの方式には異なる障害モードがあるため、セッション鍵がどちらか一方の要素が機能すれば安全になるように、両者を組み合わせた研究が増えています。まず、QKDで拡張された設計を評価する基準となる、従来型の鍵交換方式とPQCを組み合わせたハイブリッド方式を確立します。次に、8 つの次元 (統合レイヤー、コンバイナ構造、認証範囲とソース、QKD トポロジ、信頼できるエンティティ、鍵配信インターフェース、古典的コンポーネント、および証拠タイプ) に沿ったハイブリッド PQC-QKD 設計の分類法を提案し、それを使用して、Muckle とその後継、MACsec および TLS 統合、RFC 8784、9370、および 9867 で標準化された IKEv2 メカニズムなど、公開されているプロトコルを比較します。KEM コンバイナに関する文献、および NIST、ETSI、ITU-T のガイダンスに照らして鍵コンバイナ構造を検討し、ハイブリッド PQC-QKD プロトコルのセキュリティに関する議論を、セキュリティ モデル、仮定、許容される侵害、確立された保証、および制限の共通グリッドにマッピングします。本稿では、都市圏および国家レベルのQKDネットワークにおける導入事例を統合し、鍵経路でPQCを実行した少数のテストベッドと純粋なQKD導入事例を区別するとともに、QKDのみに依存することに反対する国家安全保障機関の立場を含め、標準規格と政策の現状を概説する。最後に、QKD古典チャネルの認証、共有インフラストラクチャの脅威モデル、デバイス認証と形式的証明、ハイブリッドハンドシェイクの形式的検証、査読済みの導入経済性に関するデータの欠如といった未解決の問題を取り上げる。",
+  "last_delivered_at": "2026-10-15T09:00:20Z"
+ },
+ {
+  "delivery_id": "main:2610.19491",
+  "id": "2610.19491",
+  "posted_at": "2026-10-15T09:00:23Z",
+  "title": "Quantum-Resilient Secure Protocol for Decentralized Edge-IoT Peer-to-Peer Energy Trading Systems",
+  "title_ja": "分散型エッジIoTピアツーピアエネルギー取引システム向け量子耐性セキュアプロトコル",
+  "title_translated": "分散型エッジIoTピアツーピアエネルギー取引システム向け量子耐性セキュアプロトコル",
+  "translation_language": "ja",
+  "authors": "Ali Shahidinejad, Jamshid Aghaei, Mahdi Jalili",
+  "link": "https://arxiv.org/abs/2610.19491v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "The rise of quantum computing presents substantial challenges to the security of Peer-to-Peer (P2P) energy trading systems. This paper introduces an innovative mutual authenticated session key agreement protocol aimed at protecting edge-IoT P2P energy trading communications in the quantum era. Each peer is an IoT-enabled smart metering device that is registered by an edge registration authority and acts as both producer and consumer. The proposed protocol incorporates CRYSTALS-Kyber's quantum-resistant cryptographic suite to guarantee the authenticity and confidentiality of negotiated session keys in the presence of quantum threats. Furthermore, it leverages the Hedera Hashgraph public blockchain, which is recognized for its quantum-resilient design, to ensure transparency and support efficient revocation mechanisms. Extensive comparative analyses have been conducted to demonstrate the protocol's superiority over existing alternatives, including both traditional schemes based on classical cryptography and emerging early-stage post-quantum approaches, in terms of performance and security features. By combining robust security and high efficiency, the proposed protocol fosters the development of resilient decentralized energy markets, paving the way for secure and sustainable energy distribution in the future.",
+  "abstract_ja": "量子コンピューティングの台頭は、ピアツーピア（P2P）エネルギー取引システムのセキュリティに大きな課題をもたらしています。本稿では、量子時代におけるエッジIoT P2Pエネルギー取引通信を保護することを目的とした、革新的な相互認証セッションキー合意プロトコルを紹介します。各ピアは、エッジ登録機関に登録され、生産者と消費者の両方の役割を果たすIoT対応スマートメータリングデバイスです。提案するプロトコルは、量子脅威が存在する状況下でも、交渉されたセッションキーの真正性と機密性を保証するために、CRYSTALS-Kyberの量子耐性暗号スイートを採用しています。さらに、透明性を確保し、効率的な失効メカニズムをサポートするために、量子耐性設計で知られるHedera Hashgraphパブリックブロックチェーンを活用しています。性能とセキュリティ機能の両面において、従来の古典暗号方式に基づく方式や、初期段階のポスト量子アプローチなど、既存の代替案に対する本プロトコルの優位性を実証するために、広範な比較分析を実施しました。提案されたプロトコルは、堅牢なセキュリティと高い効率性を組み合わせることで、回復力のある分散型エネルギー市場の発展を促進し、将来の安全で持続可能なエネルギー流通への道を開く。",
+  "abstract_translated": "量子コンピューティングの台頭は、ピアツーピア（P2P）エネルギー取引システムのセキュリティに大きな課題をもたらしています。本稿では、量子時代におけるエッジIoT P2Pエネルギー取引通信を保護することを目的とした、革新的な相互認証セッションキー合意プロトコルを紹介します。各ピアは、エッジ登録機関に登録され、生産者と消費者の両方の役割を果たすIoT対応スマートメータリングデバイスです。提案するプロトコルは、量子脅威が存在する状況下でも、交渉されたセッションキーの真正性と機密性を保証するために、CRYSTALS-Kyberの量子耐性暗号スイートを採用しています。さらに、透明性を確保し、効率的な失効メカニズムをサポートするために、量子耐性設計で知られるHedera Hashgraphパブリックブロックチェーンを活用しています。性能とセキュリティ機能の両面において、従来の古典暗号方式に基づく方式や、初期段階のポスト量子アプローチなど、既存の代替案に対する本プロトコルの優位性を実証するために、広範な比較分析を実施しました。提案されたプロトコルは、堅牢なセキュリティと高い効率性を組み合わせることで、回復力のある分散型エネルギー市場の発展を促進し、将来の安全で持続可能なエネルギー流通への道を開く。",
+  "last_delivered_at": "2026-10-15T09:00:23Z"
+ },
+ {
+  "delivery_id": "main:2610.20521",
+  "id": "2610.20521",
+  "posted_at": "2026-10-15T09:00:25Z",
+  "title": "Tulva: Practical Asynchronous Threshold FHE",
+  "title_ja": "Tulva: 実用的な非同期しきい値FHE",
+  "title_translated": "Tulva: 実用的な非同期しきい値FHE",
+  "translation_language": "ja",
+  "authors": "Valerio Cini, Antonio Guimarães, Russell W. F. Lai, Michał Osadnik, Ivy K. Y. Woo",
+  "link": "https://arxiv.org/abs/2610.20521v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We present Tulva, a practical threshold FHE scheme which equips a base FHE scheme with an asynchronous threshold decryption mechanism in a modular way. Our scheme simultaneously (1) is compatible with virtually any base FHE scheme and leaves its ciphertexts unchanged apart from an appended random tag, (2) supports a wide range of threshold profiles $(t,K)$ and ring degrees $\\geq 256$ with 6-25 bits partial decryption per plaintext bit, and (3) achieves security in the presence of partial decryption queries on challenge ciphertexts based on the standard LWE assumption. We provide an open-source implementation, benchmark its threshold decryption performance and evaluate the end-to-end costs for typical privacy-preserving Ethereum Virtual Machine (EVM) use cases. For 16-out-of-512 threshold and a publicly preprocessed ciphertext, computing secret-dependent partial decryption and public share combination requires only 3.7 ms and 0.5 ms, respectively, on commodity hardware. Compared with the state-of-the-art synchronous scheme [Zyskind et al., CCS'25], we replace their ciphertext-independent yet interactive preparation of secret-correlated randomness with a public, ciphertext-dependent 0.5 s preprocessing step, eliminate interaction in the online phase while maintaining similar decryption time on the same machine, and support 32$\\times$ more total users.",
+  "abstract_ja": "本稿では、実用的な閾値FHEスキームであるTulvaを紹介します。Tulvaは、基本FHEスキームに非同期閾値復号メカニズムをモジュール式に組み込んだものです。本スキームは、(1)ほぼすべての基本FHEスキームと互換性があり、付加されたランダムタグを除いて暗号文は変更されません。(2)幅広い閾値プロファイル$(t,K)$とリング次数$\\geq 256$をサポートし、平文1ビットあたり6～25ビットの部分復号が可能です。(3)標準的なLWE仮定に基づき、チャレンジ暗号文に対する部分復号クエリが存在する場合でもセキュリティが確保されます。本稿では、オープンソースの実装を提供し、閾値復号性能のベンチマークを行い、一般的なプライバシー保護型Ethereum仮想マシン（EVM）ユースケースにおけるエンドツーエンドのコストを評価します。 16/512の閾値と公開前処理済みの暗号文の場合、市販のハードウェアでは、秘密依存の部分復号と公開共有の組み合わせの計算にそれぞれ3.7ミリ秒と0.5ミリ秒しかかかりません。最先端の同期方式[Zyskind et al., CCS'25]と比較すると、暗号文に依存しない対話型の秘密相関乱数生成の準備は、公開された暗号文依存の0.5秒の前処理ステップに置き換えられ、オンラインフェーズでの対話が排除され、同じマシン上で同様の復号時間を維持し、合計で32倍のユーザーをサポートできます。",
+  "abstract_translated": "本稿では、実用的な閾値FHEスキームであるTulvaを紹介します。Tulvaは、基本FHEスキームに非同期閾値復号メカニズムをモジュール式に組み込んだものです。本スキームは、(1)ほぼすべての基本FHEスキームと互換性があり、付加されたランダムタグを除いて暗号文は変更されません。(2)幅広い閾値プロファイル$(t,K)$とリング次数$\\geq 256$をサポートし、平文1ビットあたり6～25ビットの部分復号が可能です。(3)標準的なLWE仮定に基づき、チャレンジ暗号文に対する部分復号クエリが存在する場合でもセキュリティが確保されます。本稿では、オープンソースの実装を提供し、閾値復号性能のベンチマークを行い、一般的なプライバシー保護型Ethereum仮想マシン（EVM）ユースケースにおけるエンドツーエンドのコストを評価します。 16/512の閾値と公開前処理済みの暗号文の場合、市販のハードウェアでは、秘密依存の部分復号と公開共有の組み合わせの計算にそれぞれ3.7ミリ秒と0.5ミリ秒しかかかりません。最先端の同期方式[Zyskind et al., CCS'25]と比較すると、暗号文に依存しない対話型の秘密相関乱数生成の準備は、公開された暗号文依存の0.5秒の前処理ステップに置き換えられ、オンラインフェーズでの対話が排除され、同じマシン上で同様の復号時間を維持し、合計で32倍のユーザーをサポートできます。",
+  "last_delivered_at": "2026-10-15T09:00:25Z"
  }
 ]

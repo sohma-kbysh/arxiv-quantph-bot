@@ -9025,26 +9025,43 @@
    "classifier": "gemini-2.5-flash-lite",
    "skip_votes": [],
    "reviewed_at": "2026-10-14T12:48:48Z"
-  }
- },
- "external_pending": {
-  "cs.IT:2610.19451": {
-   "id": "2610.19451",
-   "title": "High-Girth QLDPC Codes from Circulant and Affine Permutation Matrices",
-   "link": "https://arxiv.org/abs/2610.19451v1",
-   "authors": "Vahid Nourozi, Roxana Smarandache, David G. M. Mitchell\u2020",
-   "announce_type": "external",
-   "categories": [
-    "cs.IT",
-    "math.QA"
+  },
+  "cs.CR:2610.19491": {
+   "genre_ids": [
+    "pqc"
    ],
-   "primary": "cs.IT",
-   "abstract": "We study two explicit constructions of binary Calderbank--Shor--Steane quantum low-density parity-check (QLDPC) codes with check weight six. The first uses a fixed circulant shift pattern and yields parameters $\\code{6N}{2N+2}{6}$ with Tanner graph girth twelve for $N=31$ and every $N\\ge37$. A graph incidence interpretation gives the ranks and girths, and a uniform weight six logical operator establishes the exact distance. The second construction uses fixed matrix polynomials with circulant and affine permutation coefficients. Here, a polynomial commutation identity guarantees orthogonality for every cyclic lift. Four realizations give $[[192,16,8]]$, $[[288,16,12]]$, $[[384,16,14]]$, and $[[576,32,20]]$, with Tanner girth eight and computationally certified distances. We give reproducible construction data, distinguish classical cycle distance from quantum distance, and identify the limitations of both families.",
-   "published": "2026-10-14T02:37:41Z",
-   "updated": "2026-10-14T02:37:41Z",
-   "source_feed": "cs.IT"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-15T08:59:53Z"
+  },
+  "cs.CR:2610.19039": {
+   "genre_ids": [
+    "pqc",
+    "crypto",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-15T08:59:53Z"
+  },
+  "cs.CR:2610.20521": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-15T08:59:53Z"
+  },
+  "cs.IT:2610.19451": {
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-15T08:59:58Z"
   }
  },
+ "external_pending": {},
  "schema_version": 2,
  "completed_ids": [
   "1506.05785",
@@ -16598,10 +16615,162 @@
   "2610.20537",
   "2610.20591"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2610.19491": {
+   "paper": {
+    "id": "2610.19491",
+    "title": "Quantum-Resilient Secure Protocol for Decentralized Edge-IoT Peer-to-Peer Energy Trading Systems",
+    "link": "https://arxiv.org/abs/2610.19491v1",
+    "authors": "Ali Shahidinejad, Jamshid Aghaei, Mahdi Jalili",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "The rise of quantum computing presents substantial challenges to the security of Peer-to-Peer (P2P) energy trading systems. This paper introduces an innovative mutual authenticated session key agreement protocol aimed at protecting edge-IoT P2P energy trading communications in the quantum era. Each peer is an IoT-enabled smart metering device that is registered by an edge registration authority and acts as both producer and consumer. The proposed protocol incorporates CRYSTALS-Kyber's quantum-resistant cryptographic suite to guarantee the authenticity and confidentiality of negotiated session keys in the presence of quantum threats. Furthermore, it leverages the Hedera Hashgraph public blockchain, which is recognized for its quantum-resilient design, to ensure transparency and support efficient revocation mechanisms. Extensive comparative analyses have been conducted to demonstrate the protocol's superiority over existing alternatives, including both traditional schemes based on classical cryptography and emerging early-stage post-quantum approaches, in terms of performance and security features. By combining robust security and high efficiency, the proposed protocol fosters the development of resilient decentralized energy markets, paving the way for secure and sustainable energy distribution in the future.",
+    "published": "2026-10-14T03:12:40Z",
+    "updated": "2026-10-14T03:12:40Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-15T08:59:58Z"
+  },
+  "2610.19039": {
+   "paper": {
+    "id": "2610.19039",
+    "title": "Combining Post-Quantum Cryptography and Quantum Key Distribution: Taxonomy, Constructions, Proofs, Standards, Deployments and Open Problems",
+    "link": "https://arxiv.org/abs/2610.19039v1",
+    "authors": "Mona Alotaibi, Noora Fetais, Saif Al-Kuwari",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Post-quantum cryptography (PQC) and quantum key distribution (QKD) address the quantum threat from opposite directions: PQC replaces vulnerable public-key algorithms with schemes believed to resist quantum cryptanalysis, while QKD derives keys whose secrecy rests on physical assumptions rather than computational ones. Because each approach has a distinct failure mode, a growing body of work combines them so that a session key remains secure if either component holds. We first establish the deployed baseline, hybrid classical-plus-PQC key exchange, against which QKD-augmented designs must be judged. We then propose a taxonomy of hybrid PQC-QKD designs along eight dimensions (integration layer, combiner construction, authentication scope and source, QKD topology, trusted entities, key-delivery interface, classical component, and evidence type), and use it to compare published protocols, including Muckle and its successors, MACsec and TLS integrations, and IKEv2 mechanisms standardised in RFCs 8784, 9370, and 9867. We examine key-combiner constructions in light of the KEM-combiner literature and of NIST, ETSI, and ITU-T guidance, and map the security arguments for hybrid PQC-QKD protocols onto a common grid of security model, assumptions, permitted compromise, established guarantee, and limitations. We synthesise deployment evidence from metropolitan and national QKD networks, distinguishing the few testbeds that have run PQC in the key path from pure-QKD deployments, and summarise the standards and policy landscape, including the positions of national security agencies that recommend against relying on QKD alone. We close with open problems: authentication of the QKD classical channel, shared-infrastructure threat models, device certification versus formal proofs, formal verification of hybrid handshakes, and the lack of peer-reviewed deployment economics.",
+    "published": "2026-10-13T18:28:12Z",
+    "updated": "2026-10-13T18:28:12Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "crypto",
+     "network"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "crypto",
+    "network"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "crypto": {
+     "status": "pending"
+    },
+    "network": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-15T08:59:58Z"
+  },
+  "2610.20521": {
+   "paper": {
+    "id": "2610.20521",
+    "title": "Tulva: Practical Asynchronous Threshold FHE",
+    "link": "https://arxiv.org/abs/2610.20521v1",
+    "authors": "Valerio Cini, Antonio Guimar\u00e3es, Russell W. F. Lai, Micha\u0142 Osadnik, Ivy K. Y. Woo",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "We present Tulva, a practical threshold FHE scheme which equips a base FHE scheme with an asynchronous threshold decryption mechanism in a modular way. Our scheme simultaneously (1) is compatible with virtually any base FHE scheme and leaves its ciphertexts unchanged apart from an appended random tag, (2) supports a wide range of threshold profiles $(t,K)$ and ring degrees $\\geq 256$ with 6-25 bits partial decryption per plaintext bit, and (3) achieves security in the presence of partial decryption queries on challenge ciphertexts based on the standard LWE assumption. We provide an open-source implementation, benchmark its threshold decryption performance and evaluate the end-to-end costs for typical privacy-preserving Ethereum Virtual Machine (EVM) use cases. For 16-out-of-512 threshold and a publicly preprocessed ciphertext, computing secret-dependent partial decryption and public share combination requires only 3.7 ms and 0.5 ms, respectively, on commodity hardware. Compared with the state-of-the-art synchronous scheme [Zyskind et al., CCS'25], we replace their ciphertext-independent yet interactive preparation of secret-correlated randomness with a public, ciphertext-dependent 0.5 s preprocessing step, eliminate interaction in the online phase while maintaining similar decryption time on the same machine, and support 32$\\times$ more total users.",
+    "published": "2026-10-14T17:22:01Z",
+    "updated": "2026-10-14T17:22:01Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-15T08:59:58Z"
+  },
+  "2610.19451": {
+   "paper": {
+    "id": "2610.19451",
+    "title": "High-Girth QLDPC Codes from Circulant and Affine Permutation Matrices",
+    "link": "https://arxiv.org/abs/2610.19451v1",
+    "authors": "Vahid Nourozi, Roxana Smarandache, David G. M. Mitchell\u2020",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT",
+     "math.QA"
+    ],
+    "primary": "cs.IT",
+    "abstract": "We study two explicit constructions of binary Calderbank--Shor--Steane quantum low-density parity-check (QLDPC) codes with check weight six. The first uses a fixed circulant shift pattern and yields parameters $\\code{6N}{2N+2}{6}$ with Tanner graph girth twelve for $N=31$ and every $N\\ge37$. A graph incidence interpretation gives the ranks and girths, and a uniform weight six logical operator establishes the exact distance. The second construction uses fixed matrix polynomials with circulant and affine permutation coefficients. Here, a polynomial commutation identity guarantees orthogonality for every cyclic lift. Four realizations give $[[192,16,8]]$, $[[288,16,12]]$, $[[384,16,14]]$, and $[[576,32,20]]$, with Tanner girth eight and computationally certified distances. We give reproducible construction data, distinguish classical cycle distance from quantum distance, and identify the limitations of both families.",
+    "published": "2026-10-14T02:37:41Z",
+    "updated": "2026-10-14T02:37:41Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-15T08:59:58Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-10-14T12:46:10Z",
-  "cs.CC": "2026-10-15T05:48:33Z",
-  "cs.IT": "2026-10-15T05:48:38Z"
+  "cs.CR": "2026-10-15T08:59:18Z",
+  "cs.CC": "2026-10-15T08:59:27Z",
+  "cs.IT": "2026-10-15T08:59:32Z"
  }
 }

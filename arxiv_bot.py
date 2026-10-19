@@ -409,6 +409,53 @@ def parse_external_atom(raw: bytes, source_category: str) -> list[dict]:
     return papers
 
 
+_RETRYABLE_ARXIV_API_STATUSES = frozenset({429, 500, 502, 503, 504})
+
+
+def _retry_after_seconds(headers) -> float | None:
+    """Return a numeric Retry-After value, ignoring HTTP-date forms."""
+    try:
+        value = float((headers or {}).get("Retry-After", ""))
+    except (TypeError, ValueError):
+        return None
+    return value if value >= 0 else None
+
+
+def http_get_arxiv_api(url: str, rule: dict) -> bytes:
+    """GET an arXiv API page, retrying timeouts and rate limits.
+
+    export.arxiv.org intermittently times out or answers 429 "Rate exceeded."
+    during busy hours.  A short backoff almost always succeeds, whereas
+    failing immediately turns a transient blip into a red workflow run.
+    """
+    timeout = int(rule.get("timeout_sec", 60))
+    retries = max(0, int(rule.get("retry_attempts", 3)))
+    backoff_base = float(rule.get("retry_backoff_sec", 10))
+    backoff_max = float(rule.get("retry_backoff_max_sec", 120))
+    for attempt in range(retries + 1):
+        try:
+            return http_get(url, timeout=timeout)
+        except urllib.error.HTTPError as exc:
+            if (exc.code not in _RETRYABLE_ARXIV_API_STATUSES
+                    or attempt >= retries):
+                raise
+            retry_after = _retry_after_seconds(exc.headers)
+            reason = f"HTTP {exc.code}"
+        except (TimeoutError, urllib.error.URLError) as exc:
+            if attempt >= retries:
+                raise
+            retry_after = None
+            reason = type(exc).__name__
+        backoff = backoff_base * (2 ** attempt)
+        if retry_after is not None:
+            backoff = max(backoff, retry_after)
+        backoff = min(backoff_max, backoff)
+        print(f"[warn] arXiv API {reason}; retry in {backoff:g}s "
+              f"({attempt + 1}/{retries})", file=sys.stderr)
+        time.sleep(backoff)
+    raise AssertionError("unreachable")
+
+
 def fetch_external_arxiv(category: str, rule: dict) -> list[dict]:
     """Fetch short API queries, paging until the lookback boundary."""
     terms = [str(t) for t in rule.get("terms", []) if str(t).strip()]
@@ -430,7 +477,8 @@ def fetch_external_arxiv(category: str, rule: dict) -> list[dict]:
                 time.sleep(min_interval)
             url = build_external_arxiv_query(
                 category, chunk, page_size, start=start)
-            rows = parse_external_atom(http_get(url), category)
+            rows = parse_external_atom(
+                http_get_arxiv_api(url, rule), category)
             request_count += 1
             signature = tuple(paper["id"] for paper in rows)
             # Defensive guard for an upstream endpoint that ignores ``start``.

@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import os
 import unittest
 from unittest.mock import patch
+import urllib.error
 import urllib.parse
 
 import arxiv_bot
@@ -110,6 +111,55 @@ class ExternalArxivTests(unittest.TestCase):
             [paper["id"] for paper in papers],
             ["2607.12345", "2607.00001"],
         )
+
+    def test_external_fetch_retries_timeout_and_rate_limit(self) -> None:
+        rate_limited = urllib.error.HTTPError(
+            "https://export.arxiv.org/api/query", 429, "Unknown Error",
+            {"Retry-After": "30"}, None)
+        rule = {
+            "terms": ["quantum"],
+            "query_min_interval_sec": 0,
+            "retry_backoff_sec": 5,
+        }
+        with (
+            patch.object(
+                arxiv_bot, "http_get",
+                side_effect=[TimeoutError("read timed out"), rate_limited,
+                             ATOM_FIXTURE]) as get,
+            patch.object(arxiv_bot.time, "sleep") as sleep,
+        ):
+            papers = arxiv_bot.fetch_external_arxiv("cs.CR", rule)
+        self.assertEqual(get.call_count, 3)
+        self.assertEqual(get.call_args.kwargs["timeout"], 60)
+        # Exponential backoff, raised to the server's Retry-After.
+        self.assertEqual([c.args[0] for c in sleep.call_args_list], [5, 30])
+        self.assertEqual([paper["id"] for paper in papers], ["2607.12345"])
+
+    def test_external_fetch_gives_up_after_retry_budget(self) -> None:
+        rule = {"terms": ["quantum"], "retry_attempts": 2}
+        with (
+            patch.object(
+                arxiv_bot, "http_get",
+                side_effect=TimeoutError("read timed out")) as get,
+            patch.object(arxiv_bot.time, "sleep"),
+            self.assertRaises(TimeoutError),
+        ):
+            arxiv_bot.fetch_external_arxiv("cs.CR", rule)
+        self.assertEqual(get.call_count, 3)
+
+    def test_external_fetch_does_not_retry_client_errors(self) -> None:
+        bad_request = urllib.error.HTTPError(
+            "https://export.arxiv.org/api/query", 400, "Bad Request",
+            {}, None)
+        with (
+            patch.object(
+                arxiv_bot, "http_get", side_effect=bad_request) as get,
+            patch.object(arxiv_bot.time, "sleep") as sleep,
+            self.assertRaises(urllib.error.HTTPError),
+        ):
+            arxiv_bot.fetch_external_arxiv("cs.CR", {"terms": ["quantum"]})
+        self.assertEqual(get.call_count, 1)
+        sleep.assert_not_called()
 
     def test_local_term_match_uses_token_boundaries(self) -> None:
         paper = {

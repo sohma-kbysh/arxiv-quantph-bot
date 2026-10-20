@@ -9398,26 +9398,18 @@
    "classifier": "gemini-2.5-flash-lite",
    "skip_votes": [],
    "reviewed_at": "2026-10-20T06:07:56Z"
-  }
- },
- "external_pending": {
+  },
   "cs.CR:2610.25916": {
-   "id": "2610.25916",
-   "title": "Secure Agentic Coding through Counterexample-Grounded Feedback",
-   "link": "https://arxiv.org/abs/2610.25916v1",
-   "authors": "Tue Le, Anh Nguyen Hoang, Gabriel Sasseville, Doseok Jang, Pierre-Luc Bacon, Nghi D. Q. Bui",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR",
-    "cs.AI"
+   "genre_ids": [],
+   "classifier": "skip-consensus:gemini-2.5-flash+gemini-2.5-flash-lite",
+   "skip_votes": [
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite"
    ],
-   "primary": "cs.CR",
-   "abstract": "As coding models and agent harnesses become more capable, reliable security verification is becoming a central bottleneck. Improving secure code generation requires a signal whose reported progress remains aligned with actual program behavior under optimization; otherwise, an optimizer can improve the signal's verdict without removing the underlying vulnerability. Existing model-based approaches require models to either infer program behavior from source code or specify correct outcomes for adversarial tests, placing substantial reasoning demands on the security signal. We introduce \\falcon{}, a counterexample-grounded verification framework that separates attack exploration from behavioral verification and connects them through execution traces of the program under test. In test-time repair, \\falcon{} yields substantially stronger held-out functional-security gains than alternative security signals across secure code generation benchmarks, while preserving or improving functionality. As an RL reward, \\falcon{} also outperforms static-analysis and learned rewards on held-out functional-security, even when all policies successfully optimize their respective training rewards. Combining \\falcon{} with either proxy reward further improves held-out performance, suggesting that execution-grounded feedback can mitigate reward overoptimization while preserving useful guidance from existing security signals.",
-   "published": "2026-10-19T07:18:34Z",
-   "updated": "2026-10-19T07:18:34Z",
-   "source_feed": "cs.CR"
+   "reviewed_at": "2026-10-20T09:16:58Z"
   }
  },
+ "external_pending": {},
  "schema_version": 2,
  "completed_ids": [
   "0506038",
@@ -17270,8 +17262,8 @@
  ],
  "deliveries": {},
  "external_cursors": {
-  "cs.CR": "2026-10-20T05:54:15Z",
-  "cs.CC": "2026-10-20T05:54:24Z",
-  "cs.IT": "2026-10-20T05:54:28Z"
+  "cs.CR": "2026-10-20T09:16:33Z",
+  "cs.CC": "2026-10-20T09:16:41Z",
+  "cs.IT": "2026-10-20T09:16:45Z"
  }
 }

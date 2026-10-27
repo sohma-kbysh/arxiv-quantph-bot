@@ -3,20 +3,20 @@
  "source_status": {
   "api_ever_available": false,
   "status": "waiting_for_source",
-  "last_probe_at": "2026-10-26T20:01:44Z",
-  "last_error": "2026-08-12: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-08-18: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-08-21: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-08-26: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-09-16: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-09-22: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-10-09: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-10-19: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-10-27: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+  "last_probe_at": "2026-10-27T19:30:41Z",
+  "last_error": "2026-08-27: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-08-31: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-09-04: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-09-09: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-09-28: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-09-29: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-10-12: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-10-20: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404; 2026-10-28: official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
   "last_endpoint": "https://scirate.com/arxiv/quant-ph.json?<redacted>",
   "source_ever_available": false,
   "pending_errors": {
-   "2026-10-27": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
-   "2026-09-16": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
-   "2026-10-09": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
-   "2026-08-18": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
-   "2026-08-21": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
-   "2026-09-22": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
-   "2026-10-19": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
-   "2026-08-12": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
-   "2026-08-26": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404"
+   "2026-10-28": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-08-27": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-09-28": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-10-12": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-08-31": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-09-04": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-10-20": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-09-09": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404",
+   "2026-09-29": "official SciRate JSON failed: SciRate JSON API HTTP 403; configured relay failed: SciRate JSON API HTTP 404"
   }
  },
  "pending_discovery": {
@@ -102,8 +102,8 @@
    "2026-08-27": {
     "target_date": "2026-08-27",
     "queued_at": "2026-08-26T15:57:21Z",
-    "last_attempt_at": "2026-10-18T17:27:19Z",
-    "attempts": 12
+    "last_attempt_at": "2026-10-27T19:30:39Z",
+    "attempts": 13
    },
    "2026-08-28": {
     "target_date": "2026-08-28",
@@ -114,8 +114,8 @@
    "2026-08-31": {
     "target_date": "2026-08-31",
     "queued_at": "2026-08-30T18:06:58Z",
-    "last_attempt_at": "2026-10-19T20:01:17Z",
-    "attempts": 11
+    "last_attempt_at": "2026-10-27T19:30:40Z",
+    "attempts": 12
    },
    "2026-09-01": {
     "target_date": "2026-09-01",
@@ -138,8 +138,8 @@
    "2026-09-04": {
     "target_date": "2026-09-04",
     "queued_at": "2026-09-03T17:55:33Z",
-    "last_attempt_at": "2026-10-19T20:01:17Z",
-    "attempts": 9
+    "last_attempt_at": "2026-10-27T19:30:40Z",
+    "attempts": 10
    },
    "2026-09-07": {
     "target_date": "2026-09-07",
@@ -156,8 +156,8 @@
    "2026-09-09": {
     "target_date": "2026-09-09",
     "queued_at": "2026-09-08T17:57:44Z",
-    "last_attempt_at": "2026-10-19T20:01:19Z",
-    "attempts": 8
+    "last_attempt_at": "2026-10-27T19:30:40Z",
+    "attempts": 9
    },
    "2026-09-10": {
     "target_date": "2026-09-10",
@@ -234,14 +234,14 @@
    "2026-09-28": {
     "target_date": "2026-09-28",
     "queued_at": "2026-09-27T18:33:31Z",
-    "last_attempt_at": "2026-10-18T17:27:19Z",
-    "attempts": 4
+    "last_attempt_at": "2026-10-27T19:30:39Z",
+    "attempts": 5
    },
    "2026-09-29": {
     "target_date": "2026-09-29",
     "queued_at": "2026-09-28T20:38:25Z",
-    "last_attempt_at": "2026-10-19T20:01:19Z",
-    "attempts": 4
+    "last_attempt_at": "2026-10-27T19:30:41Z",
+    "attempts": 5
    },
    "2026-09-30": {
     "target_date": "2026-09-30",
@@ -294,8 +294,8 @@
    "2026-10-12": {
     "target_date": "2026-10-12",
     "queued_at": "2026-10-11T19:04:17Z",
-    "last_attempt_at": "2026-10-18T17:27:19Z",
-    "attempts": 2
+    "last_attempt_at": "2026-10-27T19:30:40Z",
+    "attempts": 3
    },
    "2026-10-13": {
     "target_date": "2026-10-13",
@@ -330,8 +330,8 @@
    "2026-10-20": {
     "target_date": "2026-10-20",
     "queued_at": "2026-10-19T20:01:17Z",
-    "last_attempt_at": "2026-10-19T20:01:17Z",
-    "attempts": 1
+    "last_attempt_at": "2026-10-27T19:30:40Z",
+    "attempts": 2
    },
    "2026-10-21": {
     "target_date": "2026-10-21",
@@ -361,6 +361,12 @@
     "target_date": "2026-10-27",
     "queued_at": "2026-10-26T20:01:42Z",
     "last_attempt_at": "2026-10-26T20:01:42Z",
+    "attempts": 1
+   },
+   "2026-10-28": {
+    "target_date": "2026-10-28",
+    "queued_at": "2026-10-27T19:30:39Z",
+    "last_attempt_at": "2026-10-27T19:30:39Z",
     "attempts": 1
    }
   },

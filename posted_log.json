@@ -1,114 +1,5 @@
 [
  {
-  "delivery_id": "main:2608.17217",
-  "id": "2608.17217",
-  "posted_at": "2026-08-19T04:54:11Z",
-  "title": "Dynamical protection of quantum steering and fidelity dynamics in double Jaynes-Cummings model",
-  "title_ja": "二重ジェインズ・カミングスモデルにおける量子ステアリングと忠実度ダイナミクスの動的保護",
-  "title_translated": "二重ジェインズ・カミングスモデルにおける量子ステアリングと忠実度ダイナミクスの動的保護",
-  "translation_language": "ja",
-  "authors": "Koushik Mandal, Chitra Rangan, Shohini Ghose",
-  "link": "https://arxiv.org/abs/2608.17217",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We investigate the dynamics of Einstein-Podolsky-Rosen (EPR) steering in a double Jaynes-Cummings model, where two initially entangled spatially separated two-level atoms in two cavities interact with independent cavity modes. We study how the intrinsic noise in an initial Werner-type state affects the steering dynamics in this type of quantum optical systems. We also analyze the evolution of steering under experimentally relevant conditions, including atom-cavity detuning and dipole-dipole interactions. We find that both detuning and dipole-dipole coupling help reduce steering sudden death in the system. We further identify a direct correlation between steering and state fidelity, revealing a threshold below which steering disappears. This suggests that fidelity can serve as a practical indicator of steerability in cavity QED systems. Our results provide insight into the controllability and robustness of nonclassical correlations in realistic light-matter platforms.",
-  "abstract_ja": "2つのキャビティ内の空間的に離れた2つの初期に絡み合った空間的に分離された2つの準位原子が独立したキャビティモードと相互作用する二重ジェインズ・カミングスモデルにおけるアインシュタイン・ポドルスキー・ローゼン(EPR)ステアリングのダイナミクスを調査します。初期ヴェルナー型状態における固有ノイズがこの種の量子光学システムにおけるステアリングダイナミクスにどのように影響するかを研究します。また、原子-キャビティのデチューニングや双極子-双極子相互作用を含む実験的に関連した条件下でのステアリングの進化も分析します。デチューニングと双極子-双極子結合の両方がシステム内のステアリング突然死の低減に寄与することを発見しました。さらに、ステアと状態忠実度の直接的な相関関係を特定し、ステアリングが消える閾値を明らかにしました。これは、ファデレーションがキャビティQEDシステムにおける操舵可能性の実用的な指標となり得ることを示唆しています。我々の結果は、現実的な光物質プラットフォームにおける非古典的相関の制御可能性と堅牢性に関する洞察を提供します。",
-  "abstract_translated": "2つのキャビティ内の空間的に離れた2つの初期に絡み合った空間的に分離された2つの準位原子が独立したキャビティモードと相互作用する二重ジェインズ・カミングスモデルにおけるアインシュタイン・ポドルスキー・ローゼン(EPR)ステアリングのダイナミクスを調査します。初期ヴェルナー型状態における固有ノイズがこの種の量子光学システムにおけるステアリングダイナミクスにどのように影響するかを研究します。また、原子-キャビティのデチューニングや双極子-双極子相互作用を含む実験的に関連した条件下でのステアリングの進化も分析します。デチューニングと双極子-双極子結合の両方がシステム内のステアリング突然死の低減に寄与することを発見しました。さらに、ステアと状態忠実度の直接的な相関関係を特定し、ステアリングが消える閾値を明らかにしました。これは、ファデレーションがキャビティQEDシステムにおける操舵可能性の実用的な指標となり得ることを示唆しています。我々の結果は、現実的な光物質プラットフォームにおける非古典的相関の制御可能性と堅牢性に関する洞察を提供します。",
-  "last_delivered_at": "2026-08-19T04:54:13Z"
- },
- {
-  "delivery_id": "main:2608.17239",
-  "id": "2608.17239",
-  "posted_at": "2026-08-19T04:54:15Z",
-  "title": "Gaussian Optimality of Energy-Constrained One-Shot Communication through Single-Mode Bosonic Gaussian Channels",
-  "title_ja": "単一モードボソンガウスチャネルを通じたエネルギー制約付きワンショット通信のガウス最適性",
-  "title_translated": "単一モードボソンガウスチャネルを通じたエネルギー制約付きワンショット通信のガウス最適性",
-  "translation_language": "ja",
-  "authors": "Se-Wan Ji",
-  "link": "https://arxiv.org/abs/2608.17239",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We prove Gaussian optimality for the energy-constrained one-shot Holevo capacity of single-mode bosonic Gaussian channels, including phase-sensitive channels with arbitrarily squeezed thermal noise. The unresolved regime is the low energy branch, where the Gaussian optimizer modulates only one quadrature and minimum-output-entropy arguments cannot decouple the average state from the letters. For pure one-mode dilations we retain a stronger pointwise result: moment-matched Gaussianization improves the fixed average Holevo function for every input. For mixed environments, whose purification produces a 1:2 entanglement-of-formation problem, we avoid any generic 1:2 Gaussian extremality conjecture. The optimal Gaussian letter selects an effective environmental Schmidt mode and an affine two-mode EPR witness. Its null direction is exactly the modulated quadrature, while its slope equals the negative derivative of the Gaussian letter-output entropy. This produces a supporting lower bound on the dilated entanglement of formation; Gaussian maximum entropy and concavity then give a global upper bound tangent at the Gaussian optimizer. Consequently the known Gaussian formulas for attenuating, amplifying, phase-conjugating, and additive-noise fiducial channels are exact over unrestricted ensembles at every input energy. Via the passive-input fiducial decomposition and energy-constrained continuity, the result extends to every single-mode Gaussian channel, including lower-rank canonical limits. No additivity across channel uses is assumed.",
-  "abstract_ja": "単一モードボスンチャネルのエネルギー制約付きワンショットHolevo容量、すなわち任意に圧縮された熱ノイズを持つ位相感応チャネルに対してガウス最適性を証明します。未解決領域は低エネルギー分岐であり、ガウス最適化器は1つの直交のみを変調し、最小出力エントロピーの引数では平均状態を文字から切り離すことはできません。純粋なワンモード拡張では、より強い点ごとの結果を保持します。モーメントマッチングガウス化は、すべての入力に対して固定平均ホレボ関数を改善します。混合環境では、その精製が1:2の形成もつれ問題を生じさせるため、一般的な1:2ガウス極限性予想は避けます。最適なガウス文字は、効果的な環境シュミットモードとアフィン2モードEPRの証人を選択します。そのヌル方向は変調直交であり、傾きはガウス文字出力エントロピーの負微分に等しい。これにより、形成の拡張エンタングルメントの支持下限が生まれる。ガウス最大エントロピーと凹性はガウス最適化器でグローバルな上界接線を与える。したがって、減衰、増幅、位相共役、加法ノイズフィデュシャルチャネルの既知のガウス公式は、すべての入力エネルギーで制限のないアンサンブル上で正確である。受動入力フィデューシャル分解とエネルギー制約連続性を通じて、結果は低ランクの正準極限を含むすべての単一モードガウスチャネルに拡張される。チャネル使用をまたぐ加法性は仮定されていない。",
-  "abstract_translated": "単一モードボスンチャネルのエネルギー制約付きワンショットHolevo容量、すなわち任意に圧縮された熱ノイズを持つ位相感応チャネルに対してガウス最適性を証明します。未解決領域は低エネルギー分岐であり、ガウス最適化器は1つの直交のみを変調し、最小出力エントロピーの引数では平均状態を文字から切り離すことはできません。純粋なワンモード拡張では、より強い点ごとの結果を保持します。モーメントマッチングガウス化は、すべての入力に対して固定平均ホレボ関数を改善します。混合環境では、その精製が1:2の形成もつれ問題を生じさせるため、一般的な1:2ガウス極限性予想は避けます。最適なガウス文字は、効果的な環境シュミットモードとアフィン2モードEPRの証人を選択します。そのヌル方向は変調直交であり、傾きはガウス文字出力エントロピーの負微分に等しい。これにより、形成の拡張エンタングルメントの支持下限が生まれる。ガウス最大エントロピーと凹性はガウス最適化器でグローバルな上界接線を与える。したがって、減衰、増幅、位相共役、加法ノイズフィデュシャルチャネルの既知のガウス公式は、すべての入力エネルギーで制限のないアンサンブル上で正確である。受動入力フィデューシャル分解とエネルギー制約連続性を通じて、結果は低ランクの正準極限を含むすべての単一モードガウスチャネルに拡張される。チャネル使用をまたぐ加法性は仮定されていない。",
-  "last_delivered_at": "2026-08-19T04:54:15Z"
- },
- {
-  "delivery_id": "main:2608.17274",
-  "id": "2608.17274",
-  "posted_at": "2026-08-19T04:54:16Z",
-  "title": "Weak Typicality of von Neumann Entanglement Entropy in Gaussian Boson Sampling",
-  "title_ja": "ガウスボソンサンプリングにおけるフォン・ノイマンエンタングルメントエントロピーの弱い典型性",
-  "title_translated": "ガウスボソンサンプリングにおけるフォン・ノイマンエンタングルメントエントロピーの弱い典型性",
-  "translation_language": "ja",
-  "authors": "Hongru Zhao",
-  "link": "https://arxiv.org/abs/2608.17274",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We study the von Neumann entanglement entropy generated by a Haar distributed passive interferometer acting on $n$ equally squeezed input modes with fixed nonzero squeezing strength $s$. Previous work established proportional weak typicality for integer R'enyi orders $\\alpha\\geq 2$ and stated a sublinear von Neumann result, while the proportional von Neumann case remained open. For a subsystem of $k_n$ modes satisfying $k_n/n\\to r\\in(0,1)$, we prove that, for every $\\varepsilon>0$ and all sufficiently large $n$, $\\mathbb{P}\\left(\\left|\\frac{S_{1,n}}{\\mathbb{E}S_{1,n}}-1\\right|\\geq\\varepsilon\\right)\\leq2\\exp\\left[-\\frac{c_{s,r}\\varepsilon^2n^2}{\\log^2(en)}\\right].$ The proof represents the entropy as a singular value statistic of a principal block of $UU^{\\mathsf T}$, where $U$ denotes the unitary interferometer. It regularizes the logarithmic singularity at the endpoint corresponding to a pure Gaussian mode and applies concentration on the unitary group. The result establishes proportional von Neumann weak typicality and further implies almost sure convergence of $S_{1,n}/\\mathbb{E}S_{1,n}$ to $1$, a typical volume law, and the variance bound $\\mathrm{Var}(S_{1,n})=O_s(\\log^2 n)$. An accompanying Lean 4 development verifies the proof chain.",
-  "abstract_ja": "我々は、固定された非ゼロ圧縮強度$s$のハール分布受動干渉計が$n$の等圧縮入力モードに作用することで生成されるフォン・ノイマンエンタングルメントエントロピーを研究します。以前の研究では整数R'enyi次数$\\α\\geq 2$に対して比例的弱い典型性が確立され、部分線形フォン・ノイマン結果が示されましたが、比例フォン・ノイマンの場合は未解決のままでした。$k_n$のモードの部分システムに対して、$k_n/n\\toのr\\in(0,)を満たす 1)$ に対して、すべての$\\varepsilon>0$および十分に大きいすべての$n$に対して、$\\mathbb{P}\\left(\\left|\\frac{S_{1,n}}{\\mathbb{E}S_{1,n}}-1\\right|\\geq\\varepsilon\\right)\\leq2\\exp\\left[-\\frac{c_{s,r}\\vaepsilon^2n^2}{\\log^2(en)}\\right]。この証明はエントロピーを$UU^{\\mathsf T}$の主ブロックの特異値統計量として表現し、$U$はユニタリ干渉計を表します。これは純粋なガウスモードに対応する端点で対数特異点を正則化し、ユニタリ群に集中を適用します。この結果は比例フォン・ノイマンの弱典型性を確立し、さらに$S_{1,n}/\\mathbb{E}S_{1,n}$へのほぼ確実な収束を示唆し、典型的な体積法則である$1$と分散界定$\\mathrm{Var}(S_{1,n})=O_s(\\log^2 n)$となります。付随するリーン4の展開は証明連鎖を検証します。",
-  "abstract_translated": "我々は、固定された非ゼロ圧縮強度$s$のハール分布受動干渉計が$n$の等圧縮入力モードに作用することで生成されるフォン・ノイマンエンタングルメントエントロピーを研究します。以前の研究では整数R'enyi次数$\\α\\geq 2$に対して比例的弱い典型性が確立され、部分線形フォン・ノイマン結果が示されましたが、比例フォン・ノイマンの場合は未解決のままでした。$k_n$のモードの部分システムに対して、$k_n/n\\toのr\\in(0,)を満たす 1)$ に対して、すべての$\\varepsilon>0$および十分に大きいすべての$n$に対して、$\\mathbb{P}\\left(\\left|\\frac{S_{1,n}}{\\mathbb{E}S_{1,n}}-1\\right|\\geq\\varepsilon\\right)\\leq2\\exp\\left[-\\frac{c_{s,r}\\vaepsilon^2n^2}{\\log^2(en)}\\right]。この証明はエントロピーを$UU^{\\mathsf T}$の主ブロックの特異値統計量として表現し、$U$はユニタリ干渉計を表します。これは純粋なガウスモードに対応する端点で対数特異点を正則化し、ユニタリ群に集中を適用します。この結果は比例フォン・ノイマンの弱典型性を確立し、さらに$S_{1,n}/\\mathbb{E}S_{1,n}$へのほぼ確実な収束を示唆し、典型的な体積法則である$1$と分散界定$\\mathrm{Var}(S_{1,n})=O_s(\\log^2 n)$となります。付随するリーン4の展開は証明連鎖を検証します。",
-  "last_delivered_at": "2026-08-19T04:54:16Z"
- },
- {
   "delivery_id": "main:2608.17313",
   "id": "2608.17313",
   "posted_at": "2026-08-19T04:54:18Z",
@@ -190532,5 +190423,130 @@
   "abstract_ja": "分散型サイバーフィジカルシステム（CPS）やエッジAIネットワークは、暗号学的に関連する量子コンピュータ（QC）に対して脆弱な公開鍵認証や鍵確立メカニズムへの依存度を高めている。 ショアのアルゴリズムは、広く導入されている非対称暗号プリミティブを脅かしており、一方、グローバーのアルゴリズムは、対称暗号およびハッシュベースのメカニズムの実効的なセキュリティマージンを低下させる。 ポスト量子暗号（PQC）は移行経路を提供するものの、その公開鍵、暗号文、および署名のサイズが大きくなることで、計算、メモリ、通信、ストレージ、およびパケット断片化のコストが増大し、動的なマルチエージェントシステムに制約をもたらす可能性がある。 本記事では、暗号エポック間の認証済み遷移を通じて一時的な鍵の露出を制限するアーキテクチャ上の目標である「ローテーション・シークレシー」を紹介する。また、権限付与された物理AIエージェント間で、ポリシーによってトリガーされる鍵の確立、ローテーション、および調整を連携させる参照メカニズム「Private Authentication for Rotational Secrecy（PARS）」を提示する。 セキュリティ状態に関する分散合意を必要とする展開環境向けに、我々はさらに「PARS対応エッジセキュリティ台帳（PARS-ESL）」を開発した。これは、承認されたバリデーターまたは対応可能なエッジゲートウェイによって維持される、オプションの許可型アーキテクチャである。PARS-ESLは、大量の運用トランザクションを保存しない。 その代わりに、キーエポック、グループメンバーシップ、失効、アルゴリズムスイートポリシー、チャレンジ検証、およびリカバリチェックポイントに関する認証済み状態を記録する。その結果、リソースに制約のあるエージェントも軽量クライアントとして参加可能となり、低遅延の運用トラフィックは、現在アクティブな対称エポックキーによって保護され、レジャーのコンセンサスパスの外側に留まる。 我々の結果によると、明示された信頼性、侵害、接続性、およびリソースに関する仮定の下では、特定のエッジAIおよびCPSセキュリティ制御ワークロードにおいて、台帳を活用したポスト量子鍵エポック管理が実現可能であることが示されています。",
   "abstract_translated": "分散型サイバーフィジカルシステム（CPS）やエッジAIネットワークは、暗号学的に関連する量子コンピュータ（QC）に対して脆弱な公開鍵認証や鍵確立メカニズムへの依存度を高めている。 ショアのアルゴリズムは、広く導入されている非対称暗号プリミティブを脅かしており、一方、グローバーのアルゴリズムは、対称暗号およびハッシュベースのメカニズムの実効的なセキュリティマージンを低下させる。 ポスト量子暗号（PQC）は移行経路を提供するものの、その公開鍵、暗号文、および署名のサイズが大きくなることで、計算、メモリ、通信、ストレージ、およびパケット断片化のコストが増大し、動的なマルチエージェントシステムに制約をもたらす可能性がある。 本記事では、暗号エポック間の認証済み遷移を通じて一時的な鍵の露出を制限するアーキテクチャ上の目標である「ローテーション・シークレシー」を紹介する。また、権限付与された物理AIエージェント間で、ポリシーによってトリガーされる鍵の確立、ローテーション、および調整を連携させる参照メカニズム「Private Authentication for Rotational Secrecy（PARS）」を提示する。 セキュリティ状態に関する分散合意を必要とする展開環境向けに、我々はさらに「PARS対応エッジセキュリティ台帳（PARS-ESL）」を開発した。これは、承認されたバリデーターまたは対応可能なエッジゲートウェイによって維持される、オプションの許可型アーキテクチャである。PARS-ESLは、大量の運用トランザクションを保存しない。 その代わりに、キーエポック、グループメンバーシップ、失効、アルゴリズムスイートポリシー、チャレンジ検証、およびリカバリチェックポイントに関する認証済み状態を記録する。その結果、リソースに制約のあるエージェントも軽量クライアントとして参加可能となり、低遅延の運用トラフィックは、現在アクティブな対称エポックキーによって保護され、レジャーのコンセンサスパスの外側に留まる。 我々の結果によると、明示された信頼性、侵害、接続性、およびリソースに関する仮定の下では、特定のエッジAIおよびCPSセキュリティ制御ワークロードにおいて、台帳を活用したポスト量子鍵エポック管理が実現可能であることが示されています。",
   "last_delivered_at": "2026-10-27T06:29:03Z"
+ },
+ {
+  "delivery_id": "main:2610.36808",
+  "id": "2610.36808",
+  "posted_at": "2026-10-28T06:48:29Z",
+  "title": "HqcLethe: Streaming HQC Encapsulation for Tiny Stateless Servers",
+  "title_ja": "HqcLethe: 小型のステートレスサーバー向け HQC カプセル化のストリーミング",
+  "title_translated": "HqcLethe: 小型のステートレスサーバー向け HQC カプセル化のストリーミング",
+  "translation_language": "ja",
+  "authors": "Wind Wong, Klaus v. Gleissenthall",
+  "link": "https://arxiv.org/abs/2610.36808v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "qec"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "誤り訂正・符号理論"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "qec"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Stateless post-quantum authenticated key exchanges such as post-quantum WireGuard hedge against unexpected cryptanalytic advances by combining a lattice KEM with code-based Classic McEliece. However, recent attacks have led Germany's BSI to advise against McEliece, which leaves these protocols with lattices alone. HQC, the code-based KEM that NIST selected, could restore diversity, but its keys do not fit in a single packet, so a server would have to buffer multi-packet handshakes. This would leave an attack surface for memory exhaustion, which is what WireGuard's stateless handshake was designed to avoid in the first place. McTiny demonstrated that stateless key encapsulation for Classic McEliece is possible by streaming key blocks one-at-a-time. However, HQC's encapsulation does not split as easily into individual packets, as cyclic polynomial multiplication, unlike matrix-vector multiplication, is inherently non-local. We present HqcLethe, a stateless key exchange that streams an HQC encapsulation in packet-sized pieces. It uses the Chinese remainder theorem to split the polynomial multiplication into independent remainders, one per packet, and masks them so that they reveal no more than an ordinary HQC ciphertext, which we prove in Rocq with SSProve; we also verify session secrecy, server authentication and forward secrecy in ProVerif. Client puzzles bound CPU exhaustion, and HqcLethe removes memory exhaustion: on a Raspberry Pi 3B+, each worker runs in a fixed 1.2-1.6 MiB. At category 5 it sends 27x fewer bytes and uses 9.0x less server CPU than McTiny, the earlier stateless code-based design.",
+  "abstract_ja": "ポスト量子WireGuardのようなステートレスなポスト量子認証付き鍵交換（KEM）は、格子KEMとコードベースの古典的McElieceを組み合わせることで、予期せぬ暗号解析技術の進歩に対するリスクをヘッジしています。しかし、最近の攻撃を受けて、ドイツのBSIはMcElieceの使用を控えるよう勧告しており、その結果、これらのプロトコルは格子KEMのみに依存することになります。 NISTが選定したコードベースのKEMであるHQCは、この多様性を回復できる可能性があるが、その鍵は1つのパケットに収まらないため、サーバーは複数パケットにわたるハンドシェイクをバッファに保持しなければならない。これにより、メモリ枯渇攻撃に対する攻撃対象領域が残ることになるが、これはそもそもWireGuardのステートレス・ハンドシェイクが回避するために設計されたものである。 McTinyは、キーブロックを1つずつストリーミングすることで、Classic McElieceにおけるステートレスなキーカプセル化が可能であることを実証しました。しかし、HQCのカプセル化は個々のパケットに容易に分割できません。これは、行列・ベクトル乗算とは異なり、巡回多項式乗算が本質的に非局所的であるためです。 そこで我々は、HQCカプセル化をパケットサイズの断片としてストリーミングするステートレス鍵交換方式「HqcLethe」を提案する。 これは、中国剰余定理を用いて多項式乗算をパケットごとに独立した剰余に分割し、通常のHQC暗号文以上の情報を漏らさないようマスクする。このことは、SSProveを用いたRocqで証明されており、ProVerifを用いてセッションの秘密性、サーバー認証、およびフォワードシークレシーも検証している。 クライアント側のパズルは CPU リソースの枯渇を制限するが、HqcLethe はメモリ枯渇の問題も解消する。Raspberry Pi 3B+ 上で、各ワーカーは 1.2～1.6 MiB の固定メモリ範囲内で動作する。 カテゴリ5において、以前のステートレスなコードベースの設計であるMcTinyと比較して、送信バイト数は27分の1、サーバーCPU使用量は9.0分の1に抑えられています。",
+  "abstract_translated": "ポスト量子WireGuardのようなステートレスなポスト量子認証付き鍵交換（KEM）は、格子KEMとコードベースの古典的McElieceを組み合わせることで、予期せぬ暗号解析技術の進歩に対するリスクをヘッジしています。しかし、最近の攻撃を受けて、ドイツのBSIはMcElieceの使用を控えるよう勧告しており、その結果、これらのプロトコルは格子KEMのみに依存することになります。 NISTが選定したコードベースのKEMであるHQCは、この多様性を回復できる可能性があるが、その鍵は1つのパケットに収まらないため、サーバーは複数パケットにわたるハンドシェイクをバッファに保持しなければならない。これにより、メモリ枯渇攻撃に対する攻撃対象領域が残ることになるが、これはそもそもWireGuardのステートレス・ハンドシェイクが回避するために設計されたものである。 McTinyは、キーブロックを1つずつストリーミングすることで、Classic McElieceにおけるステートレスなキーカプセル化が可能であることを実証しました。しかし、HQCのカプセル化は個々のパケットに容易に分割できません。これは、行列・ベクトル乗算とは異なり、巡回多項式乗算が本質的に非局所的であるためです。 そこで我々は、HQCカプセル化をパケットサイズの断片としてストリーミングするステートレス鍵交換方式「HqcLethe」を提案する。 これは、中国剰余定理を用いて多項式乗算をパケットごとに独立した剰余に分割し、通常のHQC暗号文以上の情報を漏らさないようマスクする。このことは、SSProveを用いたRocqで証明されており、ProVerifを用いてセッションの秘密性、サーバー認証、およびフォワードシークレシーも検証している。 クライアント側のパズルは CPU リソースの枯渇を制限するが、HqcLethe はメモリ枯渇の問題も解消する。Raspberry Pi 3B+ 上で、各ワーカーは 1.2～1.6 MiB の固定メモリ範囲内で動作する。 カテゴリ5において、以前のステートレスなコードベースの設計であるMcTinyと比較して、送信バイト数は27分の1、サーバーCPU使用量は9.0分の1に抑えられています。",
+  "last_delivered_at": "2026-10-28T06:48:32Z"
+ },
+ {
+  "delivery_id": "main:2610.36731",
+  "id": "2610.36731",
+  "posted_at": "2026-10-28T06:48:34Z",
+  "title": "Beyond LWE: Post-Quantum Assumptions under a Counterfactual Break of the Dihedral Coset Problem",
+  "title_ja": "LWEを超えて：二面体剰余類問題の反事実的破綻下におけるポスト量子仮定",
+  "title_translated": "LWEを超えて：二面体剰余類問題の反事実的破綻下におけるポスト量子仮定",
+  "translation_language": "ja",
+  "authors": "Ramses Fernandez",
+  "link": "https://arxiv.org/abs/2610.36731v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "complexity",
+   "algo"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子複雑性理論",
+   "量子アルゴリズム"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "complexity",
+   "algo"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "量子複雑性理論",
+   "量子アルゴリズム"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "A refuted 2026 claim of an efficient quantum algorithm for the Dihedral Coset Problem (DCP) motivates this survey of the consequences of a genuine breakthrough. We distinguish a noiseless cyclic coset-state solver, a solver with a prescribed failure exponent, and an extrapolated-state solver. Regev's rare-corruption observation already makes the first hypothesis sufficient for lattice algorithms at some polynomial approximation factors; the witnessing algorithm determines the quantitative bounds. We compose unstructured reductions with explicit sample, state-preparation and success conditions, and compare their sufficient guarantees with more than thirty lattice and non-lattice assumptions. We restate the structured state conversion of Wen and Zheng and audit its forward parameter certificate; the printed bound supplies no certificate at the ML-KEM ring and modulus. We use an explicit affine embedding for heuristic gap estimates, explain the lossiness connection from decision NTRU to search Ring-LWE, and distinguish ordinary from module uniqueness. Chen's withdrawn 2024 quantum algorithm for LWE and a proposed repair of its post-processing would, if correct, reach only a many-sample, small-noise LWE regime that the failure-exponent hypothesis already covers for exponents below $1/2$, and no deployed parameter set. Tables separate rigorous consequences, heuristic comparisons and unverified applications, and distinguish solving a proof assumption from attacking a scheme. Classical structural attacks on Classic McEliece, which do not involve DCP but put the concrete security of the scheme under revision, are summarised here and analysed in detail in a companion paper. The survey closes with open questions and a scenario-planning checklist that requires a complete efficient reduction.",
+  "abstract_ja": "2026年に提唱され、その後反証された「二面体剰余類問題（DCP）」に対する効率的な量子アルゴリズムに関する主張を契機として、本調査では、真のブレークスルーがもたらす影響について考察する。ここでは、ノイズのない循環的剰余類状態ソルバー、所定の失敗指数を持つソルバー、および外挿状態ソルバーを区別する。 Regevによる「稀な破損」の観察により、すでに最初の仮説は、ある多項式近似係数において格子アルゴリズムにとって十分条件となっている。証言アルゴリズムは、その定量的境界を決定する。我々は、明示的なサンプリング、状態準備、および成功条件を備えた非構造化還元を構成し、それらの十分な保証を30以上の格子および非格子の仮定と比較する。 我々は、WenとZhengによる構造化された状態変換を再定式化し、その順方向パラメータ証明書を検証する。公表された境界値は、ML-KEMの環およびモジュラスにおいて証明書を提供しない。ヒューリスティックなギャップ推定には明示的なアフィン埋め込みを用い、決定型NTRUから探索型Ring-LWEへの「ロス性」の関連性を説明し、通常の唯一性とモジュール唯一性を区別する。 Chenが撤回した2024年のLWE向け量子アルゴリズムと、その後処理に対する修正案は、仮に正しければ、失敗指数仮説がすでに指数$1/2$未満でカバーしている多サンプル・低ノイズのLWE領域にしか到達せず、実用化されたパラメータセットには適用されない。 表では、厳密な帰結、ヒューリスティックな比較、未検証の応用を区分し、証明の仮定の解決とスキームへの攻撃とを区別している。 DCPを伴わないが、スキームの具体的な安全性を見直すことになるClassic McElieceに対する古典的な構造的攻撃については、ここで要約し、関連論文で詳細に分析している。本調査は、未解決の問題と、完全かつ効率的な還元を必要とするシナリオ計画チェックリストをもって締めくくられる。",
+  "abstract_translated": "2026年に提唱され、その後反証された「二面体剰余類問題（DCP）」に対する効率的な量子アルゴリズムに関する主張を契機として、本調査では、真のブレークスルーがもたらす影響について考察する。ここでは、ノイズのない循環的剰余類状態ソルバー、所定の失敗指数を持つソルバー、および外挿状態ソルバーを区別する。 Regevによる「稀な破損」の観察により、すでに最初の仮説は、ある多項式近似係数において格子アルゴリズムにとって十分条件となっている。証言アルゴリズムは、その定量的境界を決定する。我々は、明示的なサンプリング、状態準備、および成功条件を備えた非構造化還元を構成し、それらの十分な保証を30以上の格子および非格子の仮定と比較する。 我々は、WenとZhengによる構造化された状態変換を再定式化し、その順方向パラメータ証明書を検証する。公表された境界値は、ML-KEMの環およびモジュラスにおいて証明書を提供しない。ヒューリスティックなギャップ推定には明示的なアフィン埋め込みを用い、決定型NTRUから探索型Ring-LWEへの「ロス性」の関連性を説明し、通常の唯一性とモジュール唯一性を区別する。 Chenが撤回した2024年のLWE向け量子アルゴリズムと、その後処理に対する修正案は、仮に正しければ、失敗指数仮説がすでに指数$1/2$未満でカバーしている多サンプル・低ノイズのLWE領域にしか到達せず、実用化されたパラメータセットには適用されない。 表では、厳密な帰結、ヒューリスティックな比較、未検証の応用を区分し、証明の仮定の解決とスキームへの攻撃とを区別している。 DCPを伴わないが、スキームの具体的な安全性を見直すことになるClassic McElieceに対する古典的な構造的攻撃については、ここで要約し、関連論文で詳細に分析している。本調査は、未解決の問題と、完全かつ効率的な還元を必要とするシナリオ計画チェックリストをもって締めくくられる。",
+  "last_delivered_at": "2026-10-28T06:48:37Z"
+ },
+ {
+  "delivery_id": "main:2610.36145",
+  "id": "2610.36145",
+  "posted_at": "2026-10-28T06:48:39Z",
+  "title": "They Will See Johnny's Message: A Measurement Study of Post-Quantum Cryptography Across Email Delivery Paths",
+  "title_ja": "「彼らはジョニーのメッセージを見るだろう」：電子メール配信経路におけるポスト量子暗号の測定研究",
+  "title_translated": "「彼らはジョニーのメッセージを見るだろう」：電子メール配信経路におけるポスト量子暗号の測定研究",
+  "translation_language": "ja",
+  "authors": "Jaehwan Park, Sunghyun Park, Kevin Nam, Doowon Kim",
+  "link": "https://arxiv.org/abs/2610.36145v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "network",
+   "crypto"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ネットワーク・通信",
+   "暗号・セキュリティ"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "network",
+   "crypto"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "量子ネットワーク・通信",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "Harvest-now, decrypt-later (HNDL) attacks make the transition to post-quantum cryptography (PQC) urgent for email. This paper presents a systematic measurement that jointly examines PQC deployment across email service stages, negotiation by communicating peers, and usable message encryption. Endpoint-level support alone does not establish PQC readiness across email workflows because submission, relay, and access use independently negotiated Transport Layer Security (TLS) connections. We therefore combine three snapshots of relay, submission, access, and webmail services associated with the Tranco Top~1M domains with controlled tests of mail clients, sending servers, and OpenPGP and S/MIME implementations. Our measurements reveal a transition concentrated among a few providers, with available capability not consistently translating into actual use. Fewer than half of the domains in each service panel support PQC, and Google alone accounts for approximately 87\\% of hybrid-capable relay domains. Only two of eight tested sending providers negotiate PQC with our receiver, although five accept it inbound. When TLS groups are restricted to PQC, four of the six incompatible senders fall back to plaintext where unencrypted SMTP remains permitted. At the message layer, limited native key generation, key-format incompatibilities, and backend integration failures further constrain usable PQC encryption.",
+  "abstract_ja": "「Harvest-now, decrypt-later（HNDL）」攻撃により、電子メールにおけるポスト量子暗号（PQC）への移行が急務となっています。本論文では、電子メールサービスの各段階におけるPQCの導入状況、通信相手間でのネゴシエーション、および実用的なメッセージ暗号化を総合的に検証する体系的な測定手法を提示します。 送信、中継、アクセスではそれぞれ独立してネゴシエーションされたTLS（Transport Layer Security）接続が使用されるため、エンドポイントレベルのサポートだけでは、電子メールのワークフロー全体におけるPQCへの対応が確立されるわけではない。 そこで本研究では、Tranco Top~1Mドメインに関連する中継、送信、アクセス、およびウェブメールサービスの3つのスナップショットを、メールクライアント、送信サーバー、ならびにOpenPGPおよびS/MIMEの実装に対する制御されたテストと組み合わせた。測定結果からは、移行が少数のプロバイダーに集中しており、利用可能な機能が必ずしも実際の利用につながっていないことが明らかになった。 各サービスパネルに含まれるドメインのうち、PQCをサポートしているのは半数未満であり、ハイブリッド対応のリレードメインの約87％をGoogleが単独で占めています。テスト対象となった8つの送信プロバイダーのうち、当社の受信側とPQCをネゴシエートできたのは2社のみでしたが、5社は受信時にPQCを受け入れていました。 TLSグループがPQCに限定された場合、互換性のない6つの送信プロバイダーのうち4つは、暗号化されていないSMTPが依然として許可されている環境において、平文へのフォールバックを行っていました。メッセージ層においては、ネイティブな鍵生成機能の制限、鍵形式の非互換性、およびバックエンド統合の失敗が、実用可能なPQC暗号化をさらに制約しています。",
+  "abstract_translated": "「Harvest-now, decrypt-later（HNDL）」攻撃により、電子メールにおけるポスト量子暗号（PQC）への移行が急務となっています。本論文では、電子メールサービスの各段階におけるPQCの導入状況、通信相手間でのネゴシエーション、および実用的なメッセージ暗号化を総合的に検証する体系的な測定手法を提示します。 送信、中継、アクセスではそれぞれ独立してネゴシエーションされたTLS（Transport Layer Security）接続が使用されるため、エンドポイントレベルのサポートだけでは、電子メールのワークフロー全体におけるPQCへの対応が確立されるわけではない。 そこで本研究では、Tranco Top~1Mドメインに関連する中継、送信、アクセス、およびウェブメールサービスの3つのスナップショットを、メールクライアント、送信サーバー、ならびにOpenPGPおよびS/MIMEの実装に対する制御されたテストと組み合わせた。測定結果からは、移行が少数のプロバイダーに集中しており、利用可能な機能が必ずしも実際の利用につながっていないことが明らかになった。 各サービスパネルに含まれるドメインのうち、PQCをサポートしているのは半数未満であり、ハイブリッド対応のリレードメインの約87％をGoogleが単独で占めています。テスト対象となった8つの送信プロバイダーのうち、当社の受信側とPQCをネゴシエートできたのは2社のみでしたが、5社は受信時にPQCを受け入れていました。 TLSグループがPQCに限定された場合、互換性のない6つの送信プロバイダーのうち4つは、暗号化されていないSMTPが依然として許可されている環境において、平文へのフォールバックを行っていました。メッセージ層においては、ネイティブな鍵生成機能の制限、鍵形式の非互換性、およびバックエンド統合の失敗が、実用可能なPQC暗号化をさらに制約しています。",
+  "last_delivered_at": "2026-10-28T06:48:43Z"
  }
 ]

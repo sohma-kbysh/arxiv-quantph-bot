@@ -10142,104 +10142,67 @@
    "classifier": "gemini-2.5-flash",
    "skip_votes": [],
    "reviewed_at": "2026-10-28T06:48:18Z"
-  }
- },
- "external_pending": {
+  },
   "cs.CR:2610.40507": {
-   "id": "2610.40507",
-   "title": "RecHash: Segmented Hash-Entangled Chains for Stateful Sequential Authentication",
-   "link": "https://arxiv.org/abs/2610.40507v1",
-   "authors": "Luis Adri\u00e1n Lizama-P\u00e9rez",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR"
+   "genre_ids": [
+    "pqc",
+    "crypto"
    ],
-   "primary": "cs.CR",
-   "abstract": "RecHash is a stateful sequential authentication construction based on paired hash-chain openings and an authenticated record history. It develops the decreasing position relation of the 2019 hash-entangled construction, whose exact integer normalization yields a two-coordinate constant-sum antichain. Direct proportional reuse is constrained by integer capacity and multiplicative contraction. The main construction instead assigns each record to a predetermined chain segment, with complementary positions encoding each digest block. All digests fit every scheduled slot, independently of preceding messages. For an $\\ell$-bit digest distributed over $k$ equal-length chain pairs, balanced allocation gives $\\lfloor L/(2^{\\lceil\\ell/k\\rceil}+1)\\rfloor$ slots. A 256-bit digest, 32 pairs, and length 65535 provide 254 application records followed by a renewal certificate, with 2048 bytes of openings per record for 256-bit chain outputs. We give a complete segmented state transition, a worked trace, exact allocation and resource results, and a renewal-free security-composition theorem conditional on authenticated history and an adaptive one-step guarantee. The analysis relates the construction to constant-sum encodings and standardized hash-based signatures; a concrete post-quantum reduction and security across renewal remain open.",
-   "published": "2026-10-29T17:23:08Z",
-   "updated": "2026-10-29T17:23:08Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash-lite",
+   "skip_votes": [
+    "gemini-2.5-flash"
+   ],
+   "reviewed_at": "2026-10-30T10:45:46Z"
   },
   "cs.CR:2610.39873": {
-   "id": "2610.39873",
-   "title": "Syndrome Trellis Decryption in Post-Quantum Cryptography",
-   "link": "https://arxiv.org/abs/2610.39873v1",
-   "authors": "Meir Ariel",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR"
+   "genre_ids": [
+    "pqc",
+    "qec",
+    "hardware"
    ],
-   "primary": "cs.CR",
-   "abstract": "We present a novel post-quantum cryptographic framework based on masked high-memory convolutional codes in the Niederreiter paradigm. The public key is derived from a high-memory polynomial parity-check matrix augmented by dense random masking and additional invertible linear transformations. The resulting matrix exhibits strong random-like properties, effectively concealing its algebraic structure and resisting known structural and algebraic attacks. Legitimate recipients retain polynomial-time decoding capability, whereas adversaries appear to be limited to generic information-set decoding with exponential complexity. Under standard cryptanalytic estimates, the proposed construction achieves security margins exceeding those of classical McEliece- and Niederreiter-based systems by factors greater than 2^200. Beyond its enhanced security profile, the construction offers considerable design flexibility, supporting arbitrary plaintext lengths, linear-time decryption, and a uniform per-bit computational cost, enabling efficient scalability to very long messages. Practical implementation is facilitated by a parallel array of syndrome-trellis decoders, dynamically instantiated according to candidate syndrome values, enabling efficient hardware and software implementations with high throughput. Overall, the proposed scheme is a promising candidate for robust, scalable, quantum-resistant public-key cryptography.",
-   "published": "2026-10-29T11:47:20Z",
-   "updated": "2026-10-29T11:47:20Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-30T10:45:46Z"
   },
   "cs.CR:2610.38632": {
-   "id": "2610.38632",
-   "title": "The use of post-quantum cryptography in the automotive context",
-   "link": "https://arxiv.org/abs/2610.38632v1",
-   "authors": "Mariana do Carmo Barata Gon\u00e7alves, Valderi Reis Quietinho Leithardt",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR",
-    "cs.DC"
+   "genre_ids": [
+    "pqc",
+    "hardware"
    ],
-   "primary": "cs.CR",
-   "abstract": "This study comparatively evaluates post-quantum cryptography (PQC) in automotive communication scenarios, considering the threat posed by quantum algorithms such as Shor's and Grover's algorithms. The simulations use OMNeT++, Veins, INET, and SUMO on two hardware platforms and examine ML-KEM/CRYSTALS-Kyber, ML-DSA/CRYSTALS-Dilithium, and FALCON. ML-KEM and ML-DSA are finalized NIST standards, whereas FALCON is a NIST-selected candidate pending final standardization. The evaluation considers a rural V2V scenario and an urban V2X scenario supported by a roadside unit. Kyber exhibits low {key encapsulation mechanism (KEM)}\\color{black} operation latency, Dilithium provides balanced signature performance, and FALCON has high key-generation and signing costs but efficient verification. The results are interpreted as a comparative assessment among the evaluated PQC schemes under the reported simulation conditions; {a conventional ECDSA/ECDH baseline measured in the same simulation setup is also reported for reference.}\\color{black} The resulting dataset can support future studies of cryptographic selection in automotive systems.",
-   "published": "2026-10-28T10:49:11Z",
-   "updated": "2026-10-28T10:49:11Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-30T10:45:46Z"
   },
   "cs.CR:2610.38479": {
-   "id": "2610.38479",
-   "title": "Recurrent Bipartite Graph Neural Networks for QC-MDPC Error Decoding in McEliece Cryptosystems",
-   "link": "https://arxiv.org/abs/2610.38479v1",
-   "authors": "Parth Rajeshkumar Tandel, Elisabeth Fink",
-   "announce_type": "external",
-   "categories": [
-    "cs.CR",
-    "cs.LG"
+   "genre_ids": [
+    "pqc",
+    "qec",
+    "qml"
    ],
-   "primary": "cs.CR",
-   "abstract": "As the advent of large-scale quantum computing threatens classical encryption, Quasi-Cyclic Moderate Density Parity-Check (QC-MDPC) codes have emerged as a foundational element of Post-Quantum Cryptography (PQC). However, decoding these relatively dense codes using classical Belief Propagation algorithms often leads to failures caused by short graph cycles that stall the decoder. In cryptographic applications, these failures are severe security vulnerabilities that leak secret key information. To address this, this paper proposes a Recurrent Bipartite Graph Neural Network (R-BGNN) as proof of concept. By integrating Gated Recurrent Units (GRUs) into the message-passing framework and employing a multi-topology curriculum training strategy, the R-BGNN actively learns to break limit-cycle oscillations. Evaluated across 20 unseen matrix topologies, the proposed architecture significantly outperforms classical Bit-Flipping and Min-Sum baselines, reducing the Decoding Failure Rate (DFR) by 63.7\\% at moderate noise levels ($t=10$) while converging in fewer iterations.",
-   "published": "2026-10-28T08:53:00Z",
-   "updated": "2026-10-28T08:53:00Z",
-   "source_feed": "cs.CR"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-30T10:45:46Z"
   },
   "cs.IT:2610.39615": {
-   "id": "2610.39615",
-   "title": "Improving Energy Efficiency of Uplink RSMA via Rydberg Atomic Quantum Receiver",
-   "link": "https://arxiv.org/abs/2610.39615v1",
-   "authors": "Xinya Shen, Zheng Chu, David Chieng, Chiew Foong Kwong, Qihao Peng, Zhengyu Zhu, Pei Xiao, Jianyue Zhu",
-   "announce_type": "external",
-   "categories": [
-    "cs.IT",
-    "cs.NI"
+   "genre_ids": [
+    "network",
+    "sensing"
    ],
-   "primary": "cs.IT",
-   "abstract": "This paper investigates an uplink rate-splitting multiple access (RSMA) network empowered by a Rydberg atomic quantum receiver (RAQR) to maximize energy efficiency (EE). To overcome the amplitude-only measurement limitation of the considered direct readout RAQR, we devise a phase alignment mechanism that linearizes the received signal while retaining full channel energy, thereby enabling tractable optimization. The resulting non-convex fractional EE problem is transformed via Dinkelbach's method. For IoT scenarios with symmetric rate requirements, we derive exact closed-form power allocation from the Karush-Kuhn-Tucker (KKT) conditions, which yields a globally optimal bisection search with negligible computational latency. For asymmetric rate requirements, we develop a generalized block coordinate descent-based power allocation (BCD-PA) framework that eliminates reliance on expensive interior-point solvers. We further propose a low-complexity paired allocation (LC-Paired) that exploits user pairing and closed-form bandwidth solutions via the Lambert-W function. Simulation results confirm that the KKT-based scheme attains the highest EE, while the BCD-PA offers a flexible complexity-performance trade-off. The LC-Paired scheme drastically reduces computational cost with only moderate EE degradation.",
-   "published": "2026-10-29T08:47:15Z",
-   "updated": "2026-10-29T08:47:15Z",
-   "source_feed": "cs.IT"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-30T10:45:57Z"
   },
   "cs.IT:2610.38451": {
-   "id": "2610.38451",
-   "title": "Rydberg Atomic Quantum Receiver Empowered Hybrid Non-orthogonal Multiple Access",
-   "link": "https://arxiv.org/abs/2610.38451v1",
-   "authors": "Xinya Shen, Zheng Chu, David Chieng, Chiew Foong Kwong, Qihao Peng, Pei Xiao, Theodoros Tsiftsis, Jianyue Zhu",
-   "announce_type": "external",
-   "categories": [
-    "cs.IT",
-    "cs.NI"
+   "genre_ids": [
+    "network",
+    "sensing"
    ],
-   "primary": "cs.IT",
-   "abstract": "In this paper, we propose a novel uplink Hybrid Non-Orthogonal Multiple Access (NOMA) architecture assisted by Rydberg Atomic Quantum Receivers (RAQRs) to improve energy efficiency by addressing the physical constraints of atomic sensing. We formulate a joint optimization problem encompassing phase measurements and multi-user power allocation to minimize the total transmit power. This problem is particularly challenging due to the non-linear amplitude-only observations of atomic vapor cells. To decomposes the resulting non-convexity, we develop a hierarchical three-layer decomposition optimization framework that systematically decouples the global problem. The inner layer employs a customized Expectation Maximization-Gerchberg-Saxton (EM-GS) algorithm to resolve phase ambiguity and estimate equivalent channel gains. The middle layer derives closed-form optimal power allocation solutions via Karush-Kuhn-Tucker (KKT) conditions. The outer layer utilizes linear Minimum Mean Square Error (MMSE) detection for high-reliability signal recovery. Simulation results demonstrate the superiority of the proposed framework over conventional RF-based Hybrid NOMA. Notably, the atomic architecture achieves approximately a 93% reduction in total power consumption compared to Orthogonal Multiple Access (OMA) baselines while maintaining strict backward compatibility, thereby laying a solid foundation for practical deployment in next-generation green communication networks.",
-   "published": "2026-10-28T08:28:37Z",
-   "updated": "2026-10-28T08:28:37Z",
-   "source_feed": "cs.IT"
+   "classifier": "gemini-2.5-flash",
+   "skip_votes": [],
+   "reviewed_at": "2026-10-30T10:45:57Z"
   }
  },
+ "external_pending": {},
  "schema_version": 2,
  "completed_ids": [
   "0506038",
@@ -18698,10 +18661,265 @@
   "2610.40651",
   "2610.40652"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2610.40507": {
+   "paper": {
+    "id": "2610.40507",
+    "title": "RecHash: Segmented Hash-Entangled Chains for Stateful Sequential Authentication",
+    "link": "https://arxiv.org/abs/2610.40507v1",
+    "authors": "Luis Adri\u00e1n Lizama-P\u00e9rez",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "RecHash is a stateful sequential authentication construction based on paired hash-chain openings and an authenticated record history. It develops the decreasing position relation of the 2019 hash-entangled construction, whose exact integer normalization yields a two-coordinate constant-sum antichain. Direct proportional reuse is constrained by integer capacity and multiplicative contraction. The main construction instead assigns each record to a predetermined chain segment, with complementary positions encoding each digest block. All digests fit every scheduled slot, independently of preceding messages. For an $\\ell$-bit digest distributed over $k$ equal-length chain pairs, balanced allocation gives $\\lfloor L/(2^{\\lceil\\ell/k\\rceil}+1)\\rfloor$ slots. A 256-bit digest, 32 pairs, and length 65535 provide 254 application records followed by a renewal certificate, with 2048 bytes of openings per record for 256-bit chain outputs. We give a complete segmented state transition, a worked trace, exact allocation and resource results, and a renewal-free security-composition theorem conditional on authenticated history and an adaptive one-step guarantee. The analysis relates the construction to constant-sum encodings and standardized hash-based signatures; a concrete post-quantum reduction and security across renewal remain open.",
+    "published": "2026-10-29T17:23:08Z",
+    "updated": "2026-10-29T17:23:08Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "crypto"
+    ],
+    "external_classifier": "gemini-2.5-flash-lite"
+   },
+   "genre_ids": [
+    "pqc",
+    "crypto"
+   ],
+   "classifier": "gemini-2.5-flash-lite",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "crypto": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-30T10:45:57Z"
+  },
+  "2610.39873": {
+   "paper": {
+    "id": "2610.39873",
+    "title": "Syndrome Trellis Decryption in Post-Quantum Cryptography",
+    "link": "https://arxiv.org/abs/2610.39873v1",
+    "authors": "Meir Ariel",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "We present a novel post-quantum cryptographic framework based on masked high-memory convolutional codes in the Niederreiter paradigm. The public key is derived from a high-memory polynomial parity-check matrix augmented by dense random masking and additional invertible linear transformations. The resulting matrix exhibits strong random-like properties, effectively concealing its algebraic structure and resisting known structural and algebraic attacks. Legitimate recipients retain polynomial-time decoding capability, whereas adversaries appear to be limited to generic information-set decoding with exponential complexity. Under standard cryptanalytic estimates, the proposed construction achieves security margins exceeding those of classical McEliece- and Niederreiter-based systems by factors greater than 2^200. Beyond its enhanced security profile, the construction offers considerable design flexibility, supporting arbitrary plaintext lengths, linear-time decryption, and a uniform per-bit computational cost, enabling efficient scalability to very long messages. Practical implementation is facilitated by a parallel array of syndrome-trellis decoders, dynamically instantiated according to candidate syndrome values, enabling efficient hardware and software implementations with high throughput. Overall, the proposed scheme is a promising candidate for robust, scalable, quantum-resistant public-key cryptography.",
+    "published": "2026-10-29T11:47:20Z",
+    "updated": "2026-10-29T11:47:20Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "qec",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "qec",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "qec": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-30T10:45:57Z"
+  },
+  "2610.38632": {
+   "paper": {
+    "id": "2610.38632",
+    "title": "The use of post-quantum cryptography in the automotive context",
+    "link": "https://arxiv.org/abs/2610.38632v1",
+    "authors": "Mariana do Carmo Barata Gon\u00e7alves, Valderi Reis Quietinho Leithardt",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.DC"
+    ],
+    "primary": "cs.CR",
+    "abstract": "This study comparatively evaluates post-quantum cryptography (PQC) in automotive communication scenarios, considering the threat posed by quantum algorithms such as Shor's and Grover's algorithms. The simulations use OMNeT++, Veins, INET, and SUMO on two hardware platforms and examine ML-KEM/CRYSTALS-Kyber, ML-DSA/CRYSTALS-Dilithium, and FALCON. ML-KEM and ML-DSA are finalized NIST standards, whereas FALCON is a NIST-selected candidate pending final standardization. The evaluation considers a rural V2V scenario and an urban V2X scenario supported by a roadside unit. Kyber exhibits low {key encapsulation mechanism (KEM)}\\color{black} operation latency, Dilithium provides balanced signature performance, and FALCON has high key-generation and signing costs but efficient verification. The results are interpreted as a comparative assessment among the evaluated PQC schemes under the reported simulation conditions; {a conventional ECDSA/ECDH baseline measured in the same simulation setup is also reported for reference.}\\color{black} The resulting dataset can support future studies of cryptographic selection in automotive systems.",
+    "published": "2026-10-28T10:49:11Z",
+    "updated": "2026-10-28T10:49:11Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-30T10:45:57Z"
+  },
+  "2610.38479": {
+   "paper": {
+    "id": "2610.38479",
+    "title": "Recurrent Bipartite Graph Neural Networks for QC-MDPC Error Decoding in McEliece Cryptosystems",
+    "link": "https://arxiv.org/abs/2610.38479v1",
+    "authors": "Parth Rajeshkumar Tandel, Elisabeth Fink",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.LG"
+    ],
+    "primary": "cs.CR",
+    "abstract": "As the advent of large-scale quantum computing threatens classical encryption, Quasi-Cyclic Moderate Density Parity-Check (QC-MDPC) codes have emerged as a foundational element of Post-Quantum Cryptography (PQC). However, decoding these relatively dense codes using classical Belief Propagation algorithms often leads to failures caused by short graph cycles that stall the decoder. In cryptographic applications, these failures are severe security vulnerabilities that leak secret key information. To address this, this paper proposes a Recurrent Bipartite Graph Neural Network (R-BGNN) as proof of concept. By integrating Gated Recurrent Units (GRUs) into the message-passing framework and employing a multi-topology curriculum training strategy, the R-BGNN actively learns to break limit-cycle oscillations. Evaluated across 20 unseen matrix topologies, the proposed architecture significantly outperforms classical Bit-Flipping and Min-Sum baselines, reducing the Decoding Failure Rate (DFR) by 63.7\\% at moderate noise levels ($t=10$) while converging in fewer iterations.",
+    "published": "2026-10-28T08:53:00Z",
+    "updated": "2026-10-28T08:53:00Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "qec",
+     "qml"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "pqc",
+    "qec",
+    "qml"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "qec": {
+     "status": "pending"
+    },
+    "qml": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-30T10:45:57Z"
+  },
+  "2610.39615": {
+   "paper": {
+    "id": "2610.39615",
+    "title": "Improving Energy Efficiency of Uplink RSMA via Rydberg Atomic Quantum Receiver",
+    "link": "https://arxiv.org/abs/2610.39615v1",
+    "authors": "Xinya Shen, Zheng Chu, David Chieng, Chiew Foong Kwong, Qihao Peng, Zhengyu Zhu, Pei Xiao, Jianyue Zhu",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT",
+     "cs.NI"
+    ],
+    "primary": "cs.IT",
+    "abstract": "This paper investigates an uplink rate-splitting multiple access (RSMA) network empowered by a Rydberg atomic quantum receiver (RAQR) to maximize energy efficiency (EE). To overcome the amplitude-only measurement limitation of the considered direct readout RAQR, we devise a phase alignment mechanism that linearizes the received signal while retaining full channel energy, thereby enabling tractable optimization. The resulting non-convex fractional EE problem is transformed via Dinkelbach's method. For IoT scenarios with symmetric rate requirements, we derive exact closed-form power allocation from the Karush-Kuhn-Tucker (KKT) conditions, which yields a globally optimal bisection search with negligible computational latency. For asymmetric rate requirements, we develop a generalized block coordinate descent-based power allocation (BCD-PA) framework that eliminates reliance on expensive interior-point solvers. We further propose a low-complexity paired allocation (LC-Paired) that exploits user pairing and closed-form bandwidth solutions via the Lambert-W function. Simulation results confirm that the KKT-based scheme attains the highest EE, while the BCD-PA offers a flexible complexity-performance trade-off. The LC-Paired scheme drastically reduces computational cost with only moderate EE degradation.",
+    "published": "2026-10-29T08:47:15Z",
+    "updated": "2026-10-29T08:47:15Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "network",
+     "sensing"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "network",
+    "sensing"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "network": {
+     "status": "pending"
+    },
+    "sensing": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-30T10:45:57Z"
+  },
+  "2610.38451": {
+   "paper": {
+    "id": "2610.38451",
+    "title": "Rydberg Atomic Quantum Receiver Empowered Hybrid Non-orthogonal Multiple Access",
+    "link": "https://arxiv.org/abs/2610.38451v1",
+    "authors": "Xinya Shen, Zheng Chu, David Chieng, Chiew Foong Kwong, Qihao Peng, Pei Xiao, Theodoros Tsiftsis, Jianyue Zhu",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT",
+     "cs.NI"
+    ],
+    "primary": "cs.IT",
+    "abstract": "In this paper, we propose a novel uplink Hybrid Non-Orthogonal Multiple Access (NOMA) architecture assisted by Rydberg Atomic Quantum Receivers (RAQRs) to improve energy efficiency by addressing the physical constraints of atomic sensing. We formulate a joint optimization problem encompassing phase measurements and multi-user power allocation to minimize the total transmit power. This problem is particularly challenging due to the non-linear amplitude-only observations of atomic vapor cells. To decomposes the resulting non-convexity, we develop a hierarchical three-layer decomposition optimization framework that systematically decouples the global problem. The inner layer employs a customized Expectation Maximization-Gerchberg-Saxton (EM-GS) algorithm to resolve phase ambiguity and estimate equivalent channel gains. The middle layer derives closed-form optimal power allocation solutions via Karush-Kuhn-Tucker (KKT) conditions. The outer layer utilizes linear Minimum Mean Square Error (MMSE) detection for high-reliability signal recovery. Simulation results demonstrate the superiority of the proposed framework over conventional RF-based Hybrid NOMA. Notably, the atomic architecture achieves approximately a 93% reduction in total power consumption compared to Orthogonal Multiple Access (OMA) baselines while maintaining strict backward compatibility, thereby laying a solid foundation for practical deployment in next-generation green communication networks.",
+    "published": "2026-10-28T08:28:37Z",
+    "updated": "2026-10-28T08:28:37Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "network",
+     "sensing"
+    ],
+    "external_classifier": "gemini-2.5-flash"
+   },
+   "genre_ids": [
+    "network",
+    "sensing"
+   ],
+   "classifier": "gemini-2.5-flash",
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "network": {
+     "status": "pending"
+    },
+    "sensing": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-10-30T10:45:57Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-10-30T06:59:11Z",
-  "cs.CC": "2026-10-30T06:59:19Z",
-  "cs.IT": "2026-10-30T06:59:24Z"
+  "cs.CR": "2026-10-30T10:45:08Z",
+  "cs.CC": "2026-10-30T10:45:17Z",
+  "cs.IT": "2026-10-30T10:45:23Z"
  }
 }

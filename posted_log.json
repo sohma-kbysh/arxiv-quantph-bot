@@ -1,237 +1,5 @@
 [
  {
-  "delivery_id": "main:2608.19391",
-  "id": "2608.19391",
-  "posted_at": "2026-08-21T04:54:33Z",
-  "title": "State convertibility and fluctuation theorems from a dynamical reference: majorization meets martingales",
-  "title_ja": "動的参照からの状態可換性とゆらぎ定理:メジャー化とマーチンゲールの交差",
-  "title_translated": "動的参照からの状態可換性とゆらぎ定理:メジャー化とマーチンゲールの交差",
-  "translation_language": "ja",
-  "authors": "Davide Cugini, Giacomo Guarnieri",
-  "link": "https://arxiv.org/abs/2608.19391",
-  "primary": "cond-mat.stat-mech",
-  "categories": [
-   "cond-mat.stat-mech",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "qit",
-   "foundations"
-  ],
-  "genre_names": [
-   "量子情報理論",
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "qit",
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子情報理論",
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "State convertibility represents a fundamental concept used to determine whether a transformation is possible given a specific set of resources. Within the field of Thermodynamics, where physical process are required to preserve a reference state typically in microcanonical or canonical form, this translates into the notions of majorization and thermo-majorization ---criteria that require constructing and comparing state-dependent Lorenz curves. In this work, we firstly unify and extend these notions to an arbitrary and possibly time-dependent reference distribution $g(t)$, introducing the concept of $g(t)$-majorization; we then introduce a dual picture whereby state convertibility is turned into a one-dimensional convex-order problem, which allows us to demonstrate that a transition is admissible if and only if the associated real-valued distributions of relative populations $ k_j(t)/g_j(t)$ are connected by a martingale. Building on it, we then derive an exact fluctuation theorem for a reference-relative entropy production whose average violation certifies, through a $\\chi^{2}$-divergence bound, the mismatch between an assumed and the true reference evolution---a model-independent diagnostic that requires no independent characterization of the latter and turns an observed breakdown of the fluctuation relation into a certified lower bound on the reference error.",
-  "abstract_ja": "状態変換可能性は、特定のリソースセットにおいて変換が可能かどうかを判断するための基本的な概念を表します。熱力学の分野では、物理過程が通常ミクロカノニカルまたはカノニカルな形で基準状態を保持する必要があるため、これはメジャー化や熱メジャー化---基準の概念につながり、状態依存のローレンツ曲線の構築と比較を必要とする。本研究ではまず、これらの概念を統一し、任意の時間依存的な参照分布$g(t)$へと拡張し、$g(t)$メジャー化の概念を導入します。次に、状態の可換性を一次元の凸順序問題に変換する二重な図像を導入します。これにより、遷移が許容されるのは、相対母集団 $ k_j(t)/g_j(t)$ の実数値分布がマーチンゲールで結ばれていることと同条件であることを示せます。これを基に、平均違反が$\\chi^{2}$発散界を通じて仮定された基準進化と真の参照進化の不一致を証明する基準相対エントロピー生成の正確な揺らぎ定理を導出します---モデルに依存しない診断で、揺らぎ関係の観察された崩壊を参照誤差の認証下限に変換します。",
-  "abstract_translated": "状態変換可能性は、特定のリソースセットにおいて変換が可能かどうかを判断するための基本的な概念を表します。熱力学の分野では、物理過程が通常ミクロカノニカルまたはカノニカルな形で基準状態を保持する必要があるため、これはメジャー化や熱メジャー化---基準の概念につながり、状態依存のローレンツ曲線の構築と比較を必要とする。本研究ではまず、これらの概念を統一し、任意の時間依存的な参照分布$g(t)$へと拡張し、$g(t)$メジャー化の概念を導入します。次に、状態の可換性を一次元の凸順序問題に変換する二重な図像を導入します。これにより、遷移が許容されるのは、相対母集団 $ k_j(t)/g_j(t)$ の実数値分布がマーチンゲールで結ばれていることと同条件であることを示せます。これを基に、平均違反が$\\chi^{2}$発散界を通じて仮定された基準進化と真の参照進化の不一致を証明する基準相対エントロピー生成の正確な揺らぎ定理を導出します---モデルに依存しない診断で、揺らぎ関係の観察された崩壊を参照誤差の認証下限に変換します。",
-  "last_delivered_at": "2026-08-21T04:54:35Z"
- },
- {
-  "delivery_id": "main:2608.19427",
-  "id": "2608.19427",
-  "posted_at": "2026-08-21T04:54:36Z",
-  "title": "Compressibility of genuine multipartite entanglement under the Hadamard map",
-  "title_ja": "ハダマール写像下での真の多部分エンタングルメントの圧縮可能性",
-  "title_translated": "ハダマール写像下での真の多部分エンタングルメントの圧縮可能性",
-  "translation_language": "ja",
-  "authors": "Kl\\'ara Baksov\\'a, Lisa T. Weinbrenner",
-  "link": "https://arxiv.org/abs/2608.19427",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "One of the most counterintuitive effects in the examination of quantum states is the phenomenon of superactivation, which describes the fact that a quantum state, which is useless for a specific task, may become useful when one considers multiple copies of it. This effect can be observed in the case of genuine multipartite entanglement, where local projections from multiple copies to the single-copy Hilbert space could significantly simplify the practical accessibility of its superactivation. We investigate how such projections behave in the limit of many copies, using the Hadamard map as an example, and studying different state families. We show that, in this scheme, for a fixed map, an optimal number of copies exists, beyond which the obtained entanglement decreases, highlighting the differences between entanglement distillation and local projection schemes.",
-  "abstract_ja": "量子状態の検証で最も直感に反する効果の一つはスーパーアクティベーション現象であり、これは特定の課題には役に立たない量子状態が、複数のコピーを考慮すると有用になることを指します。この効果は、複数のコピーから単一コピーのヒルベルト空間への局所射影が、その超活性化の実用的なアクセスを大幅に簡素化できる真の多部エンタングルメントの場合に観察できます。私たちは、ハダマール写像を例に挙げ、多数のコピーの極限における射影の挙動を調査し、異なる状態族を研究します。このスキームでは、固定された写像に対して最適なコピー数が存在し、そこを超えると得られたエンタングルメントが減少することを示し、エンタングルメント蒸留と局所射影スキームの違いを浮き彫りにします。",
-  "abstract_translated": "量子状態の検証で最も直感に反する効果の一つはスーパーアクティベーション現象であり、これは特定の課題には役に立たない量子状態が、複数のコピーを考慮すると有用になることを指します。この効果は、複数のコピーから単一コピーのヒルベルト空間への局所射影が、その超活性化の実用的なアクセスを大幅に簡素化できる真の多部エンタングルメントの場合に観察できます。私たちは、ハダマール写像を例に挙げ、多数のコピーの極限における射影の挙動を調査し、異なる状態族を研究します。このスキームでは、固定された写像に対して最適なコピー数が存在し、そこを超えると得られたエンタングルメントが減少することを示し、エンタングルメント蒸留と局所射影スキームの違いを浮き彫りにします。",
-  "last_delivered_at": "2026-08-21T04:54:36Z"
- },
- {
-  "delivery_id": "main:2608.19428",
-  "id": "2608.19428",
-  "posted_at": "2026-08-21T04:54:38Z",
-  "title": "Holographic Bit Threads from String-Diagrammatic Quantum Information Flow",
-  "title_ja": "文字列図式量子情報フローからのホログラフィックビットスレッド",
-  "title_translated": "文字列図式量子情報フローからのホログラフィックビットスレッド",
-  "translation_language": "ja",
-  "authors": "Yi-Yu Lin, Song Cheng",
-  "link": "https://arxiv.org/abs/2608.19428",
-  "primary": "hep-th",
-  "categories": [
-   "hep-th",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "qit",
-   "other"
-  ],
-  "genre_names": [
-   "量子情報理論",
-   "その他・異分野"
-  ],
-  "target_genre_ids": [
-   "qit",
-   "other"
-  ],
-  "target_genre_names": [
-   "量子情報理論",
-   "その他・異分野"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Bit threads, arising as the convex dual of the minimal-surface formula for holographic entanglement entropy, are line-like structures with nontrivial bulk trajectories. Their physical picture has long been associated with Bell-pair interpretations, yet the meaning of their detailed trajectories, particularly their nonuniqueness, remains unclear. We propose to apply Coecke's notion of quantum information flow (QIF) in protocol-network geometry, developed within categorical quantum mechanics, to a holographic setup, and show that its trajectories within the discrete holographic bulk---the tensor network---obey the divergence-free and density-bound conditions of bit threads. From this process-centered perspective, bit-thread nonuniqueness becomes natural: for a given resource state, different protocols realizing the same distillation task can give rise to different QIF trajectories. We further analyze stabilizer-type holographic tensor networks using ZX string diagrams and show that QIF trajectories can probe finer entanglement structure beyond the level captured by entanglement entropy.",
-  "abstract_ja": "ビットスレッドは、ホログラフィックエンタングルメントエントロピーの最小曲面公式の凸双対として生じ、非自明なバルク軌跡を持つ線状構造です。それらの物理的なイメージは長らくベル対の解釈と結びついてきましたが、特にその非一意性の詳細な軌跡の意味は依然として不明です。我々は、圏論的量子力学の体系で発展したプロトコルネットワーク幾何学におけるCoeckeの量子情報フロー(QIF)の概念をホログラフィックセットアップに適用し、離散ホログラフィックバルク---テンソルネットワーク---におけるその軌道がビットスレッドの発散なしかつ密度に縛られる条件に従うことを示そうとする。このプロセス中心の視点からは、ビットスレッドの非一意性が自然に起こります。あるリソース状態において、同じ蒸留タスクを実現する異なるプロトコルが異なるQIF軌跡を生み出す可能性があります。さらにZX弦図を用いて安定化型ホログラフィックテンソルネットワークを解析し、QIF軌道がエンタングルメントエントロピーで捉えられるレベルを超えたより細かいエンタングルメント構造を探査できることを示しました。",
-  "abstract_translated": "ビットスレッドは、ホログラフィックエンタングルメントエントロピーの最小曲面公式の凸双対として生じ、非自明なバルク軌跡を持つ線状構造です。それらの物理的なイメージは長らくベル対の解釈と結びついてきましたが、特にその非一意性の詳細な軌跡の意味は依然として不明です。我々は、圏論的量子力学の体系で発展したプロトコルネットワーク幾何学におけるCoeckeの量子情報フロー(QIF)の概念をホログラフィックセットアップに適用し、離散ホログラフィックバルク---テンソルネットワーク---におけるその軌道がビットスレッドの発散なしかつ密度に縛られる条件に従うことを示そうとする。このプロセス中心の視点からは、ビットスレッドの非一意性が自然に起こります。あるリソース状態において、同じ蒸留タスクを実現する異なるプロトコルが異なるQIF軌跡を生み出す可能性があります。さらにZX弦図を用いて安定化型ホログラフィックテンソルネットワークを解析し、QIF軌道がエンタングルメントエントロピーで捉えられるレベルを超えたより細かいエンタングルメント構造を探査できることを示しました。",
-  "last_delivered_at": "2026-08-21T04:54:40Z"
- },
- {
-  "delivery_id": "main:2608.19533",
-  "id": "2608.19533",
-  "posted_at": "2026-08-21T04:54:42Z",
-  "title": "Quantum Energy Storage versus Heat-to-Work Conversion in an Interacting Spin System",
-  "title_ja": "相互作用するスピンシステムにおける量子エネルギー貯蔵と熱から仕事への変換",
-  "title_translated": "相互作用するスピンシステムにおける量子エネルギー貯蔵と熱から仕事への変換",
-  "translation_language": "ja",
-  "authors": "Omar Bachain, Mohamed Amazioug, Rachid Ahl Laamara",
-  "link": "https://arxiv.org/abs/2608.19533",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "We investigate the energetic and thermodynamic performance of an interacting two-qubit system serving as both a quantum battery and a quantum Otto heat engine. The working medium is described by an anisotropic Heisenberg Hamiltonian supplemented by a dipolar interaction, a symmetric spin--orbit interaction, and an external magnetic field. Within a unified microscopic framework, we first analyze a coherent unitary charging protocol and characterize the resulting energy-storage performance through the ergotropy, anti-ergotropy, charging power, storage capacity, and $\\ell_1$-norm of quantum coherence. We investigate the effects of the dipolar interaction, temperature, and magnetic field on these quantities. We then employ the same working medium in a quantum Otto cycle and study the absorbed and released heat, net work, and thermodynamic efficiency as functions of the magnetic-field modulation, dipolar interaction, and temperature bias. A direct comparison between the two protocols reveals a pronounced contrast in their response to the dipolar interaction. In the investigated parameter regime, increasing the dipolar interaction substantially enhances the maximum ergotropy and storage capacity of the quantum battery, whereas the maximum work extracted per Otto cycle decreases. The Otto efficiency exhibits a nonmonotonic dependence on the dipolar interaction while remaining below the Carnot bound. These results demonstrate that an enhancement of quantum energy-storage capability does not necessarily imply an enhancement of heat-to-work conversion. Our findings highlight the complementary nature of quantum batteries and quantum heat engines and show how microscopic spin interactions can be used to control different forms of quantum energy conversion within the same physical platform.",
-  "abstract_ja": "私たちは、量子電池および量子オットー熱機関の両方として機能する相互作用する2量子ビット系のエネルギーおよび熱力学的性能を調査します。この作動媒体は異方性ハイゼンベルクハミルトニアンに、双極子相互作用、対称スピン軌道相互作用、外部磁場によって説明されます。統一された微視的枠組みの中で、まず一貫したユニタリー充電プロトコルを解析し、エルゴトロピー、反エルゴトロピー、充電電力、貯蔵容量、量子コヒーレンスの$ell_1$ノルムを通じて得られるエネルギー貯蔵性能を特徴づけます。私たちは、双極子相互作用、温度、磁場がこれらの量に与える影響を調査します。次に、同じ作動媒体を量子オットーサイクルで用い、吸収熱と放出熱、正味仕事、熱力学効率を磁場変調、双極子相互作用、温度バイアスの関数として研究します。両プロトコルの直接比較は、双極子相互作用に対する応答に顕著な対照があることが明らかになります。調査対象のパラメータ領域では、双極子相互作用を増やすことで量子電池の最大エルゴトロピーと蓄積容量が大幅に向上しますが、オットーサイクルあたりの最大仕事は減少します。オット効率はカルノー限界以下に留まりつつ、双極子相互作用に非単調依存を示します。これらの結果は、量子エネルギー貯蔵能力の向上が必ずしも熱から仕事への変換の向上を意味しないことを示しています。私たちの発見は、量子電池と量子熱エンジンの補完的な性質を強調し、微視的なスピン相互作用を用いて同じ物理的プラットフォーム内で異なる量子エネルギー変換を制御できることを示しています。",
-  "abstract_translated": "私たちは、量子電池および量子オットー熱機関の両方として機能する相互作用する2量子ビット系のエネルギーおよび熱力学的性能を調査します。この作動媒体は異方性ハイゼンベルクハミルトニアンに、双極子相互作用、対称スピン軌道相互作用、外部磁場によって説明されます。統一された微視的枠組みの中で、まず一貫したユニタリー充電プロトコルを解析し、エルゴトロピー、反エルゴトロピー、充電電力、貯蔵容量、量子コヒーレンスの$ell_1$ノルムを通じて得られるエネルギー貯蔵性能を特徴づけます。私たちは、双極子相互作用、温度、磁場がこれらの量に与える影響を調査します。次に、同じ作動媒体を量子オットーサイクルで用い、吸収熱と放出熱、正味仕事、熱力学効率を磁場変調、双極子相互作用、温度バイアスの関数として研究します。両プロトコルの直接比較は、双極子相互作用に対する応答に顕著な対照があることが明らかになります。調査対象のパラメータ領域では、双極子相互作用を増やすことで量子電池の最大エルゴトロピーと蓄積容量が大幅に向上しますが、オットーサイクルあたりの最大仕事は減少します。オット効率はカルノー限界以下に留まりつつ、双極子相互作用に非単調依存を示します。これらの結果は、量子エネルギー貯蔵能力の向上が必ずしも熱から仕事への変換の向上を意味しないことを示しています。私たちの発見は、量子電池と量子熱エンジンの補完的な性質を強調し、微視的なスピン相互作用を用いて同じ物理的プラットフォーム内で異なる量子エネルギー変換を制御できることを示しています。",
-  "last_delivered_at": "2026-08-21T04:54:43Z"
- },
- {
-  "delivery_id": "main:2608.19685",
-  "id": "2608.19685",
-  "posted_at": "2026-08-21T04:54:45Z",
-  "title": "Tight Entropy Contraction of Generalized Quantum Depolarization",
-  "title_ja": "一般化量子脱分極の厳密なエントロピー収縮",
-  "title_translated": "一般化量子脱分極の厳密なエントロピー収縮",
-  "translation_language": "ja",
-  "authors": "Li Gao, Long Zhao",
-  "link": "https://arxiv.org/abs/2608.19685",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "math.FA",
-   "math.OA"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "We establish upper and lower bounds for relative entropy contraction of generalized quantum depolarizing channels and semigroups. Our bound provides tight first order asymptotic of the contraction rate in terms of the dimension constant. One side estimate are based on sharp reverse ratio and convexity of relative entropy of two states, which can be derived from the recently introduced Hockey-Stick quantum $f$-divergence, and also independently, Bogoliubov--Kubo--Mori quantum Fisher information metric. The other side follows from the existence of index achieving pure state with respect to a general conditional expectation. Our results extend to the complete entropy contraction rate, tensor stable estimates for product dynamics. Examples include quantum depolarization, dephasing, and compact group symmetrization, with consequences for the decay rate of coherence and asymmetry.",
-  "abstract_ja": "一般化量子脱分極チャネルおよび半群の相対エントロピー収縮の上限と下限を確立します。我々の束縛は次元定数に関して収縮率の厳密な一次漸近的関係を提供します。一方の推定は、2つの状態の相対エントロピーの急激な逆比と凸性に基づいており、これは最近導入されたHockey-Stick量子の$f$-発散から導き出され、また独立してBogoliubov-Kubo-Mori量子フィッシャー情報計量から導き出されます。もう一方の側は、一般的な条件付き期待値に関して純粋状態を達成する指標の存在から導かれます。私たちの結果は、完全なエントロピー収縮率や積動力学のテンソル安定推定にも及びます。例としては、量子脱分極、位相脱、コンパクト群対称化があり、これらはコヒーレンスと非対称性の減衰率に影響します。",
-  "abstract_translated": "一般化量子脱分極チャネルおよび半群の相対エントロピー収縮の上限と下限を確立します。我々の束縛は次元定数に関して収縮率の厳密な一次漸近的関係を提供します。一方の推定は、2つの状態の相対エントロピーの急激な逆比と凸性に基づいており、これは最近導入されたHockey-Stick量子の$f$-発散から導き出され、また独立してBogoliubov-Kubo-Mori量子フィッシャー情報計量から導き出されます。もう一方の側は、一般的な条件付き期待値に関して純粋状態を達成する指標の存在から導かれます。私たちの結果は、完全なエントロピー収縮率や積動力学のテンソル安定推定にも及びます。例としては、量子脱分極、位相脱、コンパクト群対称化があり、これらはコヒーレンスと非対称性の減衰率に影響します。",
-  "last_delivered_at": "2026-08-21T04:54:45Z"
- },
- {
-  "delivery_id": "main:2608.20001",
-  "id": "2608.20001",
-  "posted_at": "2026-08-21T04:54:47Z",
-  "title": "Bayesian inference and retrodiction for faithful states on von Neumann algebras",
-  "title_ja": "フォン・ノイマン代数上の忠実な状態におけるベイズ推論と逆帰",
-  "title_translated": "フォン・ノイマン代数上の忠実な状態におけるベイズ推論と逆帰",
-  "translation_language": "ja",
-  "authors": "Pradyut Karmakar, Arthur J. Parzygnat",
-  "link": "https://arxiv.org/abs/2608.20001",
-  "primary": "math.OA",
-  "categories": [
-   "math.OA",
-   "math.CT",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "qit",
-   "foundations"
-  ],
-  "genre_names": [
-   "量子情報理論",
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "qit",
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子情報理論",
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Retrodiction is the act of inferring a cause from its effects, the most common example of which is Bayesian inference. Retrodiction can be defined by its structural process-theoretic properties, which are mathematically captured by category theory. This categorical definition of retrodiction has recently been shown to potentially isolate the Petz recovery map as a unique universal candidate for quantum Bayesian inference. This paper extends these results to the infinite-dimensional setting on von Neumann algebras. In the process, we provide a pedagogical review of the Petz recovery map in infinite dimensions and its relation to the more commonly used expression in the finite-dimensional setting. We formalize the open question as to whether these categorical axioms for retrodiction do in fact uniquely characterize the Petz recovery map. If such a characterization holds, this would show that Bayesian inversion and the Petz recovery map are structural necessities and not simply useful algorithms for classical and quantum inference.",
-  "abstract_ja": "逆行とは、結果から原因を推論する行為であり、最も一般的な例がベイズ推論です。逆帰は、圏論によって数学的に捉えられる構造過程理論的性質によって定義できます。このレトロディクションのカテゴリカルな定義は、最近、ペッツ回復写像を量子ベイズ推論の一意の普遍候補として孤立させる可能性が示されています。本論文では、これらの結果をフォン・ノイマン代数の無限次元設定に拡張します。この過程で、無限次元におけるペッツ回復写像と、有限次元設定でより一般的に用いられる式との関係について教育的レビューを提供します。これらの回溯公理が実際にペッツ回復マップを一意に特徴付けるかどうかという未解決の問題を形式化します。もしそのような特徴付けが成り立つならば、ベイズ反転とペッツ回復写像は構造的必然であり、単なる古典的および量子的推論の有用なアルゴリズムではないことが示されます。",
-  "abstract_translated": "逆行とは、結果から原因を推論する行為であり、最も一般的な例がベイズ推論です。逆帰は、圏論によって数学的に捉えられる構造過程理論的性質によって定義できます。このレトロディクションのカテゴリカルな定義は、最近、ペッツ回復写像を量子ベイズ推論の一意の普遍候補として孤立させる可能性が示されています。本論文では、これらの結果をフォン・ノイマン代数の無限次元設定に拡張します。この過程で、無限次元におけるペッツ回復写像と、有限次元設定でより一般的に用いられる式との関係について教育的レビューを提供します。これらの回溯公理が実際にペッツ回復マップを一意に特徴付けるかどうかという未解決の問題を形式化します。もしそのような特徴付けが成り立つならば、ベイズ反転とペッツ回復写像は構造的必然であり、単なる古典的および量子的推論の有用なアルゴリズムではないことが示されます。",
-  "last_delivered_at": "2026-08-21T04:54:48Z"
- },
- {
   "delivery_id": "main:2608.20050",
   "id": "2608.20050",
   "posted_at": "2026-08-21T04:54:50Z",
@@ -190427,5 +190195,251 @@
   "abstract_ja": null,
   "abstract_translated": null,
   "last_delivered_at": "2026-10-30T07:26:30Z"
+ },
+ {
+  "delivery_id": "main:2610.38479",
+  "id": "2610.38479",
+  "posted_at": "2026-10-30T10:46:18Z",
+  "title": "Recurrent Bipartite Graph Neural Networks for QC-MDPC Error Decoding in McEliece Cryptosystems",
+  "title_ja": "McEliece暗号システムにおけるQC-MDPC誤り復号のための再帰型二部グラフニューラルネットワーク",
+  "title_translated": "McEliece暗号システムにおけるQC-MDPC誤り復号のための再帰型二部グラフニューラルネットワーク",
+  "translation_language": "ja",
+  "authors": "Parth Rajeshkumar Tandel, Elisabeth Fink",
+  "link": "https://arxiv.org/abs/2610.38479v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.LG"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "qec",
+   "qml"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "誤り訂正・符号理論",
+   "量子機械学習"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "qec",
+   "qml"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "誤り訂正・符号理論",
+   "量子機械学習"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "As the advent of large-scale quantum computing threatens classical encryption, Quasi-Cyclic Moderate Density Parity-Check (QC-MDPC) codes have emerged as a foundational element of Post-Quantum Cryptography (PQC). However, decoding these relatively dense codes using classical Belief Propagation algorithms often leads to failures caused by short graph cycles that stall the decoder. In cryptographic applications, these failures are severe security vulnerabilities that leak secret key information. To address this, this paper proposes a Recurrent Bipartite Graph Neural Network (R-BGNN) as proof of concept. By integrating Gated Recurrent Units (GRUs) into the message-passing framework and employing a multi-topology curriculum training strategy, the R-BGNN actively learns to break limit-cycle oscillations. Evaluated across 20 unseen matrix topologies, the proposed architecture significantly outperforms classical Bit-Flipping and Min-Sum baselines, reducing the Decoding Failure Rate (DFR) by 63.7\\% at moderate noise levels ($t=10$) while converging in fewer iterations.",
+  "abstract_ja": "大規模量子コンピューティングの出現により、従来の暗号化が脅かされる中、準巡回中密度パリティチェック（QC-MDPC）符号がポスト量子暗号（PQC）の基礎要素として登場しました。しかし、これらの比較的密度の高い符号を従来の信念伝播アルゴリズムで復号すると、短いグラフサイクルによってデコーダが停止し、失敗することが少なくありません。暗号化アプリケーションでは、これらの失敗は秘密鍵情報を漏洩させる深刻なセキュリティ脆弱性となります。この問題を解決するため、本論文では概念実証としてリカレント二部グラフニューラルネットワーク（R-BGNN）を提案します。R-BGNNは、ゲート付きリカレントユニット（GRU）をメッセージパッシングフレームワークに統合し、マルチトポロジーカリキュラムトレーニング戦略を採用することで、リミットサイクル振動を積極的に学習します。 20種類の未知のマトリックストポロジーで評価した結果、提案されたアーキテクチャは、従来のビット反転および最小和ベースラインを大幅に上回り、中程度のノイズレベル（t=10）で復号失敗率（DFR）を63.7%削減し、より少ない反復回数で収束することがわかった。",
+  "abstract_translated": "大規模量子コンピューティングの出現により、従来の暗号化が脅かされる中、準巡回中密度パリティチェック（QC-MDPC）符号がポスト量子暗号（PQC）の基礎要素として登場しました。しかし、これらの比較的密度の高い符号を従来の信念伝播アルゴリズムで復号すると、短いグラフサイクルによってデコーダが停止し、失敗することが少なくありません。暗号化アプリケーションでは、これらの失敗は秘密鍵情報を漏洩させる深刻なセキュリティ脆弱性となります。この問題を解決するため、本論文では概念実証としてリカレント二部グラフニューラルネットワーク（R-BGNN）を提案します。R-BGNNは、ゲート付きリカレントユニット（GRU）をメッセージパッシングフレームワークに統合し、マルチトポロジーカリキュラムトレーニング戦略を採用することで、リミットサイクル振動を積極的に学習します。 20種類の未知のマトリックストポロジーで評価した結果、提案されたアーキテクチャは、従来のビット反転および最小和ベースラインを大幅に上回り、中程度のノイズレベル（t=10）で復号失敗率（DFR）を63.7%削減し、より少ない反復回数で収束することがわかった。",
+  "last_delivered_at": "2026-10-30T10:46:22Z"
+ },
+ {
+  "delivery_id": "main:2610.39873",
+  "id": "2610.39873",
+  "posted_at": "2026-10-30T10:46:23Z",
+  "title": "Syndrome Trellis Decryption in Post-Quantum Cryptography",
+  "title_ja": "ポスト量子暗号におけるシンドロームトレリス復号",
+  "title_translated": "ポスト量子暗号におけるシンドロームトレリス復号",
+  "translation_language": "ja",
+  "authors": "Meir Ariel",
+  "link": "https://arxiv.org/abs/2610.39873v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "qec",
+   "hardware"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "誤り訂正・符号理論",
+   "量子ハードウェア・実装"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "qec",
+   "hardware"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "誤り訂正・符号理論",
+   "量子ハードウェア・実装"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "We present a novel post-quantum cryptographic framework based on masked high-memory convolutional codes in the Niederreiter paradigm. The public key is derived from a high-memory polynomial parity-check matrix augmented by dense random masking and additional invertible linear transformations. The resulting matrix exhibits strong random-like properties, effectively concealing its algebraic structure and resisting known structural and algebraic attacks. Legitimate recipients retain polynomial-time decoding capability, whereas adversaries appear to be limited to generic information-set decoding with exponential complexity. Under standard cryptanalytic estimates, the proposed construction achieves security margins exceeding those of classical McEliece- and Niederreiter-based systems by factors greater than 2^200. Beyond its enhanced security profile, the construction offers considerable design flexibility, supporting arbitrary plaintext lengths, linear-time decryption, and a uniform per-bit computational cost, enabling efficient scalability to very long messages. Practical implementation is facilitated by a parallel array of syndrome-trellis decoders, dynamically instantiated according to candidate syndrome values, enabling efficient hardware and software implementations with high throughput. Overall, the proposed scheme is a promising candidate for robust, scalable, quantum-resistant public-key cryptography.",
+  "abstract_ja": "本稿では、ニーダーライター暗号方式におけるマスク付き高メモリ畳み込み符号に基づく、新しいポスト量子暗号フレームワークを提案する。公開鍵は、高密度ランダムマスキングと追加の可逆線形変換によって拡張された高メモリ多項式パリティチェック行列から導出される。結果として得られる行列は、強力なランダム性を持ち、その代数構造を効果的に隠蔽し、既知の構造的攻撃および代数的攻撃に耐性を持つ。正当な受信者は多項式時間復号能力を維持する一方、攻撃者は指数関数的な複雑さを伴う一般的な情報セット復号に限定される。標準的な暗号解析評価に基づくと、提案する構成は、古典的なマクエリス暗号方式およびニーダーライター暗号方式のセキュリティマージンを2^200倍以上上回るセキュリティマージンを達成する。強化されたセキュリティプロファイルに加え、この構成は設計の柔軟性にも優れており、任意の平文長、線形時間復号、およびビットあたりの均一な計算コストをサポートし、非常に長いメッセージへの効率的な拡張性を実現する。実用的な実装は、候補となるシンドローム値に応じて動的にインスタンス化されるシンドローム・トレリス復号器の並列アレイによって容易に実現され、高スループットで効率的なハードウェアおよびソフトウェア実装が可能になります。全体として、提案された方式は、堅牢で拡張性があり、量子耐性のある公開鍵暗号方式として有望な候補です。",
+  "abstract_translated": "本稿では、ニーダーライター暗号方式におけるマスク付き高メモリ畳み込み符号に基づく、新しいポスト量子暗号フレームワークを提案する。公開鍵は、高密度ランダムマスキングと追加の可逆線形変換によって拡張された高メモリ多項式パリティチェック行列から導出される。結果として得られる行列は、強力なランダム性を持ち、その代数構造を効果的に隠蔽し、既知の構造的攻撃および代数的攻撃に耐性を持つ。正当な受信者は多項式時間復号能力を維持する一方、攻撃者は指数関数的な複雑さを伴う一般的な情報セット復号に限定される。標準的な暗号解析評価に基づくと、提案する構成は、古典的なマクエリス暗号方式およびニーダーライター暗号方式のセキュリティマージンを2^200倍以上上回るセキュリティマージンを達成する。強化されたセキュリティプロファイルに加え、この構成は設計の柔軟性にも優れており、任意の平文長、線形時間復号、およびビットあたりの均一な計算コストをサポートし、非常に長いメッセージへの効率的な拡張性を実現する。実用的な実装は、候補となるシンドローム値に応じて動的にインスタンス化されるシンドローム・トレリス復号器の並列アレイによって容易に実現され、高スループットで効率的なハードウェアおよびソフトウェア実装が可能になります。全体として、提案された方式は、堅牢で拡張性があり、量子耐性のある公開鍵暗号方式として有望な候補です。",
+  "last_delivered_at": "2026-10-30T10:46:27Z"
+ },
+ {
+  "delivery_id": "main:2610.40507",
+  "id": "2610.40507",
+  "posted_at": "2026-10-30T10:46:29Z",
+  "title": "RecHash: Segmented Hash-Entangled Chains for Stateful Sequential Authentication",
+  "title_ja": "RecHash: ステートフルなシーケンシャル認証のためのセグメント化されたハッシュ絡み合いチェーン",
+  "title_translated": "RecHash: ステートフルなシーケンシャル認証のためのセグメント化されたハッシュ絡み合いチェーン",
+  "translation_language": "ja",
+  "authors": "Luis Adrián Lizama-Pérez",
+  "link": "https://arxiv.org/abs/2610.40507v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "crypto"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "crypto"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-2.5-flash-lite",
+  "abstract_en": "RecHash is a stateful sequential authentication construction based on paired hash-chain openings and an authenticated record history. It develops the decreasing position relation of the 2019 hash-entangled construction, whose exact integer normalization yields a two-coordinate constant-sum antichain. Direct proportional reuse is constrained by integer capacity and multiplicative contraction. The main construction instead assigns each record to a predetermined chain segment, with complementary positions encoding each digest block. All digests fit every scheduled slot, independently of preceding messages. For an $\\ell$-bit digest distributed over $k$ equal-length chain pairs, balanced allocation gives $\\lfloor L/(2^{\\lceil\\ell/k\\rceil}+1)\\rfloor$ slots. A 256-bit digest, 32 pairs, and length 65535 provide 254 application records followed by a renewal certificate, with 2048 bytes of openings per record for 256-bit chain outputs. We give a complete segmented state transition, a worked trace, exact allocation and resource results, and a renewal-free security-composition theorem conditional on authenticated history and an adaptive one-step guarantee. The analysis relates the construction to constant-sum encodings and standardized hash-based signatures; a concrete post-quantum reduction and security across renewal remain open.",
+  "abstract_ja": "RecHash は、ペアになったハッシュチェーンのオープニングと認証済みレコード履歴に基づくステートフルなシーケンシャル認証構造です。これは、正確な整数正規化によって 2 座標の定数和アンチチェーンが得られる 2019 年のハッシュエンタングル構造の減少位置関係を発展させたものです。直接比例再利用は、整数容量と乗法収縮によって制約されます。メイン構造では、各レコードをあらかじめ決められたチェーンセグメントに割り当て、補完的な位置で各ダイジェストブロックをエンコードします。すべてのダイジェストは、先行するメッセージとは無関係に、スケジュールされたすべてのスロットに適合します。$k$ 個の等しい長さのチェーンペアに分散された $\\ell$ ビットのダイジェストの場合、バランスの取れた割り当てにより $\\lfloor L/(2^{\\lceil\\ell/k\\rceil}+1)\\rfloor$ 個のスロットが得られます。256 ビットのダイジェスト、32 ペア、長さ 65535 の場合、254 個のアプリケーションレコードに続いて更新証明書が提供され、256 ビットのチェーン出力の場合、レコードごとに 2048 バイトのオープニングがあります。本稿では、完全なセグメント化された状態遷移、処理済みトレース、正確な割り当てとリソースの結果、および認証済み履歴と適応型ワンステップ保証を条件とする更新不要のセキュリティ構成定理を示す。この分析は、構成を定数和符号化と標準化されたハッシュベースの署名に関連付けている。具体的なポスト量子削減と更新に対するセキュリティは未解決である。",
+  "abstract_translated": "RecHash は、ペアになったハッシュチェーンのオープニングと認証済みレコード履歴に基づくステートフルなシーケンシャル認証構造です。これは、正確な整数正規化によって 2 座標の定数和アンチチェーンが得られる 2019 年のハッシュエンタングル構造の減少位置関係を発展させたものです。直接比例再利用は、整数容量と乗法収縮によって制約されます。メイン構造では、各レコードをあらかじめ決められたチェーンセグメントに割り当て、補完的な位置で各ダイジェストブロックをエンコードします。すべてのダイジェストは、先行するメッセージとは無関係に、スケジュールされたすべてのスロットに適合します。$k$ 個の等しい長さのチェーンペアに分散された $\\ell$ ビットのダイジェストの場合、バランスの取れた割り当てにより $\\lfloor L/(2^{\\lceil\\ell/k\\rceil}+1)\\rfloor$ 個のスロットが得られます。256 ビットのダイジェスト、32 ペア、長さ 65535 の場合、254 個のアプリケーションレコードに続いて更新証明書が提供され、256 ビットのチェーン出力の場合、レコードごとに 2048 バイトのオープニングがあります。本稿では、完全なセグメント化された状態遷移、処理済みトレース、正確な割り当てとリソースの結果、および認証済み履歴と適応型ワンステップ保証を条件とする更新不要のセキュリティ構成定理を示す。この分析は、構成を定数和符号化と標準化されたハッシュベースの署名に関連付けている。具体的なポスト量子削減と更新に対するセキュリティは未解決である。",
+  "last_delivered_at": "2026-10-30T10:46:30Z"
+ },
+ {
+  "delivery_id": "main:2610.38632",
+  "id": "2610.38632",
+  "posted_at": "2026-10-30T10:46:32Z",
+  "title": "The use of post-quantum cryptography in the automotive context",
+  "title_ja": "自動車分野におけるポスト量子暗号の利用",
+  "title_translated": "自動車分野におけるポスト量子暗号の利用",
+  "translation_language": "ja",
+  "authors": "Mariana do Carmo Barata Gonçalves, Valderi Reis Quietinho Leithardt",
+  "link": "https://arxiv.org/abs/2610.38632v1",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.DC"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "hardware"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "hardware"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "量子ハードウェア・実装"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "This study comparatively evaluates post-quantum cryptography (PQC) in automotive communication scenarios, considering the threat posed by quantum algorithms such as Shor's and Grover's algorithms. The simulations use OMNeT++, Veins, INET, and SUMO on two hardware platforms and examine ML-KEM/CRYSTALS-Kyber, ML-DSA/CRYSTALS-Dilithium, and FALCON. ML-KEM and ML-DSA are finalized NIST standards, whereas FALCON is a NIST-selected candidate pending final standardization. The evaluation considers a rural V2V scenario and an urban V2X scenario supported by a roadside unit. Kyber exhibits low {key encapsulation mechanism (KEM)}\\color{black} operation latency, Dilithium provides balanced signature performance, and FALCON has high key-generation and signing costs but efficient verification. The results are interpreted as a comparative assessment among the evaluated PQC schemes under the reported simulation conditions; {a conventional ECDSA/ECDH baseline measured in the same simulation setup is also reported for reference.}\\color{black} The resulting dataset can support future studies of cryptographic selection in automotive systems.",
+  "abstract_ja": "この研究では、Shor アルゴリズムや Grover アルゴリズムなどの量子アルゴリズムがもたらす脅威を考慮して、自動車通信シナリオにおけるポスト量子暗号 (PQC) を比較評価します。シミュレーションでは、2 つのハードウェア プラットフォームで OMNeT++、Veins、INET、SUMO を使用し、ML-KEM/CRYSTALS-Kyber、ML-DSA/CRYSTALS-Dilithium、FALCON を検証します。ML-KEM と ML-DSA は NIST の最終標準ですが、FALCON は NIST が選定した最終標準化待ちの候補です。評価では、路側ユニットがサポートする農村部の V2V シナリオと都市部の V2X シナリオを考慮します。Kyber は低い {鍵カプセル化メカニズム (KEM)}\\color{black} 動作遅延を示し、Dilithium はバランスの取れた署名性能を提供し、FALCON は鍵生成と署名のコストが高いものの、効率的な検証が行われます。結果は、報告されたシミュレーション条件の下で評価された PQC スキーム間の比較評価として解釈されます。 {同じシミュレーション設定で測定された従来の ECDSA/ECDH ベースラインも参考として報告されています。}\\color{black} 結果として得られたデータセットは、自動車システムにおける暗号化選択の今後の研究をサポートすることができます。",
+  "abstract_translated": "この研究では、Shor アルゴリズムや Grover アルゴリズムなどの量子アルゴリズムがもたらす脅威を考慮して、自動車通信シナリオにおけるポスト量子暗号 (PQC) を比較評価します。シミュレーションでは、2 つのハードウェア プラットフォームで OMNeT++、Veins、INET、SUMO を使用し、ML-KEM/CRYSTALS-Kyber、ML-DSA/CRYSTALS-Dilithium、FALCON を検証します。ML-KEM と ML-DSA は NIST の最終標準ですが、FALCON は NIST が選定した最終標準化待ちの候補です。評価では、路側ユニットがサポートする農村部の V2V シナリオと都市部の V2X シナリオを考慮します。Kyber は低い {鍵カプセル化メカニズム (KEM)}\\color{black} 動作遅延を示し、Dilithium はバランスの取れた署名性能を提供し、FALCON は鍵生成と署名のコストが高いものの、効率的な検証が行われます。結果は、報告されたシミュレーション条件の下で評価された PQC スキーム間の比較評価として解釈されます。 {同じシミュレーション設定で測定された従来の ECDSA/ECDH ベースラインも参考として報告されています。}\\color{black} 結果として得られたデータセットは、自動車システムにおける暗号化選択の今後の研究をサポートすることができます。",
+  "last_delivered_at": "2026-10-30T10:46:34Z"
+ },
+ {
+  "delivery_id": "main:2610.38451",
+  "id": "2610.38451",
+  "posted_at": "2026-10-30T10:46:35Z",
+  "title": "Rydberg Atomic Quantum Receiver Empowered Hybrid Non-orthogonal Multiple Access",
+  "title_ja": "リュードベリ原子量子受信機を活用したハイブリッド非直交多重アクセス",
+  "title_translated": "リュードベリ原子量子受信機を活用したハイブリッド非直交多重アクセス",
+  "translation_language": "ja",
+  "authors": "Xinya Shen, Zheng Chu, David Chieng, Chiew Foong Kwong, Qihao Peng, Pei Xiao, Theodoros Tsiftsis, Jianyue Zhu",
+  "link": "https://arxiv.org/abs/2610.38451v1",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT",
+   "cs.NI"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "network",
+   "sensing"
+  ],
+  "genre_names": [
+   "量子ネットワーク・通信",
+   "量子センシング・計測"
+  ],
+  "target_genre_ids": [
+   "network",
+   "sensing"
+  ],
+  "target_genre_names": [
+   "量子ネットワーク・通信",
+   "量子センシング・計測"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "In this paper, we propose a novel uplink Hybrid Non-Orthogonal Multiple Access (NOMA) architecture assisted by Rydberg Atomic Quantum Receivers (RAQRs) to improve energy efficiency by addressing the physical constraints of atomic sensing. We formulate a joint optimization problem encompassing phase measurements and multi-user power allocation to minimize the total transmit power. This problem is particularly challenging due to the non-linear amplitude-only observations of atomic vapor cells. To decomposes the resulting non-convexity, we develop a hierarchical three-layer decomposition optimization framework that systematically decouples the global problem. The inner layer employs a customized Expectation Maximization-Gerchberg-Saxton (EM-GS) algorithm to resolve phase ambiguity and estimate equivalent channel gains. The middle layer derives closed-form optimal power allocation solutions via Karush-Kuhn-Tucker (KKT) conditions. The outer layer utilizes linear Minimum Mean Square Error (MMSE) detection for high-reliability signal recovery. Simulation results demonstrate the superiority of the proposed framework over conventional RF-based Hybrid NOMA. Notably, the atomic architecture achieves approximately a 93% reduction in total power consumption compared to Orthogonal Multiple Access (OMA) baselines while maintaining strict backward compatibility, thereby laying a solid foundation for practical deployment in next-generation green communication networks.",
+  "abstract_ja": "本論文では、原子センシングの物理的制約に対処することでエネルギー効率を向上させるため、リュードベリ原子量子受信機（RAQR）を用いた新しいアップリンクハイブリッド非直交多元接続（NOMA）アーキテクチャを提案する。我々は、総送信電力を最小化するために、位相測定とマルチユーザ電力割り当てを含む統合最適化問題を定式化する。この問題は、原子蒸気セルの非線形振幅のみの観測のため、特に困難である。結果として生じる非凸性を分解するために、グローバル問題を体系的に分離する階層的な3層分解最適化フレームワークを開発する。内側の層では、位相曖昧性を解消し、等価チャネル利得を推定するために、カスタマイズされた期待値最大化-ゲルヒベルグ-サクストン（EM-GS）アルゴリズムを使用する。中間層では、カルシュ-クーン-タッカー（KKT）条件を介して閉形式の最適電力割り当てソリューションを導出する。外側の層では、高信頼性信号回復のために線形最小平均二乗誤差（MMSE）検出を使用する。シミュレーション結果は、提案されたフレームワークが従来のRFベースのハイブリッドNOMAよりも優れていることを示しています。特に、アトミックアーキテクチャは、厳密な後方互換性を維持しながら、直交多元接続（OMA）ベースラインと比較して総消費電力を約93%削減しており、次世代グリーン通信ネットワークへの実用化に向けた確固たる基盤を築いています。",
+  "abstract_translated": "本論文では、原子センシングの物理的制約に対処することでエネルギー効率を向上させるため、リュードベリ原子量子受信機（RAQR）を用いた新しいアップリンクハイブリッド非直交多元接続（NOMA）アーキテクチャを提案する。我々は、総送信電力を最小化するために、位相測定とマルチユーザ電力割り当てを含む統合最適化問題を定式化する。この問題は、原子蒸気セルの非線形振幅のみの観測のため、特に困難である。結果として生じる非凸性を分解するために、グローバル問題を体系的に分離する階層的な3層分解最適化フレームワークを開発する。内側の層では、位相曖昧性を解消し、等価チャネル利得を推定するために、カスタマイズされた期待値最大化-ゲルヒベルグ-サクストン（EM-GS）アルゴリズムを使用する。中間層では、カルシュ-クーン-タッカー（KKT）条件を介して閉形式の最適電力割り当てソリューションを導出する。外側の層では、高信頼性信号回復のために線形最小平均二乗誤差（MMSE）検出を使用する。シミュレーション結果は、提案されたフレームワークが従来のRFベースのハイブリッドNOMAよりも優れていることを示しています。特に、アトミックアーキテクチャは、厳密な後方互換性を維持しながら、直交多元接続（OMA）ベースラインと比較して総消費電力を約93%削減しており、次世代グリーン通信ネットワークへの実用化に向けた確固たる基盤を築いています。",
+  "last_delivered_at": "2026-10-30T10:46:37Z"
+ },
+ {
+  "delivery_id": "main:2610.39615",
+  "id": "2610.39615",
+  "posted_at": "2026-10-30T10:46:40Z",
+  "title": "Improving Energy Efficiency of Uplink RSMA via Rydberg Atomic Quantum Receiver",
+  "title_ja": "リュードベリ原子量子受信機によるアップリンクRSMAのエネルギー効率の向上",
+  "title_translated": "リュードベリ原子量子受信機によるアップリンクRSMAのエネルギー効率の向上",
+  "translation_language": "ja",
+  "authors": "Xinya Shen, Zheng Chu, David Chieng, Chiew Foong Kwong, Qihao Peng, Zhengyu Zhu, Pei Xiao, Jianyue Zhu",
+  "link": "https://arxiv.org/abs/2610.39615v1",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT",
+   "cs.NI"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "network",
+   "sensing"
+  ],
+  "genre_names": [
+   "量子ネットワーク・通信",
+   "量子センシング・計測"
+  ],
+  "target_genre_ids": [
+   "network",
+   "sensing"
+  ],
+  "target_genre_names": [
+   "量子ネットワーク・通信",
+   "量子センシング・計測"
+  ],
+  "classifier": "gemini-2.5-flash",
+  "abstract_en": "This paper investigates an uplink rate-splitting multiple access (RSMA) network empowered by a Rydberg atomic quantum receiver (RAQR) to maximize energy efficiency (EE). To overcome the amplitude-only measurement limitation of the considered direct readout RAQR, we devise a phase alignment mechanism that linearizes the received signal while retaining full channel energy, thereby enabling tractable optimization. The resulting non-convex fractional EE problem is transformed via Dinkelbach's method. For IoT scenarios with symmetric rate requirements, we derive exact closed-form power allocation from the Karush-Kuhn-Tucker (KKT) conditions, which yields a globally optimal bisection search with negligible computational latency. For asymmetric rate requirements, we develop a generalized block coordinate descent-based power allocation (BCD-PA) framework that eliminates reliance on expensive interior-point solvers. We further propose a low-complexity paired allocation (LC-Paired) that exploits user pairing and closed-form bandwidth solutions via the Lambert-W function. Simulation results confirm that the KKT-based scheme attains the highest EE, while the BCD-PA offers a flexible complexity-performance trade-off. The LC-Paired scheme drastically reduces computational cost with only moderate EE degradation.",
+  "abstract_ja": "本論文では、エネルギー効率（EE）を最大化するために、リュードベリ原子量子受信機（RAQR）を搭載したアップリンクレート分割多重アクセス（RSMA）ネットワークについて検討する。検討対象の直接読み出しRAQRの振幅のみの測定制限を克服するために、受信信号を線形化しつつチャネルエネルギーをフルに保持する位相整合機構を考案し、扱いやすい最適化を可能にする。結果として得られる非凸分数EE問題は、ディンケルバッハ法によって変換される。対称レート要件を持つIoTシナリオでは、カルシュ・クーン・タッカー（KKT）条件から正確な閉形式の電力割り当てを導出し、計算遅延を無視できるグローバル最適二分探索を実現する。非対称レート要件については、高価な内点ソルバーへの依存を排除する一般化されたブロック座標降下法に基づく電力割り当て（BCD-PA）フレームワークを開発する。さらに、ランバートW関数を用いたユーザペアリングと閉形式帯域幅解を活用する低複雑度ペア割り当て方式（LC-Paired）を提案する。シミュレーション結果から、KKTベースの方式が最高のエネルギー効率（EE）を達成する一方、BCD-PAは複雑度と性能のトレードオフにおいて柔軟性があることが確認された。LC-Paired方式は、EEの低下を最小限に抑えつつ、計算コストを大幅に削減する。",
+  "abstract_translated": "本論文では、エネルギー効率（EE）を最大化するために、リュードベリ原子量子受信機（RAQR）を搭載したアップリンクレート分割多重アクセス（RSMA）ネットワークについて検討する。検討対象の直接読み出しRAQRの振幅のみの測定制限を克服するために、受信信号を線形化しつつチャネルエネルギーをフルに保持する位相整合機構を考案し、扱いやすい最適化を可能にする。結果として得られる非凸分数EE問題は、ディンケルバッハ法によって変換される。対称レート要件を持つIoTシナリオでは、カルシュ・クーン・タッカー（KKT）条件から正確な閉形式の電力割り当てを導出し、計算遅延を無視できるグローバル最適二分探索を実現する。非対称レート要件については、高価な内点ソルバーへの依存を排除する一般化されたブロック座標降下法に基づく電力割り当て（BCD-PA）フレームワークを開発する。さらに、ランバートW関数を用いたユーザペアリングと閉形式帯域幅解を活用する低複雑度ペア割り当て方式（LC-Paired）を提案する。シミュレーション結果から、KKTベースの方式が最高のエネルギー効率（EE）を達成する一方、BCD-PAは複雑度と性能のトレードオフにおいて柔軟性があることが確認された。LC-Paired方式は、EEの低下を最小限に抑えつつ、計算コストを大幅に削減する。",
+  "last_delivered_at": "2026-10-30T10:46:41Z"
  }
 ]

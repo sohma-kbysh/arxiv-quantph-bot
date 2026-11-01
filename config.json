@@ -374,15 +374,15 @@
   "classify_with_llm": true,
   "gemini_model": "gemini-3.5-flash-lite",
   "gemini_model_primary": "gemini-3.5-flash-lite",
-  "gemini_model_secondary": "gemini-3.8-flash",
+  "gemini_model_secondary": "gemini-3.6-flash",
   "gemini_min_interval_sec": 7,
   "gemini_min_intervals": {
     "gemini-3.5-flash-lite": 7,
-    "gemini-3.8-flash": 7
+    "gemini-3.6-flash": 7
   },
   "gemini_thinking_levels": {
     "gemini-3.5-flash-lite": "minimal",
-    "gemini-3.8-flash": "low"
+    "gemini-3.6-flash": "medium"
   },
   "gemini_max_output_tokens": 4096,
   "gemini_max_retries": 2,

@@ -2,7 +2,7 @@
 
 This bot fetches the official arXiv RSS feed (`rss.arxiv.org/rss/quant-ph`) three times a day (Monday-Saturday), classifies each paper into one or more of 15 genres, and posts it to every corresponding Discord channel through webhooks with a translated title and abstract. The embed footer of each post lists **all** genres assigned to the paper, so a multi-genre paper shows its full classification in every channel it appears in.
 
-In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Azure Translator -> Apps Script (when configured). Normal quant-ph papers first use `gemini-3.5-flash-lite`; unresolved papers fall through to `gemini-3.8-flash`, then the deterministic TF-IDF/keyword fallback. Both models are paced at 7 seconds between requests. The bot uses **only the Python standard library**; `pip install` is not required.
+In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Azure Translator -> Apps Script (when configured). Normal quant-ph papers first use `gemini-3.5-flash-lite`; unresolved papers fall through to `gemini-3.6-flash`, then the deterministic TF-IDF/keyword fallback. Both models are paced at 7 seconds between requests. The bot uses **only the Python standard library**; `pip install` is not required.
 
 The November 2026 update adds daily quant-ph API backfill, classification decision traces, route-aware read-only audits, and re-evaluation of fallback classifications that have not reached any channel. The configured final translation backend is [Apps Script](docs/FREE_TRANSLATION.md), which is skipped until an operator deploys the web app and sets its two secrets. Google Cloud Translation is retained for explicit opt-in only because credit overages can be billed. The new model setup has offline regression coverage, but its live account quotas and classification accuracy still need operational evaluation.
 
@@ -160,10 +160,10 @@ Every paper obtained from the quant-ph RSS feed uses the normal AI classificatio
 
 **Primary path: Gemini classification with a fixed fallback order**
 
-When `classify_with_llm: true` and `GEMINI_API_KEY` is available, the bot sends titles and abstracts in batches of `translate_batch_size` entries (default 5). Every batch tries `gemini_model_primary` (`gemini-3.5-flash-lite`) first, then `gemini_model_secondary` (`gemini-3.8-flash`) for entries still unresolved. TF-IDF no longer routes papers between models.
+When `classify_with_llm: true` and `GEMINI_API_KEY` is available, the bot sends titles and abstracts in batches of `translate_batch_size` entries (default 5). Every batch tries `gemini_model_primary` (`gemini-3.5-flash-lite`) first, then `gemini_model_secondary` (`gemini-3.6-flash`) for entries still unresolved. TF-IDF no longer routes papers between models.
 
 - Each model has its own circuit breaker. Rate limits and overload stop repeated attempts against that model; unresolved entries proceed to the next model, then the deterministic fallback.
-- Both models have a 7-second minimum interval, with `minimal` / `low` thinking respectively, a 4096-token output cap, two retry attempts, and an overload give-up threshold of one. These settings limit waits; they do not guarantee free-tier capacity.
+- Both models have a 7-second minimum interval, with `minimal` / `medium` thinking respectively, a 4096-token output cap, two retry attempts, and an overload give-up threshold of one. These settings limit waits; they do not guarantee free-tier capacity.
 - The prompt includes each genre's natural-language `description` and asks for genre IDs only. Output uses `<<<k>>> id1,id2`.
 - Multi-label classification and the existing broad QEC policy remain. All papers acquired through quant-ph use normal classification regardless of primary category.
 - With `reclassify_pending_fallback: true`, the next discovery run retries a queued `tfidf` classification only if no destination has a delivery receipt. Already delivered classifications remain stable.
@@ -249,7 +249,7 @@ Delivery is verified per channel:
 }
 ```
 
-`classifier` records the selected model (`gemini-3.5-flash-lite`, `gemini-3.8-flash`) or `tfidf`. New queue/log entries also carry `classification`: the policy fingerprint, base and final genre IDs, and post-processing rules with matched terms and added/removed genres. Older history remains unchanged.
+`classifier` records the selected model (`gemini-3.5-flash-lite`, `gemini-3.6-flash`) or `tfidf`. New queue/log entries also carry `classification`: the policy fingerprint, base and final genre IDs, and post-processing rules with matched terms and added/removed genres. Older history remains unchanged.
 
 `title_translated`, `abstract_translated`, and `translation_language` are the language-neutral fields. `title_ja` and `abstract_ja` are still written for backward compatibility with older logs and the existing Japanese workflow.
 
@@ -259,7 +259,7 @@ After posting, the bot sends one summary embed (in Japanese) to `DISCORD_WEBHOOK
 
 - Number of papers fetched from the feed and number of new post candidates
 - Number of papers posted successfully (and number of Discord messages), deferred for translation, and failed
-- Classification stats: per-model paper counts, e.g. `🏷 分類: gemini-3.5-flash-lite: 13件 / gemini-3.8-flash: 21件 / TF-IDF: 2件`
+- Classification stats: per-model paper counts, e.g. `🏷 分類: gemini-3.5-flash-lite: 13件 / gemini-3.6-flash: 21件 / TF-IDF: 2件`
 - Translation stats: successful translations per backend (DeepL / Azure / Apps Script; optional Google), and any backend disabled by the circuit breaker during the run
 - **The list of posted papers with the channels each one was sent to**, plus separate lists of deferred and failed papers
 
@@ -313,6 +313,8 @@ python3 scripts/audit_classification.py --date 2026-07-03 --timezone Asia/Tokyo
 ```
 
 The audit restores `source_feed`, `announce_type`, and `classification_context`. Quant-ph papers use normal classification; external papers use the same strict review and skip-consensus rules as production. Missing rules or inconclusive results are reported as unclassified. Label order alone is not a difference. The audit uses classifier API quota but sends no Discord messages and does not update production state.
+
+The backup model is now Gemini 3.6 Flash: in a one-paper production-key audit it returned a complete classification in 6.5 seconds, while 3.8 Flash timed out again on the same input. Both models have official free tiers; no billing upgrade was made. See the [official pricing](https://ai.google.dev/gemini-api/docs/pricing) and [supported models](https://ai.google.dev/gemini-api/docs/deprecations).
 
 An empty selection, missing result, or any unclassified paper exits with status 2, so an API failure cannot appear as a successful audit with zero differences. Confirmed `skip` decisions count as completed reviews. Use `--limit 1` (or the workflow's `limit` input) for a small connection test. Sanitized request diagnostics are retained as workflow artifacts for seven days.
 
@@ -706,7 +708,7 @@ Classification-related settings in `config.json`:
 | `fallback_title_token_bonus` | `0.10` | Score bonus for a single-word keyword found in the title |
 | `fallback_abstract_token_bonus` | `0.03` | Score bonus for a single-word keyword found in the abstract |
 | `gemini_model_primary` | `"gemini-3.5-flash-lite"` | Primary classification model |
-| `gemini_model_secondary` | `"gemini-3.8-flash"` | Used for entries unresolved by the primary model |
+| `gemini_model_secondary` | `"gemini-3.6-flash"` | Used for entries unresolved by the primary model |
 | `gemini_min_intervals` | Both models: `7` | Per-model request spacing in seconds |
 | `gemini_thinking_levels` | Lite: `minimal`, Flash: `low` | Per-model thinking level |
 | `gemini_max_output_tokens` | `4096` | Output token cap |
@@ -733,7 +735,7 @@ Per-source keys inside `external_arxiv_queries`:
 The run log prints LLM usage. Example:
 
 ```text
-[info] Gemini usage: mode=classify-only, model=gemini-3.5-flash-lite+gemini-3.8-flash, requests=17, classified=82/82, tfidf_fallback=0, disabled_models=None
+[info] Gemini usage: mode=classify-only, model=gemini-3.5-flash-lite+gemini-3.6-flash, requests=17, classified=82/82, tfidf_fallback=0, disabled_models=None
 ```
 
 ### arXiv category hints
@@ -959,7 +961,7 @@ Note: users with `Administrator` bypass channel permission overwrites. Webhooks 
 
 arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1日3回取得し、論文を15ジャンルのうち1つ以上に分類して、翻訳済みタイトル・abstract 訳とともに対応する Discord の各チャンネルへ Webhook で投稿する。各投稿の embed footer には、投稿先チャンネルのジャンルだけでなく**その論文に割り当てられた全ジャンル名**が表示されるため、複数ジャンルの論文はどのチャンネルで見ても分類の全体が分かる。
 
-現在の標準運用では、Gemini は**分類のみ**に使い、翻訳は DeepL → Azure Translator → Apps Script（設定済みの場合） の順に試行する。通常のquant-ph論文をまず `gemini-3.5-flash-lite` に送り、未分類分を `gemini-3.8-flash`、続いて決定的な TF-IDF・キーワード分類へ回す。両モデルともリクエスト間隔は7秒。**標準ライブラリのみで動作し、`pip install` は不要。**
+現在の標準運用では、Gemini は**分類のみ**に使い、翻訳は DeepL → Azure Translator → Apps Script（設定済みの場合） の順に試行する。通常のquant-ph論文をまず `gemini-3.5-flash-lite` に送り、未分類分を `gemini-3.6-flash`、続いて決定的な TF-IDF・キーワード分類へ回す。両モデルともリクエスト間隔は7秒。**標準ライブラリのみで動作し、`pip install` は不要。**
 
 2026年11月の更新で、quant-ph APIによる日次の取りこぼし回収、分類判断の履歴、取得経路を再現する読み取り専用監査、未配信のフォールバック分類の再評価を追加した。翻訳チェーンの最終段を[Apps Script](docs/FREE_TRANSLATION.md)に変更したが、運用者がWebアプリをデプロイして2つのSecretを設定するまではスキップする。Google Cloud Translationは控除超過が課金対象となるため、明示的に有効化する場合だけ使用する。新モデル構成はオフライン回帰試験で確認しており、実アカウントの利用枠と分類精度は今後の運用評価が必要。
 
@@ -1117,10 +1119,10 @@ quant-ph RSS から取得した論文は、primary category に関係なく通�
 
 **主経路: Gemini 分類を固定順に試行**
 
-`classify_with_llm: true` かつ `GEMINI_API_KEY` がある場合、タイトルと abstract を `translate_batch_size` 件ずつ（既定5件）送る。全バッチで `gemini_model_primary`（`gemini-3.5-flash-lite`）を先に使い、未分類分だけを `gemini_model_secondary`（`gemini-3.8-flash`）へ回す。TF-IDF によるモデル振り分けは行わない。
+`classify_with_llm: true` かつ `GEMINI_API_KEY` がある場合、タイトルと abstract を `translate_batch_size` 件ずつ（既定5件）送る。全バッチで `gemini_model_primary`（`gemini-3.5-flash-lite`）を先に使い、未分類分だけを `gemini_model_secondary`（`gemini-3.6-flash`）へ回す。TF-IDF によるモデル振り分けは行わない。
 
 - モデルごとに circuit breaker を持ち、レート制限や過負荷時は同じモデルへの繰り返しを止める。未分類分は次のモデル、その後に決定的なフォールバックへ進む。
-- 両モデルの最小間隔は7秒。thinking はそれぞれ `minimal` / `low`、出力上限4096 token、再試行2回、過負荷の打ち切り閾値1。待ち時間を抑える設定であり、無料枠で処理しきれることは保証しない。
+- 両モデルの最小間隔は7秒。thinking はそれぞれ `minimal` / `medium`、出力上限4096 token、再試行2回、過負荷の打ち切り閾値1。待ち時間を抑える設定であり、無料枠で処理しきれることは保証しない。
 - プロンプトにはジャンルの `description` を渡し、`<<<k>>> id1,id2` 形式のジャンルIDだけを返させる。
 - マルチラベルと広義QEC方針は維持する。quant-phから取得した論文はprimaryに関係なく通常分類する。
 - `reclassify_pending_fallback: true` では、次の発見フェーズでキュー内の `tfidf` 分類を再評価する。ただし配信receiptが1件もない論文だけを対象とし、配信済みの分類は変更しない。
@@ -1206,7 +1208,7 @@ DeepL → Azure Translator → Apps Script（設定済みの場合）
 }
 ```
 
-`classifier` は分類したモデル（`gemini-3.5-flash-lite`、`gemini-3.8-flash`）または `tfidf` を記録する。新規のキュー・投稿ログには `classification` も保存し、方針のfingerprint、補正前後のジャンル、発火ルール・一致語・追加/削除ジャンルを区別する。古い履歴は書き換えない。
+`classifier` は分類したモデル（`gemini-3.5-flash-lite`、`gemini-3.6-flash`）または `tfidf` を記録する。新規のキュー・投稿ログには `classification` も保存し、方針のfingerprint、補正前後のジャンル、発火ルール・一致語・追加/削除ジャンルを区別する。古い履歴は書き換えない。
 
 `title_translated`, `abstract_translated`, `translation_language` は多言語対応用の汎用フィールド。`title_ja` と `abstract_ja` は、既存の日本語ログや従来運用との互換性のために引き続き保存される。
 
@@ -1216,7 +1218,7 @@ DeepL → Azure Translator → Apps Script（設定済みの場合）
 
 - フィードから取得した論文数と、新規投稿対象の論文数
 - 投稿に成功した論文数(と Discord メッセージ数)、翻訳持ち越し数、投稿失敗数
-- 分類の内訳: モデル別の投稿論文数(例: `🏷 分類: gemini-3.5-flash-lite: 13件 / gemini-3.8-flash: 21件 / TF-IDF: 2件`)
+- 分類の内訳: モデル別の投稿論文数(例: `🏷 分類: gemini-3.5-flash-lite: 13件 / gemini-3.6-flash: 21件 / TF-IDF: 2件`)
 - 翻訳の内訳: バックエンド別(DeepL / Azure / Apps Script、任意のGoogle)の成功数と、実行中に circuit breaker で停止したバックエンド
 - **投稿した論文の一覧と、それぞれの送信先チャンネル**。翻訳持ち越し・投稿失敗の論文一覧も別掲
 
@@ -1270,6 +1272,8 @@ python3 scripts/audit_classification.py --date 2026-07-03 --timezone Asia/Tokyo
 ```
 
 監査は `source_feed`・`announce_type`・`classification_context` を復元し、quant-phには通常分類、外部候補には本番と同じ厳密審査とskip合意条件を適用する。ルール不足・審査未決着は未分類として報告し、ラベル順だけの違いは差分としない。分類APIの利用枠は消費するが、Discord投稿や本番状態の更新は行わない。
+
+予備系はGemini 3.6 Flashへ変更した。本番キーで同じ1論文を試したところ、3.8 Flashは再びタイムアウトし、3.6 Flashは6.5秒で分類を完了した。Google内部の遅延原因はログだけでは特定できない。無料枠のあるサポート中モデルを利用し、課金設定は変更していない。
 
 対象0件・結果不足・未分類が1件でも残る場合は終了コード2で失敗にする。API失敗を「差分なし・監査成功」と扱わない。合意済みのskip判定は監査完了に数える。少量の疎通確認は `--limit 1` またはworkflow入力 `limit: 1` を使う。秘密情報を伏せた通信診断はworkflowのartifactに7日間保存する。
 
@@ -1572,7 +1576,7 @@ python3 arxiv_bot.py
 | `fallback_title_token_bonus` | `0.10` | タイトル中の1単語キーワードへの加点 |
 | `fallback_abstract_token_bonus` | `0.03` | abstract 中の1単語キーワードへの加点 |
 | `gemini_model_primary` | `"gemini-3.5-flash-lite"` | 分類のプライマリモデル |
-| `gemini_model_secondary` | `"gemini-3.8-flash"` | プライマリモデルで未分類の論文に使用 |
+| `gemini_model_secondary` | `"gemini-3.6-flash"` | プライマリモデルで未分類の論文に使用 |
 | `gemini_min_intervals` | 両モデル: `7` | モデル別の最小リクエスト間隔（秒） |
 | `gemini_thinking_levels` | Lite: `minimal`, Flash: `low` | モデル別thinking設定 |
 | `gemini_max_output_tokens` | `4096` | 出力token上限 |
@@ -1599,7 +1603,7 @@ python3 arxiv_bot.py
 実行ログには LLM の利用状況が出力される。例:
 
 ```text
-[info] Gemini usage: mode=classify-only, model=gemini-3.5-flash-lite+gemini-3.8-flash, requests=17, classified=82/82, tfidf_fallback=0, disabled_models=None
+[info] Gemini usage: mode=classify-only, model=gemini-3.5-flash-lite+gemini-3.6-flash, requests=17, classified=82/82, tfidf_fallback=0, disabled_models=None
 ```
 
 ### arXiv カテゴリヒント

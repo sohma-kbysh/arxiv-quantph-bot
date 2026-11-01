@@ -1,21 +1,31 @@
 # 設計バックログ（監査項目10以降）
 
 2026-07-30 の設計監査で挙げた項目のうち、1〜9 は `b70588f` で修正・本番デプロイ済み。
-本書は **10 以降の構想と実施順序** をまとめたもの。実装は未着手で、着手するかは項目ごとにユーザーが決める。
+本書は **10 以降の構想と実施順序** をまとめたもの。2026-11-01に実装状況を更新した。未決の分類方針や対象カテゴリの拡張は、以下の限定的な改善とは分けて判断する。
 
 ---
 
-## 0. 現況の再検証（2026-07-30 時点、`c4be2fd`）
+## 2026-11-01 更新
+
+- 分類順を `gemini-3.5-flash-lite` → `gemini-3.8-flash` → 決定的フォールバックへ簡素化。両モデル7秒間隔、thinkingはminimal/low、出力上限4096、再試行2回、過負荷打ち切り閾値1。無料利用可能量や実分類精度は実アカウントでの評価が必要。
+- #11の一般語crypto追加を特定句へ限定し、#23の英語説明・正規化・キーワード証拠の重複排除を実装。
+- #24の分類履歴、#17の方針fingerprintによるskip再評価、#25の経路別監査を実装。採用済み・配信済みの判定は変更しない。TF-IDFの未配信キューだけ次回discoverで再評価する。
+- quant-phカテゴリAPIによる取りこぼし回収を追加。成功後20時間間隔、初回7日、最終成功からの経過＋重複2日を考慮し、全ページ成功時のみcursorを進める。投稿日窓より古い論文の新cross-listはRSSに依存する。
+- 標準翻訳順をDeepL → Azure → Apps Scriptへ変更し、Google Cloudは明示的な有効化時だけ使用する。Apps Scriptの公開endpointは未デプロイで、Secret設定まではスキップする。SciRateのソース・workflowは今回の変更対象外。
+
+## 0. 現況の再検証（2026-11-01 更新）
 
 監査後の修正で結果的に解消された項目があるため、まず実コードで確認した。
 
 | # | 項目 | 状態 |
 |---|---|---|
 | 26 | repostスクリプトの冪等性 | **解消済み** — `repost_genre_ids` / `repost_channels` で配信済みchannelをskip |
-| 28 | state保存の非atomic・件数制限 | **半分解消** — stateは `atomic_write_json` かつ上限撤廃。ただし `posted_log.json` は `log[-5000:]` の切り詰めが残存（現在2154件、未発火） |
-| 30 | integration test不足 | **一部解消** — `test_delivery_reliability` / `test_repost_reliability` / `test_scirate_reliability` を追加。policy変更・切り詰め後再投稿・audit整合は未カバー |
+| 28 | state保存の非atomic・件数制限 | **半分解消** — stateは `atomic_write_json` かつ上限撤廃。ただし `posted_log.json` は `log[-5000:]` の切り詰めが残存（現在5000件で上限到達） |
+| 30 | integration test不足 | **一部解消** — 配信・外部審査・経路別audit・分類fallbackのオフライン回帰試験を追加。ログ切り詰め後の監査や新モデルの実精度評価は残る |
 | 22 | quant-ph優先がend-to-endでない | **緩和** — 配信が独立フェーズになり途中停止に強くなった。ただし外部LLMレビューは同一runの discover フェーズ内で quant-ph 配信より前に走る |
-| 10〜21, 23〜25, 27, 29 | — | **未着手** |
+| 11, 23, 24 | 一般語crypto・決定的分類・判断履歴 | **解消済み**（詳細は各節） |
+| 17, 25, 27 | 再評価・経路別audit・preview | **一部解消**（詳細は各節） |
+| 10, 12〜16, 18〜21, 29 | 分類・翻訳方針 | **未決または未着手**。今回の改善で方針変更は行わない |
 
 ---
 
@@ -35,41 +45,24 @@ Phase 5  周辺整理            →  #23, #28残り
 
 理由：
 
-- **Phase 0 がないと Phase 2 以降を評価できない。** 現在ログには最終genreしか残らず（#24）、「AIがそう判断した」のか「後処理が足した」のか区別できない。また本番同等の分類を投稿なしで試す手段がない（#27）ため、方針変更の影響を事前に測れない。
-- **Phase 1 がないと Phase 2 以降が過去に届かない。** 分類cacheのキーは `category:arxiv_id` のみで policy version を含まない（#17）。方針を変えても過去の accept/skip は凍結されたまま。特に skip は永久に再評価されない。
+- **観測と試験台を先に整える。** #24の判断履歴と過去投稿に対する経路別auditは実装済み。全取得・翻訳・配信判断をまとめた副作用なしpreviewは#27として残る。
+- **再評価の範囲を制御する。** #17で方針変更後のskipを再評価可能にした。採用済み・配信済みの分類は維持し、意図しない追い投稿を防ぐ。
 - **Phase 2 が決まらないと Phase 3・4 の正解が決まらない。** 「最終判断は誰か」が未確定のまま個別keywordを調整しても、方針が揺れるたびに手戻りする。
 
 ---
 
 ## Phase 0 — 観測と試験台
 
-### #24 ログでAI判断と後処理を区別できない
+### #24 ログでAI判断と後処理を区別できない — 解消済み
 
-**現状**：`posted_log.json` の `classifier` は `"gemini-2.5-flash"` のような単一モデル名のみ。
-`postprocess_genres` による primary強制other・crypto強制追加・QEC追加は記録されない。先の crypto 誤配信（metrologyの "blind directions" 等）もログ上は Gemini の判断に見える。
+新しいキュー・投稿ログの `classification` に `policy`、`base_genre_ids`、`final_genre_ids`、`postprocess` を保存する。各補正は `rule`・`matched_terms`・`added_genre_ids`・`removed_genre_ids` を持つ。既存の `classifier` も残す。決定的分類はその出自を記録し、LLMの出力と混同しない。
 
-**構想**：分類結果を「決定の履歴」として持つ。
+古い投稿履歴には後から根拠を補完しない。補正の発火頻度や誤分類を集計するための情報は、今回以降の判定から蓄積する。
 
-```json
-"classification": {
-  "model_votes": [{"model": "gemini-2.5-flash", "genre_ids": ["qit"]}],
-  "base_genre_ids": ["qit"],
-  "postprocess": [
-    {"rule": "force_genre_keywords.crypto", "matched": "blind", "added": ["crypto"]},
-    {"rule": "qec_adjacent_coding", "matched": "linear code", "added": ["qec"]}
-  ],
-  "final_genre_ids": ["qit", "crypto", "qec"]
-}
-```
+### #27 本番同等の分類を投稿なしで試せない — 一部解消
 
-`classifier` は後方互換のため残す。`postprocess_genres` / `apply_forced_genres` / `apply_external_qec_policy` が理由を返す形に変える。
+**現状**：過去投稿は `scripts/audit_classification.py` で本番と同じ取得経路の分類・後処理を再実行できる。Discord投稿・本番状態更新はなく、モデルの指定も可能。ただしAPI利用枠は消費する。新規取得から翻訳判定まで含む完全なpreviewは未実装。
 
-**効果**：これ単体で「後処理が何件・どのkeywordで発火しているか」を実データから集計できるようになり、#11・#18 の是非を推測でなく実測で決められる。
-**コスト**：小〜中（純粋な追加、既存挙動を変えない）。**リスク**：低。
-
-### #27 本番同等の分類を投稿なしで試せない
-
-**現状**：
 - `--dry-run` = LLMを呼ばず TF-IDF のみ（本番と別物）
 - `ARXIV_TEST_FEED` = 入力だけテスト、**投稿先は本番webhook・stateも本番**
 
@@ -86,27 +79,21 @@ Phase 5  周辺整理            →  #23, #28残り
 ### #30 残り
 
 `--preview` を土台に、次を追加：
-- policy version 変更時に過去分が再評価されること（#17と同時）
+- policy fingerprintが変わったskipの再評価を検証し、採用済み判定を維持する（#17）
 - `posted_log` 切り詰め後に再投稿が起きないこと（#28残り）
-- audit / SciRate が本番と同じ分類を出すこと（#25）
+- auditの経路一致は回帰試験済み。SciRateは今回変更せず、別途対象を判断する（#25）
 
 ---
 
 ## Phase 1 — 再評価可能性
 
-### #17 分類cacheにpolicy versionがない
+### #17 分類cacheにpolicy versionがない — 一部解消
 
-**現状**：`external_reviews` のキーは `f"{category}:{paper['id']}"`。genre定義・prompt・QECルール・モデル構成を変えても過去の判定は再評価されない。特に skip はそのまま固定される。
+`external_reviews` の判定には分類設定・ルール・モデル構成から得る方針fingerprintを保存する。方針が変わった保存済みskipは、候補が再取得または保留から復元された際に再審査する。採用済み判定は有効なままとし、過去配信の変更・追い投稿は発生させない。
 
-**構想**：
-- `config.json` に `classification_policy_version`（整数 or ハッシュ）を持つ
-- prompt本文・genre定義・`qec_adjacent_coding_terms`・`force_genre_keywords`・モデル構成から**自動でハッシュを算出**する方が運用が楽（手動更新は必ず忘れる）
-- cacheエントリに `policy` を保存し、不一致なら「再評価対象」とする
-- 全件再評価はAPI量が跳ねるので、**skipのみ再評価** / **accept含め全件** を選べるようにする
+また、`reclassify_pending_fallback: true` では、どのチャンネルにも配信されていないTF-IDFキューを次回discoverで再評価する。一部でも配信済みなら分類を固定する。
 
-**判断が必要**：policy変更時に既存 accept の genre も更新するか（＝過去投稿の追い投稿が発生しうる）、それとも新規判定にのみ適用するか。
-
-**コスト**：中。**リスク**：中（再評価の範囲を誤ると大量の追い投稿になる。`--preview` 必須）。
+**残る課題**：過去の全skipをAPI取得窓と無関係に再走査する仕組み、採用済み判定を明示的に再評価する安全な操作。これらは今回実装しない。
 
 ---
 
@@ -118,7 +105,7 @@ Phase 5  周辺整理            →  #23, #28残り
 
 | 経路 | AI前 | AI判定 | AI後の決定的補正 |
 |---|---|---|---|
-| quant-ph | TF-IDFでモデル振り分け | Flash → Flash Lite → Cerebras | crypto強制追加、QEC隣接追加、（cross-list以外は）primary強制other |
+| quant-ph | モデル振り分けなし | Gemini 3.5 Flash Lite → Gemini 3.8 Flash | 特定句のcrypto追加、QEC隣接追加。quant-ph取得元のprimary強制otherはなし |
 | 外部 | keyword query | 同上（最初の採用モデルで確定） | QEC隣接追加 |
 | quant-ph全滅時 | — | TF-IDF が最終分類 | 同上 |
 
@@ -137,22 +124,15 @@ Phase 5  周辺整理            →  #23, #28残り
 
 **これが決まらないと以下が決まらない：#11, #12, #18, #19。**
 
-### #11 crypto強制keywordが広すぎる
+### #11 crypto強制keywordが広すぎる — 解消済み
 
-**現状**：`force_genre_keywords.crypto` に `blind` / `blindness` / `verifiable` / `verifiability` / `secure` / `securely` / `security` を含む14語。マッチは `\b<語>\w*\b` を title+abstract 全体に適用し、**1回でも出れば crypto を追加し、同時に `other` を除去する**。
+`blind`・`secure`・`security`・`verifiable`などの一般語単独を除去し、`blind quantum computation`、`verifiable quantum computation`、`secure delegation`、`quantum key distribution`など特定の15句に限定した。大文字小文字・ハイフン・一般的な複数形を正規化し、一致語と補正内容を判断履歴に残す。
 
-実際の誤配信：metrology の "blind directions"、chirality の "blind"、数学的な "verifiable certificates"、"symbol-blind channel estimation"。
-
-**構想**（(a)または(b)を選んだ場合）：
-- 単語単独マッチ（`blind`, `secure`, `security`, `verifiable`）を削除し、**句のみ残す**（`blind quantum computation`, `delegated quantum computation`, `untrusted server` 等）。現状すでに句形の候補が7語あり、これらは誤爆していない
-- 「AIがcryptoを落としたが句が存在する」場合のみ追加、という条件に狭める
-- Phase 0 の #24 が入っていれば、**変更前に「どの語が何件発火しているか」を実測してから削る**ことができる
-
-**コスト**：小（configのみ）。**リスク**：低。ただし削りすぎると取りこぼしが増えるため、`--preview` で before/after 比較する。
+metrologyの“blind directions”など、一般語だけを根拠にcryptoへ追加する経路は回帰試験で防ぐ。より広い編集方針の変更や過去投稿の訂正は今回の対象外。
 
 ### #12 classify_max_genres が上限として機能していない
 
-**現状**：`classify_max_genres`（既定2）は **TF-IDFのランキング切り出しとpromptの文面にしか使われていない**。LLM出力を正規化する `normalize_genre_ids` は件数を切らない。さらに crypto / QEC を後付けするため、通常ログだけで3分類以上が30件ある。
+**現状**：`classify_max_genres`（既定2）は **TF-IDFのランキング切り出しとpromptの文面にしか使われていない**。LLM出力を正規化する `normalize_genre_ids` は件数を切らない。さらに crypto / QEC を後付けするため、2026-11-01時点の保持ログ5000件中101件が3分類以上だった。
 
 **選択肢**：
 - **(a) 上限を撤廃してmulti-label前提を明文化**（現状の実態に名前を合わせる）。設定名を `classify_target_genres`（＝AIへの目安）に改名
@@ -172,7 +152,7 @@ Phase 5  周辺整理            →  #23, #28残り
 ### #19 other の意味が経路で違う
 
 **現状**：
-- quant-ph経路：分類不能・primary強制・TF-IDF低信頼を**全部 other** に入れる
+- quant-ph経路：LLMのother判定やTF-IDF低信頼はotherになる。quant-ph取得元へのprimary強制otherは廃止済み
 - 外部経路：other は禁止（`excluded_genres`）。合わなければ skip
 - `other, qec` のような組合せも生成可能
 
@@ -199,14 +179,14 @@ primary強制otherは #1 の修正で quant-ph feed には効かなくなった�
 
 **推奨**：(b)。QEC取りこぼし（今回の4本）はまさに「1モデルが1ラベルしか返さない」ケースだった。
 
-**コスト**：中。**リスク**：API quota（Flash 無料枠）。`gemini_primary_run_budget: 20` との兼ね合いを要確認。
+**コスト**：中。**リスク**：API quota。現行の2モデルを追加呼び出しする量を実測し、アカウントのRPM/TPM/RPDとの兼ね合いを確認する。
 
 ### #16 skip判定の独立性が低い
 
-**現状**：Flash と Flash Lite は同系列・同prompt・同abstract。2つが skip すると Cerebras まで到達しない。単独skip票は pending に保存されず、次回ゼロからやり直し（`single_skip_pending` という統計はあるが再利用されていない）。
+**現状**：Gemini 3.5 Flash Lite と Gemini 3.8 Flashは同じ提供元・同prompt・同abstractであり、skip誤りの相関は残る。単独skip票は次回へ持ち越さず、再実行時は再審査する（`single_skip_pending`は統計のみ）。
 
 **構想**：
-- 合意を取るモデルを **系列違いにする**（Flash + Cerebras を必須にし、Flash Lite は3番手）
+- モデル数だけを独立性とみなさず、プロンプト・証拠・人手評価を変えた場合のskip再現率を測る
 - 単独skip票を pending に保存し、次回は「1票持ち越し」から再開する（現状の再計算を無駄にしない）
 - #17 の policy version と組み合わせ、方針変更時は skip 票を破棄して再評価する
 
@@ -249,52 +229,33 @@ multi-label 前提（#12(a)）なら問題にならない。**上限を設ける
 
 **推奨**：まず (c) で主張範囲を正しくし、その上で (a) を1カテゴリずつ。`--preview` があれば追加時の影響を投稿前に測れる。
 
-### #25 audit / SciRate が外部経路を再現しない
+### #25 audit / SciRate が外部経路を再現しない — auditは解消済み
 
-**現状**：`scripts/audit_classification.py` は全論文に `postprocess_genres`（quant-ph経路）を適用する（[audit_classification.py:145](scripts/audit_classification.py#L145)）。外部由来の cs.IT primary 論文などは監査時に other へ変わり、**監査結果に偽の差分が出る**。
+監査はログの `source_feed`・`announce_type`・`classification_context` を復元する。quant-phには通常分類・後処理、外部候補には `review_external_candidates` の本番審査・skip合意・QEC方針を使う。旧ログの `announce_type: external` も復元し、未知のルールは推測せず未分類とする。
 
-※ このファイルはユーザーの未コミット作業中のため、着手前に現状を確認すること。
+外部のcs.IT論文が監査時だけotherへ変わる偽差分と、ラベル順序だけの差分を防ぐ回帰試験を追加した。SciRateの実装・workflowは変更していない。経路の全体共通化は必要になった時点で判断する。
 
-**構想**：分類の入口を1本の関数に集約する。
+### #29 翻訳方針が経路間で非対称 — メインbotは一部解消
 
-```python
-classify_paper(paper, route="quantph"|"external"|"scirate", cfg, genres) -> ClassificationResult
-```
+メインbotは `require_translation: true` の場合、低優先ジャンルでも未翻訳なら保留する。表示タイトルも `require_translated_title: true` で翻訳必須とした。旧 `allow_untranslated` が残るキューも、`allow_untranslated_low_priority: true` を明示しない限り例外を解除する。
 
-audit も SciRate も本番もこれを呼ぶ。#24 の decision trace もこの戻り値に含める。
-→ #14 と同時にやると効率がよい。
+標準チェーンはDeepL → Azure → Apps Script。Google Cloud Translationは控除超過課金の可能性があるため自動チェーンから除外し、adapterだけ明示有効化用に残す。`google_skip_translation_genres` はその任意経路の対象制限であり、翻訳必須を解除しない。
 
-### #29 翻訳方針が経路間で非対称
-
-**現状**：
-- `google_skip_translation_genres` の genre は Google 翻訳が禁止。DeepL/Azure が失敗すると `allow_untranslated = True` になり、`require_translation: true` でも**英語のまま投稿される**
-- タイトルだけ翻訳失敗した場合の再試行がない
-- SciRate は Google除外設定を無視する
-
-**構想**：
-- 翻訳失敗は「英語で投稿」ではなく **pending に積んで次回再試行**（#3 で作った queue がそのまま使える）
-- N回失敗したら英語投稿にフォールバックし、その旨を run report に出す
-- SciRate も同じ `google_translation_allowed` を通す
-
-**コスト**：小〜中（queue基盤は既にある）。**リスク**：低。
+SciRateのソース・workflowは変更せず、経路間の完全な統一は今回行わない。Apps ScriptのWebアプリ公開とSecret設定も運用者の作業として残る。
 
 ---
 
 ## Phase 5 — 周辺整理
 
-### #23 TF-IDF の実態は英語keyword分類
+### #23 TF-IDF の実態は英語keyword分類 — 改善済み
 
-**現状**：`_tokenize` が `[a-z][a-z0-9]*` のみ拾うため、genre `description` の日本語はTF-IDFにほぼ寄与しない。実質、英語keyword一致に近い。
+各genreに英語の `classifier_description` を追加し、日本語説明に依存しないベクトルを作る。大文字小文字・ハイフン・一般的な単数複数形を正規化し、同じキーワード証拠の重複加点を避ける。TF-IDFによるモデル振り分けは廃止し、2モデルが分類できない場合の最終fallbackとして維持する。
 
-**判断が必要**：TF-IDF を今後どう位置づけるか。
-- Phase 2 で「AI全滅時は保留」を選ぶなら、TF-IDF は **モデル振り分け（prescreen）専用**になり、日本語対応は不要。設定名とREADMEをそれに合わせるだけでよい
-- 最終fallbackとして残すなら、genre ごとに英語keywordを明示的に持たせる（日本語descriptionに依存しない）
-
-実績上、直近200件で TF-IDF 最終fallbackは0件。優先度は低い。
+2026年10月の保持ログでは2407件中248件（10.3%）がTF-IDFだった。新しいfallbackの実精度はオフライン回帰に加えて今後の標本監査で測定する。
 
 ### #28 残り：posted_log の切り詰め
 
-`posted_log.json` は `log[-5000:]` で切り詰められる（現在2154件）。state 側は上限撤廃済みだが、ログ側は残っている。
+`posted_log.json` は `log[-5000:]` で切り詰められる（現在5000件で上限到達）。state 側は上限撤廃済みだが、ログ側は残っている。
 `posted_log` は重複防止の権威ではない（state が権威）ので correctness には直結しないが、`repost_missing_channels.py` が参照するため、**古い論文の追い投稿判定が5000件を超えると効かなくなる**。年次でのアーカイブ分割を検討。
 
 ---
@@ -308,4 +269,4 @@ audit も SciRate も本番もこれを呼ぶ。#24 の decision trace もこの
 3. **#13 外部ルールの矢印** — 厳密なroutingか、主要候補にすぎないか
 4. **#21 完全性の主張範囲** — 3カテゴリのprimaryのままか、拡張するか
 
-Phase 0（#24, #27）は上記のどれを選んでも必要になるため、**判断を待たずに着手できる**。
+判断履歴（#24）と経路別の過去投稿auditは実装済み。未決方針を変更する前に、これらで現在の判定を測り、必要なら完全なpreview（#27）を追加する。

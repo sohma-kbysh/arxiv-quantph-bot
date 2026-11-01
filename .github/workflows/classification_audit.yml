@@ -12,7 +12,7 @@ on:
         required: true
         default: "Asia/Tokyo"
       model:
-        description: "Optional classifier model override, e.g. gpt-oss-120b"
+        description: "Optional free-tier Gemini model override, e.g. gemini-3.5-flash-lite"
         required: false
         default: ""
 
@@ -32,13 +32,12 @@ jobs:
       - name: Re-run Gemini classification and print differences
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          AUDIT_DATE: ${{ inputs.date }}
+          AUDIT_TIMEZONE: ${{ inputs.timezone }}
+          AUDIT_MODEL: ${{ inputs.model }}
         run: |
-          extra_model=""
-          if [ -n "${{ inputs.model }}" ]; then
-            extra_model="--model ${{ inputs.model }}"
+          args=(--date "$AUDIT_DATE" --timezone "$AUDIT_TIMEZONE")
+          if [ -n "$AUDIT_MODEL" ]; then
+            args+=(--model "$AUDIT_MODEL")
           fi
-          python3 scripts/audit_classification.py \
-            --date "${{ inputs.date }}" \
-            --timezone "${{ inputs.timezone }}" \
-            $extra_model
+          python3 scripts/audit_classification.py "${args[@]}"

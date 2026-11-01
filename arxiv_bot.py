@@ -8,12 +8,11 @@ arXiv quant-ph -> Discord notifier with translated abstracts.
   an explicit skip decision before they can enter configured genre channels
 - Filters out cross-listed papers whose primary category is irrelevant
   (e.g. cond-mat.*) while keeping quantum-information-adjacent categories
-- Classifies papers into user-defined genres. A TF-IDF pre-screen routes
-  papers through the configured classifier chain (currently Gemini 2.5 Flash,
-  Gemini 2.5 Flash Lite, then Cerebras gpt-oss-120b). The TF-IDF result itself
-  is only posted as an emergency fallback when every LLM is unavailable.
+- Classifies papers using free-tier Gemini 3.5 Flash-Lite then 3.8 Flash.
+  A normalized TF-IDF/phrase classifier provides the no-model fallback.
+  Records raw labels, deterministic corrections and the policy version.
 - Translates abstracts via the configurable translator chain
-  (default: DeepL -> Azure -> Google); each backend stops for the run on quota exhaustion
+  (default: DeepL -> Azure -> optional Apps Script); backends stop on quota exhaustion
   (circuit breaker), and any paper left untranslated is deferred, never
   posted in English.
 - Persists a durable per-paper/per-channel queue before translation and
@@ -26,6 +25,7 @@ Standard library only. Designed to run on GitHub Actions.
 """
 
 import json
+import hashlib
 import math
 import os
 import re
@@ -364,6 +364,8 @@ def build_external_arxiv_query(category: str, terms: list[str],
 def parse_external_atom(raw: bytes, source_category: str) -> list[dict]:
     """Parse custom-query Atom results into the normal internal paper shape."""
     root = ET.fromstring(raw)
+    if root.tag != "{http://www.w3.org/2005/Atom}feed":
+        raise ValueError("arXiv API did not return an Atom feed")
     papers = []
     for entry in root.findall("atom:entry", ATOM_NS):
         title = re.sub(
@@ -371,6 +373,8 @@ def parse_external_atom(raw: bytes, source_category: str) -> list[dict]:
         abstract = re.sub(
             r"\s+", " ", entry.findtext("atom:summary", "", ATOM_NS)).strip()
         id_url = entry.findtext("atom:id", "", ATOM_NS).strip()
+        if not id_url or "/api/errors" in id_url:
+            raise ValueError("arXiv API returned an error or invalid entry")
         arxiv_id = re.sub(r"v\d+$", "", id_url.rsplit("/", 1)[-1])
         categories = [
             node.get("term", "").strip()
@@ -574,6 +578,81 @@ def select_external_candidates(
     ]
 
 
+def feed_backfill_due(rule: dict, last_success: str | None,
+                      now: datetime | None = None) -> bool:
+    """Rate-limit complete feed reconciliation, retaining retry after failure."""
+    if not rule.get("enabled", False):
+        return False
+    if not last_success:
+        return True
+    try:
+        cursor = datetime.fromisoformat(last_success.replace("Z", "+00:00"))
+        if cursor.tzinfo is None:
+            cursor = cursor.replace(tzinfo=timezone.utc)
+    except (AttributeError, ValueError):
+        return True
+    elapsed = ((now or datetime.now(timezone.utc)) - cursor).total_seconds()
+    return elapsed >= max(0, float(rule.get("min_interval_hours", 20))) * 3600
+
+
+def fetch_feed_backfill(category: str, rule: dict,
+                        now: datetime | None = None) -> list[dict]:
+    """Reconcile recent submissions, paging through the entire outage window.
+
+    This recovers new submissions and recent cross-lists after RSS outages;
+    old submissions newly cross-listed outside this window still need RSS.
+    Repeated or truncated pages are failures, never a successful checkpoint.
+    """
+    page_size = max(1, int(rule.get("max_results", 100)))
+    max_pages = max(1, int(rule.get("max_pages", 100)))
+    lookback = max(1, int(rule.get("lookback_days", 7)))
+    reference = now or datetime.now(timezone.utc)
+    result: dict[str, dict] = {}
+    signatures: set[tuple[str, ...]] = set()
+    for page in range(max_pages):
+        if page:
+            time.sleep(max(3, float(rule.get("query_min_interval_sec", 3))))
+        url = "https://export.arxiv.org/api/query?" + urllib.parse.urlencode({
+            "search_query": f"cat:{category}",
+            "start": page * page_size,
+            "max_results": page_size,
+            "sortBy": "submittedDate",
+            "sortOrder": "descending",
+        })
+        raw = http_get_arxiv_api(url, rule)
+        rows = parse_external_atom(raw, category)
+        metadata = ET.fromstring(raw)
+        namespace = "{http://a9.com/-/spec/opensearch/1.1/}"
+        try:
+            total = int(metadata.findtext(namespace + "totalResults", ""))
+            offset = int(metadata.findtext(namespace + "startIndex", ""))
+        except ValueError as err:
+            raise ValueError("arXiv backfill has invalid pagination metadata") from err
+        if (offset != page * page_size or total < offset + len(rows)
+                or (len(rows) < page_size and total > offset + len(rows))):
+            raise ValueError("arXiv backfill returned an incomplete page")
+        signature = tuple(p["id"] for p in rows)
+        if signature and signature in signatures:
+            raise ValueError("arXiv feed backfill repeated a page")
+        signatures.add(signature)
+        for paper in rows:
+            if not paper.get("published"):
+                raise ValueError("arXiv backfill entry has no publication date")
+            datetime.fromisoformat(paper["published"].replace("Z", "+00:00"))
+            if not external_paper_is_recent(paper, lookback, reference):
+                continue
+            if category not in paper.get("categories", []):
+                raise ValueError("arXiv backfill returned a different category")
+            paper["source_feed"] = category
+            paper["announce_type"] = (
+                "new" if paper["primary"] == category else "cross")
+            result.setdefault(paper["id"], paper)
+        if (len(rows) < page_size or not rows or total == offset + len(rows)
+                or not external_paper_is_recent(rows[-1], lookback, reference)):
+            return list(result.values())
+    raise ValueError("arXiv feed backfill exceeded max_pages; cursor retained")
+
+
 # ---------------------------------------------------------------- filtering
 
 def category_matches(cat: str, patterns: list[str]) -> bool:
@@ -629,13 +708,45 @@ _STOPWORDS = frozenset(
     "we our this that these which its it also can show based using used "
     "such via from have has had not do does did will would could may "
     "must both only even more most some any all one two new no "
-    "quantum qubit qubits state states system systems".split()
+    "quantum qubit qubits state states system systems "
+    "blind blindness verifiable verifiability secure securely security "
+    "protocol experiment result model method framework".split()
 )
-_classifier_cache = None  # (genre_tf, idf) precomputed once per run
+_classifier_cache = None  # (genre signature, genre_tf, idf)
+
+# Deliberately conservative domain normalization: unrestricted prefix matching
+# confuses "blind" with "blinded", and "code" with unrelated words.  These
+# aliases handle common scientific inflections without adding a dependency.
+_CLASSIFIER_TOKEN_ALIASES = {
+    "correct": "correction", "correcting": "correction",
+    "corrected": "correction", "corrections": "correction",
+    "decode": "decoding", "decoder": "decoding", "decoders": "decoding",
+    "decoded": "decoding", "tolerance": "tolerant",
+    "entropies": "entropy", "capacities": "capacity",
+    "complexities": "complexity", "inequalities": "inequality",
+    "matrices": "matrix", "indices": "index",
+    "topological": "topology", "superconducting": "superconductivity",
+    "classes": "class", "processes": "process",
+}
+
+
+def _classifier_tokens(text: str) -> list[str]:
+    """Keep phrase boundaries and normalize common dash/plural variants."""
+    text = text.casefold().translate(str.maketrans("‐‑‒–—−", "------"))
+    words = re.findall(r"[a-z][a-z0-9]*", text)
+    normalized = []
+    for word in words:
+        if word in _CLASSIFIER_TOKEN_ALIASES:
+            word = _CLASSIFIER_TOKEN_ALIASES[word]
+        elif len(word) > 3 and word.endswith("s") and not word.endswith(
+                ("ss", "us", "is", "ics")):
+            word = word[:-1]
+        normalized.append(word)
+    return normalized
 
 
 def _tokenize(text: str) -> list[str]:
-    return [w for w in re.findall(r"[a-z][a-z0-9]*", text.lower())
+    return [w for w in _classifier_tokens(text)
             if w not in _STOPWORDS and len(w) > 2]
 
 
@@ -651,17 +762,19 @@ def _keyword_tokens(keywords: list[str]) -> list[str]:
 
 
 def _build_tfidf(genres: list[dict]) -> tuple[dict, dict]:
-    """Build TF vectors and IDF weights from genre descriptions + keywords.
+    """Build TF vectors from English classifier descriptions and keywords.
 
     Terms appearing in all genres get IDF=0 (e.g. "quantum"), so only
     discriminative vocabulary contributes to similarity scores.
     """
     tf: dict[str, Counter] = {}
     for g in genres:
+        description = g.get("classifier_description", g.get("description", ""))
         words = _tokenize(
-            f"{g.get('description', '')} {' '.join(_keyword_tokens(g.get('keywords', [])))}"
-        )
-        tf[g["id"]] = Counter(words)
+            f"{description} {' '.join(_keyword_tokens(g.get('keywords', [])))}")
+        # Repeating an acronym in a description and keyword list is not
+        # independent evidence about that genre.
+        tf[g["id"]] = Counter(set(words))
     N = len(tf)
     df: dict[str, int] = {}
     for vec in tf.values():
@@ -671,15 +784,18 @@ def _build_tfidf(genres: list[dict]) -> tuple[dict, dict]:
     return tf, idf
 
 
-def _phrase_pattern(phrase: str) -> str:
-    parts = [re.escape(p) for p in re.findall(r"[a-z][a-z0-9]*", phrase.lower())]
-    return r"\b" + r"[\s-]+".join(parts) + r"\b" if parts else r"$^"
+def _phrase_spans(tokens: list[str], phrase: tuple[str, ...]) -> list[tuple[int, int]]:
+    size = len(phrase)
+    if not size:
+        return []
+    return [(i, i + size) for i in range(len(tokens) - size + 1)
+            if tuple(tokens[i:i + size]) == phrase]
 
 
 def _keyword_evidence_scores(paper: dict, genres: list[dict],
                              cfg: dict | None = None) -> dict[str, float]:
-    title = paper.get("title", "").lower()
-    abstract = paper.get("abstract", "").lower()
+    title = _classifier_tokens(paper.get("title", ""))
+    abstract = _classifier_tokens(paper.get("abstract", ""))
     scores = {g["id"]: 0.0 for g in genres}
 
     title_phrase = cfg.get("fallback_title_phrase_bonus", 0.35) if cfg else 0.35
@@ -689,32 +805,34 @@ def _keyword_evidence_scores(paper: dict, genres: list[dict],
 
     for g in genres:
         gid = g["id"]
-        for keyword in g.get("keywords", []):
-            key = str(keyword).strip().lower()
-            if not key:
+        keywords = [*g.get("keywords", []), *(cfg or {}).get(
+            "fallback_keyword_boosts", {}).get(gid, [])]
+        phrases = {tuple(_classifier_tokens(str(key))) for key in keywords}
+        evidence = []
+        for phrase in phrases:
+            if not phrase or (len(phrase) == 1 and phrase[0] in _STOPWORDS):
                 continue
-            if re.search(r"[\s-]", key):
-                pattern = _phrase_pattern(key)
-                if re.search(pattern, title):
-                    scores[gid] += title_phrase
-                elif re.search(pattern, abstract):
-                    scores[gid] += abstract_phrase
-            elif key not in _STOPWORDS:
-                pattern = r"\b" + re.escape(key) + r"\w*\b"
-                if re.search(pattern, title):
-                    scores[gid] += title_token
-                elif re.search(pattern, abstract):
-                    scores[gid] += abstract_token
-
-    for gid, keywords in (cfg or {}).get("fallback_keyword_boosts", {}).items():
-        if gid not in scores:
-            continue
-        for keyword in keywords:
-            pattern = _phrase_pattern(str(keyword))
-            if re.search(pattern, title):
-                scores[gid] += title_phrase
-            elif re.search(pattern, abstract):
-                scores[gid] += abstract_phrase
+            spans = _phrase_spans(title, phrase)
+            section = "title"
+            if not spans:
+                spans = _phrase_spans(abstract, phrase)
+                section = "abstract"
+            if spans:
+                phrase_bonus = title_phrase if section == "title" else abstract_phrase
+                token_bonus = title_token if section == "title" else abstract_token
+                evidence.append((len(phrase), phrase_bonus if len(phrase) > 1
+                                 else token_bonus, section, spans))
+        # Count a phrase, its plural/spelling variants and contained keywords
+        # once. Distinct, non-overlapping contributions still add evidence.
+        occupied: dict[str, set[int]] = {"title": set(), "abstract": set()}
+        for _length, bonus, section, spans in sorted(
+                evidence, key=lambda row: (-row[0], -row[1], row[2], row[3])):
+            for start, end in spans:
+                positions = set(range(start, end))
+                if not positions & occupied[section]:
+                    scores[gid] += bonus
+                    occupied[section].update(positions)
+                    break
 
     return scores
 
@@ -723,13 +841,18 @@ def _score_genres(paper: dict, genres: list[dict],
                   cfg: dict | None = None) -> dict[str, float]:
     """Compute TF-IDF cosine similarity + category hint scores for each genre."""
     global _classifier_cache
-    if _classifier_cache is None:
-        _classifier_cache = _build_tfidf(genres)
-    genre_tf, idf = _classifier_cache
+    signature = tuple((g["id"], g.get("classifier_description", g.get(
+        "description", "")), tuple(g.get("keywords", []))) for g in genres)
+    if _classifier_cache is None or _classifier_cache[0] != signature:
+        _classifier_cache = (signature, *_build_tfidf(genres))
+    _, genre_tf, idf = _classifier_cache
 
-    paper_vec = {k: v * idf.get(k, 0.0)
-                 for k, v in Counter(_tokenize(
-                     f"{paper['title']} {paper['abstract']}")).items()}
+    title_weight = (cfg or {}).get("fallback_title_weight", 2.0)
+    terms = Counter(_tokenize(paper.get("abstract", "")))
+    for token, count in Counter(_tokenize(paper.get("title", ""))).items():
+        terms[token] += title_weight * count
+    paper_vec = {k: (1 + math.log(v)) * idf.get(k, 0.0)
+                 for k, v in terms.items()}
     norm_p = math.sqrt(sum(v ** 2 for v in paper_vec.values())) or 1.0
 
     scores: dict[str, float] = {}
@@ -742,13 +865,16 @@ def _score_genres(paper: dict, genres: list[dict],
     if cfg:
         hints = cfg.get("category_genre_hints", {})
         strong_other = set(cfg.get("category_other_overrides", []))
+        hinted: set[str] = set()
         for cat in paper.get("categories", []):
             if cat in strong_other and "other" in scores:
-                scores["other"] += 1.0
+                hinted.add("other")
             else:
                 gid = hints.get(cat)
-                if gid and gid in scores:
-                    scores[gid] += 0.15
+                if gid and gid in scores and scores[gid] > 0:
+                    hinted.add(gid)
+        for gid in hinted:
+            scores[gid] += 1.0 if gid == "other" else 0.15
         keyword_scores = _keyword_evidence_scores(paper, genres, cfg)
         for gid, score in keyword_scores.items():
             scores[gid] = scores.get(gid, 0.0) + score
@@ -768,7 +894,8 @@ def classify(paper: dict, genres: list[dict], cfg: dict | None = None) -> dict |
 
 
 def classify_multi(paper: dict, genres: list[dict],
-                   cfg: dict | None = None) -> list[dict]:
+                   cfg: dict | None = None, *,
+                   apply_policy: bool = True) -> list[dict]:
     """Return up to classify_max_genres genres, score-ordered.
 
     The primary genre must exceed classify_min_score.
@@ -792,15 +919,18 @@ def classify_multi(paper: dict, genres: list[dict],
         return [fallback] if fallback else []
 
     best_score = scores[ranked[0]]
+    keyword_evidence = _keyword_evidence_scores(paper, genres, cfg)
+    secondary_evidence = (cfg or {}).get("fallback_secondary_evidence_min", 0.35)
     result: list[dict] = []
     for gid in ranked[:max_genres]:
         if gid not in genre_map:
             continue
-        if result and scores[gid] < best_score * sec_ratio:
-            break
+        if (result and scores[gid] < best_score * sec_ratio
+                and keyword_evidence.get(gid, 0.0) < secondary_evidence):
+            continue
         result.append(genre_map[gid])
     result = result if result else ([fallback] if fallback else [])
-    return postprocess_genres(paper, result, genres, cfg)
+    return postprocess_genres(paper, result, genres, cfg) if apply_policy else result
 
 
 def postprocess_genres(paper: dict, selected: list[dict | None],
@@ -842,19 +972,71 @@ def apply_forced_genres(paper: dict, selected: list[dict | None],
 
     genre_map = {g["id"]: g for g in genres}
     selected_ids = {g["id"] for g in result}
-    text = f"{paper.get('title', '')} {paper.get('abstract', '')}".lower()
     for gid, keywords in cfg.get("force_genre_keywords", {}).items():
         if gid in selected_ids or gid not in genre_map:
             continue
-        for keyword in keywords:
-            pattern = r"\b" + re.escape(str(keyword).lower()) + r"\w*\b"
-            if re.search(pattern, text):
-                fallback_ids = {"other"}
-                result = [g for g in result if g.get("id") not in fallback_ids]
-                result.append(genre_map[gid])
-                selected_ids.add(gid)
-                break
+        if _matched_forced_terms(paper, keywords):
+            result = [g for g in result if g.get("id") != "other"]
+            result.append(genre_map[gid])
+            selected_ids.add(gid)
     return result
+
+
+def _matched_forced_terms(paper: dict, keywords: list[str]) -> list[str]:
+    texts = [_classifier_tokens(paper.get(field, ""))
+             for field in ("title", "abstract")]
+    return [str(keyword) for keyword in keywords
+            if any(_phrase_spans(tokens, tuple(_classifier_tokens(str(keyword))))
+                   for tokens in texts)]
+
+
+def deterministic_genre_trace(
+        paper: dict, base_genres: list, final_genres: list, cfg: dict) -> list[dict]:
+    """Explain actual deterministic changes; accept genre dicts or genre IDs.
+
+    This is observational only: it never changes labels or calls a provider.
+    The supplied final labels constrain the trace, so an external route that
+    deliberately bypasses the primary-category override is not misreported.
+    """
+    def ids(values: list) -> list[str]:
+        return list(dict.fromkeys(str(value.get("id")) if isinstance(value, dict)
+                                  else str(value) for value in values if value))
+
+    current, final = ids(base_genres), ids(final_genres)
+    trace: list[dict] = []
+
+    def record(rule: str, terms: list[str], updated: list[str]) -> None:
+        nonlocal current
+        added = [gid for gid in updated if gid not in current]
+        removed = [gid for gid in current if gid not in updated]
+        if added or removed:
+            trace.append({"rule": rule, "matched_terms": terms,
+                          "added_genre_ids": added, "removed_genre_ids": removed})
+        current = updated
+
+    primary = paper.get("primary", "")
+    if not is_quantph_feed_paper(paper) and final == ["other"]:
+        equivalent = cfg.get("cross_classify_primary_as_quantph", ["quant-ph", "cs.CR"])
+        if primary and not category_matches(primary, equivalent):
+            record("primary_category_other", [primary], ["other"])
+            return trace
+        if category_matches(primary, cfg.get("category_other_overrides", [])):
+            record("category_other_override", [primary], ["other"])
+            return trace
+
+    for gid, keywords in cfg.get("force_genre_keywords", {}).items():
+        if gid not in final or gid in current:
+            continue
+        matched = _matched_forced_terms(paper, keywords)
+        if matched:
+            record(f"force_genre_keywords.{gid}", matched,
+                   [g for g in current if g != "other"] + [gid])
+    if "qec" in final and "qec" not in current:
+        matched = [str(term) for term in cfg.get("qec_adjacent_coding_terms", [])
+                   if matches_external_terms(paper, [str(term)])]
+        if matched:
+            record("qec_adjacent_coding", matched, [*current, "qec"])
+    return trace
 
 
 def genre_by_id(genre_id: str | None, genres: list[dict]) -> dict | None:
@@ -887,14 +1069,11 @@ BATCH_TAG_CLS = re.compile(r"<<<(\d+)\s*\|\s*([A-Za-z0-9_,\s]+?)>>>")
 
 
 def gemini_min_interval(cfg: dict, model: str) -> float:
-    """Per-model pacing. Free-tier gemini-2.5-pro allows only 5 RPM, so it
-    defaults to 13s spacing; other models use gemini_min_interval_sec."""
+    """Per-model pacing; actual free quotas remain project-specific."""
     intervals = cfg.get("gemini_min_intervals", {})
     if model in intervals:
         return float(intervals[model])
     base = float(cfg.get("gemini_min_interval_sec", 7))
-    if "pro" in model:
-        return max(13.0, base)
     return base
 
 
@@ -902,7 +1081,7 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
     """One paced, retried Gemini call. Marks the model dead for this run on
     persistent quota exhaustion (429) or sustained server overload (500/503);
     other models keep working."""
-    model = model or cfg.get("gemini_model", "gemini-2.5-flash")
+    model = model or cfg.get("gemini_model", "gemini-3.5-flash-lite")
     if model in _gemini_dead_models:
         return None
     key = os.environ.get("GEMINI_API_KEY", "")
@@ -919,21 +1098,60 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
             time.sleep(wait)
         _last_gemini_calls[model] = time.time()
 
-        status, body = http_post_json(
-            url, {"contents": [{"parts": [{"text": prompt}]}]})
+        generation = {
+            "maxOutputTokens": int(cfg.get("gemini_max_output_tokens", 4096)),
+        }
+        thinking = cfg.get("gemini_thinking_levels", {}).get(model)
+        if thinking:
+            generation["thinkingConfig"] = {"thinkingLevel": thinking}
+        status, body = http_post_json(url, {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": generation,
+        })
         if status == 200:
             _gemini_fail_streaks[model] = 0
             try:
                 data = json.loads(body)
-                return (data["candidates"][0]["content"]["parts"][0]["text"]
-                        .strip())
-            except (KeyError, IndexError, json.JSONDecodeError):
+                candidate = data["candidates"][0]
+                if candidate.get("finishReason", "STOP") != "STOP":
+                    raise ValueError("incomplete or blocked Gemini response")
+                parts = candidate["content"]["parts"]
+                output = "".join(
+                    p["text"] for p in parts if isinstance(p, dict)
+                    and isinstance(p.get("text"), str) and not p.get("thought"))
+                if not output.strip():
+                    raise ValueError("empty Gemini response")
+                return output.strip()
+            except (KeyError, IndexError, TypeError, ValueError, AttributeError):
                 save_error_diagnostic(
                     "invalid_response", url=url, method="POST", status=200,
                     body=body)
                 return None
-        if status in (429, 500, 503) and attempt < max_retries:
+        daily_quota = False
+        retry_after = None
+        if status == 429:
+            try:
+                details = json.loads(body).get("error", {}).get("details", [])
+                for detail in details:
+                    for violation in detail.get("violations", []):
+                        quota_id = str(violation.get("quotaId", "")).lower()
+                        daily_quota |= "perday" in quota_id or "per_day" in quota_id
+                    delay = str(detail.get("retryDelay", "")).removesuffix("s")
+                    if delay:
+                        retry_after = float(delay)
+                # Some quota errors only identify the exhausted daily limit in text.
+                message = json.loads(body).get("error", {}).get("message", "").lower()
+                daily_quota |= "per day" in message or "requestsperday" in message
+            except (TypeError, ValueError, AttributeError):
+                pass
+        if (status in (429, 500, 502, 503, 504) and not daily_quota
+                and attempt < max_retries):
             backoff = min(60, 10 * (2 ** attempt))
+            if retry_after is not None:
+                if retry_after > 60:
+                    _gemini_dead_models.add(model)
+                    return None
+                backoff = max(backoff, retry_after)
             print(f"[warn] Gemini {model} HTTP {status}; retry in {backoff}s "
                   f"({attempt + 1}/{max_retries})", file=sys.stderr)
             time.sleep(backoff)
@@ -947,7 +1165,7 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
                   f"({body[:300]!r}); skipping this model for the rest of "
                   "this run.", file=sys.stderr)
             _gemini_dead_models.add(model)
-        elif status in (500, 503):
+        elif status in (500, 502, 503, 504):
             # Server overload. One request surviving full backoff is bad
             # enough; if it keeps happening, stop hammering this model for
             # the run and let callers fall through to the next model.
@@ -961,6 +1179,8 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
                       "this model for the rest of this run.", file=sys.stderr)
                 _gemini_dead_models.add(model)
         else:
+            if status in (400, 401, 403, 404):
+                _gemini_dead_models.add(model)
             print(f"[warn] Gemini {model} HTTP {status}: {body[:200]!r}",
                   file=sys.stderr)
         return None
@@ -1054,8 +1274,13 @@ def _openai_compat_request(prompt: str, cfg: dict, spec: dict) -> str | None:
 
         try:
             data = json.loads(body)
-            return data["choices"][0]["message"]["content"].strip()
-        except (KeyError, IndexError, json.JSONDecodeError):
+            choice = data["choices"][0]
+            content = choice["message"]["content"]
+            if (not isinstance(content, str) or not content.strip()
+                    or choice.get("finish_reason", "stop") != "stop"):
+                raise ValueError("empty or incomplete classifier response")
+            return content.strip()
+        except (KeyError, IndexError, TypeError, ValueError):
             save_error_diagnostic(
                 "invalid_response", url=url, method="POST", status=200,
                 body=body)
@@ -1067,7 +1292,7 @@ def _openai_compat_request(prompt: str, cfg: dict, spec: dict) -> str | None:
 
 def classifier_model_specs(cfg: dict) -> list[dict]:
     primary = cfg.get("gemini_model_primary") or cfg.get(
-        "gemini_model", "gemini-2.5-flash")
+        "gemini_model", "gemini-3.5-flash-lite")
     secondary = cfg.get("gemini_model_secondary") or primary
     specs: list[dict] = [
         {"provider": "gemini", "model": primary, "name": primary},
@@ -1107,6 +1332,43 @@ def classifier_dead(spec: dict) -> bool:
     if provider == "gemini":
         return str(spec.get("model", "")) in _gemini_dead_models
     return name in _openai_compat_dead_models
+
+
+def classification_policy_fingerprint(cfg: dict) -> str:
+    """Version cached decisions when models, descriptions or routing change."""
+    keys = (
+        "genres", "force_genre_keywords", "qec_adjacent_coding_terms",
+        "external_arxiv_queries", "classify_max_genres",
+        "external_classify_max_genres", "external_skip_consensus",
+        "category_other_overrides", "cross_classify_primary_as_quantph",
+        "category_genre_hints", "fallback_keyword_boosts",
+    )
+    policy = {key: cfg.get(key) for key in keys}
+    policy.update(version=2, models=classifier_model_specs(cfg))
+    return hashlib.sha256(json.dumps(
+        policy, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:20]
+
+
+def classification_record(paper: dict, base_genres: list,
+                          final_genres: list, cfg: dict) -> dict:
+    def ids(values: list) -> list[str]:
+        return [g["id"] if isinstance(g, dict) else g for g in values if g]
+    return {
+        "policy": classification_policy_fingerprint(cfg),
+        "base_genre_ids": ids(base_genres),
+        "final_genre_ids": ids(final_genres),
+        "postprocess": deterministic_genre_trace(
+            paper, base_genres, final_genres, cfg),
+    }
+
+
+def external_cache_is_current(review: Any, cfg: dict) -> bool:
+    if not isinstance(review, dict) or "genre_ids" not in review:
+        return False
+    # Already accepted/delivered papers are never automatically reposted.
+    return (bool(review.get("genre_ids"))
+            or not cfg.get("revalidate_external_skips", False)
+            or review.get("policy") == classification_policy_fingerprint(cfg))
 
 
 def target_language(cfg: dict) -> str:
@@ -1352,16 +1614,16 @@ def classify_gemini_batch(
         genres: list[dict], model: str | None = None) -> list[list[str]]:
     """Classify papers using Gemini without translating (classification only).
 
-    Output tokens are minimal (just genre IDs), so quota consumption is
-    roughly 1/50 of the combined translate+classify request. Use this when
-    translation is handled by the configured translator chain instead.
+    Visible output is limited to genre IDs. Input and thinking tokens and
+    request counts still consume quota, so short labels do not guarantee
+    capacity. Translation uses its separate configured backend chain.
 
     `model` overrides the Gemini model (defaults to gemini_model_primary,
     then gemini_model). Returns a list of genre ID lists (empty list when
     Gemini fails for that entry).
     """
     model = model or cfg.get("gemini_model_primary") or cfg.get(
-        "gemini_model", "gemini-2.5-flash")
+        "gemini_model", "gemini-3.5-flash-lite")
     valid_ids = {g["id"] for g in genres}
     prompt = _classification_prompt(texts, cfg, genres)
     out = _gemini_request(prompt, cfg, model=model)
@@ -1494,6 +1756,7 @@ def review_external_candidates(
         candidates_by_category: dict[str, list[dict]], cfg: dict,
         genres: list[dict], cached_reviews: dict[str, dict],
         dry_run: bool = False,
+        *, model_specs: list[dict] | None = None,
 ) -> tuple[list[dict], dict[str, dict], dict[str, Any]]:
     """Strictly review external candidates using the configured LLM chain.
 
@@ -1518,7 +1781,7 @@ def review_external_candidates(
         "_pending_papers": {},
     }
     model_counts: Counter = Counter()
-    specs = classifier_model_specs(cfg)
+    specs = classifier_model_specs(cfg) if model_specs is None else model_specs
     batch_size = max(1, int(cfg.get("translate_batch_size", 5)))
     text_limit = int(cfg.get("max_translate_chars", 2000))
     skip_consensus = max(2, int(cfg.get("external_skip_consensus", 2)))
@@ -1530,7 +1793,7 @@ def review_external_candidates(
         for paper in papers:
             key = f"{category}:{paper['id']}"
             cached = cached_reviews.get(key)
-            if isinstance(cached, dict) and "genre_ids" in cached:
+            if external_cache_is_current(cached, cfg):
                 stats["cached"] += 1
                 gids = [
                     str(gid) for gid in cached.get("genre_ids", [])
@@ -1542,6 +1805,7 @@ def review_external_candidates(
                     paper["external_genre_ids"] = gids
                     paper["external_classifier"] = cached.get(
                         "classifier", "cached-external-review")
+                    paper["external_classification"] = cached.get("classification")
                     accepted.append(paper)
                     stats["accepted"] += 1
                 else:
@@ -1617,6 +1881,10 @@ def review_external_candidates(
                     "skip_votes": skip_votes,
                     "reviewed_at": time.strftime(
                         "%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                    "policy": classification_policy_fingerprint(cfg),
+                    "classification": classification_record(
+                        paper, gids, accepted_gids, cfg),
+                    "paper": paper,
                 }
                 if accepted_gids:
                     # Keep the paper until it has actually been posted. This
@@ -1627,6 +1895,7 @@ def review_external_candidates(
                 if accepted_gids:
                     paper["external_genre_ids"] = accepted_gids
                     paper["external_classifier"] = final_classifier
+                    paper["external_classification"] = review["classification"]
                     accepted.append(paper)
                     stats["accepted"] += 1
                 else:
@@ -1642,6 +1911,8 @@ _google_dead = False
 _last_azure_call = 0.0
 _last_google_call = 0.0
 _translation_success: Counter = Counter()  # successful texts per backend
+_apps_script_dead = False
+_last_apps_script_call = 0.0
 
 
 def wait_for_backend_slot(last_call: float, min_interval: float) -> float:
@@ -1810,6 +2081,49 @@ def translate_azure(text: str, cfg: dict) -> str | None:
     return None
 
 
+def translate_apps_script_batch(texts: list[str], cfg: dict) -> list[str | None]:
+    """Optional official LanguageApp bridge; no Cloud billing or Gemini quota."""
+    global _apps_script_dead, _last_apps_script_call
+    results: list[str | None] = [None] * len(texts)
+    url = os.environ.get("GOOGLE_APPS_SCRIPT_URL", "").strip()
+    token = os.environ.get("GOOGLE_APPS_SCRIPT_TOKEN", "")
+    if _apps_script_dead or not url or not token:
+        return results
+    parsed = urllib.parse.urlsplit(url)
+    if (parsed.scheme != "https" or parsed.netloc != "script.google.com"
+            or not re.fullmatch(r"/macros/s/[A-Za-z0-9_-]+/exec", parsed.path)
+            or parsed.query or parsed.fragment or not 32 <= len(token) <= 256):
+        print("[warn] Apps Script URL/token configuration is invalid", file=sys.stderr)
+        _apps_script_dead = True
+        return results
+    for start in range(0, len(texts), 5):
+        chunk = texts[start:start + 5]
+        _last_apps_script_call = wait_for_backend_slot(
+            _last_apps_script_call, float(cfg.get("apps_script_min_interval_sec", 1.2)))
+        status, body = http_post_json(url, {
+            "token": token, "texts": chunk, "source_language": "en",
+            "target_language": target_language(cfg),
+        })
+        try:
+            data = json.loads(body)
+            translations = data.get("translations")
+            if (status != 200 or data.get("error")
+                    or not isinstance(translations, list)
+                    or len(translations) != len(chunk)
+                    or any(not isinstance(t, str) or not t.strip()
+                           for t in translations)):
+                raise ValueError("invalid or failed Apps Script response")
+        except (TypeError, ValueError, AttributeError):
+            # Do not print service responses: a misconfigured deployment could
+            # return arbitrary text. A failed bridge is retried next run.
+            print(f"[warn] Apps Script translation unavailable (HTTP {status})",
+                  file=sys.stderr)
+            _apps_script_dead = True
+            break
+        results[start:start + len(chunk)] = [t.strip() for t in translations]
+    return results
+
+
 def translate_batch(texts: list[str], cfg: dict,
                     google_allowed: list[bool] | None = None
                     ) -> list[str | None]:
@@ -1843,12 +2157,15 @@ def translate_batch(texts: list[str], cfg: dict,
             sub = [translate_azure(t, cfg) for t in subset]
         elif backend == "google":
             sub = [translate_google(t, cfg) for t in subset]
+        elif backend == "apps_script":
+            sub = translate_apps_script_batch(subset, cfg)
         else:
             save_error_diagnostic(
                 "configuration_error",
                 body=f"unknown translator backend: {backend}")
             print(f"[warn] unknown translator '{backend}'", file=sys.stderr)
             continue
+        sub = [normalized_translation(r) for r in sub]
         ok = sum(1 for r in sub if r)
         if ok:
             _translation_success[backend] += ok
@@ -1880,6 +2197,7 @@ _TRANSLATOR_DEAD_FLAGS = {
     "deepl": lambda: _deepl_dead,
     "azure": lambda: _azure_dead,
     "google": lambda: _google_dead,
+    "apps_script": lambda: _apps_script_dead,
 }
 
 
@@ -1890,7 +2208,7 @@ def dead_translators(cfg: dict) -> list[str]:
     for b in chain:
         if b == "gemini":
             # Gemini-as-translator uses gemini_model; dead flags are per model.
-            if cfg.get("gemini_model", "gemini-2.5-flash") in _gemini_dead_models:
+            if cfg.get("gemini_model", "gemini-3.5-flash-lite") in _gemini_dead_models:
                 dead.append(b)
         elif _TRANSLATOR_DEAD_FLAGS.get(b, lambda: False)():
             dead.append(b)
@@ -2125,13 +2443,18 @@ def normalize_bot_state(raw: Any) -> dict:
         str(pid): row for pid, row in deliveries.items()
         if isinstance(row, dict) and isinstance(row.get("paper"), dict)
     }
-    for key in ("external_reviews", "external_pending", "external_cursors"):
+    for key in ("external_reviews", "external_pending", "external_cursors", "feed_cursors"):
         if not isinstance(state.get(key), dict):
             state[key] = {}
     return state
 
 
-def entry_from_delivery(record: dict, genre_map: dict[str, dict]) -> dict:
+def normalized_translation(value: Any) -> str | None:
+    return value.strip() if isinstance(value, str) and value.strip() else None
+
+
+def entry_from_delivery(record: dict, genre_map: dict[str, dict], *,
+                        reclassify_fallback: bool = False) -> dict:
     """Restore a normal in-memory entry from a durable delivery record."""
     return {
         "paper": record["paper"],
@@ -2139,13 +2462,19 @@ def entry_from_delivery(record: dict, genre_map: dict[str, dict]) -> dict:
             genre_map[gid] for gid in record.get("genre_ids", [])
             if gid in genre_map
         ],
-        "jp": record.get("abstract_translated"),
-        "jp_title": record.get("title_translated"),
+        "jp": normalized_translation(record.get("abstract_translated")),
+        "jp_title": normalized_translation(record.get("title_translated")),
         "need_tr": bool(record.get(
             "need_translation", record["paper"].get("abstract"))),
         "allow_untranslated": bool(record.get("allow_untranslated", False)),
-        "llm_done": True,
+        "llm_done": not (
+            reclassify_fallback and record.get("classifier") == "tfidf"
+            and is_quantph_feed_paper(record["paper"])
+            and not any(channel.get("status") == "delivered"
+                        for channel in record.get("channels", {}).values()
+                        if isinstance(channel, dict))),
         "classifier": record.get("classifier", "persisted-delivery"),
+        "classification": record.get("classification"),
     }
 
 
@@ -2175,6 +2504,7 @@ def merge_entry_into_delivery(entry: dict, existing: dict | None = None) -> dict
         "paper": entry["paper"],
         "genre_ids": genre_ids,
         "classifier": entry.get("classifier", "tfidf"),
+        "classification": entry.get("classification"),
         "abstract_translated": entry.get("jp"),
         "title_translated": entry.get("jp_title"),
         "need_translation": bool(entry.get("need_tr", False)),
@@ -2255,6 +2585,7 @@ def record_delivery_success(
                 if gid in genre_map
             ],
             "classifier": entry.get("classifier", "tfidf"),
+            "classification": entry.get("classification"),
             "abstract_en": paper["abstract"],
             "abstract_ja": entry.get("jp"),
             "abstract_translated": entry.get("jp"),
@@ -2294,6 +2625,8 @@ def main() -> None:
     resume_only = translate_only or deliver_only
 
     cfg = load_json(CONFIG_PATH, {})
+    if isinstance(cfg.get("main_translators"), list):
+        cfg["translators"] = cfg["main_translators"]
     backfill_raw = os.environ.get("EXTERNAL_ARXIV_LOOKBACK_DAYS", "").strip()
     if backfill_raw:
         try:
@@ -2357,6 +2690,35 @@ def main() -> None:
             if not dry_run:
                 time.sleep(3)  # be polite to arXiv
 
+        backfill_rule = cfg.get("feed_backfill", {})
+        if (isinstance(backfill_rule, dict)
+                and not os.environ.get("ARXIV_TEST_FEED")):
+            for cat in cfg.get("feeds", ["quant-ph"]):
+                cursor = state["feed_cursors"].get(cat)
+                if not feed_backfill_due(backfill_rule, cursor):
+                    continue
+                rule = dict(backfill_rule)
+                rule["lookback_days"] = effective_external_lookback_days(
+                    backfill_rule, cursor)
+                started_at = datetime.now(timezone.utc).isoformat()
+                try:
+                    rows = fetch_feed_backfill(cat, rule)
+                    for p in rows:
+                        papers.setdefault(p["id"], p)
+                    if not dry_run:
+                        state["feed_cursors"][cat] = started_at
+                    print(f"[info] feed backfill {cat}: fetched={len(rows)}, "
+                          f"lookback_days={rule['lookback_days']}")
+                except Exception as err:  # noqa: BLE001
+                    source_failures.append({
+                        "source": f"arXiv backfill:{cat}", "error": str(err)})
+                    save_error_diagnostic(
+                        "source_error", method="GET", exception=err)
+                    print(f"[error] feed backfill {cat} failed: {err}",
+                          file=sys.stderr)
+                if not dry_run:
+                    time.sleep(3)
+
     # Adjacent arXiv categories use custom API queries as a high-recall,
     # mechanical first stage. Their results are never sent through the normal
     # "other" fallback: a separate strict LLM review must explicitly accept
@@ -2412,7 +2774,8 @@ def main() -> None:
         for key, review in cached_external_reviews.items():
             if (
                 isinstance(review, dict)
-                and review.get("genre_ids")
+                and (review.get("genre_ids")
+                     or not external_cache_is_current(review, cfg))
                 and isinstance(review.get("paper"), dict)
             ):
                 durable_candidates.append((key, review["paper"]))
@@ -2443,7 +2806,9 @@ def main() -> None:
     # genres is always a non-empty list; fallback genre is "other".
     genre_map = {g["id"]: g for g in genres}
     entries: list[dict[str, Any]] = [
-        entry_from_delivery(record, genre_map)
+        entry_from_delivery(
+            record, genre_map, reclassify_fallback=(
+                not resume_only and cfg.get("reclassify_pending_fallback", True)))
         for record in deliveries.values()
     ]
     entries.extend([
@@ -2463,6 +2828,9 @@ def main() -> None:
         }
         for p in pending
     ])
+    if not cfg.get("allow_untranslated_low_priority", False):
+        for entry in entries:
+            entry["allow_untranslated"] = False
 
     batch_size = max(1, cfg.get("translate_batch_size", 5))
     use_llm_cls = cfg.get("classify_with_llm", True)
@@ -2480,7 +2848,7 @@ def main() -> None:
     llm_classify_only = use_llm_cls and not llm_first
     classifier_specs = classifier_model_specs(cfg)
     model_primary = cfg.get("gemini_model_primary") or cfg.get(
-        "gemini_model", "gemini-2.5-flash")
+        "gemini_model", "gemini-3.5-flash-lite")
     model_secondary = cfg.get("gemini_model_secondary") or model_primary
     classifier_names = [classifier_spec_name(s) for s in classifier_specs]
     gemini_stats = {
@@ -2525,58 +2893,25 @@ def main() -> None:
                     e["genres"] = gs if gs else [genre_by_id(None, genres)]
                     e["genres"] = postprocess_genres(
                         e["paper"], e["genres"], genres, cfg)
+                    e["classification"] = classification_record(
+                        e["paper"], gs, e["genres"], cfg)
                     e["llm_done"] = True
                     e["classifier"] = cfg.get("gemini_model",
-                                              "gemini-2.5-flash")
+                                              "gemini-3.5-flash-lite")
                     gemini_stats["entries_classified"] += 1
 
     # ---- path B: Gemini classify only, translate via DeepL/Google ---------
     # Used when classify_with_llm=true but "gemini" is NOT in translators.
-    # Gemini output is ~genre IDs only, so quota usage is 1/50 of path A.
+    # Visible output is genre IDs only; request/input/thinking quotas still apply.
     #
-    # A TF-IDF pre-screen routes the papers first (routing only; its labels
-    # are never posted unless Gemini is entirely unavailable):
-    #   - papers touching none of prescreen_defer_genres -> "priority" group,
-    #     always classified by the configured primary model
-    #   - the rest -> "deferred" group: also the primary model while the
-    #     estimated request count fits gemini_primary_run_budget, otherwise
-    #     the configured secondary model
-    # Either group falls through to the other model when one is rate-limited
-    # out mid-run (per-model circuit breaker).
+    # Use the same free-tier model chain for all genres. Per-run routing
+    # thresholds cannot represent project-wide daily quotas. The deterministic
+    # classifier is used only for unresolved entries after both models fail.
     elif (llm_classify_only and not dry_run
           and gemini_stats["classifier_key_present"]):
-        defer_ids = set(cfg.get("prescreen_defer_genres",
-                                ["nisq", "hardware", "sensing",
-                                 "foundations", "other"]))
         normal_entries = [e for e in entries if not e.get("llm_done")]
-        for e in normal_entries:
-            e["prescreen"] = classify_multi(e["paper"], genres, cfg)
-            pre_ids = {g["id"] for g in e["prescreen"] if g}
-            e["route"] = "defer" if pre_ids & defer_ids else "priority"
-        priority_group = [
-            e for e in normal_entries if e["route"] == "priority"]
-        deferred_group = [
-            e for e in normal_entries if e["route"] == "defer"]
-
-        est_requests = (math.ceil(len(priority_group) / batch_size)
-                        + math.ceil(len(deferred_group) / batch_size))
-        budget = cfg.get("gemini_primary_run_budget", 60)
-        primary_spec = {"provider": "gemini", "model": model_primary,
-                        "name": model_primary}
-        secondary_spec = {"provider": "gemini", "model": model_secondary,
-                          "name": model_secondary}
-        fallback_specs = [
-            s for s in classifier_specs
-            if classifier_spec_name(s) not in {model_primary, model_secondary}
-        ]
-        priority_chain = [primary_spec, secondary_spec, *fallback_specs]
-        defer_chain = ([primary_spec, secondary_spec, *fallback_specs]
-                       if est_requests <= budget
-                       else [secondary_spec, *fallback_specs])
-        print(f"[info] classification routing: priority={len(priority_group)}, "
-              f"deferred={len(deferred_group)}, est_requests={est_requests}, "
-              f"deferred group uses "
-              f"{'primary' if est_requests <= budget else 'secondary'} model")
+        print(f"[info] classification chain: papers={len(normal_entries)}, "
+              f"models={'+'.join(classifier_names)}")
 
         def classify_group(group: list[dict], model_chain: list[dict]) -> None:
             limit = cfg.get("max_translate_chars", 2000)
@@ -2618,22 +2953,25 @@ def main() -> None:
                         e["genres"] = gs if gs else [genre_by_id(None, genres)]
                         e["genres"] = postprocess_genres(
                             e["paper"], e["genres"], genres, cfg)
+                        e["classification"] = classification_record(
+                            e["paper"], gs, e["genres"], cfg)
                         e["llm_done"] = True
                         e["classifier"] = model_name
                         gemini_stats["entries_classified"] += 1
 
-        classify_group(priority_group, priority_chain)
-        classify_group(deferred_group, defer_chain)
+        classify_group(normal_entries, classifier_specs)
 
     # ---- fallback: TF-IDF classify (papers not yet classified) ------------
     # Reuses the pre-screen result when available (emergency fallback only).
     leftover = [e for e in entries if not e.get("llm_done")]
     for e in leftover:
-        fallback_genres = e.get("prescreen") or classify_multi(
-            e["paper"], genres, cfg)
+        fallback_genres = classify_multi(
+            e["paper"], genres, cfg, apply_policy=False)
         e["genres"] = postprocess_genres(
             e["paper"], fallback_genres, genres, cfg)
         e["classifier"] = "tfidf"
+        e["classification"] = classification_record(
+            e["paper"], fallback_genres, e["genres"], cfg)
     gemini_fallback = len(leftover)
 
     if dry_run:
@@ -2693,7 +3031,7 @@ def main() -> None:
             for paper in rows:
                 key = f"{category}:{paper['id']}"
                 cached = cached_external_reviews.get(key)
-                if isinstance(cached, dict) and "genre_ids" in cached:
+                if external_cache_is_current(cached, cfg):
                     completed_review_keys.add(key)
         for key in completed_review_keys:
             pending_external_reviews.pop(key, None)
@@ -2725,6 +3063,7 @@ def main() -> None:
         "llm_done": True,
         "classifier": paper.get(
             "external_classifier", "cached-external-review"),
+        "classification": paper.get("external_classification"),
     } for paper in accepted_external)
 
     def finish_queue_phase(label: str) -> None:
@@ -2786,7 +3125,8 @@ def main() -> None:
                     chunk, translate_batch(abstracts, cfg, google_allowed)):
                 e["jp"] = jp
             for e, allowed in zip(chunk, google_allowed):
-                if e["jp"] is None and not allowed:
+                if (e["jp"] is None and not allowed
+                        and cfg.get("allow_untranslated_low_priority", False)):
                     e["allow_untranslated"] = True
 
         if show_translated_title(cfg):
@@ -2854,7 +3194,11 @@ def main() -> None:
         delivery = deliveries.get(pid)
         if not isinstance(delivery, dict):
             continue
-        if (e["need_tr"] and e["jp"] is None and require_tr
+        missing_abstract = e["need_tr"] and e["jp"] is None and require_tr
+        missing_title = (cfg.get("require_translated_title", False)
+                         and show_translated_title(cfg)
+                         and e["paper"].get("title") and not e.get("jp_title"))
+        if ((missing_abstract or missing_title)
                 and not e.get("allow_untranslated", False)):
             deferred += 1
             deferred_records.append({

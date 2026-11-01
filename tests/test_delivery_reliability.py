@@ -359,7 +359,7 @@ class DeliveryReliabilityTests(unittest.TestCase):
 
     def test_discovery_never_uses_combined_gemini_translation(self) -> None:
         cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
-        cfg["translators"] = ["gemini"]
+        cfg["main_translators"] = ["gemini"]
         qit = next(g for g in cfg["genres"] if g["id"] == "qit")
         with tempfile.TemporaryDirectory() as tmp:
             state_path = Path(tmp) / "state.json"

@@ -15,6 +15,10 @@ on:
         description: "Optional free-tier Gemini model override, e.g. gemini-3.5-flash-lite"
         required: false
         default: ""
+      limit:
+        description: "Maximum papers to audit (1 for a small connection test, 0 for the whole day)"
+        type: string
+        default: "0"
 
 permissions:
   contents: read
@@ -35,9 +39,19 @@ jobs:
           AUDIT_DATE: ${{ inputs.date }}
           AUDIT_TIMEZONE: ${{ inputs.timezone }}
           AUDIT_MODEL: ${{ inputs.model }}
+          AUDIT_LIMIT: ${{ inputs.limit || '0' }}
         run: |
-          args=(--date "$AUDIT_DATE" --timezone "$AUDIT_TIMEZONE")
+          args=(--date "$AUDIT_DATE" --timezone "$AUDIT_TIMEZONE" --limit "$AUDIT_LIMIT")
           if [ -n "$AUDIT_MODEL" ]; then
             args+=(--model "$AUDIT_MODEL")
           fi
           python3 scripts/audit_classification.py "${args[@]}"
+
+      - name: Upload sanitized audit diagnostics
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: error_diagnostics.jsonl
+          if-no-files-found: ignore
+          retention-days: 7

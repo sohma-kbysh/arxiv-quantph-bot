@@ -40,6 +40,62 @@ def log_row(**changes) -> dict:
 
 
 class ClassificationAuditTests(unittest.TestCase):
+    def run_main_with_results(self, rows, results, extra_args=()):
+        output, errors = StringIO(), StringIO()
+        with (
+            patch.object(audit.sys, "argv", [
+                "audit_classification.py", "--date", "2026-10-30", *extra_args]),
+            patch.object(arxiv_bot, "load_json", side_effect=[CONFIG, rows]),
+            patch.object(arxiv_bot, "classifier_key_present", return_value=True),
+            patch.object(audit, "audit_rows", return_value=results) as classify,
+            patch.object(arxiv_bot, "post_to_discord") as post,
+            patch.object(arxiv_bot, "atomic_write_json") as write,
+            redirect_stdout(output), redirect_stderr(errors),
+        ):
+            status = audit.main()
+        post.assert_not_called()
+        write.assert_not_called()
+        return status, output.getvalue(), errors.getvalue(), classify
+
+    def test_all_unclassified_is_failure_not_zero_differences_success(self):
+        status, output, error, _ = self.run_main_with_results([log_row()], [None])
+        self.assertEqual(status, 2)
+        self.assertIn("llm_classified=0/1", output)
+        self.assertIn("INCOMPLETE", error)
+
+    def test_partial_classification_is_also_failure(self):
+        status, output, error, _ = self.run_main_with_results(
+            [log_row(), log_row(id="second")],
+            [{"genre_ids": ["qit"], "classifier": "model-a"}, None])
+        self.assertEqual(status, 2)
+        self.assertIn("llm_classified=1/2", output)
+        self.assertIn("INCOMPLETE", error)
+
+    def test_confirmed_skip_is_a_complete_decision_and_succeeds(self):
+        status, output, _, _ = self.run_main_with_results(
+            [log_row()], [{"genre_ids": [], "classifier": "skip-consensus"}])
+        self.assertEqual(status, 0)
+        self.assertIn("COMPLETE:", output)
+
+    def test_empty_day_cannot_be_reported_as_successful_probe(self):
+        status, _, error, classify = self.run_main_with_results([], [])
+        self.assertEqual(status, 2)
+        self.assertIn("audit was not performed", error)
+        classify.assert_not_called()
+
+    def test_limit_one_only_sends_one_paper(self):
+        status, output, _, classify = self.run_main_with_results(
+            [log_row(), log_row(id="second")],
+            [{"genre_ids": ["qit"], "classifier": "model-a"}], ["--limit", "1"])
+        self.assertEqual(status, 0)
+        self.assertEqual(len(classify.call_args.args[0]), 1)
+        self.assertIn("papers=1", output)
+
+    def test_missing_result_is_not_silently_ignored(self):
+        status, _, error, _ = self.run_main_with_results([log_row()], [])
+        self.assertEqual(status, 2)
+        self.assertIn("result count", error)
+
     def run_audit(self, rows, *, normal=None, external=None):
         with (
             patch.object(arxiv_bot, "classifier_key_present", return_value=True),

@@ -257,6 +257,12 @@ def http_post_json(url: str, payload: dict, headers: dict | None = None,
             "http_error", url=url, method="POST", status=e.code,
             reason=e.reason, headers=e.headers, body=body, exception=e)
         return e.code, body
+    except TimeoutError as e:
+        save_error_diagnostic(
+            "request_timeout", url=url, method="POST", exception=e)
+        print(f"[warn] Request timed out after {timeout:g}s for "
+              f"{redact_url(url)}", file=sys.stderr)
+        return 0, b""
     except urllib.error.URLError as e:
         save_error_diagnostic(
             "connection_error", url=url, method="POST", reason=e.reason,
@@ -1091,9 +1097,21 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
            f"{model}:generateContent?key={key}")
     min_interval = gemini_min_interval(cfg, model)
     max_retries = cfg.get("gemini_max_retries", 4)
+    timeout = max(1.0, float(cfg.get("gemini_timeout_sec", 45)))
+    budget = max(1.0, float(cfg.get("gemini_request_budget_sec", 100)))
+    transport_retries = max(0, int(cfg.get("gemini_transport_retries", 1)))
+    transport_retries_used = 0
+    started = time.monotonic()
+    deadline = started + budget
 
     for attempt in range(max_retries + 1):
+        remaining = deadline - time.monotonic()
         wait = _last_gemini_calls.get(model, 0.0) + min_interval - time.time()
+        if remaining <= max(0, wait):
+            print(f"[warn] Gemini {model} request budget exhausted; "
+                  "using the next classifier", file=sys.stderr)
+            _gemini_dead_models.add(model)
+            return None
         if wait > 0:
             time.sleep(wait)
         _last_gemini_calls[model] = time.time()
@@ -1107,7 +1125,7 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
         status, body = http_post_json(url, {
             "contents": [{"parts": [{"text": prompt}]}],
             "generationConfig": generation,
-        })
+        }, timeout=min(timeout, max(0.1, deadline - time.monotonic())))
         if status == 200:
             _gemini_fail_streaks[model] = 0
             try:
@@ -1121,6 +1139,14 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
                     and isinstance(p.get("text"), str) and not p.get("thought"))
                 if not output.strip():
                     raise ValueError("empty Gemini response")
+                usage = data.get("usageMetadata", {})
+                counts = {
+                    k: v for k, v in usage.items()
+                    if k in {"promptTokenCount", "candidatesTokenCount", "thoughtsTokenCount"}
+                    and isinstance(v, int)
+                } if isinstance(usage, dict) else {}
+                print(f"[info] Gemini {model} response: "
+                      f"elapsed={time.monotonic() - started:.1f}s, usage={counts}")
                 return output.strip()
             except (KeyError, IndexError, TypeError, ValueError, AttributeError):
                 save_error_diagnostic(
@@ -1144,7 +1170,9 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
                 daily_quota |= "per day" in message or "requestsperday" in message
             except (TypeError, ValueError, AttributeError):
                 pass
-        if (status in (429, 500, 502, 503, 504) and not daily_quota
+        retryable = status in (0, 408, 429, 500, 502, 503, 504)
+        can_retry_transport = status != 0 or transport_retries_used < transport_retries
+        if (retryable and not daily_quota and can_retry_transport
                 and attempt < max_retries):
             backoff = min(60, 10 * (2 ** attempt))
             if retry_after is not None:
@@ -1152,6 +1180,13 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
                     _gemini_dead_models.add(model)
                     return None
                 backoff = max(backoff, retry_after)
+            if backoff >= deadline - time.monotonic():
+                print(f"[warn] Gemini {model} retry would exceed request budget; "
+                      "using the next classifier", file=sys.stderr)
+                _gemini_dead_models.add(model)
+                return None
+            if status == 0:
+                transport_retries_used += 1
             print(f"[warn] Gemini {model} HTTP {status}; retry in {backoff}s "
                   f"({attempt + 1}/{max_retries})", file=sys.stderr)
             time.sleep(backoff)
@@ -1165,7 +1200,12 @@ def _gemini_request(prompt: str, cfg: dict, model: str | None = None) -> str | N
                   f"({body[:300]!r}); skipping this model for the rest of "
                   "this run.", file=sys.stderr)
             _gemini_dead_models.add(model)
-        elif status in (500, 502, 503, 504):
+        elif status == 0:
+            print(f"[warn] Gemini {model} transport retries exhausted after "
+                  f"{time.monotonic() - started:.1f}s; skipping this model "
+                  "for the rest of this run.", file=sys.stderr)
+            _gemini_dead_models.add(model)
+        elif status in (408, 500, 502, 503, 504):
             # Server overload. One request surviving full backoff is bad
             # enough; if it keeps happening, stop hammering this model for
             # the run and let callers fall through to the next model.

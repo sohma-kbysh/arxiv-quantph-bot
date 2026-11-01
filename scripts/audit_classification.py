@@ -127,10 +127,14 @@ def main() -> int:
                         help="Local date to audit, e.g. 2026-07-03.")
     parser.add_argument("--timezone", default="Asia/Tokyo")
     parser.add_argument("--batch-size", type=int, default=None)
+    parser.add_argument("--limit", type=int, default=0,
+                        help="Maximum papers to audit; 0 audits the whole day.")
     parser.add_argument("--model", action="append", default=None,
                         help="Gemini model chain override (repeatable). "
                              "Default: configured classifier chain.")
     args = parser.parse_args()
+    if args.limit < 0:
+        parser.error("--limit must be 0 or greater")
 
     cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
     log = arxiv_bot.load_json(arxiv_bot.LOG_PATH, [])
@@ -143,9 +147,12 @@ def main() -> int:
         if row.get("posted_at")
         and local_date(row["posted_at"], args.timezone) == args.date
     ]
+    if args.limit:
+        rows = rows[:args.limit]
     print(f"[audit] date={args.date} timezone={args.timezone} papers={len(rows)}")
     if not rows:
-        return 0
+        print("[audit] No matching papers; audit was not performed.", file=sys.stderr)
+        return 2
 
     if args.model:
         configured_specs = arxiv_bot.classifier_model_specs(cfg)
@@ -186,6 +193,10 @@ def main() -> int:
     diffs: list[tuple[dict, list[str], list[str]]] = []
     unclassified: list[dict] = []
     results = audit_rows(rows, cfg, genres, chain, batch_size)
+    if len(results) != len(rows):
+        print("[audit] INCOMPLETE: result count does not match selected papers.",
+              file=sys.stderr)
+        return 2
     model_counts: Counter = Counter()
     for row, result in zip(rows, results):
         if result is None:
@@ -211,6 +222,11 @@ def main() -> int:
         print(f"after : {after} ({genre_names(after, genre_map)})")
         print(row.get("link", ""))
 
+    if unclassified:
+        print("[audit] INCOMPLETE: unclassified papers remain; "
+              "differences are not a complete audit result.", file=sys.stderr)
+        return 2
+    print("[audit] COMPLETE: every selected paper has a decision.")
     return 0
 
 

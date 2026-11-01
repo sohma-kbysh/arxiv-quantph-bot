@@ -176,6 +176,73 @@ class GeminiReliabilityTests(unittest.TestCase):
             self.assertNotIn("unit-model", arxiv_bot._gemini_dead_models)
             self.assertEqual(arxiv_bot._gemini_fail_streaks["unit-model"], 0)
 
+    def test_transport_failure_retries_once_then_disables_only_that_model(self):
+        with patch.object(arxiv_bot, "http_post_json", return_value=(0, b"")) as post:
+            self.assertIsNone(arxiv_bot._gemini_request("classify", self.cfg))
+            self.assertEqual(post.call_count, 2)
+            for call in post.call_args_list:
+                self.assertLessEqual(call.kwargs["timeout"], 45)
+            self.assertIn("unit-model", arxiv_bot._gemini_dead_models)
+            self.assertIsNone(arxiv_bot._gemini_request("another batch", self.cfg))
+            self.assertEqual(post.call_count, 2)
+        with patch.object(arxiv_bot, "http_post_json", return_value=response()):
+            self.assertEqual(arxiv_bot._gemini_request(
+                "classify", self.cfg, model="healthy-model"), "<<<1>>> qit")
+
+    def test_transport_failure_can_recover_without_disabling_model(self):
+        with patch.object(arxiv_bot, "http_post_json", side_effect=[
+                (0, b""), response()]) as post:
+            self.assertEqual(arxiv_bot._gemini_request("classify", self.cfg), "<<<1>>> qit")
+            self.assertEqual(post.call_count, 2)
+            self.assertNotIn("unit-model", arxiv_bot._gemini_dead_models)
+
+    def test_retry_budget_includes_waiting_and_reduces_second_timeout(self):
+        clock = [0.0]
+        timeouts = []
+
+        def send(*args, timeout, **kwargs):
+            timeouts.append(timeout)
+            clock[0] += timeout
+            return 0, b""
+
+        def sleep(delay):
+            clock[0] += delay
+
+        cfg = dict(self.cfg, gemini_timeout_sec=45, gemini_request_budget_sec=70)
+        with (patch.object(arxiv_bot.time, "monotonic", side_effect=lambda: clock[0]),
+              patch.object(arxiv_bot.time, "sleep", side_effect=sleep),
+              patch.object(arxiv_bot, "http_post_json", side_effect=send)):
+            self.assertIsNone(arxiv_bot._gemini_request("classify", cfg))
+        self.assertEqual(timeouts, [45, 15])
+        self.assertEqual(clock[0], 70)
+        self.assertIn("unit-model", arxiv_bot._gemini_dead_models)
+
+    def test_no_retry_starts_when_wait_would_exceed_budget(self):
+        clock = [0.0]
+
+        def send(*args, **kwargs):
+            clock[0] += 45
+            return 0, b""
+
+        cfg = dict(self.cfg, gemini_request_budget_sec=50)
+        with (patch.object(arxiv_bot.time, "monotonic", side_effect=lambda: clock[0]),
+              patch.object(arxiv_bot, "http_post_json", side_effect=send) as post,
+              patch.object(arxiv_bot.time, "sleep") as sleep):
+            self.assertIsNone(arxiv_bot._gemini_request("classify", cfg))
+            self.assertEqual(post.call_count, 1)
+            sleep.assert_not_called()
+        self.assertIn("unit-model", arxiv_bot._gemini_dead_models)
+
+    def test_socket_timeout_is_a_sanitized_transport_failure(self):
+        with (patch.object(arxiv_bot.urllib.request, "urlopen",
+                           side_effect=TimeoutError("read operation timed out")) as request,
+              patch.object(arxiv_bot, "save_error_diagnostic") as diagnostic):
+            status, _ = arxiv_bot.http_post_json(
+                "https://example.test/model?key=unit-test-key", {}, timeout=45)
+            self.assertEqual(status, 0)
+            self.assertEqual(request.call_args.kwargs["timeout"], 45)
+            self.assertEqual(diagnostic.call_args.args[0], "request_timeout")
+
 
 class ClassificationStateReliabilityTests(unittest.TestCase):
     def setUp(self):

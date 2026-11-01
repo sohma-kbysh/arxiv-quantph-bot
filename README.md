@@ -314,6 +314,8 @@ python3 scripts/audit_classification.py --date 2026-07-03 --timezone Asia/Tokyo
 
 The audit restores `source_feed`, `announce_type`, and `classification_context`. Quant-ph papers use normal classification; external papers use the same strict review and skip-consensus rules as production. Missing rules or inconclusive results are reported as unclassified. Label order alone is not a difference. The audit uses classifier API quota but sends no Discord messages and does not update production state.
 
+An empty selection, missing result, or any unclassified paper exits with status 2, so an API failure cannot appear as a successful audit with zero differences. Confirmed `skip` decisions count as completed reviews. Use `--limit 1` (or the workflow's `limit` input) for a small connection test. Sanitized request diagnostics are retained as workflow artifacts for seven days.
+
 After an audit, papers that gained genres can be posted to just those missing channels with the repost workflow (`repost.yml`, manual `workflow_dispatch`, inputs: `plan` path defaulting to `repost_plan.json` and `dry_run` defaulting to `true`). It reuses `title_translated` / `abstract_translated` from `posted_log.json` for each paper (no translation API calls), posts one embed per missing channel with the corrected full genre list in the footer, and updates the log entry's `genre_ids` / `genre_names` to the corrected classification (recording `repost_channels`, `repost_genre_ids`, and `reposted_at`).
 
 The repost script is idempotent: channels already recorded as reposted are skipped, so re-running the same plan does not duplicate posts. It never touches `seen_ids.json`, deliberately skips channels whose webhook secret is missing instead of falling back to the general channel, and refuses channels that resolve to the same webhook URL. A run report in Japanese is sent to the bot-emergency channel.
@@ -801,6 +803,9 @@ Phrase matching normalizes case, hyphens, and common plural forms. New classific
 | `gemini_model` | `"gemini-3.5-flash-lite"` | Legacy default model; now used only as the Gemini-as-translator model on the combined translate-and-classify path. Classification uses `gemini_model_primary` / `gemini_model_secondary` instead |
 | `gemini_min_interval_sec` | `7` | Minimum interval between Gemini requests, in seconds (fallback when a model has no entry in `gemini_min_intervals`) |
 | `gemini_max_retries` | `2` | Maximum retries for temporary errors |
+| `gemini_timeout_sec` | `45` | Socket timeout per Gemini attempt |
+| `gemini_transport_retries` | `1` | Maximum retries for connection errors/timeouts, also bounded by `gemini_max_retries` |
+| `gemini_request_budget_sec` | `100` | Retry window including pacing/backoff; remaining time reduces each attempt's socket timeout |
 | `gemini_overload_giveup` | `1` | Consecutive overload errors before stopping that model |
 
 ---
@@ -1266,6 +1271,8 @@ python3 scripts/audit_classification.py --date 2026-07-03 --timezone Asia/Tokyo
 
 監査は `source_feed`・`announce_type`・`classification_context` を復元し、quant-phには通常分類、外部候補には本番と同じ厳密審査とskip合意条件を適用する。ルール不足・審査未決着は未分類として報告し、ラベル順だけの違いは差分としない。分類APIの利用枠は消費するが、Discord投稿や本番状態の更新は行わない。
 
+対象0件・結果不足・未分類が1件でも残る場合は終了コード2で失敗にする。API失敗を「差分なし・監査成功」と扱わない。合意済みのskip判定は監査完了に数える。少量の疎通確認は `--limit 1` またはworkflow入力 `limit: 1` を使う。秘密情報を伏せた通信診断はworkflowのartifactに7日間保存する。
+
 監査の結果、ジャンルが追加された論文は、追い投稿ワークフロー(`repost.yml`、手動 `workflow_dispatch`、入力: `plan` パス(デフォルト `repost_plan.json`)、`dry_run`(デフォルト `true`))で不足チャンネルにだけ投稿できる。`posted_log.json` の `title_translated` / `abstract_translated` を再利用するため翻訳 API は呼び出さず、不足チャンネルごとに、footer に修正後の全ジャンル一覧を載せた embed を1件投稿する。ログエントリの `genre_ids` / `genre_names` は修正後の分類に更新される(`repost_channels`、`repost_genre_ids`、`reposted_at` を記録)。
 
 追い投稿スクリプトは冪等である。追い投稿済みとして記録されたチャンネルはスキップされるため、同じプランを再実行しても重複投稿しない。`seen_ids.json` には一切触れず、Webhook secret が未設定のチャンネルは general チャンネルへのフォールバックはせず意図的にスキップし、同じ Webhook URL に解決されるチャンネルは拒否する。実行後は日本語の実行レポートが bot-emergency チャンネルへ送られる。
@@ -1662,6 +1669,9 @@ quantum secret sharing, quantum authentication, quantum bit commitment
 | `gemini_model` | `"gemini-3.5-flash-lite"` | レガシーなデフォルト値。Gemini が翻訳も兼ねる「翻訳+分類」経路でのみ使用される。分類には `gemini_model_primary` / `gemini_model_secondary` を使う |
 | `gemini_min_interval_sec` | `7` | Gemini リクエスト間の最小間隔(秒)。`gemini_min_intervals` に該当モデルの指定がない場合のフォールバック値 |
 | `gemini_max_retries` | `2` | 一時的エラー時の再試行上限 |
+| `gemini_timeout_sec` | `45` | Geminiの1試行ごとのソケットタイムアウト（秒） |
+| `gemini_transport_retries` | `1` | 通信エラー・タイムアウトの再試行上限。`gemini_max_retries`でも制限 |
+| `gemini_request_budget_sec` | `100` | 待機・再試行の時間枠（秒）。残時間に応じて試行のソケットタイムアウトを短縮 |
 | `gemini_overload_giveup` | `1` | そのモデルを停止する過負荷連続回数 |
 
 ---

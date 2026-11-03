@@ -10398,6 +10398,78 @@
     ],
     "postprocess": []
    }
+  },
+  "cs.CR:2611.02179": {
+   "genre_ids": [],
+   "classifier": "skip-consensus:gemini-3.5-flash-lite+gemini-3.6-flash",
+   "skip_votes": [
+    "gemini-3.5-flash-lite",
+    "gemini-3.6-flash"
+   ],
+   "reviewed_at": "2026-11-03T07:48:30Z",
+   "policy": "48df5a31f4519d520c54",
+   "classification": {
+    "policy": "48df5a31f4519d520c54",
+    "base_genre_ids": [],
+    "final_genre_ids": [],
+    "postprocess": []
+   },
+   "paper": {
+    "id": "2611.02179",
+    "title": "A Matched Evaluation of QUBO Action Models and Defensive Remediation in Cyber Attack Graphs",
+    "link": "https://arxiv.org/abs/2611.02179v1",
+    "authors": "Kasymkhan Khubiev, Yaroslav Kholodov, Alexey S. Petrenko",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "This study examines how vulnerability-specific actions affect quadratic unconstrained binary optimization (QUBO) models for minimum-cost cyber attack paths and defensive remediation. Edge-flow and variable-length hop formulations are evaluated using simulated annealing, steepest descent, and tabu search against exact classical references. Experiments on six independent synthetic topologies separate the effects of transition eligibility, vulnerability labels, exploit costs, and multiple exploit alternatives. A single labeled action per eligible transition preserves feasible paths, optimal costs, and QUBO size. Under the tested settings, multiple exploit alternatives were associated with approximately unchanged valid-path recovery, lower optimal-path recovery, and substantially larger representations, particularly for the hop formulation. These recovery differences remain descriptive because they are not statistically significant after correction for multiple comparisons. An evaluation on a published 3CX attack graph with synthetic costs demonstrates applicability beyond the generated topologies. The defensive extension selects patches within a budget to raise attack-path costs to specified thresholds or disconnect protected targets. Against exhaustive and mixed-integer references, the tested QUBO heuristics recovered an optimal patch set in 12 of 16 calls across eight scenarios on one topology. The results characterize formulation correctness, solution recovery, and resource requirements using classical local optimization, without establishing quantum computational advantage.",
+    "published": "2026-11-01T20:28:51Z",
+    "updated": "2026-11-01T20:28:51Z",
+    "source_feed": "cs.CR"
+   }
+  },
+  "cs.CR:2611.01144": {
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-03T07:48:30Z",
+   "policy": "48df5a31f4519d520c54",
+   "classification": {
+    "policy": "48df5a31f4519d520c54",
+    "base_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "final_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.IT:2611.01678": {
+   "genre_ids": [
+    "qit"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-03T07:48:32Z",
+   "policy": "48df5a31f4519d520c54",
+   "classification": {
+    "policy": "48df5a31f4519d520c54",
+    "base_genre_ids": [
+     "qit"
+    ],
+    "final_genre_ids": [
+     "qit"
+    ],
+    "postprocess": []
+   }
   }
  },
  "external_pending": {},
@@ -19038,11 +19110,132 @@
   "2610.42131",
   "2610.42150"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2611.01144": {
+   "paper": {
+    "id": "2611.01144",
+    "title": "Side-Channel Attack Prevention for Post Quantum Cryptography Algorithms: A 3D-Shield Approach",
+    "link": "https://arxiv.org/abs/2611.01144v1",
+    "authors": "Carl Benda, Eren Kurshan, Aydin Aysu, Paul Franzon",
+    "announce_type": "external",
+    "categories": [
+     "cs.CR",
+     "cs.ET"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Despite their theoretical quantum attack resistance, practical implementations of post-quantum cryptography (PQC) algorithms remain susceptible to side-channel attacks. This includes all standard algorithms selected the National Institute of Standards and Technology (NIST) such as Kyber/ML-KEM, Dilithium/ML-DSA, Falcon/FN-DSA and SPHINCS+/SLH-DSA. This paper proposes an alternative defense for side-channel resilience based on 3D integration that uses 3D hardware to shield the underlying cryptographic activity by introducing decoy keys and physical shielding through stacking. The proposed approach can complement other security measures (such as masking and shuffling) on protecting Number Theoretic Transform (NTT) that move computation to dedicated NTT chips. We outline the construction of our approach and validate the effectiveness on a generic attack targeting intermediate computation inside an NTT butterfly.",
+    "published": "2026-10-31T17:32:09Z",
+    "updated": "2026-10-31T17:32:09Z",
+    "source_feed": "cs.CR",
+    "external_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "48df5a31f4519d520c54",
+     "base_genre_ids": [
+      "pqc",
+      "hardware"
+     ],
+     "final_genre_ids": [
+      "pqc",
+      "hardware"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "pqc",
+    "hardware"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "48df5a31f4519d520c54",
+    "base_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "final_genre_ids": [
+     "pqc",
+     "hardware"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "hardware": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-03T07:48:32Z"
+  },
+  "2611.01678": {
+   "paper": {
+    "id": "2611.01678",
+    "title": "Communication with Adversarial Users: Byzantine Models in Multi-User Information Theory",
+    "link": "https://arxiv.org/abs/2611.01678v1",
+    "authors": "Minglai Cai, Christian Deppe, Neha Sangwan",
+    "announce_type": "external",
+    "categories": [
+     "cs.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "We consider communication systems operating in environments where some participating users cannot be trusted. This motivates the study of Byzantine communication models, in which users may behave adversarially. In this survey, we provide a unified information-theoretic perspective on communication with adversarial users in multi-user settings. We review recent advances in Byzantine multiple access channels, including reliable communication, adversary identification, and distributed function computation. Furthermore, we discuss extensions to classical-quantum channels and highlight fundamental differences between classical and quantum models. Finally, we outline key open problems and future research directions at the intersection of communication, computation, and security.",
+    "published": "2026-11-01T07:55:24Z",
+    "updated": "2026-11-01T07:55:24Z",
+    "source_feed": "cs.IT",
+    "external_genre_ids": [
+     "qit"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "48df5a31f4519d520c54",
+     "base_genre_ids": [
+      "qit"
+     ],
+     "final_genre_ids": [
+      "qit"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "qit"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "48df5a31f4519d520c54",
+    "base_genre_ids": [
+     "qit"
+    ],
+    "final_genre_ids": [
+     "qit"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qit": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-03T07:48:32Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-11-02T16:55:53Z",
-  "cs.CC": "2026-11-02T16:56:02Z",
-  "cs.IT": "2026-11-02T16:56:06Z"
+  "cs.CR": "2026-11-03T07:48:08Z",
+  "cs.CC": "2026-11-03T07:48:16Z",
+  "cs.IT": "2026-11-03T07:48:22Z"
  },
  "feed_cursors": {
   "quant-ph": "2026-11-02T12:05:56.914925+00:00"

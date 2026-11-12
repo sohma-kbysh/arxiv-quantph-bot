@@ -2,9 +2,9 @@
 
 This bot fetches the official arXiv RSS feed (`rss.arxiv.org/rss/quant-ph`) three times a day (Monday-Saturday), reconciles it against arXiv's OAI-PMH announcement records so an empty or stale RSS snapshot cannot drop a day, classifies each paper into one or more of 15 genres, and posts it to every corresponding Discord channel through webhooks with a translated title and abstract. The embed footer of each post lists **all** genres assigned to the paper, so a multi-genre paper shows its full classification in every channel it appears in.
 
-In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Azure Translator -> Apps Script (when configured). Normal quant-ph papers first use `gemini-3.5-flash-lite`; unresolved papers fall through to `gemini-3.6-flash`, then the deterministic TF-IDF/keyword fallback. Both models are paced at 7 seconds between requests. The bot uses **only the Python standard library**; `pip install` is not required.
+In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Azure Translator -> Google Cloud Translation (capped inside its free tier) -> Apps Script (when configured) -> Gemini (capped daily request budget). Normal quant-ph papers first use `gemini-3.5-flash-lite`; unresolved papers fall through to `gemini-3.6-flash`, then the deterministic TF-IDF/keyword fallback. Both models are paced at 7 seconds between requests. The bot uses **only the Python standard library**; `pip install` is not required.
 
-The November 2026 update adds daily quant-ph API backfill, classification decision traces, route-aware read-only audits, and re-evaluation of fallback classifications that have not reached any channel. The configured final translation backend is [Apps Script](docs/FREE_TRANSLATION.md), which is skipped until an operator deploys the web app and sets its two secrets. Google Cloud Translation is retained for explicit opt-in only because credit overages can be billed. The new model setup has offline regression coverage, but its live account quotas and classification accuracy still need operational evaluation.
+The November 2026 update adds daily quant-ph API backfill, classification decision traces, route-aware read-only audits, and re-evaluation of fallback classifications that have not reached any channel. The configured final translation backend is [Apps Script](docs/FREE_TRANSLATION.md), which is skipped until an operator deploys the web app and sets its two secrets. Since 2026-11-12, Google Cloud Translation is back in the chain behind a bot-enforced cap below its monthly free credit, and Gemini translates as a last resort within a daily request budget (see "5. Translation fallback chain"). The new model setup has offline regression coverage, but its live account quotas and classification accuracy still need operational evaluation.
 
 The 2026-11-12 update replaces the submission-date API backfill and the adjacent-category API keyword queries with OAI-PMH harvesting by announcement datestamp (see "1. Fetch sources"), moves the all-translators-down alert into the translation phase so it can actually fire, and pauses the SciRate workflow.
 
@@ -205,8 +205,20 @@ One paper can be classified into multiple genres and posted to each correspondin
 Current standard setting:
 
 ```text
-DeepL -> Azure Translator -> Apps Script (when configured)
+DeepL -> Azure Translator -> Google Cloud Translation (free-tier cap) -> Apps Script (when configured) -> Gemini (daily budget)
 ```
+
+Every free allowance is used, but never beyond it:
+
+| Backend | Free allowance | How the bot stays inside it |
+| --- | --- | --- |
+| DeepL API Free | 500,000 characters per month | Stops on HTTP 456 |
+| Azure Translator F0 | 2,000,000 characters per month | Stops on HTTP 401/403/429 |
+| Google Cloud Translation | 500,000 characters per month as a $10 credit; **overage is billed** | Reserves each text's characters from `google_monthly_char_limit` (450,000, a 10% margin) before sending, counted per Pacific-time month like Google's billing, in `seen_ids.json` `translation_usage` |
+| Apps Script `LanguageApp` | 5,000 calls per day (personal account) | Requires an operator deployment; skipped until then |
+| Gemini (classification project, billing disabled) | Free-tier request quota shared with classification | Last resort; at most `gemini_translation_daily_request_limit` (100) requests per Pacific day, always after classification has run |
+
+Only a process that loaded the budget from the bot state can use Google or Gemini translation, so other callers (SciRate, ad-hoc scripts) cannot spend outside it. The run report shows the current use, e.g. `📊 無料枠の使用量: google 123,456/450,000字/月 / gemini 12/100回/日`; a backend that reached its budget counts as stopped for the outage alert.
 
 The configured `apps_script` backend requires an operator-deployed Google Apps Script web app and `GOOGLE_APPS_SCRIPT_URL` / `GOOGLE_APPS_SCRIPT_TOKEN`. Until these are set, it is skipped. This update does not deploy a public endpoint. The main notifier workflow passes these secrets; the unchanged SciRate workflow does not, so SciRate continues with its available existing backends. See [setup and quota limits](docs/FREE_TRANSLATION.md).
 
@@ -549,7 +561,7 @@ Translation backends are tried in the order listed in `config.json` under `main_
 | DeepL | Translation | Plan-dependent: existing API Free 500k/month; Developer 1M total without renewal | `DEEPL_API_KEY` |
 | Azure Translator | Translation | Free up to 2M characters/month on F0 | `AZURE_TRANSLATOR_KEY` + `AZURE_TRANSLATOR_REGION` |
 | Apps Script | Optional translation | LanguageApp daily call quota; requires deployment | `GOOGLE_APPS_SCRIPT_URL` + `GOOGLE_APPS_SCRIPT_TOKEN` |
-| Google Cloud Translation | Explicit opt-in translation | Monthly credit; overage is billable and requires project quota controls | `GOOGLE_TRANSLATE_API_KEY` |
+| Google Cloud Translation | Translation, capped inside the free tier | Monthly $10 credit (500,000 characters); the bot stops at `google_monthly_char_limit` | `GOOGLE_TRANSLATE_API_KEY` |
 
 You can create a Gemini API key in [Google AI Studio](https://aistudio.google.com/). If no Gemini key is available, normal quant-ph classification falls back to TF-IDF; external review remains pending.
 
@@ -597,7 +609,7 @@ GEMINI_API_KEY
 DEEPL_API_KEY            # optional
 AZURE_TRANSLATOR_KEY     # optional
 AZURE_TRANSLATOR_REGION  # optional unless your Azure resource requires it
-GOOGLE_TRANSLATE_API_KEY # explicit opt-in only; overage can be billed
+GOOGLE_TRANSLATE_API_KEY # used up to google_monthly_char_limit per month (below the free credit)
 GOOGLE_APPS_SCRIPT_URL   # optional; operator-deployed Apps Script endpoint
 GOOGLE_APPS_SCRIPT_TOKEN # optional; shared token for that endpoint
 ```
@@ -777,7 +789,9 @@ Phrase matching normalizes case, hyphens, and common plural forms. New classific
 
 | Key | Default | Description |
 | --- | --- | --- |
-| `main_translators` | `["deepl","azure","apps_script"]` | Main notifier translation order; overrides `translators` only in the main notifier |
+| `main_translators` | `["deepl","azure","google","apps_script","gemini"]` | Main notifier translation order; overrides `translators` only in the main notifier |
+| `google_monthly_char_limit` | `450000` | Characters per Pacific-time month the bot may send to Google Cloud Translation (free credit: 500,000). `0` disables Google |
+| `gemini_translation_daily_request_limit` | `100` | Gemini translation requests per Pacific-time day (each translates up to 5 texts). `0` disables Gemini translation |
 | `translators` | `["deepl","azure","google"]` | Existing SciRate/direct-caller translation order, retained unchanged |
 | `target_language` | `"ja"` | Translation target language code. Passed to each translation backend unless overridden |
 | `target_language_name` | `"Japanese"` | Human-readable target language name used in LLM translation prompts |
@@ -794,7 +808,7 @@ Phrase matching normalizes case, hyphens, and common plural forms. New classific
 | `google_max_retries` | `3` | Retries for Google Translate 429 / user-rate-limit responses |
 | `translation_priority_genres` | 15 genre IDs | Genre priority used after classification when choosing translation/posting order |
 | `translate_only_matched` | `false` | When `true`, papers with no classified genre are not translated, saving API usage |
-| `google_skip_translation_genres` | `["other","foundations","sensing","nisq"]` | Applies only to explicitly enabled Google; does not bypass required translation |
+| `google_skip_translation_genres` | `[]` | Genres that must not use Google. Empty, so every paper may use the free allowance; translation priority still decides who goes first |
 | `allow_untranslated_low_priority` | `false` | Explicit opt-in to legacy English fallback |
 | `require_translated_title` | `true` | Require translated main-bot titles when shown |
 | `require_translation` | `true` | `true`: papers whose translation failed are retried later / `false`: post in English |
@@ -836,7 +850,7 @@ Phrase matching normalizes case, hyphens, and common plural forms. New classific
 - The final genre set is not decided by the LLM alone. Deterministic post-processing can add `crypto` and the broad `qec` coding-theory label after classification, and new `classification` traces distinguish those additions from the model's own output.
 - The default checked-in configuration is intentionally Japanese. Multilingual behavior is opt-in through `target_language` and related settings, so changing the code does not change the default Japanese Discord workflow.
 - Azure Translator's F0 tier includes 2M free characters/month, which makes it a useful translation backend. For an Azure-only setup, use `main_translators: ["azure"]` and set `target_language` to an Azure-supported language code such as `fr`, `de`, `ko`, or `zh-Hans`.
-- Google Cloud Translation is not in the default automatic chain. To opt in, add `google` explicitly and set project quota controls; billing-account credits do not prevent overage charges. Apps Script uses a separate service quota.
+- Google Cloud Translation bills anything above its monthly credit, and the credit itself does not stop usage. The bot therefore caps it at `google_monthly_char_limit`; for an additional Google-side guard you can set a project quota, but a daily quota also limits legitimate use. Apps Script uses a separate service quota.
 - Gemini free-tier availability and RPM/TPM/RPD limits depend on the model, project, and account, and can change. Check [Google AI Studio](https://aistudio.google.com/) before operation. The configured request spacing and fallback order do not guarantee a free allowance or successful API access.
 - Completed IDs, unfinished per-channel deliveries, external reviews, pending candidates, and fetch cursors in `seen_ids.json` are not truncated, because truncating them can cause missed retries or duplicate reposts. `posted_log.json` remains a bounded 5000-entry presentation/audit log.
 - Adjacent-category completeness currently covers papers whose **primary** category is `cs.CR`, `cs.CC`, or `cs.IT`. Papers primary to other categories, such as `math.IT` or `cs.DS`, are only picked up when they are cross-listed to quant-ph.
@@ -967,9 +981,9 @@ Note: users with `Administrator` bypass channel permission overwrites. Webhooks 
 
 arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1日3回取得し、arXiv OAI-PMH のアナウンス記録と突き合わせて(RSSが空・古い日でも取りこぼさない)、論文を15ジャンルのうち1つ以上に分類して、翻訳済みタイトル・abstract 訳とともに対応する Discord の各チャンネルへ Webhook で投稿する。各投稿の embed footer には、投稿先チャンネルのジャンルだけでなく**その論文に割り当てられた全ジャンル名**が表示されるため、複数ジャンルの論文はどのチャンネルで見ても分類の全体が分かる。
 
-現在の標準運用では、Gemini は**分類のみ**に使い、翻訳は DeepL → Azure Translator → Apps Script（設定済みの場合） の順に試行する。通常のquant-ph論文をまず `gemini-3.5-flash-lite` に送り、未分類分を `gemini-3.6-flash`、続いて決定的な TF-IDF・キーワード分類へ回す。両モデルともリクエスト間隔は7秒。**標準ライブラリのみで動作し、`pip install` は不要。**
+現在の標準運用では、Gemini は**分類のみ**に使い、翻訳は DeepL → Azure Translator → Google Cloud Translation（無料枠内の上限付き） → Apps Script（設定済みの場合） → Gemini（日次リクエスト上限付き） の順に試行する。通常のquant-ph論文をまず `gemini-3.5-flash-lite` に送り、未分類分を `gemini-3.6-flash`、続いて決定的な TF-IDF・キーワード分類へ回す。両モデルともリクエスト間隔は7秒。**標準ライブラリのみで動作し、`pip install` は不要。**
 
-2026年11月の更新で、quant-ph APIによる日次の取りこぼし回収、分類判断の履歴、取得経路を再現する読み取り専用監査、未配信のフォールバック分類の再評価を追加した。翻訳チェーンの最終段を[Apps Script](docs/FREE_TRANSLATION.md)に変更したが、運用者がWebアプリをデプロイして2つのSecretを設定するまではスキップする。Google Cloud Translationは控除超過が課金対象となるため、明示的に有効化する場合だけ使用する。新モデル構成はオフライン回帰試験で確認しており、実アカウントの利用枠と分類精度は今後の運用評価が必要。
+2026年11月の更新で、quant-ph APIによる日次の取りこぼし回収、分類判断の履歴、取得経路を再現する読み取り専用監査、未配信のフォールバック分類の再評価を追加した。翻訳チェーンの最終段を[Apps Script](docs/FREE_TRANSLATION.md)に変更したが、運用者がWebアプリをデプロイして2つのSecretを設定するまではスキップする。2026-11-12からは、Google Cloud Translationを月間無料控除より低いbot側の上限付きでチェーンに戻し、Geminiも日次リクエスト上限内で最後の予備として翻訳に使う(「5. 翻訳フォールバックチェーン」参照)。新モデル構成はオフライン回帰試験で確認しており、実アカウントの利用枠と分類精度は今後の運用評価が必要。
 
 2026-11-12の更新で、投稿日基準のAPIバックフィルと隣接カテゴリのAPIキーワード検索を、アナウンス日(OAI-PMHのdatestamp)基準の取得に置き換えた(「1. 取得」参照)。翻訳全停止アラートは実際に発火できるよう翻訳フェーズで判定するようにし、SciRate workflowは一時停止した。
 
@@ -1170,8 +1184,20 @@ quant-ph RSS から取得した論文は、primary category に関係なく通�
 現在の標準設定:
 
 ```text
-DeepL → Azure Translator → Apps Script（設定済みの場合）
+DeepL → Azure Translator → Google Cloud Translation（無料枠内の上限） → Apps Script（設定済みの場合） → Gemini（日次上限）
 ```
+
+無料枠はすべて使うが、超えることはない。
+
+| バックエンド | 無料枠 | 枠内に収める方法 |
+| --- | --- | --- |
+| DeepL API Free | 月50万字 | HTTP 456で停止 |
+| Azure Translator F0 | 月200万字 | HTTP 401/403/429で停止 |
+| Google Cloud Translation | 毎月$10の控除(50万字相当)。**超過分は課金される** | 送信前に各テキストの文字数を `google_monthly_char_limit`(45万字。1割の余裕)から確保する。Googleの請求と同じ太平洋時間の月で数え、`seen_ids.json` の `translation_usage` に保存する |
+| Apps Script `LanguageApp` | 1日5,000回(個人アカウント) | 運用者のデプロイが必要。それまではスキップ |
+| Gemini(分類用project、課金無効) | 分類と共有する無料枠 | 最後の予備。太平洋時間の1日あたり `gemini_translation_daily_request_limit`(100)回まで。分類の後にだけ使う |
+
+Google・Geminiの翻訳は、bot stateから予算を読み込んだプロセスだけが使える。このため、SciRateや手動スクリプトなど他の呼び出し元が枠外で使うことはない。実行レポートには `📊 無料枠の使用量: google 123,456/450,000字/月 / gemini 12/100回/日` のように使用量を表示し、上限に達したバックエンドは全停止アラートの判定で停止扱いにする。
 
 設定済みの `apps_script` バックエンドには、自分でデプロイしたGoogle Apps Script Webアプリと `GOOGLE_APPS_SCRIPT_URL`・`GOOGLE_APPS_SCRIPT_TOKEN` が必要。未設定ならスキップする。この更新では公開endpointをデプロイしない。メインの通知workflowは両Secretを渡すが、変更していないSciRate workflowには追加していないため、SciRateでは既存の利用可能な段を使う。[設定方法と利用枠](docs/FREE_TRANSLATION.md)を参照。
 
@@ -1423,7 +1449,7 @@ python3 tools/scirate_snapshot.py --repo ~/scirate-snapshots
 | DeepL | 翻訳 | プラン依存。旧API Freeは月50万文字、新Developerは累計100万文字で更新なし | `DEEPL_API_KEY` |
 | Azure Translator | 翻訳 | F0 で月200万文字まで無料 | `AZURE_TRANSLATOR_KEY` + `AZURE_TRANSLATOR_REGION` |
 | Apps Script | 任意の翻訳 | LanguageAppの日次呼び出し枠。要デプロイ | `GOOGLE_APPS_SCRIPT_URL` + `GOOGLE_APPS_SCRIPT_TOKEN` |
-| Google Cloud Translation | 明示有効化時の翻訳 | 月次控除の超過は有料。projectのquota管理が必要 | `GOOGLE_TRANSLATE_API_KEY` |
+| Google Cloud Translation | 無料枠内の上限付き翻訳 | 毎月$10控除(50万字)。botは `google_monthly_char_limit` で止める | `GOOGLE_TRANSLATE_API_KEY` |
 
 Gemini API キーは [Google AI Studio](https://aistudio.google.com/) で発行できる。未設定の場合、通常の quant-ph 分類は TF-IDF を使い、外部審査は保留する。
 
@@ -1471,7 +1497,7 @@ GEMINI_API_KEY
 DEEPL_API_KEY            # 省略可
 AZURE_TRANSLATOR_KEY     # 省略可
 AZURE_TRANSLATOR_REGION  # Azure resource が要求する場合に設定
-GOOGLE_TRANSLATE_API_KEY # 明示有効化時だけ使用。超過課金に注意
+GOOGLE_TRANSLATE_API_KEY # 毎月 google_monthly_char_limit まで使用(無料控除の範囲内)
 GOOGLE_APPS_SCRIPT_URL   # 任意。自分でデプロイしたApps ScriptのURL
 GOOGLE_APPS_SCRIPT_TOKEN # 任意。そのendpointの共有token
 ```
@@ -1651,7 +1677,9 @@ quantum secret sharing, quantum authentication, quantum bit commitment
 
 | キー | デフォルト | 説明 |
 | --- | --- | --- |
-| `main_translators` | `["deepl","azure","apps_script"]` | 通常botだけの翻訳順。通常bot内でのみ `translators` を上書き |
+| `main_translators` | `["deepl","azure","google","apps_script","gemini"]` | 通常botだけの翻訳順。通常bot内でのみ `translators` を上書き |
+| `google_monthly_char_limit` | `450000` | Google Cloud Translationへ送る太平洋時間の月あたり文字数(無料控除は50万字)。`0` でGoogleを使わない |
+| `gemini_translation_daily_request_limit` | `100` | 太平洋時間の1日あたりのGemini翻訳リクエスト数(1回で最大5件)。`0` でGemini翻訳を使わない |
 | `translators` | `["deepl","azure","google"]` | SciRate・直接呼び出し用の従来の翻訳順を維持 |
 | `target_language` | `"ja"` | 翻訳先言語コード。個別指定がない場合は各翻訳バックエンドに渡される |
 | `target_language_name` | `"Japanese"` | LLM 翻訳プロンプトで使う翻訳先言語名 |
@@ -1668,7 +1696,7 @@ quantum secret sharing, quantum authentication, quantum bit commitment
 | `google_max_retries` | `3` | Google Translate の 429 / user-rate-limit 応答に対するリトライ回数 |
 | `translation_priority_genres` | 15ジャンルID | 分類後に翻訳・投稿するジャンル優先順 |
 | `translate_only_matched` | `false` | `true` にするとジャンル未分類論文は翻訳しない(API節約) |
-| `google_skip_translation_genres` | `["other","foundations","sensing","nisq"]` | 明示有効化したGoogleの対象制限。翻訳必須条件は維持 |
+| `google_skip_translation_genres` | `[]` | Googleを使わないジャンル。空なので全論文が無料枠を使える。順番は翻訳優先度で決まる |
 | `allow_untranslated_low_priority` | `false` | 旧英語投稿例外の明示許可 |
 | `require_translated_title` | `true` | メインbotの表示用タイトルも翻訳必須 |
 | `require_translation` | `true` | `true`: 翻訳失敗論文は次回へ持ち越す / `false`: 英語のまま投稿 |
@@ -1710,7 +1738,7 @@ quantum secret sharing, quantum authentication, quantum bit commitment
 - 最終的なジャンルは LLM だけで決まっているわけではない。分類後の決定的な後処理が `crypto` と広義 `qec` の符号理論ラベルを追加することがあり、新しい `classification` 履歴でその追加分とモデル自身の出力を区別する。
 - チェックインされている標準設定は意図的に日本語運用のまま。多言語動作は `target_language` と関連設定を変更した場合のみ有効になるため、多言語対応は既存の日本語 Discord ワークフローを変更しない。
 - Azure Translator の F0 は月200万文字まで無料なので、翻訳backendとして利用できる。Azure のみで使う場合は `main_translators: ["azure"]` とし、`target_language` に `fr`, `de`, `ko`, `zh-Hans` などの Azure 対応言語コードを設定する。
-- Google Cloud Translationは標準の自動チェーンに含めない。使用する場合は `google` を明示追加し、projectのquotaを設定する。請求先アカウントの控除だけでは超過課金を防げない。Apps Scriptとは別枠である。
+- Google Cloud Translationは月間控除を超えた分が課金され、控除そのものは利用を止めない。そのためbot側で `google_monthly_char_limit` に上限を設けている。Google側でも止めたい場合はprojectのquotaを設定できるが、日次quotaは正当な利用も制限する。Apps Scriptとは別枠である。
 - Gemini の無料枠の対象・RPM/TPM/RPDはモデル、project、アカウントによって異なり変更される。[Google AI Studio](https://aistudio.google.com/) で実際の値を確認すること。設定済みのリクエスト間隔やフォールバック順序は、無料利用枠やAPI利用成功の保証ではない。
 - `seen_ids.json` の完了ID、未完了のチャンネル別配信状態、外部審査、未審査候補、取得cursorは、再送漏れ・古い論文の再投稿を防ぐため切り捨てない。表示・監査用の `posted_log.json` だけは最新5000件に制限する。
 - 隣接カテゴリの completeness が現在カバーするのは、**primary** が `cs.CR`, `cs.CC`, `cs.IT` の論文である。`math.IT` や `cs.DS` など他カテゴリが primary の論文は、quant-ph へ cross-list された場合にのみ拾われる。

@@ -21360,13 +21360,9 @@
  },
  "translation_alerts": {},
  "translation_status": {
-  "at": "2026-11-12T06:04:03Z",
-  "translated": {
-   "azure": 20
-  },
-  "dead": [
-   "deepl"
-  ],
+  "at": "2026-11-12T08:11:01Z",
+  "translated": {},
+  "dead": [],
   "unconfigured": [
    "apps_script"
   ],

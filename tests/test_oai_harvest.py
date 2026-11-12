@@ -26,7 +26,7 @@ V_NOV11 = "Wed, 11 Nov 2026 09:00:00 GMT"
 def raw_record(pid: str, datestamp: str, versions: list[str], categories: str,
                *, title: str = "Quantum error correction with LDPC codes",
                abstract: str = "We construct quantum codes.",
-               deleted: bool = False) -> str:
+               deleted: bool = False, comments: str = "") -> str:
     header = (f"<identifier>oai:arXiv.org:{pid}</identifier>"
               f"<datestamp>{datestamp}</datestamp>"
               "<setSpec>physics:quant-ph</setSpec>")
@@ -43,15 +43,24 @@ def raw_record(pid: str, datestamp: str, versions: list[str], categories: str,
         f"<title>{title}\n  continued</title>"
         "<authors>A. Author, B. Author</authors>"
         f"<categories>{categories}</categories>"
-        f"<abstract>  {abstract}\n</abstract>"
+        + (f"<comments>{comments}</comments>" if comments else "")
+        + f"<abstract>  {abstract}\n</abstract>"
         "</arXivRaw></metadata></record>")
 
 
+def now_stamp() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def oai_page(records: list[str], *, token: str | None = None,
-             response_date: str = "2026-11-11T20:00:00Z",
-             error: tuple[str, str] | None = None) -> bytes:
+             response_date: str | None = None,
+             error: tuple[str, str] | None = None,
+             verb: str = "ListRecords") -> bytes:
+    response_date = response_date or now_stamp()
     if error:
         body = f'<error code="{error[0]}">{error[1]}</error>'
+    elif verb == "GetRecord":
+        body = f"<GetRecord>{''.join(records)}</GetRecord>"
     else:
         resumption = (
             f'<resumptionToken expirationDate="2026-11-13T00:00:00Z">{token}'
@@ -89,7 +98,7 @@ class OaiParsingTests(unittest.TestCase):
             raw_record("2611.00003", "2026-11-11", [], "quant-ph"),
             raw_record("2611.00004", "2026-11-11", [V_NOV10], "quant-ph",
                        deleted=True),
-        ], token="next-page")
+        ], token="next-page", response_date="2026-11-11T20:00:00Z")
         rows, token, served, skipped = arxiv_bot.parse_oai_list_records(page)
         self.assertEqual(token, "next-page")
         self.assertEqual(served, "2026-11-11T20:00:00Z")
@@ -111,13 +120,14 @@ class OaiParsingTests(unittest.TestCase):
 
     def test_no_records_is_success_but_other_errors_fail(self) -> None:
         rows, token, served, skipped = arxiv_bot.parse_oai_list_records(
-            oai_page([], error=("noRecordsMatch", "none")))
+            oai_page([], error=("noRecordsMatch", "none"),
+                     response_date="2026-11-11T20:00:00Z"))
         self.assertEqual((rows, token, skipped), ([], None, 0))
         self.assertEqual(served, "2026-11-11T20:00:00Z")
         for raw in [
             oai_page([], error=("badArgument", "bad from")),
             b"<html><body>Service unavailable</body></html>",
-            oai_page([]).replace(
+            oai_page([], response_date="2026-11-11T20:00:00Z").replace(
                 b"<responseDate>2026-11-11T20:00:00Z</responseDate>", b""),
         ]:
             with self.subTest(raw=raw[:40]):
@@ -138,7 +148,8 @@ class OaiParsingTests(unittest.TestCase):
                            side_effect=pages) as get,
               patch.object(arxiv_bot.time, "sleep")):
             rows, cursor, skipped = arxiv_bot.fetch_oai_records(
-                "physics:quant-ph", "2026-11-08", {})
+                "physics:quant-ph", "2026-11-08", {},
+                now=datetime(2026, 11, 11, 19, 5, tzinfo=timezone.utc))
         self.assertEqual(sorted(r["id"] for r in rows),
                          ["2611.00001", "2611.00002"])
         self.assertEqual(cursor, "2026-11-11T19:00:00Z")
@@ -147,7 +158,8 @@ class OaiParsingTests(unittest.TestCase):
         self.assertEqual(first, {"verb": "ListRecords",
                                  "metadataPrefix": "arXivRaw",
                                  "set": "physics:quant-ph",
-                                 "from": "2026-11-08"})
+                                 "from": "2026-11-08",
+                                 "until": "2026-11-11"})
         self.assertEqual(second, {"verb": "ListRecords",
                                   "resumptionToken":
                                   "verb%3DListRecords%26page%3D2"})
@@ -172,6 +184,41 @@ class OaiParsingTests(unittest.TestCase):
             _rows, cursor, _ = arxiv_bot.fetch_oai_records(
                 "physics:quant-ph", "2026-11-08", {})
         self.assertLess(cursor, "2099")
+
+    def test_cached_stale_response_is_retried_with_a_new_url(self) -> None:
+        now = datetime(2026, 11, 12, 6, 30, tzinfo=timezone.utc)
+        stale = oai_page([], error=("noRecordsMatch", "none"),
+                         response_date="2026-11-12T01:17:18Z")
+        fresh = oai_page([raw_record("2611.00001", "2026-11-12", [V_NOV11],
+                                     "quant-ph")],
+                         response_date="2026-11-12T06:30:05Z")
+        with (patch.object(arxiv_bot, "http_get_arxiv_api",
+                           side_effect=[stale, fresh]) as get,
+              patch.object(arxiv_bot.time, "sleep"),
+              patch("sys.stderr", new=io.StringIO())):
+            rows, cursor, _ = arxiv_bot.fetch_oai_records(
+                "physics:quant-ph", "2026-11-09", {}, now=now)
+        self.assertEqual([r["id"] for r in rows], ["2611.00001"])
+        self.assertEqual(cursor, "2026-11-12T06:30:00Z")
+        urls = [query(c.args[0]) for c in get.call_args_list]
+        self.assertEqual([(u["from"], u["until"]) for u in urls],
+                         [("2026-11-09", "2026-11-12"),
+                          ("2026-11-08", "2026-11-12")])
+
+    def test_all_stale_attempts_return_freshest_with_conservative_cursor(
+            self) -> None:
+        now = datetime(2026, 11, 12, 6, 30, tzinfo=timezone.utc)
+        pages = [oai_page([], error=("noRecordsMatch", "none"),
+                          response_date=stamp)
+                 for stamp in ("2026-11-12T01:00:00Z", "2026-11-12T03:00:00Z")]
+        with (patch.object(arxiv_bot, "http_get_arxiv_api",
+                           side_effect=pages),
+              patch.object(arxiv_bot.time, "sleep"),
+              patch("sys.stderr", new=io.StringIO())):
+            _rows, cursor, _ = arxiv_bot.fetch_oai_records(
+                "physics:quant-ph", "2026-11-09", {"cache_retry_attempts": 2},
+                now=now)
+        self.assertEqual(cursor, "2026-11-12T03:00:00Z")
 
     def test_from_date_uses_cursor_overlap_and_optional_backfill(self) -> None:
         now = datetime(2026, 11, 12, 8, tzinfo=timezone.utc)
@@ -286,7 +333,7 @@ class OaiMainFlowTests(unittest.TestCase):
                        "quant-ph"),
             raw_record("2604.20004", "2026-11-11", [V_APR], "quant-ph"),
             raw_record("2611.10000", "2026-11-11", [V_NOV10], "quant-ph"),
-        ], response_date="2026-11-11T20:00:00Z")
+        ], response_date=(served := now_stamp()))
         state = {"seen": ["2611.10000"],
                  "feed_cursors": {"quant-ph": "2026-11-11T07:00:00Z"}}
         code, saved, reports, get = self.run_discover(
@@ -297,8 +344,7 @@ class OaiMainFlowTests(unittest.TestCase):
         self.assertEqual(
             saved["deliveries"]["2611.20002"]["paper"]["announce_type"],
             "cross")
-        self.assertEqual(saved["oai_cursors"],
-                         {"physics:quant-ph": "2026-11-11T20:00:00Z"})
+        self.assertEqual(saved["oai_cursors"], {"physics:quant-ph": served})
         self.assertEqual(query(get.call_args.args[0])["from"], "2026-11-08")
         notice = reports[0]["source_notices"][0]
         self.assertEqual(notice["source"], "OAI-PMH:quant-ph")
@@ -413,27 +459,6 @@ class OaiMainFlowTests(unittest.TestCase):
         self.assertEqual(saved["oai_cursors"], {})
 
 
-def atom_entries(entries: list[tuple[str, str, list[str], str]]) -> bytes:
-    """Atom API entries: (id with version, primary, categories, comment)."""
-    body = []
-    for pid, primary, categories, comment in entries:
-        cats = "".join(f'<category term="{c}"/>' for c in categories)
-        note = f"<arxiv:comment>{comment}</arxiv:comment>" if comment else ""
-        body.append(
-            f"<entry><id>http://arxiv.org/abs/{pid}</id>"
-            "<published>2026-09-29T10:00:00Z</published>"
-            "<updated>2026-10-05T10:00:00Z</updated>"
-            f"<title>Recovered {pid}</title>"
-            "<summary>Quantum error correction.</summary>"
-            f"<author><name>Example</name></author>{cats}"
-            f'<arxiv:primary_category term="{primary}"/>{note}'
-            f'<link rel="alternate" href="https://arxiv.org/abs/{pid}"/>'
-            "</entry>")
-    return ('<feed xmlns="http://www.w3.org/2005/Atom" '
-            'xmlns:arxiv="http://arxiv.org/schemas/atom">'
-            + "".join(body) + "</feed>").encode()
-
-
 class RecoveryTests(unittest.TestCase):
     def test_parse_recover_ids_accepts_free_form_operator_text(self) -> None:
         self.assertEqual(arxiv_bot.parse_recover_ids(
@@ -442,47 +467,72 @@ class RecoveryTests(unittest.TestCase):
             ["2609.35837", "2609.35962", "2610.35931"])
         self.assertEqual(arxiv_bot.parse_recover_ids(""), [])
 
+    @staticmethod
+    def get_record(pid: str, categories: str, *, versions: int = 1,
+                   comments: str = "") -> bytes:
+        dates = [V_SEP, V_NOV10][:versions]
+        return oai_page([raw_record(pid, "2026-09-30", dates, categories,
+                                    comments=comments)], verb="GetRecord")
+
     def test_fetch_maps_new_and_cross_and_rejects_unusable_ids(self) -> None:
-        raw = atom_entries([
-            ("2609.35837v2", "quant-ph", ["quant-ph"], ""),
-            ("2609.35962v1", "cond-mat.str-el",
-             ["cond-mat.str-el", "quant-ph"], ""),
-            ("2609.35973v1", "cs.LG", ["cs.LG"], ""),
-            ("2609.36000v2", "quant-ph", ["quant-ph"],
-             "This paper has been withdrawn by the authors"),
-        ])
-        with patch.object(arxiv_bot, "http_get_arxiv_api",
-                          return_value=raw) as get:
+        responses = {
+            "2609.35837": self.get_record("2609.35837", "quant-ph",
+                                          versions=2),
+            "2609.35962": self.get_record("2609.35962",
+                                          "cond-mat.str-el quant-ph"),
+            "2609.35973": self.get_record("2609.35973", "cs.LG"),
+            "2609.36000": self.get_record(
+                "2609.36000", "quant-ph",
+                comments="This paper has been withdrawn by the authors"),
+            "2609.36001": oai_page([], error=("idDoesNotExist", "unknown"),
+                                   verb="GetRecord"),
+        }
+        requested: list[dict[str, str]] = []
+
+        def source(url: str, _rule: dict) -> bytes:
+            params = query(url)
+            requested.append(params)
+            return responses[params["identifier"].rsplit(":", 1)[-1]]
+
+        with (patch.object(arxiv_bot, "http_get_arxiv_api",
+                           side_effect=source),
+              patch.object(arxiv_bot.time, "sleep")):
             papers, rejected = arxiv_bot.fetch_recovery_papers(
-                ["2609.35837", "2609.35962", "2609.35973", "2609.36000",
-                 "2609.36001"], "quant-ph", {})
+                list(responses), "quant-ph", {})
         self.assertEqual([(p["id"], p["announce_type"], p["source_feed"])
                           for p in papers],
                          [("2609.35837", "new", "quant-ph"),
                           ("2609.35962", "cross", "quant-ph")])
+        # A replaced paper is still recovered; only metadata keys of the
+        # normal paper shape are kept.
+        self.assertNotIn("withdrawn", papers[0])
+        self.assertNotIn("version_count", papers[0])
         self.assertEqual(rejected, ["2609.35973", "2609.36000", "2609.36001"])
-        self.assertEqual(query(get.call_args.args[0])["id_list"],
-                         "2609.35837,2609.35962,2609.35973,2609.36000,"
-                         "2609.36001")
+        self.assertEqual(requested[0], {
+            "verb": "GetRecord", "metadataPrefix": "arXivRaw",
+            "identifier": "oai:arXiv.org:2609.35837"})
 
     def test_discover_queues_requested_ids_once(self) -> None:
         cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
         cfg["external_arxiv_queries"] = {}
         cfg["classify_with_llm"] = False
+        fetched: list[str] = []
 
         def source(url: str, _rule: dict) -> bytes:
-            if "oaipmh" in url:
+            params = query(url)
+            if params["verb"] == "ListRecords":
                 return oai_page([], error=("noRecordsMatch", "none"))
-            self.assertEqual(query(url)["id_list"], "2609.35837,2609.35962")
-            return atom_entries([
-                ("2609.35837v1", "quant-ph", ["quant-ph"], ""),
-                ("2609.35962v1", "cond-mat.str-el",
-                 ["cond-mat.str-el", "quant-ph"], "")])
+            pid = params["identifier"].rsplit(":", 1)[-1]
+            fetched.append(pid)
+            categories = {"2609.35837": "quant-ph",
+                          "2609.35962": "cond-mat.str-el quant-ph"}[pid]
+            return self.get_record(pid, categories)
 
         code, saved, reports, _ = OaiMainFlowTests.run_discover(
             self, cfg, {"seen": ["2611.10000"]}, [], source,
             {"ARXIV_RECOVER_IDS": "2609.35837 2609.35962 2611.10000"})
         self.assertIsNone(code)
+        self.assertEqual(fetched, ["2609.35837", "2609.35962"])
         self.assertEqual(sorted(saved["deliveries"]),
                          ["2609.35837", "2609.35962"])
         notice = reports[0]["source_notices"][0]

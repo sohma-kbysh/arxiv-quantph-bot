@@ -70,6 +70,7 @@ The workflow can also be run manually (`workflow_dispatch`) with three inputs.
 | `use_test_feed` | `false` | Read `test_feed.xml` instead of the live RSS feed |
 | `test_emergency_alert` | `false` | Send only a test message to the bot-emergency channel without running the notifier |
 | `external_backfill_days` | `"0"` | One-time lookback in days for the adjacent-category sources only (the OAI harvest starts that many days ago). `0` keeps the cursor-based window |
+| `recover_ids` | `""` | One-time recovery: arXiv IDs (space or comma separated) that every source missed. Their metadata is fetched with OAI-PMH `GetRecord` and they go through normal classification, translation and delivery; IDs already queued or delivered are skipped |
 
 A separate SciRate workflow (weekday Top 3 and Sunday weekly 30+ digest) is **paused**: its schedule was removed on 2026-11-12 because SciRate's endpoint has never been reachable from Actions. It can still be run manually.
 
@@ -109,6 +110,8 @@ Delivery is intentionally **at-least-once**: an unusual runner failure after Dis
 The bot fetches RSS feeds for the categories listed in `config.json` under `feeds` (currently `"quant-ph"`) and deduplicates papers by ID. If the same paper appears in multiple feeds, the first configured feed wins.
 
 **OAI-PMH reconciliation (`oai_harvest`).** RSS shows only the latest announcement and is rebuilt about four hours after it; on several announcement days in September-October 2026 it was served empty all day, and 135 papers were never seen. Every run therefore also harvests the `physics:quant-ph` set from `https://oaipmh.arxiv.org/oai` in `arXivRaw` format, starting `overlap_days` before the last complete harvest. OAI datestamps follow the announcement (and later metadata changes), not the submission date, so a paper held in moderation for weeks is still seen on the day it is announced. Records with exactly one version whose v1 was submitted at most `max_announce_delay_days` (default 90) before the datestamp become normal `new` (primary quant-ph) or `cross` rows; replacements stay excluded as with `include_replacements: false`, and older papers that reappear only through journal-ref or DOI updates are excluded by the delay bound. IDs already queued or completed are deduplicated as usual. When RSS had no new papers, or when the harvest recovers announcements from an earlier day, the discovery phase reports it to bot-emergency; today's listing reaching OAI before the RSS rebuild is normal and is only logged.
+
+arXiv's CDN can answer a repeated OAI URL with a response generated hours earlier, ignores no-cache headers, and the OAI server accepts no extra parameters and no `until` later than tomorrow. Each harvest therefore pins `until` to today's UTC date and, when a page's `responseDate` is older than `max_response_age_minutes` (30), retries with `from` one day earlier (a new URL) up to `cache_retry_attempts` (4) times. The cursor is the accepted response's own `responseDate`, so a stale answer can delay a paper but never skip it.
 
 Setting `oai_harvest.enabled` to `false` restores the previous sources: `feed_backfill` (a submission-date API query at most once per 20 hours, seven-day window) and the API keyword queries described below.
 
@@ -1035,6 +1038,7 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 | `use_test_feed` | `false` | 本番 RSS の代わりに `test_feed.xml` を読み込む |
 | `test_emergency_alert` | `false` | 通知本体を動かさず、bot-emergency チャンネルへテスト送信だけを行う |
 | `external_backfill_days` | `"0"` | 隣接カテゴリの取得元だけを指定日数まで遡る一回限りの設定(OAI取得をその日数前から開始)。`0` ならcursor基準の通常範囲 |
+| `recover_ids` | `""` | 一回限りの回収。全取得元が取りこぼしたarXiv ID(空白/カンマ区切り)。OAI-PMHの `GetRecord` でメタデータを取得し、通常の分類・翻訳・配信に流す。キュー済み・配信済みのIDは飛ばす |
 
 SciRateの平日Top 3・日曜週次30+を投稿する別workflowは**一時停止中**。SciRateの取得元にActionsから一度も到達できなかったため、2026-11-12に定期実行(schedule)を削除した。手動実行は可能。
 
@@ -1074,6 +1078,8 @@ SciRateの平日Top 3・日曜週次30+を投稿する別workflowは**一時停�
 `config.json` の `feeds` に列挙したカテゴリ(現在は `"quant-ph"`)の RSS を順に取得し、論文を ID でまとめる。複数フィードで同一論文が登場した場合は、設定上先にあるフィードを優先する。
 
 **OAI-PMHによる照合(`oai_harvest`)。** RSSは最新1回分のアナウンスしか載せず、アナウンスの約4時間後に作り直される。2026年9〜10月には、アナウンス日にRSSが終日空のまま配信された日があり、135本が一度も取得されなかった。そこで毎回、`https://oaipmh.arxiv.org/oai` から `physics:quant-ph` セットを `arXivRaw` 形式で、前回の完全取得の `overlap_days` 前から取得する。OAIのdatestampは投稿日ではなくアナウンス(と後のメタデータ変更)に従うため、モデレーションで数週間保留された論文も、アナウンスされた日に必ず見える。版が1つだけで、v1の投稿からdatestampまでが `max_announce_delay_days`(デフォルト90日)以内のレコードを、通常の `new`(primaryがquant-ph)または `cross` として扱う。差し替え版は `include_replacements: false` と同じく除外し、journal-refやDOIの追加だけで再登場する古い論文は日数上限で除外する。キュー済み・完了済みIDは通常どおり重複排除する。RSSに新着が無かったとき、または前日以前のアナウンスを回収したときは、発見フェーズがbot-emergencyへ報告する。当日分がRSSの作り直しより先にOAIへ載るのは正常なので、ログに残すだけにする。
+
+arXivのCDNは、同じOAIのURLに対して数時間前に生成した応答を返すことがある。no-cacheヘッダーは無視され、OAIサーバーは余分な引数も明日より先の `until` も受け付けない。そこで取得ごとに `until` を当日(UTC)に固定し、ページの `responseDate` が `max_response_age_minutes`(30分)より古ければ、`from` を1日前にずらした別のURLで `cache_retry_attempts`(4回)まで取り直す。cursorには採用した応答自身の `responseDate` を使うため、古い応答で論文が遅れることはあっても、抜け落ちることはない。
 
 `oai_harvest.enabled` を `false` にすると従来の取得元に戻る。`feed_backfill`(20時間に1回、投稿日7日窓のAPI照会)と、後述のAPIキーワード検索である。
 

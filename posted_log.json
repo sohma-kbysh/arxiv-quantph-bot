@@ -1,400 +1,5 @@
 [
  {
-  "delivery_id": "main:2609.09035",
-  "id": "2609.09035",
-  "posted_at": "2026-09-09T06:28:56Z",
-  "title": "Near-Optimal Quantum Lower Bounds for Convex Optimization via Fourier Rank",
-  "title_ja": "フーリエランクによる凸最適化の近最適量子下限",
-  "title_translated": "フーリエランクによる凸最適化の近最適量子下限",
-  "translation_language": "ja",
-  "authors": "Brandon Augustino, Shouvanik Chakrabarti, Enrico Fontana, Dylan Herman, Junhyung Lyle Kim, Guneykan Ozgul, Nadezhda Voronova",
-  "link": "https://arxiv.org/abs/2609.09035",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cs.DS",
-   "math.OC"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "complexity"
-  ],
-  "genre_names": [
-   "量子複雑性理論"
-  ],
-  "target_genre_ids": [
-   "complexity"
-  ],
-  "target_genre_names": [
-   "量子複雑性理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We establish a near-linear quantum query lower bound for high-accuracy convex optimization over an explicit family of $n$-dimensional ellipsoids. We focus on linear optimization with an explicitly given objective, where the feasible set is accessed through a membership oracle. We show that any algorithm that, for every unit linear objective, returns an exactly feasible point with additive objective error $\\Theta(n^{-2})$ requires $\\Omega\\!\\left(\\frac{n}{\\log n\\,\\log\\log n}\\right)$ membership queries. The same lower bound can be shown to hold if the returned point is only required to be approximately feasible, within $\\Theta(n^{-2})$ distance from the feasible set. This resolves, up to logarithmic factors, an open question posed by Chakrabarti, Childs, Li, and Wu~(\\textit{Quantum}, 2020) and by van Apeldoorn, Gily\\'en, Gribling, and de Wolf~(\\textit{Quantum}, 2020). Coupled with the upper bounds in these papers, the query complexity of high-accuracy convex optimization is characterized tightly up to logarithmic factors. The proof is built around a lower bound for determinant computation that is derived via a novel polynomial method based on Fourier-rank. In the continuous matrix phase-query model, computing the determinant of a real $n\\times n$ matrix requires at least $n/2$ matrix-vector product queries. The construction also yields an $\\Omega(n)$ phase-query lower bound for estimating the minimum eigenvalue of a real symmetric $n\\times n$ matrix to additive accuracy $\\Theta(n^{-2})$. These results extend the determinant and minimum-eigenvalue lower bounds of Childs, Hung, and Li~(ICALP 2021) from finite fields to the real-valued setting. Based on the same constructions, we also prove a near-optimal gradient-query lower bound for constant-accuracy optimization of smooth and strongly convex functions.",
-  "abstract_ja": "$n次元楕円体の明示的な族に対して高精度な凸最適化の近線形量子クエリ下限を確立します。明示的に定められた目的を用いて線形最適化に焦点を当て、実現可能集合はメンバーシップオラクルを通じてアクセスされます。任意の単位線形目標に対して、加法目的誤差$\\Theta(n^{-2})$を返す任意のアルゴリズムは、$\\Omega\\!\\left(\\frac{n}{\\log n\\,\\log\\log n}\\right)$ のメンバーシップクエリを必要とすることを示します。同じ下限は、返される点が実現可能で、実現可能集合から$\\Theta(n^{-2})$の距離以内に近似的に実現可能であればば成り立つことが示されます。これにより、Chakrabarti、Childs、Li、Wu~(\\textit{Quantum}, 2020)およびvan Apeldoorn, Gily\\'en, Gribling, de Wolf~(\\textit{Quantum}, 2020)によって提起された未解決の問題を、対数因子までで解決します。これらの論文の上限と組み合わせることで、高精度凸最適化のクエリ複雑さは対数因子単位で厳密に特徴付けられます。証明は、フーリエランクに基づく新しい多項式手法を通じて導出される行列式計算の下限を基に構築されています。連続行列位相クエリモデルでは、実数$n×n$行列の行列式を計算するには少なくとも$n/2$行列ベクトル積のクエリが必要です。この構成はまた、実対称$n×n$行列の最小固有値を加法精度で推定するための$\\Omega(n)$の位相クエリ下限を導き出します。これらの結果は、Childs、Hung、Li~(ICALP 2021)の行列式および最小固有値の下限を有限体から実値設定へ拡張しています。同じ構成に基づき、滑らかで強凸関数の定数精度最適化のためのほぼ最適な勾配クエリ下限も証明しました。",
-  "abstract_translated": "$n次元楕円体の明示的な族に対して高精度な凸最適化の近線形量子クエリ下限を確立します。明示的に定められた目的を用いて線形最適化に焦点を当て、実現可能集合はメンバーシップオラクルを通じてアクセスされます。任意の単位線形目標に対して、加法目的誤差$\\Theta(n^{-2})$を返す任意のアルゴリズムは、$\\Omega\\!\\left(\\frac{n}{\\log n\\,\\log\\log n}\\right)$ のメンバーシップクエリを必要とすることを示します。同じ下限は、返される点が実現可能で、実現可能集合から$\\Theta(n^{-2})$の距離以内に近似的に実現可能であればば成り立つことが示されます。これにより、Chakrabarti、Childs、Li、Wu~(\\textit{Quantum}, 2020)およびvan Apeldoorn, Gily\\'en, Gribling, de Wolf~(\\textit{Quantum}, 2020)によって提起された未解決の問題を、対数因子までで解決します。これらの論文の上限と組み合わせることで、高精度凸最適化のクエリ複雑さは対数因子単位で厳密に特徴付けられます。証明は、フーリエランクに基づく新しい多項式手法を通じて導出される行列式計算の下限を基に構築されています。連続行列位相クエリモデルでは、実数$n×n$行列の行列式を計算するには少なくとも$n/2$行列ベクトル積のクエリが必要です。この構成はまた、実対称$n×n$行列の最小固有値を加法精度で推定するための$\\Omega(n)$の位相クエリ下限を導き出します。これらの結果は、Childs、Hung、Li~(ICALP 2021)の行列式および最小固有値の下限を有限体から実値設定へ拡張しています。同じ構成に基づき、滑らかで強凸関数の定数精度最適化のためのほぼ最適な勾配クエリ下限も証明しました。",
-  "last_delivered_at": "2026-09-09T06:28:56Z"
- },
- {
-  "delivery_id": "main:2609.09091",
-  "id": "2609.09091",
-  "posted_at": "2026-09-09T06:28:58Z",
-  "title": "Impossibility of One-Way One-Round Quantum 4-Coloring via Matrix-Space Stability",
-  "title_ja": "行列空間安定性による一方向一輪量子4着色の不可能",
-  "title_translated": "行列空間安定性による一方向一輪量子4着色の不可能",
-  "translation_language": "ja",
-  "authors": "Tom Gur, Longcheng Li",
-  "link": "https://arxiv.org/abs/2609.09091",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cs.DC"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "complexity"
-  ],
-  "genre_names": [
-   "量子複雑性理論"
-  ],
-  "target_genre_ids": [
-   "complexity"
-  ],
-  "target_genre_names": [
-   "量子複雑性理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We show that one-way one-round quantum LOCAL algorithms cannot $4$-color directed cycles with high probability, even with unbounded local computation and quantum message length. This is the first lower bound in the high-probability quantum LOCAL setting that goes beyond the non-signaling and bounded-dependence models, exploiting the structure of distributed quantum algorithms. Our proof connects distributed quantum computing with noncommutative extremal combinatorics by identifying local collision probabilities with the weighted multiplicative energy of matrix-space decompositions. We obtain our lower bound by proving a dimension-independent weighted stability theorem for a directed noncommutative analogue of Mantel's theorem.",
-  "abstract_ja": "一方通行の一輪量子ローカルアルゴリズムは、無制限局所計算と量子メッセージ長であっても、4ドルの色向サイクルを高い確率で達成できないことを示しました。これは、非シグナルモデルや有界依存モデルを超え、分散量子アルゴリズムの構造を活用した高確率量子ローカル設定における最初の下限です。我々の証明は、局所衝突確率と行列空間分解の重み乗算エネルギーを同一視することで、分散量子計算と非可換極値組合せ論を結びつけます。マンテルの定理の有向非可換類似物に対する次元非依存の重み安定性定理を証明することで下限を得ます。",
-  "abstract_translated": "一方通行の一輪量子ローカルアルゴリズムは、無制限局所計算と量子メッセージ長であっても、4ドルの色向サイクルを高い確率で達成できないことを示しました。これは、非シグナルモデルや有界依存モデルを超え、分散量子アルゴリズムの構造を活用した高確率量子ローカル設定における最初の下限です。我々の証明は、局所衝突確率と行列空間分解の重み乗算エネルギーを同一視することで、分散量子計算と非可換極値組合せ論を結びつけます。マンテルの定理の有向非可換類似物に対する次元非依存の重み安定性定理を証明することで下限を得ます。",
-  "last_delivered_at": "2026-09-09T06:28:58Z"
- },
- {
-  "delivery_id": "main:2609.05556",
-  "id": "2609.05556",
-  "posted_at": "2026-09-09T06:29:00Z",
-  "title": "Kibble-Zurek Dynamics in Two-dimensional Frustrated Systems with a Neural Foundation-state Subspace Method",
-  "title_ja": "神経基盤状態サブスペース法を用いた二次元フラストレーション系におけるキブル・ズレック動力学",
-  "title_translated": "神経基盤状態サブスペース法を用いた二次元フラストレーション系におけるキブル・ズレック動力学",
-  "translation_language": "ja",
-  "authors": "Linda Mauron, Luciano Loris Viteritti, Zakari Denis, Riccardo Rende, Giuseppe Carleo",
-  "link": "https://arxiv.org/abs/2609.05556",
-  "primary": "cond-mat.str-el",
-  "categories": [
-   "cond-mat.str-el",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "sim",
-   "qml"
-  ],
-  "genre_names": [
-   "量子シミュレーション",
-   "量子機械学習"
-  ],
-  "target_genre_ids": [
-   "sim",
-   "qml"
-  ],
-  "target_genre_names": [
-   "量子シミュレーション",
-   "量子機械学習"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Universal scaling generated when a strongly interacting quantum many-body system is driven across a continuous phase transition provides a dynamical probe of equilibrium criticality. Accessing this regime numerically in two dimensions is challenging because it requires accurate real-time evolution of correlated many-body states over many system sizes and driving rates. We introduce a Neural Foundation-state Subspace (NFS) method for near-adiabatic dynamics. A foundation neural-network quantum state represents the ground-state manifold along the driving path, and a small fidelity-selected subset defines a fixed variational subspace. The many-body Schr\\\"odinger equation then reduces to the evolution of a few linear coefficients, with projected operators reusable across ramp times. We validate the method on the two-dimensional transverse-field Ising model, recovering the expected Kibble-Zurek scaling and critical exponents in quantitative agreement with ground-state quantum Monte Carlo estimates. Applied to the frustrated square-lattice $J_1$-$J_2$ Heisenberg model up to $16 \\times 16$ clusters, our approach provides strong numerical evidence of Kibble-Zurek mechanism across the N\\'eel-to-spin-liquid transition at $J_2/J_1=0.49$, yielding ${\\nu=1.23(15)}$ and ${\\eta=0.409(19)}$ at fixed $z=1$, consistent with static estimates and supporting the proposed continuous critical behavior.",
-  "abstract_ja": "強く相互作用する量子多体系が連続的な相転移を通過することで生成される普遍的スケーリングは、平衡臨界性の動的プローブを提供します。この領域を2次元で数値的にアクセスすることは、多くの系サイズや駆動速度にわたる相関多体状態の正確なリアルタイム進化を必要とするため、困難です。私たちは、近断熱力学のためのニューラル・ファウンデーション状態部分空間(NFS)手法を導入します。基礎ニューラルネットワークの量子状態は駆動経路に沿った基底状態多様体を表し、小さな忠実度選択部分集合が固定された変分部分空間を定義します。多体シュルディンガー方程式は、数個の線形係数の進化に還元され、予測演算子はランプ時間を超えて再利用可能です。この手法を2次元横場イジングモデルで検証し、基底状態量子モンテカルロ推定値と定量的に一致するキブル・ズレックのスケーリングと臨界指数を回復しました。フラストレーションを持たせた正方格子$J_1$-$J_2$ハイゼンベルクモデルで$16×16$クラスタに適用すると、$J_2/J_1=0.49$でKibble-Zurekメカニズムが存在し、固定$z=1$で${\\nu=1.23(15)}$および${\\eta=0.409(19)}$となり、静的推定と一致し、提案された連続的臨界挙動を支持します。",
-  "abstract_translated": "強く相互作用する量子多体系が連続的な相転移を通過することで生成される普遍的スケーリングは、平衡臨界性の動的プローブを提供します。この領域を2次元で数値的にアクセスすることは、多くの系サイズや駆動速度にわたる相関多体状態の正確なリアルタイム進化を必要とするため、困難です。私たちは、近断熱力学のためのニューラル・ファウンデーション状態部分空間(NFS)手法を導入します。基礎ニューラルネットワークの量子状態は駆動経路に沿った基底状態多様体を表し、小さな忠実度選択部分集合が固定された変分部分空間を定義します。多体シュルディンガー方程式は、数個の線形係数の進化に還元され、予測演算子はランプ時間を超えて再利用可能です。この手法を2次元横場イジングモデルで検証し、基底状態量子モンテカルロ推定値と定量的に一致するキブル・ズレックのスケーリングと臨界指数を回復しました。フラストレーションを持たせた正方格子$J_1$-$J_2$ハイゼンベルクモデルで$16×16$クラスタに適用すると、$J_2/J_1=0.49$でKibble-Zurekメカニズムが存在し、固定$z=1$で${\\nu=1.23(15)}$および${\\eta=0.409(19)}$となり、静的推定と一致し、提案された連続的臨界挙動を支持します。",
-  "last_delivered_at": "2026-09-09T06:29:02Z"
- },
- {
-  "delivery_id": "main:2609.05686",
-  "id": "2609.05686",
-  "posted_at": "2026-09-09T06:29:04Z",
-  "title": "Spectroscopy With Intelligent Feature Tracking for automated characterization of excited-state structure in semiconductor quantum dot devices",
-  "title_ja": "半導体量子ドットデバイスにおける励起状態構造の自動特性評価のためのインテリジェント特徴追跡による分光法",
-  "title_translated": "半導体量子ドットデバイスにおける励起状態構造の自動特性評価のためのインテリジェント特徴追跡による分光法",
-  "translation_language": "ja",
-  "authors": "A. R. Huffman, Daniel Schug, Merritt Losert, Sanghyeok Park, Daniel King, Yuna Chun, Giordano Scappucci, M. A. Eriksson, Justyna P. Zwolak",
-  "link": "https://arxiv.org/abs/2609.05686",
-  "primary": "cond-mat.mes-hall",
-  "categories": [
-   "cond-mat.mes-hall",
-   "physics.app-ph",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "nisq",
-   "qml"
-  ],
-  "genre_names": [
-   "変分・NISQアルゴリズム",
-   "量子機械学習"
-  ],
-  "target_genre_ids": [
-   "nisq",
-   "qml"
-  ],
-  "target_genre_names": [
-   "変分・NISQアルゴリズム",
-   "量子機械学習"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "The characterization of excited-state structure in semiconductor quantum dot (QD) devices is an important component of tuning them for spin-qubit operation. We present Spectroscopy With Intelligent Feature Tracking (SWIFT), a framework that combines machine-learning (ML)-assisted feature identification with physics-informed geometric processing to extract energy-level splittings from pulsed-gate spectroscopy data. SWIFT isolates the relevant spectral features and exploits their characteristic geometry to reduce the two-dimensional spectroscopy analysis to a one-dimensional peak-detection problem. It further combines an ensemble-based confidence metric with sequential accumulation of rapid, low-SNR scans, allowing the inferred spectrum to be reevaluated as experimental evidence accumulates. Using Si/SiGe QD devices, we demonstrate SWIFT both offline and in real time, including automated tracking of QD excited states and lead resonances. Benchmarking on 255 manually labeled scans shows that SWIFT reduces the median splitting error to 0.05 mV from 0.11 mV for a classical baseline, with the largest improvement on lower-quality measurements. These results provide a path toward incorporating excited-state spectroscopy into autonomous QD characterization, tuning, and optimization, which will be essential in large-scale quantum dot devices.",
-  "abstract_ja": "半導体量子ドット(QD)デバイスにおける励起状態構造の特徴付けは、スピン量子ビット動作に最適化する上で重要な要素です。私たちは、機械学習(ML)支援による特徴識別と物理学に基づく幾何学的処理を組み合わせ、パルスゲート分光データからエネルギー準位分割を抽出するフレームワーク「インテリジェント特徴追跡分光(SWIFT)」を紹介します。SWIFTは関連するスペクトル特徴を分離し、その特徴的な幾何学を活用して二次元分光解析を一次元ピーク検出問題に還元します。さらに、アンサンブルベースの信頼度指標と、迅速かつ低SNRスキャンの連続蓄積を組み合わせ、実験的証拠が蓄積されるにつれて推定スペクトルを再評価できるようにします。Si/SiGe QDデバイスを用いて、QD励起状態やリード共鳴の自動追跡を含むオフラインおよびリアルタイムのSWIFTを実証します。255件の手動ラベル付きスキャンをベンチマークした結果、SWIFTは古典的な基準線の中央分割誤差を0.11 mVから0.05 mVに削減し、低品質測定での最大の向上を示しています。これらの結果は、自律型QD特性評価、チューニング、最適化に励起状態分光法を組み込む道筋を示し、大規模な量子ドットデバイスにおいて不可欠となるでしょう。",
-  "abstract_translated": "半導体量子ドット(QD)デバイスにおける励起状態構造の特徴付けは、スピン量子ビット動作に最適化する上で重要な要素です。私たちは、機械学習(ML)支援による特徴識別と物理学に基づく幾何学的処理を組み合わせ、パルスゲート分光データからエネルギー準位分割を抽出するフレームワーク「インテリジェント特徴追跡分光(SWIFT)」を紹介します。SWIFTは関連するスペクトル特徴を分離し、その特徴的な幾何学を活用して二次元分光解析を一次元ピーク検出問題に還元します。さらに、アンサンブルベースの信頼度指標と、迅速かつ低SNRスキャンの連続蓄積を組み合わせ、実験的証拠が蓄積されるにつれて推定スペクトルを再評価できるようにします。Si/SiGe QDデバイスを用いて、QD励起状態やリード共鳴の自動追跡を含むオフラインおよびリアルタイムのSWIFTを実証します。255件の手動ラベル付きスキャンをベンチマークした結果、SWIFTは古典的な基準線の中央分割誤差を0.11 mVから0.05 mVに削減し、低品質測定での最大の向上を示しています。これらの結果は、自律型QD特性評価、チューニング、最適化に励起状態分光法を組み込む道筋を示し、大規模な量子ドットデバイスにおいて不可欠となるでしょう。",
-  "last_delivered_at": "2026-09-09T06:29:06Z"
- },
- {
-  "delivery_id": "main:2609.05702",
-  "id": "2609.05702",
-  "posted_at": "2026-09-09T06:29:08Z",
-  "title": "Characterizing Privacy Risks of Quantum Machine Learning with Emergent Quantum-Native Access",
-  "title_ja": "量子機械学習による新たな量子ネイティブアクセスのプライバシーリスクの特徴付け",
-  "title_translated": "量子機械学習による新たな量子ネイティブアクセスのプライバシーリスクの特徴付け",
-  "translation_language": "ja",
-  "authors": "Liou Tang, James Joshi, Ashish Kundu",
-  "link": "https://arxiv.org/abs/2609.05702",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cs.LG"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qml"
-  ],
-  "genre_names": [
-   "量子機械学習"
-  ],
-  "target_genre_ids": [
-   "qml"
-  ],
-  "target_genre_names": [
-   "量子機械学習"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Quantum Machine Learning (QML) has shown rapid advances by utilizing quantum computing for machine learning tasks. Meanwhile, the privacy risks accompanying QML is also starting to be studied, which inherit privacy leakage channels from \"classical\" ML and also quantum-unique risks. Existing work on privacy-preserving QML largely focuses on a QML-as-a-service scenario, which generally assumes that the QML model owner provides only classical bit outputs to queries, while users (and adversaries) have only classical computing abilities. However, this view is increasingly challenged in a quantum-native world of quantum-capable users/adversaries, which may have access to both quantum computing abilities and access to quantum information output from service providers. In this paper, we aim to bridge this gap by examining membership inference attacks against QML models by demonstrating that increasing quantum access and quantum computing abilities provides provable theoretical privacy leakage and empirical adversarial gain. However, the probabilistic nature of QML introduces a gap between theoretical and empirical adversarial advantage. These results show that existing research on privacy leakage on QML models underestimate privacy leakage in an emergent quantum-native access regimes, which we hope to establish a first step into examining potential privacy leakages for QML in the quantum-native world.These results show that existing research on privacy leakage in QML models underestimates privacy leakage in emergent quantum-native access regimes, and we hope to establish a first step in examining potential privacy leakages for QML in the quantum-native world.",
-  "abstract_ja": "量子機械学習(QML)は、機械学習タスクに量子コンピューティングを活用することで急速に進展しています。一方で、QMLに伴うプライバシーリスクも研究が始まっており、これは「古典的」MLから継承するプライバシーリークチャネルや量子固有のリスクも含まれます。プライバシーを保護するQMLに関する既存の研究は主にQMLアズアサービスシナリオに焦点を当てており、一般的にQMLモデルの所有者はクエリに対して古典的なビット出力のみを提供し、ユーザー(および敵対者)は古典的な計算能力しか持たないと仮定しています。しかし、この見解は量子ネイティブの世界でますます挑戦されており、量子計算能力とサービスプロバイダーからの量子情報出力の両方にアクセスできる可能性があります。本論文では、QMLモデルに対するメンバーシップ推論攻撃を検証し、量子アクセスと量子計算能力の向上が理論的プライバシーリークと実証的な敵対的利益をもたらすことを示すことで、このギャップを埋めることを目指します。しかし、QMLの確率的性質は理論的優位性と経験的敵対的優位の間にギャップを生じさせます。これらの結果は、QMLモデルにおけるプライバシーリークに関する既存の研究が、出現する量子ネイティブアクセス体制におけるプライバシーリークを過小評価していることを示しており、量子ネイティブ世界におけるQMLのプライバシーリークの可能性を調査する第一歩を確立したいと考えています。これらの結果は、QMLモデルにおけるプライバシーリークに関する既存の研究が、新たな量子ネイティブアクセス体制におけるプライバシーリークを過小評価していることを示し、量子ネイティブ世界におけるQMLのプライバシーリークの可能性を調査する第一歩を確立したいと考えています。",
-  "abstract_translated": "量子機械学習(QML)は、機械学習タスクに量子コンピューティングを活用することで急速に進展しています。一方で、QMLに伴うプライバシーリスクも研究が始まっており、これは「古典的」MLから継承するプライバシーリークチャネルや量子固有のリスクも含まれます。プライバシーを保護するQMLに関する既存の研究は主にQMLアズアサービスシナリオに焦点を当てており、一般的にQMLモデルの所有者はクエリに対して古典的なビット出力のみを提供し、ユーザー(および敵対者)は古典的な計算能力しか持たないと仮定しています。しかし、この見解は量子ネイティブの世界でますます挑戦されており、量子計算能力とサービスプロバイダーからの量子情報出力の両方にアクセスできる可能性があります。本論文では、QMLモデルに対するメンバーシップ推論攻撃を検証し、量子アクセスと量子計算能力の向上が理論的プライバシーリークと実証的な敵対的利益をもたらすことを示すことで、このギャップを埋めることを目指します。しかし、QMLの確率的性質は理論的優位性と経験的敵対的優位の間にギャップを生じさせます。これらの結果は、QMLモデルにおけるプライバシーリークに関する既存の研究が、出現する量子ネイティブアクセス体制におけるプライバシーリークを過小評価していることを示しており、量子ネイティブ世界におけるQMLのプライバシーリークの可能性を調査する第一歩を確立したいと考えています。これらの結果は、QMLモデルにおけるプライバシーリークに関する既存の研究が、新たな量子ネイティブアクセス体制におけるプライバシーリークを過小評価していることを示し、量子ネイティブ世界におけるQMLのプライバシーリークの可能性を調査する第一歩を確立したいと考えています。",
-  "last_delivered_at": "2026-09-09T06:29:08Z"
- },
- {
-  "delivery_id": "main:2609.05842",
-  "id": "2609.05842",
-  "posted_at": "2026-09-09T06:29:10Z",
-  "title": "Do Quantum AIs Dream in Paths? Path-Integral Slow Thinking through Grover Interference",
-  "title_ja": "量子AIはパスの中で夢を見るのか?グローバー干渉によるパスインテグラルスローシンキング",
-  "title_translated": "量子AIはパスの中で夢を見るのか?グローバー干渉によるパスインテグラルスローシンキング",
-  "translation_language": "ja",
-  "authors": "Xiansheng Cai, Xiu-Hao Deng, Kun Chen",
-  "link": "https://arxiv.org/abs/2609.05842",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cs.AI",
-   "cs.LG"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qml",
-   "algo",
-   "crypto"
-  ],
-  "genre_names": [
-   "量子機械学習",
-   "量子アルゴリズム",
-   "暗号・セキュリティ"
-  ],
-  "target_genre_ids": [
-   "qml",
-   "algo",
-   "crypto"
-  ],
-  "target_genre_names": [
-   "量子機械学習",
-   "量子アルゴリズム",
-   "暗号・セキュリティ"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Reinforcement learning with verifiable rewards enables large language models to think slowly, but the same training can induce policy collapse: probability concentrates onto a few successful trajectories and exploratory diversity erodes. We ask whether quantum AI can realize slow thinking differently. We formulate slow thinking as coherent dynamics over reasoning trajectories, a discrete path integral in which action sequences coexist in superposition and recombine before measurement. In our trainable realization, an exact verifier partitions the ensemble into collective accepted and rejected components that interfere under Grover amplitude amplification. A finite Grover evolution is maximized when the pre-amplification success probability lies at an analytically determined value below one, so inference itself defines an interior training target and removes the monotonic pressure toward unit success. In exact statevector simulations of a 2x3 sliding puzzle, Grover training reaches accuracy 0.95 on a 32-question training set at one round, against 0.73 for the strongest classical control. On held-out questions specialization has a cost: an untrained uniform policy read out through the same amplification remains the strongest reference on this solution-dense benchmark, and quantum training preserves far more held-out accuracy than classical training - at four rounds with matched circuit applications the two quantum models reach 3.2 and 3.9 times the strongest classical controls. The number of training questions supported by fixed-size policies trained at each amplification budget also grows faster with the budget than with matched classical repetition. These results establish a Grover-based realization of path-integral slow thinking: the interior target preserves exploratory path diversity, and ensemble-level interference converts it into verified performance.",
-  "abstract_ja": "検証可能な報酬を伴う強化学習は、大規模言語モデルがゆっくり考えることを可能にしますが、同じ訓練では政策崩壊を誘発し、確率がいくつかの成功した軌道に集中し、探索的多様性が失われることがあります。私たちは、量子AIが遅い思考を異なる方法で実現できるかどうかを問います。私たちは、遅い思考を軌道推論上の一貫した動態として定式化し、動作列が重ね合わせで共存し、測定前に再結合する離散的な経路積分として定式化します。私たちの訓練可能な実現では、正確な検証器がアンサンブルを集合的に受け入れられた成分と拒否された成分に分割し、グローバー振幅増幅の下で干渉します。有限のグローバー進化は、増幅前の成功確率が解析的に決定された値1未満にある場合に最大化されるため、推論自体が内部の訓練目標を定義し、単位成功への単調圧力を取り除きます。2×3スライディングパズルの正確な状態ベクトルシミュレーションでは、32問のトレーニングセットでグローバー訓練は1ラウンドで0.95の精度に達し、最強の古典制御では0.73を上回ります。保留問題では専門化にはコストが伴います。同じ増幅による訓練されていない均一なポリシーの読み出しがこの解密度の高いベンチマークで最も強力な基準であり、量子訓練は古典的訓練よりもはるかに高い精度を保持します。マッチド回路適用の4ラウンドでは、2つの量子モデルは最強の古典制御の3.2倍と3.9倍に達します。各増幅予算で固定サイズのポリシーで訓練された学習問題の数も、マッチングされた古典的反復よりも予算の増加に伴います。これらの結果は、グローバーに基づくパス積分の遅い思考の実現を確立します。内部ターゲットは探索的経路多様性を保持し、アンサンブルレベルの干渉によって検証された性能に変換されます。",
-  "abstract_translated": "検証可能な報酬を伴う強化学習は、大規模言語モデルがゆっくり考えることを可能にしますが、同じ訓練では政策崩壊を誘発し、確率がいくつかの成功した軌道に集中し、探索的多様性が失われることがあります。私たちは、量子AIが遅い思考を異なる方法で実現できるかどうかを問います。私たちは、遅い思考を軌道推論上の一貫した動態として定式化し、動作列が重ね合わせで共存し、測定前に再結合する離散的な経路積分として定式化します。私たちの訓練可能な実現では、正確な検証器がアンサンブルを集合的に受け入れられた成分と拒否された成分に分割し、グローバー振幅増幅の下で干渉します。有限のグローバー進化は、増幅前の成功確率が解析的に決定された値1未満にある場合に最大化されるため、推論自体が内部の訓練目標を定義し、単位成功への単調圧力を取り除きます。2×3スライディングパズルの正確な状態ベクトルシミュレーションでは、32問のトレーニングセットでグローバー訓練は1ラウンドで0.95の精度に達し、最強の古典制御では0.73を上回ります。保留問題では専門化にはコストが伴います。同じ増幅による訓練されていない均一なポリシーの読み出しがこの解密度の高いベンチマークで最も強力な基準であり、量子訓練は古典的訓練よりもはるかに高い精度を保持します。マッチド回路適用の4ラウンドでは、2つの量子モデルは最強の古典制御の3.2倍と3.9倍に達します。各増幅予算で固定サイズのポリシーで訓練された学習問題の数も、マッチングされた古典的反復よりも予算の増加に伴います。これらの結果は、グローバーに基づくパス積分の遅い思考の実現を確立します。内部ターゲットは探索的経路多様性を保持し、アンサンブルレベルの干渉によって検証された性能に変換されます。",
-  "last_delivered_at": "2026-09-09T06:29:13Z"
- },
- {
-  "delivery_id": "main:2609.06054",
-  "id": "2609.06054",
-  "posted_at": "2026-09-09T06:29:15Z",
-  "title": "Propagating sparsely supported states with time-dependent neural quantum states",
-  "title_ja": "時間依存的な神経量子状態を持つスパースサポート状態の伝播",
-  "title_translated": "時間依存的な神経量子状態を持つスパースサポート状態の伝播",
-  "translation_language": "ja",
-  "authors": "Lexin Ding, Markus Reiher",
-  "link": "https://arxiv.org/abs/2609.06054",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "physics.chem-ph",
-   "physics.comp-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qml",
-   "sim"
-  ],
-  "genre_names": [
-   "量子機械学習",
-   "量子シミュレーション"
-  ],
-  "target_genre_ids": [
-   "qml",
-   "sim"
-  ],
-  "target_genre_names": [
-   "量子機械学習",
-   "量子シミュレーション"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Neural quantum states (NQSs) have emerged as a powerful ansatz for quantum dynamics. Their high entanglement capacity promises to overcome the entanglement barrier. However, existing time-dependent NQS methods are ill-equipped to propagate sparsely supported initial states due to the inherent mismatch between the supports of such states and their time derivatives. To address this issue, we introduce the interpolation sampling method as a novel form of importance sampling, where samples are drawn from a distribution that interpolates between the wave function and its time derivative. Combined with a global-in-time variational principle, we demonstrate with the example of the two-dimensional transverse-field Ising model that interpolation sampling allows for accurate propagation of extremely peaked states that standard wave function sampling could not tackle. We further improve sampling efficiency by introducing (i) a configuration-time joint sampling scheme where spin configurations and time are both treated as random variables, and (ii) a hybrid strategy for sample proposal that incorporates the knowledge of a Krylov subspace. Our work extends the scope of time-dependent NQS methods to a wider range of physically relevant scenarios, while challenging the prevailing reliance on the Born distribution and its close variants as the default basis for sampling.",
-  "abstract_ja": "ニューラル量子状態(NQS)は量子動力学の強力なアンサッツとして登場しています。その高いエンタングルメント容量はエンタングルメントの壁を克服することが期待されています。しかし、既存の時間依存NQS手法は、まばらな初期状態の支持と時間微分との固有の不一致により伝播に適していません。この問題に対処するため、波関数とその時間微分間の補間分布からサンプルを抽出する重要度サンプリングの新しい形態として補間サンプリング法を導入します。グローバル時間変分原理と組み合わせることで、2次元横場イジングモデルの例を用いて、補間が標準的な波動関数サンプリングでは対応できない極度ピーク状態の正確な伝播を可能にすることを示しました。さらに、(i) スピン構成と時間を確率変数として扱う構成時間結合サンプリング方式、(ii) Krylov部分空間の知識を取り入れたサンプル提案のハイブリッド戦略を導入することで、サンプリング効率をさらに向上させます。本研究は、時間依存NQS手法の範囲を物理的に関連性の高いシナリオの幅広い範囲に拡大しつつ、サンプリングのデフォルトベースとしてのBorn分布およびその近接バリアントへの従来の依存に挑戦します。",
-  "abstract_translated": "ニューラル量子状態(NQS)は量子動力学の強力なアンサッツとして登場しています。その高いエンタングルメント容量はエンタングルメントの壁を克服することが期待されています。しかし、既存の時間依存NQS手法は、まばらな初期状態の支持と時間微分との固有の不一致により伝播に適していません。この問題に対処するため、波関数とその時間微分間の補間分布からサンプルを抽出する重要度サンプリングの新しい形態として補間サンプリング法を導入します。グローバル時間変分原理と組み合わせることで、2次元横場イジングモデルの例を用いて、補間が標準的な波動関数サンプリングでは対応できない極度ピーク状態の正確な伝播を可能にすることを示しました。さらに、(i) スピン構成と時間を確率変数として扱う構成時間結合サンプリング方式、(ii) Krylov部分空間の知識を取り入れたサンプル提案のハイブリッド戦略を導入することで、サンプリング効率をさらに向上させます。本研究は、時間依存NQS手法の範囲を物理的に関連性の高いシナリオの幅広い範囲に拡大しつつ、サンプリングのデフォルトベースとしてのBorn分布およびその近接バリアントへの従来の依存に挑戦します。",
-  "last_delivered_at": "2026-09-09T06:29:16Z"
- },
- {
-  "delivery_id": "main:2609.06307",
-  "id": "2609.06307",
-  "posted_at": "2026-09-09T06:29:18Z",
-  "title": "Hierarchical Fourier Approximation for Variational Quantum Distribution Learning",
-  "title_ja": "変分量子分布学習のための階層的フーリエ近似",
-  "title_translated": "変分量子分布学習のための階層的フーリエ近似",
-  "translation_language": "ja",
-  "authors": "Taha Hoseinpour Asli, Sajjad Hashemian, Ebrahim Ardeshir-Larijani",
-  "link": "https://arxiv.org/abs/2609.06307",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cs.LG"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qml",
-   "nisq"
-  ],
-  "genre_names": [
-   "量子機械学習",
-   "変分・NISQアルゴリズム"
-  ],
-  "target_genre_ids": [
-   "qml",
-   "nisq"
-  ],
-  "target_genre_names": [
-   "量子機械学習",
-   "変分・NISQアルゴリズム"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "We study variational quantum distribution learning through a hierarchy of Walsh--Fourier approximations on the Boolean cube. At each level, a selected set of target Fourier coefficients defines a spectral truncation, which is projected onto the probability simplex and used as the target of a quantum circuit Born machine. Parameters learned at one level initialize the next through a warm-start map. We prove an end-to-end expected learning guarantee where the approximation term is determined by the omitted Fourier mass, while a normalized unbiased estimator yields an explicit statistical bound for empirical truncations. We then instantiate the abstract discrepancy conditions for total variation distance and relate the resulting distributional error to quantum-state fidelity. The total-variation specialization incurs the explicit factor $2^{n-1}$ under our normalized $\\ell_2$ convention and is therefore informative only for sufficiently concentrated Fourier tails. The framework does not establish global trainability or eliminate barren plateaus; rather, it identifies the conditions under which low-to-high spectral training admits a approximation--estimation--optimization analysis.",
-  "abstract_ja": "私たちは、ブール立方体上のウォルシュ-フーリエ近似の階層を通じて変分量子分布学習を研究します。各レベルで、選択されたターゲットフーリエ係数のセットがスペクトル切断を定義し、これを確率シンプレックスに投影して量子回路Bornマシンのターゲットとして用いられます。あるレベルで学習されたパラメータはウォームスタートマップを通じて次のレベルを初期化します。近似項は省略されたフーリエ質量によって決定され、正規化され無偏推定量は経験的切断の明示的な統計的上限を与えるエンドツーエンドの期待学習保証を証明します。次に、全変動距離の抽象的な不一致条件をインスタンス化し、その結果得られる分布誤差を量子状態忠実度に関連付けます。全変動専門化は、正規化された$\\ell_2$の慣例の下で明示的な因子$2^{n-1}$を伴い、したがって十分に集中したフーリエ尾部にのみ有用です。このフレームワークは、グローバルな訓練可能性を確立したり、不毛なプラトーを排除したりするものではありません。むしろ、低から高スペクトルトレーニングが近似・推定・最適化解析を可能にする条件を特定します。",
-  "abstract_translated": "私たちは、ブール立方体上のウォルシュ-フーリエ近似の階層を通じて変分量子分布学習を研究します。各レベルで、選択されたターゲットフーリエ係数のセットがスペクトル切断を定義し、これを確率シンプレックスに投影して量子回路Bornマシンのターゲットとして用いられます。あるレベルで学習されたパラメータはウォームスタートマップを通じて次のレベルを初期化します。近似項は省略されたフーリエ質量によって決定され、正規化され無偏推定量は経験的切断の明示的な統計的上限を与えるエンドツーエンドの期待学習保証を証明します。次に、全変動距離の抽象的な不一致条件をインスタンス化し、その結果得られる分布誤差を量子状態忠実度に関連付けます。全変動専門化は、正規化された$\\ell_2$の慣例の下で明示的な因子$2^{n-1}$を伴い、したがって十分に集中したフーリエ尾部にのみ有用です。このフレームワークは、グローバルな訓練可能性を確立したり、不毛なプラトーを排除したりするものではありません。むしろ、低から高スペクトルトレーニングが近似・推定・最適化解析を可能にする条件を特定します。",
-  "last_delivered_at": "2026-09-09T06:29:19Z"
- },
- {
-  "delivery_id": "main:2609.06672",
-  "id": "2609.06672",
-  "posted_at": "2026-09-09T06:29:21Z",
-  "title": "Efficient Representation of multicategorical local Hilbert spaces: nonlinear Restricted Boltzmann Machines to Kolmogorov-Arnold Networks",
-  "title_ja": "多範疇局所ヒルベルト空間の効率的な表現:非線形制限ボルツマンマシンからコルモゴロフ・アーノルドネットワークへ",
-  "title_translated": "多範疇局所ヒルベルト空間の効率的な表現:非線形制限ボルツマンマシンからコルモゴロフ・アーノルドネットワークへ",
-  "translation_language": "ja",
-  "authors": "Abhiroop Lahiri",
-  "link": "https://arxiv.org/abs/2609.06672",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cond-mat.dis-nn"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qml",
-   "sim"
-  ],
-  "genre_names": [
-   "量子機械学習",
-   "量子シミュレーション"
-  ],
-  "target_genre_ids": [
-   "qml",
-   "sim"
-  ],
-  "target_genre_names": [
-   "量子機械学習",
-   "量子シミュレーション"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Neural network quantum states (NQS) for representing spin-$\\frac{1}{2}$ systems are typically built from Multi-Layer Perceptrons (MLPs) with binary visible variables, in which the input spins are first combined through linear affine maps before more expressive nonlinear transformations are applied. The standard way for representing multi-categorical systems, namely spin-1 and spin-2, or the q-state quantum Potts systems with more than two local degrees of freedom, is a unary or one-hot encoded MLP architecture. Following a few similar studies, I observe that while the one-hot construction is the mathematically faithful encoding for systems with more than two local states such as spin-$S$ models with $S > 1/2$ or $q$-state Potts models, its parameter count grows with the number of local states, and the resulting optimization landscape can hinder convergence. I find numerically that allowing $\\log \\Psi$ to be a nonlinear function of the raw multi-valued spin variable is a natural categorical generalization: it preserves the labelling freedom of the local basis and reproduces the one-hot model with strictly fewer parameters, often with improved trainability. I first benchmark this idea on shallow Restricted Boltzmann Machines (RBMs), equipping them with several distinct nonlinear connections, for spin-1, 2, and 3 Heisenberg chains. I then turn to Kolmogorov-Arnold Networks (KANs), where each edge carries a learnable univariate nonlinearity, and show that they provide a strictly more expressive realization of the same principle. Finally, I demonstrate that this framework captures the critical behaviour of the quantum Potts Hamiltonian, recovering its phase transition.",
-  "abstract_ja": "スピン$\\frac{1}{2}$系を表すニューラルネットワーク量子状態(NQS)は通常、可視変数を2項で使うマルチレイヤーパーセプトロン(MLP)から構築され、入力スピンはまず線形アフィン写像で結合され、より表現力豊かな非線形変換が適用されます。多カテゴリ系、すなわちスピン1およびスピン2、すなわち2つ以上の局所自由度を持つq状態量子ポッツ系を表現する標準的な方法は、単項またはワンホット符号化のMLPアーキテクチャです。いくつかの類似研究を経て、1ホット構成は1/2ドルや$qドル状態を持つスピン$Sドル$S >モデルなど、2つ以上の局所状態を持つシステムに対する数学的に忠実な符号化である一方で、パラメータ数は局所状態の数とともに増加し、その結果としての最適化風景が収束を妨げることがあると観察しました。数値的には、$\\log \\Psi$を生の多値スピン変数の非線形関数として許容することは自然なカテゴリカルな一般化であると分かりました。これは局所基底のラベル付けの自由を保ち、パラメータ数を厳密に少なく、しばしば訓練可能性を向上させたワンホットモデルを再現します。まず、このアイデアを浅い制限ボルツマンマシン(RBM)でベンチマークし、スピン1、2、3のハイゼンベルク鎖に対して複数の異なる非線形接続を搭載しています。次に、各辺が学習可能な単変量非線形性を持つコルモゴロフ・アーノルドネットワーク(KAN)に注目し、同じ原理をより厳密に表現力のある実現していることを示します。最後に、この枠組みが量子ポッツハミルトニアンの臨界的挙動を捉え、その相転移を回復していることを示します。",
-  "abstract_translated": "スピン$\\frac{1}{2}$系を表すニューラルネットワーク量子状態(NQS)は通常、可視変数を2項で使うマルチレイヤーパーセプトロン(MLP)から構築され、入力スピンはまず線形アフィン写像で結合され、より表現力豊かな非線形変換が適用されます。多カテゴリ系、すなわちスピン1およびスピン2、すなわち2つ以上の局所自由度を持つq状態量子ポッツ系を表現する標準的な方法は、単項またはワンホット符号化のMLPアーキテクチャです。いくつかの類似研究を経て、1ホット構成は1/2ドルや$qドル状態を持つスピン$Sドル$S >モデルなど、2つ以上の局所状態を持つシステムに対する数学的に忠実な符号化である一方で、パラメータ数は局所状態の数とともに増加し、その結果としての最適化風景が収束を妨げることがあると観察しました。数値的には、$\\log \\Psi$を生の多値スピン変数の非線形関数として許容することは自然なカテゴリカルな一般化であると分かりました。これは局所基底のラベル付けの自由を保ち、パラメータ数を厳密に少なく、しばしば訓練可能性を向上させたワンホットモデルを再現します。まず、このアイデアを浅い制限ボルツマンマシン(RBM)でベンチマークし、スピン1、2、3のハイゼンベルク鎖に対して複数の異なる非線形接続を搭載しています。次に、各辺が学習可能な単変量非線形性を持つコルモゴロフ・アーノルドネットワーク(KAN)に注目し、同じ原理をより厳密に表現力のある実現していることを示します。最後に、この枠組みが量子ポッツハミルトニアンの臨界的挙動を捉え、その相転移を回復していることを示します。",
-  "last_delivered_at": "2026-09-09T06:29:23Z"
- },
- {
-  "delivery_id": "main:2609.06814",
-  "id": "2609.06814",
-  "posted_at": "2026-09-09T06:29:25Z",
-  "title": "Quantum-Enhanced Learning Framework for Intelligent and AI-Native 6G Wireless Networks",
-  "title_ja": "インテリジェントかつAIネイティブな6G無線ネットワークのための量子強化学習フレームワーク",
-  "title_translated": "インテリジェントかつAIネイティブな6G無線ネットワークのための量子強化学習フレームワーク",
-  "translation_language": "ja",
-  "authors": "Muhammad Bilal Akram Dastagir, Rakesh Saini, Omer Tariq, Saif Al-Kuwari, Shahid Mumtaz, Anwer Al-Dulaimi, Ahmed Farouk",
-  "link": "https://arxiv.org/abs/2609.06814",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qml",
-   "nisq"
-  ],
-  "genre_names": [
-   "量子機械学習",
-   "変分・NISQアルゴリズム"
-  ],
-  "target_genre_ids": [
-   "qml",
-   "nisq"
-  ],
-  "target_genre_names": [
-   "量子機械学習",
-   "変分・NISQアルゴリズム"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "The recent convergence of 6G wireless systems and Tiny Machine Learning (TinyML) has driven the need for on-device intelligence in edge networks, where ultra-low latency, stringent energy budgets, and tight compute constraints demand novel architectures. Lightweight deep models efficiently extract local patterns but fail to capture global dependencies, while attention mechanisms do so at the expense of energy and computational cost. To bridge this gap, we introduce Quantumer, a hybrid TinyML--quantum framework that integrates multi-scale dilated convolutions and scaled dot-product attention within a lightweight transformer architecture, employing a two-stage transfer learning pipeline from Quantum Pre-Training (Quantumer-Q) to Classical Fine-Tuning (Quantumer-C). We also present QuantiblentLayer, a four-qubit variational circuit that maps compact traffic representations into measurement-based Hilbert-space features using trainable rotations and cyclic entangling operations. The circuit is used only during offline pre-training as a nonlinear embedding teacher and is removed before Quantumer-C deployment, leaving a fully classical inference model without runtime quantum execution. By transferring these quantum-assisted embeddings into an energy-efficient, lightweight transformer, Quantumer achieves strong detection performance with minimal compute and memory overhead on resource-constrained edge devices. The intrusion detection system (IDS) is used as a case study and evaluated on the Edge-IIoTset, TON IoT, and WUSTL-IIoT-2021 datasets. Quantumer-Q achieves competitive compact-model performance with 105.86K parameters, 0.4038 MB memory usage, 0.5525 MB model size, and 5.5646 MFLOPs; the INT8 Raspberry Pi 4 deployment obtains 16.8413 ms latency with a 0.6493 MB footprint. These results support training-time quantum-assisted representation learning for compact edge-deployable IDS.",
-  "abstract_ja": "6G無線システムとTiny Machine Learning(TinyML)の最近の融合により、超低遅延、厳しいエネルギー予算、厳しい計算制約が求められるエッジネットワークにおけるオンデバイス知能の必要性が高まりました。軽量なディープモデルは局所的なパターンを効率的に抽出しますが、グローバル依存関係を捉えきれず、注意メカニズムはエネルギーと計算コストを犠牲にしてそれを成し遂げています。このギャップを埋めるために、Quantumerを導入します。これは、軽量トランスフォーマーアーキテクチャ内でマルチスケールの拡張畳み込みとスケールドット積注意を統合し、Quantum Pre-Training(Quantumer-Q)から古典的微調整(Quantumer-C)までの2段階の転移学習パイプラインを用いています。また、QuantiblentLayerという4量子ビットの変分回路を紹介します。これは、訓練可能な回転と巡回エンタングルリング演算を用いてコンパクトなトラフィック表現を測定ベースのヒルベルト空間特徴にマッピングします。この回路はオフラインの事前訓練中のみ非線形埋め込み教師として使用され、Quantumer-C展開前に削除されるため、実行時量子実行なしの完全な古典的推論モデルが残ります。これらの量子支援埋め込みを省エネで軽量なトランスに転送することで、Quantumerはリソース制約の限られたエッジデバイス上で最小限の計算およびメモリ負荷で強力な検出性能を実現します。侵入検知システム(IDS)はケーススタディとして用いられ、Edge-IIoTset、TON IoT、WUSTL-IIoT-2021データセットで評価されています。Quantumer-Qは105.86Kパラメータ、0.4038MBのメモリ使用量、0.5525MBのモデルサイズ、5.5646MFLOPsで競争力のあるコンパクトモデル性能を実現しています。INT8 Raspberry Pi 4の展開は16.8413 msの遅延を達成し、フットプリントは0.6493 MBです。これらの結果は、コンパクトなエッジ展開可能なIDS向けのトレーニングタイム量子支援表現学習をサポートします。",
-  "abstract_translated": "6G無線システムとTiny Machine Learning(TinyML)の最近の融合により、超低遅延、厳しいエネルギー予算、厳しい計算制約が求められるエッジネットワークにおけるオンデバイス知能の必要性が高まりました。軽量なディープモデルは局所的なパターンを効率的に抽出しますが、グローバル依存関係を捉えきれず、注意メカニズムはエネルギーと計算コストを犠牲にしてそれを成し遂げています。このギャップを埋めるために、Quantumerを導入します。これは、軽量トランスフォーマーアーキテクチャ内でマルチスケールの拡張畳み込みとスケールドット積注意を統合し、Quantum Pre-Training(Quantumer-Q)から古典的微調整(Quantumer-C)までの2段階の転移学習パイプラインを用いています。また、QuantiblentLayerという4量子ビットの変分回路を紹介します。これは、訓練可能な回転と巡回エンタングルリング演算を用いてコンパクトなトラフィック表現を測定ベースのヒルベルト空間特徴にマッピングします。この回路はオフラインの事前訓練中のみ非線形埋め込み教師として使用され、Quantumer-C展開前に削除されるため、実行時量子実行なしの完全な古典的推論モデルが残ります。これらの量子支援埋め込みを省エネで軽量なトランスに転送することで、Quantumerはリソース制約の限られたエッジデバイス上で最小限の計算およびメモリ負荷で強力な検出性能を実現します。侵入検知システム(IDS)はケーススタディとして用いられ、Edge-IIoTset、TON IoT、WUSTL-IIoT-2021データセットで評価されています。Quantumer-Qは105.86Kパラメータ、0.4038MBのメモリ使用量、0.5525MBのモデルサイズ、5.5646MFLOPsで競争力のあるコンパクトモデル性能を実現しています。INT8 Raspberry Pi 4の展開は16.8413 msの遅延を達成し、フットプリントは0.6493 MBです。これらの結果は、コンパクトなエッジ展開可能なIDS向けのトレーニングタイム量子支援表現学習をサポートします。",
-  "last_delivered_at": "2026-09-09T06:29:26Z"
- },
- {
   "delivery_id": "main:2609.07397",
   "id": "2609.07397",
   "posted_at": "2026-09-09T06:29:28Z",
@@ -199237,5 +198842,480 @@
   "abstract_ja": "Ballら(2017, 2018)による算術化された$k$-直交ベクトル多項式$FOV^k$の厳密評価を研究します。任意の固定整数$k \\geq 3$に対して、$d(n) = \\left \\lceil \\log^2 n \\right \\rceil$。量子強指数時間仮説(QSETH)の基本決定版を仮定すると、 任意の定数$\\Varepsilon>0$では、すべての十分な大きな$n$に対して、すべての入力に対して一様な量子アルゴリズムが$O(n^{k/2 - \\varepsilon})$時間で実行され、この多項式を少なくとも$3 / 4$の確率で正しく評価します。$\\mathbb F_{p(n)}^{knd(n)}$ とアルゴリズムの内部ランダム性に対して。これは、$p(n)$が$n^{k - 1}$より大きい最小素数であり、$n^k$より大きい最小素数である場合に成り立つ。我々の直接還元は古典的多項式自己補正と量子平均ケース評価器の呼び出しを組み合わせている。小さい素数に対しては、数が十分に大きい場合、ランダムサンプリングで直交組が一定の確率で直交組を見つけられる。その数が$p(n)$で割ったものを回す。そうでなければ、正確な残数が答えを決定する。より大きな素数の場合、量子最小値の発見と漸近的素ギャップ境界は、所定の場を生成するコストを考慮する。先行の孤立ベースの還元が小さな特性を許容していることを考慮し、これらの結果は2つの正則素数族に対する明示的な還元として提示し、すべてのセットアップコストは一様量子実行時間に含まれる。難易度保証は単一インスタンスの正確評価に関するものである。マッチング量子評価アルゴリズムと量子プルーフ・オブ・ワークプロトコルは依然としてオープンです。",
   "abstract_translated": "Ballら(2017, 2018)による算術化された$k$-直交ベクトル多項式$FOV^k$の厳密評価を研究します。任意の固定整数$k \\geq 3$に対して、$d(n) = \\left \\lceil \\log^2 n \\right \\rceil$。量子強指数時間仮説(QSETH)の基本決定版を仮定すると、 任意の定数$\\Varepsilon>0$では、すべての十分な大きな$n$に対して、すべての入力に対して一様な量子アルゴリズムが$O(n^{k/2 - \\varepsilon})$時間で実行され、この多項式を少なくとも$3 / 4$の確率で正しく評価します。$\\mathbb F_{p(n)}^{knd(n)}$ とアルゴリズムの内部ランダム性に対して。これは、$p(n)$が$n^{k - 1}$より大きい最小素数であり、$n^k$より大きい最小素数である場合に成り立つ。我々の直接還元は古典的多項式自己補正と量子平均ケース評価器の呼び出しを組み合わせている。小さい素数に対しては、数が十分に大きい場合、ランダムサンプリングで直交組が一定の確率で直交組を見つけられる。その数が$p(n)$で割ったものを回す。そうでなければ、正確な残数が答えを決定する。より大きな素数の場合、量子最小値の発見と漸近的素ギャップ境界は、所定の場を生成するコストを考慮する。先行の孤立ベースの還元が小さな特性を許容していることを考慮し、これらの結果は2つの正則素数族に対する明示的な還元として提示し、すべてのセットアップコストは一様量子実行時間に含まれる。難易度保証は単一インスタンスの正確評価に関するものである。マッチング量子評価アルゴリズムと量子プルーフ・オブ・ワークプロトコルは依然としてオープンです。",
   "last_delivered_at": "2026-11-11T07:53:34Z"
+ },
+ {
+  "delivery_id": "main:2609.20236",
+  "id": "2609.20236",
+  "posted_at": "2026-11-12T06:04:05Z",
+  "title": "Conflict-Free Color-Clustered Sequential Belief-Propagation Decoding of Quantum LDPC Codes via Reinforcement Learning",
+  "title_ja": "強化学習による量子LDPCコードのコンフリクトフリーカラークラスタリング逐次信念伝播復号",
+  "title_translated": "強化学習による量子LDPCコードのコンフリクトフリーカラークラスタリング逐次信念伝播復号",
+  "translation_language": "ja",
+  "authors": "Mohsen Moradi, Taejoon Kim, and Remi A. Chou",
+  "link": "https://arxiv.org/abs/2609.20236",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT",
+   "math.IT"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "target_genre_ids": [
+   "qec"
+  ],
+  "target_genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "qec"
+   ],
+   "final_genre_ids": [
+    "qec"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Belief-propagation (BP) decoding for quantum low-density parity-check (QLDPC) codes is attractive due to its low complexity and low latency, but it is often limited by short cycles, degeneracy, and convergence failures. Reinforcement-learning-based sequential BP decoding (RL-S) improves BP by learning a syndrome-dependent variable-node (VN) update order, but its VN-by-VN schedule has limited within-iteration parallelism. In this paper, we propose a conflict-free color-clustered extension of RL-S. We construct a VN conflict graph in which two VNs are adjacent if they share an X-type or Z-type check, and color this graph so that same-color VNs have disjoint check neighborhoods. This also prevents VNs from the same Tanner 4- or 6-cycle from being updated simultaneously. During decoding, the trained VN-level Q-table selects a seed VN, and all remaining VNs with the same color are updated in parallel using the same pre-batch messages. For the [[288,12,18]] bivariate-bicycle code over the depolarizing channel, our proposed decoder achieves block-error-rate performance close to VN-level RL-S while reducing the scheduling decisions from 288 VNs to 11 color classes per BP iteration.",
+  "abstract_ja": "量子低密度パリティチェック(QLDPC)コードに対する信念伝播(BP)復号は、その複雑さと遅延が低いため魅力的ですが、短いサイクル、退化、収束失敗によって制限されることが多いです。強化学習ベースの逐次BP復号(RL-S)は、症候群依存変数ノード(VN)の更新順序を学習することでBPを改善しますが、VN間スケジュールは反復内で並列性に制限があります。本論文では、RL-Sのコンリクトフリーカラークラスタ拡張を提案します。2つのVNがX型またはZ型チェックを共有する場合に隣接するVNのコンフリクトグラフを構築し、同色のVN同士の相素なチェック近傍を持つように色付けします。これにより、同じTanner 4サイクルまたは6サイクルのVNが同時に更新されるのを防ぎます。復号中、訓練済みVNレベルのQテーブルがシードVNを選択し、同じ色の残りのすべてのVNが同じ事前バッチメッセージで並列に更新されます。脱分極チャネル上の[[288,12,18]]二変量バイシクルコードについては、提案したデコーダはVNレベルのRL-Sに近いブロックエラー率性能を実現し、スケジューリング決定を288のVNからBP1回のカラークラス11に削減します。",
+  "abstract_translated": "量子低密度パリティチェック(QLDPC)コードに対する信念伝播(BP)復号は、その複雑さと遅延が低いため魅力的ですが、短いサイクル、退化、収束失敗によって制限されることが多いです。強化学習ベースの逐次BP復号(RL-S)は、症候群依存変数ノード(VN)の更新順序を学習することでBPを改善しますが、VN間スケジュールは反復内で並列性に制限があります。本論文では、RL-Sのコンリクトフリーカラークラスタ拡張を提案します。2つのVNがX型またはZ型チェックを共有する場合に隣接するVNのコンフリクトグラフを構築し、同色のVN同士の相素なチェック近傍を持つように色付けします。これにより、同じTanner 4サイクルまたは6サイクルのVNが同時に更新されるのを防ぎます。復号中、訓練済みVNレベルのQテーブルがシードVNを選択し、同じ色の残りのすべてのVNが同じ事前バッチメッセージで並列に更新されます。脱分極チャネル上の[[288,12,18]]二変量バイシクルコードについては、提案したデコーダはVNレベルのRL-Sに近いブロックエラー率性能を実現し、スケジューリング決定を288のVNからBP1回のカラークラス11に削減します。",
+  "last_delivered_at": "2026-11-12T06:04:05Z"
+ },
+ {
+  "delivery_id": "main:2609.26132",
+  "id": "2609.26132",
+  "posted_at": "2026-11-12T06:04:06Z",
+  "title": "Zeta-Transform Evaluation for Higher-Order Vanishing Key Recovery",
+  "title_ja": "高次消失鍵回復のためのゼータ変換評価",
+  "title_translated": "高次消失鍵回復のためのゼータ変換評価",
+  "translation_language": "ja",
+  "authors": "Sunyeop Kim, Insung Kim",
+  "link": "https://arxiv.org/abs/2609.26132",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc",
+   "qec"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号",
+   "誤り訂正・符号理論"
+  ],
+  "target_genre_ids": [
+   "pqc",
+   "qec"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号",
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "pqc",
+    "qec"
+   ],
+   "final_genre_ids": [
+    "pqc",
+    "qec"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Hemmert's key-recovery algorithm for Classic McEliece is based on higher-order vanishing. It computes a basis of $\\ker(\\widetilde\\varphi_A^{(p)})$, where $A=H'''$ is the shortened parity-check matrix used in the attack. For Classic McEliece parameters, this kernel computation is the dominant cost of the attack. We show that the sums defining $\\widetilde\\varphi_A^{(p)}$ can be evaluated, column by column, as weighted upper zeta transforms on the Boolean lattice. Since only selected levels of these transforms are required by $\\widetilde\\varphi_A^{(p)}$, restricting their evaluation to the band between level $p$ and the lowest required level yields exact evaluations of both $\\widetilde\\varphi_A^{(p)}$ and its transpose. Using the resulting truncated zeta-transform evaluation in the Wiedemann-based kernel computation reduces the cost of the repeated matrix--vector products without changing the overall key-recovery algorithm. The exact cost depends on the weight distribution of the non-pivot columns of $H'''$. We therefore consider two models: an all-one model, in which every relevant binary coordinate is active, and a Bernoulli$(1/2)$ model, in which the coordinates are independently active with probability $1/2$. For the five Classic McEliece parameter sets, our method reduces the estimated key-recovery cost by $14.09$--$41.19$ bits in the all-one model and by $7.25$--$22.48$ bits in the Bernoulli$(1/2)$ model.",
+  "abstract_ja": "Hemmertのクラシック・マクリースに対する鍵回復アルゴリズムは、高次の消失に基づいています。このアルゴリズムは、攻撃で用いられた短縮パリティチェック行列である$\\ker(\\widetilde\\varphi_A{(p)})$A)$の基底を計算します。クラシック・マクリースのパラメータでは、このカーネル計算が攻撃の支配的なコストとなります。$\\widetilde\\varphi_A{(p)}$を定義する和は、ブール格子上の重み付き上位ゼータ変換として列ごとに評価できることを示します。これらの変換のうち選択されたレベルのみが$\\widetildde\\varphi_A{{(p)}$)で要求されるため、評価をレベル$p$と最低要求レベルの間の帯域に限定することで、$\\widetildde\\varphi_A^{(p)}$とその転置の両方の正確な評価が得られます。Wiedemannベースのカーネル計算で得られた切断ゼータ変換の評価を用いることで、全体の鍵復元アルゴリズムを変えずに繰り返し行列ベクトル積のコストを削減できます。正確なコストは$H'''$の非ピボット列の重み分布に依存します。したがって、2つのモデルを考えます。すべての関連する2進座標がアクティブなオールワンモデルと、座標が確率$1/2$で独立に活性化するベルヌーイモデルです。5つのクラシック・マクリースパラメータセットについては、本手法で推定鍵回復コストを14.09ドル(41.19ドル)ビット削減し、ベルヌーイ(1/2)$モデルでは7.25ドル(22.48ドル)ビットを削減します。",
+  "abstract_translated": "Hemmertのクラシック・マクリースに対する鍵回復アルゴリズムは、高次の消失に基づいています。このアルゴリズムは、攻撃で用いられた短縮パリティチェック行列である$\\ker(\\widetilde\\varphi_A{(p)})$A)$の基底を計算します。クラシック・マクリースのパラメータでは、このカーネル計算が攻撃の支配的なコストとなります。$\\widetilde\\varphi_A{(p)}$を定義する和は、ブール格子上の重み付き上位ゼータ変換として列ごとに評価できることを示します。これらの変換のうち選択されたレベルのみが$\\widetildde\\varphi_A{{(p)}$)で要求されるため、評価をレベル$p$と最低要求レベルの間の帯域に限定することで、$\\widetildde\\varphi_A^{(p)}$とその転置の両方の正確な評価が得られます。Wiedemannベースのカーネル計算で得られた切断ゼータ変換の評価を用いることで、全体の鍵復元アルゴリズムを変えずに繰り返し行列ベクトル積のコストを削減できます。正確なコストは$H'''$の非ピボット列の重み分布に依存します。したがって、2つのモデルを考えます。すべての関連する2進座標がアクティブなオールワンモデルと、座標が確率$1/2$で独立に活性化するベルヌーイモデルです。5つのクラシック・マクリースパラメータセットについては、本手法で推定鍵回復コストを14.09ドル(41.19ドル)ビット削減し、ベルヌーイ(1/2)$モデルでは7.25ドル(22.48ドル)ビットを削減します。",
+  "last_delivered_at": "2026-11-12T06:04:08Z"
+ },
+ {
+  "delivery_id": "main:2610.00075",
+  "id": "2610.00075",
+  "posted_at": "2026-11-12T06:04:10Z",
+  "title": "Exact Kernel Transfer to Clique Complexes and the Hardness of Normalized Persistence",
+  "title_ja": "クリーク複体への正確な核転送と正規化持続の難易度",
+  "title_translated": "クリーク複体への正確な核転送と正規化持続の難易度",
+  "translation_language": "ja",
+  "authors": "Cheng Xin",
+  "link": "https://arxiv.org/abs/2610.00075",
+  "primary": "cs.CC",
+  "categories": [
+   "cs.CC",
+   "cs.CG"
+  ],
+  "source_feed": "cs.CC",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "complexity"
+  ],
+  "genre_names": [
+   "量子複雑性理論"
+  ],
+  "target_genre_ids": [
+   "complexity"
+  ],
+  "target_genre_names": [
+   "量子複雑性理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "complexity"
+   ],
+   "final_genre_ids": [
+    "complexity"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "For clique complexes $X_1\\subseteq X_2$, normalized persistence in degree $d$ is $\\operatorname{rank}[H_d(X_1)\\to H_d(X_2)]/\\dim H_d(X_1)$. Estimating it requires exact endpoint homology and the inclusion-induced map, even with inverse-polynomial endpoint Laplacian gaps. We prove that additive-error $1/24$ estimation is hard for $\\mathsf{BQP}_{1}^{G_2}$, the perfect-completeness class over the exact gate set $G_2=\\{X,\\mathsf{CX},\\mathsf{CCX},H\\otimes H\\}$, and hence for $\\mathsf{BQP}_{1}$ over every finite gate set with entries in a cyclotomic field $\\mathbb{Q}(\\zeta_{2^k})$, even for unweighted clique complexes. The main tool is a finite-certificate kernel-transfer theorem. For a fixed palette of weighted clique gadgets satisfying finitely many exactly checkable local conditions, every unit chain $x$ of the full geometric complex satisfies $\\operatorname{dist}(x,K)^2\\le C(t\\lambda^2+\\langle x,\\Delta x\\rangle/(g\\lambda^{26}))$, where $K$ is the embedded kernel of the simulated projector Hamiltonian, $g$ its gap, $t$ the number of gadgets, and $\\lambda$ the private vertex weight. Since $\\lambda$ is chosen independently of $g$, the geometric Laplacian has exactly $\\dim K$ zero modes and a gap linear in $g$ above them. Exact fillings identify the endpoint homology with a quotient $V/W_A$ of the register cycle space, and nested term sets induce the natural quotient epimorphisms, so the persistent rank equals the later kernel dimension without any choice of compatible harmonic representatives. A fixed eight-dimensional label register turns a $\\mathsf{BQP}_{1}^{G_2}$ verifier into instances with $\\beta_d(X_1)=8$ and normalized persistence $3/4$ or $1/8$, and an established common-copy blow-up transfers everything to unweighted graphs.",
+  "abstract_ja": "クリーク複体 $X_1\\subseteq X_2$ の場合、次数 $d$ での正規化持続は $\\operatorname{rank}[H_d(X_1)\\to H_d(X_2)]/\\dim H_d(X_1)$ となります。推定するには、逆多項式端点ラプラシアンギャップがあっても、正確な端点ホモロジーと包含誘導写像が必要です。加法誤差$1/24$推定は、完全完備類である完全性類$\\mathsf{BQP}_{1}^{G_2}$に対して難しいことを証明します。これは、完全完備性類であり、完全性クラスである$G_2=X,\\mathsf{CX},\\mathsf{CCX},H\\otimes H\\}$であり、したがって、循環体上の任意の有限ゲート集合$\\math{1}bb{Q}(\\zeta_{2^k})$に対しても、重みのないクリーク複体に対しても同様であることを証明します。主なツールは有限証明書カーネル転送定理です。有限個の正確に検証可能な局所条件を満たす固定の重み付きクリークガジェットのパレットに対して、全幾何複体の任意の単位鎖$x$は$\\operatorname{dist}(x,K)^2\\le C(t\\lambda^2+\\langle x,\\Delta x\\rangle/(g\\lambda^{26})))$を満たします。ここで$K$はシミュレートされた射影器ハミルトニアンの埋め込み核、$g$はそのギャップ、$t$はガジェットの数、$\\lambda$はプライベート頂点の重みです。$\\lambda$は$g$とは独立に選ばれるため、幾何ラプラシアンは正確に$\\dimのK$のゼロモードを持ち、その上に$g$のギャップが線形です。完全充填は端点相同性をレジスタサイクル空間の商$V/W_A$と同一視し、入れ子項集合は自然な商エピ射を誘導するため、永続的なランクは互換性のある調和代表元を選ばずに後の核次元に等しくなります。固定された8次元ラベルレジスタは、$\\mathsf{BQP}_{1}^{G_2}$の検証器を$\\beta_d(X_1)=8$、正規化持続値$3/4$または$1/8$のインスタンスに変換し、確立された共通コピーのブローアップですべてを無重みグラフに転送します。",
+  "abstract_translated": "クリーク複体 $X_1\\subseteq X_2$ の場合、次数 $d$ での正規化持続は $\\operatorname{rank}[H_d(X_1)\\to H_d(X_2)]/\\dim H_d(X_1)$ となります。推定するには、逆多項式端点ラプラシアンギャップがあっても、正確な端点ホモロジーと包含誘導写像が必要です。加法誤差$1/24$推定は、完全完備類である完全性類$\\mathsf{BQP}_{1}^{G_2}$に対して難しいことを証明します。これは、完全完備性類であり、完全性クラスである$G_2=X,\\mathsf{CX},\\mathsf{CCX},H\\otimes H\\}$であり、したがって、循環体上の任意の有限ゲート集合$\\math{1}bb{Q}(\\zeta_{2^k})$に対しても、重みのないクリーク複体に対しても同様であることを証明します。主なツールは有限証明書カーネル転送定理です。有限個の正確に検証可能な局所条件を満たす固定の重み付きクリークガジェットのパレットに対して、全幾何複体の任意の単位鎖$x$は$\\operatorname{dist}(x,K)^2\\le C(t\\lambda^2+\\langle x,\\Delta x\\rangle/(g\\lambda^{26})))$を満たします。ここで$K$はシミュレートされた射影器ハミルトニアンの埋め込み核、$g$はそのギャップ、$t$はガジェットの数、$\\lambda$はプライベート頂点の重みです。$\\lambda$は$g$とは独立に選ばれるため、幾何ラプラシアンは正確に$\\dimのK$のゼロモードを持ち、その上に$g$のギャップが線形です。完全充填は端点相同性をレジスタサイクル空間の商$V/W_A$と同一視し、入れ子項集合は自然な商エピ射を誘導するため、永続的なランクは互換性のある調和代表元を選ばずに後の核次元に等しくなります。固定された8次元ラベルレジスタは、$\\mathsf{BQP}_{1}^{G_2}$の検証器を$\\beta_d(X_1)=8$、正規化持続値$3/4$または$1/8$のインスタンスに変換し、確立された共通コピーのブローアップですべてを無重みグラフに転送します。",
+  "last_delivered_at": "2026-11-12T06:04:10Z"
+ },
+ {
+  "delivery_id": "main:2609.11991",
+  "id": "2609.11991",
+  "posted_at": "2026-11-12T06:04:12Z",
+  "title": "A Survey on Quantum-Safe Cryptographic Mechanisms: Building Blocks and Applications",
+  "title_ja": "量子安全な暗号機構に関する調査:構成要素と応用",
+  "title_translated": "量子安全な暗号機構に関する調査:構成要素と応用",
+  "translation_language": "ja",
+  "authors": "Ricardo Parizotto and Preeti Yadav and Marcus Freire and Anderson Tomkelski and Maycon Peixoto and Emmanuel Zambrini Cruzeiro and Israat Haque",
+  "link": "https://arxiv.org/abs/2609.11991",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.NI"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "pqc"
+   ],
+   "final_genre_ids": [
+    "pqc"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "The possible emergence of fault-tolerant quantum computers may enable widely used cryptographic algorithms to be broken. These algorithms for public key encryption and digital signatures could be exposed if an efficient algorithm is employed. This poses a threat to existing infrastructure, motivating the development of mechanisms that can withstand quantum-computer cybersecurity risks. However, the transition to new security mechanisms is still underway and faces many challenges, including identifying which applications are under threat and implementing agile, scalable migration processes. In this work, we survey the state of the art in quantum-safe cryptographic mechanisms, existing applications targeting migration, and open challenges. We examine the building blocks commonly used to integrate quantum-safe mechanisms into existing applications and categorize them by the security mechanisms they employ. Next, we systematically review existing migrations into quantum-safe schemes and categorize them by application domain, including Telecommunications, the Internet of Things, and Blockchains. Finally, we summarize the challenges that must be addressed to enable a successful migration to quantum-resistant mechanisms, as well as the motivations for pursuing this migration.",
+  "abstract_ja": "フォールトトレラント量子コンピュータの出現により、広く使われている暗号アルゴリズムが破られる可能性があります。これらの公開鍵暗号化やデジタル署名のアルゴリズムは、効率的なアルゴリズムが用いられれば暴露される可能性があります。これは既存のインフラに脅威をもたらし、量子コンピュータのサイバーセキュリティリスクに耐えられるメカニズムの開発を促進しています。しかし、新たなセキュリティメカニズムへの移行はまだ進行中であり、どのアプリケーションが脅威にさらされているかを特定し、アジャイルでスケーラブルな移行プロセスの実装など多くの課題に直面しています。本研究では、量子安全な暗号メカニズムの最新動態、移行を対象とした既存アプリケーション、そして未解決の課題を調査します。量子安全メカニズムを既存のアプリケーションに統合するためによく用いられる構成要素を検証し、それらを用いるセキュリティメカニズムごとに分類します。次に、既存の量子安全スキームへの移行を体系的にレビューし、通信、モノのインターネット、ブロックチェーンなどのアプリケーションドメインごとに分類します。最後に、量子抵抗メカニズムへの移行を成功させるために対処すべき課題と、その移行を追求する動機についてまとめます。",
+  "abstract_translated": "フォールトトレラント量子コンピュータの出現により、広く使われている暗号アルゴリズムが破られる可能性があります。これらの公開鍵暗号化やデジタル署名のアルゴリズムは、効率的なアルゴリズムが用いられれば暴露される可能性があります。これは既存のインフラに脅威をもたらし、量子コンピュータのサイバーセキュリティリスクに耐えられるメカニズムの開発を促進しています。しかし、新たなセキュリティメカニズムへの移行はまだ進行中であり、どのアプリケーションが脅威にさらされているかを特定し、アジャイルでスケーラブルな移行プロセスの実装など多くの課題に直面しています。本研究では、量子安全な暗号メカニズムの最新動態、移行を対象とした既存アプリケーション、そして未解決の課題を調査します。量子安全メカニズムを既存のアプリケーションに統合するためによく用いられる構成要素を検証し、それらを用いるセキュリティメカニズムごとに分類します。次に、既存の量子安全スキームへの移行を体系的にレビューし、通信、モノのインターネット、ブロックチェーンなどのアプリケーションドメインごとに分類します。最後に、量子抵抗メカニズムへの移行を成功させるために対処すべき課題と、その移行を追求する動機についてまとめます。",
+  "last_delivered_at": "2026-11-12T06:04:12Z"
+ },
+ {
+  "delivery_id": "main:2609.26225",
+  "id": "2609.26225",
+  "posted_at": "2026-11-12T06:04:13Z",
+  "title": "Quantum-Ready Secure WAN: A Risk Assessment and Migration Framework",
+  "title_ja": "量子準備型セキュアWAN:リスク評価と移行フレームワーク",
+  "title_translated": "量子準備型セキュアWAN:リスク評価と移行フレームワーク",
+  "translation_language": "ja",
+  "authors": "Saeed Alam",
+  "link": "https://arxiv.org/abs/2609.26225",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.NI"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "pqc"
+   ],
+   "final_genre_ids": [
+    "pqc"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Enterprise wide-area networks (WANs) use quantum-vulnerable public-key cryptography to authenticate peers and establish keys for Internet Protocol Security (IPsec), Transport Layer Security (TLS), and software-defined WAN services. Harvest-now, decrypt-later collection already threatens data whose protection lifetime may exceed the time needed to migrate, while a future cryptographically relevant quantum computer would also endanger certificates and other authentication dependencies. Post-quantum standards and government directives now define algorithms and transition milestones, but they do not tell an enterprise which WAN services to migrate first or what evidence is sufficient for deployment. This paper proposes a vendor-neutral framework that separates exposure priority, migration readiness, and evidence confidence, and maps those outputs to staged security, operational, and governance gates. It also defines a complete evaluation design for classical and ML-KEM hybrid key establishment in TLS 1.3 and IKEv2/IPsec. The retained artifact is narrower: it contains author-reported aggregate TLS p50, p95, and p99 latencies at configured loss settings of 0%, 1%, 3%, and 5%, an arithmetic checker, and limited environment and MTU/MSS notes. At those settings, the TLS-H minus TLS-C p95 differences are 0.00, 0.16, 0.38, and 0.63 ms, corresponding to 0.00%, 1.32%, 3.07%, and 5.00% relative to TLS-C. These values are descriptive aggregate observations, not inferential results, because per-trial data, sample counts, original captures, and timestamped logs were not retained. Protocol-size and MTU/MSS calculations are reported separately from measured behavior, and unsupported IKE, resource, throughput, retransmission, and downgrade outcomes are excluded.",
+  "abstract_ja": "エンタープライズ広域ネットワーク(WAN)は、量子脆弱な公開鍵暗号技術を用いてピアを認証し、インターネットプロトコルセキュリティ(IPsec)、トランスポート層セキュリティ(TLS)、ソフトウェア定義WANサービスの鍵を確立します。今は収穫し後で復号する収集は、保護寿命が移行に必要な時間を超えるデータもすでに脅かしており、将来の暗号学的に重要な量子コンピュータは証明書やその他の認証依存関係も危険にさらします。ポスト量子標準や政府指令はアルゴリズムや移行のマイルストーンを定義していますが、どのWANサービスを最初に移行すべきか、またはどのような証拠が展開に十分かを企業に指示するものではありません。本稿は、露出の優先度、移行準備度、証拠の信頼性を分離し、それらの出力を段階的なセキュリティ、運用、ガバナンスゲートにマッピングするベンダー中立のフレームワークを提案します。また、TLS 1.3およびIKEv2/IPsecにおける古典的およびML-KEMハイブリッド鍵確立のための完全な評価設計も定義しています。保持されるアーティファクトはより狭く、0%、1%、3%、5%の設定された損失設定での著者報告のTLS p50、p95、p99のレイテンシー、算術チェッカー、制限された環境およびMTU/MSSノートを含みます。これらの設定では、TLS-HからTLS-C p95を差し引いた差は0.00、0.16、0.38、0.63msであり、TLS-Cに対して0.00%、1.32%、3.07%、5.00%に対応します。これらの値は記述的な集計観察であり推論結果ではありません。なぜなら、試行ごとのデータ、サンプル数、元のキャプチャ、タイムスタンプ付きログは保持されていないからです。プロトコルサイズおよびMTU/MSSの計算は測定された挙動とは別に報告され、サポートされていないIKE、リソース、スループット、再送信、ダウングレードの結果は除外されます。",
+  "abstract_translated": "エンタープライズ広域ネットワーク(WAN)は、量子脆弱な公開鍵暗号技術を用いてピアを認証し、インターネットプロトコルセキュリティ(IPsec)、トランスポート層セキュリティ(TLS)、ソフトウェア定義WANサービスの鍵を確立します。今は収穫し後で復号する収集は、保護寿命が移行に必要な時間を超えるデータもすでに脅かしており、将来の暗号学的に重要な量子コンピュータは証明書やその他の認証依存関係も危険にさらします。ポスト量子標準や政府指令はアルゴリズムや移行のマイルストーンを定義していますが、どのWANサービスを最初に移行すべきか、またはどのような証拠が展開に十分かを企業に指示するものではありません。本稿は、露出の優先度、移行準備度、証拠の信頼性を分離し、それらの出力を段階的なセキュリティ、運用、ガバナンスゲートにマッピングするベンダー中立のフレームワークを提案します。また、TLS 1.3およびIKEv2/IPsecにおける古典的およびML-KEMハイブリッド鍵確立のための完全な評価設計も定義しています。保持されるアーティファクトはより狭く、0%、1%、3%、5%の設定された損失設定での著者報告のTLS p50、p95、p99のレイテンシー、算術チェッカー、制限された環境およびMTU/MSSノートを含みます。これらの設定では、TLS-HからTLS-C p95を差し引いた差は0.00、0.16、0.38、0.63msであり、TLS-Cに対して0.00%、1.32%、3.07%、5.00%に対応します。これらの値は記述的な集計観察であり推論結果ではありません。なぜなら、試行ごとのデータ、サンプル数、元のキャプチャ、タイムスタンプ付きログは保持されていないからです。プロトコルサイズおよびMTU/MSSの計算は測定された挙動とは別に報告され、サポートされていないIKE、リソース、スループット、再送信、ダウングレードの結果は除外されます。",
+  "last_delivered_at": "2026-11-12T06:04:13Z"
+ },
+ {
+  "delivery_id": "main:2609.27828",
+  "id": "2609.27828",
+  "posted_at": "2026-11-12T06:04:15Z",
+  "title": "A Non-Invasive Cloud-Based Migration Strategy for Post-Quantum Cybersecurity in Smart HVAC Systems: Architecture, Implementation, and Empirical Evaluation",
+  "title_ja": "スマートHVACシステムにおけるポスト量子サイバーセキュリティのための非侵襲的なクラウドベースの移行戦略:アーキテクチャ、実装、実証的評価",
+  "title_translated": "スマートHVACシステムにおけるポスト量子サイバーセキュリティのための非侵襲的なクラウドベースの移行戦略:アーキテクチャ、実装、実証的評価",
+  "translation_language": "ja",
+  "authors": "Mahedee Zaman Moon, Kaysarul Anas Apurba, Md Hasibul Hasan, Sk Md Mizanur Rahman",
+  "link": "https://arxiv.org/abs/2609.27828",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.AI",
+   "cs.SY",
+   "eess.SY"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "pqc"
+   ],
+   "final_genre_ids": [
+    "pqc"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Legacy smart HVAC controllers rely on vendor-cloud TLS secured by ECDH and RSA, both broken by Shor's algorithm, and typical 10-15 year lifespans mean today's devices remain in service through the quantum-threat era. Direct on-device post-quantum cryptography is infeasible: an ESP32-S3, representative of capable HVAC hardware, has only 339 KB free heap against the 900 KB ML-KEM-768 requires, and even classical ECDH-P256 keygen (111.93 ms) dwarfs hardware AES-128 (0.032 ms). We propose a non-invasive PQC proxy, requiring no device, firmware, or vendor-cloud changes, performing ML-KEM-768 encapsulation and ML-DSA-65 authentication (NIST FIPS 203/204) with AES-256-GCM session keys via HKDF, implemented with Open Quantum Safe liboqs on a Raspberry Pi 4B gateway. Over 500 runs, the post-quantum handshake (Steps 1-6) completes in 2.48 ms, 0.38 ms slower than classical baseline, with PQC computation around 8% of handshake time at 20 ms simulated round-trip network latency. The gateway sustains 443 sessions/second, 100% success under 32 concurrent connections, extrapolating to 3546 sessions/second on a 32-core cloud instance. Five side-channel tests, including verified in-place session-key zeroization and a fixed-vs-random TVLA timing analysis, found no exploitable timing leakage or susceptibility to man-in-the-middle attacks. The architecture is vendor-agnostic and becomes unnecessary once vendors adopt NIST PQC natively.",
+  "abstract_ja": "従来のスマートHVACコントローラは、ECdhおよびRSAによって保護されたベンダークラウドTLSに依存しており、どちらもShorのアルゴリズムによって破られました。また、典型的な10〜15年の寿命により、今日のデバイスは量子脅威時代にも引き続き運用されています。直接オンデバイスでのポスト量子暗号解析は現実的ではありません。対応可能なHVACハードウェアの代表であるESP32-S3は、900KBのML-KEM-768の要求に対してわずか339KBのフリーヒープしか持たず、さらには従来のECDH-P256キージェン(111.93ms)でさえAES-128(0.032ms)をはるかに上回っています。私たちは、デバイス、ファームウェア、ベンダーのクラウド変更を不要に行う非侵襲的なPQCプロキシを提案し、AES-256-GCMセッションキーを用いてML-KEM-768カプセル化およびML-DSA-65認証(NIST FIPS 203/204)を実行し、Raspberry Pi 4Bゲートウェイ上のOpen Quantum Safe liboqsで実装します。500回以上の実行を経て、ポスト量子ハンドシェイク(ステップ1-6)は2.48msで完了し、従来のベースラインより0.38ms遅く、PQC計算はハンドシェイク時間の約8%で、20msの往復ネットワーク遅延をシミュレートします。ゲートウェイは443セッション/秒を維持し、32コアクラウドインスタンスで32の同時接続で100%成功、32コアクラウドインスタンスで3546セッション/秒に拡大します。検証済みのインプレイスセッションキーゼロ化や固定対ランダムTVLAタイミング分析を含む5つのサイドチャネルテストでは、悪用可能なタイミング漏れや中間者攻撃への脆弱性は検出されませんでした。このアーキテクチャはベンダーに依存しず、ベンダーがNIST PQCをネイティブに採用すると不要になります。",
+  "abstract_translated": "従来のスマートHVACコントローラは、ECdhおよびRSAによって保護されたベンダークラウドTLSに依存しており、どちらもShorのアルゴリズムによって破られました。また、典型的な10〜15年の寿命により、今日のデバイスは量子脅威時代にも引き続き運用されています。直接オンデバイスでのポスト量子暗号解析は現実的ではありません。対応可能なHVACハードウェアの代表であるESP32-S3は、900KBのML-KEM-768の要求に対してわずか339KBのフリーヒープしか持たず、さらには従来のECDH-P256キージェン(111.93ms)でさえAES-128(0.032ms)をはるかに上回っています。私たちは、デバイス、ファームウェア、ベンダーのクラウド変更を不要に行う非侵襲的なPQCプロキシを提案し、AES-256-GCMセッションキーを用いてML-KEM-768カプセル化およびML-DSA-65認証(NIST FIPS 203/204)を実行し、Raspberry Pi 4Bゲートウェイ上のOpen Quantum Safe liboqsで実装します。500回以上の実行を経て、ポスト量子ハンドシェイク(ステップ1-6)は2.48msで完了し、従来のベースラインより0.38ms遅く、PQC計算はハンドシェイク時間の約8%で、20msの往復ネットワーク遅延をシミュレートします。ゲートウェイは443セッション/秒を維持し、32コアクラウドインスタンスで32の同時接続で100%成功、32コアクラウドインスタンスで3546セッション/秒に拡大します。検証済みのインプレイスセッションキーゼロ化や固定対ランダムTVLAタイミング分析を含む5つのサイドチャネルテストでは、悪用可能なタイミング漏れや中間者攻撃への脆弱性は検出されませんでした。このアーキテクチャはベンダーに依存しず、ベンダーがNIST PQCをネイティブに採用すると不要になります。",
+  "last_delivered_at": "2026-11-12T06:04:15Z"
+ },
+ {
+  "delivery_id": "main:2610.14040",
+  "id": "2610.14040",
+  "posted_at": "2026-11-12T06:04:17Z",
+  "title": "Symmetric Cryptography via Dirichlet Convolution",
+  "title_ja": "ディリクレ畳み込みによる対称暗号",
+  "title_translated": "ディリクレ畳み込みによる対称暗号",
+  "translation_language": "ja",
+  "authors": "Artur Sowa, Elias Hassani Sangani, Francis Bui, Grant Harris, Jonathan Norton",
+  "link": "https://arxiv.org/abs/2610.14040",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.IT",
+   "math.IT"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "pqc"
+   ],
+   "final_genre_ids": [
+    "pqc"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "We discuss a new symmetric-key cipher for digital data encryption. Its implementation is fast, memory efficient, and resilient against classical, AI-assisted, and quantum attacks. Let $x$, $k$, and $c$ be elements of a finite abelian group $G$ with operation $+$ and neutral element $0$. Suppose one is given ciphertext $c=x+k$. Retrieving the plaintext $x=c-k$ from the ciphertext is trivial when the key $k$ is known. Without the key, however, recovering $x$ amounts to a blind search. Even if an efficient criterion were available for identifying the plaintext among all group elements, the average number of trials would remain prohibitively large when the group is sufficiently large. The challenge in constructing a practical cryptosystem is therefore to identify a sufficiently rich group $G$, together with efficient algorithms that enable an immersion of \\emph{real digital data} into $G$ and efficient evaluation of the group operations. The proposed cipher is based on generalized Dirichlet convolution over finite fields. We investigate its security against plaintext attacks from an information-theoretic perspective. The nonlocal structure of Dirichlet convolution naturally permits plaintext salting, providing protection against plaintext attacks while allowing controlled key reuse. We establish perfect masking properties over finite fields and prove that the resulting cipher achieves information-theoretic security under key reuse when the underlying arithmetic is carried out in $\\mathbb{F}_p$ with $p>2$. For arithmetic over $\\mathbb{F}_2$, some information leakage remains, leading to a finite key-reuse budget.",
+  "abstract_ja": "デジタルデータ暗号化のための新しい対称鍵暗号について議論します。その実装は高速でメモリ効率が高く、古典的攻撃、AI支援攻撃、量子攻撃に対して耐性があります。$x$、$k$、$c$を有限アーベル群$Gの要素とし、演算は$+$、中性要素は$0$とします。暗号文$c=x+k$が与えられるとします。鍵$k$が分かっている場合、暗号文から平文$x=c-k$を取得するのは簡単です。しかし鍵がなければ、$x$の回復はブラインドサーチに等しいです。たとえすべてのグループ要素から平文を特定する効率的な基準が存在しても、群が十分に大きい場合、平均試行回数は依然として非常に多いままです。したがって、実用的な暗号システムを構築する際の課題は、十分に豊かな群$G$を特定し、\\emph{実デジタルデータ}を$G$に浸け、群演算を効率的に評価できる効率的なアルゴリズムを組み合わせることです。提案された暗号は有限体上の一般化ディリクレ畳み込みに基づいています。情報理論的観点から平文攻撃に対する安全性を調査します。ディリクレ畳み込みの非局所構造は自然に平文ソルティングを可能にし、平文攻撃から保護しつつ制御された鍵の再利用を可能にします。有限場上で完璧なマスキング特性を確立し、基礎算術が$\\mathbb{F}$p>_p$で実行された場合に鍵再利用下で情報理論的セキュリティを達成することを証明しました。$\\mathbb{F}_2$上の算術では、情報漏洩が残り、有限鍵再利用の予算となります。",
+  "abstract_translated": "デジタルデータ暗号化のための新しい対称鍵暗号について議論します。その実装は高速でメモリ効率が高く、古典的攻撃、AI支援攻撃、量子攻撃に対して耐性があります。$x$、$k$、$c$を有限アーベル群$Gの要素とし、演算は$+$、中性要素は$0$とします。暗号文$c=x+k$が与えられるとします。鍵$k$が分かっている場合、暗号文から平文$x=c-k$を取得するのは簡単です。しかし鍵がなければ、$x$の回復はブラインドサーチに等しいです。たとえすべてのグループ要素から平文を特定する効率的な基準が存在しても、群が十分に大きい場合、平均試行回数は依然として非常に多いままです。したがって、実用的な暗号システムを構築する際の課題は、十分に豊かな群$G$を特定し、\\emph{実デジタルデータ}を$G$に浸け、群演算を効率的に評価できる効率的なアルゴリズムを組み合わせることです。提案された暗号は有限体上の一般化ディリクレ畳み込みに基づいています。情報理論的観点から平文攻撃に対する安全性を調査します。ディリクレ畳み込みの非局所構造は自然に平文ソルティングを可能にし、平文攻撃から保護しつつ制御された鍵の再利用を可能にします。有限場上で完璧なマスキング特性を確立し、基礎算術が$\\mathbb{F}$p>_p$で実行された場合に鍵再利用下で情報理論的セキュリティを達成することを証明しました。$\\mathbb{F}_2$上の算術では、情報漏洩が残り、有限鍵再利用の予算となります。",
+  "last_delivered_at": "2026-11-12T06:04:17Z"
+ },
+ {
+  "delivery_id": "main:2609.18965",
+  "id": "2609.18965",
+  "posted_at": "2026-11-12T06:04:19Z",
+  "title": "BadQubits: An LLM-Based Framework for Static Pre-Execution Detection of Structurally Harmful Quantum Circuits",
+  "title_ja": "BadQubits:構造的に有害な量子回路の静的事前実行検出のためのLLMベースのフレームワーク",
+  "title_translated": "BadQubits:構造的に有害な量子回路の静的事前実行検出のためのLLMベースのフレームワーク",
+  "translation_language": "ja",
+  "authors": "Justin Woodring, Lamine Noureddine, Aisha Ali-Gombe",
+  "link": "https://arxiv.org/abs/2609.18965",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.AI"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "hardware",
+   "nisq"
+  ],
+  "genre_names": [
+   "量子ハードウェア・実装",
+   "変分・NISQアルゴリズム"
+  ],
+  "target_genre_ids": [
+   "hardware",
+   "nisq"
+  ],
+  "target_genre_names": [
+   "量子ハードウェア・実装",
+   "変分・NISQアルゴリズム"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "hardware",
+    "nisq"
+   ],
+   "final_genre_ids": [
+    "hardware",
+    "nisq"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "This paper presents BadQubits, an LLM-based framework for static pre-execution detection of structurally harmful OpenQASM 2.0 circuits. The framework targets physical-execution-layer threats by analyzing submitted circuits prior to runtime, where dynamic inspection is constrained by measurement irreversibility and the exponential cost of classical quantum-state simulation. We evaluate four code-understanding LLM architectures on a dataset of 1,500 circuits consisting of 1,000 benign programs from MQTBench[33] and 500 synthetic attack circuits derived from three documented physical-layer threat primitives. Our fine-tuned Qwen Coder 2.5 7B model achieves 92.67% classification accuracy and 96.1% harmful-circuit recall. Two of the four evaluated base models fail to generalize under constrained LoRA fine-tuning, indicating that architecture-aware model selection is a necessary design consideration rather than a minor tuning choice. To characterize what the detector has learned, we compare it against a bag-of-gates CNN under progressive confound removal and adversarial syntactic perturbation. The CNN's harmful-circuit recall drops from 100% to 17%, while the fine-tuned LLM decreases only from 96.1% to 91.2%. We attribute this gap to the sequential structure retained in token-level LLM inputs but discarded by histogram-based baselines. A correlation analysis further shows that model decisions track threat-defining features, specifically SWAP density and measurement timing, rather than generator-specific artifacts such as register naming.",
+  "abstract_ja": "本論文では、構造的に有害なOpenQASM 2.0回路の静的事前実行検出のためのLLMベースのフレームワーク「BadQubits」を紹介します。このフレームワークは、実行前に提出された回路を解析することで物理実行層の脅威をターゲットにしており、動的検査は測定不可逆性と古典的量子状態シミュレーションの指数関数的コストによって制約されます。私たちは、MQTBench[33]の1,000個の無害プログラムと、3つの物理層脅威プリミティブから派生した500個の合成攻撃回路からなる1,500回線のデータセット上で、4つのコード理解型LLMアーキテクチャを評価します。当社の微調整されたQwen Coder 2.5 7Bモデルは、分類精度92.67%、害悪回路リコール率96.1%を達成しています。評価された4つのベースモデルのうち2つは制約付きLoRAファインチューニング下で一般化できず、アーキテクチャ認識型モデルの選択はマイナーなチューニング選択ではなく、必要な設計上の考慮であることを示しています。検出器が学習した内容を特徴づけるために、進行的混雑除去および敵対的構文摂動下のゲート袋型CNNと比較してみます。CNNの有害回路のリコール率は100%から17%に低下し、ファインチューニングされたLLMは96.1%から91.2%に減少しました。このギャップは、トークンレベルのLLM入力には保持されているが、ヒストグラムベースのベースラインによって破棄される逐次構造に起因すると考えます。相関解析では、モデルの決定は生成器固有のインスタリング(例えばレジスタネーリング)ではなく、脅威定義の特徴、特にSWAP密度や測定タイミングを追跡していることが示されています。",
+  "abstract_translated": "本論文では、構造的に有害なOpenQASM 2.0回路の静的事前実行検出のためのLLMベースのフレームワーク「BadQubits」を紹介します。このフレームワークは、実行前に提出された回路を解析することで物理実行層の脅威をターゲットにしており、動的検査は測定不可逆性と古典的量子状態シミュレーションの指数関数的コストによって制約されます。私たちは、MQTBench[33]の1,000個の無害プログラムと、3つの物理層脅威プリミティブから派生した500個の合成攻撃回路からなる1,500回線のデータセット上で、4つのコード理解型LLMアーキテクチャを評価します。当社の微調整されたQwen Coder 2.5 7Bモデルは、分類精度92.67%、害悪回路リコール率96.1%を達成しています。評価された4つのベースモデルのうち2つは制約付きLoRAファインチューニング下で一般化できず、アーキテクチャ認識型モデルの選択はマイナーなチューニング選択ではなく、必要な設計上の考慮であることを示しています。検出器が学習した内容を特徴づけるために、進行的混雑除去および敵対的構文摂動下のゲート袋型CNNと比較してみます。CNNの有害回路のリコール率は100%から17%に低下し、ファインチューニングされたLLMは96.1%から91.2%に減少しました。このギャップは、トークンレベルのLLM入力には保持されているが、ヒストグラムベースのベースラインによって破棄される逐次構造に起因すると考えます。相関解析では、モデルの決定は生成器固有のインスタリング(例えばレジスタネーリング)ではなく、脅威定義の特徴、特にSWAP密度や測定タイミングを追跡していることが示されています。",
+  "last_delivered_at": "2026-11-12T06:04:21Z"
+ },
+ {
+  "delivery_id": "main:2610.14126",
+  "id": "2610.14126",
+  "posted_at": "2026-11-12T06:04:22Z",
+  "title": "Quantum Annealing for Resource Allocation in Next-Generation Wireless Communication Networks: A QUBO Modeling Guide",
+  "title_ja": "次世代無線通信ネットワークにおける資源配分のための量子アニーリング:QBOモデリングガイド",
+  "title_translated": "次世代無線通信ネットワークにおける資源配分のための量子アニーリング:QBOモデリングガイド",
+  "translation_language": "ja",
+  "authors": "Nguyen Xuan Tung, Le Tung Giang, Mai Dinh Cong, Pham Dang Anh Duc, Nguyen Hoang Viet, Trinh Van Chien and Lajos Hanzo",
+  "link": "https://arxiv.org/abs/2610.14126",
+  "primary": "cs.IT",
+  "categories": [
+   "cs.IT",
+   "math.IT"
+  ],
+  "source_feed": "cs.IT",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "nisq"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム"
+  ],
+  "target_genre_ids": [
+   "nisq"
+  ],
+  "target_genre_names": [
+   "変分・NISQアルゴリズム"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "nisq"
+   ],
+   "final_genre_ids": [
+    "nisq"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Quantum annealing (QA) offers a physics-inspired approach for such subproblems by mapping them onto an Ising Hamiltonian, which is algebraically equivalent to a Quadratic Unconstrained Binary Optimization (QUBO) model executable on quantum annealers or hybrid solvers. However, their practical employment in wireless systems critically depends on the specific problem formulation, on the particular variable encoding, constraint handling, solver selection, hardware embedding, and fair benchmarking. This paper develops wireless-oriented QUBO modeling guidelines for QA-assisted resource allocation. We first present a beginner-friendly toy example in which a terrestrial-aerial resource-allocation problem with a fractional signal-to-interference-plus-noise ratio (SINR) maximization objective is reformulated into a two-bit QUBO via Boolean interpolation, converted into an Ising representation, and decoded back into a wireless scheduling decision. The same scheduling is applicable to UAV, aircraft, satellite, and terrestrial links in SAGIN systems. We then review the QA foundations and solver ecosystems, including binary quadratic, discrete quadratic, constrained quadratic, and hybrid models from the perspective of NG wireless optimization. Furthermore, we discuss both binary and discrete encoding, penalty-based constraint conversion, embedding overhead, solution decoding, and feasibility verification. A QUBO Compatibility Index is introduced as a lightweight diagnostic metric for assessing the associated QUBO formulation readiness, rather than a predictor of runtime or solution quality. Finally, a case study on max-min uplink power control in cell-free massive MIMO illustrates how a fairness-oriented wireless problem can be discretized, constrained, converted into the concept of a QUBO, and evaluated against classical baselines. A host of key challenges and future directions are also discussed.",
+  "abstract_ja": "量子アニーリング(QA)は、これらのサブ問題をイジングハミルトニアンにマッピングすることで物理学に着想を得たアプローチを提供します。これは代数的に量子アニーラーやハイブリッドソルバー上で実行可能な二次制約なし二値最適化(QUBO)モデルと同等です。しかし、無線システムでの実用的利用は、特定の問題の定式化、特定の変数エンコーディング、制約処理、ソルバーの選択、ハードウェア組み込み、公平なベンチマークに依存します。本論文はQA支援リソース配分のための無線指向のQBOモデリングガイドラインを開発します。まず、地上・空中資源配分問題を、信号対干渉プラス雑音比(SINR)最大化目標をブール補間で2ビットQUBOに再定式化し、イジング表現に変換し、無線スケジューリング決定へとデコードする初心者向けのおもちゃ例を紹介します。同じスケジューリングはSAGINシステム内のUAV、航空機、衛星、地上リンクにも適用されます。次に、NG無線最適化の観点から、二進二次、離散二次、制約付き二次、ハイブリッドモデルを含むQAの基礎とソルバーエコシステムをレビューします。さらに、二進および離散符号化、ペナルティベースの制約変換、埋め込みオーバーヘッド、解デコード、実現可能性検証についても議論します。QUBO適合指数は、実行時間や解の質の予測ではなく、関連するQBO定式化準備状況を評価するための軽量な診断指標として導入されました。最後に、セルフリー大規模MIMOにおける最大最小アップリンク電力制御に関するケーススタディは、公平性指向の無線問題をどのように離散化し、制約し、QUBOの概念に変換し、古典的なベースラインと比較して評価できるかを示しています。また、多くの主要な課題と今後の方向性についても議論されています。",
+  "abstract_translated": "量子アニーリング(QA)は、これらのサブ問題をイジングハミルトニアンにマッピングすることで物理学に着想を得たアプローチを提供します。これは代数的に量子アニーラーやハイブリッドソルバー上で実行可能な二次制約なし二値最適化(QUBO)モデルと同等です。しかし、無線システムでの実用的利用は、特定の問題の定式化、特定の変数エンコーディング、制約処理、ソルバーの選択、ハードウェア組み込み、公平なベンチマークに依存します。本論文はQA支援リソース配分のための無線指向のQBOモデリングガイドラインを開発します。まず、地上・空中資源配分問題を、信号対干渉プラス雑音比(SINR)最大化目標をブール補間で2ビットQUBOに再定式化し、イジング表現に変換し、無線スケジューリング決定へとデコードする初心者向けのおもちゃ例を紹介します。同じスケジューリングはSAGINシステム内のUAV、航空機、衛星、地上リンクにも適用されます。次に、NG無線最適化の観点から、二進二次、離散二次、制約付き二次、ハイブリッドモデルを含むQAの基礎とソルバーエコシステムをレビューします。さらに、二進および離散符号化、ペナルティベースの制約変換、埋め込みオーバーヘッド、解デコード、実現可能性検証についても議論します。QUBO適合指数は、実行時間や解の質の予測ではなく、関連するQBO定式化準備状況を評価するための軽量な診断指標として導入されました。最後に、セルフリー大規模MIMOにおける最大最小アップリンク電力制御に関するケーススタディは、公平性指向の無線問題をどのように離散化し、制約し、QUBOの概念に変換し、古典的なベースラインと比較して評価できるかを示しています。また、多くの主要な課題と今後の方向性についても議論されています。",
+  "last_delivered_at": "2026-11-12T06:04:22Z"
+ },
+ {
+  "delivery_id": "main:2610.40701",
+  "id": "2610.40701",
+  "posted_at": "2026-11-12T06:04:24Z",
+  "title": "FGSM Attack Transferability from Simulation to Quantum Hardware in Network Intrusion Detection",
+  "title_ja": "ネットワーク侵入検出におけるシミュレーションから量子ハードウェアへのFGSM攻撃移転性",
+  "title_translated": "ネットワーク侵入検出におけるシミュレーションから量子ハードウェアへのFGSM攻撃移転性",
+  "translation_language": "ja",
+  "authors": "Zeeshan Ajmal, Kimmo Halunen, Marc Mau{\\ss}ner, Volker Reers, Arif Ali Khan",
+  "link": "https://arxiv.org/abs/2610.40701",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR",
+   "cs.ET",
+   "cs.LG"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "nisq"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム"
+  ],
+  "target_genre_ids": [
+   "nisq"
+  ],
+  "target_genre_names": [
+   "変分・NISQアルゴリズム"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "bf785087a9c1d3c8196a",
+   "base_genre_ids": [
+    "nisq"
+   ],
+   "final_genre_ids": [
+    "nisq"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Quantum computers are now available through cloud platforms, and recent work has proposed using them to detect network intrusions. It is not yet clear how easily such systems can be attacked. We train a hybrid variational quantum classifier (VQC) on the Friday DDoS subset of CICIDS2017 and test it against two attacks: label flipping during training and FGSM evasion at prediction time. We run the tests in simulation and on IBM hardware, the Fez superconducting processor (Heron r2). We find that two models with similar accuracy can differ greatly in how easily they are attacked. A model that decides with little confidence loses half its detections to a very small change in the input, while a model trained to decide with more confidence needs a much larger change before it fails. Attacks built in simulation against the more confident model also work on real hardware, and the device classifies every unaltered attack sample correctly. Simulated device noise does not reduce accuracy, but it does reduce the model's confidence and makes attacks easier, so accuracy alone does not show how exposed a model is. Label flipping has no measurable effect until 15% of attack labels are changed. These results show that device noise should not be treated as a defense and that reported weaknesses in these classifiers depend partly on how they were trained.",
+  "abstract_ja": "量子コンピュータは現在クラウドプラットフォームを通じて利用可能であり、最近の研究ではネットワーク侵入の検出に利用されることが提案されています。このようなシステムがどれほど簡単に攻撃されるかはまだ明確ではありません。私たちはCICIDS2017の金曜日DDoSサブセットでハイブリッド変分量子分類器(VQC)を訓練し、訓練中のラベル反転と予測時のFGSM回避という2つの攻撃に対してテストします。シミュレーションとIBMハードウェアであるFez超伝導プロセッサ(Heron r2)でテストを実施しました。同様の精度を持つ2つのモデルは、攻撃されやすい程度に大きく異なることがわかりました。自信が低いモデルは、入力のごくわずかな変化で検出数の半分を失いますが、より自信を持って判断するように訓練されたモデルは失敗する前にはるかに大きな変化が必要です。より自信のあるモデルに対するシミュレーション内構築の攻撃は実際のハードウェアでも機能し、デバイスは変更されていない攻撃サンプルをすべて正しく分類します。シミュレートされたデバイスノイズは精度を下げるものではありませんが、モデルの信頼度を下げ攻撃を容易にするため、精度だけではモデルの露出度を示すことはできません。ラベルの反転は、攻撃ラベルの15%が変更されるまで測定可能な効果はありません。これらの結果は、デバイスノイズを防御として扱うべきではなく、これらの分類器の報告された弱点は部分的に訓練方法に依存していることを示しています。",
+  "abstract_translated": "量子コンピュータは現在クラウドプラットフォームを通じて利用可能であり、最近の研究ではネットワーク侵入の検出に利用されることが提案されています。このようなシステムがどれほど簡単に攻撃されるかはまだ明確ではありません。私たちはCICIDS2017の金曜日DDoSサブセットでハイブリッド変分量子分類器(VQC)を訓練し、訓練中のラベル反転と予測時のFGSM回避という2つの攻撃に対してテストします。シミュレーションとIBMハードウェアであるFez超伝導プロセッサ(Heron r2)でテストを実施しました。同様の精度を持つ2つのモデルは、攻撃されやすい程度に大きく異なることがわかりました。自信が低いモデルは、入力のごくわずかな変化で検出数の半分を失いますが、より自信を持って判断するように訓練されたモデルは失敗する前にはるかに大きな変化が必要です。より自信のあるモデルに対するシミュレーション内構築の攻撃は実際のハードウェアでも機能し、デバイスは変更されていない攻撃サンプルをすべて正しく分類します。シミュレートされたデバイスノイズは精度を下げるものではありませんが、モデルの信頼度を下げ攻撃を容易にするため、精度だけではモデルの露出度を示すことはできません。ラベルの反転は、攻撃ラベルの15%が変更されるまで測定可能な効果はありません。これらの結果は、デバイスノイズを防御として扱うべきではなく、これらの分類器の報告された弱点は部分的に訓練方法に依存していることを示しています。",
+  "last_delivered_at": "2026-11-12T06:04:24Z"
  }
 ]

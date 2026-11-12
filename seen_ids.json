@@ -11085,10 +11085,10 @@
     "gemini-3.5-flash-lite",
     "gemini-3.6-flash"
    ],
-   "reviewed_at": "2026-11-12T06:03:29Z",
-   "policy": "bf785087a9c1d3c8196a",
+   "reviewed_at": "2026-11-12T08:10:56Z",
+   "policy": "48df5a31f4519d520c54",
    "classification": {
-    "policy": "bf785087a9c1d3c8196a",
+    "policy": "48df5a31f4519d520c54",
     "base_genre_ids": [],
     "final_genre_ids": [],
     "postprocess": []
@@ -11203,10 +11203,10 @@
     "gemini-3.5-flash-lite",
     "gemini-3.6-flash"
    ],
-   "reviewed_at": "2026-11-12T06:03:29Z",
-   "policy": "bf785087a9c1d3c8196a",
+   "reviewed_at": "2026-11-12T08:10:56Z",
+   "policy": "48df5a31f4519d520c54",
    "classification": {
-    "policy": "bf785087a9c1d3c8196a",
+    "policy": "48df5a31f4519d520c54",
     "base_genre_ids": [],
     "final_genre_ids": [],
     "postprocess": []
@@ -11809,10 +11809,10 @@
     "gemini-3.5-flash-lite",
     "gemini-3.6-flash"
    ],
-   "reviewed_at": "2026-11-12T06:03:29Z",
-   "policy": "bf785087a9c1d3c8196a",
+   "reviewed_at": "2026-11-12T08:10:56Z",
+   "policy": "48df5a31f4519d520c54",
    "classification": {
-    "policy": "bf785087a9c1d3c8196a",
+    "policy": "48df5a31f4519d520c54",
     "base_genre_ids": [],
     "final_genre_ids": [],
     "postprocess": []
@@ -21345,18 +21345,18 @@
  ],
  "deliveries": {},
  "external_cursors": {
-  "cs.CR": "2026-11-12T06:02:45Z",
-  "cs.CC": "2026-11-12T06:02:50Z",
-  "cs.IT": "2026-11-12T06:03:08Z"
+  "cs.CR": "2026-11-12T08:10:35Z",
+  "cs.CC": "2026-11-12T08:10:39Z",
+  "cs.IT": "2026-11-12T08:10:45Z"
  },
  "feed_cursors": {
   "quant-ph": "2026-11-11T07:41:15.607094+00:00"
  },
  "oai_cursors": {
-  "physics:quant-ph": "2026-11-12T05:55:56Z",
-  "cs:cs:CR": "2026-11-12T06:02:22Z",
-  "cs:cs:CC": "2026-11-12T06:02:46Z",
-  "cs:cs:IT": "2026-11-12T06:02:56Z"
+  "physics:quant-ph": "2026-11-12T08:10:27Z",
+  "cs:cs:CR": "2026-11-12T08:10:32Z",
+  "cs:cs:CC": "2026-11-12T08:10:36Z",
+  "cs:cs:IT": "2026-11-12T08:10:42Z"
  },
  "translation_alerts": {},
  "translation_status": {

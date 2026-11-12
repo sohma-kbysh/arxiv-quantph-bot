@@ -1,5 +1,17 @@
 {
   "feeds": ["quant-ph"],
+  "oai_harvest": {
+    "enabled": true,
+    "endpoint": "https://oaipmh.arxiv.org/oai",
+    "overlap_days": 3,
+    "max_announce_delay_days": 90,
+    "max_pages": 100,
+    "page_interval_sec": 3,
+    "timeout_sec": 120,
+    "retry_attempts": 4,
+    "retry_backoff_sec": 15,
+    "retry_backoff_max_sec": 120
+  },
   "feed_backfill": {
     "enabled": true,
     "lookback_days": 7,

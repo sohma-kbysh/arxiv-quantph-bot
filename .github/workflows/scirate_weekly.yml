@@ -1,11 +1,12 @@
 name: SciRate daily and weekly quant-ph digest
 
 on:
-  schedule:
-    # Daily Top 3 at 23:30 JST on normal arXiv announcement weekdays.
-    - cron: "30 14 * * 1-5"
-    # Weekly 30+ digest at 23:30 JST on Sunday.
-    - cron: "30 14 * * 0"
+  # Paused since 2026-11-12: the official SciRate endpoint is behind a
+  # Cloudflare challenge (HTTP 403) and no relay snapshot has ever existed, so
+  # no digest was ever produced. The schedule (Mon-Fri 23:30 JST daily, Sunday
+  # 23:30 JST weekly) is removed; manual dispatch remains for testing.
+  # Before restoring it, decide what to do with the periods still pending in
+  # scirate_weekly_state.json, or they will all be retried.
   workflow_dispatch:
     inputs:
       mode:

@@ -21345,18 +21345,18 @@
  ],
  "deliveries": {},
  "external_cursors": {
-  "cs.CR": "2026-11-12T08:10:35Z",
-  "cs.CC": "2026-11-12T08:10:39Z",
-  "cs.IT": "2026-11-12T08:10:45Z"
+  "cs.CR": "2026-11-12T12:19:28Z",
+  "cs.CC": "2026-11-12T12:19:31Z",
+  "cs.IT": "2026-11-12T12:19:37Z"
  },
  "feed_cursors": {
   "quant-ph": "2026-11-11T07:41:15.607094+00:00"
  },
  "oai_cursors": {
-  "physics:quant-ph": "2026-11-12T08:10:27Z",
-  "cs:cs:CR": "2026-11-12T08:10:32Z",
-  "cs:cs:CC": "2026-11-12T08:10:36Z",
-  "cs:cs:IT": "2026-11-12T08:10:42Z"
+  "physics:quant-ph": "2026-11-12T12:19:20Z",
+  "cs:cs:CR": "2026-11-12T12:19:24Z",
+  "cs:cs:CC": "2026-11-12T12:19:28Z",
+  "cs:cs:IT": "2026-11-12T12:19:34Z"
  },
  "translation_alerts": {},
  "translation_status": {

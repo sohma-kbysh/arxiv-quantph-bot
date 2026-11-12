@@ -11070,12 +11070,34 @@
   },
   "cs.CR:2610.36571": {
    "genre_ids": [],
-   "classifier": "skip-consensus:gemini-2.5-flash+gemini-2.5-flash-lite",
+   "classifier": "skip-consensus:gemini-3.5-flash-lite+gemini-3.6-flash",
    "skip_votes": [
-    "gemini-2.5-flash",
-    "gemini-2.5-flash-lite"
+    "gemini-3.5-flash-lite",
+    "gemini-3.6-flash"
    ],
-   "reviewed_at": "2026-10-28T06:48:18Z"
+   "reviewed_at": "2026-11-12T06:03:29Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [],
+    "final_genre_ids": [],
+    "postprocess": []
+   },
+   "paper": {
+    "id": "2610.36571",
+    "title": "Peak-DNA: Recurrent Morphology in Global Narrative Propagation",
+    "link": "https://arxiv.org/abs/2610.36571",
+    "authors": "Joosung Kim, Luyonghe Li, Shanwen Wu",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Global narrative streams exhibit noisy, fragmented, and asynchronous amplification bursts, making direct waveform comparison unreliable for recurrence analysis. This paper introduces Peak-DNA, a framework for identifying recurrent propagation morphology in global narrative streams. The proposed framework transforms hourly GDELT activity into normalized macro-peak episodes through denoising, macro-peak consolidation, and temporal alignment, and compares propagation morphology using DTW-based similarity analysis. Using GDELT narrative streams, we analyze five high-amplification narrative domains: Iran, Defense, AI, Space/Elon, and Quantum/PQC. The results show that amplification events repeatedly converge toward morphology-level propagation patterns within each narrative domain. DTW-based similarity analysis further demonstrates strong intra-domain structural compactness despite heterogeneous publication dynamics and severe observational noise. These findings suggest a measurable morphology layer beyond semantic content or anomaly intensity, providing an initial structural foundation for recurrence-aware narrative monitoring, propagation family discovery, and longitudinal Narrative Genome analysis.",
+    "published": "2026-10-27T03:21:54Z",
+    "updated": "2026-10-27T03:21:54Z",
+    "source_feed": "cs.CR",
+    "announce_type": "external"
+   }
   },
   "cs.CR:2610.36145": {
    "genre_ids": [
@@ -11171,10 +11193,10 @@
     "gemini-3.5-flash-lite",
     "gemini-3.6-flash"
    ],
-   "reviewed_at": "2026-11-03T07:48:30Z",
-   "policy": "48df5a31f4519d520c54",
+   "reviewed_at": "2026-11-12T06:03:29Z",
+   "policy": "bf785087a9c1d3c8196a",
    "classification": {
-    "policy": "48df5a31f4519d520c54",
+    "policy": "bf785087a9c1d3c8196a",
     "base_genre_ids": [],
     "final_genre_ids": [],
     "postprocess": []
@@ -11182,9 +11204,8 @@
    "paper": {
     "id": "2611.02179",
     "title": "A Matched Evaluation of QUBO Action Models and Defensive Remediation in Cyber Attack Graphs",
-    "link": "https://arxiv.org/abs/2611.02179v1",
-    "authors": "Kasymkhan Khubiev, Yaroslav Kholodov, Alexey S. Petrenko",
-    "announce_type": "external",
+    "link": "https://arxiv.org/abs/2611.02179",
+    "authors": "Kasymkhan Khubiev and Yaroslav Kholodov and Alexey S. Petrenko",
     "categories": [
      "cs.CR"
     ],
@@ -11192,7 +11213,8 @@
     "abstract": "This study examines how vulnerability-specific actions affect quadratic unconstrained binary optimization (QUBO) models for minimum-cost cyber attack paths and defensive remediation. Edge-flow and variable-length hop formulations are evaluated using simulated annealing, steepest descent, and tabu search against exact classical references. Experiments on six independent synthetic topologies separate the effects of transition eligibility, vulnerability labels, exploit costs, and multiple exploit alternatives. A single labeled action per eligible transition preserves feasible paths, optimal costs, and QUBO size. Under the tested settings, multiple exploit alternatives were associated with approximately unchanged valid-path recovery, lower optimal-path recovery, and substantially larger representations, particularly for the hop formulation. These recovery differences remain descriptive because they are not statistically significant after correction for multiple comparisons. An evaluation on a published 3CX attack graph with synthetic costs demonstrates applicability beyond the generated topologies. The defensive extension selects patches within a budget to raise attack-path costs to specified thresholds or disconnect protected targets. Against exhaustive and mixed-integer references, the tested QUBO heuristics recovered an optimal patch set in 12 of 16 calls across eight scenarios on one topology. The results characterize formulation correctness, solution recovery, and resource requirements using classical local optimization, without establishing quantum computational advantage.",
     "published": "2026-11-01T20:28:51Z",
     "updated": "2026-11-01T20:28:51Z",
-    "source_feed": "cs.CR"
+    "source_feed": "cs.CR",
+    "announce_type": "external"
    }
   },
   "cs.CR:2611.01144": {
@@ -11665,6 +11687,234 @@
     ],
     "final_genre_ids": [
      "qec"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.CR:2609.11991": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:09Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc"
+    ],
+    "final_genre_ids": [
+     "pqc"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.CR:2609.18965": {
+   "genre_ids": [
+    "hardware",
+    "nisq"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:09Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "hardware",
+     "nisq"
+    ],
+    "final_genre_ids": [
+     "hardware",
+     "nisq"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.CR:2609.26132": {
+   "genre_ids": [
+    "pqc",
+    "qec"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:09Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc",
+     "qec"
+    ],
+    "final_genre_ids": [
+     "pqc",
+     "qec"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.CR:2609.26225": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:09Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc"
+    ],
+    "final_genre_ids": [
+     "pqc"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.CR:2609.27828": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:09Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc"
+    ],
+    "final_genre_ids": [
+     "pqc"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.CR:2610.00125": {
+   "genre_ids": [],
+   "classifier": "skip-consensus:gemini-3.5-flash-lite+gemini-3.6-flash",
+   "skip_votes": [
+    "gemini-3.5-flash-lite",
+    "gemini-3.6-flash"
+   ],
+   "reviewed_at": "2026-11-12T06:03:29Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [],
+    "final_genre_ids": [],
+    "postprocess": []
+   },
+   "paper": {
+    "id": "2610.00125",
+    "title": "A Comprehensive Review of One-Pixel Attack: Research Status, Taxonomy, Applications, Regulation Policy and Future Directions",
+    "link": "https://arxiv.org/abs/2610.00125",
+    "authors": "Mirza Niaz Morshed, Md. Masudul Islam, Galib Muhammad Shahriar Himel, Md. Aslam Uddin, Hui Liu, Md. Shafiqul Islam",
+    "categories": [
+     "cs.CR",
+     "cs.CV"
+    ],
+    "primary": "cs.CR",
+    "abstract": "One-Pixel Attacks (OPAs) represent one of the most extreme demonstrations of adversarial fragility in deep learning, where modifying a single pixel can reliably induce high-confidence misclassification across domains such as medical diagnosis, autonomous driving, biometrics, and quantum communication. Despite their conceptual simplicity, OPAs remain underexamined in existing adversarial-attack surveys, which provide only fragmented or cursory coverage. This PRISMA-guided review synthesizes high-quality studies from 2017 to 2026 and delivers a unified, multi-axis taxonomy of OPA research spanning algorithmic foundations, black-box evolutionary optimization, emerging hybrid and program-synthesis attacks, defence mechanisms, interpretability tools, and domain-specific vulnerabilities. Our analysis reveals the dominance of Differential Evolution-based strategies, the rise of efficiency-optimized and saliency-guided methods, and persistent gaps in dataset diversity, transferability, and standardized evaluation. We summarized and assess defence paradigms including pixel restoration, anomaly detection, input-space transformations, and robust training highlighting their trade-offs in robustness, imperceptibility, and computational overhead. Building on these insights, we outline future research priorities involving selective pixel recovery, transformer-specific vulnerability analysis, saliency-driven optimization, and real-world domain-adaptive defences. We further propose a regulatory framework emphasizing robustness testing, incident disclosure, and AI security governance. This review establishes a comprehensive foundation for understanding, evaluating, and mitigating ultra-sparse adversarial threats in contemporary AI systems.",
+    "published": "2026-09-09T17:20:16Z",
+    "updated": "2026-09-09T17:20:16Z",
+    "source_feed": "cs.CR",
+    "announce_type": "external"
+   }
+  },
+  "cs.CR:2610.14040": {
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:29Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc"
+    ],
+    "final_genre_ids": [
+     "pqc"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.CR:2610.40701": {
+   "genre_ids": [
+    "nisq"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:29Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "nisq"
+    ],
+    "final_genre_ids": [
+     "nisq"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.CC:2610.00075": {
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:30Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "complexity"
+    ],
+    "final_genre_ids": [
+     "complexity"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.IT:2609.20236": {
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:36Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "qec"
+    ],
+    "final_genre_ids": [
+     "qec"
+    ],
+    "postprocess": []
+   }
+  },
+  "cs.IT:2610.14126": {
+   "genre_ids": [
+    "nisq"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "skip_votes": [],
+   "reviewed_at": "2026-11-12T06:03:36Z",
+   "policy": "bf785087a9c1d3c8196a",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "nisq"
+    ],
+    "final_genre_ids": [
+     "nisq"
     ],
     "postprocess": []
    }
@@ -21073,13 +21323,602 @@
   "2611.14461",
   "2611.14484"
  ],
- "deliveries": {},
+ "deliveries": {
+  "2609.11991": {
+   "paper": {
+    "id": "2609.11991",
+    "title": "A Survey on Quantum-Safe Cryptographic Mechanisms: Building Blocks and Applications",
+    "link": "https://arxiv.org/abs/2609.11991",
+    "authors": "Ricardo Parizotto and Preeti Yadav and Marcus Freire and Anderson Tomkelski and Maycon Peixoto and Emmanuel Zambrini Cruzeiro and Israat Haque",
+    "categories": [
+     "cs.CR",
+     "cs.NI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "The possible emergence of fault-tolerant quantum computers may enable widely used cryptographic algorithms to be broken. These algorithms for public key encryption and digital signatures could be exposed if an efficient algorithm is employed. This poses a threat to existing infrastructure, motivating the development of mechanisms that can withstand quantum-computer cybersecurity risks. However, the transition to new security mechanisms is still underway and faces many challenges, including identifying which applications are under threat and implementing agile, scalable migration processes. In this work, we survey the state of the art in quantum-safe cryptographic mechanisms, existing applications targeting migration, and open challenges. We examine the building blocks commonly used to integrate quantum-safe mechanisms into existing applications and categorize them by the security mechanisms they employ. Next, we systematically review existing migrations into quantum-safe schemes and categorize them by application domain, including Telecommunications, the Internet of Things, and Blockchains. Finally, we summarize the challenges that must be addressed to enable a successful migration to quantum-resistant mechanisms, as well as the motivations for pursuing this migration.",
+    "published": "2026-09-09T18:14:20Z",
+    "updated": "2026-09-09T18:14:20Z",
+    "source_feed": "cs.CR",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "pqc"
+     ],
+     "final_genre_ids": [
+      "pqc"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc"
+    ],
+    "final_genre_ids": [
+     "pqc"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  },
+  "2609.18965": {
+   "paper": {
+    "id": "2609.18965",
+    "title": "BadQubits: An LLM-Based Framework for Static Pre-Execution Detection of Structurally Harmful Quantum Circuits",
+    "link": "https://arxiv.org/abs/2609.18965",
+    "authors": "Justin Woodring, Lamine Noureddine, Aisha Ali-Gombe",
+    "categories": [
+     "cs.CR",
+     "cs.AI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "This paper presents BadQubits, an LLM-based framework for static pre-execution detection of structurally harmful OpenQASM 2.0 circuits. The framework targets physical-execution-layer threats by analyzing submitted circuits prior to runtime, where dynamic inspection is constrained by measurement irreversibility and the exponential cost of classical quantum-state simulation. We evaluate four code-understanding LLM architectures on a dataset of 1,500 circuits consisting of 1,000 benign programs from MQTBench[33] and 500 synthetic attack circuits derived from three documented physical-layer threat primitives. Our fine-tuned Qwen Coder 2.5 7B model achieves 92.67% classification accuracy and 96.1% harmful-circuit recall. Two of the four evaluated base models fail to generalize under constrained LoRA fine-tuning, indicating that architecture-aware model selection is a necessary design consideration rather than a minor tuning choice. To characterize what the detector has learned, we compare it against a bag-of-gates CNN under progressive confound removal and adversarial syntactic perturbation. The CNN's harmful-circuit recall drops from 100% to 17%, while the fine-tuned LLM decreases only from 96.1% to 91.2%. We attribute this gap to the sequential structure retained in token-level LLM inputs but discarded by histogram-based baselines. A correlation analysis further shows that model decisions track threat-defining features, specifically SWAP density and measurement timing, rather than generator-specific artifacts such as register naming.",
+    "published": "2026-07-16T00:50:42Z",
+    "updated": "2026-07-16T00:50:42Z",
+    "source_feed": "cs.CR",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "hardware",
+     "nisq"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "hardware",
+      "nisq"
+     ],
+     "final_genre_ids": [
+      "hardware",
+      "nisq"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "hardware",
+    "nisq"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "hardware",
+     "nisq"
+    ],
+    "final_genre_ids": [
+     "hardware",
+     "nisq"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "hardware": {
+     "status": "pending"
+    },
+    "nisq": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  },
+  "2609.26132": {
+   "paper": {
+    "id": "2609.26132",
+    "title": "Zeta-Transform Evaluation for Higher-Order Vanishing Key Recovery",
+    "link": "https://arxiv.org/abs/2609.26132",
+    "authors": "Sunyeop Kim, Insung Kim",
+    "categories": [
+     "cs.CR"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Hemmert's key-recovery algorithm for Classic McEliece is based on higher-order vanishing. It computes a basis of $\\ker(\\widetilde\\varphi_A^{(p)})$, where $A=H'''$ is the shortened parity-check matrix used in the attack. For Classic McEliece parameters, this kernel computation is the dominant cost of the attack. We show that the sums defining $\\widetilde\\varphi_A^{(p)}$ can be evaluated, column by column, as weighted upper zeta transforms on the Boolean lattice. Since only selected levels of these transforms are required by $\\widetilde\\varphi_A^{(p)}$, restricting their evaluation to the band between level $p$ and the lowest required level yields exact evaluations of both $\\widetilde\\varphi_A^{(p)}$ and its transpose. Using the resulting truncated zeta-transform evaluation in the Wiedemann-based kernel computation reduces the cost of the repeated matrix--vector products without changing the overall key-recovery algorithm. The exact cost depends on the weight distribution of the non-pivot columns of $H'''$. We therefore consider two models: an all-one model, in which every relevant binary coordinate is active, and a Bernoulli$(1/2)$ model, in which the coordinates are independently active with probability $1/2$. For the five Classic McEliece parameter sets, our method reduces the estimated key-recovery cost by $14.09$--$41.19$ bits in the all-one model and by $7.25$--$22.48$ bits in the Bernoulli$(1/2)$ model.",
+    "published": "2026-08-08T14:23:09Z",
+    "updated": "2026-08-08T14:23:09Z",
+    "source_feed": "cs.CR",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "pqc",
+     "qec"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "pqc",
+      "qec"
+     ],
+     "final_genre_ids": [
+      "pqc",
+      "qec"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "pqc",
+    "qec"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc",
+     "qec"
+    ],
+    "final_genre_ids": [
+     "pqc",
+     "qec"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    },
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  },
+  "2609.26225": {
+   "paper": {
+    "id": "2609.26225",
+    "title": "Quantum-Ready Secure WAN: A Risk Assessment and Migration Framework",
+    "link": "https://arxiv.org/abs/2609.26225",
+    "authors": "Saeed Alam",
+    "categories": [
+     "cs.CR",
+     "cs.NI"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Enterprise wide-area networks (WANs) use quantum-vulnerable public-key cryptography to authenticate peers and establish keys for Internet Protocol Security (IPsec), Transport Layer Security (TLS), and software-defined WAN services. Harvest-now, decrypt-later collection already threatens data whose protection lifetime may exceed the time needed to migrate, while a future cryptographically relevant quantum computer would also endanger certificates and other authentication dependencies. Post-quantum standards and government directives now define algorithms and transition milestones, but they do not tell an enterprise which WAN services to migrate first or what evidence is sufficient for deployment. This paper proposes a vendor-neutral framework that separates exposure priority, migration readiness, and evidence confidence, and maps those outputs to staged security, operational, and governance gates. It also defines a complete evaluation design for classical and ML-KEM hybrid key establishment in TLS 1.3 and IKEv2/IPsec. The retained artifact is narrower: it contains author-reported aggregate TLS p50, p95, and p99 latencies at configured loss settings of 0%, 1%, 3%, and 5%, an arithmetic checker, and limited environment and MTU/MSS notes. At those settings, the TLS-H minus TLS-C p95 differences are 0.00, 0.16, 0.38, and 0.63 ms, corresponding to 0.00%, 1.32%, 3.07%, and 5.00% relative to TLS-C. These values are descriptive aggregate observations, not inferential results, because per-trial data, sample counts, original captures, and timestamped logs were not retained. Protocol-size and MTU/MSS calculations are reported separately from measured behavior, and unsupported IKE, resource, throughput, retransmission, and downgrade outcomes are excluded.",
+    "published": "2026-08-11T17:02:57Z",
+    "updated": "2026-08-11T17:02:57Z",
+    "source_feed": "cs.CR",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "pqc"
+     ],
+     "final_genre_ids": [
+      "pqc"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc"
+    ],
+    "final_genre_ids": [
+     "pqc"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  },
+  "2609.27828": {
+   "paper": {
+    "id": "2609.27828",
+    "title": "A Non-Invasive Cloud-Based Migration Strategy for Post-Quantum Cybersecurity in Smart HVAC Systems: Architecture, Implementation, and Empirical Evaluation",
+    "link": "https://arxiv.org/abs/2609.27828",
+    "authors": "Mahedee Zaman Moon, Kaysarul Anas Apurba, Md Hasibul Hasan, Sk Md Mizanur Rahman",
+    "categories": [
+     "cs.CR",
+     "cs.AI",
+     "cs.SY",
+     "eess.SY"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Legacy smart HVAC controllers rely on vendor-cloud TLS secured by ECDH and RSA, both broken by Shor's algorithm, and typical 10-15 year lifespans mean today's devices remain in service through the quantum-threat era. Direct on-device post-quantum cryptography is infeasible: an ESP32-S3, representative of capable HVAC hardware, has only 339 KB free heap against the 900 KB ML-KEM-768 requires, and even classical ECDH-P256 keygen (111.93 ms) dwarfs hardware AES-128 (0.032 ms). We propose a non-invasive PQC proxy, requiring no device, firmware, or vendor-cloud changes, performing ML-KEM-768 encapsulation and ML-DSA-65 authentication (NIST FIPS 203/204) with AES-256-GCM session keys via HKDF, implemented with Open Quantum Safe liboqs on a Raspberry Pi 4B gateway. Over 500 runs, the post-quantum handshake (Steps 1-6) completes in 2.48 ms, 0.38 ms slower than classical baseline, with PQC computation around 8% of handshake time at 20 ms simulated round-trip network latency. The gateway sustains 443 sessions/second, 100% success under 32 concurrent connections, extrapolating to 3546 sessions/second on a 32-core cloud instance. Five side-channel tests, including verified in-place session-key zeroization and a fixed-vs-random TVLA timing analysis, found no exploitable timing leakage or susceptibility to man-in-the-middle attacks. The architecture is vendor-agnostic and becomes unnecessary once vendors adopt NIST PQC natively.",
+    "published": "2026-08-19T04:11:16Z",
+    "updated": "2026-08-19T04:11:16Z",
+    "source_feed": "cs.CR",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "pqc"
+     ],
+     "final_genre_ids": [
+      "pqc"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc"
+    ],
+    "final_genre_ids": [
+     "pqc"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  },
+  "2610.14040": {
+   "paper": {
+    "id": "2610.14040",
+    "title": "Symmetric Cryptography via Dirichlet Convolution",
+    "link": "https://arxiv.org/abs/2610.14040",
+    "authors": "Artur Sowa, Elias Hassani Sangani, Francis Bui, Grant Harris, Jonathan Norton",
+    "categories": [
+     "cs.CR",
+     "cs.IT",
+     "math.IT"
+    ],
+    "primary": "cs.CR",
+    "abstract": "We discuss a new symmetric-key cipher for digital data encryption. Its implementation is fast, memory efficient, and resilient against classical, AI-assisted, and quantum attacks. Let $x$, $k$, and $c$ be elements of a finite abelian group $G$ with operation $+$ and neutral element $0$. Suppose one is given ciphertext $c=x+k$. Retrieving the plaintext $x=c-k$ from the ciphertext is trivial when the key $k$ is known. Without the key, however, recovering $x$ amounts to a blind search. Even if an efficient criterion were available for identifying the plaintext among all group elements, the average number of trials would remain prohibitively large when the group is sufficiently large. The challenge in constructing a practical cryptosystem is therefore to identify a sufficiently rich group $G$, together with efficient algorithms that enable an immersion of \\emph{real digital data} into $G$ and efficient evaluation of the group operations. The proposed cipher is based on generalized Dirichlet convolution over finite fields. We investigate its security against plaintext attacks from an information-theoretic perspective. The nonlocal structure of Dirichlet convolution naturally permits plaintext salting, providing protection against plaintext attacks while allowing controlled key reuse. We establish perfect masking properties over finite fields and prove that the resulting cipher achieves information-theoretic security under key reuse when the underlying arithmetic is carried out in $\\mathbb{F}_p$ with $p>2$. For arithmetic over $\\mathbb{F}_2$, some information leakage remains, leading to a finite key-reuse budget.",
+    "published": "2026-10-02T15:48:14Z",
+    "updated": "2026-10-02T15:48:14Z",
+    "source_feed": "cs.CR",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "pqc"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "pqc"
+     ],
+     "final_genre_ids": [
+      "pqc"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "pqc"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "pqc"
+    ],
+    "final_genre_ids": [
+     "pqc"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "pqc": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  },
+  "2610.40701": {
+   "paper": {
+    "id": "2610.40701",
+    "title": "FGSM Attack Transferability from Simulation to Quantum Hardware in Network Intrusion Detection",
+    "link": "https://arxiv.org/abs/2610.40701",
+    "authors": "Zeeshan Ajmal, Kimmo Halunen, Marc Mau{\\ss}ner, Volker Reers, Arif Ali Khan",
+    "categories": [
+     "cs.CR",
+     "cs.ET",
+     "cs.LG"
+    ],
+    "primary": "cs.CR",
+    "abstract": "Quantum computers are now available through cloud platforms, and recent work has proposed using them to detect network intrusions. It is not yet clear how easily such systems can be attacked. We train a hybrid variational quantum classifier (VQC) on the Friday DDoS subset of CICIDS2017 and test it against two attacks: label flipping during training and FGSM evasion at prediction time. We run the tests in simulation and on IBM hardware, the Fez superconducting processor (Heron r2). We find that two models with similar accuracy can differ greatly in how easily they are attacked. A model that decides with little confidence loses half its detections to a very small change in the input, while a model trained to decide with more confidence needs a much larger change before it fails. Attacks built in simulation against the more confident model also work on real hardware, and the device classifies every unaltered attack sample correctly. Simulated device noise does not reduce accuracy, but it does reduce the model's confidence and makes attacks easier, so accuracy alone does not show how exposed a model is. Label flipping has no measurable effect until 15% of attack labels are changed. These results show that device noise should not be treated as a defense and that reported weaknesses in these classifiers depend partly on how they were trained.",
+    "published": "2026-10-28T19:49:41Z",
+    "updated": "2026-10-28T19:49:41Z",
+    "source_feed": "cs.CR",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "nisq"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "nisq"
+     ],
+     "final_genre_ids": [
+      "nisq"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "nisq"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "nisq"
+    ],
+    "final_genre_ids": [
+     "nisq"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "nisq": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  },
+  "2610.00075": {
+   "paper": {
+    "id": "2610.00075",
+    "title": "Exact Kernel Transfer to Clique Complexes and the Hardness of Normalized Persistence",
+    "link": "https://arxiv.org/abs/2610.00075",
+    "authors": "Cheng Xin",
+    "categories": [
+     "cs.CC",
+     "cs.CG"
+    ],
+    "primary": "cs.CC",
+    "abstract": "For clique complexes $X_1\\subseteq X_2$, normalized persistence in degree $d$ is $\\operatorname{rank}[H_d(X_1)\\to H_d(X_2)]/\\dim H_d(X_1)$. Estimating it requires exact endpoint homology and the inclusion-induced map, even with inverse-polynomial endpoint Laplacian gaps. We prove that additive-error $1/24$ estimation is hard for $\\mathsf{BQP}_{1}^{G_2}$, the perfect-completeness class over the exact gate set $G_2=\\{X,\\mathsf{CX},\\mathsf{CCX},H\\otimes H\\}$, and hence for $\\mathsf{BQP}_{1}$ over every finite gate set with entries in a cyclotomic field $\\mathbb{Q}(\\zeta_{2^k})$, even for unweighted clique complexes. The main tool is a finite-certificate kernel-transfer theorem. For a fixed palette of weighted clique gadgets satisfying finitely many exactly checkable local conditions, every unit chain $x$ of the full geometric complex satisfies $\\operatorname{dist}(x,K)^2\\le C(t\\lambda^2+\\langle x,\\Delta x\\rangle/(g\\lambda^{26}))$, where $K$ is the embedded kernel of the simulated projector Hamiltonian, $g$ its gap, $t$ the number of gadgets, and $\\lambda$ the private vertex weight. Since $\\lambda$ is chosen independently of $g$, the geometric Laplacian has exactly $\\dim K$ zero modes and a gap linear in $g$ above them. Exact fillings identify the endpoint homology with a quotient $V/W_A$ of the register cycle space, and nested term sets induce the natural quotient epimorphisms, so the persistent rank equals the later kernel dimension without any choice of compatible harmonic representatives. A fixed eight-dimensional label register turns a $\\mathsf{BQP}_{1}^{G_2}$ verifier into instances with $\\beta_d(X_1)=8$ and normalized persistence $3/4$ or $1/8$, and an established common-copy blow-up transfers everything to unweighted graphs.",
+    "published": "2026-09-05T02:19:57Z",
+    "updated": "2026-09-05T02:19:57Z",
+    "source_feed": "cs.CC",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "complexity"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "complexity"
+     ],
+     "final_genre_ids": [
+      "complexity"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "complexity"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "complexity"
+    ],
+    "final_genre_ids": [
+     "complexity"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "complexity": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  },
+  "2609.20236": {
+   "paper": {
+    "id": "2609.20236",
+    "title": "Conflict-Free Color-Clustered Sequential Belief-Propagation Decoding of Quantum LDPC Codes via Reinforcement Learning",
+    "link": "https://arxiv.org/abs/2609.20236",
+    "authors": "Mohsen Moradi, Taejoon Kim, and Remi A. Chou",
+    "categories": [
+     "cs.IT",
+     "math.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Belief-propagation (BP) decoding for quantum low-density parity-check (QLDPC) codes is attractive due to its low complexity and low latency, but it is often limited by short cycles, degeneracy, and convergence failures. Reinforcement-learning-based sequential BP decoding (RL-S) improves BP by learning a syndrome-dependent variable-node (VN) update order, but its VN-by-VN schedule has limited within-iteration parallelism. In this paper, we propose a conflict-free color-clustered extension of RL-S. We construct a VN conflict graph in which two VNs are adjacent if they share an X-type or Z-type check, and color this graph so that same-color VNs have disjoint check neighborhoods. This also prevents VNs from the same Tanner 4- or 6-cycle from being updated simultaneously. During decoding, the trained VN-level Q-table selects a seed VN, and all remaining VNs with the same color are updated in parallel using the same pre-batch messages. For the [[288,12,18]] bivariate-bicycle code over the depolarizing channel, our proposed decoder achieves block-error-rate performance close to VN-level RL-S while reducing the scheduling decisions from 288 VNs to 11 color classes per BP iteration.",
+    "published": "2026-09-02T13:15:35Z",
+    "updated": "2026-09-02T13:15:35Z",
+    "source_feed": "cs.IT",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "qec"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "qec"
+     ],
+     "final_genre_ids": [
+      "qec"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "qec"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "qec"
+    ],
+    "final_genre_ids": [
+     "qec"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "qec": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  },
+  "2610.14126": {
+   "paper": {
+    "id": "2610.14126",
+    "title": "Quantum Annealing for Resource Allocation in Next-Generation Wireless Communication Networks: A QUBO Modeling Guide",
+    "link": "https://arxiv.org/abs/2610.14126",
+    "authors": "Nguyen Xuan Tung, Le Tung Giang, Mai Dinh Cong, Pham Dang Anh Duc, Nguyen Hoang Viet, Trinh Van Chien and Lajos Hanzo",
+    "categories": [
+     "cs.IT",
+     "math.IT"
+    ],
+    "primary": "cs.IT",
+    "abstract": "Quantum annealing (QA) offers a physics-inspired approach for such subproblems by mapping them onto an Ising Hamiltonian, which is algebraically equivalent to a Quadratic Unconstrained Binary Optimization (QUBO) model executable on quantum annealers or hybrid solvers. However, their practical employment in wireless systems critically depends on the specific problem formulation, on the particular variable encoding, constraint handling, solver selection, hardware embedding, and fair benchmarking. This paper develops wireless-oriented QUBO modeling guidelines for QA-assisted resource allocation. We first present a beginner-friendly toy example in which a terrestrial-aerial resource-allocation problem with a fractional signal-to-interference-plus-noise ratio (SINR) maximization objective is reformulated into a two-bit QUBO via Boolean interpolation, converted into an Ising representation, and decoded back into a wireless scheduling decision. The same scheduling is applicable to UAV, aircraft, satellite, and terrestrial links in SAGIN systems. We then review the QA foundations and solver ecosystems, including binary quadratic, discrete quadratic, constrained quadratic, and hybrid models from the perspective of NG wireless optimization. Furthermore, we discuss both binary and discrete encoding, penalty-based constraint conversion, embedding overhead, solution decoding, and feasibility verification. A QUBO Compatibility Index is introduced as a lightweight diagnostic metric for assessing the associated QUBO formulation readiness, rather than a predictor of runtime or solution quality. Finally, a case study on max-min uplink power control in cell-free massive MIMO illustrates how a fairness-oriented wireless problem can be discretized, constrained, converted into the concept of a QUBO, and evaluated against classical baselines. A host of key challenges and future directions are also discussed.",
+    "published": "2026-10-09T11:05:48Z",
+    "updated": "2026-10-09T11:05:48Z",
+    "source_feed": "cs.IT",
+    "announce_type": "external",
+    "external_genre_ids": [
+     "nisq"
+    ],
+    "external_classifier": "gemini-3.5-flash-lite",
+    "external_classification": {
+     "policy": "bf785087a9c1d3c8196a",
+     "base_genre_ids": [
+      "nisq"
+     ],
+     "final_genre_ids": [
+      "nisq"
+     ],
+     "postprocess": []
+    }
+   },
+   "genre_ids": [
+    "nisq"
+   ],
+   "classifier": "gemini-3.5-flash-lite",
+   "classification": {
+    "policy": "bf785087a9c1d3c8196a",
+    "base_genre_ids": [
+     "nisq"
+    ],
+    "final_genre_ids": [
+     "nisq"
+    ],
+    "postprocess": []
+   },
+   "abstract_translated": null,
+   "title_translated": null,
+   "need_translation": true,
+   "allow_untranslated": false,
+   "channels": {
+    "nisq": {
+     "status": "pending"
+    }
+   },
+   "queued_at": "2026-11-12T06:03:36Z"
+  }
+ },
  "external_cursors": {
-  "cs.CR": "2026-11-11T15:00:32Z",
-  "cs.CC": "2026-11-11T15:00:44Z",
-  "cs.IT": "2026-11-11T15:00:49Z"
+  "cs.CR": "2026-11-12T06:02:45Z",
+  "cs.CC": "2026-11-12T06:02:50Z",
+  "cs.IT": "2026-11-12T06:03:08Z"
  },
  "feed_cursors": {
   "quant-ph": "2026-11-11T07:41:15.607094+00:00"
- }
+ },
+ "oai_cursors": {
+  "physics:quant-ph": "2026-11-12T05:55:56Z",
+  "cs:cs:CR": "2026-11-12T06:02:22Z",
+  "cs:cs:CC": "2026-11-12T06:02:46Z",
+  "cs:cs:IT": "2026-11-12T06:02:56Z"
+ },
+ "translation_alerts": {}
 }

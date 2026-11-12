@@ -2,9 +2,11 @@
 """
 arXiv quant-ph -> Discord notifier with translated abstracts.
 
-- Fetches the official arXiv RSS feed (rss.arxiv.org/rss/quant-ph)
-- Uses custom arXiv API queries to find non-cross-listed candidates from
-  selected adjacent categories, then subjects them to strict LLM review with
+- Fetches the official arXiv RSS feed (rss.arxiv.org/rss/quant-ph) and
+  reconciles it against arXiv OAI-PMH announcement datestamps, so an empty or
+  stale RSS snapshot cannot drop an announcement day
+- Harvests selected adjacent categories through the same OAI-PMH sets to find
+  non-cross-listed candidates, then subjects them to strict LLM review with
   an explicit skip decision before they can enter configured genre channels
 - Filters out cross-listed papers whose primary category is irrelevant
   (e.g. cond-mat.*) while keeping quantum-information-adjacent categories
@@ -24,6 +26,7 @@ arXiv quant-ph -> Discord notifier with translated abstracts.
 Standard library only. Designed to run on GitHub Actions.
 """
 
+import email.utils
 import json
 import hashlib
 import math
@@ -657,6 +660,292 @@ def fetch_feed_backfill(category: str, rule: dict,
                 or not external_paper_is_recent(rows[-1], lookback, reference)):
             return list(result.values())
     raise ValueError("arXiv feed backfill exceeded max_pages; cursor retained")
+
+
+# ------------------------------------------------------------ arXiv OAI-PMH
+#
+# RSS shows only the latest announcement and has served empty feeds on
+# announcement days, while API date queries index the *submission* date, so a
+# paper held in moderation can be announced outside any submission window.
+# OAI-PMH datestamps follow announcements and later metadata changes, so a
+# harvest from the last successful harvest date sees every announcement.
+
+OAI_ENDPOINT = "https://oaipmh.arxiv.org/oai"
+OAI_NS = {
+    "oai": "http://www.openarchives.org/OAI/2.0/",
+    "raw": "http://arxiv.org/OAI/arXivRaw/",
+}
+_OAI_PHYSICS_ARCHIVES = frozenset({
+    "astro-ph", "cond-mat", "gr-qc", "hep-ex", "hep-lat", "hep-ph", "hep-th",
+    "math-ph", "nlin", "nucl-ex", "nucl-th", "physics", "quant-ph",
+})
+
+
+def oai_set_for_category(category: str) -> str:
+    """Map an arXiv category such as quant-ph or cs.CR to its OAI set."""
+    archive, _, subject = category.strip().partition(".")
+    prefix = (f"physics:{archive}" if archive in _OAI_PHYSICS_ARCHIVES
+              else f"{archive}:{archive}")
+    return f"{prefix}:{subject}" if subject else prefix
+
+
+def _oai_version_datetime(value: str) -> datetime | None:
+    """Parse an arXivRaw version date such as 'Tue, 10 Nov 2026 18:45:36 GMT'."""
+    try:
+        parsed = email.utils.parsedate_to_datetime((value or "").strip())
+    except (TypeError, ValueError, IndexError):
+        return None
+    if parsed is None:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def parse_oai_list_records(raw: bytes) -> tuple[list[dict], str | None, str, int]:
+    """Parse one arXivRaw ListRecords page.
+
+    Returns ``(records, resumption_token, response_date, skipped)``.  The OAI
+    ``noRecordsMatch`` error is a successful empty harvest; any other OAI
+    error, an HTML page or a missing ``responseDate`` raises, so a broken
+    response can never advance the harvest cursor.
+    """
+    root = ET.fromstring(raw)
+    if root.tag != f"{{{OAI_NS['oai']}}}OAI-PMH":
+        raise ValueError("arXiv OAI-PMH did not return an OAI-PMH document")
+    response_date = (root.findtext("oai:responseDate", "", OAI_NS) or "").strip()
+    if not response_date:
+        raise ValueError("arXiv OAI-PMH response has no responseDate")
+    error = root.find("oai:error", OAI_NS)
+    if error is not None:
+        if error.get("code") == "noRecordsMatch":
+            return [], None, response_date, 0
+        raise ValueError(
+            f"arXiv OAI-PMH error {error.get('code', '?')}: "
+            f"{(error.text or '').strip()[:200]}")
+    listing = root.find("oai:ListRecords", OAI_NS)
+    if listing is None:
+        raise ValueError("arXiv OAI-PMH response has no ListRecords element")
+
+    def clean(meta: ET.Element, tag: str) -> str:
+        return re.sub(r"\s+", " ", meta.findtext(tag, "", OAI_NS) or "").strip()
+
+    records: list[dict] = []
+    skipped = 0
+    for record in listing.findall("oai:record", OAI_NS):
+        header = record.find("oai:header", OAI_NS)
+        if header is not None and header.get("status") == "deleted":
+            continue
+        meta = record.find("oai:metadata/raw:arXivRaw", OAI_NS)
+        datestamp = (
+            header.findtext("oai:datestamp", "", OAI_NS).strip()
+            if header is not None else "")
+        if meta is None or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", datestamp):
+            skipped += 1
+            continue
+        pid = clean(meta, "raw:id")
+        versions: list[tuple[int, datetime]] = []
+        for node in meta.findall("raw:version", OAI_NS):
+            label = re.fullmatch(r"v(\d+)", (node.get("version") or "").strip())
+            stamp = _oai_version_datetime(node.findtext("raw:date", "", OAI_NS))
+            if label and stamp:
+                versions.append((int(label.group(1)), stamp))
+        categories = clean(meta, "raw:categories").split()
+        if not pid or not versions or not categories:
+            skipped += 1
+            continue
+        versions.sort()
+        records.append({
+            "id": pid,
+            "title": clean(meta, "raw:title"),
+            "link": f"https://arxiv.org/abs/{pid}",
+            "authors": clean(meta, "raw:authors"),
+            "categories": categories,
+            "primary": categories[0],
+            "abstract": clean(meta, "raw:abstract"),
+            "published": versions[0][1].strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "updated": versions[-1][1].strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "version_count": len(versions),
+            "oai_datestamp": datestamp,
+        })
+    token_node = listing.find("oai:resumptionToken", OAI_NS)
+    token = (token_node.text or "").strip() if token_node is not None else ""
+    return records, token or None, response_date, skipped
+
+
+def oai_harvest_from_date(cursor: str | None, rule: dict,
+                          now: datetime | None = None,
+                          extra_days: int = 0) -> str:
+    """First datestamp to harvest: the last successful harvest minus overlap."""
+    reference = now or datetime.now(timezone.utc)
+    base = reference
+    if cursor:
+        try:
+            parsed = datetime.fromisoformat(str(cursor).replace("Z", "+00:00"))
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=timezone.utc)
+            base = min(base, parsed)
+        except ValueError:
+            pass
+    start = base - timedelta(days=max(1, int(rule.get("overlap_days", 3))))
+    if extra_days > 0:
+        start = min(start, reference - timedelta(days=extra_days))
+    return start.date().isoformat()
+
+
+def fetch_oai_records(set_spec: str, from_date: str,
+                      rule: dict) -> tuple[list[dict], str, int]:
+    """Harvest every arXivRaw record in ``set_spec`` with datestamp >= from_date.
+
+    Returns ``(records, cursor, skipped)``. ``cursor`` is the server's
+    responseDate for the first page (never later than the local clock), so
+    a stale cached response cannot move the next harvest past unseen records.
+    Repeated resumption tokens or too many pages raise instead of returning
+    a silently truncated harvest.
+    """
+    endpoint = str(rule.get("endpoint") or OAI_ENDPOINT)
+    max_pages = max(1, int(rule.get("max_pages", 100)))
+    interval = max(0.0, float(rule.get("page_interval_sec", 3)))
+    params = {"verb": "ListRecords", "metadataPrefix": "arXivRaw",
+              "set": set_spec, "from": from_date}
+    by_id: dict[str, dict] = {}
+    cursor: str | None = None
+    skipped = 0
+    tokens: set[str] = set()
+    for page in range(max_pages):
+        if page:
+            time.sleep(interval)
+        raw = http_get_arxiv_api(
+            f"{endpoint}?{urllib.parse.urlencode(params)}", rule)
+        rows, token, response_date, bad = parse_oai_list_records(raw)
+        skipped += bad
+        if cursor is None:
+            try:
+                served = datetime.fromisoformat(
+                    response_date.replace("Z", "+00:00"))
+            except ValueError as err:
+                raise ValueError(
+                    "arXiv OAI-PMH responseDate is not ISO 8601") from err
+            if served.tzinfo is None:
+                served = served.replace(tzinfo=timezone.utc)
+            served = min(served, datetime.now(timezone.utc))
+            cursor = served.strftime("%Y-%m-%dT%H:%M:%SZ")
+        for row in rows:
+            by_id[row["id"]] = row
+        if not token:
+            return list(by_id.values()), cursor, skipped
+        if token in tokens:
+            raise ValueError("arXiv OAI-PMH repeated a resumptionToken")
+        tokens.add(token)
+        params = {"verb": "ListRecords", "resumptionToken": token}
+    raise ValueError("arXiv OAI-PMH harvest exceeded max_pages; cursor retained")
+
+
+def oai_record_is_recent(record: dict, max_delay_days: int) -> bool:
+    """Whether v1 was submitted at most ``max_delay_days`` before the datestamp.
+
+    New announcements carry a fresh datestamp; papers announced long ago
+    reappear only through metadata changes (journal-ref, DOI), so a bound on
+    submission-to-datestamp delay keeps them out without an ID registry.
+    """
+    try:
+        stamp = datetime.fromisoformat(str(record["oai_datestamp"])).date()
+        first = datetime.fromisoformat(
+            str(record["published"]).replace("Z", "+00:00")).date()
+    except (KeyError, ValueError):
+        return False
+    return (stamp - first).days <= max(1, int(max_delay_days))
+
+
+def _paper_from_oai(record: dict, **fields: str) -> dict:
+    paper = {
+        key: value for key, value in record.items()
+        if key not in ("version_count", "oai_datestamp")
+    }
+    paper.update(fields)
+    return paper
+
+
+def select_oai_feed_papers(records: list[dict], category: str,
+                           rule: dict) -> list[dict]:
+    """Turn first-version OAI records of a feed category into new/cross rows.
+
+    Replacements (more than one version) are not new announcements and are
+    skipped exactly like RSS ``replace`` rows when include_replacements=false.
+    """
+    max_delay = int(rule.get("max_announce_delay_days", 90))
+    return [
+        _paper_from_oai(
+            record, source_feed=category,
+            announce_type="new" if record["primary"] == category else "cross")
+        for record in records
+        if record.get("version_count") == 1
+        and category in record.get("categories", [])
+        and oai_record_is_recent(record, max_delay)
+    ]
+
+
+def select_oai_external_candidates(
+        records: list[dict], category: str, rule: dict, max_delay_days: int,
+        core_ids: set[str], seen: set[str]) -> list[dict]:
+    """Apply the external mechanical filters to first-version OAI records."""
+    terms = [str(t) for t in rule.get("terms", [])]
+    return [
+        _paper_from_oai(record, source_feed=category, announce_type="external")
+        for record in records
+        if record.get("version_count") == 1
+        and oai_record_is_recent(record, max_delay_days)
+        and record["id"] not in core_ids
+        and record["id"] not in seen
+        and record["primary"] == category
+        and "quant-ph" not in record.get("categories", [])
+        and matches_external_terms(record, terms)
+    ]
+
+
+def parse_recover_ids(raw: str) -> list[str]:
+    """Extract unique arXiv IDs (versions dropped) from free-form operator text."""
+    ids: list[str] = []
+    for pid in re.findall(r"(?<![\d.])\d{4}\.\d{4,5}(?!\d)", raw or ""):
+        if pid not in ids:
+            ids.append(pid)
+    return ids
+
+
+def fetch_recovery_papers(ids: list[str], category: str,
+                          rule: dict) -> tuple[list[dict], list[str]]:
+    """Fetch operator-listed missed papers as normal new/cross feed rows.
+
+    Used once to deliver announcements that every automatic source missed.
+    Returns ``(papers, rejected)``; an ID is rejected when the API does not
+    return it, it is no longer listed in ``category``, or it was withdrawn.
+    """
+    papers: list[dict] = []
+    rejected: list[str] = []
+    for start in range(0, len(ids), 100):
+        if start:
+            time.sleep(3)
+        chunk = ids[start:start + 100]
+        url = "https://export.arxiv.org/api/query?" + urllib.parse.urlencode({
+            "id_list": ",".join(chunk), "max_results": len(chunk)})
+        raw = http_get_arxiv_api(url, rule)
+        rows = {row["id"]: row for row in parse_external_atom(raw, category)}
+        withdrawn = set()
+        for entry in ET.fromstring(raw).findall("atom:entry", ATOM_NS):
+            comment = entry.findtext("arxiv:comment", "", ATOM_NS) or ""
+            if re.search(r"\bwithdrawn\b", comment, flags=re.I):
+                withdrawn.add(re.sub(r"v\d+$", "", entry.findtext(
+                    "atom:id", "", ATOM_NS).strip().rsplit("/", 1)[-1]))
+        for pid in chunk:
+            row = rows.get(pid)
+            if (row is None or pid in withdrawn
+                    or category not in row.get("categories", [])):
+                rejected.append(pid)
+                continue
+            row.update(source_feed=category, announce_type=(
+                "new" if row["primary"] == category else "cross"))
+            papers.append(row)
+    return papers, rejected
 
 
 # ---------------------------------------------------------------- filtering
@@ -2255,23 +2544,98 @@ def dead_translators(cfg: dict) -> list[str]:
     return dead
 
 
-def notify_translation_outage(deferred: int, dead: list[str]) -> None:
+# Credentials each backend needs. A backend without them cannot translate,
+# even though it never trips its circuit breaker (Apps Script returns early).
+_TRANSLATOR_REQUIRED_ENV = {
+    "deepl": ("DEEPL_API_KEY",),
+    "azure": ("AZURE_TRANSLATOR_KEY",),
+    "google": ("GOOGLE_TRANSLATE_API_KEY",),
+    "apps_script": ("GOOGLE_APPS_SCRIPT_URL", "GOOGLE_APPS_SCRIPT_TOKEN"),
+    "gemini": ("GEMINI_API_KEY",),
+}
+
+
+def unconfigured_translators(cfg: dict) -> list[str]:
+    """Backends in the chain that are unknown or lack their credentials."""
+    chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
+    return [
+        backend for backend in chain
+        if backend not in _TRANSLATOR_REQUIRED_ENV
+        or not all(os.environ.get(name, "").strip()
+                   for name in _TRANSLATOR_REQUIRED_ENV[backend])
+    ]
+
+
+def translation_missing(entry: dict, cfg: dict) -> bool:
+    """Whether delivery must wait for a required abstract or title translation."""
+    if entry.get("allow_untranslated", False):
+        return False
+    missing_abstract = (cfg.get("require_translation", True)
+                        and entry.get("need_tr") and entry.get("jp") is None)
+    missing_title = (cfg.get("require_translated_title", False)
+                     and show_translated_title(cfg)
+                     and entry["paper"].get("title")
+                     and not entry.get("jp_title"))
+    return bool(missing_abstract or missing_title)
+
+
+def record_translation_status(state: dict, entries: list[dict], cfg: dict,
+                              now: datetime | None = None) -> dict:
+    """Persist this translation pass and alert (once a day) on a full outage.
+
+    A full outage means papers still wait for translation while every backend
+    in the chain has either tripped its circuit breaker in this pass or is not
+    configured at all.
+    """
+    chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
+    unconfigured = unconfigured_translators(cfg)
+    dead = [b for b in dead_translators(cfg) if b not in unconfigured]
+    waiting = sum(1 for entry in entries if translation_missing(entry, cfg))
+    stamp = now or datetime.now(timezone.utc)
+    status = {
+        "at": stamp.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "translated": dict(_translation_success),
+        "dead": dead,
+        "unconfigured": unconfigured,
+        "waiting": waiting,
+    }
+    state["translation_status"] = status
+    if waiting and chain and all(b in dead or b in unconfigured for b in chain):
+        alerts = state.get("translation_alerts")
+        if not isinstance(alerts, dict):
+            alerts = state["translation_alerts"] = {}
+        today = stamp.date().isoformat()
+        if (alerts.get("outage_notified_on") != today
+                and notify_translation_outage(waiting, dead, unconfigured)):
+            alerts["outage_notified_on"] = today
+    return status
+
+
+def notify_translation_outage(deferred: int, dead: list[str],
+                              unconfigured: list[str] | None = None) -> bool:
     """Warn the bot-emergency Discord channel when every translator backend
-    in the chain is unavailable, so papers are being silently deferred."""
+    in the chain is unavailable, so papers are being silently deferred.
+
+    Returns whether Discord accepted the notice.
+    """
     webhook = os.environ.get("DISCORD_WEBHOOK_BOT_EMERGENCY", "")
+    states = [f"{name}: 停止" for name in dead]
+    states += [f"{name}: 未設定" for name in unconfigured or []]
     content = (
-        "⚠️ All translation backends are unavailable "
-        f"({', '.join(dead)}); {deferred} paper(s) deferred until "
-        "translation recovers."
+        "⚠️ 翻訳バックエンドがすべて利用できません "
+        f"({', '.join(states)})。翻訳待ちの{deferred}件は、翻訳が復旧するまで"
+        "配信を保留します。"
     )
     if not webhook:
         print(f"[warn] {content} (no DISCORD_WEBHOOK_BOT_EMERGENCY configured "
               "to send this notice)", file=sys.stderr)
-        return
+        return False
     status, body = http_post_json(webhook, {"content": content})
     if status not in (200, 204):
         print(f"[warn] failed to send translation-outage notice: "
               f"HTTP {status} {body[:200]!r}", file=sys.stderr)
+        return False
+    return True
 
 
 def _report_paper_line(item: dict) -> str:
@@ -2354,12 +2718,19 @@ def notify_run_report(report: dict, cfg: dict) -> None:
             f"単独skip保留 {external.get('single_skip_pending', 0)}件 / "
             f"キャッシュ {external.get('cached', 0)}件)")
     translated = report.get("translated") or {}
+    status_at = str(report.get("translation_status_at") or "")
+    when = (f"、翻訳処理 {status_at[5:16].replace('T', ' ')} UTC"
+            if len(status_at) >= 16 else "")
     if translated:
         usage = " / ".join(f"{b}: {n}件" for b, n in translated.items())
-        lines.append(f"🌐 翻訳成功(タイトル含む): {usage}")
+        lines.append(f"🌐 翻訳成功(タイトル含む{when}): {usage}")
     dead = report.get("dead_translators") or []
     if dead:
-        lines.append(f"⚠️ この実行で停止した翻訳バックエンド: {', '.join(dead)}")
+        lines.append(f"⚠️ 停止した翻訳バックエンド{f'({when[1:]})' if when else ''}: "
+                     f"{', '.join(dead)}")
+    unconfigured = report.get("unconfigured_translators") or []
+    if unconfigured and deferred:
+        lines.append(f"ℹ️ 未設定の翻訳バックエンド: {', '.join(unconfigured)}")
     if not report.get("candidates"):
         lines.append("🈳 新規の投稿対象論文はありませんでした。")
 
@@ -2483,7 +2854,8 @@ def normalize_bot_state(raw: Any) -> dict:
         str(pid): row for pid, row in deliveries.items()
         if isinstance(row, dict) and isinstance(row.get("paper"), dict)
     }
-    for key in ("external_reviews", "external_pending", "external_cursors", "feed_cursors"):
+    for key in ("external_reviews", "external_pending", "external_cursors",
+                "feed_cursors", "oai_cursors", "translation_alerts"):
         if not isinstance(state.get(key), dict):
             state[key] = {}
     return state
@@ -2668,9 +3040,10 @@ def main() -> None:
     if isinstance(cfg.get("main_translators"), list):
         cfg["translators"] = cfg["main_translators"]
     backfill_raw = os.environ.get("EXTERNAL_ARXIV_LOOKBACK_DAYS", "").strip()
+    backfill_days = 0
     if backfill_raw:
         try:
-            backfill_days = int(backfill_raw)
+            backfill_days = max(0, int(backfill_raw))
         except ValueError:
             backfill_days = 0
             print("[warn] EXTERNAL_ARXIV_LOOKBACK_DAYS must be an integer; "
@@ -2710,14 +3083,59 @@ def main() -> None:
         cached_external_reviews, completed, set(deliveries))
     excluded_ids = completed | set(deliveries)
     source_failures: list[dict[str, str]] = []
+    source_notices: list[dict[str, str]] = []
+    using_test_feed = bool(os.environ.get("ARXIV_TEST_FEED", ""))
+    oai_rule = cfg.get("oai_harvest", {})
+    if not isinstance(oai_rule, dict):
+        oai_rule = {}
+    use_oai = bool(oai_rule.get("enabled", False))
+
+    def harvest_oai(category: str, legacy_cursor: str | None,
+                    extra_days: int = 0) -> list[dict] | None:
+        """Harvest one category's OAI set; None after a recorded failure."""
+        set_spec = oai_set_for_category(category)
+        cursor = state["oai_cursors"].get(set_spec) or legacy_cursor
+        from_date = oai_harvest_from_date(
+            cursor, oai_rule, extra_days=extra_days)
+        try:
+            records, served_at, skipped = fetch_oai_records(
+                set_spec, from_date, oai_rule)
+        except Exception as err:  # noqa: BLE001
+            message = str(err)
+            save_error_diagnostic(
+                "source_error", method="GET", body=traceback.format_exc(),
+                exception=err)
+            source_failures.append({
+                "source": f"arXiv OAI-PMH:{set_spec}", "error": message})
+            print(f"[error] OAI-PMH {set_spec} from={from_date} failed: "
+                  f"{message}", file=sys.stderr)
+            return None
+        finally:
+            if not dry_run:
+                time.sleep(3)  # arXiv asks harvesters to pace requests
+        if not dry_run:
+            state["oai_cursors"][set_spec] = served_at
+        if skipped:
+            source_notices.append({
+                "source": f"OAI-PMH:{set_spec}",
+                "message": f"解析できないレコード{skipped}件を除外"})
+        print(f"[info] OAI-PMH {set_spec}: from={from_date}, "
+              f"records={len(records)}, unparsable={skipped}")
+        return records
 
     papers: dict[str, dict] = {}
+    rss_listed: dict[str, int] = {}
     if not resume_only:
         for cat in cfg.get("feeds", ["quant-ph"]):
             try:
-                for p in fetch_feed(cat):
+                rss_rows = fetch_feed(cat)
+                for p in rss_rows:
                     p["source_feed"] = cat
                     papers.setdefault(p["id"], p)
+                rss_listed[cat] = sum(
+                    p["announce_type"] in ("new", "cross") for p in rss_rows)
+                print(f"[info] RSS {cat}: items={len(rss_rows)}, "
+                      f"new_or_cross={rss_listed[cat]}")
             except Exception as err:  # noqa: BLE001
                 message = str(err)
                 save_error_diagnostic(
@@ -2731,8 +3149,43 @@ def main() -> None:
                 time.sleep(3)  # be polite to arXiv
 
         backfill_rule = cfg.get("feed_backfill", {})
-        if (isinstance(backfill_rule, dict)
-                and not os.environ.get("ARXIV_TEST_FEED")):
+        if use_oai and not using_test_feed:
+            # Announcement-date reconciliation: every first-version record
+            # whose OAI datestamp is after the last harvest, regardless of
+            # submission date or of whether RSS showed it.
+            for cat in cfg.get("feeds", ["quant-ph"]):
+                records = harvest_oai(cat, state["feed_cursors"].get(cat))
+                if records is None:
+                    continue
+                rows = select_oai_feed_papers(records, cat, oai_rule)
+                recovered = [
+                    p for p in rows
+                    if p["id"] not in papers and p["id"] not in excluded_ids
+                ]
+                for p in rows:
+                    papers.setdefault(p["id"], p)
+                print(f"[info] OAI-PMH {cat}: new_or_cross={len(rows)}, "
+                      f"missing_from_rss_and_state={len(recovered)}")
+                # RSS is rebuilt about four hours after each announcement, so
+                # today's listing legitimately reaches OAI first. Report only
+                # an empty RSS snapshot or announcements from earlier days.
+                datestamps = {r["id"]: r["oai_datestamp"] for r in records}
+                today = datetime.now(timezone.utc).date().isoformat()
+                earlier = sorted(
+                    datestamps.get(p["id"], today) for p in recovered
+                    if datestamps.get(p["id"], today) < today)
+                if recovered and (not rss_listed.get(cat) or earlier):
+                    shown = ", ".join(p["id"] for p in recovered[:8])
+                    more = "…" if len(recovered) > 8 else ""
+                    reason = ("RSSに新着が無かった" if not rss_listed.get(cat)
+                              else f"{earlier[0]}以降のRSS取りこぼし")
+                    source_notices.append({
+                        "source": f"OAI-PMH:{cat}",
+                        "message": (f"{reason}ため新着{len(recovered)}件を"
+                                    f"OAI-PMHで回収 ({shown}{more})"),
+                    })
+        elif (isinstance(backfill_rule, dict)
+                and not using_test_feed):
             for cat in cfg.get("feeds", ["quant-ph"]):
                 cursor = state["feed_cursors"].get(cat)
                 if not feed_backfill_due(backfill_rule, cursor):
@@ -2759,20 +3212,72 @@ def main() -> None:
                 if not dry_run:
                     time.sleep(3)
 
-    # Adjacent arXiv categories use custom API queries as a high-recall,
-    # mechanical first stage. Their results are never sent through the normal
-    # "other" fallback: a separate strict LLM review must explicitly accept
-    # them into only the configured destination channels.
+        # One-time operator recovery of announcements that every automatic
+        # source missed (workflow input recover_ids). Recovered papers go
+        # through the normal classification, translation and delivery.
+        recover_ids = parse_recover_ids(
+            os.environ.get("ARXIV_RECOVER_IDS", ""))
+        if recover_ids and not using_test_feed:
+            feed = cfg.get("feeds", ["quant-ph"])[0]
+            todo = [pid for pid in recover_ids
+                    if pid not in excluded_ids and pid not in papers]
+            try:
+                rows, rejected = (
+                    fetch_recovery_papers(todo, feed, oai_rule)
+                    if todo else ([], []))
+            except Exception as err:  # noqa: BLE001
+                save_error_diagnostic(
+                    "source_error", method="GET",
+                    body=traceback.format_exc(), exception=err)
+                source_failures.append({
+                    "source": "arXiv API:指定ID回収", "error": str(err)})
+                print(f"[error] ID recovery failed: {err}", file=sys.stderr)
+            else:
+                for p in rows:
+                    papers.setdefault(p["id"], p)
+                skipped = len(recover_ids) - len(todo)
+                message = (f"指定{len(recover_ids)}件のうち{len(rows)}件を"
+                           "通常の分類・翻訳・配信へ追加")
+                if skipped:
+                    message += f"、処理済み・取得済み{skipped}件"
+                if rejected:
+                    message += (f"、対象外{len(rejected)}件 "
+                                f"({', '.join(rejected[:8])})")
+                source_notices.append({"source": "指定ID回収",
+                                       "message": message})
+                print(f"[info] ID recovery: requested={len(recover_ids)}, "
+                      f"queued={len(rows)}, already_done={skipped}, "
+                      f"rejected={len(rejected)}")
+
+    # Adjacent arXiv categories use a high-recall mechanical first stage (OAI
+    # announcements plus local term matching, or legacy API queries). Their
+    # results are never sent through the normal "other" fallback: a separate
+    # strict LLM review must explicitly accept them into only the configured
+    # destination channels.
     external_candidates: dict[str, list[dict]] = {}
     external_rules = cfg.get("external_arxiv_queries", {})
-    using_test_feed = bool(os.environ.get("ARXIV_TEST_FEED", ""))
     if (
         not resume_only
         and isinstance(external_rules, dict)
         and not using_test_feed
     ):
+        max_delay = int(oai_rule.get("max_announce_delay_days", 90))
         for cat, rule in external_rules.items():
             if not isinstance(rule, dict) or not rule.get("enabled", True):
+                continue
+            if use_oai:
+                records = harvest_oai(
+                    cat, external_cursors.get(cat), extra_days=backfill_days)
+                if records is None:
+                    continue
+                rows = select_oai_external_candidates(
+                    records, cat, rule, max_delay, set(papers), excluded_ids)
+                external_candidates[cat] = rows
+                external_cursors[cat] = time.strftime(
+                    "%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+                print(f"[info] external OAI-PMH {cat}: "
+                      f"records={len(records)}, "
+                      f"mechanical_candidates={len(rows)}")
                 continue
             try:
                 effective_rule = dict(rule)
@@ -3107,7 +3612,9 @@ def main() -> None:
     } for paper in accepted_external)
 
     def finish_queue_phase(label: str) -> None:
-        if source_failures:
+        # Recovered-from-OAI notices are reported here because the delivery
+        # phase runs in a separate process and cannot see this run's sources.
+        if source_failures or source_notices:
             notify_run_report({
                 "source": "arXiv取得・配信準備",
                 "fetched": len(papers),
@@ -3117,6 +3624,7 @@ def main() -> None:
                 "deferred": [],
                 "failed": [],
                 "source_failures": source_failures,
+                "source_notices": source_notices,
                 "gemini": gemini_stats,
                 "classifier_counts": dict(Counter(
                     e.get("classifier", "tfidf") for e in entries)),
@@ -3188,6 +3696,11 @@ def main() -> None:
                         chunk, translate_batch(titles, cfg, google_allowed)):
                     e["jp_title"] = jp_title
 
+        # The translation phase is the only process that observes backend
+        # failures, so it records them for the delivery report and raises
+        # the full-outage alert itself.
+        record_translation_status(state, entries, cfg)
+
     # ---- dry-run: print classification results and exit --------------------
     if dry_run:
         print(f"[dry-run] {len(entries)} papers from feed (seen_ids ignored)\n")
@@ -3224,7 +3737,6 @@ def main() -> None:
         return
 
     # ---- post ---------------------------------------------------------------
-    require_tr = cfg.get("require_translation", True)
     posted = deferred = 0
     posted_records: list[dict] = []
     deferred_records: list[dict] = []
@@ -3234,12 +3746,7 @@ def main() -> None:
         delivery = deliveries.get(pid)
         if not isinstance(delivery, dict):
             continue
-        missing_abstract = e["need_tr"] and e["jp"] is None and require_tr
-        missing_title = (cfg.get("require_translated_title", False)
-                         and show_translated_title(cfg)
-                         and e["paper"].get("title") and not e.get("jp_title"))
-        if ((missing_abstract or missing_title)
-                and not e.get("allow_untranslated", False)):
+        if translation_missing(e, cfg):
             deferred += 1
             deferred_records.append({
                 "id": e["paper"]["id"],
@@ -3327,12 +3834,13 @@ def main() -> None:
                 state, completed, deliveries, cached_external_reviews,
                 pending_external_reviews, external_cursors)
 
-    if deferred > 0:
-        dead = dead_translators(cfg)
-        chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
-        if chain and len(dead) == len(chain):
-            notify_translation_outage(deferred, dead)
-
+    # The full-outage alert was already decided by the translation pass
+    # (record_translation_status). In the three-phase workflow this delivery
+    # process never translates, so its live circuit-breaker flags are empty;
+    # report the persisted result of the latest translation pass instead.
+    translation_status = state.get("translation_status")
+    if not isinstance(translation_status, dict):
+        translation_status = {}
     notify_run_report({
         "source": "arXiv新着通知",
         "fetched": len(papers),
@@ -3342,12 +3850,17 @@ def main() -> None:
         "deferred": deferred_records,
         "failed": failed_records,
         "source_failures": source_failures,
+        "source_notices": source_notices,
         "gemini": gemini_stats,
         "classifier_counts": dict(Counter(
             e.get("classifier", "tfidf") for e in entries)),
         "tfidf_fallback": gemini_fallback,
-        "translated": dict(_translation_success),
-        "dead_translators": dead_translators(cfg),
+        "translated": (translation_status.get("translated")
+                       or dict(_translation_success)),
+        "dead_translators": (translation_status.get("dead")
+                             or dead_translators(cfg)),
+        "unconfigured_translators": translation_status.get("unconfigured", []),
+        "translation_status_at": translation_status.get("at"),
         "external_review": external_stats,
     }, cfg)
 

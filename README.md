@@ -1,16 +1,18 @@
 # New arXiv quant-ph paper -> Discord notification bot (with configurable translation)
 
-This bot fetches the official arXiv RSS feed (`rss.arxiv.org/rss/quant-ph`) three times a day (Monday-Saturday), classifies each paper into one or more of 15 genres, and posts it to every corresponding Discord channel through webhooks with a translated title and abstract. The embed footer of each post lists **all** genres assigned to the paper, so a multi-genre paper shows its full classification in every channel it appears in.
+This bot fetches the official arXiv RSS feed (`rss.arxiv.org/rss/quant-ph`) three times a day (Monday-Saturday), reconciles it against arXiv's OAI-PMH announcement records so an empty or stale RSS snapshot cannot drop a day, classifies each paper into one or more of 15 genres, and posts it to every corresponding Discord channel through webhooks with a translated title and abstract. The embed footer of each post lists **all** genres assigned to the paper, so a multi-genre paper shows its full classification in every channel it appears in.
 
 In the current standard setup, Gemini is used for **classification only**, while translation is attempted through DeepL -> Azure Translator -> Apps Script (when configured). Normal quant-ph papers first use `gemini-3.5-flash-lite`; unresolved papers fall through to `gemini-3.6-flash`, then the deterministic TF-IDF/keyword fallback. Both models are paced at 7 seconds between requests. The bot uses **only the Python standard library**; `pip install` is not required.
 
 The November 2026 update adds daily quant-ph API backfill, classification decision traces, route-aware read-only audits, and re-evaluation of fallback classifications that have not reached any channel. The configured final translation backend is [Apps Script](docs/FREE_TRANSLATION.md), which is skipped until an operator deploys the web app and sets its two secrets. Google Cloud Translation is retained for explicit opt-in only because credit overages can be billed. The new model setup has offline regression coverage, but its live account quotas and classification accuracy still need operational evaluation.
 
+The 2026-11-12 update replaces the submission-date API backfill and the adjacent-category API keyword queries with OAI-PMH harvesting by announcement datestamp (see "1. Fetch sources"), moves the all-translators-down alert into the translation phase so it can actually fire, and pauses the SciRate workflow.
+
 Completeness is the primary design goal. Every run is split into three durable phases (discover -> translate -> deliver), and the delivery state is tracked **per paper and per channel**, so a partial failure retries only the channels that have not been confirmed yet. See "Execution phases and durable state" below.
 
 After every run, the bot posts a **run report in Japanese to the bot-emergency channel** (`DISCORD_WEBHOOK_BOT_EMERGENCY`), including successful runs: which papers were posted to which channels, what was deferred for translation, and what failed. See "Monitoring: bot-emergency channel" below.
 
-`main_translators` overrides the translation order only for the main notifier. SciRate continues to read the unchanged `translators: ["deepl", "azure", "google"]` setting; its source and workflow are unchanged.
+`main_translators` overrides the translation order only for the main notifier. SciRate still reads the unchanged `translators: ["deepl", "azure", "google"]` setting, but its scheduled workflow is paused (see "SciRate daily and weekly channel").
 
 The default translation target is Japanese (`target_language: "ja"`), but it can be changed by editing `target_language` in `config.json`. If you choose a language that DeepL does not support, Azure and Apps Script can handle many target languages; set `main_translators` to `["azure", "apps_script"]` or use `deepl_target_language` / `azure_target_language` / `google_target_language` for backend-specific language codes.
 
@@ -33,6 +35,7 @@ The checked-in `config.json` remains configured for the original Japanese Discor
 | `tests/test_classification_quality.py` | Deterministic classifier normalization and keyword regression tests |
 | `docs/FREE_TRANSLATION.md` | Optional operator-deployed Apps Script translation setup and quota limits |
 | `tests/test_external_arxiv.py` | Tests for adjacent-category API queries, external review, and the QEC policy |
+| `tests/test_oai_harvest.py` | Tests for OAI-PMH harvesting, announcement reconciliation, cursors, and the translation-outage alert |
 | `tests/test_delivery_reliability.py` | Tests for per-channel delivery receipts, resumable phases, and webhook error handling |
 | `tests/test_repost_reliability.py` | Tests for repost idempotency and webhook validation |
 | `tests/test_scirate_reliability.py` | Tests for the SciRate three-phase pipeline |
@@ -44,7 +47,7 @@ The checked-in `config.json` remains configured for the original Japanese Discor
 | `repost_plan.json` | Repost plan (paper id -> channels to add), generated from a classification audit |
 | `DESIGN_BACKLOG.md` | Open design decisions and their proposed order of work |
 | `.github/workflows/notify.yml` | GitHub Actions schedule and secret references for the main notifier |
-| `.github/workflows/scirate_weekly.yml` | GitHub Actions schedule for the SciRate daily Top 3 and Sunday weekly 30+ digest |
+| `.github/workflows/scirate_weekly.yml` | SciRate daily Top 3 and Sunday weekly 30+ digest (paused: manual dispatch only) |
 | `.github/workflows/classification_audit.yml` | Manually triggered workflow that audits one day of past classifications |
 | `.github/workflows/repost.yml` | Manually triggered workflow that posts papers to missing channels per a repost plan |
 
@@ -66,13 +69,9 @@ The workflow can also be run manually (`workflow_dispatch`) with three inputs.
 | --- | --- | --- |
 | `use_test_feed` | `false` | Read `test_feed.xml` instead of the live RSS feed |
 | `test_emergency_alert` | `false` | Send only a test message to the bot-emergency channel without running the notifier |
-| `external_backfill_days` | `"0"` | One-time lookback in days for the adjacent-category API sources only. `0` keeps the configured window |
+| `external_backfill_days` | `"0"` | One-time lookback in days for the adjacent-category sources only (the OAI harvest starts that many days ago). `0` keeps the cursor-based window |
 
-A separate workflow posts SciRate's weekday Top 3 and Sunday weekly 30+ digest to one dedicated channel.
-
-| UTC | JST | Purpose |
-| --- | --- | --- |
-| Weekdays / Sunday 14:30 | Weekdays / Sunday 23:30 | Daily Top 3 / weekly 30+ SciRate digest |
+A separate SciRate workflow (weekday Top 3 and Sunday weekly 30+ digest) is **paused**: its schedule was removed on 2026-11-12 because SciRate's endpoint has never been reachable from Actions. It can still be run manually.
 
 ---
 
@@ -86,7 +85,7 @@ discover + classify -> commit -> translate -> commit -> deliver -> commit per-ch
 
 | Phase | Command | What it does |
 | --- | --- | --- |
-| Discover | `python3 arxiv_bot.py --discover-only` | Fetch RSS and adjacent-category API sources, classify, and write the delivery queue |
+| Discover | `python3 arxiv_bot.py --discover-only` | Fetch RSS and the OAI-PMH sets for quant-ph and the adjacent categories, classify, and write the delivery queue |
 | Translate | `python3 arxiv_bot.py --translate-only` | Translate queued papers and store the translations in the queue |
 | Deliver | `python3 arxiv_bot.py --deliver-only` | Post to Discord and record a receipt for every channel |
 
@@ -97,7 +96,7 @@ What this buys:
 - **Per-channel retries.** If a paper is delivered to `qec` but the `crypto` post fails, only `crypto` is retried on the next run. The paper is not marked complete until every assigned channel has a receipt.
 - **Translation failures survive the feed.** Papers whose translation failed stay in the durable queue, so they are still retried after they drop off the arXiv RSS feed.
 - **Unreviewed external candidates survive the lookback window.** Candidates without a completed review are stored with their metadata in `external_pending`.
-- **Fetch cursors close outage gaps.** Each adjacent-category source records the timestamp of its last successful fetch in `external_cursors`. The next run expands its lookback to cover the elapsed time plus `cursor_overlap_days` (default 2), so an Actions or arXiv API outage longer than the normal window cannot silently skip papers.
+- **Harvest cursors close outage gaps.** Each OAI-PMH set records the server `responseDate` of its last complete harvest in `oai_cursors`. The next harvest starts `overlap_days` (default 3) before it, so an Actions, RSS, or OAI-PMH outage of any length delays papers instead of skipping them. A failed or truncated harvest never advances its cursor.
 
 Delivery is intentionally **at-least-once**: an unusual runner failure after Discord accepts a webhook but before its receipt is committed can produce a duplicate, because Discord webhooks do not provide an idempotency key. The design prefers a rare duplicate over a silent loss.
 
@@ -109,9 +108,11 @@ Delivery is intentionally **at-least-once**: an unusual runner failure after Dis
 
 The bot fetches RSS feeds for the categories listed in `config.json` under `feeds` (currently `"quant-ph"`) and deduplicates papers by ID. If the same paper appears in multiple feeds, the first configured feed wins.
 
-`feed_backfill` also queries the category API at most once per 20 hours after a successful fetch. The initial window is seven days; later windows cover at least that range or the time since the last success plus two overlap days. Complete pagination is required before advancing `feed_cursors`. Candidates use the normal quant-ph classification and ID deduplication. The API is ordered by submission date, preserving `include_replacements: false`; newly cross-listed old submissions outside the window still depend on RSS. This recovery reduces missed new submissions but does not reconstruct every historical cross-list event.
+**OAI-PMH reconciliation (`oai_harvest`).** RSS shows only the latest announcement and is rebuilt about four hours after it; on several announcement days in September-October 2026 it was served empty all day, and 135 papers were never seen. Every run therefore also harvests the `physics:quant-ph` set from `https://oaipmh.arxiv.org/oai` in `arXivRaw` format, starting `overlap_days` before the last complete harvest. OAI datestamps follow the announcement (and later metadata changes), not the submission date, so a paper held in moderation for weeks is still seen on the day it is announced. Records with exactly one version whose v1 was submitted at most `max_announce_delay_days` (default 90) before the datestamp become normal `new` (primary quant-ph) or `cross` rows; replacements stay excluded as with `include_replacements: false`, and older papers that reappear only through journal-ref or DOI updates are excluded by the delay bound. IDs already queued or completed are deduplicated as usual. When RSS had no new papers, or when the harvest recovers announcements from an earlier day, the discovery phase reports it to bot-emergency; today's listing reaching OAI before the RSS rebuild is normal and is only logged.
 
-In addition, `external_arxiv_queries` retrieves mechanically narrowed candidates whose primary category is adjacent to quant-ph and which are not already cross-listed to quant-ph, through custom Atom API queries:
+Setting `oai_harvest.enabled` to `false` restores the previous sources: `feed_backfill` (a submission-date API query at most once per 20 hours, seven-day window) and the API keyword queries described below.
+
+In addition, `external_arxiv_queries` selects mechanically narrowed candidates whose primary category is adjacent to quant-ph and which are not already cross-listed to quant-ph. With OAI-PMH enabled, each category's set (`cs:cs:CR`, `cs:cs:CC`, `cs:cs:IT`) is harvested by announcement datestamp and filtered locally with the same term list (title and abstract, token boundaries), so the former four-day submission window no longer hides papers announced late. Without OAI-PMH, custom Atom API queries are used:
 
 | Source | Usual destinations | Search terms |
 | --- | --- | --- |
@@ -284,9 +285,12 @@ The `DISCORD_WEBHOOK_BOT_EMERGENCY` webhook receives operational messages, all i
 
 | Message | When |
 | --- | --- |
-| ✅ / 🟡 / 🚨 Run report | Every run of the main notifier and the SciRate daily/weekly digest |
-| ⚠️ Translation outage alert | When every translator backend in the chain has given up for the run and papers are being silently deferred |
-| 🚨 Source or delivery failure | When an RSS feed, an arXiv API query, or a Discord delivery failed during the run |
+| ✅ / 🟡 / 🚨 Run report | Every run of the main notifier (and of the SciRate digest when it is run manually) |
+| ℹ️ Discovery notice | When OAI-PMH recovered announcements that RSS did not show (empty RSS or an earlier day) |
+| ⚠️ Translation outage alert | At most once per UTC day, from the translation phase, when papers are waiting and every backend in `main_translators` has tripped its circuit breaker or is not configured (missing key, or Apps Script not deployed) |
+| 🚨 Source or delivery failure | When an RSS feed, an OAI-PMH or arXiv API request, or a Discord delivery failed during the run |
+
+The translation phase also stores its per-backend results in `translation_status`, so the delivery report shows which backends translated papers and which stopped, even though delivery runs in a separate process.
 
 To send a test message without running the notifier, run the `notify.yml` workflow manually with the `test_emergency_alert` input checked.
 
@@ -331,6 +335,8 @@ python3 scripts/repost_missing_channels.py --plan repost_plan.json --dry-run
 ---
 
 ## SciRate daily and weekly channel
+
+> **Paused since 2026-11-12.** The scheduled triggers were removed from `scirate_weekly.yml`; only manual dispatch remains. No digest has ever been delivered: the official endpoint returns a Cloudflare challenge (HTTP 403) to Actions, and the relay repository has never contained a snapshot. `scirate_weekly_state.json` still lists the daily and weekly periods that were pending when it was paused; decide what to do with them before restoring the schedule, or they will all be retried.
 
 `.github/workflows/scirate_weekly.yml` sends all SciRate editorial content to
 one dedicated webhook, `DISCORD_WEBHOOK_SCIRATE`. It never reposts SciRate
@@ -959,17 +965,19 @@ Note: users with `Administrator` bypass channel permission overwrites. Webhooks 
 
 # arXiv quant-ph → Discord 通知 bot(翻訳付き)
 
-arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1日3回取得し、論文を15ジャンルのうち1つ以上に分類して、翻訳済みタイトル・abstract 訳とともに対応する Discord の各チャンネルへ Webhook で投稿する。各投稿の embed footer には、投稿先チャンネルのジャンルだけでなく**その論文に割り当てられた全ジャンル名**が表示されるため、複数ジャンルの論文はどのチャンネルで見ても分類の全体が分かる。
+arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1日3回取得し、arXiv OAI-PMH のアナウンス記録と突き合わせて(RSSが空・古い日でも取りこぼさない)、論文を15ジャンルのうち1つ以上に分類して、翻訳済みタイトル・abstract 訳とともに対応する Discord の各チャンネルへ Webhook で投稿する。各投稿の embed footer には、投稿先チャンネルのジャンルだけでなく**その論文に割り当てられた全ジャンル名**が表示されるため、複数ジャンルの論文はどのチャンネルで見ても分類の全体が分かる。
 
 現在の標準運用では、Gemini は**分類のみ**に使い、翻訳は DeepL → Azure Translator → Apps Script（設定済みの場合） の順に試行する。通常のquant-ph論文をまず `gemini-3.5-flash-lite` に送り、未分類分を `gemini-3.6-flash`、続いて決定的な TF-IDF・キーワード分類へ回す。両モデルともリクエスト間隔は7秒。**標準ライブラリのみで動作し、`pip install` は不要。**
 
 2026年11月の更新で、quant-ph APIによる日次の取りこぼし回収、分類判断の履歴、取得経路を再現する読み取り専用監査、未配信のフォールバック分類の再評価を追加した。翻訳チェーンの最終段を[Apps Script](docs/FREE_TRANSLATION.md)に変更したが、運用者がWebアプリをデプロイして2つのSecretを設定するまではスキップする。Google Cloud Translationは控除超過が課金対象となるため、明示的に有効化する場合だけ使用する。新モデル構成はオフライン回帰試験で確認しており、実アカウントの利用枠と分類精度は今後の運用評価が必要。
 
+2026-11-12の更新で、投稿日基準のAPIバックフィルと隣接カテゴリのAPIキーワード検索を、アナウンス日(OAI-PMHのdatestamp)基準の取得に置き換えた(「1. 取得」参照)。翻訳全停止アラートは実際に発火できるよう翻訳フェーズで判定するようにし、SciRate workflowは一時停止した。
+
 設計上の最優先事項は completeness(取りこぼさないこと)である。実行は「発見 → 翻訳 → 配信」の3つの永続フェーズに分割され、配信状態は**論文ごと・チャンネルごと**に記録される。したがって一部が失敗しても、まだ確認できていないチャンネルだけを再試行する。詳細は後述の「実行フェーズと永続状態」を参照。
 
 また、毎回の実行後に **bot-emergency チャンネル(`DISCORD_WEBHOOK_BOT_EMERGENCY`)へ日本語の実行レポート**を投稿する。成功時も含めて毎回投稿されるため、どの論文がどのチャンネルへ送られたか・翻訳持ち越し・投稿失敗を実行ログとして追える。詳細は後述の「監視: bot-emergency チャンネル」を参照。
 
-通常botだけが `main_translators` を翻訳順として使う。SciRateは従来どおり `translators: ["deepl", "azure", "google"]` を使い、ソースとworkflowは変更していない。
+通常botだけが `main_translators` を翻訳順として使う。SciRateは従来どおり `translators: ["deepl", "azure", "google"]` を読むが、定期実行は一時停止している(「SciRate 日次・週次専用チャンネル」参照)。
 
 デフォルトの翻訳先は日本語(`target_language: "ja"`)だが、`config.json` の `target_language` を変更すれば他言語へ翻訳できる。DeepL 非対応言語ではAzureやApps Scriptを利用できる。必要なら `main_translators` を `["azure", "apps_script"]` にするか、`deepl_target_language` / `azure_target_language` / `google_target_language` でバックエンドごとの言語コードを指定する。
 
@@ -992,6 +1000,7 @@ arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1
 | `tests/test_classification_quality.py` | 決定的分類の正規化・キーワード回帰試験 |
 | `docs/FREE_TRANSLATION.md` | 任意のApps Script翻訳の設定と利用枠 |
 | `tests/test_external_arxiv.py` | 隣接カテゴリAPIクエリ・外部審査・QECポリシーのテスト |
+| `tests/test_oai_harvest.py` | OAI-PMH取得・アナウンス照合・cursor・翻訳全停止アラートのテスト |
 | `tests/test_delivery_reliability.py` | チャンネル別receipt、フェーズ再開、webhookエラー処理のテスト |
 | `tests/test_repost_reliability.py` | 追い投稿の冪等性とwebhook検証のテスト |
 | `tests/test_scirate_reliability.py` | SciRate 3フェーズパイプラインのテスト |
@@ -1003,7 +1012,7 @@ arXiv の公式 RSS フィード (`rss.arxiv.org/rss/quant-ph`) を月〜土の1
 | `repost_plan.json` | 追い投稿プラン(論文ID → 追加チャンネル)。分類監査の結果から生成 |
 | `DESIGN_BACKLOG.md` | 未決の設計判断と、その着手順序の構想 |
 | `.github/workflows/notify.yml` | 実行スケジュールと Secret 参照の定義 |
-| `.github/workflows/scirate_weekly.yml` | SciRate平日Top 3・日曜週次30+の実行スケジュール |
+| `.github/workflows/scirate_weekly.yml` | SciRate平日Top 3・日曜週次30+(一時停止中: 手動実行のみ) |
 | `.github/workflows/classification_audit.yml` | 過去1日分の分類を監査する手動実行ワークフロー |
 | `.github/workflows/repost.yml` | 追い投稿プランに従って不足チャンネルへ投稿する手動実行ワークフロー |
 
@@ -1025,13 +1034,9 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 | --- | --- | --- |
 | `use_test_feed` | `false` | 本番 RSS の代わりに `test_feed.xml` を読み込む |
 | `test_emergency_alert` | `false` | 通知本体を動かさず、bot-emergency チャンネルへテスト送信だけを行う |
-| `external_backfill_days` | `"0"` | 隣接カテゴリAPIの取得元だけを指定日数まで遡る一回限りの設定。`0` なら通常の設定値のまま |
+| `external_backfill_days` | `"0"` | 隣接カテゴリの取得元だけを指定日数まで遡る一回限りの設定(OAI取得をその日数前から開始)。`0` ならcursor基準の通常範囲 |
 
-別workflowが、SciRateの平日Top 3と日曜の週次30+を1つの専用チャンネルへ投稿する。
-
-| UTC | JST | 目的 |
-| --- | --- | --- |
-| 平日・日曜 14:30 | 平日・日曜 23:30 | SciRate日次Top 3・日曜週次30+ |
+SciRateの平日Top 3・日曜週次30+を投稿する別workflowは**一時停止中**。SciRateの取得元にActionsから一度も到達できなかったため、2026-11-12に定期実行(schedule)を削除した。手動実行は可能。
 
 ---
 
@@ -1045,7 +1050,7 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 
 | フェーズ | コマンド | 処理内容 |
 | --- | --- | --- |
-| 発見 | `python3 arxiv_bot.py --discover-only` | RSS と隣接カテゴリAPIを取得して分類し、配信queueを書き出す |
+| 発見 | `python3 arxiv_bot.py --discover-only` | RSS と、quant-ph・隣接カテゴリのOAI-PMHセットを取得して分類し、配信queueを書き出す |
 | 翻訳 | `python3 arxiv_bot.py --translate-only` | queue の論文を翻訳し、翻訳結果を queue に保存する |
 | 配信 | `python3 arxiv_bot.py --deliver-only` | Discord へ投稿し、チャンネルごとに receipt を記録する |
 
@@ -1056,7 +1061,7 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 - **チャンネル単位の再試行。** ある論文が `qec` には配信できて `crypto` で失敗した場合、次回は `crypto` だけを再試行する。割り当てられた全チャンネルの receipt が揃うまで、その論文は完了扱いにしない。
 - **翻訳失敗がフィードより長生きする。** 翻訳に失敗した論文は永続queueに残るため、arXiv の RSS から消えた後も再試行される。
 - **未審査の外部候補が取得日数を過ぎても残る。** 審査が完了していない候補は、論文メタデータごと `external_pending` に保存される。
-- **取得cursorが障害の穴を埋める。** 隣接カテゴリの各取得元は、最後に取得へ成功した時刻を `external_cursors` に記録する。次回はその経過時間に `cursor_overlap_days`(デフォルト2日)を足した日数まで遡るため、Actions や arXiv API の障害が通常の取得窓を超えても、論文が黙って抜け落ちることはない。
+- **取得cursorが障害の穴を埋める。** OAI-PMHの各セットは、最後に全ページを取得できたときのサーバー `responseDate` を `oai_cursors` に記録する。次回はその `overlap_days`(デフォルト3日)前から取得するため、Actions・RSS・OAI-PMHの障害がどれだけ続いても、論文は遅れるだけで抜け落ちない。失敗や途中打ち切りの取得ではcursorを進めない。
 
 配信保証は意図的に **at-least-once** である。Discord が webhook を受理した直後、receipt を commit する前に runner が異常終了した場合だけは、Discord webhook に idempotency key がないため重複し得る。まれな重複よりも、黙った欠落を避ける設計を優先している。
 
@@ -1068,9 +1073,11 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 
 `config.json` の `feeds` に列挙したカテゴリ(現在は `"quant-ph"`)の RSS を順に取得し、論文を ID でまとめる。複数フィードで同一論文が登場した場合は、設定上先にあるフィードを優先する。
 
-`feed_backfill` では、カテゴリAPIも取得する。成功後の最小間隔は20時間、初回は7日分。以降は通常の7日または最終成功からの経過日数＋重複2日の広い方を使う。全ページの取得が完了した場合だけ `feed_cursors` を進め、ID重複排除と通常のquant-ph分類を適用する。APIは投稿日順で取得し、`include_replacements: false` の方針を維持するため、取得窓より古い論文の新しいcross-listは引き続きRSSに依存する。新規投稿の欠落を減らす仕組みであり、全過去cross-listを再構築するものではない。
+**OAI-PMHによる照合(`oai_harvest`)。** RSSは最新1回分のアナウンスしか載せず、アナウンスの約4時間後に作り直される。2026年9〜10月には、アナウンス日にRSSが終日空のまま配信された日があり、135本が一度も取得されなかった。そこで毎回、`https://oaipmh.arxiv.org/oai` から `physics:quant-ph` セットを `arXivRaw` 形式で、前回の完全取得の `overlap_days` 前から取得する。OAIのdatestampは投稿日ではなくアナウンス(と後のメタデータ変更)に従うため、モデレーションで数週間保留された論文も、アナウンスされた日に必ず見える。版が1つだけで、v1の投稿からdatestampまでが `max_announce_delay_days`(デフォルト90日)以内のレコードを、通常の `new`(primaryがquant-ph)または `cross` として扱う。差し替え版は `include_replacements: false` と同じく除外し、journal-refやDOIの追加だけで再登場する古い論文は日数上限で除外する。キュー済み・完了済みIDは通常どおり重複排除する。RSSに新着が無かったとき、または前日以前のアナウンスを回収したときは、発見フェーズがbot-emergencyへ報告する。当日分がRSSの作り直しより先にOAIへ載るのは正常なので、ログに残すだけにする。
 
-加えて `external_arxiv_queries` により、arXiv API のカスタム Atom クエリから、primary が隣接カテゴリで、かつ quant-ph へ cross-list されていない候補を機械的に絞って取得する。
+`oai_harvest.enabled` を `false` にすると従来の取得元に戻る。`feed_backfill`(20時間に1回、投稿日7日窓のAPI照会)と、後述のAPIキーワード検索である。
+
+加えて `external_arxiv_queries` により、primary が隣接カテゴリで、かつ quant-ph へ cross-list されていない候補を機械的に絞って取得する。OAI-PMH有効時は、各カテゴリのセット(`cs:cs:CR`、`cs:cs:CC`、`cs:cs:IT`)をアナウンス日基準で取得し、同じ検索語リストで手元で絞り込む(タイトルとabstract、単語境界で照合)。このため、以前の投稿日4日窓では見えなかった遅いアナウンスも候補になる。OAI-PMH無効時は arXiv API のカスタム Atom クエリを使う。
 
 | 取得元 | 主な行き先 | 検索語数 |
 | --- | --- | --- |
@@ -1243,9 +1250,12 @@ embed の色は、全成功なら緑、持ち越しありなら橙、Discord 投
 
 | メッセージ | タイミング |
 | --- | --- |
-| ✅ / 🟡 / 🚨 実行レポート | 通常通知とSciRate日次・週次ダイジェストの毎回の実行後 |
-| ⚠️ 翻訳全停止アラート | チェーン内の全翻訳バックエンドがその実行で停止し、論文が黙って持ち越されているとき |
-| 🚨 取得・配信失敗 | RSS フィード、arXiv API クエリ、Discord 配信のいずれかがその実行で失敗したとき |
+| ✅ / 🟡 / 🚨 実行レポート | 通常通知の毎回の実行後(SciRateダイジェストは手動実行したときのみ) |
+| ℹ️ 発見フェーズの通知 | RSSに無かったアナウンスをOAI-PMHで回収したとき(RSSが空、または前日以前の分) |
+| ⚠️ 翻訳全停止アラート | 翻訳待ちの論文があり、`main_translators` の全バックエンドが停止(サーキットブレーカー作動)または未設定(キー無し・Apps Script未デプロイ)のとき。翻訳フェーズが判定し、UTCで1日1回まで |
+| 🚨 取得・配信失敗 | RSS フィード、OAI-PMH・arXiv API の取得、Discord 配信のいずれかがその実行で失敗したとき |
+
+翻訳フェーズはバックエンド別の結果を `translation_status` に保存する。このため、別プロセスで動く配信フェーズのレポートにも、どのバックエンドが翻訳し、どれが停止したかが表示される。
 
 通知本体を動かさずにテスト送信したい場合は、`notify.yml` を手動実行して `test_emergency_alert` にチェックを入れる。
 
@@ -1290,6 +1300,8 @@ python3 scripts/repost_missing_channels.py --plan repost_plan.json --dry-run
 ---
 
 ## SciRate 日次・週次専用チャンネル
+
+> **2026-11-12から一時停止中。** `scirate_weekly.yml` から定期実行を削除し、手動実行だけを残している。これまで一度もダイジェストを配信できていない。公式エンドポイントはActionsに対してCloudflareのチャレンジ(HTTP 403)を返し、relayリポジトリにはスナップショットが一度も置かれていない。停止時点で保留中だった日次・週次の期間は `scirate_weekly_state.json` に残っている。定期実行を戻す前にその扱いを決めないと、すべて再試行される。
 
 `.github/workflows/scirate_weekly.yml` は SciRate の編集コンテンツをすべて `DISCORD_WEBHOOK_SCIRATE` の1チャンネルへ送る。QEC・QITなど通常の分類チャンネルには再投稿しない。
 

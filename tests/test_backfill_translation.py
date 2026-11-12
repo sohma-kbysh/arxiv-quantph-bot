@@ -113,6 +113,8 @@ class BackfillTranslationTests(unittest.TestCase):
         cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
         cfg["external_arxiv_queries"] = {}
         cfg["classify_with_llm"] = False
+        # Legacy API backfill is the fallback used only without OAI-PMH.
+        cfg["oai_harvest"] = {"enabled": False}
         row = {"id": "2610.1", "title": "Quantum code", "abstract": "Quantum error correction.",
                "authors": "", "link": "https://arxiv.org/abs/2610.1",
                "primary": "quant-ph", "categories": ["quant-ph"], "announce_type": "new"}

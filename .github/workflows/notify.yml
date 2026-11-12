@@ -22,6 +22,10 @@ on:
         description: "外部カテゴリだけを指定日数まで遡る (通常は0)"
         type: string
         default: "0"
+      recover_ids:
+        description: "取りこぼした論文IDを通常どおり分類・翻訳・配信する (空白/カンマ区切り。通常は空)"
+        type: string
+        default: ""
 
 
 permissions:
@@ -80,6 +84,7 @@ jobs:
           GOOGLE_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
           ARXIV_TEST_FEED: ${{ inputs.use_test_feed == true && 'test_feed.xml' || '' }}
           EXTERNAL_ARXIV_LOOKBACK_DAYS: ${{ inputs.external_backfill_days || '0' }}
+          ARXIV_RECOVER_IDS: ${{ inputs.recover_ids || '' }}
         run: python arxiv_bot.py --discover-only
 
       - name: Commit discovered delivery queue
@@ -97,6 +102,8 @@ jobs:
         if: ${{ inputs.test_emergency_alert != true }}
         continue-on-error: true
         env:
+          # The translation phase decides the all-backends-down alert.
+          DISCORD_WEBHOOK_BOT_EMERGENCY: ${{ secrets.DISCORD_WEBHOOK_BOT_EMERGENCY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
           AZURE_TRANSLATOR_KEY: ${{ secrets.AZURE_TRANSLATOR_KEY }}

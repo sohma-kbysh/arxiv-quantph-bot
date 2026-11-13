@@ -21747,13 +21747,9 @@
  },
  "translation_alerts": {},
  "translation_status": {
-  "at": "2026-11-13T08:00:47Z",
-  "translated": {
-   "azure": 330
-  },
-  "dead": [
-   "deepl"
-  ],
+  "at": "2026-11-13T11:57:58Z",
+  "translated": {},
+  "dead": [],
   "unconfigured": [
    "apps_script"
   ],
@@ -21766,7 +21762,7 @@
     "limit": 450000
    },
    "gemini": {
-    "period": "2026-11-12",
+    "period": "2026-11-13",
     "used": 0,
     "limit": 100
    }
@@ -21779,7 +21775,7 @@
    "limit": 450000
   },
   "gemini": {
-   "period": "2026-11-12",
+   "period": "2026-11-13",
    "used": 0,
    "limit": 100
   }

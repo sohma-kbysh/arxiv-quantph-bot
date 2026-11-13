@@ -528,12 +528,22 @@ class TranslationOutageTests(unittest.TestCase):
     def test_translate_phase_alerts_once_per_day_on_full_outage(self) -> None:
         cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
         self.assertEqual(cfg["main_translators"],
-                         ["deepl", "azure", "apps_script"])
+                         ["deepl", "azure", "google", "apps_script", "gemini"])
         env = {
             "DEEPL_API_KEY": "deepl-test",
             "AZURE_TRANSLATOR_KEY": "azure-test",
+            "GOOGLE_TRANSLATE_API_KEY": "google-test",
+            "GEMINI_API_KEY": "gemini-test",
             "DISCORD_WEBHOOK_BOT_EMERGENCY": "https://discord.test/emergency",
             "DISCORD_WEBHOOK_QEC": "https://discord.test/qec",
+        }
+        # Google's monthly and Gemini's daily free-tier budgets are used up.
+        local = arxiv_bot._pacific_time()
+        usage = {
+            "google": {"period": local.strftime("%Y-%m"),
+                       "used": cfg["google_monthly_char_limit"]},
+            "gemini": {"period": local.strftime("%Y-%m-%d"),
+                       "used": cfg["gemini_translation_daily_request_limit"]},
         }
         posts: list[tuple[str, dict]] = []
 
@@ -547,23 +557,36 @@ class TranslationOutageTests(unittest.TestCase):
             root = Path(tmp)
             (root / "cfg.json").write_text(json.dumps(cfg))
             (root / "state.json").write_text(json.dumps(
-                {"deliveries": {"2611.40001": queued("2611.40001")}}))
+                {"deliveries": {"2611.40001": queued("2611.40001")},
+                 "translation_usage": usage}))
             (root / "log.json").write_text("[]")
             with (patch.object(arxiv_bot, "_deepl_dead", False),
                   patch.object(arxiv_bot, "_azure_dead", False),
+                  patch.object(arxiv_bot, "_google_dead", False),
                   patch.object(arxiv_bot, "_apps_script_dead", False),
+                  patch.object(arxiv_bot, "_gemini_dead_models", set()),
+                  patch.object(arxiv_bot, "_translation_budget", None),
+                  patch.object(arxiv_bot, "_budget_exhausted", set()),
                   patch.object(arxiv_bot, "_translation_success", Counter())):
                 self.run_phase(root, "--translate-only", env, post_json)
                 self.run_phase(root, "--translate-only", env, post_json)
                 alerts = [p for u, p in posts if u.endswith("/emergency")]
                 self.assertEqual(len(alerts), 1)
-                self.assertIn("deepl: 停止", alerts[0]["content"])
-                self.assertIn("azure: 停止", alerts[0]["content"])
-                self.assertIn("apps_script: 未設定", alerts[0]["content"])
+                for state_text in ("deepl: 停止", "azure: 停止", "google: 停止",
+                                   "gemini: 停止", "apps_script: 未設定"):
+                    self.assertIn(state_text, alerts[0]["content"])
+                # Exhausted budgets never reach Google or Gemini.
+                self.assertFalse(any("googleapis" in u for u, _ in posts))
                 saved = json.loads((root / "state.json").read_text())
                 status = saved["translation_status"]
-                self.assertEqual(status["dead"], ["deepl", "azure"])
+                self.assertEqual(status["dead"],
+                                 ["deepl", "azure", "google", "gemini"])
+                self.assertEqual(status["budget_exhausted"],
+                                 ["gemini", "google"])
                 self.assertEqual(status["unconfigured"], ["apps_script"])
+                self.assertEqual(saved["translation_usage"], usage | {
+                    name: usage[name] | {"limit": usage[name]["used"]}
+                    for name in usage})
                 self.assertEqual(status["waiting"], 1)
                 self.assertEqual(
                     saved["translation_alerts"]["outage_notified_on"],
@@ -574,9 +597,12 @@ class TranslationOutageTests(unittest.TestCase):
                                   side_effect=lambda r, _c: reports.append(r)):
                     self.run_phase(root, "--deliver-only", env, post_json)
                 self.assertEqual(reports[0]["dead_translators"],
-                                 ["deepl", "azure"])
+                                 ["deepl", "azure", "google", "gemini"])
                 self.assertEqual(reports[0]["unconfigured_translators"],
                                  ["apps_script"])
+                self.assertEqual(
+                    reports[0]["free_tier"]["google"]["used"],
+                    cfg["google_monthly_char_limit"])
                 self.assertEqual(len(reports[0]["deferred"]), 1)
 
     def test_no_alert_while_a_configured_backend_still_works(self) -> None:

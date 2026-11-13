@@ -2243,6 +2243,81 @@ _translation_success: Counter = Counter()  # successful texts per backend
 _apps_script_dead = False
 _last_apps_script_call = 0.0
 
+# Free-tier budgets for translators whose overage is billed (Google Cloud
+# Translation) or whose quota is shared with classification (Gemini). Only a
+# process that loaded them from the bot state may use those backends, so any
+# other caller (SciRate, ad-hoc scripts) cannot spend outside the budget.
+_translation_budget: dict[str, dict] | None = None
+_budget_exhausted: set[str] = set()
+
+
+def _pacific_time(now: datetime | None = None) -> datetime:
+    """Google resets monthly credits and daily API quotas on Pacific time."""
+    now = now or datetime.now(timezone.utc)
+    try:
+        from zoneinfo import ZoneInfo
+        return now.astimezone(ZoneInfo("America/Los_Angeles"))
+    except Exception:  # noqa: BLE001 - tzdata unavailable
+        return now.astimezone(timezone(timedelta(hours=-8)))
+
+
+def load_translation_budget(state: dict, cfg: dict,
+                            now: datetime | None = None) -> dict[str, dict]:
+    """Load this Pacific month's Google characters and day's Gemini requests."""
+    global _translation_budget
+    usage = state.get("translation_usage")
+    usage = usage if isinstance(usage, dict) else {}
+    local = _pacific_time(now)
+    periods = {"google": local.strftime("%Y-%m"),
+               "gemini": local.strftime("%Y-%m-%d")}
+    limits = {
+        "google": int(cfg.get("google_monthly_char_limit", 0) or 0),
+        "gemini": int(cfg.get("gemini_translation_daily_request_limit", 0)
+                      or 0),
+    }
+    budget: dict[str, dict] = {}
+    for backend, period in periods.items():
+        saved = usage.get(backend)
+        saved = saved if isinstance(saved, dict) else {}
+        try:
+            used = int(saved.get("used", 0)) if saved.get("period") == period else 0
+        except (TypeError, ValueError):
+            used = 0
+        budget[backend] = {"period": period, "used": max(0, used),
+                           "limit": max(0, limits[backend])}
+    _translation_budget = budget
+    _budget_exhausted.clear()
+    return budget
+
+
+def save_translation_budget(state: dict) -> None:
+    """Persist budget usage with the state committed after translation."""
+    if _translation_budget is not None:
+        state["translation_usage"] = {
+            backend: dict(values)
+            for backend, values in _translation_budget.items()
+        }
+
+
+def reserve_translation_budget(backend: str, amount: int) -> bool:
+    """Reserve quota before a request; False once it would exceed the cap.
+
+    Reserving before sending counts failed or timed-out requests too, which
+    errs on the side of never exceeding the free allowance.
+    """
+    budget = (_translation_budget or {}).get(backend)
+    if (budget is None or budget["limit"] <= 0
+            or budget["used"] + amount > budget["limit"]):
+        if backend not in _budget_exhausted:
+            detail = (f"{budget['used']}/{budget['limit']}"
+                      if budget else "not loaded in this process")
+            print(f"[info] {backend} free-tier translation budget reached "
+                  f"({detail}); skipping {backend} for the rest of this run.")
+        _budget_exhausted.add(backend)
+        return False
+    budget["used"] += amount
+    return True
+
 
 def wait_for_backend_slot(last_call: float, min_interval: float) -> float:
     wait = last_call + min_interval - time.time()
@@ -2295,13 +2370,20 @@ def translate_deepl(text: str, cfg: dict) -> str | None:
 
 
 def translate_google(text: str, cfg: dict) -> str | None:
-    """Official Cloud Translation API (v2). Free tier: 500k chars/month."""
+    """Official Cloud Translation API (v2), capped below its free tier.
+
+    The monthly $10 credit covers 500k characters; anything above is billed,
+    so every request first reserves its characters from
+    ``google_monthly_char_limit`` (see reserve_translation_budget).
+    """
     global _google_dead, _last_google_call
-    if _google_dead:
+    if _google_dead or "google" in _budget_exhausted:
         return None
     key = os.environ.get("GOOGLE_TRANSLATE_API_KEY", "")
     if not key:
         _google_dead = True
+        return None
+    if not reserve_translation_budget("google", len(text)):
         return None
     url = ("https://translation.googleapis.com/language/translate/v2"
            f"?key={urllib.parse.quote(key)}")
@@ -2479,7 +2561,12 @@ def translate_batch(texts: list[str], cfg: dict,
                 continue
         subset = [texts[i] for i in target]
         if backend == "gemini":
-            sub = translate_gemini_batch(subset, cfg)
+            # One request per chunk, drawn from a daily budget so translation
+            # cannot exhaust the free quota that classification depends on.
+            sub = (translate_gemini_batch(subset, cfg)
+                   if "gemini" not in _budget_exhausted
+                   and reserve_translation_budget("gemini", 1)
+                   else [None] * len(subset))
         elif backend == "deepl":
             sub = [translate_deepl(t, cfg) for t in subset]
         elif backend == "azure":
@@ -2531,11 +2618,13 @@ _TRANSLATOR_DEAD_FLAGS = {
 
 
 def dead_translators(cfg: dict) -> list[str]:
-    """Backends in the configured chain that gave up for this run."""
+    """Backends in the chain that gave up, or used up their budget, this run."""
     chain = cfg.get("translators") or [cfg.get("translator", "gemini")]
     dead = []
     for b in chain:
-        if b == "gemini":
+        if b in _budget_exhausted:
+            dead.append(b)
+        elif b == "gemini":
             # Gemini-as-translator uses gemini_model; dead flags are per model.
             if cfg.get("gemini_model", "gemini-3.5-flash-lite") in _gemini_dead_models:
                 dead.append(b)
@@ -2598,7 +2687,14 @@ def record_translation_status(state: dict, entries: list[dict], cfg: dict,
         "dead": dead,
         "unconfigured": unconfigured,
         "waiting": waiting,
+        "budget_exhausted": sorted(_budget_exhausted & set(chain)),
+        "free_tier": {
+            backend: dict(values)
+            for backend, values in (_translation_budget or {}).items()
+            if backend in chain
+        },
     }
+    save_translation_budget(state)
     state["translation_status"] = status
     if waiting and chain and all(b in dead or b in unconfigured for b in chain):
         alerts = state.get("translation_alerts")
@@ -2731,6 +2827,13 @@ def notify_run_report(report: dict, cfg: dict) -> None:
     unconfigured = report.get("unconfigured_translators") or []
     if unconfigured and deferred:
         lines.append(f"ℹ️ 未設定の翻訳バックエンド: {', '.join(unconfigured)}")
+    free_tier = report.get("free_tier") or {}
+    if free_tier:
+        units = {"google": "字/月", "gemini": "回/日"}
+        lines.append("📊 無料枠の使用量: " + " / ".join(
+            f"{backend} {values.get('used', 0):,}/{values.get('limit', 0):,}"
+            f"{units.get(backend, '')}"
+            for backend, values in free_tier.items()))
     if not report.get("candidates"):
         lines.append("🈳 新規の投稿対象論文はありませんでした。")
 
@@ -3663,6 +3766,7 @@ def main() -> None:
     # genre, so external sources cannot consume translation quota first.
     entries.sort(key=lambda e: translation_priority(e, cfg))
     if not dry_run and not deliver_only and not discover_only:
+        load_translation_budget(state, cfg)
         to_tr = [e for e in entries if e["need_tr"] and e["jp"] is None and (
             e["genres"] or not cfg.get("translate_only_matched", False))]
         for i in range(0, len(to_tr), batch_size):
@@ -3860,6 +3964,7 @@ def main() -> None:
         "dead_translators": (translation_status.get("dead")
                              or dead_translators(cfg)),
         "unconfigured_translators": translation_status.get("unconfigured", []),
+        "free_tier": translation_status.get("free_tier", {}),
         "translation_status_at": translation_status.get("at"),
         "external_review": external_stats,
     }, cfg)

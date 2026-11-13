@@ -45,7 +45,7 @@ POSTするJSONの形式:
 | サービス | 無料条件・制約 | このbotでの扱い |
 | --- | --- | --- |
 | Azure Translator F0 | 200万文字/月 | 現在401が出る場合、Azureポータルの有効なリソース・キー・リージョンの組み合わせを確認する。公開リポジトリから正しい認証情報を復元することはできない。 |
-| Google Cloud Translation NMT | 50万文字/月相当の毎月$10控除。Basic/Advanced合算 | 超過分は有料なので使用量を管理する。Apps Scriptとは別の枠。 |
+| Google Cloud Translation NMT | 50万文字/月相当の毎月$10控除。Basic/Advanced合算 | 超過分は有料。2026-11-12から通常botのチェーンに入れ、botが太平洋時間の月ごとに `google_monthly_char_limit`(45万字)で止める。Apps Scriptとは別の枠。 |
 | DeepL | 旧API Freeは50万文字/月。新規受付終了。新しいDeveloperは累計100万文字で更新なし | 既存アカウントがどのプランか確認する。新規登録で毎月無料枠が得られると想定しない。 |
 | Nani | 無料のWeb・デスクトップ版あり。外部向け公開APIなし | botの翻訳先としては採用しない。アプリ起動用URLも結果を返せない。 |
 | MyMemory | 匿名5,000文字/日、有効な連絡先メール指定で50,000文字/日。1要求500**バイト**まで | 文単位への分割が必要。1日分の上限がある補助経路であり、日本語・専門用語の品質は要検証。 |
@@ -55,3 +55,5 @@ POSTするJSONの形式:
 根拠: [Azure料金](https://azure.microsoft.com/en-us/pricing/details/translator/)、[Azure認証](https://learn.microsoft.com/en-us/azure/ai-services/translator/text-translation/reference/authentication)、[Google Cloud料金](https://cloud.google.com/products/translate/pricing)、[DeepL APIプラン](https://support.deepl.com/hc/en-us/articles/360021200939-DeepL-API-plans)、[Nani公式FAQ](https://nani.now/en)、[Naniアプリ連携仕様](https://nani.now/en/blog/custom-url-scheme-translate)、[MyMemory上限](https://mymemory.translated.net/doc/usagelimits.php)、[MyMemory API仕様](https://mymemory.translated.net/doc/spec.php)、[LibreTranslate](https://portal.libretranslate.com/)、[TexTra規約](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/content/policy/)、[NICTの論文検索API説明](https://www.nict.go.jp/publicity/topics/2025/06/11-1.html)。
 
 月333万文字ならAzureとGoogle Cloudの無料分の合計250万文字だけでは足りない。旧DeepL無料枠が維持されても合計300万文字なので、追加経路の評価と、上限到達後に保留できるキューが必要になる。
+
+2026-11-12時点の通常botの順序は `deepl → azure → google → apps_script → gemini`。Google Cloudは上記の上限まで使い、Geminiは分類用project(課金無効)の無料枠から1日 `gemini_translation_daily_request_limit`(100)回までを最後の予備として使う。不足分を確実に埋められるのは、このApps Scriptのデプロイである。

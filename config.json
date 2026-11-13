@@ -379,7 +379,7 @@
   },
 
   "translators": ["deepl", "azure", "google"],
-  "main_translators": ["deepl", "azure", "apps_script"],
+  "main_translators": ["deepl", "azure", "google", "apps_script", "gemini"],
   "target_language": "ja",
   "target_language_name": "Japanese",
   "translated_title_label": "邦題",
@@ -407,6 +407,8 @@
   "max_translate_chars": 2000,
   "azure_min_interval_sec": 1.2,
   "azure_max_retries": 4,
+  "google_monthly_char_limit": 450000,
+  "gemini_translation_daily_request_limit": 100,
   "google_min_interval_sec": 1.2,
   "google_max_retries": 3,
   "translation_priority_genres": [
@@ -427,7 +429,7 @@
     "other"
   ],
   "translate_only_matched": false,
-  "google_skip_translation_genres": ["other", "foundations", "sensing", "nisq"],
+  "google_skip_translation_genres": [],
   "require_translation": true,
   "require_translated_title": true,
   "allow_untranslated_low_priority": false,

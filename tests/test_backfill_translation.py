@@ -214,9 +214,15 @@ class BackfillTranslationTests(unittest.TestCase):
                     self.assertFalse(saved["deliveries"]["2610.1"]["allow_untranslated"])
                     post.assert_not_called()
 
-    def test_default_chain_excludes_automatic_paid_translation(self):
+    def test_default_chain_uses_paid_backend_only_inside_free_tier(self):
         cfg = arxiv_bot.load_json(arxiv_bot.CONFIG_PATH, {})
-        self.assertEqual(cfg["main_translators"], ["deepl", "azure", "apps_script"])
+        self.assertEqual(cfg["main_translators"],
+                         ["deepl", "azure", "google", "apps_script", "gemini"])
+        # Google Cloud bills beyond 500k characters per month; the bot-side
+        # cap must stay below it, and Gemini must keep a daily request cap.
+        self.assertGreater(cfg["google_monthly_char_limit"], 0)
+        self.assertLessEqual(cfg["google_monthly_char_limit"], 450_000)
+        self.assertGreater(cfg["gemini_translation_daily_request_limit"], 0)
         self.assertEqual(cfg["translators"], ["deepl", "azure", "google"])
         self.assertTrue(cfg["require_translation"])
         self.assertTrue(cfg["require_translated_title"])

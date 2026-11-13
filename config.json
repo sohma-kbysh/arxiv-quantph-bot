@@ -10,7 +10,9 @@
     "timeout_sec": 120,
     "retry_attempts": 4,
     "retry_backoff_sec": 15,
-    "retry_backoff_max_sec": 120
+    "retry_backoff_max_sec": 120,
+    "max_response_age_minutes": 30,
+    "cache_retry_attempts": 4
   },
   "feed_backfill": {
     "enabled": true,

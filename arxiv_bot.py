@@ -718,12 +718,16 @@ def parse_oai_list_records(raw: bytes) -> tuple[list[dict], str | None, str, int
         raise ValueError("arXiv OAI-PMH response has no responseDate")
     error = root.find("oai:error", OAI_NS)
     if error is not None:
-        if error.get("code") == "noRecordsMatch":
+        # An empty harvest, or a GetRecord for an identifier arXiv does not
+        # have, is an answer rather than a failure.
+        if error.get("code") in ("noRecordsMatch", "idDoesNotExist"):
             return [], None, response_date, 0
         raise ValueError(
             f"arXiv OAI-PMH error {error.get('code', '?')}: "
             f"{(error.text or '').strip()[:200]}")
     listing = root.find("oai:ListRecords", OAI_NS)
+    if listing is None:
+        listing = root.find("oai:GetRecord", OAI_NS)
     if listing is None:
         raise ValueError("arXiv OAI-PMH response has no ListRecords element")
 
@@ -767,6 +771,8 @@ def parse_oai_list_records(raw: bytes) -> tuple[list[dict], str | None, str, int
             "updated": versions[-1][1].strftime("%Y-%m-%dT%H:%M:%SZ"),
             "version_count": len(versions),
             "oai_datestamp": datestamp,
+            "withdrawn": bool(re.search(
+                r"\bwithdrawn\b", clean(meta, "raw:comments"), flags=re.I)),
         })
     token_node = listing.find("oai:resumptionToken", OAI_NS)
     token = (token_node.text or "").strip() if token_node is not None else ""
@@ -793,23 +799,30 @@ def oai_harvest_from_date(cursor: str | None, rule: dict,
     return start.date().isoformat()
 
 
-def fetch_oai_records(set_spec: str, from_date: str,
-                      rule: dict) -> tuple[list[dict], str, int]:
-    """Harvest every arXivRaw record in ``set_spec`` with datestamp >= from_date.
+def _oai_served_at(response_date: str) -> datetime:
+    try:
+        served = datetime.fromisoformat(response_date.replace("Z", "+00:00"))
+    except ValueError as err:
+        raise ValueError("arXiv OAI-PMH responseDate is not ISO 8601") from err
+    return served if served.tzinfo else served.replace(tzinfo=timezone.utc)
 
-    Returns ``(records, cursor, skipped)``. ``cursor`` is the server's
-    responseDate for the first page (never later than the local clock), so
-    a stale cached response cannot move the next harvest past unseen records.
-    Repeated resumption tokens or too many pages raise instead of returning
-    a silently truncated harvest.
+
+def _harvest_oai_once(set_spec: str, from_date: str, until_date: str,
+                      rule: dict) -> tuple[list[dict], datetime, datetime, int]:
+    """One complete ListRecords harvest.
+
+    Returns ``(records, first_served, oldest_served, skipped)`` where the
+    served times are the pages' responseDate values. Repeated resumption
+    tokens or too many pages raise instead of returning a truncated harvest.
     """
     endpoint = str(rule.get("endpoint") or OAI_ENDPOINT)
     max_pages = max(1, int(rule.get("max_pages", 100)))
     interval = max(0.0, float(rule.get("page_interval_sec", 3)))
     params = {"verb": "ListRecords", "metadataPrefix": "arXivRaw",
-              "set": set_spec, "from": from_date}
+              "set": set_spec, "from": from_date, "until": until_date}
     by_id: dict[str, dict] = {}
-    cursor: str | None = None
+    first: datetime | None = None
+    oldest: datetime | None = None
     skipped = 0
     tokens: set[str] = set()
     for page in range(max_pages):
@@ -819,26 +832,61 @@ def fetch_oai_records(set_spec: str, from_date: str,
             f"{endpoint}?{urllib.parse.urlencode(params)}", rule)
         rows, token, response_date, bad = parse_oai_list_records(raw)
         skipped += bad
-        if cursor is None:
-            try:
-                served = datetime.fromisoformat(
-                    response_date.replace("Z", "+00:00"))
-            except ValueError as err:
-                raise ValueError(
-                    "arXiv OAI-PMH responseDate is not ISO 8601") from err
-            if served.tzinfo is None:
-                served = served.replace(tzinfo=timezone.utc)
-            served = min(served, datetime.now(timezone.utc))
-            cursor = served.strftime("%Y-%m-%dT%H:%M:%SZ")
+        served = _oai_served_at(response_date)
+        first = first or served
+        oldest = served if oldest is None else min(oldest, served)
         for row in rows:
             by_id[row["id"]] = row
         if not token:
-            return list(by_id.values()), cursor, skipped
+            return list(by_id.values()), first, oldest, skipped
         if token in tokens:
             raise ValueError("arXiv OAI-PMH repeated a resumptionToken")
         tokens.add(token)
         params = {"verb": "ListRecords", "resumptionToken": token}
     raise ValueError("arXiv OAI-PMH harvest exceeded max_pages; cursor retained")
+
+
+def fetch_oai_records(set_spec: str, from_date: str, rule: dict,
+                      now: datetime | None = None
+                      ) -> tuple[list[dict], str, int]:
+    """Harvest every arXivRaw record in ``set_spec`` with datestamp >= from_date.
+
+    arXiv's CDN can answer a repeated ListRecords URL with a response that
+    was generated hours earlier; it ignores no-cache request headers, and
+    OAI-PMH accepts no argument but day-granular dates. Each harvest
+    therefore pins ``until`` to today's UTC date and, while a page's
+    responseDate is older than ``max_response_age_minutes``, retries with
+    ``from`` one day earlier (a different URL) up to ``cache_retry_attempts``
+    times. If every attempt is stale, the freshest harvest is returned.
+
+    Returns ``(records, cursor, skipped)``. ``cursor`` is the accepted
+    harvest's first responseDate (never later than the local clock), so a
+    stale response can delay but never skip the next harvest.
+    """
+    max_age = timedelta(minutes=max(
+        1.0, float(rule.get("max_response_age_minutes", 30))))
+    attempts = max(1, int(rule.get("cache_retry_attempts", 4)))
+    start = datetime.fromisoformat(from_date).date()
+    best: tuple[list[dict], datetime, int] | None = None
+    for attempt in range(attempts):
+        requested = now or datetime.now(timezone.utc)
+        until = requested.date()
+        since = min(start - timedelta(days=attempt), until)
+        if attempt:
+            time.sleep(max(0.0, float(rule.get("page_interval_sec", 3))))
+        records, first, oldest, skipped = _harvest_oai_once(
+            set_spec, since.isoformat(), until.isoformat(), rule)
+        if best is None or first > best[1]:
+            best = (records, first, skipped)
+        if requested - oldest <= max_age:
+            best = (records, first, skipped)
+            break
+        print(f"[warn] OAI-PMH {set_spec} from={since}: cached response "
+              f"from {oldest:%Y-%m-%dT%H:%MZ}; retrying with an earlier "
+              "from date", file=sys.stderr)
+    records, first, skipped = best
+    cursor = min(first, now or datetime.now(timezone.utc))
+    return records, cursor.strftime("%Y-%m-%dT%H:%M:%SZ"), skipped
 
 
 def oai_record_is_recent(record: dict, max_delay_days: int) -> bool:
@@ -860,7 +908,7 @@ def oai_record_is_recent(record: dict, max_delay_days: int) -> bool:
 def _paper_from_oai(record: dict, **fields: str) -> dict:
     paper = {
         key: value for key, value in record.items()
-        if key not in ("version_count", "oai_datestamp")
+        if key not in ("version_count", "oai_datestamp", "withdrawn")
     }
     paper.update(fields)
     return paper
@@ -917,34 +965,30 @@ def fetch_recovery_papers(ids: list[str], category: str,
     """Fetch operator-listed missed papers as normal new/cross feed rows.
 
     Used once to deliver announcements that every automatic source missed.
-    Returns ``(papers, rejected)``; an ID is rejected when the API does not
-    return it, it is no longer listed in ``category``, or it was withdrawn.
+    Metadata comes from OAI-PMH GetRecord: the arXiv API rate-limits GitHub
+    runners (HTTP 429/503 for minutes at a time), while OAI-PMH serves them.
+    Returns ``(papers, rejected)``; an ID is rejected when arXiv does not
+    have it, it is no longer listed in ``category``, or it was withdrawn.
     """
+    endpoint = str(rule.get("endpoint") or OAI_ENDPOINT)
+    interval = max(0.0, float(rule.get("page_interval_sec", 3)))
     papers: list[dict] = []
     rejected: list[str] = []
-    for start in range(0, len(ids), 100):
-        if start:
-            time.sleep(3)
-        chunk = ids[start:start + 100]
-        url = "https://export.arxiv.org/api/query?" + urllib.parse.urlencode({
-            "id_list": ",".join(chunk), "max_results": len(chunk)})
-        raw = http_get_arxiv_api(url, rule)
-        rows = {row["id"]: row for row in parse_external_atom(raw, category)}
-        withdrawn = set()
-        for entry in ET.fromstring(raw).findall("atom:entry", ATOM_NS):
-            comment = entry.findtext("arxiv:comment", "", ATOM_NS) or ""
-            if re.search(r"\bwithdrawn\b", comment, flags=re.I):
-                withdrawn.add(re.sub(r"v\d+$", "", entry.findtext(
-                    "atom:id", "", ATOM_NS).strip().rsplit("/", 1)[-1]))
-        for pid in chunk:
-            row = rows.get(pid)
-            if (row is None or pid in withdrawn
-                    or category not in row.get("categories", [])):
-                rejected.append(pid)
-                continue
-            row.update(source_feed=category, announce_type=(
-                "new" if row["primary"] == category else "cross"))
-            papers.append(row)
+    for index, pid in enumerate(ids):
+        if index:
+            time.sleep(interval)
+        url = endpoint + "?" + urllib.parse.urlencode({
+            "verb": "GetRecord", "metadataPrefix": "arXivRaw",
+            "identifier": f"oai:arXiv.org:{pid}"})
+        rows = parse_oai_list_records(http_get_arxiv_api(url, rule))[0]
+        record = next((row for row in rows if row["id"] == pid), None)
+        if (record is None or record.get("withdrawn")
+                or category not in record.get("categories", [])):
+            rejected.append(pid)
+            continue
+        papers.append(_paper_from_oai(
+            record, source_feed=category,
+            announce_type="new" if record["primary"] == category else "cross"))
     return papers, rejected
 
 

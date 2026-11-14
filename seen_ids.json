@@ -21747,7 +21747,7 @@
  },
  "translation_alerts": {},
  "translation_status": {
-  "at": "2026-11-14T07:31:32Z",
+  "at": "2026-11-14T11:16:22Z",
   "translated": {},
   "dead": [],
   "unconfigured": [
@@ -21762,7 +21762,7 @@
     "limit": 450000
    },
    "gemini": {
-    "period": "2026-11-13",
+    "period": "2026-11-14",
     "used": 0,
     "limit": 100
    }
@@ -21775,7 +21775,7 @@
    "limit": 450000
   },
   "gemini": {
-   "period": "2026-11-13",
+   "period": "2026-11-14",
    "used": 0,
    "limit": 100
   }

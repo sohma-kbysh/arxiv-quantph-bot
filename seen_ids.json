@@ -22017,13 +22017,9 @@
  },
  "translation_alerts": {},
  "translation_status": {
-  "at": "2026-11-14T12:36:47Z",
-  "translated": {
-   "azure": 270
-  },
-  "dead": [
-   "deepl"
-  ],
+  "at": "2026-11-14T14:00:35Z",
+  "translated": {},
+  "dead": [],
   "unconfigured": [
    "apps_script"
   ],

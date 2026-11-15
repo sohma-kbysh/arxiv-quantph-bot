@@ -72,7 +72,7 @@ The workflow can also be run manually (`workflow_dispatch`) with three inputs.
 | `external_backfill_days` | `"0"` | One-time lookback in days for the adjacent-category sources only (the OAI harvest starts that many days ago). `0` keeps the cursor-based window |
 | `recover_ids` | `""` | One-time recovery: arXiv IDs (space or comma separated) that every source missed. Their metadata is fetched with OAI-PMH `GetRecord` and they go through normal classification, translation and delivery; IDs already queued or delivered are skipped |
 
-A separate SciRate workflow (weekday Top 3 and Sunday weekly 30+ digest) is **paused**: its schedule was removed on 2026-11-12 because SciRate's endpoint has never been reachable from Actions. It can still be run manually.
+A separate SciRate workflow (weekday Top 3 and Sunday weekly 30+ digest) is **paused**: its schedule was removed on 2026-11-12 because SciRate's endpoint has never been reachable from Actions. It can still be run manually. Since 2026-11-15 the workflow itself is also disabled in the repository's Actions settings; enable it there before a manual run.
 
 ---
 
@@ -794,6 +794,8 @@ Phrase matching normalizes case, hyphens, and common plural forms. New classific
 | --- | --- | --- |
 | `main_translators` | `["deepl","azure","google","apps_script","gemini"]` | Main notifier translation order; overrides `translators` only in the main notifier |
 | `google_monthly_char_limit` | `450000` | Characters per Pacific-time month the bot may send to Google Cloud Translation (free credit: 500,000). `0` disables Google |
+| `delivery_spread` | `{"enabled": true, "batches_per_day": 3, "max_hold_hours": 20}` | Scheduled runs post a day's papers in `batches_per_day` parts instead of all at once: the k-th delivering run of a UTC day posts every (batches − k)-th ready paper of the priority-sorted queue, and the last one posts the rest. Papers already posted to one channel, or queued for `max_hold_hours`, are never held. Manual (`workflow_dispatch`) runs post everything |
+| `source_failure_alert_after_runs` | `3` | A source (RSS, OAI-PMH, arXiv API) that fails is retried by the next run from its unchanged cursor. The run only fails and alerts once the same source has failed this many runs in a row; earlier failures are listed in the run report as notices |
 | `gemini_translation_daily_request_limit` | `100` | Gemini translation requests per Pacific-time day (each translates up to 5 texts). `0` disables Gemini translation |
 | `translators` | `["deepl","azure","google"]` | Existing SciRate/direct-caller translation order, retained unchanged |
 | `target_language` | `"ja"` | Translation target language code. Passed to each translation backend unless overridden |
@@ -1054,7 +1056,7 @@ GitHub Actions により**月〜土に1日3回**自動実行される(cron の�
 | `external_backfill_days` | `"0"` | 隣接カテゴリの取得元だけを指定日数まで遡る一回限りの設定(OAI取得をその日数前から開始)。`0` ならcursor基準の通常範囲 |
 | `recover_ids` | `""` | 一回限りの回収。全取得元が取りこぼしたarXiv ID(空白/カンマ区切り)。OAI-PMHの `GetRecord` でメタデータを取得し、通常の分類・翻訳・配信に流す。キュー済み・配信済みのIDは飛ばす |
 
-SciRateの平日Top 3・日曜週次30+を投稿する別workflowは**一時停止中**。SciRateの取得元にActionsから一度も到達できなかったため、2026-11-12に定期実行(schedule)を削除した。手動実行は可能。
+SciRateの平日Top 3・日曜週次30+を投稿する別workflowは**一時停止中**。SciRateの取得元にActionsから一度も到達できなかったため、2026-11-12に定期実行(schedule)を削除した。手動実行は可能。 2026-11-15以降はworkflow自体もActionsの設定で無効化している。手動実行する場合は先に有効化する。
 
 ---
 
@@ -1685,6 +1687,8 @@ quantum secret sharing, quantum authentication, quantum bit commitment
 | --- | --- | --- |
 | `main_translators` | `["deepl","azure","google","apps_script","gemini"]` | 通常botだけの翻訳順。通常bot内でのみ `translators` を上書き |
 | `google_monthly_char_limit` | `450000` | Google Cloud Translationへ送る太平洋時間の月あたり文字数(無料控除は50万字)。`0` でGoogleを使わない |
+| `delivery_spread` | `{"enabled": true, "batches_per_day": 3, "max_hold_hours": 20}` | 定期実行は1日分の論文を一度に流さず、`batches_per_day` 回に分けて配信する。UTCの1日のうちk回目の配信では、優先度順のキューから(回数−k)本おきに選び、最後の回で残りをすべて配信する。一部のチャンネルに配信済みの論文と、`max_hold_hours` 以上待った論文は保留しない。手動実行(`workflow_dispatch`)はすべて配信する |
+| `source_failure_alert_after_runs` | `3` | 取得元(RSS・OAI-PMH・arXiv API)が失敗しても、次の実行が同じカーソルから取り直す。同じ取得元がこの回数だけ連続で失敗したときに初めて実行を失敗扱いにして警告する。それまでの失敗は実行レポートに補足として載る |
 | `gemini_translation_daily_request_limit` | `100` | 太平洋時間の1日あたりのGemini翻訳リクエスト数(1回で最大5件)。`0` でGemini翻訳を使わない |
 | `translators` | `["deepl","azure","google"]` | SciRate・直接呼び出し用の従来の翻訳順を維持 |
 | `target_language` | `"ja"` | 翻訳先言語コード。個別指定がない場合は各翻訳バックエンドに渡される |

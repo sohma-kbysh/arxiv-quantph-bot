@@ -1,5 +1,7 @@
 {
   "feeds": ["quant-ph"],
+  "delivery_spread": {"enabled": true, "batches_per_day": 3, "max_hold_hours": 20},
+  "source_failure_alert_after_runs": 3,
   "oai_harvest": {
     "enabled": true,
     "endpoint": "https://oaipmh.arxiv.org/oai",

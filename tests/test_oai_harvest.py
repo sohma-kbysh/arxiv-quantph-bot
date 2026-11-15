@@ -401,14 +401,54 @@ class OaiMainFlowTests(unittest.TestCase):
         }
         state = {"seen": [], "oai_cursors": {
             "physics:quant-ph": "2026-11-01T00:00:00Z"}}
+        cfg = self.base_cfg()
+        cfg["source_failure_alert_after_runs"] = 1
         code, saved, reports, _ = self.run_discover(
-            self.base_cfg(), state, [rss_row], TimeoutError("offline"))
+            cfg, state, [rss_row], TimeoutError("offline"))
         self.assertEqual(code, 2)
         self.assertEqual(saved["oai_cursors"]["physics:quant-ph"],
                          "2026-11-01T00:00:00Z")
         self.assertIn("2611.20001", saved["deliveries"])
         self.assertEqual(reports[0]["source_failures"][0]["source"],
                          "arXiv OAI-PMH:physics:quant-ph")
+
+    def test_transient_source_failure_only_fails_after_repeats(self) -> None:
+        rss_row = {
+            "id": "2611.20001", "title": "Quantum codes", "link": "",
+            "authors": "", "announce_type": "new", "categories": ["quant-ph"],
+            "primary": "quant-ph", "abstract": "Quantum error correction.",
+        }
+        source = "arXiv OAI-PMH:physics:quant-ph"
+        cfg = self.base_cfg()
+        cfg["source_failure_alert_after_runs"] = 3
+
+        # First failure: the run stays green, the paper is queued, and the
+        # failure is reported as a notice with its streak.
+        code, saved, reports, _ = self.run_discover(
+            cfg, {"seen": []}, [rss_row], TimeoutError("offline"))
+        self.assertIsNone(code)
+        self.assertIn("2611.20001", saved["deliveries"])
+        self.assertEqual(saved["source_failure_streaks"], {source: 1})
+        self.assertEqual(reports[0]["source_failures"], [])
+        self.assertEqual(reports[0]["source_notices"][0]["source"], source)
+        self.assertIn("連続1回目", reports[0]["source_notices"][0]["message"])
+
+        # Third consecutive failure: the run fails and alerts.
+        code, saved, reports, _ = self.run_discover(
+            cfg, {"seen": [], "source_failure_streaks": {source: 2}},
+            [rss_row], TimeoutError("offline"))
+        self.assertEqual(code, 2)
+        self.assertEqual(saved["source_failure_streaks"], {source: 3})
+        self.assertEqual(reports[0]["source_failures"][0]["source"], source)
+
+        # A successful run resets the streak.
+        page = oai_page([raw_record("2611.20001", "2026-11-11", [V_NOV10],
+                                    "quant-ph")])
+        code, saved, _, _ = self.run_discover(
+            cfg, {"seen": [], "source_failure_streaks": {source: 2}},
+            [rss_row], [page])
+        self.assertIsNone(code)
+        self.assertEqual(saved["source_failure_streaks"], {})
 
     def test_external_categories_use_announcement_harvest(self) -> None:
         cfg = self.base_cfg()

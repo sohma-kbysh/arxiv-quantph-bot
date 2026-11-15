@@ -145,6 +145,9 @@ jobs:
           DISCORD_WEBHOOK_SENSING: ${{ secrets.DISCORD_WEBHOOK_SENSING }}
           DISCORD_WEBHOOK_FOUNDATIONS: ${{ secrets.DISCORD_WEBHOOK_FOUNDATIONS }}
           DISCORD_WEBHOOK_OTHER: ${{ secrets.DISCORD_WEBHOOK_OTHER }}
+          # 定期実行は1日分を delivery_spread の回数に分けて配信する。
+          # 手動実行は保留分も含めてすべて配信する。
+          DELIVERY_SPREAD_DISABLED: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
         run: python arxiv_bot.py --deliver-only
 
       - name: Commit delivery receipts

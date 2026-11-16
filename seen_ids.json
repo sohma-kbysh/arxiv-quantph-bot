@@ -22188,13 +22188,9 @@
  },
  "translation_alerts": {},
  "translation_status": {
-  "at": "2026-11-16T07:57:59Z",
-  "translated": {
-   "azure": 152
-  },
-  "dead": [
-   "deepl"
-  ],
+  "at": "2026-11-16T12:30:57Z",
+  "translated": {},
+  "dead": [],
   "unconfigured": [
    "apps_script"
   ],
@@ -22207,7 +22203,7 @@
     "limit": 450000
    },
    "gemini": {
-    "period": "2026-11-15",
+    "period": "2026-11-16",
     "used": 0,
     "limit": 100
    }
@@ -22220,7 +22216,7 @@
    "limit": 450000
   },
   "gemini": {
-   "period": "2026-11-15",
+   "period": "2026-11-16",
    "used": 0,
    "limit": 100
   }

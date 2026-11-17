@@ -1,41 +1,5 @@
 [
  {
-  "delivery_id": "main:2609.15844",
-  "id": "2609.15844",
-  "posted_at": "2026-09-15T06:24:50Z",
-  "title": "Absolute frequency measurement of the $^{40}$Ca$^{+}$ clock transition using a GNSS link to the SI second",
-  "title_ja": "GNSSリンクをSI秒に使った$^{40}$Ca$^{+}$クロック遷移の絶対周波数測定",
-  "title_translated": "GNSSリンクをSI秒に使った$^{40}$Ca$^{+}$クロック遷移の絶対周波数測定",
-  "translation_language": "ja",
-  "authors": "M. Guevara-Bertsch, M. K. Joshi, M. I Hussain, R. Blatt, C. F. Roos",
-  "link": "https://arxiv.org/abs/2609.15844",
-  "primary": "physics.atom-ph",
-  "categories": [
-   "physics.atom-ph",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "sensing"
-  ],
-  "genre_names": [
-   "量子センシング・計測"
-  ],
-  "target_genre_ids": [
-   "sensing"
-  ],
-  "target_genre_names": [
-   "量子センシング・計測"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "We report the absolute frequency measurement of the $4s$ $ ^{2}S_{1/2}\\leftrightarrow 3d$ $^{2}D_{5/2}$ $^{40}$Ca$^{+}$ clock transition with respect to the SI second. To perform this measurement, a link between our laboratory in Innsbruck and the clocks realizing the Coordinated Universal Time at the Physikalisch-Technische Bundesanstalt (PTB) in Braunschweig was installed and characterized using the Global Navigation Satellite System GNSS. The comparison between our clock and the ones at PTB was done using the Precise Point Positioning technique. After the evaluation of the systematic shifts, the measured transition frequency is 411 042 129 776 401.2$\\pm$0.6 Hz with a fractional uncertainty of 1.5 $\\times$ 10$^{-15}$. The stability of the clock measurements was also corroborated by comparing two different calcium ion clock experiments, which share the clock laser source at our institute. Furthermore, after careful evaluation of the trap-drive induced ac magnetic fields, we estimate ac Zeeman shifts on the $D_{5/2}$ sublevels and reevaluate the Land\\'e g-factor of the $3d$ $^{2}D_{5/2}$ level to be g$_{5/2}= 1.200329(1)$.",
-  "abstract_ja": "私たちは、シニー単位秒に対する$4s$ $ ^{2}S_{1/2}\\leftrightarrow 3d$ $^{2}D_{5/2}$ $^{40}$Ca$^{+}$の時計遷移の絶対周波数測定を報告します。この測定を行うために、インスブルックの研究所とブラウンシュヴァイクの物理技術連邦時(PTB)で協調普遍時を実現する時計との間にリンクを設置し、グローバルナビゲーション衛星システムGNSSを用いて特性評価しました。私たちの時計とPTBの時計の比較は、精密点位置測定技術を用いて行われました。系統的なシフトの評価後、測定された遷移周波数は411 042 129 776 401.2$\\pm$0.6 Hzで、1.5 $\\times$ 10$^{-15}$です。クロック測定の安定性は、当研究所で共有するクロックレーザー源を共有する2つの異なるカルシウムイオンクロック実験の比較によっても裏付けられました。さらに、トラップ駆動による交流磁場の慎重な評価の後、$D_{5/2}$のサブレベルの交流ゼーマンシフトを推定し、$3d$ $^{2}D_{5/2}$レベルのランドGファクターをg$_{5/2}= 1.200329(1)$と再評価しました。",
-  "abstract_translated": "私たちは、シニー単位秒に対する$4s$ $ ^{2}S_{1/2}\\leftrightarrow 3d$ $^{2}D_{5/2}$ $^{40}$Ca$^{+}$の時計遷移の絶対周波数測定を報告します。この測定を行うために、インスブルックの研究所とブラウンシュヴァイクの物理技術連邦時(PTB)で協調普遍時を実現する時計との間にリンクを設置し、グローバルナビゲーション衛星システムGNSSを用いて特性評価しました。私たちの時計とPTBの時計の比較は、精密点位置測定技術を用いて行われました。系統的なシフトの評価後、測定された遷移周波数は411 042 129 776 401.2$\\pm$0.6 Hzで、1.5 $\\times$ 10$^{-15}$です。クロック測定の安定性は、当研究所で共有するクロックレーザー源を共有する2つの異なるカルシウムイオンクロック実験の比較によっても裏付けられました。さらに、トラップ駆動による交流磁場の慎重な評価の後、$D_{5/2}$のサブレベルの交流ゼーマンシフトを推定し、$3d$ $^{2}D_{5/2}$レベルのランドGファクターをg$_{5/2}= 1.200329(1)$と再評価しました。",
-  "last_delivered_at": "2026-09-15T06:24:50Z"
- },
- {
   "delivery_id": "main:2609.13312",
   "id": "2609.13312",
   "posted_at": "2026-09-15T06:24:52Z",
@@ -204229,5 +204193,50 @@
   "abstract_ja": "Wi-Fi接続を保護する鍵合意はDiffie-Hellmanに依存しており、十分な能力を持つ量子コンピュータであればこれを破るでしょう。したがって、敵対者は今日、関連付けを記録し、数年後にそのトラフィックを復号化することができます。したがって、鍵確立はIEEE 802.11の先に移行しなければならない部分です。この作業は、リンク設定に使われるフレーム内でその合意を実行する2つのプロトコル、すなわち、通常はオープンなネットワークを暗号化するOpportunistic Wireless Encryption(OWE)と、高密度かつモバイルな展開環境での高速接続を目的としたFast Initial Link Setup(FILS)を対象としています。私たちは、Diffie-Hellman交換を、ML-KEM(FIPS 203)と並行して古典的な楕円曲線協定を実行し、両方のシークレットからマスターキーを導き出すハイブリッド交換交換に置き換えることを提案します。これにより、どちらかのコンポーネントが途切れない限り接続は保護されたままです。交換は各プロトコルがすでに送信したフレームを再利用し、追加の往復トリップを加えません。アクセスポイントは、クラシックなOWEと並行してハイブリッドモードをアドバタイズすることができ、必要と設定されたステーションはポスト量子交換が完了しない限りアソシエイトを拒否します。派生キーに広告された能力をバインドすることは設計拡張として指定されており、プロトタイプには含まれていません。hostapdおよびwpa_supplicant上で動作する実装で設計を検証します。両エンドポイントは測定されたすべての接続で同じキーを導出し、2つの小さなパラメータセットは拡大された各アソシエーションフレームが1つのフレーム内に収まり、保守的な1500バイトの断片化閾値未満でも接続時間と計算は0.5ミリ秒未満に保たれます。測定値はOWE上で得られます。設計はFILSに引き継がれ、そのフレーム予算は特定の測定のために残されます。3つのML-KEMパラメータセットのうち、中間のものがセキュリティレベルとサイズのバランスが最も良いです。",
   "abstract_translated": "Wi-Fi接続を保護する鍵合意はDiffie-Hellmanに依存しており、十分な能力を持つ量子コンピュータであればこれを破るでしょう。したがって、敵対者は今日、関連付けを記録し、数年後にそのトラフィックを復号化することができます。したがって、鍵確立はIEEE 802.11の先に移行しなければならない部分です。この作業は、リンク設定に使われるフレーム内でその合意を実行する2つのプロトコル、すなわち、通常はオープンなネットワークを暗号化するOpportunistic Wireless Encryption(OWE)と、高密度かつモバイルな展開環境での高速接続を目的としたFast Initial Link Setup(FILS)を対象としています。私たちは、Diffie-Hellman交換を、ML-KEM(FIPS 203)と並行して古典的な楕円曲線協定を実行し、両方のシークレットからマスターキーを導き出すハイブリッド交換交換に置き換えることを提案します。これにより、どちらかのコンポーネントが途切れない限り接続は保護されたままです。交換は各プロトコルがすでに送信したフレームを再利用し、追加の往復トリップを加えません。アクセスポイントは、クラシックなOWEと並行してハイブリッドモードをアドバタイズすることができ、必要と設定されたステーションはポスト量子交換が完了しない限りアソシエイトを拒否します。派生キーに広告された能力をバインドすることは設計拡張として指定されており、プロトタイプには含まれていません。hostapdおよびwpa_supplicant上で動作する実装で設計を検証します。両エンドポイントは測定されたすべての接続で同じキーを導出し、2つの小さなパラメータセットは拡大された各アソシエーションフレームが1つのフレーム内に収まり、保守的な1500バイトの断片化閾値未満でも接続時間と計算は0.5ミリ秒未満に保たれます。測定値はOWE上で得られます。設計はFILSに引き継がれ、そのフレーム予算は特定の測定のために残されます。3つのML-KEMパラメータセットのうち、中間のものがセキュリティレベルとサイズのバランスが最も良いです。",
   "last_delivered_at": "2026-11-17T09:23:42Z"
+ },
+ {
+  "delivery_id": "main:2611.21590",
+  "id": "2611.21590",
+  "posted_at": "2026-11-17T12:53:57Z",
+  "title": "The Provenance-Privacy Paradox: Can Private Cloud Compute (PCC) Prove That Apple Reference Images Are Not Used for Learning?",
+  "title_ja": "出所とプライバシーのパラドックス：プライベートクラウドコンピューティング（PCC）は、Appleのリファレンスイメージが学習目的で使用されていないことを証明できるのか？",
+  "title_translated": "出所とプライバシーのパラドックス：プライベートクラウドコンピューティング（PCC）は、Appleのリファレンスイメージが学習目的で使用されていないことを証明できるのか？",
+  "translation_language": "ja",
+  "authors": "Mohammad I. Husain and Viet Nguyen",
+  "link": "https://arxiv.org/abs/2611.21590",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "pqc"
+   ],
+   "final_genre_ids": [
+    "pqc"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Apple Reference Image (ARI) combines camera-sensor signatures, Secure Enclave attestation (SEP), cryptographic timestamp bounds, Private Cloud Compute (PCC), and a final post-quantum signature to establish photographic provenance. PCC is central to this process because it validates the secure digital negative and develops authenticated raw sensor measurements into a reference JPEG. Although the secure digital negative is encrypted during transmission, the authorized PCC workload must process the raw pixels in plaintext. This requirement creates a provenance-privacy paradox: cloud processing strengthens the provenance guarantee while giving an Apple-authorized, machine-learning-capable workload access to valuable, hardware-authenticated raw imagery. We argue that workload attestation and transparency-log inclusion verify software identity and authorization but do not, by themselves, prove that an authorized workload cannot learn from or retain information derived from the photograph. We implement this counterexample in a Python- and Docker-based experimental testbed that models relevant ARI and PCC functions. Across 27 public-domain photographs, a baseline workload and a learning-enabled workload both passed the same verification checks and returned byte-for-byte identical JPEGs. However, the learning-enabled workload retained a first-layer gradient of approximately 48 KB from which its 64 x 64 input was reconstructed with a maximum absolute per-pixel error of 6 x 10^-8. The additional processing overhead was small relative to image decoding and processing. These results do not demonstrate that Apple currently trains on ARI photographs or reproduce production PCC, but identify non-learning and non-retention as independently verifiable assurance requirements.",
+  "abstract_ja": "Apple Reference Image (ARI) は、カメラセンサーの署名、Secure Enclave アテステーション (SEP)、暗号化タイムスタンプの境界、Private Cloud Compute (PCC)、および最終的なポスト量子署名を組み合わせて、写真の来歴を確立します。PCC はこのプロセスにおいて中心的な役割を果たします。なぜなら、PCC はセキュアなデジタルネガを検証し、認証済みの生センサー測定値をリファレンス JPEG に現像するからです。セキュアなデジタルネガは送信中に暗号化されますが、認証された PCC ワークロードは生ピクセルを平文で処理する必要があります。この要件は、来歴とプライバシーのパラドックスを生み出します。クラウド処理は来歴の保証を強化する一方で、Apple が認証した機械学習対応のワークロードに、貴重なハードウェア認証済みの生画像へのアクセスを許可します。ワークロードのアテステーションと透明性ログの組み込みは、ソフトウェアの ID と認証を検証しますが、それ自体では、認証されたワークロードが写真から得られた情報を学習したり保持したりできないことを証明するものではありません。私たちは、関連する ARI および PCC 機能をモデル化した Python および Docker ベースの実験テストベッドで、この反例を実装します。 27枚のパブリックドメイン写真において、ベースラインワークロードと学習機能付きワークロードの両方が同じ検証チェックに合格し、バイト単位で同一のJPEG画像を返しました。ただし、学習機能付きワークロードでは、約48KBの第1層勾配が保持され、そこから64×64ピクセルの入力が再構築されました。この際、ピクセルあたりの絶対誤差は最大で6×10⁻⁸でした。追加の処理オーバーヘッドは、画像デコードおよび処理に比べて小さいものでした。これらの結果は、Appleが現在ARI写真でトレーニングを行っていることや、本番環境のPCCを再現していることを示すものではありませんが、学習機能と保持機能がないことを独立して検証可能な保証要件として示しています。",
+  "abstract_translated": "Apple Reference Image (ARI) は、カメラセンサーの署名、Secure Enclave アテステーション (SEP)、暗号化タイムスタンプの境界、Private Cloud Compute (PCC)、および最終的なポスト量子署名を組み合わせて、写真の来歴を確立します。PCC はこのプロセスにおいて中心的な役割を果たします。なぜなら、PCC はセキュアなデジタルネガを検証し、認証済みの生センサー測定値をリファレンス JPEG に現像するからです。セキュアなデジタルネガは送信中に暗号化されますが、認証された PCC ワークロードは生ピクセルを平文で処理する必要があります。この要件は、来歴とプライバシーのパラドックスを生み出します。クラウド処理は来歴の保証を強化する一方で、Apple が認証した機械学習対応のワークロードに、貴重なハードウェア認証済みの生画像へのアクセスを許可します。ワークロードのアテステーションと透明性ログの組み込みは、ソフトウェアの ID と認証を検証しますが、それ自体では、認証されたワークロードが写真から得られた情報を学習したり保持したりできないことを証明するものではありません。私たちは、関連する ARI および PCC 機能をモデル化した Python および Docker ベースの実験テストベッドで、この反例を実装します。 27枚のパブリックドメイン写真において、ベースラインワークロードと学習機能付きワークロードの両方が同じ検証チェックに合格し、バイト単位で同一のJPEG画像を返しました。ただし、学習機能付きワークロードでは、約48KBの第1層勾配が保持され、そこから64×64ピクセルの入力が再構築されました。この際、ピクセルあたりの絶対誤差は最大で6×10⁻⁸でした。追加の処理オーバーヘッドは、画像デコードおよび処理に比べて小さいものでした。これらの結果は、Appleが現在ARI写真でトレーニングを行っていることや、本番環境のPCCを再現していることを示すものではありませんが、学習機能と保持機能がないことを独立して検証可能な保証要件として示しています。",
+  "last_delivered_at": "2026-11-17T12:53:57Z"
  }
 ]

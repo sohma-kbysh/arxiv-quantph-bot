@@ -23381,14 +23381,9 @@
  },
  "translation_alerts": {},
  "translation_status": {
-  "at": "2026-11-20T08:30:08Z",
-  "translated": {
-   "google": 196
-  },
-  "dead": [
-   "deepl",
-   "azure"
-  ],
+  "at": "2026-11-20T12:36:24Z",
+  "translated": {},
+  "dead": [],
   "unconfigured": [
    "apps_script"
   ],

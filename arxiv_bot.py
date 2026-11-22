@@ -2812,6 +2812,9 @@ def notify_run_report(report: dict, cfg: dict) -> None:
         f" / ⏸ 翻訳持ち越し: {len(deferred)}件"
         f" / ❌ 投稿失敗: {len(failed)}件",
     ]
+    if report.get("held"):
+        lines.append(
+            f"🕒 分散配信のため次回以降に配信: {report['held']}件")
     if source_failures:
         lines.append(
             "🚨 取得失敗: " + " / ".join(
@@ -3002,7 +3005,8 @@ def normalize_bot_state(raw: Any) -> dict:
         if isinstance(row, dict) and isinstance(row.get("paper"), dict)
     }
     for key in ("external_reviews", "external_pending", "external_cursors",
-                "feed_cursors", "oai_cursors", "translation_alerts"):
+                "feed_cursors", "oai_cursors", "translation_alerts",
+                "source_failure_streaks"):
         if not isinstance(state.get(key), dict):
             state[key] = {}
     return state
@@ -3089,6 +3093,98 @@ def persist_bot_state(
     state["external_pending"] = external_pending
     state["external_cursors"] = external_cursors
     atomic_write_json(STATE_PATH, state)
+
+
+def escalate_source_failures(
+        state: dict, failures: list[dict], cfg: dict,
+        persist: bool = True) -> tuple[list[dict], list[dict]]:
+    """Split this run's source failures into (persistent, transient).
+
+    Every source is retried by the next run from its unchanged cursor, so a
+    single 429/timeout loses nothing. A failure only fails the run once the
+    same source has failed source_failure_alert_after_runs runs in a row
+    (default 1 = every failure, the previous behaviour).
+    """
+    try:
+        threshold = max(1, int(cfg.get("source_failure_alert_after_runs", 1)))
+    except (TypeError, ValueError):
+        threshold = 1
+    previous = state.get("source_failure_streaks")
+    if not isinstance(previous, dict):
+        previous = {}
+    streaks: dict[str, int] = {}
+    for item in failures:
+        source = str(item.get("source", "?"))
+        if source not in streaks:
+            try:
+                streaks[source] = int(previous.get(source, 0)) + 1
+            except (TypeError, ValueError):
+                streaks[source] = 1
+    if persist:
+        # Sources that succeeded this run are dropped, resetting their streak.
+        state["source_failure_streaks"] = streaks
+    persistent = [
+        item for item in failures
+        if streaks[str(item.get("source", "?"))] >= threshold]
+    transient = [
+        {**item, "streak": streaks[str(item.get("source", "?"))]}
+        for item in failures
+        if streaks[str(item.get("source", "?"))] < threshold]
+    return persistent, transient
+
+
+def select_delivery_batch(
+        state: dict, ready: list[dict], cfg: dict,
+        now: datetime | None = None, force_all: bool = False) -> set[str]:
+    """Choose which ready deliveries this run posts (delivery_spread).
+
+    The k-th counted run of a UTC day posts every (batches - k)-th ready
+    paper, so a day's announcement arrives in batches_per_day roughly equal
+    parts and the last run flushes the rest. Taking every n-th paper of the
+    priority-sorted list spreads each channel instead of emptying the
+    high-priority channels first. Papers that already reached one channel,
+    or have waited max_hold_hours, are never held.
+    """
+    ids = [str(row["id"]) for row in ready]
+    rule = cfg.get("delivery_spread")
+    if (force_all or not ids or not isinstance(rule, dict)
+            or not rule.get("enabled", False)):
+        return set(ids)
+    try:
+        batches = max(1, int(rule.get("batches_per_day", 3)))
+        max_hold = float(rule.get("max_hold_hours", 20))
+    except (TypeError, ValueError):
+        return set(ids)
+    current = now or datetime.now(timezone.utc)
+    today = current.strftime("%Y-%m-%d")
+    record = state.get("delivery_spread")
+    if not isinstance(record, dict) or record.get("date") != today:
+        record = {"date": today, "runs": 0}
+    try:
+        runs = max(0, int(record.get("runs", 0)))
+    except (TypeError, ValueError):
+        runs = 0
+    step = max(1, batches - runs)
+    state["delivery_spread"] = {"date": today, "runs": runs + 1}
+    selected: set[str] = set()
+    position = 0
+    for row in ready:
+        pid = str(row["id"])
+        overdue = False
+        try:
+            queued = datetime.strptime(
+                str(row.get("queued_at")), "%Y-%m-%dT%H:%M:%SZ"
+            ).replace(tzinfo=timezone.utc)
+            overdue = (current - queued) >= timedelta(hours=max_hold)
+        except ValueError:
+            overdue = True  # unknown age: do not risk holding it forever
+        if row.get("partly_delivered") or overdue:
+            selected.add(pid)
+            continue
+        if position % step == 0:
+            selected.add(pid)
+        position += 1
+    return selected
 
 
 def strip_completed_external_papers(
@@ -3761,7 +3857,7 @@ def main() -> None:
     def finish_queue_phase(label: str) -> None:
         # Recovered-from-OAI notices are reported here because the delivery
         # phase runs in a separate process and cannot see this run's sources.
-        if source_failures or source_notices:
+        if alert_failures or source_notices:
             notify_run_report({
                 "source": "arXiv取得・配信準備",
                 "fetched": len(papers),
@@ -3770,7 +3866,7 @@ def main() -> None:
                 "posted": [],
                 "deferred": [],
                 "failed": [],
-                "source_failures": source_failures,
+                "source_failures": alert_failures,
                 "source_notices": source_notices,
                 "gemini": gemini_stats,
                 "classifier_counts": dict(Counter(
@@ -3782,8 +3878,22 @@ def main() -> None:
             }, cfg)
         print(f"{label} {len(entries)} queued paper(s); "
               f"source_failures={len(source_failures)}")
-        if source_failures:
+        if alert_failures:
             raise SystemExit(2)
+
+    # A source that fails once is retried by the next run from the same
+    # cursor; only repeated failures of the same source fail the run.
+    alert_failures = source_failures
+    if not resume_only:
+        alert_failures, transient_failures = escalate_source_failures(
+            state, source_failures, cfg, persist=not dry_run)
+        for item in transient_failures:
+            source_notices.append({
+                "source": item.get("source", "?"),
+                "message": (
+                    f"一時的な取得失敗（連続{item['streak']}回目、次回の実行で"
+                    f"再試行）: {item.get('error', 'unknown error')}"),
+            })
 
     # Save newly discovered/classified papers before translation starts.  A
     # translator outage therefore cannot make a normal quant-ph paper depend
@@ -3885,10 +3995,28 @@ def main() -> None:
         return
 
     # ---- post ---------------------------------------------------------------
-    posted = deferred = 0
+    posted = deferred = held = 0
     posted_records: list[dict] = []
     deferred_records: list[dict] = []
     failed_records: list[dict] = []
+    ready_rows = [
+        {
+            "id": e["paper"]["id"],
+            "queued_at": deliveries[e["paper"]["id"]].get("queued_at"),
+            "partly_delivered": any(
+                isinstance(channel, dict)
+                and channel.get("status") == "delivered"
+                for channel in deliveries[e["paper"]["id"]].get(
+                    "channels", {}).values()),
+        }
+        for e in entries
+        if isinstance(deliveries.get(e["paper"]["id"]), dict)
+        and not translation_missing(e, cfg)
+    ]
+    batch_ids = select_delivery_batch(
+        state, ready_rows, cfg,
+        force_all=dry_run or bool(
+            os.environ.get("DELIVERY_SPREAD_DISABLED", "").strip()))
     for e in entries:
         pid = e["paper"]["id"]
         delivery = deliveries.get(pid)
@@ -3902,6 +4030,9 @@ def main() -> None:
                 "link": e["paper"]["link"],
                 "genre_names": [g["name"] for g in e["genres"] if g],
             })
+            continue
+        if pid not in batch_ids:
+            held += 1
             continue
         posted_channels: list[str] = []
         failed_channels: list[str] = []
@@ -3997,7 +4128,8 @@ def main() -> None:
         "posted": posted_records,
         "deferred": deferred_records,
         "failed": failed_records,
-        "source_failures": source_failures,
+        "held": held,
+        "source_failures": alert_failures,
         "source_notices": source_notices,
         "gemini": gemini_stats,
         "classifier_counts": dict(Counter(
@@ -4018,8 +4150,9 @@ def main() -> None:
         pending_external_reviews, external_cursors)
     atomic_write_json(LOG_PATH, log[-5000:], ensure_ascii=False)
     print(f"posted {posted} papers ({len(papers)} fetched, "
-          f"{deferred} deferred for retry)")
-    if source_failures:
+          f"{deferred} deferred for retry"
+          + (f", {held} held for a later batch" if held else "") + ")")
+    if alert_failures:
         raise SystemExit(2)
     if failed_records:
         raise SystemExit(3)

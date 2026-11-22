@@ -115,6 +115,7 @@ class BackfillTranslationTests(unittest.TestCase):
         cfg["classify_with_llm"] = False
         # Legacy API backfill is the fallback used only without OAI-PMH.
         cfg["oai_harvest"] = {"enabled": False}
+        cfg["source_failure_alert_after_runs"] = 1
         row = {"id": "2610.1", "title": "Quantum code", "abstract": "Quantum error correction.",
                "authors": "", "link": "https://arxiv.org/abs/2610.1",
                "primary": "quant-ph", "categories": ["quant-ph"], "announce_type": "new"}

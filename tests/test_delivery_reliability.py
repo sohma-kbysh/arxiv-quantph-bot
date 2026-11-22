@@ -295,7 +295,10 @@ class DeliveryReliabilityTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             state_path = Path(tmp) / "state.json"
             log_path = Path(tmp) / "log.json"
-            arxiv_bot.atomic_write_json(state_path, {"seen": []})
+            # The source already failed in the two previous runs, so this
+            # third consecutive failure reaches the alert threshold.
+            arxiv_bot.atomic_write_json(state_path, {
+                "seen": [], "source_failure_streaks": {"RSS:quant-ph": 2}})
             arxiv_bot.atomic_write_json(log_path, [], ensure_ascii=False)
             reports: list[dict] = []
             with (

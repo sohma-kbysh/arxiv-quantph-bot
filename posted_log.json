@@ -1,891 +1,5 @@
 [
  {
-  "delivery_id": "main:2609.20020",
-  "id": "2609.20020",
-  "posted_at": "2026-09-18T06:07:30Z",
-  "title": "Corner entanglement scaling with projected entangled pair states",
-  "title_ja": "射影エンタングルドペア状態を用いたコーナーエンタングルメントのスケーリング",
-  "title_translated": "射影エンタングルドペア状態を用いたコーナーエンタングルメントのスケーリング",
-  "translation_language": "ja",
-  "authors": "Chlo\\'e Van Bastelaere, Rui-Zhen Huang, Laurens Vanderstraeten",
-  "link": "https://arxiv.org/abs/2609.20020",
-  "primary": "cond-mat.str-el",
-  "categories": [
-   "cond-mat.str-el",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Entanglement scaling provides a powerful probe of universal properties at quantum critical points. In two dimensions, contributions originating from a corner-shaped bipartition exhibit a universal scaling, which is determined by the underlying conformal field theory. We develop a method to extract this corner entanglement entropy from projected entangled pair states directly in the thermodynamic limit. When applied to models at a quantum critical point, we show that the corner contribution exhibits scaling with the effective correlation length, in agreement with the hypothesis of finite-entanglement scaling. Our results for the corner coefficients are consistent with other methods, demonstrating the efficiency of our method for diagnosing strongly-correlated quantum critical points in two dimensions.",
-  "abstract_ja": "エンタングルメントスケーリングは、量子臨界点における普遍的性質の強力な探査を提供します。2次元では、角形の二分割から生じる寄与は、基礎となる共形場理論によって決定される普遍スケーリングを示します。私たちは、熱力学極限における射影されたエンタングルメント対状態からこのコーナーエンタングルメントエントロピーを直接抽出する方法を開発します。量子臨界点のモデルに適用すると、コーナー寄与は有限エンタングルメントスケーリングの仮説と一致し、有効相関長とともにスケーリングを示すことが示されました。コーナー係数の結果は他の手法と整合しており、2次元における強く相関のある量子臨界点の診断における我々の手法の効率性を示しています。",
-  "abstract_translated": "エンタングルメントスケーリングは、量子臨界点における普遍的性質の強力な探査を提供します。2次元では、角形の二分割から生じる寄与は、基礎となる共形場理論によって決定される普遍スケーリングを示します。私たちは、熱力学極限における射影されたエンタングルメント対状態からこのコーナーエンタングルメントエントロピーを直接抽出する方法を開発します。量子臨界点のモデルに適用すると、コーナー寄与は有限エンタングルメントスケーリングの仮説と一致し、有効相関長とともにスケーリングを示すことが示されました。コーナー係数の結果は他の手法と整合しており、2次元における強く相関のある量子臨界点の診断における我々の手法の効率性を示しています。",
-  "last_delivered_at": "2026-09-18T06:07:30Z"
- },
- {
-  "delivery_id": "main:2609.20148",
-  "id": "2609.20148",
-  "posted_at": "2026-09-18T06:07:32Z",
-  "title": "Exceptional points and Jordan-chain signatures in quantum first-passage statistics",
-  "title_ja": "量子第一通過統計における例外点とジョーダンチェーン署名",
-  "title_translated": "量子第一通過統計における例外点とジョーダンチェーン署名",
-  "translation_language": "ja",
-  "authors": "Lachlan Bridges",
-  "link": "https://arxiv.org/abs/2609.20148",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "math-ph",
-   "math.MP"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Exceptional-point signatures in first-passage observables are governed by two independent survival mechanisms: nonlinear spectral defectivity must pass from the one-record or transfer description to the physical one-level first-passage ladder, and the resulting ladder Jordan mode must have nonzero overlap with the chosen preparation and terminal observation. For finite reset-form monitored quantum systems with upward-skip-free counting, we prove the exact threshold factorization $H_N(s)=R_s^N$, identify the physical Perron branch, and derive the transfer factorization $Q_s(r)=B_s(r)(R_s-rI)$. Invertibility of the cofactor gives local equality of Smith data, whereas a singular cofactor can contribute transfer multiplicity absent from the ladder. An order-two Keldysh formula yields an independent observation gate. We then prove a fixed-reset no-go theorem: even a defective full tilted generator cannot generate a cumulative-count Jordan polynomial when the post-count ladder is scalar. Finally, we construct a three-reset monitored-Lindblad witness, minimal within irreducible nonnegative ladders, with a genuine subleading $N\\lambda^N$ threshold term and a coherence-tuned model in which a binary terminal effect retains the exact polynomial signature at a transversal transform-domain exceptional point. The analysis is formulated at the level of exact transform-domain structure; time-domain asymptotics and perturbative robustness remain separate questions.",
-  "abstract_ja": "第一通過観測量における例外点署名は、2つの独立した生存メカニズムによって支配されます。すなわち、非線形スペクトルの欠陥性は、1記録または転送記述から物理的な1準位第一通過ラダーへと伝達されなければならず、その結果得られるラダージョーダンモードは選択した準備および終端観測と非ゼロの重複を持つ必要があります。有限リセット形式監視量子系で上向きスキップフリーカウントを行う場合、正確な閾値分解$H_N(s)=R_s^N$を証明し、物理的なペロン枝を特定し、転送分解$Q_s(r)=B_s(r)(R_s-rI)$を導出します。補因子の可逆性はスミスデータの局所的な等価性をもたらし、特異補因子はラダーにはない転送多重性を寄与します。2階ケルディッシュ式は独立した観測ゲートを導きます。次に、固定リセット・ノーゴー定理を証明します:欠陥のある全傾き生成子であっても、計数後はしごがスカラーである場合、累積カウント・ジョーダン多項式を生成することはできません。最後に、非可約非負のはしご内で最小化する3リセット監視リンドブラッド証を構築し、真のサブリーディング $N\\lambda^N$ しきい値項と、2値終端効果が横断変換領域例外点で正確な多項式署名を保持するコヒーレンス調整モデルを用います。解析は正確な変換領域構造レベルで定式化されます。時間領域漸近論と摂動的ロバスト性は別の問題として残ります。",
-  "abstract_translated": "第一通過観測量における例外点署名は、2つの独立した生存メカニズムによって支配されます。すなわち、非線形スペクトルの欠陥性は、1記録または転送記述から物理的な1準位第一通過ラダーへと伝達されなければならず、その結果得られるラダージョーダンモードは選択した準備および終端観測と非ゼロの重複を持つ必要があります。有限リセット形式監視量子系で上向きスキップフリーカウントを行う場合、正確な閾値分解$H_N(s)=R_s^N$を証明し、物理的なペロン枝を特定し、転送分解$Q_s(r)=B_s(r)(R_s-rI)$を導出します。補因子の可逆性はスミスデータの局所的な等価性をもたらし、特異補因子はラダーにはない転送多重性を寄与します。2階ケルディッシュ式は独立した観測ゲートを導きます。次に、固定リセット・ノーゴー定理を証明します:欠陥のある全傾き生成子であっても、計数後はしごがスカラーである場合、累積カウント・ジョーダン多項式を生成することはできません。最後に、非可約非負のはしご内で最小化する3リセット監視リンドブラッド証を構築し、真のサブリーディング $N\\lambda^N$ しきい値項と、2値終端効果が横断変換領域例外点で正確な多項式署名を保持するコヒーレンス調整モデルを用います。解析は正確な変換領域構造レベルで定式化されます。時間領域漸近論と摂動的ロバスト性は別の問題として残ります。",
-  "last_delivered_at": "2026-09-18T06:07:34Z"
- },
- {
-  "delivery_id": "main:2609.20226",
-  "id": "2609.20226",
-  "posted_at": "2026-09-18T06:07:36Z",
-  "title": "Phase-Flag Access and No-Go Constraints on Quotient-Space Real Quantum Mechanics",
-  "title_ja": "位相フラグアクセスと商空間実量子力学におけるノーゴー制約",
-  "title_translated": "位相フラグアクセスと商空間実量子力学におけるノーゴー制約",
-  "translation_language": "ja",
-  "authors": "Jeongho Bang, Kyoungho Cho, Kyunghyun Baek",
-  "link": "https://arxiv.org/abs/2609.20226",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Barrios Hita et al. [Phys. Rev. Lett. 136, 240202 (2026)] proposed a quotient-space formulation of quantum mechanics over the real numbers and concluded that complex numbers are only a convenience. A preceding analysis [arXiv:2607.05865] showed that, when the construction is empirically equivalent to complex quantum mechanics, its real flag is protected by a hidden complex structure $\\hat{J}$ and its composition rule is the balanced tensor product over that structure. Here we ask what would follow from the stronger operational reading that the flag is an accessible real degree of freedom. The answer is a direct clash with overlap-determinability (OD), introduced in [arXiv:2601.14638], and with standard no-go theorems. A readable or coherently controllable flag fixes a representative of each ray, and hence supplies precisely the phase convention that OD identifies as the missing resource for universal superposition of unknown states. Once promoted to a generic phase-access primitive, this resource enables probabilistic cloning of a linearly dependent set, steering-based signaling, and logarithmic-query unstructured search. Thus the quotient construction has a sharp follow-up interpretation: as a protected gauge representation it is standard complex quantum mechanics in real notation; as an accessible real theory it leaves the quantum operational framework.",
-  "abstract_ja": "Barrios Hitaら[Phys. Rev. Lett. 136, 240202 (2026)] は実数上の量子力学の商空間定式化を提案し、複素数は単なる便宜的なものであると結論づけました。先行の解析[arXiv:2607.05865]では、構成が複素量子力学と経験的に同値である場合、その実フラグは隠れた複素構造$\\hat{J}$によって保護され、その合成規則はその構造上のバランスされたテンソル積であることが示されました。ここで、フラグがアクセス可能な実自由度であるというより強い操作的解釈から何が導かれるかを問います。答えは、[arXiv:2601.14638]で導入されたオーバーラップ決定可能性(OD)および標準的なノーゴー定理との直接的な衝突です。可読または整合性制御可能なフラグは各レイの代表を固定し、未知状態の普遍的重ね合わせに欠けている資源としてODが特定した位相慣習を正確に提供します。一般的な位相アクセスプリミティブに昇格すると、この資源は線形依存集合の確率的クローン作成、ステアリングに基づくシグナリング、対数問いの非構造化探索を可能にします。したがって商構成は鋭い後続解釈を持ちます。保護ゲージ表現としては実記法における標準的な複素量子力学です。アクセス可能な実理論としては量子操作枠組みを離れます。",
-  "abstract_translated": "Barrios Hitaら[Phys. Rev. Lett. 136, 240202 (2026)] は実数上の量子力学の商空間定式化を提案し、複素数は単なる便宜的なものであると結論づけました。先行の解析[arXiv:2607.05865]では、構成が複素量子力学と経験的に同値である場合、その実フラグは隠れた複素構造$\\hat{J}$によって保護され、その合成規則はその構造上のバランスされたテンソル積であることが示されました。ここで、フラグがアクセス可能な実自由度であるというより強い操作的解釈から何が導かれるかを問います。答えは、[arXiv:2601.14638]で導入されたオーバーラップ決定可能性(OD)および標準的なノーゴー定理との直接的な衝突です。可読または整合性制御可能なフラグは各レイの代表を固定し、未知状態の普遍的重ね合わせに欠けている資源としてODが特定した位相慣習を正確に提供します。一般的な位相アクセスプリミティブに昇格すると、この資源は線形依存集合の確率的クローン作成、ステアリングに基づくシグナリング、対数問いの非構造化探索を可能にします。したがって商構成は鋭い後続解釈を持ちます。保護ゲージ表現としては実記法における標準的な複素量子力学です。アクセス可能な実理論としては量子操作枠組みを離れます。",
-  "last_delivered_at": "2026-09-18T06:07:37Z"
- },
- {
-  "delivery_id": "main:2609.20320",
-  "id": "2609.20320",
-  "posted_at": "2026-09-18T06:07:39Z",
-  "title": "Divergence Geometry of Quantum Multi-Mpemba Effects",
-  "title_ja": "量子多重ムペンバ効果の発散幾何学",
-  "title_translated": "量子多重ムペンバ効果の発散幾何学",
-  "translation_language": "ja",
-  "authors": "Domingos S. P. Salazar",
-  "link": "https://arxiv.org/abs/2609.20320",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cond-mat.stat-mech"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Whether a quantum Mpemba effect occurs can depend on how distance from stationarity is measured. We show that agreement across normalized operator-convex Petz divergences is decided by a one-parameter $\\chi^2$ profile. Its sign fixes the common order, alternating sign margins guarantee repeated crossings, and finite dimension yields a polynomial positivity test. The same profile explains diagnostic-independent late-time order for a simple real slow mode and isolates coherence as the local source of diagnostic dependence. In a trapped-ion qutrit ideal model, the reported preparation gives diagnostic-selective crossings, while a nearby preparation is a floating-point candidate for two family-wide reversals. The framework turns diagnostic robustness into a tractable control problem.",
-  "abstract_ja": "量子Mempba効果が起こるかどうかは、定常性からの距離の測定方法に依存します。正規化された演算子凸ペッツ発散間の一致は、1パラメータの$\\chi^2$プロファイルによって決定されることを示しています。その符号は共通順序を固定し、交互符号マージンは繰り返し交差を保証し、有限次元は多項式正検定を提供します。同じプロファイルは、単純な実遅いモードの診断に依存しない遅い時間順序を説明し、診断依存の局所的な原因としてコヒーレンスを分離します。トラップイオンクトリット理想モデルでは、報告された調製は診断選択的交差を与え、近接する準備は2つのファミリー全体の反転の浮動小数点候補となります。このフレームワークは診断の堅牢性を扱いやすい制御問題に変えます。",
-  "abstract_translated": "量子Mempba効果が起こるかどうかは、定常性からの距離の測定方法に依存します。正規化された演算子凸ペッツ発散間の一致は、1パラメータの$\\chi^2$プロファイルによって決定されることを示しています。その符号は共通順序を固定し、交互符号マージンは繰り返し交差を保証し、有限次元は多項式正検定を提供します。同じプロファイルは、単純な実遅いモードの診断に依存しない遅い時間順序を説明し、診断依存の局所的な原因としてコヒーレンスを分離します。トラップイオンクトリット理想モデルでは、報告された調製は診断選択的交差を与え、近接する準備は2つのファミリー全体の反転の浮動小数点候補となります。このフレームワークは診断の堅牢性を扱いやすい制御問題に変えます。",
-  "last_delivered_at": "2026-09-18T06:07:41Z"
- },
- {
-  "delivery_id": "main:2609.20390",
-  "id": "2609.20390",
-  "posted_at": "2026-09-18T06:07:43Z",
-  "title": "Entanglement Dynamics in Katz-Weighted Graph States",
-  "title_ja": "カッツ重みグラフ状態におけるエンタングルメントダイナミクス",
-  "title_translated": "カッツ重みグラフ状態におけるエンタングルメントダイナミクス",
-  "translation_language": "ja",
-  "authors": "Lucio De Simone, Lorenzo Capra, Roberto Franzosi",
-  "link": "https://arxiv.org/abs/2609.20390",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "math-ph",
-   "math.MP"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We investigate the entanglement dynamics of quantum states defined on graphs with non-local Ising interactions governed by the Katz kernel of the underlying network. The interaction pattern is physically motivated by a gapped fermionic mediator propagating on the same graph, whose perturbative elimination yields an effective Katz-weighted Ising Hamiltonian. Using the Entanglement Distance, we derive an exact analytical expression for the entanglement generated from an initially separable state and apply it to representative deterministic graph families. We then characterize the dynamics in different propagation regimes. In the weak-Katz regime, the dynamics admits a systematic motif expansion with triangles entering at first order order and four-cycles, local degree structure, and overlappin triangles appearing at second order. In the strong-propagation regime, the interaction is instead dominated by the principal adjacency mode and by the localization properties of its eigenvector. For Erd\\H{o}s--R\\'enyi graphs, the weak-propagation expansion can be averaged analytically, revealing a locally tree-like contribution in the sparse regime and saturation of the Entanglement Distance density in the dense regime. Our results connect entanglement dynamics with both the walk-based and spectral structure of complex networks.",
-  "abstract_ja": "基底ネットワークのカッツ核によって支配される非局所的なイジング相互作用を持つグラフ上の量子状態のもつれ動力学を調査します。相互作用パターンは、同じグラフ上で伝播するギャップ付きフェルミオン媒介子によって物理的に動機付けられ、その摂動除去により効果的なカッツ加重アイジングハミルトニアンが得られます。エンタングルメント距離を用いて、最初に分離可能状態から生成されるエンタングルメントの正確な解析式を導出し、代表的な決定論的グラフファミリーに適用します。次に、異なる伝搬領域における動力学を特徴付けます。弱カッツ領域では、三角が1階で入り、4サイクル、局所次数構造、オーバーラッピン三角形が2階で現れるという体系的なモチーフ展開を認めます。強伝搬領域では、相互作用は主隣接モードとその固有ベクトルの局所化特性によって支配されます。Erd\\H{o}s-R\\'enyiグラフでは、弱伝播展開を解析的に平均化でき、疎領域における局所的に木のような寄与と密度領域におけるエンタングルメント距離密度の飽和を示します。我々の結果は、複雑ネットワークの歩行構造およびスペクトル構造の両方とエンタングルメントダイナミクスを結びつけます。",
-  "abstract_translated": "基底ネットワークのカッツ核によって支配される非局所的なイジング相互作用を持つグラフ上の量子状態のもつれ動力学を調査します。相互作用パターンは、同じグラフ上で伝播するギャップ付きフェルミオン媒介子によって物理的に動機付けられ、その摂動除去により効果的なカッツ加重アイジングハミルトニアンが得られます。エンタングルメント距離を用いて、最初に分離可能状態から生成されるエンタングルメントの正確な解析式を導出し、代表的な決定論的グラフファミリーに適用します。次に、異なる伝搬領域における動力学を特徴付けます。弱カッツ領域では、三角が1階で入り、4サイクル、局所次数構造、オーバーラッピン三角形が2階で現れるという体系的なモチーフ展開を認めます。強伝搬領域では、相互作用は主隣接モードとその固有ベクトルの局所化特性によって支配されます。Erd\\H{o}s-R\\'enyiグラフでは、弱伝播展開を解析的に平均化でき、疎領域における局所的に木のような寄与と密度領域におけるエンタングルメント距離密度の飽和を示します。我々の結果は、複雑ネットワークの歩行構造およびスペクトル構造の両方とエンタングルメントダイナミクスを結びつけます。",
-  "last_delivered_at": "2026-09-18T06:07:43Z"
- },
- {
-  "delivery_id": "main:2609.20600",
-  "id": "2609.20600",
-  "posted_at": "2026-09-18T06:07:45Z",
-  "title": "Proof of Shor's conjecture on the accessible information of quantum dichotomies",
-  "title_ja": "量子二分法のアクセス可能な情報に関するショアの予想の証明",
-  "title_translated": "量子二分法のアクセス可能な情報に関するショアの予想の証明",
-  "translation_language": "ja",
-  "authors": "Michele Dall'Arno",
-  "link": "https://arxiv.org/abs/2609.20600",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "The accessible information of any given quantum ensemble quantifies the maximum amount of Shannon information that can be extracted from the ensemble by any quantum measurement. Almost three decades ago, Shor conjectured that the accessible information of any quantum dichotomy, that is, an ensemble of two states, is attained by a projective measurement. Recently, a proof of this conjecture restricted to the qubit case was published by Keil. Here, we conclusively settle this longstanding open problem. First, we show that Shor's conjecture follows, in arbitrary dimension, from a recent result by Fang, Fawzi and Fawzi, and we provide a self-contained, elementary proof. Second, for any given dichotomy and measurement, we provide the explicit construction of a projective measurement that outperforms such a measurement in extracting information from the given dichotomy. Third, while the computation of the accessible information is known to be non-convex in general, we frame the computation of the accessible information of dihotomies as a convex problem.",
-  "abstract_ja": "任意の量子アンサンブルのアクセス可能な情報は、任意の量子測定によってアンサンブルから抽出できる最大のシャノン情報を定量化します。約30年前、ショールは任意の量子二分法、すなわち2つの状態のアンサンブルのアクセス可能な情報は射影的測定によって得られると予想しました。最近、この予想のキュービットケースに限定された証明がカイルによって発表されました。ここで、この長年未解決の問題を決定的に解決します。まず、ショアの予想が任意の次元でファング、ファウジ、ファウジによる最近の結果に基づいていることを示し、自己完結型の初歩的証明を提供します。次に、任意の二分法と測定に対して、与えられた二分法から情報を抽出する上でそのような測定を上回る射影的測定の明示的な構成を提供します。第三に、アクセス可能な情報の計算は一般的に非凸であることが知られていますが、二重性のアクセス可能な情報の計算は凸問題として位置づけられます。",
-  "abstract_translated": "任意の量子アンサンブルのアクセス可能な情報は、任意の量子測定によってアンサンブルから抽出できる最大のシャノン情報を定量化します。約30年前、ショールは任意の量子二分法、すなわち2つの状態のアンサンブルのアクセス可能な情報は射影的測定によって得られると予想しました。最近、この予想のキュービットケースに限定された証明がカイルによって発表されました。ここで、この長年未解決の問題を決定的に解決します。まず、ショアの予想が任意の次元でファング、ファウジ、ファウジによる最近の結果に基づいていることを示し、自己完結型の初歩的証明を提供します。次に、任意の二分法と測定に対して、与えられた二分法から情報を抽出する上でそのような測定を上回る射影的測定の明示的な構成を提供します。第三に、アクセス可能な情報の計算は一般的に非凸であることが知られていますが、二重性のアクセス可能な情報の計算は凸問題として位置づけられます。",
-  "last_delivered_at": "2026-09-18T06:07:45Z"
- },
- {
-  "delivery_id": "main:2609.20690",
-  "id": "2609.20690",
-  "posted_at": "2026-09-18T06:07:47Z",
-  "title": "A counterexample to the quantum Hedetniemi conjecture",
-  "title_ja": "量子ヘデトニエミ予想の反例",
-  "title_translated": "量子ヘデトニエミ予想の反例",
-  "translation_language": "ja",
-  "authors": "Julius A. Zeiss",
-  "link": "https://arxiv.org/abs/2609.20690",
-  "primary": "math.CO",
-  "categories": [
-   "math.CO",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Godsil, Roberson, \\v{S}\\'amal and Severini conjectured that the quantum chromatic number of the categorical product of two graphs equals the minimum of the quantum chromatic numbers of the factors. We disprove this conjecture: we construct explicit finite graphs $G,H$ with \\[ \\chi(G\\times H) \\leq 1538 < 1539 = \\min(\\chi_q(G),\\chi_q(H)).\\]The graphs are obtained from Zhu's counterexample to Hedetniemi's conjecture by using a base graph for which the Lov\\'asz theta number of the complement, and not only the fractional chromatic number, is large. The lower bound for the first factor is the theta bound. For the second factor we adapt Zhu's argument to projections that do not commute: the step that fixes the colors of a clique is replaced by identities between operators. Both lower bounds hold for colorings by projections in an arbitrary nonzero unital $C^*$-algebra. Hence the conjecture also fails for the spatial, approximate, commuting-operator and $C^*$-algebraic variants of the quantum chromatic number. We also give smaller counterexamples certified by exact integer data. The graph constructions, the certificates and the counterexample statements in the projective formulation are formalized in Lean~4.",
-  "abstract_ja": "ゴドシル、ロバーソン、\\v{S}\\'amal、セヴェリーニは、2つのグラフの圏積の量子色数が因子の量子色数の最小値に等しいと予想しました。この予想を否定します。明示的な有限グラフ$G,H$を構成し、 \\[ \\chi(G\\times H) \\leq 1538 < 1539 = \\min(\\chi_q(G),\\chi_q(H)))。これらのグラフは、ホーデトニエミの予想に対する朱の反例から、補グラフのロヴ\\アズ・シータ数(分数色数だけでなく)が大きい基底グラフを用いて得られます。第一因子の下限はシータ界です。第二の因子については、可換でない射影に対して朱の議論を適用します。クリークの色を固定するステップは、演算子間の恒等式に置き換えられます。任意の非零単位元 $C^*$-代数における射影による彩色の下限はどちらも成り立ちます。したがって、この予想は量子色数の空間的、近似的、可換演算子、$C^*$-代数の変種にも当てはまりません。また、正確な整数データによって証明された小さな反例も示します。射影定式化におけるグラフ構成、証明書、反例文はLean~4で形式化されています。",
-  "abstract_translated": "ゴドシル、ロバーソン、\\v{S}\\'amal、セヴェリーニは、2つのグラフの圏積の量子色数が因子の量子色数の最小値に等しいと予想しました。この予想を否定します。明示的な有限グラフ$G,H$を構成し、 \\[ \\chi(G\\times H) \\leq 1538 < 1539 = \\min(\\chi_q(G),\\chi_q(H)))。これらのグラフは、ホーデトニエミの予想に対する朱の反例から、補グラフのロヴ\\アズ・シータ数(分数色数だけでなく)が大きい基底グラフを用いて得られます。第一因子の下限はシータ界です。第二の因子については、可換でない射影に対して朱の議論を適用します。クリークの色を固定するステップは、演算子間の恒等式に置き換えられます。任意の非零単位元 $C^*$-代数における射影による彩色の下限はどちらも成り立ちます。したがって、この予想は量子色数の空間的、近似的、可換演算子、$C^*$-代数の変種にも当てはまりません。また、正確な整数データによって証明された小さな反例も示します。射影定式化におけるグラフ構成、証明書、反例文はLean~4で形式化されています。",
-  "last_delivered_at": "2026-09-18T06:07:47Z"
- },
- {
-  "delivery_id": "main:2609.20698",
-  "id": "2609.20698",
-  "posted_at": "2026-09-18T06:07:49Z",
-  "title": "Multinegativity and single-letter formulas for asymptotic entanglement",
-  "title_ja": "漸近的もつれのための多重否定性と単一文字の公式",
-  "title_translated": "漸近的もつれのための多重否定性と単一文字の公式",
-  "translation_language": "ja",
-  "authors": "Raphael Brinster, Tulja Varun Kondra, Hermann Kampermann, Dagmar Bru{\\ss}, Nikolai Wyderka",
-  "link": "https://arxiv.org/abs/2609.20698",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "The study of entanglement inevitably leads to the concept of regularization, where measures are evaluated on infinitely many copies of a state. Single-letter formulas try to make these asymptotic entanglement quantities accessible through a calculation on one copy of a state, but are rarely available. We introduce a decreasing hierarchy of computable upper bounds on the asymptotic relative entropy of entanglement with respect to positive-partial-transpose (PPT) states. The regularization of every fixed hierarchy level equals this asymptotic quantity. Additivity at any level therefore yields a single-letter formula, even when the usual one-copy relative entropy is nonadditive. We establish such additivity at the first nontrivial level for two broad multiparameter families, both containing all Werner states. The upper-bound construction also extends to sandwiched Renyi divergences. The hierarchy motivates $k$-multinegative states, a generalization of binegative states and the associated $k$-multinegativity, which gives explicit upper bounds on both the asymptotic relative entropy and exact PPT entanglement cost. We construct states which are $k$-multinegative at arbitrarily large depths $k$ that separate consecutive levels of the previously introduced entanglement-cost hierarchy, disproving its conjectured finite collapse. These results provide state-dependent single-letter formulas while identifying a limitation of universal finite-level characterizations.",
-  "abstract_ja": "もつれの研究は必然的に正則化の概念につながり、測度は状態の無限のコピーで評価されます。単一の文字の公式は、状態の1コピーに対する計算を通じてこれらの漸近的エンタングルメント量にアクセスしようとしますが、ほとんど利用できません。正の部分転置(PPT)状態に対するエンタングルメントの漸近的相対エントロピーに対する計算可能上界の減少階層を導入します。任意の固定階層レベルの正則化はこの漸近量に等しいです。したがって、任意のレベルでの加法性は、通常の1コピーの相対エントロピーが非加法的であっても、単一の文字の公式を導きます。この加法性は、すべてのヴェルナー状態を含む2つの広範な多重パラメータ族の最初の非自明レベルで確立します。上界構成はまた、レンイ発散のサンドイッチにも拡張されます。この階層構造は$k$多重負の状態を動機づけます。これは双負性状態と関連する$k$多重否定性の一般化であり、漸近的相対エントロピーと正確なPPTエンタングルメントコストの両方に明示的な上限を与えます。我々は、以前に導入されたエンタングルメントコスト階層の連続レベルを分離し、$k$k$-多負の状態を構成する。これにより、推定されていた有限収縮を否定する。これらの結果は状態依存の単一文字式を提供しつつ、普遍有限レベルの特性付けの限界を特定している。",
-  "abstract_translated": "もつれの研究は必然的に正則化の概念につながり、測度は状態の無限のコピーで評価されます。単一の文字の公式は、状態の1コピーに対する計算を通じてこれらの漸近的エンタングルメント量にアクセスしようとしますが、ほとんど利用できません。正の部分転置(PPT)状態に対するエンタングルメントの漸近的相対エントロピーに対する計算可能上界の減少階層を導入します。任意の固定階層レベルの正則化はこの漸近量に等しいです。したがって、任意のレベルでの加法性は、通常の1コピーの相対エントロピーが非加法的であっても、単一の文字の公式を導きます。この加法性は、すべてのヴェルナー状態を含む2つの広範な多重パラメータ族の最初の非自明レベルで確立します。上界構成はまた、レンイ発散のサンドイッチにも拡張されます。この階層構造は$k$多重負の状態を動機づけます。これは双負性状態と関連する$k$多重否定性の一般化であり、漸近的相対エントロピーと正確なPPTエンタングルメントコストの両方に明示的な上限を与えます。我々は、以前に導入されたエンタングルメントコスト階層の連続レベルを分離し、$k$k$-多負の状態を構成する。これにより、推定されていた有限収縮を否定する。これらの結果は状態依存の単一文字式を提供しつつ、普遍有限レベルの特性付けの限界を特定している。",
-  "last_delivered_at": "2026-09-18T06:07:49Z"
- },
- {
-  "delivery_id": "main:2609.20728",
-  "id": "2609.20728",
-  "posted_at": "2026-09-18T06:07:51Z",
-  "title": "$k$-fold unbiased measurements and maximal incompatibility",
-  "title_ja": "$k$倍の無偏測定と最大不整合",
-  "title_translated": "$k$倍の無偏測定と最大不整合",
-  "translation_language": "ja",
-  "authors": "S\\'ebastien Designolle, M\\'at\\'e Farkas",
-  "link": "https://arxiv.org/abs/2609.20728",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Mutually unbiased bases capture perfect complementarity between two quantum measurements. Extensions beyond pairwise unbiasedness have been proposed, but essentially no non-trivial higher-order constructions are known. We introduce $k$-fold unbiased measurements ($k$-UMs), extending the $k$-fold unbiased bases notion of [arXiv:1706.04446] from rank-one basis measurements to arbitrary-rank projective measurements, and show that this higher-rank setting supports a much richer theory. We develop the notions of algebraic and spectral $k$-UMs and prove that they coincide for rank-one measurements and triples of measurements (3-UMs). We establish strong no-go results for higher-order rank-one constructions and three-outcome 3-UMs, but obtain infinitely many higher-rank triples using Hadamard matrices and Clifford algebras. We then give these structures an exact operational interpretation in terms of measurement incompatibility. For 3-UMs with any number of outcomes, we determine their generalised incompatibility robustness exactly and construct an explicit joint measurement for their noisy versions at the compatibility threshold. Finally, we implement the symmetry reduction of the sum-of-squares hierarchy recently introduced in [New J. Phys. 28, 064509 (2026)] and give numerical evidence that the noise thresholds arising from the $k$-UM analysis may characterise the asymptotic behaviour of this hierarchy. In particular, with very high precision, we numerically show that our constructed four-outcome 3-UMs are among the most incompatible triples of four-outcome measurements.",
-  "abstract_ja": "相互に偏りのない基底は、2つの量子測定間の完全相補性を捉えます。ペアワイズ・アンバイアスを超える拡張も提案されていますが、基本的に非自明な高次構成は知られていません。$k$-1の無偏測定($k$-UMs)を導入し、[arXiv:1706.04446]の$k$倍無偏基底の概念をランク1基底測定から任意のランク射影測定へと拡張し、この高ランク設定がはるかに豊かな理論を支持していることを示しました。代数的およびスペクトル的な$k$-UMの概念を発展させ、ランク1の測定と3-UMの三重の測定に対して一致することを証明しました。高次のランク1構成や3結果3-UMに対して強いノーゴー結果を確立しますが、Hadamard行列とClifford代数を用いて無限に多くの高ランクトリプルを得ます。これらの構造に測定不適合の正確な操作的解釈を与えます。任意の結果を持つ3-UMに対して、その一般化非互換性の堅牢性を正確に決定し、互換性閾値におけるノイズの多いバージョンの明示的な結合測定を構築します。最後に、[New J. Phys. 28, 064509 (2026)] で最近導入された平乗和階層の対称性還元を実装し、$k$-UM解析から生じるノイズ閾値がこの階層の漸近的挙動を特徴づける数値的証拠を提供します。特に、非常に高い精度で、我々の構築した4アウトカム3-UMは、4アカム測定のトリプルの中でも最も互換性のないものの一つであることを数値的に示しました。",
-  "abstract_translated": "相互に偏りのない基底は、2つの量子測定間の完全相補性を捉えます。ペアワイズ・アンバイアスを超える拡張も提案されていますが、基本的に非自明な高次構成は知られていません。$k$-1の無偏測定($k$-UMs)を導入し、[arXiv:1706.04446]の$k$倍無偏基底の概念をランク1基底測定から任意のランク射影測定へと拡張し、この高ランク設定がはるかに豊かな理論を支持していることを示しました。代数的およびスペクトル的な$k$-UMの概念を発展させ、ランク1の測定と3-UMの三重の測定に対して一致することを証明しました。高次のランク1構成や3結果3-UMに対して強いノーゴー結果を確立しますが、Hadamard行列とClifford代数を用いて無限に多くの高ランクトリプルを得ます。これらの構造に測定不適合の正確な操作的解釈を与えます。任意の結果を持つ3-UMに対して、その一般化非互換性の堅牢性を正確に決定し、互換性閾値におけるノイズの多いバージョンの明示的な結合測定を構築します。最後に、[New J. Phys. 28, 064509 (2026)] で最近導入された平乗和階層の対称性還元を実装し、$k$-UM解析から生じるノイズ閾値がこの階層の漸近的挙動を特徴づける数値的証拠を提供します。特に、非常に高い精度で、我々の構築した4アウトカム3-UMは、4アカム測定のトリプルの中でも最も互換性のないものの一つであることを数値的に示しました。",
-  "last_delivered_at": "2026-09-18T06:07:51Z"
- },
- {
-  "delivery_id": "main:2609.20753",
-  "id": "2609.20753",
-  "posted_at": "2026-09-18T06:07:52Z",
-  "title": "Quantum Entropy Contraction and Factorization from Hypercontractivity",
-  "title_ja": "超収縮性による量子エントロピーの収縮と因数分解",
-  "title_translated": "超収縮性による量子エントロピーの収縮と因数分解",
-  "translation_language": "ja",
-  "authors": "Li Gao, Lijun Wang",
-  "link": "https://arxiv.org/abs/2609.20753",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "math.FA",
-   "math.OA"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We prove that hypercontractivity implies entropy contraction for a single quantum channel, without a detailed balance condition. For primitive quantum Markov semigroups that are KMS-symmetric with respect to a faithful invariant state \\(\\sigma\\), we obtain the modified Log-Sobolev bound $\\alpha_1\\geq \\frac{\\lambda}{(2+\\log\\|\\sigma^{-1}\\|_\\infty)}$ where $\\lambda$ is the spectral gap. This removes the assumption of \\(L_p\\)-regularity for the comparison through the log-Sobolev constant. As an application, we show that the hypercontractivity of an average of two conditional expectations implies the approximate tensorization of relative entropy.",
-  "abstract_ja": "超収縮性は詳細なバランス条件なしに単一の量子チャネルに対してエントロピー収縮を意味することを証明します。忠実な不変状態 \\(\\sigma\\) に関して KMS 対称な原始量子マルコフ半群に対して、修正された Log-Sobolev 境界 $\\alpha_1\\geq \\frac{\\lambda}{(2+\\log\\|\\sigma^{-1}\\|_\\infty)}$ を得ます。ここで $\\lambda$ はスペクトルギャップです。これにより、log-Sobolev 定数を通じた比較における \\(L_p\\)-正則性の仮定が取り除かれます。応用として、2つの条件付き期待値の平均の超収縮性が相対エントロピーの近似テンソル化を含意することを示します。",
-  "abstract_translated": "超収縮性は詳細なバランス条件なしに単一の量子チャネルに対してエントロピー収縮を意味することを証明します。忠実な不変状態 \\(\\sigma\\) に関して KMS 対称な原始量子マルコフ半群に対して、修正された Log-Sobolev 境界 $\\alpha_1\\geq \\frac{\\lambda}{(2+\\log\\|\\sigma^{-1}\\|_\\infty)}$ を得ます。ここで $\\lambda$ はスペクトルギャップです。これにより、log-Sobolev 定数を通じた比較における \\(L_p\\)-正則性の仮定が取り除かれます。応用として、2つの条件付き期待値の平均の超収縮性が相対エントロピーの近似テンソル化を含意することを示します。",
-  "last_delivered_at": "2026-09-18T06:07:52Z"
- },
- {
-  "delivery_id": "main:2609.20757",
-  "id": "2609.20757",
-  "posted_at": "2026-09-18T06:07:55Z",
-  "title": "Procrastinating einselection in non-Markovian quantum dynamics",
-  "title_ja": "非マルコフ量子動力学における先延ばしのエインセレクション",
-  "title_translated": "非マルコフ量子動力学における先延ばしのエインセレクション",
-  "translation_language": "ja",
-  "authors": "Michael J. Moody, Tara Kalsi, Agung Budiyono, Sebastian Deffner",
-  "link": "https://arxiv.org/abs/2609.20757",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Among the processes governed by open-system and dissipative quantum dynamics, environment-induced superselection, or einselection, is particularly foundational, since it describes the formation of a preferred set of pointer states through environmental monitoring and ultimately the emergence of classicality. Especially in the context of Quantum Darwinism, einselection can be studied in terms of the motion of an observable towards its pointer value. To this end, we derive a quantum speed limit for observables for finite-dimensional systems governed by differentiable time-local open dynamics. We identify two mechanisms through which non-Markovianity can enhance observable speed: direct dissipative motion supported by population retention or revival, and indirect enhancement through restoration of the asymmetry available for coherent motion. For permanent einselection, this delays the emergence of the pointer basis due to accumulated negativity.",
-  "abstract_ja": "開系および散逸的量子力学によって支配される過程の中で、環境誘起的超選択(einselection)は特に基礎的であり、環境モニタリングを通じて好ましいポインタ状態の集合が形成され、最終的に古典性の出現を説明します。特に量子ダーウィニズムの文脈では、エインセレクションは観測対象がそのポインタ値に向かって動く動きの観点から研究できます。この目的のために、微分可能な時間局所開動学によって支配される有限次元系の可観測量に対する量子速度の上限を導出します。非マルコフ性が観測速度を向上させるメカニズムの2つを特定します。1つは集団保持や復活によって支えられた直接的散逸運動と、コヒーレント運動に利用可能な非対称性の回復による間接的な強化です。恒久的エイン選択の場合、これは蓄積された負の性質によりポインタ基底の出現を遅らせます。",
-  "abstract_translated": "開系および散逸的量子力学によって支配される過程の中で、環境誘起的超選択(einselection)は特に基礎的であり、環境モニタリングを通じて好ましいポインタ状態の集合が形成され、最終的に古典性の出現を説明します。特に量子ダーウィニズムの文脈では、エインセレクションは観測対象がそのポインタ値に向かって動く動きの観点から研究できます。この目的のために、微分可能な時間局所開動学によって支配される有限次元系の可観測量に対する量子速度の上限を導出します。非マルコフ性が観測速度を向上させるメカニズムの2つを特定します。1つは集団保持や復活によって支えられた直接的散逸運動と、コヒーレント運動に利用可能な非対称性の回復による間接的な強化です。恒久的エイン選択の場合、これは蓄積された負の性質によりポインタ基底の出現を遅らせます。",
-  "last_delivered_at": "2026-09-18T06:07:57Z"
- },
- {
-  "delivery_id": "main:2609.20774",
-  "id": "2609.20774",
-  "posted_at": "2026-09-18T06:07:59Z",
-  "title": "All causally separable quantum processes are quantum circuits with classical control of causal order",
-  "title_ja": "すべての因果的に分離可能な量子過程は、因果秩序の古典的制御を持つ量子回路です",
-  "title_translated": "すべての因果的に分離可能な量子過程は、因果秩序の古典的制御を持つ量子回路です",
-  "translation_language": "ja",
-  "authors": "Julian Wechs, Alastair A. Abbott, Cyril Branciard",
-  "link": "https://arxiv.org/abs/2609.20774",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit",
-   "foundations"
-  ],
-  "genre_names": [
-   "量子情報理論",
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "qit",
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子情報理論",
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "The concept of causal (non)separability describes whether the causal order between parties that perform local quantum operations is well-defined or indefinite. Causal (non)separability in the general multipartite setting was introduced and studied in [Oreshkov and Giarmatzi, New J. Phys. 18, 093020 (2016); Wechs, Abbott, and Branciard, New J. Phys. 21, 013027 (2019)]. We resolve an open problem from these earlier works by showing -- using a novel \"coherent teleportation technique\" -- that a sufficient condition for causal separability identified in [Wechs, Abbott, and Branciard, New J. Phys. 21, 013027 (2019)] is also necessary, and thus provides a complete characterisation of multipartite causal separability. A consequence of this result is that all causally separable processes admit a realisation as generalised quantum circuits in which the order between the operations is classically controlled, known as \"quantum circuits with classical control of causal order\".",
-  "abstract_ja": "因果(非)分離性の概念は、局所量子操作を行う当事者間の因果順序が明確に定義されているか不定かを説明します。一般的な多部分的設定における因果(非)分離可能性は、[Oreshkov and Giarmatzi, New J. Phys. 18, 093020 (2016)]で導入・研究されました。Wechs, Abbott, and Branciard, New J. Phys. 21, 013027 (2019)]。私たちは、これら初期の研究から未解決の問題を解決するために、新しい「コヒーレントテレポーテーション技術」を用いて、[Wechs, Abbott, and Branciard, New J. Phys. 21, 013027 (2019)] で特定された因果分離可能性の十分条件も必要であることを示し、これにより多部因果分離可能性の完全な特徴付けを提供します。この結果の結果として、すべての因果的に分離可能な過程は、演算間の秩序が古典的に制御される一般化量子回路としての実現を認めます。これは「因果秩序の古典的制御を持つ量子回路」として知られています。",
-  "abstract_translated": "因果(非)分離性の概念は、局所量子操作を行う当事者間の因果順序が明確に定義されているか不定かを説明します。一般的な多部分的設定における因果(非)分離可能性は、[Oreshkov and Giarmatzi, New J. Phys. 18, 093020 (2016)]で導入・研究されました。Wechs, Abbott, and Branciard, New J. Phys. 21, 013027 (2019)]。私たちは、これら初期の研究から未解決の問題を解決するために、新しい「コヒーレントテレポーテーション技術」を用いて、[Wechs, Abbott, and Branciard, New J. Phys. 21, 013027 (2019)] で特定された因果分離可能性の十分条件も必要であることを示し、これにより多部因果分離可能性の完全な特徴付けを提供します。この結果の結果として、すべての因果的に分離可能な過程は、演算間の秩序が古典的に制御される一般化量子回路としての実現を認めます。これは「因果秩序の古典的制御を持つ量子回路」として知られています。",
-  "last_delivered_at": "2026-09-18T06:08:01Z"
- },
- {
-  "delivery_id": "main:2609.20781",
-  "id": "2609.20781",
-  "posted_at": "2026-09-18T06:08:02Z",
-  "title": "Parallel quantum channel discrimination and numerical ranges in tensor product subspaces",
-  "title_ja": "テンソル積部分空間における平行量子チャネル識別と数値範囲",
-  "title_translated": "テンソル積部分空間における平行量子チャネル識別と数値範囲",
-  "translation_language": "ja",
-  "authors": "Adam B\\'ilek, Paulina Lewandowska, Ryszard Kukulski",
-  "link": "https://arxiv.org/abs/2609.20781",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "qit"
-  ],
-  "genre_names": [
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Quantum channel discrimination plays a crucial role in quantum information theory. Of particular interest is the case in which the channels can be discriminated perfectly. In this work, we focus on the perfect quantum channel discrimination task in a parallel scheme. We develop an SDP formulation combined with a bisection procedure to compute a quantum state for perfect discrimination in time linear in the number of copies. In addition, we obtain the minimal number of copies of quantum channels to achieve perfect discrimination. Thanks to that, we settle in the affirmative Conjecture 1 of Duan, Guo, Li and Li [arXiv:1605.02294, IEEE ISIT 2016], which characterizes the number of parallel uses needed to discriminate perfectly a distinguished family of operator subspaces. All our results are obtained using the notion and basic properties of the numerical range. In particular, the key fact that we prove and use is that the minimal angle of the numerical range of a tensor product of matrix subspaces equals the sum of the minimal angles of the numerical ranges of the individual subspaces.",
-  "abstract_ja": "量子チャネル識別は量子情報理論において重要な役割を果たします。特に興味深いのはチャネルが完全に識別可能な場合です。本研究では、並列スキームにおける完全量子チャネル識別課題に焦点を当てます。時間内の完全識別のための量子状態を計算するために、コピー数に線形な時間的識別のための量子状態を計算するために、二分割手続きと組み合わせたSDP定式化を開発しました。さらに、完全識別を達成するための量子チャネルの最小コピー数も得ます。これにより、Duan、Guo、Li、Liの肯定的な予想1[arXiv:1605.02294, IEEE ISIT 2016]に落ち着きました。これは、区別された演算子部分空間の族を完全に識別するために必要な並列使用回数を特徴付けています。すべての結果は数値範囲の概念と基本的性質を用いて得られています。特に、我々が証明し用いる重要な事実は、行列部分空間のテンソル積の数値範囲の最小角が、個々の部分空間の数値範囲の最小角の和に等しいということです。",
-  "abstract_translated": "量子チャネル識別は量子情報理論において重要な役割を果たします。特に興味深いのはチャネルが完全に識別可能な場合です。本研究では、並列スキームにおける完全量子チャネル識別課題に焦点を当てます。時間内の完全識別のための量子状態を計算するために、コピー数に線形な時間的識別のための量子状態を計算するために、二分割手続きと組み合わせたSDP定式化を開発しました。さらに、完全識別を達成するための量子チャネルの最小コピー数も得ます。これにより、Duan、Guo、Li、Liの肯定的な予想1[arXiv:1605.02294, IEEE ISIT 2016]に落ち着きました。これは、区別された演算子部分空間の族を完全に識別するために必要な並列使用回数を特徴付けています。すべての結果は数値範囲の概念と基本的性質を用いて得られています。特に、我々が証明し用いる重要な事実は、行列部分空間のテンソル積の数値範囲の最小角が、個々の部分空間の数値範囲の最小角の和に等しいということです。",
-  "last_delivered_at": "2026-09-18T06:08:02Z"
- },
- {
-  "delivery_id": "main:2609.20823",
-  "id": "2609.20823",
-  "posted_at": "2026-09-18T06:08:04Z",
-  "title": "Environment Alignment and Redundant Record Formation in Imperfect-CNOT Quantum Darwinism",
-  "title_ja": "不完全-CNT量子ダーウィニズムにおける環境整列と冗長記録形成",
-  "title_translated": "不完全-CNT量子ダーウィニズムにおける環境整列と冗長記録形成",
-  "translation_language": "ja",
-  "authors": "Aleksander Lasek, Pawe{\\l} Horodecki",
-  "link": "https://arxiv.org/abs/2609.20823",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "target_genre_ids": [
-   "foundations",
-   "qit"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論",
-   "量子情報理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Quantum Darwinism explains objective information through redundant environmental records. Earlier work established that imperfect records can be amplified and that environment self-evolution can enhance or suppress their formation. We investigate how preparation, interaction angle, and field disorder combine in an imperfect-CNOT model with random Gaussian couplings and pure, noninteracting environment qubits. We find that, without fields, a single alignment parameter $\\Lambda$ determines the preparation and interaction-angle dependence of conditional-state distinguishability. Increasing interaction imperfection or local field strength can improve or suppress recording. We explain this nonmonotonic response through the geometry of conditional branch separation. For the pure initial environments considered here, the $Z$ basis remains optimal for Holevo information, so field-assisted recording requires no change of the recorded system observable. Comparing uniform local field strengths with Gaussian-distributed strengths at equal root-mean-square strength shows how disorder broadens both beneficial and detrimental field effects. Exact expressions for fragment information and numerical simulations with up to 24 environment qubits quantify the distinction between high mean information and reliable records across fragments and throughout a finite observation window. These results connect the geometry of local information acquisition to the fragment sizes needed for robust recording. The branch-distinguishability analysis itself requires only the conditional evolution of each environment qubit and extends to other interactions that preserve a system pointer basis.",
-  "abstract_ja": "量子ダーウィニズムは、冗長な環境記録を通じて客観的情報を説明します。以前の研究では、不完全記録が増幅されうることや、環境の自己進化がその形成を促進または抑制できることが確立されました。我々は、不完全CNTモデルにおいて、準備、相互作用角、場の無秩序がランダムなガウス結合や純粋な非相互作用環境量子ビットとどのように組み合わさるかを調査します。場がない場合、単一のアライメントパラメータ$\\Lambda$が条件付き状態識別の準備および相互作用角依存性を決定することがわかりました。相互作用の不完全さや局所的な場の強度を増加させることで、記録を改善または抑制することができます。この非単調応答は条件付き分岐分離の幾何学によって説明されます。ここで検討する純粋な初期環境において、$Z$基底はHolevo情報にとって最適であり、場支援記録は記録された系観測変数の変更を必要としません。均一な局所場強さと、同じ平均二乗根強度でのガウス分布強度を比較することで、無秩序が有益および有害な場効果の両方を広げることが示されます。最大24の環境量子ビットを用いた断片情報と数値シミュレーションの正確な式は、断片間および有限の観測ウィンドウ全体で高平均情報と信頼できる記録の区別を定量化します。これらの結果は、局所情報取得の幾何学と堅牢な記録に必要な断片サイズを結びつけています。分岐識別可能性解析自体は、各環境キュービットの条件付き進化のみを必要とし、システムポインタ基底を保持する他の相互作用にも拡張されます。",
-  "abstract_translated": "量子ダーウィニズムは、冗長な環境記録を通じて客観的情報を説明します。以前の研究では、不完全記録が増幅されうることや、環境の自己進化がその形成を促進または抑制できることが確立されました。我々は、不完全CNTモデルにおいて、準備、相互作用角、場の無秩序がランダムなガウス結合や純粋な非相互作用環境量子ビットとどのように組み合わさるかを調査します。場がない場合、単一のアライメントパラメータ$\\Lambda$が条件付き状態識別の準備および相互作用角依存性を決定することがわかりました。相互作用の不完全さや局所的な場の強度を増加させることで、記録を改善または抑制することができます。この非単調応答は条件付き分岐分離の幾何学によって説明されます。ここで検討する純粋な初期環境において、$Z$基底はHolevo情報にとって最適であり、場支援記録は記録された系観測変数の変更を必要としません。均一な局所場強さと、同じ平均二乗根強度でのガウス分布強度を比較することで、無秩序が有益および有害な場効果の両方を広げることが示されます。最大24の環境量子ビットを用いた断片情報と数値シミュレーションの正確な式は、断片間および有限の観測ウィンドウ全体で高平均情報と信頼できる記録の区別を定量化します。これらの結果は、局所情報取得の幾何学と堅牢な記録に必要な断片サイズを結びつけています。分岐識別可能性解析自体は、各環境キュービットの条件付き進化のみを必要とし、システムポインタ基底を保持する他の相互作用にも拡張されます。",
-  "last_delivered_at": "2026-09-18T06:08:06Z"
- },
- {
-  "delivery_id": "main:2609.19163",
-  "id": "2609.19163",
-  "posted_at": "2026-09-18T06:08:08Z",
-  "title": "Energy-Constrained Commutator Variance for Weyl Pairs",
-  "title_ja": "ワイル対のエネルギー制約交換子分散",
-  "title_translated": "ワイル対のエネルギー制約交換子分散",
-  "translation_language": "ja",
-  "authors": "Hassan Nasreddine",
-  "link": "https://arxiv.org/abs/2609.19163",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "math-ph",
-   "math.MP"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Let $W$ be a representation of the Weyl relations on a separable Hilbert space and write $\\mathcal R_W(K)=\\{W(f):f\\in K\\}''$. If the symplectic pairing of $K_1$ and $K_2$ is nonzero, there is a self-adjoint unitary $B\\in\\mathcal R_W(K_2)$ such that, for every normal state $\\rho$, one can choose a self-adjoint unitary $A_\\rho\\in\\mathcal R_W(K_1)$ with $\\operatorname{Var}_\\rho(-i[A_\\rho,B])=4$. Hence the optimized mean-input-energy-constrained coefficient equals $4$ at every admissible energy threshold. For the fixed trigonometric Weyl witness $h$, an exact identity for $4-h^2$ reduces the deficit to a phase-fixed problem for commuting squared Weyl translations. For the one-mode quadratic energy $G_M=\\frac12 R^TMR-\\frac12\\sqrt{\\det M}$, with $M>0$ and $u^T\\Omega v=\\pi$, we prove $4-\\gamma_{G_M,E}(h)=\\frac{u^TMu+v^TMv+2\\pi\\sqrt{\\det M}}{4E}+O(E^{-2})$. The lower bound holds over all normal states satisfying the mean-energy constraint, and a localized Zak construction attains the same coefficient. For $G=d\\Gamma(H_1)$ and witness directions $u,v\\in\\operatorname{dom}H_1^{1/2}$, the fixed-witness deficit is $\\Theta(E^{-1})$ whenever at least one direction lies outside $\\ker H_1$; if both directions are zero modes, the constrained supremum equals the endpoint at every positive threshold.",
-  "abstract_ja": "$W$を分離可能なヒルベルト空間上のワイル関係の表現とし、$\\mathcal R_W(K)=\\{W(f):f\\in K\\}''$と書く。$K_1$と$K_2$のシンプレクティック対がゼロでない場合、自己随伴ユニタリ$B\\in\\mathcal R_W(K_2)$が存在し、任意の正規状態$\\rho$に対して、自己随伴ユニタリ$A_\\rho\\in\\mathcal R_W(K_1)$を選び、$\\operatorname{Var}_\\rho(-i[A_\\rho,B])=4$を選べる。したがって、最適化された平均入力エネルギー制約係数は、許容されるエネルギー閾値で$4$に等しくなる。固定三角関数のワイルの証人$h$の場合、$4-h^2$の完全恒等式は、二乗ワイル平行移動の位相固定問題に欠損を還元します。一モードの二次エネルギー$G_M=\\frac12 R^TMR-\\frac12\\sqrt{\\det M}$の場合、$M>0$と$u^T\\Omega v=\\pi$を用いて、$4-\\gamma_{G_M,E}(h)=\\frac{u^TMu+v^TMv+2\\pi\\sqrt{\\det M}}{4E}+O(E^{-2})$を証明します。下限は平均エネルギー制約を満たすすべての正規状態に対して成り立ち、局所的なザック構成も同じ係数となります。$G=d\\Gamma(H_1)$ と証人方向 $u,v\\in\\operatorname{dom}H_1^{1/2}$ の場合、固定証人欠損は少なくとも一つの方向が $\\ker H_1$ の外にある場合、$\\Theta(E^{-1})$ となります。両方の方向がゼロモードの場合、制約された上限はすべての正の閾値で端点と等しくなります。",
-  "abstract_translated": "$W$を分離可能なヒルベルト空間上のワイル関係の表現とし、$\\mathcal R_W(K)=\\{W(f):f\\in K\\}''$と書く。$K_1$と$K_2$のシンプレクティック対がゼロでない場合、自己随伴ユニタリ$B\\in\\mathcal R_W(K_2)$が存在し、任意の正規状態$\\rho$に対して、自己随伴ユニタリ$A_\\rho\\in\\mathcal R_W(K_1)$を選び、$\\operatorname{Var}_\\rho(-i[A_\\rho,B])=4$を選べる。したがって、最適化された平均入力エネルギー制約係数は、許容されるエネルギー閾値で$4$に等しくなる。固定三角関数のワイルの証人$h$の場合、$4-h^2$の完全恒等式は、二乗ワイル平行移動の位相固定問題に欠損を還元します。一モードの二次エネルギー$G_M=\\frac12 R^TMR-\\frac12\\sqrt{\\det M}$の場合、$M>0$と$u^T\\Omega v=\\pi$を用いて、$4-\\gamma_{G_M,E}(h)=\\frac{u^TMu+v^TMv+2\\pi\\sqrt{\\det M}}{4E}+O(E^{-2})$を証明します。下限は平均エネルギー制約を満たすすべての正規状態に対して成り立ち、局所的なザック構成も同じ係数となります。$G=d\\Gamma(H_1)$ と証人方向 $u,v\\in\\operatorname{dom}H_1^{1/2}$ の場合、固定証人欠損は少なくとも一つの方向が $\\ker H_1$ の外にある場合、$\\Theta(E^{-1})$ となります。両方の方向がゼロモードの場合、制約された上限はすべての正の閾値で端点と等しくなります。",
-  "last_delivered_at": "2026-09-18T06:08:08Z"
- },
- {
-  "delivery_id": "main:2609.19254",
-  "id": "2609.19254",
-  "posted_at": "2026-09-18T06:08:10Z",
-  "title": "Emergent classicality and wavefunction branching in an isolated quantum many-body system",
-  "title_ja": "孤立量子多体系における創発的古典性と波動関数分岐",
-  "title_translated": "孤立量子多体系における創発的古典性と波動関数分岐",
-  "translation_language": "ja",
-  "authors": "Sa\\'ul Pilatowsky-Cameo, Jordan Cotler, Daniel Ranard, C. Jess Riedel",
-  "link": "https://arxiv.org/abs/2609.19254",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cond-mat.str-el",
-   "math-ph",
-   "math.MP"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Decoherence in quantum systems is conventionally modeled as the effect of interactions with an external environment. However, such a prescription excludes isolated many-body systems, which are also expected to display classical behavior at macroscopic scales. In isolated systems, decoherence must emerge internally from microscopic degrees of freedom that are invisible to the macroscopic description. Here we explicitly show that classicality can emerge in such a fashion. We consider a weakly disordered, $3$-local chaotic kicked top of $N$ qubits, where the collective spin sector serves as the macroscopic description, while the microscopic permutation sector acts as an internal bath, decohering the collective spin sector. Starting from closed unitary dynamics, we derive and numerically confirm an effective Lindblad equation for the collective spin variables. In the thermodynamic limit these reduced dynamics converge to a classical chaotic Fokker--Planck equation with vanishingly small diffusion on the spherical phase space, producing a quantum-classical correspondence beyond the Ehrenfest time. The chaotic dynamics evolve the pure many-body wavefunction into continuously branching components associated with distinct classical trajectories. These branches acquire nearly orthogonal microscopic records in the permutation sector, preventing quantum interferences and ensuring the corresponding histories remain consistent.",
-  "abstract_ja": "量子系におけるデコヒーレンスは、従来なら外部環境との相互作用の効果としてモデル化されます。しかし、このような規定は孤立した多体系を除外し、これらも巨視的スケールで古典的な振る舞いを示すことが期待されます。孤立系では、デコヒーレンスは巨視的記述では見えない微視的自由度から内部的に現れなければなりません。ここでは、古典性がそのような形で現れることを明示的に示します。弱く無秩序で、3ドル局所カオスティック・キック・トップ$N$の量子ビットを考えます。ここで集合スピンセクターが巨視的記述を務め、微視的置換セクターが内部浴として作用し、集合スピンセクターをデコヒーリングします。閉じたユニタリ動力学から出発し、集合スピン変数の有効なリンドブラッド方程式を導出し数値的に確認します。熱力学的極限では、これらの還元動力学は球面位相空間上で極めて小さな拡散を持つ古典的なカオス的フォッカー-プランク方程式に収束し、エーレンフェスト時間を超えた量子-古典的対応を生み出します。カオス的動力学は純粋な多体波動関数を、異なる古典軌道に関連する連続的な分岐成分へと進化させます。これらの枝は置換セクターでほぼ直交する微視的記録を獲得し、量子干渉を防ぎ、対応する履歴が一貫性を保ちます。",
-  "abstract_translated": "量子系におけるデコヒーレンスは、従来なら外部環境との相互作用の効果としてモデル化されます。しかし、このような規定は孤立した多体系を除外し、これらも巨視的スケールで古典的な振る舞いを示すことが期待されます。孤立系では、デコヒーレンスは巨視的記述では見えない微視的自由度から内部的に現れなければなりません。ここでは、古典性がそのような形で現れることを明示的に示します。弱く無秩序で、3ドル局所カオスティック・キック・トップ$N$の量子ビットを考えます。ここで集合スピンセクターが巨視的記述を務め、微視的置換セクターが内部浴として作用し、集合スピンセクターをデコヒーリングします。閉じたユニタリ動力学から出発し、集合スピン変数の有効なリンドブラッド方程式を導出し数値的に確認します。熱力学的極限では、これらの還元動力学は球面位相空間上で極めて小さな拡散を持つ古典的なカオス的フォッカー-プランク方程式に収束し、エーレンフェスト時間を超えた量子-古典的対応を生み出します。カオス的動力学は純粋な多体波動関数を、異なる古典軌道に関連する連続的な分岐成分へと進化させます。これらの枝は置換セクターでほぼ直交する微視的記録を獲得し、量子干渉を防ぎ、対応する履歴が一貫性を保ちます。",
-  "last_delivered_at": "2026-09-18T06:08:10Z"
- },
- {
-  "delivery_id": "main:2609.19280",
-  "id": "2609.19280",
-  "posted_at": "2026-09-18T06:08:12Z",
-  "title": "A Square-Root Barrier to Quantum Gate Speed under Linear Coupling",
-  "title_ja": "線形結合下での量子ゲート速度に対する平方根の障壁",
-  "title_translated": "線形結合下での量子ゲート速度に対する平方根の障壁",
-  "translation_language": "ja",
-  "authors": "Pablo Restrepo Gaviria, Mischa P. Woods",
-  "link": "https://arxiv.org/abs/2609.19280",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "math-ph",
-   "math.MP",
-   "physics.comp-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Faster quantum gates can suppress the decoherence accumulated during a computation, but in superconducting processors stronger microwave pulses can also increase leakage, off-resonant excitation, stray-field errors, and crosstalk. This creates a central energy--speed--error tradeoff: can quantum state engineering make a gate parametrically faster without paying proportionally more drive energy? We address this question by treating the driving pulse as a quantum bosonic field rather than a classical waveform. For a finite-dimensional system coupled linearly to that field, we prove that fixed-fidelity gate transition rates grow at most as the square root of the pulse energy, under stated uniformity conditions on the coupling and accepted dynamics. The bound permits arbitrary pulse states, including squeezed and non-Gaussian states, as well as drive--system entanglement and back action; coherent Gaussian pulses attain its energy exponent. Thus squeezing or other state engineering alone cannot replace the square-root energy law of a conventional linear drive by the linear scaling allowed by general quantum speed limits. Achieving that improvement requires changing the interaction class, in addition to using a suitable nonclassical pulse, thereby identifying interaction nonlinearity as an essential resource for relaxing the practical gate-speed error tradeoff.",
-  "abstract_ja": "より高速な量子ゲートは計算中に蓄積されるデコヒーレンスを抑制できますが、超伝導プロセッサではより強いマイクロ波パルスが漏れ、共鳴外励起、ストレート場誤差、クロストークも増加させることがあります。これにより、エネルギー・速度・誤差の中心的なトレードオフが生じます。すなわち、量子状態工学は駆動エネルギーを比例的に多く支払わずにゲートをパラメータ的に高速にできるのか?この問題に取り組むと、駆動パルスを古典波形ではなく量子ボソニック場として扱います。その場に線形結合された有限次元系の場合、結合や受け入れられた動力学の均一性条件下で、固定忠実度ゲート遷移率は最大でパルスエネルギーの平方根として増加することを証明します。この境界は、圧縮状態や非ガウス状態を含む任意のパルス状態、さらに駆動系のもつれや逆作用を許容します。コヒーレントなガウスパルスはそのエネルギー指数を得ます。したがって、圧縮やその他の状態工学だけでは、従来の線形駆動の平方根エネルギー法則を、一般的な量子速度制限によって許容される線形スケーリングに置き換えることはできません。その改善を達成するには、適切な非古典パルスに加え、相互作用クラスを変更し、実際のゲート速度誤差のトレードオフを緩和するための相互作用非線形性の重要な資源として認識する必要があります。",
-  "abstract_translated": "より高速な量子ゲートは計算中に蓄積されるデコヒーレンスを抑制できますが、超伝導プロセッサではより強いマイクロ波パルスが漏れ、共鳴外励起、ストレート場誤差、クロストークも増加させることがあります。これにより、エネルギー・速度・誤差の中心的なトレードオフが生じます。すなわち、量子状態工学は駆動エネルギーを比例的に多く支払わずにゲートをパラメータ的に高速にできるのか?この問題に取り組むと、駆動パルスを古典波形ではなく量子ボソニック場として扱います。その場に線形結合された有限次元系の場合、結合や受け入れられた動力学の均一性条件下で、固定忠実度ゲート遷移率は最大でパルスエネルギーの平方根として増加することを証明します。この境界は、圧縮状態や非ガウス状態を含む任意のパルス状態、さらに駆動系のもつれや逆作用を許容します。コヒーレントなガウスパルスはそのエネルギー指数を得ます。したがって、圧縮やその他の状態工学だけでは、従来の線形駆動の平方根エネルギー法則を、一般的な量子速度制限によって許容される線形スケーリングに置き換えることはできません。その改善を達成するには、適切な非古典パルスに加え、相互作用クラスを変更し、実際のゲート速度誤差のトレードオフを緩和するための相互作用非線形性の重要な資源として認識する必要があります。",
-  "last_delivered_at": "2026-09-18T06:08:12Z"
- },
- {
-  "delivery_id": "main:2609.19404",
-  "id": "2609.19404",
-  "posted_at": "2026-09-18T06:08:14Z",
-  "title": "Fifty Years of the GKLS Master Equation: Foundations and Early Developments",
-  "title_ja": "GKLSマスター方程式の50年:基礎と初期の発展",
-  "title_translated": "GKLSマスター方程式の50年:基礎と初期の発展",
-  "translation_language": "ja",
-  "authors": "Fabio Benatti, Dariusz Chru\\'sci\\'nski, Saverio Pascazio",
-  "link": "https://arxiv.org/abs/2609.19404",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "The year 2026 marks the fiftieth anniversary of the two seminal papers in which Gorini, Kossakowski, and Sudarshan, and independently Lindblad, characterized the generators of completely positive quantum dynamical semigroups. We revisit the conceptual and historical route leading to the Gorini-Kossakowski-Lindblad-Sudarshan (GKLS) master equation and examine several of its early developments and consequences. Our aim is to show how several initially separate mathematical and physical ideas converged in the GKLS structure theorem, imme- diately opening the way to manifold consequences for the description of dissipative quantum phenomena and how that theorem, fifty years later, remains both a foundational result and an active framework for open quantum dynamics.",
-  "abstract_ja": "2026年は、ゴリーニ、コサコフスキー、スダルシャン、そして独立してリンドブラッドが完全に正の量子力学半群の生成元を特徴づけた2本の画期的な論文から50周年にあたります。私たちはゴリニ・コサコフスキー・リンドブラッド・スダルシャン(GKLS)マスター方程式に至る概念的かつ歴史的経緯を再検討し、その初期のいくつかの発展と結果を検証します。当初は別々に見えた数学的・物理的概念がGKLS構造定理に収束し、散逸的量子現象の記述における多様な結果への道を即座に開いたこと、そしてその定理が50年経った今も基礎的成果であり、開かれた量子ダイナミクスの活発な枠組みであり続けていることを示すことを目的としています。",
-  "abstract_translated": "2026年は、ゴリーニ、コサコフスキー、スダルシャン、そして独立してリンドブラッドが完全に正の量子力学半群の生成元を特徴づけた2本の画期的な論文から50周年にあたります。私たちはゴリニ・コサコフスキー・リンドブラッド・スダルシャン(GKLS)マスター方程式に至る概念的かつ歴史的経緯を再検討し、その初期のいくつかの発展と結果を検証します。当初は別々に見えた数学的・物理的概念がGKLS構造定理に収束し、散逸的量子現象の記述における多様な結果への道を即座に開いたこと、そしてその定理が50年経った今も基礎的成果であり、開かれた量子ダイナミクスの活発な枠組みであり続けていることを示すことを目的としています。",
-  "last_delivered_at": "2026-09-18T06:08:14Z"
- },
- {
-  "delivery_id": "main:2609.19591",
-  "id": "2609.19591",
-  "posted_at": "2026-09-18T06:08:15Z",
-  "title": "Dephasing-Enhanced Response and Phase Transitions in Quantum Boltzmann Samplers",
-  "title_ja": "量子ボルツマンサンプラーにおける位相除去強化応答および相転移",
-  "title_translated": "量子ボルツマンサンプラーにおける位相除去強化応答および相転移",
-  "translation_language": "ja",
-  "authors": "Yu-Xuan Zhang, Jing-Ling Chen, Leong-Chuan Kwek, Peng Wang",
-  "link": "https://arxiv.org/abs/2609.19591",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "Dephasing can drive a quantum Boltzmann sampler into an ordered phase while its programmed probability distribution remains disordered. We trace this transition to an enhanced conditional response: coherence loss changes how each spin responds to its neighbors, and interactions amplify the change. For all-to-all coupling, we establish the stationary transition at finite dephasing. Near criticality, the magnetization distribution depends on the ratio of dephasing strength to the square root of system size, retaining a finite imprint of coherence even as the local coherent correction vanishes. In the strong-dephasing limit on a square lattice, the dynamics generates effective multispin interactions and probability currents, with Ising-like critical statistics. Adjusting the local dissipative update restores the target probability process on arbitrary graphs.",
-  "abstract_ja": "デフェージングは、プログラムされた確率分布が無秩序なままのまま、量子ボルツマンサンプラーを秩序相に駆動することができます。この遷移は強化された条件付き応答に結びつきます。コヒーレンス損失は各スピンの隣接スピンへの応答を変え、相互作用がその変化を増幅します。全対全結合の場合、有限位相デフェージングにおける定常遷移を確立します。臨界近い段階では、磁化分布は位相除去の強度と系サイズの平方根の比率に依存し、局所的なコヒーレント補正が消えても有限のコヒーレンスの痕跡を保持します。正方形格子上の強位相脱極限では、動力学は効果的なマルチスピン相互作用と確率電流を生成し、イジングのような臨界統計を持ちます。局所散逸更新を調整すると任意のグラフ上でターゲット確率過程が復元されます。",
-  "abstract_translated": "デフェージングは、プログラムされた確率分布が無秩序なままのまま、量子ボルツマンサンプラーを秩序相に駆動することができます。この遷移は強化された条件付き応答に結びつきます。コヒーレンス損失は各スピンの隣接スピンへの応答を変え、相互作用がその変化を増幅します。全対全結合の場合、有限位相デフェージングにおける定常遷移を確立します。臨界近い段階では、磁化分布は位相除去の強度と系サイズの平方根の比率に依存し、局所的なコヒーレント補正が消えても有限のコヒーレンスの痕跡を保持します。正方形格子上の強位相脱極限では、動力学は効果的なマルチスピン相互作用と確率電流を生成し、イジングのような臨界統計を持ちます。局所散逸更新を調整すると任意のグラフ上でターゲット確率過程が復元されます。",
-  "last_delivered_at": "2026-09-18T06:08:15Z"
- },
- {
-  "delivery_id": "main:2609.19862",
-  "id": "2609.19862",
-  "posted_at": "2026-09-18T06:08:17Z",
-  "title": "Automated search for highly contextual Kochen-Specker proofs",
-  "title_ja": "高度に文脈的なコーチェン・スペッカー証明の自動検索",
-  "title_translated": "高度に文脈的なコーチェン・スペッカー証明の自動検索",
-  "translation_language": "ja",
-  "authors": "Axel Muller, Metod Saniga",
-  "link": "https://arxiv.org/abs/2609.19862",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Observable-based Kochen-Specker proofs are configurations of multi-qubit Pauli observables grouped into contexts whose products are plus or minus the indentity. Their robustness as state-independent contextuality tests can be measured by the tolerated error per context $\\varepsilon = 2d/|H|$, where $d$ is the contextuality degree and $|H|$ the number of contexts. Since the degree depends only on an underlying abstract structure called the hypergram i.e. the pair formed by the context hypergraph and the anticommutation graph, the search for highly contextual proofs can be carried out on them instead, with no reference to qubits or to any particular Pauli labeling. We further exploit this by enumerating anticommutation graphs first, and then by associating to each graph $G$ the single hypergram carrying its entire hypergraph support $HS(G)$, so that exactly one candidate is examined per graph. Applied to the House of Graphs database and to censuses of vertex-transitive graphs on at most 24 vertices, this pipeline recovers the Peres-Mermin square, the doily and the Mermin pentagram, and yields configurations reaching $\\varepsilon = 0.707$, against $0.424$ for the previous published record. The best configurations are predominantly those stemming from line graphs and unions of graphs; we explain the former by showing that every perfect matching of a graph is a context of its line graph, which exhibits the Peres-Mermin square and the doily as the first members of two infinite families. We close with finite geometric descriptions of the most striking configurations inside symplectic polar spaces, in terms of ovoids, hyperbolic quadrics and Fano planes.",
-  "abstract_ja": "可観測量ベースのコーチェン・スペッカー証明は、多量子ビットのパウリ可観測量を、直数の正負の積がインテインテイントである文脈にグループ化した構成です。状態に依存しない文脈検定としての堅牢性は、文脈ごとの許容誤差 $\\varepsilon = 2d/|H|$(ここで$d$は文脈次数、$|H|$は文脈の数です。次数はハイパーグラムと呼ばれる基盤となる抽象構造、すなわち文脈ハイパーグラフと反交換グラフのペアにのみ依存するため、量子ビットや特定のパウリラベリングを参照せずに、高度に文脈的な証明をこれら上で探すことができます。さらに、まずアンチコミュテーショングラフを列挙し、その後各グラフ$G$にハイパーグラフ$HSサポート全体を含む単一のハイパーグラムを関連付けることで、1グラフにちょうど1つの候補を検証します。House of Graphsデータベースおよび最大24頂点の頂点推移グラフの国勢調査に適用すると、このパイプラインはペレス・メルミンの正方形、ドイリー、メルミン五芒星を復元し、前回の記録では$0.424$に対し、$\\varepsilon = 0.707$に達する構成を得ます。最良の構成は主に線グラフとグラフの和集合に由来するものです。前者は、グラフの完全マッチングがその線グラフの文脈であり、ペレス・メルミン正方形とドイリーが2つの無限族の最初のメンバーであることを示すことで説明します。最後に、卵状体、双曲二次曲面、ファノ平面を用いたシンプレクティック極空間内の最も顕著な配置の有限幾何学的記述で締めくくります。",
-  "abstract_translated": "可観測量ベースのコーチェン・スペッカー証明は、多量子ビットのパウリ可観測量を、直数の正負の積がインテインテイントである文脈にグループ化した構成です。状態に依存しない文脈検定としての堅牢性は、文脈ごとの許容誤差 $\\varepsilon = 2d/|H|$(ここで$d$は文脈次数、$|H|$は文脈の数です。次数はハイパーグラムと呼ばれる基盤となる抽象構造、すなわち文脈ハイパーグラフと反交換グラフのペアにのみ依存するため、量子ビットや特定のパウリラベリングを参照せずに、高度に文脈的な証明をこれら上で探すことができます。さらに、まずアンチコミュテーショングラフを列挙し、その後各グラフ$G$にハイパーグラフ$HSサポート全体を含む単一のハイパーグラムを関連付けることで、1グラフにちょうど1つの候補を検証します。House of Graphsデータベースおよび最大24頂点の頂点推移グラフの国勢調査に適用すると、このパイプラインはペレス・メルミンの正方形、ドイリー、メルミン五芒星を復元し、前回の記録では$0.424$に対し、$\\varepsilon = 0.707$に達する構成を得ます。最良の構成は主に線グラフとグラフの和集合に由来するものです。前者は、グラフの完全マッチングがその線グラフの文脈であり、ペレス・メルミン正方形とドイリーが2つの無限族の最初のメンバーであることを示すことで説明します。最後に、卵状体、双曲二次曲面、ファノ平面を用いたシンプレクティック極空間内の最も顕著な配置の有限幾何学的記述で締めくくります。",
-  "last_delivered_at": "2026-09-18T06:08:17Z"
- },
- {
-  "delivery_id": "main:2609.20029",
-  "id": "2609.20029",
-  "posted_at": "2026-09-18T06:08:19Z",
-  "title": "Statistical delocalization in the Anyonic Aubry-Andr\\'e model",
-  "title_ja": "アニオン・オーブリー・アンドレモデルにおける統計的非局在化",
-  "title_translated": "アニオン・オーブリー・アンドレモデルにおける統計的非局在化",
-  "translation_language": "ja",
-  "authors": "Andoni Agirre, Andr\\'e Eckardt, Tobias Grass",
-  "link": "https://arxiv.org/abs/2609.20029",
-  "primary": "cond-mat.quant-gas",
-  "categories": [
-   "cond-mat.quant-gas",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "Many-body localization is remarkable in that localization persists despite the presence of dynamical interactions. Here we demonstrate the converse phenomenon: enhanced many-body delocalization induced solely by exchange statistics. We study a Aubry-Andr\\'e quasiperiodic system of anyons in one dimension in the absence of density-density interactions. In terms of anyon operators, the system is described by a quadratic Hamiltonian. By analyzing the finite-size scaling of its spectral properties and the inverse participation ratio of many-body eigenstates, we find that increasing the anyonic statistical phase systematically shifts the many-body localization crossover toward larger quasiperdiodic potentials. We further confirm these findings using a dynamical probe, namely the persistence of an initial density imbalance following quenches. Our results establish exchange statistics as an independent mechanism capable of altering many-body localization, revealing a fundamentally distinct route to delocalization in one-dimensional quantum systems.",
-  "abstract_ja": "多体局在化は、動的相互作用が存在しても局在化が持続する点で注目に値します。ここでは逆の現象、すなわち交換統計のみによって誘導される多体脱局所化の強化を示します。密度-密度相互作用を伴わない一次元におけるアニオンのAubry-Andr'e準周期系を研究します。アニオン演算子の観点から、この系は二次ハミルトニアンで記述されます。スペクトル特性の有限サイズスケーリングと多体固有状態の逆参加比を解析することで、アニオン統計位相を増加させることで多体局在のクロスオーバーが体系的により大きな準パージオディオディックポテンシャルへとシフトすることがわかります。さらに、クエンチ後の初期密度不均衡の持続性という動的プローブを用いてこれらの発見を確認します。我々の結果は、交換統計を多体系局在化を変化させる独立したメカニズムとして確立し、一次元量子系における脱局在化への根本的に異なるルートを明らかにしました。",
-  "abstract_translated": "多体局在化は、動的相互作用が存在しても局在化が持続する点で注目に値します。ここでは逆の現象、すなわち交換統計のみによって誘導される多体脱局所化の強化を示します。密度-密度相互作用を伴わない一次元におけるアニオンのAubry-Andr'e準周期系を研究します。アニオン演算子の観点から、この系は二次ハミルトニアンで記述されます。スペクトル特性の有限サイズスケーリングと多体固有状態の逆参加比を解析することで、アニオン統計位相を増加させることで多体局在のクロスオーバーが体系的により大きな準パージオディオディックポテンシャルへとシフトすることがわかります。さらに、クエンチ後の初期密度不均衡の持続性という動的プローブを用いてこれらの発見を確認します。我々の結果は、交換統計を多体系局在化を変化させる独立したメカニズムとして確立し、一次元量子系における脱局在化への根本的に異なるルートを明らかにしました。",
-  "last_delivered_at": "2026-09-18T06:08:19Z"
- },
- {
-  "delivery_id": "main:2609.20052",
-  "id": "2609.20052",
-  "posted_at": "2026-09-18T06:08:21Z",
-  "title": "Semiclassical scaling of eigenstate thermalization in single-particle chaotic systems",
-  "title_ja": "単一粒子カオス系における固有状態熱化の半古典的スケーリング",
-  "title_translated": "単一粒子カオス系における固有状態熱化の半古典的スケーリング",
-  "translation_language": "ja",
-  "authors": "Yaoqi Ye, Xiao Wang",
-  "link": "https://arxiv.org/abs/2609.20052",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cond-mat.stat-mech",
-   "nlin.CD"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "We study the off-diagonal matrix elements of real-space observables in time-reversal-invariant single-particle chaotic systems. By analyzing the semiclassical expression for the off-diagonal variance derived from Berry's conjecture, we show that the banded structure of the observable matrix emerges naturally. For local observables, we identify a characteristic bandwidth associated with a late-time timescale inversely proportional to the particle velocity. We further show that, for systems with steep-wall confinement, the predicted magnitude follows the entropy scaling of the eigenstate thermalization hypothesis (ETH), multiplied by an additional kinetic-energy-dependent factor that is independent of spatial dimension and is not captured by conventional many-body ETH. We illustrate these results through a case study of quantum billiards and verify the semiclassical scaling numerically in a generalized quarter-Sinai billiard. Our results elucidate the dynamical implications of Berry's conjecture and provide a comparison between single-particle eigenstate thermalization and many-body ETH.",
-  "abstract_ja": "時間反転不変単一粒子カオス系における実空間観測量の対角線外行列要素を研究します。ベリー予想から導き出された半古典的式を解析することで、観測可能な行列の帯状構造が自然に現れることを示します。局所観測量については、粒子速度に反比例する遅い時間スケールに関連する特徴帯域幅を特定します。さらに、急勾配壁閉じ込め系では、予測大きさが固有状態熱化仮説(ETH)のエントロピースケーリングに従い、空間次元に依存しない追加の運動エネルギー依存因子を掛け合わせることを示します。これは従来の多体ETHでは捉えられません。これらの結果は量子ビリヤードの事例研究を通じて示し、一般化されたクォーターサイナイビリヤードにおける半古典的スケーリングを数値的に検証します。私たちの結果はベリー予想の力学的含意を明らかにし、単一粒子固有状態熱化と多体ETHの比較を提供します。",
-  "abstract_translated": "時間反転不変単一粒子カオス系における実空間観測量の対角線外行列要素を研究します。ベリー予想から導き出された半古典的式を解析することで、観測可能な行列の帯状構造が自然に現れることを示します。局所観測量については、粒子速度に反比例する遅い時間スケールに関連する特徴帯域幅を特定します。さらに、急勾配壁閉じ込め系では、予測大きさが固有状態熱化仮説(ETH)のエントロピースケーリングに従い、空間次元に依存しない追加の運動エネルギー依存因子を掛け合わせることを示します。これは従来の多体ETHでは捉えられません。これらの結果は量子ビリヤードの事例研究を通じて示し、一般化されたクォーターサイナイビリヤードにおける半古典的スケーリングを数値的に検証します。私たちの結果はベリー予想の力学的含意を明らかにし、単一粒子固有状態熱化と多体ETHの比較を提供します。",
-  "last_delivered_at": "2026-09-18T06:08:21Z"
- },
- {
-  "delivery_id": "main:2609.20205",
-  "id": "2609.20205",
-  "posted_at": "2026-09-18T06:08:23Z",
-  "title": "Complex coordinates forced by finite orthogonality hypergraphs in dimension three",
-  "title_ja": "有限直交性によって強制される3次元ハイパーグラフの複素座標",
-  "title_translated": "有限直交性によって強制される3次元ハイパーグラフの複素座標",
-  "translation_language": "ja",
-  "authors": "Mirko Navara, Karl Svozil",
-  "link": "https://arxiv.org/abs/2609.20205",
-  "primary": "math.CO",
-  "categories": [
-   "math.CO",
-   "quant-ph"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "cross",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash",
-  "abstract_en": "We exhibit two finite orthogonality hypergraphs that admit faithful orthogonal representations by rays in complex three-dimensional space but admit none in real three-dimensional space. Thus, although each orthogonality diagram is unchanged, its coordinatizability in dimension three depends on whether the scalar field is complex or real. The first hypergraph has 20 vertices and 12 contexts. The second hypergraph adds one vertex and two contexts. Phase-adjusted realification also gives explicit faithful orthogonal representations of both hypergraphs in real six-dimensional space.",
-  "abstract_ja": "複素三次元空間では光線による忠実直交表現を許容するが、実三次元空間では一つも許さない2つの有限直交性ハイパーグラフを示します。したがって、各直交性図は変更されませんが、3次元でのその座標化可能性は、スカラー場が複素体か実数かに依存します。最初のハイパーグラフは20の頂点と12のコンテキストを持ちます。2つ目のハイパーグラフは1つの頂点と2つのコンテキストを追加します。位相調整された実現は、実6次元空間における両方のハイパーグラフの明示的な忠実直交表現も与えます。",
-  "abstract_translated": "複素三次元空間では光線による忠実直交表現を許容するが、実三次元空間では一つも許さない2つの有限直交性ハイパーグラフを示します。したがって、各直交性図は変更されませんが、3次元でのその座標化可能性は、スカラー場が複素体か実数かに依存します。最初のハイパーグラフは20の頂点と12のコンテキストを持ちます。2つ目のハイパーグラフは1つの頂点と2つのコンテキストを追加します。位相調整された実現は、実6次元空間における両方のハイパーグラフの明示的な忠実直交表現も与えます。",
-  "last_delivered_at": "2026-09-18T06:08:23Z"
- },
- {
-  "delivery_id": "main:2609.20428",
-  "id": "2609.20428",
-  "posted_at": "2026-09-18T06:08:24Z",
-  "title": "State-Selective Floquet Memory in Degenerate Manifolds",
-  "title_ja": "縮退多様体における状態選択的フロケット記憶",
-  "title_translated": "縮退多様体における状態選択的フロケット記憶",
-  "translation_language": "ja",
-  "authors": "Ayan Sahoo, Argha Debnath, Debraj Rakshit",
-  "link": "https://arxiv.org/abs/2609.20428",
-  "primary": "quant-ph",
-  "categories": [
-   "quant-ph",
-   "cond-mat.quant-gas"
-  ],
-  "source_feed": "quant-ph",
-  "classification_context": "quant-ph",
-  "announce_type": "new",
-  "genre_ids": [
-   "foundations"
-  ],
-  "genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "target_genre_ids": [
-   "foundations"
-  ],
-  "target_genre_names": [
-   "量子基礎・測定理論"
-  ],
-  "classifier": "gemini-2.5-flash-lite",
-  "abstract_en": "In order to understand which initial states retain memory under periodic driving, it is necessary to depart from the ideal limit giving rise to invariant structures and work inside near-degenerate manifolds. We show that degeneracy itself is not conclusive and what actually matters is how perturbations, such as structural and driving imperfections, acts on the projected multiplet. For systems decoupling into the local clusters in the ideal limit, the projections can be computed within degenerate perturbation theory. There the stability is decided by two criteria: the coupling can not connect the state with other degenerate partners in the manifold, either by kinetic blocking, or more generally, by diagonalizing the projected coupling, and the drive's local selection rule must admit only transfer energies detuned from Floquet sidebands, in which case the projected drive generator exactly vanishes. We formalize these understandings in a periodically driven clean, short-ranged alternating XXZ chain and demonstrate a set of results that include, long-lived states, both of product form and entangled across the clusters, a periodic family of sideband resonances, and an explicit example showing opposite fates for states with identical energy and charges.",
-  "abstract_ja": "どの初期状態が周期的駆動下で記憶を保持するかを理解するためには、不変構造を生み出す理想極限から離れ、ほぼ縮退多様体内で作業する必要があります。縮退自体は決定的ではなく、構造的不完全さや駆動不完全さのような摂動が射影多重項にどのように作用するかが重要であることを示します。理想極限で局所クラスタに切り離される系の場合、射影は縮退摂動理論内で計算できます。ここでの安定性は二つの基準で決まります。すなわち、結合が多様体の他の縮退パートナーとキネティックブロッキングやより一般的には射影結合の対角化によって状態を結びつけることができないこと、そしてドライブの局所選択則はフロケット側波帯から離れた転送エネルギーのみを許容しなければならず、その場合射影駆動生成子は正確にゼロとなります。これらの理解を周期的に駆動されるクリーンで短距離の交互XXZ連鎖で形式化し、生成物形態およびクラスター間で絡み合う長寿命状態、周期的なサイドバンド共鳴族、同一エネルギーと電荷を持つ状態に対して逆の運命を示す明示的な例を含む一連の結果を示しました。",
-  "abstract_translated": "どの初期状態が周期的駆動下で記憶を保持するかを理解するためには、不変構造を生み出す理想極限から離れ、ほぼ縮退多様体内で作業する必要があります。縮退自体は決定的ではなく、構造的不完全さや駆動不完全さのような摂動が射影多重項にどのように作用するかが重要であることを示します。理想極限で局所クラスタに切り離される系の場合、射影は縮退摂動理論内で計算できます。ここでの安定性は二つの基準で決まります。すなわち、結合が多様体の他の縮退パートナーとキネティックブロッキングやより一般的には射影結合の対角化によって状態を結びつけることができないこと、そしてドライブの局所選択則はフロケット側波帯から離れた転送エネルギーのみを許容しなければならず、その場合射影駆動生成子は正確にゼロとなります。これらの理解を周期的に駆動されるクリーンで短距離の交互XXZ連鎖で形式化し、生成物形態およびクラスター間で絡み合う長寿命状態、周期的なサイドバンド共鳴族、同一エネルギーと電荷を持つ状態に対して逆の運命を示す明示的な例を含む一連の結果を示しました。",
-  "last_delivered_at": "2026-09-18T06:08:24Z"
- },
- {
   "delivery_id": "main:2609.20431",
   "id": "2609.20431",
   "posted_at": "2026-09-18T06:08:26Z",
@@ -207488,5 +206602,1134 @@
   "abstract_ja": "委任可能匿名認証情報（DAC）は、DeFiの信用委任のように、仲介者を通じて委任された権限を匿名で行使することを可能にします。既存のDACでは、保有者が提示のためにチェーン状の系譜情報を保持し、処理する必要があります。 我々は、この制限を\\emph{証明者認識}と呼ぶ。提示コストは委任の深さに比例して増加する一方で、保有者が可視化するトポロジーは、系譜に基づく拒否権行使、戦略的な仲介排除、そして事実上の検閲を可能にしてしまう。 我々は、プライバシーの側面を\\emph{強化された委任匿名性}（EDA）として形式化します。これは、検証者側の匿名性と保有者側のトポロジー無知性を組み合わせた、リーク量でパラメータ化された2観察者モデルです。我々は、許容される保有者側のリーク量が同一であるパスについて、シミュレーションおよび区別不能性の定式化を示します。 我々のフレームワークである\\emph{Proof-Carrying Credentials} (PCC)は、非一様漸進的検証可能計算（NIVC）を用いて、明示的なチェーンを再帰的に更新される証明保持状態に置き換えることで、これら両方の制限に対処する。 PCCは、提示を委任の深さから独立させ、許可されたリーク範囲を超えたトポロジーを隠蔽しつつ、制限付き委任と表現力豊かな提示を維持する。 ペアリングベースの定サイズDACとは異なり、PCCは計算困難性に依存せず、透過的なFRIベースの再帰とハッシュベースの署名を用いて、QROM上でポスト量子互換のインスタンス化を可能にする。 コンシューマーグレードのハードウェアにおいて、Halo2の実装は、検証者向けの証明サイズを7.344\\,KBに一定に保ち、テストされたすべての深さにおいて35～36\\,msの検証時間を維持する。 128ビットのPlonky2実装では、深度 $L\\in\\{1,2,4,8,16\\}$ 全体で検証時間が3.8\\,ms、委任ステップあたり1.03\\,sとなり、証明サイズは157.9\\,KBで一定に保たれる。 これらの結果は、深さに依存しない実用的な提示および保有者側のトポロジー隠蔽を実証している。",
   "abstract_translated": "委任可能匿名認証情報（DAC）は、DeFiの信用委任のように、仲介者を通じて委任された権限を匿名で行使することを可能にします。既存のDACでは、保有者が提示のためにチェーン状の系譜情報を保持し、処理する必要があります。 我々は、この制限を\\emph{証明者認識}と呼ぶ。提示コストは委任の深さに比例して増加する一方で、保有者が可視化するトポロジーは、系譜に基づく拒否権行使、戦略的な仲介排除、そして事実上の検閲を可能にしてしまう。 我々は、プライバシーの側面を\\emph{強化された委任匿名性}（EDA）として形式化します。これは、検証者側の匿名性と保有者側のトポロジー無知性を組み合わせた、リーク量でパラメータ化された2観察者モデルです。我々は、許容される保有者側のリーク量が同一であるパスについて、シミュレーションおよび区別不能性の定式化を示します。 我々のフレームワークである\\emph{Proof-Carrying Credentials} (PCC)は、非一様漸進的検証可能計算（NIVC）を用いて、明示的なチェーンを再帰的に更新される証明保持状態に置き換えることで、これら両方の制限に対処する。 PCCは、提示を委任の深さから独立させ、許可されたリーク範囲を超えたトポロジーを隠蔽しつつ、制限付き委任と表現力豊かな提示を維持する。 ペアリングベースの定サイズDACとは異なり、PCCは計算困難性に依存せず、透過的なFRIベースの再帰とハッシュベースの署名を用いて、QROM上でポスト量子互換のインスタンス化を可能にする。 コンシューマーグレードのハードウェアにおいて、Halo2の実装は、検証者向けの証明サイズを7.344\\,KBに一定に保ち、テストされたすべての深さにおいて35～36\\,msの検証時間を維持する。 128ビットのPlonky2実装では、深度 $L\\in\\{1,2,4,8,16\\}$ 全体で検証時間が3.8\\,ms、委任ステップあたり1.03\\,sとなり、証明サイズは157.9\\,KBで一定に保たれる。 これらの結果は、深さに依存しない実用的な提示および保有者側のトポロジー隠蔽を実証している。",
   "last_delivered_at": "2026-11-23T08:59:32Z"
+ },
+ {
+  "delivery_id": "main:2611.27626",
+  "id": "2611.27626",
+  "posted_at": "2026-11-23T14:10:12Z",
+  "title": "Criterion and Construction Framework for Impure Quantum $(r,\\delta)$-LRCs from Optimal $(r,\\delta)$-LRCs",
+  "title_ja": "最適 $(r,\\delta)$-LRC に基づく不純量子 $(r,\\delta)$-LRC の基準および構築フレームワーク",
+  "title_translated": "最適 $(r,\\delta)$-LRC に基づく不純量子 $(r,\\delta)$-LRC の基準および構築フレームワーク",
+  "translation_language": "ja",
+  "authors": "Kun Zhou, Meng Cao",
+  "link": "https://arxiv.org/abs/2611.27626",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qec"
+  ],
+  "genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "target_genre_ids": [
+   "qec"
+  ],
+  "target_genre_names": [
+   "誤り訂正・符号理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "qec"
+   ],
+   "final_genre_ids": [
+    "qec"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "This paper aims to uncover new phenomena and provide new tools for quantum \\((r,\\delta)\\)-LRCs derived from optimal \\((r,\\delta)\\)-LRCs. The initial motivation is to identify the main reason for the existence of impure cases in such quantum codes. Our main result reveals that whether \\(d = r+1\\) is the key factor governing the impurity of quantum \\((r,\\delta)\\)-LRCs. We prove that, when \\(d \\neq r+1\\), impure quantum codes derived from optimal \\((r,\\delta)\\)-LRCs have bounded lengths. Conversely, when \\(d = r+1\\), we construct impure quantum \\((r,\\delta)\\)-LRCs with unbounded lengths. The central tool developed in this work is a criterion for identifying impure quantum codes derived from optimal \\((r,\\delta)\\)-LRCs. The main results include a criterion for impurity in quantum \\((r,\\delta)\\)-LRCs (Theorem 3.2), a construction framework for impure quantum \\((r,\\delta)\\)-LRCs (Theorem 4.4), and two families of impure quantum \\((r,\\delta)\\)-LRCs (Theorems 4.8 and 4.11).",
+  "abstract_ja": "本論文は、最適 \\((r,\\delta)\\)-LRC から導出される量子 \\((r,\\delta)\\)-LRC について、新たな現象を解明し、新たなツールを提供することを目的としている。当初の動機は、このような量子符号において不純なケースが存在する主な理由を特定することにある。 我々の主な結果は、\\(d = r+1\\) であるかどうかが、量子 \\((r,\\delta)\\)-LRC の不純性を決定づける重要な要因であることを明らかにしている。 我々は、\\(d \\neq r+1\\) の場合、最適 \\((r,\\delta)\\)-LRC から導出される不純な量子符号の長さは有界であることを証明する。 逆に、\\(d = r+1\\) の場合、長さが無界となる不純な量子 \\((r,\\delta)\\)-LRC を構成する。本研究で開発された中心的な手法は、最適 \\((r,\\delta)\\)-LRC から導出される不純な量子コードを特定するための基準である。 主な結果としては、量子 \\((r,\\delta)\\)-LRC における不純性の判別基準（定理 3.2）、不純な量子 \\((r,\\delta)\\)-LRC の構成枠組み（定理 4.4）、 および2つの不純量子\\((r,\\delta)\\)-LRCの族（定理4.8および4.11）が含まれる。",
+  "abstract_translated": "本論文は、最適 \\((r,\\delta)\\)-LRC から導出される量子 \\((r,\\delta)\\)-LRC について、新たな現象を解明し、新たなツールを提供することを目的としている。当初の動機は、このような量子符号において不純なケースが存在する主な理由を特定することにある。 我々の主な結果は、\\(d = r+1\\) であるかどうかが、量子 \\((r,\\delta)\\)-LRC の不純性を決定づける重要な要因であることを明らかにしている。 我々は、\\(d \\neq r+1\\) の場合、最適 \\((r,\\delta)\\)-LRC から導出される不純な量子符号の長さは有界であることを証明する。 逆に、\\(d = r+1\\) の場合、長さが無界となる不純な量子 \\((r,\\delta)\\)-LRC を構成する。本研究で開発された中心的な手法は、最適 \\((r,\\delta)\\)-LRC から導出される不純な量子コードを特定するための基準である。 主な結果としては、量子 \\((r,\\delta)\\)-LRC における不純性の判別基準（定理 3.2）、不純な量子 \\((r,\\delta)\\)-LRC の構成枠組み（定理 4.4）、 および2つの不純量子\\((r,\\delta)\\)-LRCの族（定理4.8および4.11）が含まれる。",
+  "last_delivered_at": "2026-11-23T14:10:12Z"
+ },
+ {
+  "delivery_id": "main:2611.26762",
+  "id": "2611.26762",
+  "posted_at": "2026-11-23T14:10:14Z",
+  "title": "Harnessing Dephasing for Quantum Reservoir Computing with a Minimum Complexity Architecture: Applications to Nonlinear Time-Series Prediction",
+  "title_ja": "最小複雑度アーキテクチャを用いた量子リザーバーコンピューティングにおける位相ずれの活用：非線形時系列予測への応用",
+  "title_translated": "最小複雑度アーキテクチャを用いた量子リザーバーコンピューティングにおける位相ずれの活用：非線形時系列予測への応用",
+  "translation_language": "ja",
+  "authors": "Yicheng Song, Zhipeng Yang, Heng Fan, Gouhei Tanaka",
+  "link": "https://arxiv.org/abs/2611.26762",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml"
+  ],
+  "genre_names": [
+   "量子機械学習"
+  ],
+  "target_genre_ids": [
+   "qml"
+  ],
+  "target_genre_names": [
+   "量子機械学習"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "qml"
+   ],
+   "final_genre_ids": [
+    "qml"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Quantum reservoir computing (QRC) exploits quantum dynamics for temporal information processing. Quantum noise affects the reservoir dynamics and can either impair computational performance or serve as a computational resource. However, the role of pure dephasing in Hamiltonian encoding QRC remains unclear. In this work, we propose a minimum complexity QRC model that harnesses pure dephasing in an open uniform XX chain. We show that, under suitable input encoding, pure dephasing can ensure the echo state and fading memory properties even without amplitude damping. Furthermore, in the presence of amplitude damping, the proposed quantum reservoir has distinct stationary states for distinct inputs, and introducing pure dephasing alters these states, thereby affecting the reservoir dynamics. Information processing capacity analysis shows that joint control of the two decoherence mechanisms regulates memory and nonlinearity, providing access to diverse capacity profiles. The proposed QRC achieves promising performance on synthetic benchmarks, while its 6-qubit configuration outperforms all three multi-reservoir echo state network baselines on over half of the real-world prediction tasks. These findings highlight pure dephasing as a computational resource for QRC.",
+  "abstract_ja": "量子リザーバーコンピューティング（QRC）は、時間的情報処理のために量子ダイナミクスを活用する。量子ノイズはリザーバーのダイナミクスに影響を及ぼし、計算性能を低下させることもあれば、計算リソースとして機能することもある。しかし、ハミルトニアン符号化型QRCにおける純粋な位相消去の役割については、依然として明らかになっていない。 本研究では、開放型一様XX鎖において純粋な位相消去を活用する、最小複雑度のQRCモデルを提案する。適切な入力符号化の下では、振幅減衰がなくても、純粋な位相消去によってエコー状態およびフェージングメモリ特性が保証されることを示す。 さらに、振幅減衰が存在する場合、提案する量子リザーバーは入力ごとに異なる定常状態を持ち、純粋な位相消去を導入することでこれらの状態が変化し、ひいてはリザーバーのダイナミクスに影響を及ぼすことが明らかになった。情報処理容量の解析により、2つのデコヒーレンスメカニズムを共同制御することで記憶性と非線形性が調整され、多様な容量プロファイルが得られることが示された。 提案されたQRCは、合成ベンチマークにおいて有望な性能を発揮し、その6量子ビット構成は、実世界の予測タスクの半数以上において、3つのマルチリザーバー・エコー状態ネットワークのベースラインすべてを上回る性能を示した。これらの知見は、純粋な位相消去がQRCのための計算リソースであることを浮き彫りにしている。",
+  "abstract_translated": "量子リザーバーコンピューティング（QRC）は、時間的情報処理のために量子ダイナミクスを活用する。量子ノイズはリザーバーのダイナミクスに影響を及ぼし、計算性能を低下させることもあれば、計算リソースとして機能することもある。しかし、ハミルトニアン符号化型QRCにおける純粋な位相消去の役割については、依然として明らかになっていない。 本研究では、開放型一様XX鎖において純粋な位相消去を活用する、最小複雑度のQRCモデルを提案する。適切な入力符号化の下では、振幅減衰がなくても、純粋な位相消去によってエコー状態およびフェージングメモリ特性が保証されることを示す。 さらに、振幅減衰が存在する場合、提案する量子リザーバーは入力ごとに異なる定常状態を持ち、純粋な位相消去を導入することでこれらの状態が変化し、ひいてはリザーバーのダイナミクスに影響を及ぼすことが明らかになった。情報処理容量の解析により、2つのデコヒーレンスメカニズムを共同制御することで記憶性と非線形性が調整され、多様な容量プロファイルが得られることが示された。 提案されたQRCは、合成ベンチマークにおいて有望な性能を発揮し、その6量子ビット構成は、実世界の予測タスクの半数以上において、3つのマルチリザーバー・エコー状態ネットワークのベースラインすべてを上回る性能を示した。これらの知見は、純粋な位相消去がQRCのための計算リソースであることを浮き彫りにしている。",
+  "last_delivered_at": "2026-11-23T14:10:14Z"
+ },
+ {
+  "delivery_id": "main:2611.27587",
+  "id": "2611.27587",
+  "posted_at": "2026-11-23T14:10:16Z",
+  "title": "Block Search Conditioned on Features for Sequential Quantum Data Encoding",
+  "title_ja": "逐次量子データ符号化における特徴に基づくブロック検索条件",
+  "title_translated": "逐次量子データ符号化における特徴に基づくブロック検索条件",
+  "translation_language": "ja",
+  "authors": "Cec\\'ilia S. C. Botelho, Erico S. Teixeira, Anderson F. P. dos Santos, Guilherme D. Lima, Helida Santos, Adenauer Yamin, Renata Reiser, In\\^es de Castro Dutra",
+  "link": "https://arxiv.org/abs/2611.27587",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph",
+   "cs.LG"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml"
+  ],
+  "genre_names": [
+   "量子機械学習"
+  ],
+  "target_genre_ids": [
+   "qml"
+  ],
+  "target_genre_names": [
+   "量子機械学習"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "qml"
+   ],
+   "final_genre_ids": [
+    "qml"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Sequential quantum data encoding is addressed through the joint selection of input features and encoding blocks within a fixed quantum register. At each step, a new feature, a block of operations, its placement, and its rotation weights are selected together from training data, extending the incremental construction of Q-FLAIR. With direct-loss selection (RAW), nine to twelve features were retained in four qubits across five new Bars and Stripes datasets. Under the same final calibration, mean changes relative to the calibrated Q-FLAIR reference were +5.53 percentage points in balanced accuracy, -15.83% in binary cross-entropy (BCE), and +7.79% in area under the ROC curve (AUC). The prespecified success criterion was met in four of five datasets and for the mean paired differences. These results were obtained by comparing complete procedures under a common cap of 32 operations.",
+  "abstract_ja": "逐次量子データ符号化は、固定された量子レジスタ内での入力特徴量と符号化ブロックの共同選択を通じて実現される。 各ステップにおいて、新しい特徴量、演算ブロック、その配置、および回転重みが学習データから一括して選択され、Q-FLAIRの漸進的な構築が拡張される。直接損失選択（RAW）により、5つの新しいBarsおよびStripesデータセットにおいて、4クビットに9～12の特徴量が保持された。 同じ最終キャリブレーションの下で、キャリブレーション済みの Q-FLAIR 基準に対する平均変化は、バランス精度で +5.53 パーセントポイント、バイナリ交差エントロピー (BCE) で -15.83%、ROC 曲線下面積 (AUC) で +7.79% でした。 あらかじめ定められた成功基準は、5つのデータセットのうち4つおよび平均ペア差において満たされた。これらの結果は、32演算という共通の上限の下で、完全な手順を比較することで得られたものである。",
+  "abstract_translated": "逐次量子データ符号化は、固定された量子レジスタ内での入力特徴量と符号化ブロックの共同選択を通じて実現される。 各ステップにおいて、新しい特徴量、演算ブロック、その配置、および回転重みが学習データから一括して選択され、Q-FLAIRの漸進的な構築が拡張される。直接損失選択（RAW）により、5つの新しいBarsおよびStripesデータセットにおいて、4クビットに9～12の特徴量が保持された。 同じ最終キャリブレーションの下で、キャリブレーション済みの Q-FLAIR 基準に対する平均変化は、バランス精度で +5.53 パーセントポイント、バイナリ交差エントロピー (BCE) で -15.83%、ROC 曲線下面積 (AUC) で +7.79% でした。 あらかじめ定められた成功基準は、5つのデータセットのうち4つおよび平均ペア差において満たされた。これらの結果は、32演算という共通の上限の下で、完全な手順を比較することで得られたものである。",
+  "last_delivered_at": "2026-11-23T14:10:16Z"
+ },
+ {
+  "delivery_id": "main:2611.27871",
+  "id": "2611.27871",
+  "posted_at": "2026-11-23T14:10:18Z",
+  "title": "World Models for Learning Quantum Many-Body Dynamics",
+  "title_ja": "量子多体ダイナミクスを学習するための世界モデル",
+  "title_translated": "量子多体ダイナミクスを学習するための世界モデル",
+  "translation_language": "ja",
+  "authors": "Yuan Wang, Oleksandr Kyriienko",
+  "link": "https://arxiv.org/abs/2611.27871",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qml"
+  ],
+  "genre_names": [
+   "量子機械学習"
+  ],
+  "target_genre_ids": [
+   "qml"
+  ],
+  "target_genre_names": [
+   "量子機械学習"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "qml"
+   ],
+   "final_genre_ids": [
+    "qml"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "We propose using world models for learning Hamiltonians from measured dynamics of a quantum computer or simulator. Implicitly, the parameters of a Hamiltonian are encoded in how the measured few-body observables evolve. By using a joint-embedding predictive architecture (JEPA) to perform prediction in latent space, we show that the device Hamiltonian can be efficiently inferred from noisy measurements. We train a spatiotemporal encoder and predictor with approximately $2.7$ million trainable weights using a single objective, to predict the representation of the next window of measurements from the previous one. The network is thereby driven to retain the reproducible dynamics and discard shot noise. We recover the field and coupling maps of a two-dimensional Ising lattice in real and imaginary time, and the disorder map of a one-dimensional Heisenberg chain of $100$ sites. In every settings the encoder achieves lower error than a masked autoencoder and than the same encoder left untrained. It also outperforms the same regression head applied directly to time-averaged observables, by factors of $4.4$ to $30$. We establish latent prediction as a practical self-supervised objective for learning from measurements of quantum dynamics.",
+  "abstract_ja": "我々は、量子コンピュータやシミュレータの測定されたダイナミクスからハミルトニアンを学習するために、ワールドモデルの利用を提案する。ハミルトニアンのパラメータは、測定された少体観測量の進化の仕方の中に暗黙的に符号化されている。 潜在空間での予測を行うために共同埋め込み予測アーキテクチャ（JEPA）を用いることで、ノイズの混入した測定データからデバイスのハミルトニアンを効率的に推定できることを示す。 我々は、単一の目的関数を用いて、約270万個の学習可能重みを持つ時空間エンコーダおよび予測器を学習させ、前の測定ウィンドウから次の測定ウィンドウの表現を予測する。これにより、ネットワークは再現可能なダイナミクスを保持し、ショットノイズを排除するよう誘導される。 我々は、実時間および虚時間における2次元アイジング格子の場マップおよび結合マップ、ならびに$100$サイトの1次元ハイゼンベルグ鎖の無秩序マップを復元した。あらゆる設定において、エンコーダはマスク付きオートエンコーダや、学習を行っていない同一のエンコーダよりも低い誤差を達成した。 また、時間平均化された観測量に直接適用された同一の回帰ヘッドよりも、$4.4$倍から$30$倍優れた性能を示した。我々は、量子ダイナミクスの測定値から学習するための実用的な自己教師あり学習目標として、潜在変数の予測を確立した。",
+  "abstract_translated": "我々は、量子コンピュータやシミュレータの測定されたダイナミクスからハミルトニアンを学習するために、ワールドモデルの利用を提案する。ハミルトニアンのパラメータは、測定された少体観測量の進化の仕方の中に暗黙的に符号化されている。 潜在空間での予測を行うために共同埋め込み予測アーキテクチャ（JEPA）を用いることで、ノイズの混入した測定データからデバイスのハミルトニアンを効率的に推定できることを示す。 我々は、単一の目的関数を用いて、約270万個の学習可能重みを持つ時空間エンコーダおよび予測器を学習させ、前の測定ウィンドウから次の測定ウィンドウの表現を予測する。これにより、ネットワークは再現可能なダイナミクスを保持し、ショットノイズを排除するよう誘導される。 我々は、実時間および虚時間における2次元アイジング格子の場マップおよび結合マップ、ならびに$100$サイトの1次元ハイゼンベルグ鎖の無秩序マップを復元した。あらゆる設定において、エンコーダはマスク付きオートエンコーダや、学習を行っていない同一のエンコーダよりも低い誤差を達成した。 また、時間平均化された観測量に直接適用された同一の回帰ヘッドよりも、$4.4$倍から$30$倍優れた性能を示した。我々は、量子ダイナミクスの測定値から学習するための実用的な自己教師あり学習目標として、潜在変数の予測を確立した。",
+  "last_delivered_at": "2026-11-23T14:10:18Z"
+ },
+ {
+  "delivery_id": "main:2611.27413",
+  "id": "2611.27413",
+  "posted_at": "2026-11-23T14:10:19Z",
+  "title": "Explicit construction of the normal cone at every nonlocal extreme behaviour of $\\mathcal{Q}_{2222}$ and device-independent applications",
+  "title_ja": "$\\mathcal{Q}_{2222}$ のあらゆる非局所的な極値挙動における法錐の明示的な構成と、デバイスに依存しない応用",
+  "title_translated": "$\\mathcal{Q}_{2222}$ のあらゆる非局所的な極値挙動における法錐の明示的な構成と、デバイスに依存しない応用",
+  "translation_language": "ja",
+  "authors": "Yutian Wu, Xie Sicheng, Ravishankar Ramanathan",
+  "link": "https://arxiv.org/abs/2611.27413",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations",
+   "crypto"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論",
+   "暗号・セキュリティ"
+  ],
+  "target_genre_ids": [
+   "foundations",
+   "crypto"
+  ],
+  "target_genre_names": [
+   "量子基礎・測定理論",
+   "暗号・セキュリティ"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "foundations",
+    "crypto"
+   ],
+   "final_genre_ids": [
+    "foundations",
+    "crypto"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "The set of quantum correlations $\\mathcal{Q}_{2222}$, in the simplest Bell scenario with two parties performing two binary measurements each, is an object of fundamental interest both in quantum foundations and for device-independent applications. A nonlocal extremal quantum behaviour in this set can maximize many different Bell expressions, yet these expressions are not all equally useful in a practical experiment. Here, firstly, we give an explicit characterization of every Bell expression maximized by any given nonlocal extremal quantum behaviour in this Bell scenario. This determines the full normal cone at every such behaviour and makes it possible to optimize over all Bell tests with the same ideal behavior. We then derive an exact variational formula for the quantum bound of an arbitrary Bell expression in this scenario. As an example illustrating the construction, we derive the normal cone for a family of extremal quantum behaviours of importance in device-independent randomness certification, from Phys. Rev. Lett. 129, 150403, 2022. Finally, we explore the consequences of this characterization for device-independent randomness generation in practical experiments. Specifically, for any given detection efficiency $\\eta \\in [0.75,0.98]$, we construct Bell tests and two-qubit experiments that certify more single-round min-entropy from one Bell score than any CHSH score can certify with the same detector efficiency, even when the quantum devices used for the CHSH test are optimized. The results provide a systematic way to choose Bell tests for a desired quantum behaviour and to improve their performance for device-independent applications under experimental imperfections.",
+  "abstract_ja": "2つの当事者がそれぞれ2つの二値測定を行う最も単純なベルシナリオにおける量子相関の集合 $\\mathcal{Q}_{2222}$ は、量子基礎理論およびデバイス非依存の応用において、いずれも根本的な関心事となっている。 この集合における非局所的な極値量子挙動は、多くの異なるベル式を最大化し得るが、これらの式がすべて実用的な実験において等しく有用であるとは限らない。本稿ではまず、このベルシナリオにおいて、任意の非局所的な極値量子挙動によって最大化されるすべてのベル式について、明示的な特徴付けを行う。 これにより、そのような各挙動における完全な正規錐が決定され、同じ理想的な挙動を用いたすべてのベルテストに対して最適化を行うことが可能となる。次に、このシナリオにおける任意のベル式の量子境界に関する厳密な変分式を導出する。 この構成を説明する例として、Phys. Rev. Lett. 129, 150403, 2022 に掲載された、デバイス非依存のランダム性認証において重要な極値量子挙動の族に対する正規錐を導出する。 最後に、この特徴付けが実際の実験におけるデバイス非依存のランダムネス生成に及ぼす影響について考察する。具体的には、任意の検出効率 $\\eta \\in [0.75,0.98]$ に対して、 ベルテストおよび2量子ビット実験を構築し、CHSHテストに使用される量子デバイスが最適化されている場合でも、同じ検出効率において、CHSHスコアが認証できる量よりも、1つのベルスコアからより多くの1ラウンド最小エントロピーを認証することを示す。 これらの結果は、所望の量子挙動に対応するベルテストを選択し、実験上の不完全性がある状況下でもデバイス非依存の応用に向けたその性能を向上させるための体系的な手法を提供するものである。",
+  "abstract_translated": "2つの当事者がそれぞれ2つの二値測定を行う最も単純なベルシナリオにおける量子相関の集合 $\\mathcal{Q}_{2222}$ は、量子基礎理論およびデバイス非依存の応用において、いずれも根本的な関心事となっている。 この集合における非局所的な極値量子挙動は、多くの異なるベル式を最大化し得るが、これらの式がすべて実用的な実験において等しく有用であるとは限らない。本稿ではまず、このベルシナリオにおいて、任意の非局所的な極値量子挙動によって最大化されるすべてのベル式について、明示的な特徴付けを行う。 これにより、そのような各挙動における完全な正規錐が決定され、同じ理想的な挙動を用いたすべてのベルテストに対して最適化を行うことが可能となる。次に、このシナリオにおける任意のベル式の量子境界に関する厳密な変分式を導出する。 この構成を説明する例として、Phys. Rev. Lett. 129, 150403, 2022 に掲載された、デバイス非依存のランダム性認証において重要な極値量子挙動の族に対する正規錐を導出する。 最後に、この特徴付けが実際の実験におけるデバイス非依存のランダムネス生成に及ぼす影響について考察する。具体的には、任意の検出効率 $\\eta \\in [0.75,0.98]$ に対して、 ベルテストおよび2量子ビット実験を構築し、CHSHテストに使用される量子デバイスが最適化されている場合でも、同じ検出効率において、CHSHスコアが認証できる量よりも、1つのベルスコアからより多くの1ラウンド最小エントロピーを認証することを示す。 これらの結果は、所望の量子挙動に対応するベルテストを選択し、実験上の不完全性がある状況下でもデバイス非依存の応用に向けたその性能を向上させるための体系的な手法を提供するものである。",
+  "last_delivered_at": "2026-11-23T14:10:21Z"
+ },
+ {
+  "delivery_id": "main:2611.27787",
+  "id": "2611.27787",
+  "posted_at": "2026-11-23T14:10:23Z",
+  "title": "Penalty-Free Constrained Optimization on Dynamic Quantum Circuits via Phase-Protected Tunneling and Closed-Loop Spectral Ratchets",
+  "title_ja": "位相保護トンネリングおよび閉ループスペクトルラチェットを用いた、動的量子回路におけるペナルティフリー制約付き最適化",
+  "title_translated": "位相保護トンネリングおよび閉ループスペクトルラチェットを用いた、動的量子回路におけるペナルティフリー制約付き最適化",
+  "translation_language": "ja",
+  "authors": "Chia-Ho Ou",
+  "link": "https://arxiv.org/abs/2611.27787",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph",
+   "math.OC",
+   "physics.comp-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "algo"
+  ],
+  "genre_names": [
+   "量子アルゴリズム"
+  ],
+  "target_genre_ids": [
+   "algo"
+  ],
+  "target_genre_names": [
+   "量子アルゴリズム"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "algo"
+   ],
+   "final_genre_ids": [
+    "algo"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Embedding hard operational constraints into an unconstrained Hamiltonian via large penalty multipliers induces quadratic spectral aliasing during phase estimation and increases two-qubit gate depth. This paper proposes a penalty-free, closed-loop dynamic quantum circuit scheme, designated as Zeno-decoupled gauge-ratchet optimization (Z-GRO), for constrained binary optimization without outer-loop training. Reversible feasibility phase operators within symmetric dynamical-decoupling echoes confine evolution to the feasible subspace, while an interaction-correlated commutator gauge operator resolves initial symmetry stall. Directional cooling couples the unpenalized objective Hamiltonian to a reusable ancilla with a zero-two-qubit-gate threshold offset, bypassing echoed tunneling gates on retained branches. A survival-filtered Ramsey controller advances the threshold from a linear-programming bound with automatic overshoot rollback. Exact density-matrix and trajectory simulations on spin-glass and quadratic knapsack ensembles show a single-check discrimination gain above four orders of magnitude, improving ground-state probability by factors of 3.0 to 4.3 over quantum Zeno dynamics and 11.4 to 22.5 over penalized schemes. Z-GRO reduces the spin-glass time-to-solution scaling base to 1.529 (compared to 1.684 for quantum Zeno dynamics and 1.909 to 2.047 for penalized schemes) and lowers 14-qubit knapsack time-to-solution by factors of 2.4 to 14.5. For two-qubit gate error rates between $5 \\times 10^{-4}$ and $5 \\times 10^{-3}$, Z-GRO achieves 2.9 to 7.0 times the optimal probability of noisy penalized feedback, while majority shielding limits loss to 6.3% at a 5.0% readout bit-flip rate, recording 0/24, 0/25, 0/96, 3/25, and 2/80 overshoots.",
+  "abstract_ja": "大きなペナルティ乗数を用いて、制約のないハミルトニアンに厳しい動作制約を組み込むと、位相推定時に二次的なスペクトルエイリアシングが生じ、2量子ビットゲートの深さが増加する。 本論文では、外ループ学習を必要としない制約付き二値最適化のための、ペナルティを伴わない閉ループ動的量子回路スキーム「Zeno-decoupled gauge-ratchet optimization（Z-GRO）」を提案する。 対称的な動的脱結合エコー内の可逆的な実現可能性位相演算子は、進化を実現可能な部分空間に制限し、一方、相互作用相関を持つコミューテーターゲージ演算子は、初期の対称性停滞を解決する。 方向性冷却により、ペナルティのない目的ハミルトニアンを、2量子ビットゲートのしきい値オフセットがゼロの再利用可能なアンシラに結合し、保持された分岐上のエコー付きトンネルゲートをバイパスする。サバイバルフィルタ付きラムゼー制御器は、自動オーバーシュートロールバックにより、線形計画法の境界からしきい値を前進させる。 スピングラスおよび二次ナップサックアンサンブルに対する密度行列および軌道シミュレーションの厳密な解析により、4桁を超える単一チェックによる識別利得が示され、量子ゼノダイナミクスに比べて基底状態の確率が3.0～4.3倍、ペナルティ付きスキームに比べて11.4～22.5倍向上することが明らかになった。 Z-GROは、スピングラスにおける解到達時間のスケーリング基数を1.529に低減する （量子ゼノダイナミクスの1.684、ペナルティ付きスキームの1.909～2.047と比較）に低減し、14量子ビットのナップサック問題の解に至るまでの時間を2.4～14.5倍短縮します。 2量子ビットゲートのエラー率が $5 \\times 10^{-4}$ から $5 \\times 10^{-3}$ の範囲にある場合、 Z-GROはノイズ付きペナルティ付きフィードバックの最適確率の2.9倍から7.0倍を達成する一方、マジョリティ・シールド法では、読み出し時のビット反転率が5.0%の場合、損失を6.3%に抑え、0/24、0/25、0/96、 3/25、および2/80のオーバーシュートを記録した。",
+  "abstract_translated": "大きなペナルティ乗数を用いて、制約のないハミルトニアンに厳しい動作制約を組み込むと、位相推定時に二次的なスペクトルエイリアシングが生じ、2量子ビットゲートの深さが増加する。 本論文では、外ループ学習を必要としない制約付き二値最適化のための、ペナルティを伴わない閉ループ動的量子回路スキーム「Zeno-decoupled gauge-ratchet optimization（Z-GRO）」を提案する。 対称的な動的脱結合エコー内の可逆的な実現可能性位相演算子は、進化を実現可能な部分空間に制限し、一方、相互作用相関を持つコミューテーターゲージ演算子は、初期の対称性停滞を解決する。 方向性冷却により、ペナルティのない目的ハミルトニアンを、2量子ビットゲートのしきい値オフセットがゼロの再利用可能なアンシラに結合し、保持された分岐上のエコー付きトンネルゲートをバイパスする。サバイバルフィルタ付きラムゼー制御器は、自動オーバーシュートロールバックにより、線形計画法の境界からしきい値を前進させる。 スピングラスおよび二次ナップサックアンサンブルに対する密度行列および軌道シミュレーションの厳密な解析により、4桁を超える単一チェックによる識別利得が示され、量子ゼノダイナミクスに比べて基底状態の確率が3.0～4.3倍、ペナルティ付きスキームに比べて11.4～22.5倍向上することが明らかになった。 Z-GROは、スピングラスにおける解到達時間のスケーリング基数を1.529に低減する （量子ゼノダイナミクスの1.684、ペナルティ付きスキームの1.909～2.047と比較）に低減し、14量子ビットのナップサック問題の解に至るまでの時間を2.4～14.5倍短縮します。 2量子ビットゲートのエラー率が $5 \\times 10^{-4}$ から $5 \\times 10^{-3}$ の範囲にある場合、 Z-GROはノイズ付きペナルティ付きフィードバックの最適確率の2.9倍から7.0倍を達成する一方、マジョリティ・シールド法では、読み出し時のビット反転率が5.0%の場合、損失を6.3%に抑え、0/24、0/25、0/96、 3/25、および2/80のオーバーシュートを記録した。",
+  "last_delivered_at": "2026-11-23T14:10:23Z"
+ },
+ {
+  "delivery_id": "main:2611.26740",
+  "id": "2611.26740",
+  "posted_at": "2026-11-23T14:10:25Z",
+  "title": "Efficient Tensor Decomposition of the Coulomb and Coulomb-like Potentials and Its Application to Probing Molecular Geometries Using a Quantum Computer",
+  "title_ja": "クーロンポテンシャルおよびクーロン類似ポテンシャルの効率的なテンソル分解と、量子コンピュータを用いた分子構造の解析への応用",
+  "title_translated": "クーロンポテンシャルおよびクーロン類似ポテンシャルの効率的なテンソル分解と、量子コンピュータを用いた分子構造の解析への応用",
+  "translation_language": "ja",
+  "authors": "James Brown, Masashi Takahashi, Robert Wodraszka, James Whitfield",
+  "link": "https://arxiv.org/abs/2611.26740",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim"
+  ],
+  "genre_names": [
+   "量子シミュレーション"
+  ],
+  "target_genre_ids": [
+   "sim"
+  ],
+  "target_genre_names": [
+   "量子シミュレーション"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "sim"
+   ],
+   "final_genre_ids": [
+    "sim"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "We present an efficient canonical polyadic decomposition of the Coulomb and Coulomb-like potentials in real-space grid representations suited to quantum computing applications. By decomposing the matrix elements of Coulomb-like potentials into low-rank Cartesian components, we achieve $O(N^{1/3})$ T-gate scaling per Coulomb term, where $N$ is the number of grid points (basis functions) per electron, while maintaining high accuracy. This opens a path to significantly reducing the number of basis functions (i.e., qubits) required compared to previous methods by utilizing improved representations of the Coulomb potential that converge faster with grid spacing. The decomposition is also valid for certain pseudopotentials, which can decrease the cost significantly compared to previous work. This efficient decomposition enables the application of block-encoding techniques at larger grid spacings than with previous decompositions, and can therefore be used for algorithms that do not require high energy accuracy. We apply this decomposed Coulomb potential to hydrogen atom energy levels, the helium ground-state energy, and the Hartree-Fock potential energy curve of LiH, and show that modest basis sizes achieve semi-quantitative to quantitative accuracy. As an example of where these faster-converging Coulomb representations can be used on a quantum computer, we discuss their application to probing low-energy molecular geometries, and we estimate the resulting reduction in the cost of real-time evolution.",
+  "abstract_ja": "本稿では、量子コンピューティングの応用に適した実空間グリッド表現における、クーロンポテンシャルおよびクーロン類似ポテンシャルの効率的な標準的な多項分解法を提案する。 クーロン様ポテンシャルの行列要素を低ランクのデカルト成分に分解することで、高い精度を維持しつつ、クーロン項あたり $O(N^{1/3})$ の T-ゲートスケーリングを実現する。ここで、$N$ は電子あたりの格子点（基底関数）の数である。 これにより、格子間隔の増加に伴い収束が速くなる改良されたクーロンポテンシャルの表現を利用することで、従来の方法と比較して必要な基底関数（すなわち量子ビット）の数を大幅に削減する道が開かれる。 この分解は特定の擬ポテンシャルに対しても有効であり、従来の研究と比較して計算コストを大幅に削減できる。この効率的な分解により、従来の分解法よりも大きな格子間隔でブロック符号化技術を適用することが可能となり、したがって、高いエネルギー精度を必要としないアルゴリズムにも利用することができる。 我々は、この分解されたクーロンポテンシャルを水素原子のエネルギー準位、ヘリウムの基底状態エネルギー、およびLiHのハートリー・フォックポテンシャルエネルギー曲線に適用し、適度な基底サイズで半定量的から定量的な精度が得られることを示した。 量子コンピュータ上で、この収束の速いクーロン表現が活用できる例として、低エネルギー分子の幾何構造の探査への応用について論じ、その結果としてリアルタイム進化の計算コストがどの程度削減されるかを推定する。",
+  "abstract_translated": "本稿では、量子コンピューティングの応用に適した実空間グリッド表現における、クーロンポテンシャルおよびクーロン類似ポテンシャルの効率的な標準的な多項分解法を提案する。 クーロン様ポテンシャルの行列要素を低ランクのデカルト成分に分解することで、高い精度を維持しつつ、クーロン項あたり $O(N^{1/3})$ の T-ゲートスケーリングを実現する。ここで、$N$ は電子あたりの格子点（基底関数）の数である。 これにより、格子間隔の増加に伴い収束が速くなる改良されたクーロンポテンシャルの表現を利用することで、従来の方法と比較して必要な基底関数（すなわち量子ビット）の数を大幅に削減する道が開かれる。 この分解は特定の擬ポテンシャルに対しても有効であり、従来の研究と比較して計算コストを大幅に削減できる。この効率的な分解により、従来の分解法よりも大きな格子間隔でブロック符号化技術を適用することが可能となり、したがって、高いエネルギー精度を必要としないアルゴリズムにも利用することができる。 我々は、この分解されたクーロンポテンシャルを水素原子のエネルギー準位、ヘリウムの基底状態エネルギー、およびLiHのハートリー・フォックポテンシャルエネルギー曲線に適用し、適度な基底サイズで半定量的から定量的な精度が得られることを示した。 量子コンピュータ上で、この収束の速いクーロン表現が活用できる例として、低エネルギー分子の幾何構造の探査への応用について論じ、その結果としてリアルタイム進化の計算コストがどの程度削減されるかを推定する。",
+  "last_delivered_at": "2026-11-23T14:10:25Z"
+ },
+ {
+  "delivery_id": "main:2611.27402",
+  "id": "2611.27402",
+  "posted_at": "2026-11-23T14:10:27Z",
+  "title": "Quantum computing for gearing down complex many-fermion problems",
+  "title_ja": "複雑な多フェルミオン問題を簡略化するための量子コンピューティング",
+  "title_translated": "複雑な多フェルミオン問題を簡略化するための量子コンピューティング",
+  "translation_language": "ja",
+  "authors": "Weijie Du, Filippo Fornetti, James P. Vary",
+  "link": "https://arxiv.org/abs/2611.27402",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph",
+   "cond-mat.str-el",
+   "hep-th",
+   "nucl-th"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "nisq",
+   "sim"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム",
+   "量子シミュレーション"
+  ],
+  "target_genre_ids": [
+   "nisq",
+   "sim"
+  ],
+  "target_genre_names": [
+   "変分・NISQアルゴリズム",
+   "量子シミュレーション"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "nisq",
+    "sim"
+   ],
+   "final_genre_ids": [
+    "nisq",
+    "sim"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Quantum computing unlocks exciting opportunities to extend first-principles calculations of quantum many-body systems beyond classical computing limits. Despite advances in algorithms and proof-of-principle experiments, large-scale {\\it ab initio} calculations on noisy intermediate-scale quantum (NISQ) devices remain challenging. We introduce a quantum-classical framework that identifies compact single-particle bases to bring otherwise intractable many-fermion problems within classical reach while preserving an accurate ground-state description. We develop an efficient adaptive search scheme driven by simulated annealing that jointly optimizes natural-orbital-guided transformations and active-space selections. A quantum-assisted ground-state estimator provides search guidance using low-depth circuits and relaxed accuracy requirements, making the framework promising for NISQ devices. We demonstrate the framework's applicability for the nuclear structure of the oxygen isotopes. Our framework opens a new route to tackling complex {\\it ab initio} many-fermion problems across disciplines through quantum-assisted basis reduction.",
+  "abstract_ja": "量子コンピューティングは、量子多体系の第一原理計算を、古典コンピューティングの限界を超えて拡張する画期的な可能性を切り開きます。アルゴリズムや原理実証実験の進展にもかかわらず、ノイズの多い中間規模量子（NISQ）デバイス上での大規模な{\\it ab initio}計算は依然として困難な課題となっています。 本研究では、正確な基底状態の記述を維持しつつ、本来は解くことが困難な多フェルミオン問題を古典計算の範囲内に収めるための、コンパクトな単一粒子基底を特定する量子・古典ハイブリッドフレームワークを提案する。また、シミュレーテッドアニーリングを用いた効率的な適応型探索スキームを開発し、自然軌道に基づく変換とアクティブスペースの選択を同時に最適化する。 量子支援型基底状態推定器は、浅い回路と緩和された精度要件を用いて探索の指針を提供するため、このフレームワークはNISQデバイスにおいて有望である。我々は、酸素同位体の核構造に対する本フレームワークの適用可能性を実証した。 本フレームワークは、量子支援による基底削減を通じて、学際的な複雑な{\\it ab initio}多フェルミオン問題に取り組む新たな道を開くものである。",
+  "abstract_translated": "量子コンピューティングは、量子多体系の第一原理計算を、古典コンピューティングの限界を超えて拡張する画期的な可能性を切り開きます。アルゴリズムや原理実証実験の進展にもかかわらず、ノイズの多い中間規模量子（NISQ）デバイス上での大規模な{\\it ab initio}計算は依然として困難な課題となっています。 本研究では、正確な基底状態の記述を維持しつつ、本来は解くことが困難な多フェルミオン問題を古典計算の範囲内に収めるための、コンパクトな単一粒子基底を特定する量子・古典ハイブリッドフレームワークを提案する。また、シミュレーテッドアニーリングを用いた効率的な適応型探索スキームを開発し、自然軌道に基づく変換とアクティブスペースの選択を同時に最適化する。 量子支援型基底状態推定器は、浅い回路と緩和された精度要件を用いて探索の指針を提供するため、このフレームワークはNISQデバイスにおいて有望である。我々は、酸素同位体の核構造に対する本フレームワークの適用可能性を実証した。 本フレームワークは、量子支援による基底削減を通じて、学際的な複雑な{\\it ab initio}多フェルミオン問題に取り組む新たな道を開くものである。",
+  "last_delivered_at": "2026-11-23T14:10:32Z"
+ },
+ {
+  "delivery_id": "main:2611.27896",
+  "id": "2611.27896",
+  "posted_at": "2026-11-23T14:10:33Z",
+  "title": "Optimised 8th-Order Trotter-Suzuki Schemes for Quantum Simulation",
+  "title_ja": "量子シミュレーションのための最適化された8次トロッター・鈴木法",
+  "title_translated": "量子シミュレーションのための最適化された8次トロッター・鈴木法",
+  "translation_language": "ja",
+  "authors": "Marko Male\\v{z}i\\v{c}, Johann Ostmeyer",
+  "link": "https://arxiv.org/abs/2611.27896",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph",
+   "cond-mat.stat-mech",
+   "cond-mat.str-el",
+   "hep-lat"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sim"
+  ],
+  "genre_names": [
+   "量子シミュレーション"
+  ],
+  "target_genre_ids": [
+   "sim"
+  ],
+  "target_genre_names": [
+   "量子シミュレーション"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "sim"
+   ],
+   "final_genre_ids": [
+    "sim"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Simulating quantum dynamics in many-body systems is one of the most promising applications of quantum computers. Product formulas are a natural choice for this task, since they map directly onto quantum gates, and increasing their order $n$ could lead to reduced gate depths, provided the parameters are chosen efficiently. So far, schemes beyond $6^{\\textrm{th}}$ order have only been built as compositions of second-order schemes, while more general product formulas are known only up to $6^{\\textrm{th}}$ order. In this work, we extend our optimisation framework to order $n = 8$, and find both more efficient compositions and the first $8^{\\textrm{th}}$ order general schemes. Our formulas improve on the theoretical efficiency of the state-of-the-art schemes by Morales et al and we recommend two schemes explicitly. In simulations of the Heisenberg XZ chain one of our recommended schemes always outperforms those by Morales et al, though it is not always the same scheme that performs best. More generally, we observe that for Hamiltonians split into many non-commuting operators the uniformity of a Trotter decomposition becomes the main indicator of a scheme's performance. To assess the schemes' use on quantum hardware, we simulate noisy circuits with our new Qiskit plugin qiskit-omelyan. At current noise levels, the Leapfrog scheme remains the best choice, but as noise rates decrease toward fault tolerance, our recommended schemes become competitive.",
+  "abstract_ja": "多体系における量子ダイナミクスのシミュレーションは、量子コンピュータの最も有望な応用分野の一つである。積の公式は、量子ゲートに直接対応する上、パラメータを効率的に選択すれば、その次数 $n$ を増やすことでゲート深度を低減できる可能性があるため、この課題に対する自然な選択肢となる。 これまで、$6^{\\textrm{th}}$次を超えるスキームは、2次スキームの合成としてのみ構築されており、より一般的な積の公式は$6^{\\textrm{th}}$次までしか知られていない。 本研究では、最適化フレームワークを次数 $n = 8$ まで拡張し、より効率的な構成スキームと、初の $8^{\\textrm{th}}$ 次の一般スキームの両方を発見した。我々の式は、Morales らによる最先端スキームの理論的効率を上回っており、2つのスキームを具体的に推奨する。 ハイゼンベルクXZ鎖のシミュレーションにおいて、我々が推奨するスキームの1つは常にMoralesらによるスキームを上回る性能を示したが、最も優れた性能を示すスキームが常に同一であるとは限らない。より一般的には、多くの非可換演算子に分割されたハミルトニアンの場合、トロッター分解の一様性がスキームの性能を決定づける主な指標となることが観察された。 量子ハードウェア上でのスキームの有用性を評価するため、我々は新しいQiskitプラグイン「qiskit-omelyan」を用いてノイズの多い回路のシミュレーションを行った。現在のノイズレベルでは、Leapfrogスキームが依然として最良の選択肢であるが、ノイズ率がフォールトトレランスに向けて低下するにつれて、我々が推奨するスキームも競争力を持つようになる。",
+  "abstract_translated": "多体系における量子ダイナミクスのシミュレーションは、量子コンピュータの最も有望な応用分野の一つである。積の公式は、量子ゲートに直接対応する上、パラメータを効率的に選択すれば、その次数 $n$ を増やすことでゲート深度を低減できる可能性があるため、この課題に対する自然な選択肢となる。 これまで、$6^{\\textrm{th}}$次を超えるスキームは、2次スキームの合成としてのみ構築されており、より一般的な積の公式は$6^{\\textrm{th}}$次までしか知られていない。 本研究では、最適化フレームワークを次数 $n = 8$ まで拡張し、より効率的な構成スキームと、初の $8^{\\textrm{th}}$ 次の一般スキームの両方を発見した。我々の式は、Morales らによる最先端スキームの理論的効率を上回っており、2つのスキームを具体的に推奨する。 ハイゼンベルクXZ鎖のシミュレーションにおいて、我々が推奨するスキームの1つは常にMoralesらによるスキームを上回る性能を示したが、最も優れた性能を示すスキームが常に同一であるとは限らない。より一般的には、多くの非可換演算子に分割されたハミルトニアンの場合、トロッター分解の一様性がスキームの性能を決定づける主な指標となることが観察された。 量子ハードウェア上でのスキームの有用性を評価するため、我々は新しいQiskitプラグイン「qiskit-omelyan」を用いてノイズの多い回路のシミュレーションを行った。現在のノイズレベルでは、Leapfrogスキームが依然として最良の選択肢であるが、ノイズ率がフォールトトレランスに向けて低下するにつれて、我々が推奨するスキームも競争力を持つようになる。",
+  "last_delivered_at": "2026-11-23T14:10:33Z"
+ },
+ {
+  "delivery_id": "main:2611.27703",
+  "id": "2611.27703",
+  "posted_at": "2026-11-23T14:10:36Z",
+  "title": "Single-realization Pauli twirling for suppressing coherent error accumulation in structured quantum circuits",
+  "title_ja": "構造化量子回路におけるコヒーレントな誤りの蓄積を抑制するための単一実現パウリ・ツイリング",
+  "title_translated": "構造化量子回路におけるコヒーレントな誤りの蓄積を抑制するための単一実現パウリ・ツイリング",
+  "translation_language": "ja",
+  "authors": "Dihang Sun, Tianqi Chen, Jin Ming Koh, Nannan Ma, Jiangbin Gong",
+  "link": "https://arxiv.org/abs/2611.27703",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "nisq"
+  ],
+  "genre_names": [
+   "変分・NISQアルゴリズム"
+  ],
+  "target_genre_ids": [
+   "nisq"
+  ],
+  "target_genre_names": [
+   "変分・NISQアルゴリズム"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "nisq"
+   ],
+   "final_genre_ids": [
+    "nisq"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Pauli twirling is conventionally understood as an ensemble-level noise-tailoring procedure which suppresses coherent components of the error channel by averaging over randomized compilations. This picture does not by itself determine whether a single realization of Pauli-dressed circuit can outperform its bare counterpart, nor does it predict when such an advantage should occur. In this work, we present single-realization based framework for the standard Pauli dressing of two-qubit Clifford gates in structured quantum circuits. This is afforded by the key insight that for weak coherent errors, the leading gate infidelity is governed by the variance of some accumulated error generator. Through both simulations and theoretical considerations, we verify that coherent errors accumulated at different entangling gates can produce $\\Theta(L^2)$ variance growth in a bare circuit, whereas independent Pauli dressing eliminates the cross-layer contribution on average and yields an $O(L)$ variance bound at any fixed confidence level for a single randomly sampled realization. We then develop a covariance diagnostic that predicts when this mechanism is effective in error mitigation. We find a strong Pauli twirling advantage for coherent errors whose transported generators have large off-diagonal covariance, and little advantage when the covariance matrix is nearly diagonal. Hardware experiments on IBM superconducting processors demonstrate fidelity improvements for GHZ-state preparation and reduced observable errors in Trotterized transverse-field Ising dynamics. These results indicate that single realizations of Pauli twirling without ensemble averaging is a useful coherent-error suppression technique for structured circuits containing repeated nontrivial two-qubit operations.",
+  "abstract_ja": "パウリ・トゥイリングは、従来、ランダム化されたコンパイルを平均化することでエラーチャネルのコヒーレント成分を抑制する、アンサンブルレベルのノイズ調整手法として理解されてきた。しかし、この見方だけでは、パウリ・ドレッシングを施した回路の単一の実装が、ドレッシングを施していない回路よりも優れた性能を発揮できるかどうかを決定づけることはできず、また、そのような利点がいつ生じるかを予測することもできない。 本研究では、構造化量子回路における2量子ビットのクリフォードゲートに対する標準的なパウリ・ドレッシングについて、単一の実現に基づく枠組みを提示する。これは、弱いコヒーレント誤差の場合、主要なゲート不忠実度は、ある蓄積誤差生成子の分散によって支配されるという重要な洞察によって可能となったものである。 シミュレーションと理論的考察の両方を通じて、異なるエンタングルメントゲートで蓄積されたコヒーレント誤差が、ベア回路において$\\Theta(L^2)$の分散増加を引き起こし得ることを検証した。一方、独立したパウリ・ドレッシングは、平均的に層間の寄与を排除し、ランダムにサンプリングされた単一の実装において、任意の固定信頼水準で$O(L)$の分散上限をもたらす。 次に、このメカニズムが誤差低減に有効である場合を予測する共分散診断法を開発した。その結果、輸送される生成子の非対角共分散が大きいコヒーレント誤差に対しては、パウリ・トゥワーリングに大きな利点があることが判明した一方、共分散行列がほぼ対角に近い場合には、その利点はほとんど見られなかった。 IBMの超伝導プロセッサを用いたハードウェア実験では、GHZ状態の準備における忠実度の向上と、トロッター化された横磁場アイジングダイナミクスにおける観測可能な誤差の低減が実証された。これらの結果は、アンサンブル平均化を行わない単一の実装によるパウリ・トゥワーリングが、繰り返される非自明な2量子ビット演算を含む構造化回路において、コヒーレント誤差を抑制する有用な手法であることを示している。",
+  "abstract_translated": "パウリ・トゥイリングは、従来、ランダム化されたコンパイルを平均化することでエラーチャネルのコヒーレント成分を抑制する、アンサンブルレベルのノイズ調整手法として理解されてきた。しかし、この見方だけでは、パウリ・ドレッシングを施した回路の単一の実装が、ドレッシングを施していない回路よりも優れた性能を発揮できるかどうかを決定づけることはできず、また、そのような利点がいつ生じるかを予測することもできない。 本研究では、構造化量子回路における2量子ビットのクリフォードゲートに対する標準的なパウリ・ドレッシングについて、単一の実現に基づく枠組みを提示する。これは、弱いコヒーレント誤差の場合、主要なゲート不忠実度は、ある蓄積誤差生成子の分散によって支配されるという重要な洞察によって可能となったものである。 シミュレーションと理論的考察の両方を通じて、異なるエンタングルメントゲートで蓄積されたコヒーレント誤差が、ベア回路において$\\Theta(L^2)$の分散増加を引き起こし得ることを検証した。一方、独立したパウリ・ドレッシングは、平均的に層間の寄与を排除し、ランダムにサンプリングされた単一の実装において、任意の固定信頼水準で$O(L)$の分散上限をもたらす。 次に、このメカニズムが誤差低減に有効である場合を予測する共分散診断法を開発した。その結果、輸送される生成子の非対角共分散が大きいコヒーレント誤差に対しては、パウリ・トゥワーリングに大きな利点があることが判明した一方、共分散行列がほぼ対角に近い場合には、その利点はほとんど見られなかった。 IBMの超伝導プロセッサを用いたハードウェア実験では、GHZ状態の準備における忠実度の向上と、トロッター化された横磁場アイジングダイナミクスにおける観測可能な誤差の低減が実証された。これらの結果は、アンサンブル平均化を行わない単一の実装によるパウリ・トゥワーリングが、繰り返される非自明な2量子ビット演算を含む構造化回路において、コヒーレント誤差を抑制する有用な手法であることを示している。",
+  "last_delivered_at": "2026-11-23T14:10:36Z"
+ },
+ {
+  "delivery_id": "main:2611.27267",
+  "id": "2611.27267",
+  "posted_at": "2026-11-23T14:10:37Z",
+  "title": "Pulse-tube-vibration induced Larmor frequency jitter in anisotropic Kramers spins",
+  "title_ja": "異方性クラマースピンにおけるパルス管振動に起因するラーモア周波数のジッター",
+  "title_translated": "異方性クラマースピンにおけるパルス管振動に起因するラーモア周波数のジッター",
+  "translation_language": "ja",
+  "authors": "R. Shaik, P. Kesarwani, S. Rajendran, S. E. Kubatkin, A. V. Danilov, S. E. de Graaf, V. Ranjan",
+  "link": "https://arxiv.org/abs/2611.27267",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sensing",
+   "hardware"
+  ],
+  "genre_names": [
+   "量子センシング・計測",
+   "量子ハードウェア・実装"
+  ],
+  "target_genre_ids": [
+   "sensing",
+   "hardware"
+  ],
+  "target_genre_names": [
+   "量子センシング・計測",
+   "量子ハードウェア・実装"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "sensing",
+    "hardware"
+   ],
+   "final_genre_ids": [
+    "sensing",
+    "hardware"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "We investigate the role of pulse-tube mechanical vibrations towards spin frequency noise in a cryogen-free dilution refrigerator. Our system comprises of a low mode-volume superconducting resonator coupled to 50 ppm $\\text{Er}^{3+}:\\text{CaWO}_4$ spins with highly anisotropic g-factors. By measuring single-shot spin echoes using narrow-bandwidth three-pulse sequences, we directly observe a vibration induced stochastic signal resulting from the spin's Larmor frequency moving into and out of the detection bandwidth. The sensitivity to these vibrations is substantially suppressed when a) the external magnetic field is aligned along the symmetry c-axis and b) spin temperature is modestly increased to 60~mK. We also benchmark the system as a quantum sensor for angular fluctuations, extracting a noise floor of 350 nanodegrees.",
+  "abstract_ja": "本研究では、極低温媒体を使用しない希釈冷凍機におけるスピン周波数ノイズに対するパルス管の機械的振動の役割について調査する。 本システムは、高い異方性g因子を持つ50 ppmの$\\text{Er}^{3+}:\\text{CaWO}_4$スピンと結合した、低モード体積の超伝導共振器で構成されている。 狭帯域の3パルスシーケンスを用いたシングルショットスピンエコーを測定することにより、スピンのラーモア周波数が検出帯域内へ入り、また帯域外へ出ることに起因する、振動によって誘起された確率的信号を直接観測した。 これらの振動に対する感度は、a) 外部磁場が対称性c軸に沿って整列している場合、および b) スピン温度が60~mKまで適度に上昇している場合、大幅に抑制される。また、本システムを角速度揺らぎの量子センサーとして評価し、350ナノ度のノイズフロアを抽出した。",
+  "abstract_translated": "本研究では、極低温媒体を使用しない希釈冷凍機におけるスピン周波数ノイズに対するパルス管の機械的振動の役割について調査する。 本システムは、高い異方性g因子を持つ50 ppmの$\\text{Er}^{3+}:\\text{CaWO}_4$スピンと結合した、低モード体積の超伝導共振器で構成されている。 狭帯域の3パルスシーケンスを用いたシングルショットスピンエコーを測定することにより、スピンのラーモア周波数が検出帯域内へ入り、また帯域外へ出ることに起因する、振動によって誘起された確率的信号を直接観測した。 これらの振動に対する感度は、a) 外部磁場が対称性c軸に沿って整列している場合、および b) スピン温度が60~mKまで適度に上昇している場合、大幅に抑制される。また、本システムを角速度揺らぎの量子センサーとして評価し、350ナノ度のノイズフロアを抽出した。",
+  "last_delivered_at": "2026-11-23T14:10:39Z"
+ },
+ {
+  "delivery_id": "main:2611.27634",
+  "id": "2611.27634",
+  "posted_at": "2026-11-23T14:10:41Z",
+  "title": "Quantum control of an electrically levitated nanoparticle with a trapped ion",
+  "title_ja": "閉じ込められたイオンを用いた、電気浮遊ナノ粒子の量子制御",
+  "title_translated": "閉じ込められたイオンを用いた、電気浮遊ナノ粒子の量子制御",
+  "translation_language": "ja",
+  "authors": "Bernard Faulend, Dmitry S. Bykov, Tracy E. Northup, Carlos Gonzalez-Ballestero",
+  "link": "https://arxiv.org/abs/2611.27634",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "hardware"
+  ],
+  "genre_names": [
+   "量子ハードウェア・実装"
+  ],
+  "target_genre_ids": [
+   "hardware"
+  ],
+  "target_genre_names": [
+   "量子ハードウェア・実装"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "hardware"
+   ],
+   "final_genre_ids": [
+    "hardware"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Quantum control of levitated nanoparticles offers a route towards macroscopic quantum states. Here we propose a novel way to achieve it for a nanoparticle levitated electrically in a linear Paul trap together with a single ion, a system recently realized experimentally. By suitably engineering the trap's AC potential, one can parametrically modulate the ion-nanoparticle distance and thus the Coulomb coupling to enable a resonant interaction. For realistic parameters, we calculate that this enables sympathetic cooling of the nanoparticle to its motional ground state by a single, continuously laser-cooled ion. Additional AC drives enable the preparation of squeezed nanoparticle states and of ion-nanoparticle entanglement. Moreover, non-Gaussian states such as Fock and cat states, prepared in the ion with standard trapped-ion techniques, can be transferred to the nanoparticle with high fidelities. We provide complete protocols for each of these states, including all known decoherence sources. Our results establish electrically trapped ion-nanoparticle systems as a platform for quantum control of levitated matter.",
+  "abstract_ja": "浮遊ナノ粒子の量子制御は、巨視的な量子状態への道筋を開くものである。本稿では、直線型ポールトラップ内で単一イオンとともに電気的に浮遊するナノ粒子について、これを実現するための新たな手法を提案する。この系は、最近実験的に実現されたものである。 トラップの交流電位を適切に設計することで、イオンとナノ粒子の距離、ひいてはクーロン結合をパラメトリックに変調し、共鳴相互作用を実現することができる。現実的なパラメータの下では、これにより、単一の連続的にレーザー冷却されたイオンによって、ナノ粒子をその運動基底状態まで共鳴冷却できると計算された。 さらに、交流駆動を追加することで、ナノ粒子のスクイーズ状態やイオンとナノ粒子のエンタングルメントを生成することが可能となる。また、標準的なトラップイオン技術を用いてイオン内で生成されたフォック状態やキャット状態などの非ガウス状態も、高い忠実度でナノ粒子へ転送することができる。 我々は、既知のすべてのデコヒーレンス源を含め、これらの各状態に対する完全なプロトコルを提供する。本研究成果により、電気的にトラップされたイオン・ナノ粒子系が、浮遊物質の量子制御のためのプラットフォームとして確立された。",
+  "abstract_translated": "浮遊ナノ粒子の量子制御は、巨視的な量子状態への道筋を開くものである。本稿では、直線型ポールトラップ内で単一イオンとともに電気的に浮遊するナノ粒子について、これを実現するための新たな手法を提案する。この系は、最近実験的に実現されたものである。 トラップの交流電位を適切に設計することで、イオンとナノ粒子の距離、ひいてはクーロン結合をパラメトリックに変調し、共鳴相互作用を実現することができる。現実的なパラメータの下では、これにより、単一の連続的にレーザー冷却されたイオンによって、ナノ粒子をその運動基底状態まで共鳴冷却できると計算された。 さらに、交流駆動を追加することで、ナノ粒子のスクイーズ状態やイオンとナノ粒子のエンタングルメントを生成することが可能となる。また、標準的なトラップイオン技術を用いてイオン内で生成されたフォック状態やキャット状態などの非ガウス状態も、高い忠実度でナノ粒子へ転送することができる。 我々は、既知のすべてのデコヒーレンス源を含め、これらの各状態に対する完全なプロトコルを提供する。本研究成果により、電気的にトラップされたイオン・ナノ粒子系が、浮遊物質の量子制御のためのプラットフォームとして確立された。",
+  "last_delivered_at": "2026-11-23T14:10:41Z"
+ },
+ {
+  "delivery_id": "main:2611.26755",
+  "id": "2611.26755",
+  "posted_at": "2026-11-23T14:10:43Z",
+  "title": "Gravity-induced entanglement assisted by an additional interaction using magic angle calibration",
+  "title_ja": "マジックアングル較正を用いた追加の相互作用による、重力誘起エンタングルメント",
+  "title_translated": "マジックアングル較正を用いた追加の相互作用による、重力誘起エンタングルメント",
+  "translation_language": "ja",
+  "authors": "Daisuke Miki, Alfred Li, Yanbei Chen",
+  "link": "https://arxiv.org/abs/2611.26755",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "sensing",
+   "foundations"
+  ],
+  "genre_names": [
+   "量子センシング・計測",
+   "量子基礎・測定理論"
+  ],
+  "target_genre_ids": [
+   "sensing",
+   "foundations"
+  ],
+  "target_genre_names": [
+   "量子センシング・計測",
+   "量子基礎・測定理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "sensing",
+    "foundations"
+   ],
+   "final_genre_ids": [
+    "sensing",
+    "foundations"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Gravity-induced entanglement provides an operational test of whether gravitational dynamics are compatible with local operations and classical communication (LOCC), but the weakness of the gravitational interaction and the presence of force noise make direct entanglement generation extremely demanding. We introduce a controllable additional coherent interaction that biases two test masses close to, but within, a separability-preservation bound, so that the weak Newtonian coupling supplies only the remaining coherent contribution needed for entanglement. If the additional interaction alone is shown to be incapable of generating entanglement, while entanglement is observed when gravity is included, the gravitational interaction provides a non-LOCC contribution. Since gravity cannot be turned off, we use a magic-angle null of the projected tidal coupling to calibrate the additional interaction and force noise. If the additional dynamics is certified to preserve separability at the magic angle and entanglement is subsequently observed in a non-null configuration, the gravitational contribution is incompatible with an LOCC description within the Markovian model. The protocol trades the stringent absolute force-noise requirement of direct schemes for precision in controlling the additional coupling, its backaction, and angle-dependent systematics.",
+  "abstract_ja": "重力によるエンタングルメントは、重力ダイナミクスが局所操作と古典的通信（LOCC）と両立するかどうかを実験的に検証する手段となるが、重力相互作用の強度が弱く、力ノイズが存在するため、エンタングルメントを直接生成することは極めて困難である。 我々は、2つの試験質量を分離性保持境界の近く（ただしその範囲内）に偏向させる制御可能な追加のコヒーレント相互作用を導入する。これにより、弱いニュートン力学的結合は、量子もつれに必要な残りのコヒーレント寄与のみを供給することになる。 もし、追加の相互作用だけでは量子もつれを生成できないことが示され、一方で重力を含めた場合に量子もつれが観測されるならば、重力相互作用は非 LOCC 的な寄与をもたらしていることになる。重力を無効にすることはできないため、投影された潮汐結合のマジックアングル・ヌルを用いて、追加の相互作用と力ノイズを校正する。 もし、追加のダイナミクスがマジックアングルにおいて分離性を保持していることが確認され、その後、非ヌル構成でエンタングルメントが観測された場合、重力寄与はマルコフモデル内のLOCC記述と両立しないことになる。 このプロトコルは、直接法が求める厳格な絶対力ノイズ要件と引き換えに、追加の結合、そのバックアクション、および角度依存の系統誤差を精密に制御することを可能にする。",
+  "abstract_translated": "重力によるエンタングルメントは、重力ダイナミクスが局所操作と古典的通信（LOCC）と両立するかどうかを実験的に検証する手段となるが、重力相互作用の強度が弱く、力ノイズが存在するため、エンタングルメントを直接生成することは極めて困難である。 我々は、2つの試験質量を分離性保持境界の近く（ただしその範囲内）に偏向させる制御可能な追加のコヒーレント相互作用を導入する。これにより、弱いニュートン力学的結合は、量子もつれに必要な残りのコヒーレント寄与のみを供給することになる。 もし、追加の相互作用だけでは量子もつれを生成できないことが示され、一方で重力を含めた場合に量子もつれが観測されるならば、重力相互作用は非 LOCC 的な寄与をもたらしていることになる。重力を無効にすることはできないため、投影された潮汐結合のマジックアングル・ヌルを用いて、追加の相互作用と力ノイズを校正する。 もし、追加のダイナミクスがマジックアングルにおいて分離性を保持していることが確認され、その後、非ヌル構成でエンタングルメントが観測された場合、重力寄与はマルコフモデル内のLOCC記述と両立しないことになる。 このプロトコルは、直接法が求める厳格な絶対力ノイズ要件と引き換えに、追加の結合、そのバックアクション、および角度依存の系統誤差を精密に制御することを可能にする。",
+  "last_delivered_at": "2026-11-23T14:10:45Z"
+ },
+ {
+  "delivery_id": "main:2611.26705",
+  "id": "2611.26705",
+  "posted_at": "2026-11-23T14:10:46Z",
+  "title": "Certification of non-stabilizerness in multi-qubit systems via worst-case random access codes",
+  "title_ja": "最悪ケースのランダムアクセス符号を用いた、多量子ビット系における非安定性の証明",
+  "title_translated": "最悪ケースのランダムアクセス符号を用いた、多量子ビット系における非安定性の証明",
+  "translation_language": "ja",
+  "authors": "Santiago Zamora",
+  "link": "https://arxiv.org/abs/2611.26705",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "target_genre_ids": [
+   "qit"
+  ],
+  "target_genre_names": [
+   "量子情報理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "qit"
+   ],
+   "final_genre_ids": [
+    "qit"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Recent works have proposed semi-device-independent frameworks to certify non-stabilizerness, but the complexity of the stabilizer polytope makes these methods infeasible beyond a few qubits. In this work, we address this limitation by moving to partially characterized measurements in the context of worst-case random access codes. We first establish a simple condition, which we term the stabilizer pigeonhole criterion, that certifies non-stabilizerness in $m$-qubit pure states, and show how it can be applied to reduced states. As an application, we certify magic in $W$ states of arbitrary size using only eight preparations and three single-qubit measurement settings. Motivated by recent work on the stabilizer marginal problem, we then construct prepare-and-measure correlations generated by global $m$-qubit quantum states for which every $k$-qubit marginal lies inside the stabilizer polytope, yet the combined correlations cannot be reproduced by any global stabilizer mixture. Finally, we derive analytical upper and lower bounds on the worst-case bias attainable with mixed stabilizer preparations in an $m$-qubit random access code with $n$ Pauli measurements. For the complete set of $4^m-1$ non-identity Pauli measurements, we show that the optimal quantum and mixed-stabilizer biases both scale as $2^{-3m/2}$, and that their ratio is asymptotically bounded by a constant ($\\lesssim 1.85$), showing that in this setting, magic in the preparations alone yields at most a constant-factor advantage over stabilizer mixtures.",
+  "abstract_ja": "最近の研究では、非安定性を証明するための半デバイス非依存的な枠組みが提案されているが、スタビライザー多面体の計算複雑さのため、これらの手法は数クビットを超えると実用不可能となる。 本研究では、最悪ケースのランダムアクセス符号の文脈において、部分的に特徴付けられた測定に移行することで、この制限に対処する。まず、$m$量子ビットの純状態における非スタビライザー性を証明する単純な条件（我々はこれを「スタビライザー・ピジョンホール基準」と呼ぶ）を確立し、それが縮約状態にどのように適用できるかを示す。 その応用として、わずか8つの準備操作と3つの単一量子ビット測定設定のみを用いて、任意のサイズの$W$状態におけるマジック性を証明する。 スタビライザーのマルジナル問題に関する最近の研究に触発され、次に、すべての $k$-量子ビットのマルジナルがスタビライザー多面体内に収まる一方で、その結合相関がいかなるグローバルなスタビライザー混合によっても再現できない、グローバルな $m$-量子ビット量子状態によって生成される「準備・測定」相関を構築する。 最後に、$n$回のパウリ測定を含む$m$量子ビットのランダムアクセス符号において、混合スタビライザー準備を用いて達成可能な最悪ケースのバイアスに対する解析的な上界および下界を導出する。 $4^m-1$個の非恒等パウリ測定の完全な集合について、最適量子バイアスと混合スタビライザーバイアスの両方が $2^{-3m/2}$ のオーダーでスケールすることを示し、 また、それらの比は漸近的に定数（$\\lesssim 1.85$）で上界が与えられることを示す。これにより、この設定において、準備状態そのものの「マジック」効果のみでは、安定化子混合に対してせいぜい定数倍の利点しか得られないことが明らかになる。",
+  "abstract_translated": "最近の研究では、非安定性を証明するための半デバイス非依存的な枠組みが提案されているが、スタビライザー多面体の計算複雑さのため、これらの手法は数クビットを超えると実用不可能となる。 本研究では、最悪ケースのランダムアクセス符号の文脈において、部分的に特徴付けられた測定に移行することで、この制限に対処する。まず、$m$量子ビットの純状態における非スタビライザー性を証明する単純な条件（我々はこれを「スタビライザー・ピジョンホール基準」と呼ぶ）を確立し、それが縮約状態にどのように適用できるかを示す。 その応用として、わずか8つの準備操作と3つの単一量子ビット測定設定のみを用いて、任意のサイズの$W$状態におけるマジック性を証明する。 スタビライザーのマルジナル問題に関する最近の研究に触発され、次に、すべての $k$-量子ビットのマルジナルがスタビライザー多面体内に収まる一方で、その結合相関がいかなるグローバルなスタビライザー混合によっても再現できない、グローバルな $m$-量子ビット量子状態によって生成される「準備・測定」相関を構築する。 最後に、$n$回のパウリ測定を含む$m$量子ビットのランダムアクセス符号において、混合スタビライザー準備を用いて達成可能な最悪ケースのバイアスに対する解析的な上界および下界を導出する。 $4^m-1$個の非恒等パウリ測定の完全な集合について、最適量子バイアスと混合スタビライザーバイアスの両方が $2^{-3m/2}$ のオーダーでスケールすることを示し、 また、それらの比は漸近的に定数（$\\lesssim 1.85$）で上界が与えられることを示す。これにより、この設定において、準備状態そのものの「マジック」効果のみでは、安定化子混合に対してせいぜい定数倍の利点しか得られないことが明らかになる。",
+  "last_delivered_at": "2026-11-23T14:10:46Z"
+ },
+ {
+  "delivery_id": "main:2611.27417",
+  "id": "2611.27417",
+  "posted_at": "2026-11-23T14:10:48Z",
+  "title": "Reset Quantum Channels",
+  "title_ja": "量子チャネルのリセット",
+  "title_translated": "量子チャネルのリセット",
+  "translation_language": "ja",
+  "authors": "Thomas Argoud, Alain Joye",
+  "link": "https://arxiv.org/abs/2611.27417",
+  "primary": "math-ph",
+  "categories": [
+   "math-ph",
+   "math.MP",
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "cross",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "target_genre_ids": [
+   "qit"
+  ],
+  "target_genre_names": [
+   "量子情報理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "qit"
+   ],
+   "final_genre_ids": [
+    "qit"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "We introduce Reset Quantum Channels (RQCs), a class of quantum channels acting on a Hilbert space structured as a direct sum of an arbitrary number of subspaces. Within each subspace, the state evolves unitarily; across subspaces, it is transferred by measure-and-prepare resets along given states. In this general setting, we show that the determination of their invariant states reduces to a stochastic eigenvalue problem, whose size is set by the number of reset states rather than by the dimension of the Hilbert space, and we discuss the uniqueness of these states. We further address the primitivity and the spectrum of these channels, which we compute explicitly when the reset states commute with the unitary evolutions. Applications include a small system coupled to several thermal reservoirs. We also consider random unitary evolutions and analyze the averages of the invariant states in this setup. Finally, we show that a suitable continuous-time limit yields Lindblad generators of reset type on the algebra of block-diagonal operators.",
+  "abstract_ja": "本稿では、任意の数の部分空間の直和として構成されるヒルベルト空間上で作用する量子チャネルの一種である「リセット量子チャネル（RQC）」を提案する。各部分空間内では、状態はユニタリに遷移するが、部分空間間では、所定の状態に沿った「測定・準備」リセットによって状態が転送される。 この一般的な設定において、我々は、その不変状態の決定が確率的固有値問題に帰着することを示す。この問題の規模は、ヒルベルト空間の次元ではなく、リセット状態の数によって決まる。また、これらの状態の一意性についても論じる。 さらに、これらのチャネルの原始性とスペクトルについて検討し、リセット状態がユニタリ進化と可換である場合に、それらを明示的に計算する。応用例として、複数の熱貯蔵庫と結合した小規模系を挙げる。また、ランダムなユニタリ進化についても考察し、この設定における不変状態の平均値を分析する。 最後に、適切な連続時間極限をとることで、ブロック対角演算子の代数上でリセット型のリンドブラッド生成子が得られることを示す。",
+  "abstract_translated": "本稿では、任意の数の部分空間の直和として構成されるヒルベルト空間上で作用する量子チャネルの一種である「リセット量子チャネル（RQC）」を提案する。各部分空間内では、状態はユニタリに遷移するが、部分空間間では、所定の状態に沿った「測定・準備」リセットによって状態が転送される。 この一般的な設定において、我々は、その不変状態の決定が確率的固有値問題に帰着することを示す。この問題の規模は、ヒルベルト空間の次元ではなく、リセット状態の数によって決まる。また、これらの状態の一意性についても論じる。 さらに、これらのチャネルの原始性とスペクトルについて検討し、リセット状態がユニタリ進化と可換である場合に、それらを明示的に計算する。応用例として、複数の熱貯蔵庫と結合した小規模系を挙げる。また、ランダムなユニタリ進化についても考察し、この設定における不変状態の平均値を分析する。 最後に、適切な連続時間極限をとることで、ブロック対角演算子の代数上でリセット型のリンドブラッド生成子が得られることを示す。",
+  "last_delivered_at": "2026-11-23T14:10:48Z"
+ },
+ {
+  "delivery_id": "main:2611.27769",
+  "id": "2611.27769",
+  "posted_at": "2026-11-23T14:10:50Z",
+  "title": "Quantum conditional relative entropy and quasi-factorization",
+  "title_ja": "量子条件付き相対エントロピーと準因数分解",
+  "title_translated": "量子条件付き相対エントロピーと準因数分解",
+  "translation_language": "ja",
+  "authors": "Angelo Lucia, \\'Angela Capel",
+  "link": "https://arxiv.org/abs/2611.27769",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph",
+   "math-ph",
+   "math.MP"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "qit"
+  ],
+  "genre_names": [
+   "量子情報理論"
+  ],
+  "target_genre_ids": [
+   "qit"
+  ],
+  "target_genre_names": [
+   "量子情報理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "qit"
+   ],
+   "final_genre_ids": [
+    "qit"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "One of the characteristic features that distinguishes quantum systems from classical ones is the inability, except for some special cases, of defining a conditional expectation map for a given quantum state, namely a map that restricts observables to a given sub-region (or more generally, a sub-algebra of observables) while preserving expectation values. Of the many consequences of this lack of conditional expectation, we consider the problem of defining the quantum conditional relative entropy, i.e., the relative entropy between two quantum states conditioned to a sub-region or sub-algebra. We discuss how, when the conditional expectation map is not defined, there are multiple, non-equivalent ways to define a quantum conditional relative entropy quantity, and we present some of their properties. Classical conditional relative entropy has played a fundamental role in many applications to spin systems, and in particular in proving logarithmic Sobolev inequalities. A key feature of conditional relative entropy that intervenes in these results is its quasi-factorization or approximate tensorization property: informally, the relative entropy is almost super-additive over weakly-dependent sub-algebras. It is then not surprising that the key to obtaining similar applications in the quantum setting, such as quantum logarithmic Sobolev inequalities in spin systems, has been to obtain approximate factorization results for the quantum conditional relative entropy, with the added complication that there is not a unique definition of conditional relative entropy to work with. We review the recent results regarding quasi-factorization of the quantum conditional relative entropy, in strong and weak forms.",
+  "abstract_ja": "量子系を古典系と区別する特徴の一つは、一部の特殊な場合を除き、与えられた量子状態に対して条件付き期待値写像、すなわち期待値を保ちつつ観測量を所定の部分領域（あるいはより一般的には、観測量の部分代数）に制限する写像を定義することができないという点である。 この条件付き期待値の欠如がもたらす多くの帰結のうち、本稿では、量子条件付き相対エントロピー、すなわち、ある部分領域または部分代数に条件付けられた2つの量子状態間の相対エントロピーを定義するという問題について考察する。 本稿では、条件付き期待値写像が定義されない場合、量子条件付き相対エントロピー量を定義する非同値な方法が複数存在することについて論じ、それらの性質のいくつかを提示する。古典的な条件付き相対エントロピーは、スピン系への多くの応用、特に対数ソボレフ不等式の証明において、根本的な役割を果たしてきた。 これらの結果に関与する条件付き相対エントロピーの重要な特徴は、その準因数分解性または近似テンソル化特性である。平易に言えば、相対エントロピーは弱に依存する部分代数上でほぼ超加法的である。 したがって、スピン系における量子対数ソボレフ不等式など、量子設定において同様の応用を得るための鍵が、量子条件付き相対エントロピーの近似因数分解結果を得ることにあるのは驚くべきことではない。ただし、扱うべき条件付き相対エントロピーの定義が一意ではないという複雑さが加わっている。 本稿では、量子条件付き相対エントロピーの準因数分解に関する、強形および弱形における最近の成果を概説する。",
+  "abstract_translated": "量子系を古典系と区別する特徴の一つは、一部の特殊な場合を除き、与えられた量子状態に対して条件付き期待値写像、すなわち期待値を保ちつつ観測量を所定の部分領域（あるいはより一般的には、観測量の部分代数）に制限する写像を定義することができないという点である。 この条件付き期待値の欠如がもたらす多くの帰結のうち、本稿では、量子条件付き相対エントロピー、すなわち、ある部分領域または部分代数に条件付けられた2つの量子状態間の相対エントロピーを定義するという問題について考察する。 本稿では、条件付き期待値写像が定義されない場合、量子条件付き相対エントロピー量を定義する非同値な方法が複数存在することについて論じ、それらの性質のいくつかを提示する。古典的な条件付き相対エントロピーは、スピン系への多くの応用、特に対数ソボレフ不等式の証明において、根本的な役割を果たしてきた。 これらの結果に関与する条件付き相対エントロピーの重要な特徴は、その準因数分解性または近似テンソル化特性である。平易に言えば、相対エントロピーは弱に依存する部分代数上でほぼ超加法的である。 したがって、スピン系における量子対数ソボレフ不等式など、量子設定において同様の応用を得るための鍵が、量子条件付き相対エントロピーの近似因数分解結果を得ることにあるのは驚くべきことではない。ただし、扱うべき条件付き相対エントロピーの定義が一意ではないという複雑さが加わっている。 本稿では、量子条件付き相対エントロピーの準因数分解に関する、強形および弱形における最近の成果を概説する。",
+  "last_delivered_at": "2026-11-23T14:10:50Z"
+ },
+ {
+  "delivery_id": "main:2611.26737",
+  "id": "2611.26737",
+  "posted_at": "2026-11-23T14:10:52Z",
+  "title": "Entropy production from crossing a quantum separatrix",
+  "title_ja": "量子セパトラックスを横断することによるエントロピー生成",
+  "title_translated": "量子セパトラックスを横断することによるエントロピー生成",
+  "translation_language": "ja",
+  "authors": "Peter Stabel, James R. Anglin",
+  "link": "https://arxiv.org/abs/2611.26737",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph",
+   "math-ph",
+   "math.MP"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "target_genre_ids": [
+   "foundations"
+  ],
+  "target_genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "foundations"
+   ],
+   "final_genre_ids": [
+    "foundations"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "If the Hamiltonian of a large quantum system depends on a variable parameter, its parameter-dependent energy spectrum may often form a dense lattice of avoided crossings. If the parameter slowly changes, the system's time evolution through the avoided crossings tends in the semi-classical limit to change from adiabatic to diabatic across a narrow energy range that has recently been defined as a quantum separatrix. Here we show that in the extreme semi-classical limit of a quasi-continuously dense spectrum, all quantum separatrices form a universal one-parameter family, and that evolution through the separatrix becomes efficiently ergodizing. If the unitary evolution is realistically averaged over small variations in the parameter time dependence, quantum separatrix crossing generates diagonal entropy according to a universal formula. Numerical examples confirm that the results for quasi-continuous spectra remain clearly recognizable in finite systems, with only small finite-size effects.",
+  "abstract_ja": "大規模な量子系のハミルトニアンが可変パラメータに依存する場合、そのパラメータ依存のエネルギースペクトルは、しばしば回避交差の密な格子を形成することがある。 パラメータがゆっくりと変化する場合、回避交差を通る系の時間発展は、半古典極限において、最近「量子セパトラックス」と定義された狭いエネルギー範囲において、断熱的から非断熱的へと変化する傾向がある。 ここでは、準連続的に密なスペクトルの極端な半古典極限において、すべての量子セパトラックスが普遍的な単一パラメータ族を形成すること、およびセパトラックスを通じた進化が効率的にエルゴダイズ化することを示す。 パラメータの時間依存性における微小な変動に対してユニタリな進化を現実的に平均化すると、量子セパトラクスの交差は、普遍的な式に従って対角エントロピーを生成する。数値例により、準連続スペクトルに関する結果は、わずかな有限サイズ効果のみを伴い、有限系においても明確に認識できることが確認された。",
+  "abstract_translated": "大規模な量子系のハミルトニアンが可変パラメータに依存する場合、そのパラメータ依存のエネルギースペクトルは、しばしば回避交差の密な格子を形成することがある。 パラメータがゆっくりと変化する場合、回避交差を通る系の時間発展は、半古典極限において、最近「量子セパトラックス」と定義された狭いエネルギー範囲において、断熱的から非断熱的へと変化する傾向がある。 ここでは、準連続的に密なスペクトルの極端な半古典極限において、すべての量子セパトラックスが普遍的な単一パラメータ族を形成すること、およびセパトラックスを通じた進化が効率的にエルゴダイズ化することを示す。 パラメータの時間依存性における微小な変動に対してユニタリな進化を現実的に平均化すると、量子セパトラクスの交差は、普遍的な式に従って対角エントロピーを生成する。数値例により、準連続スペクトルに関する結果は、わずかな有限サイズ効果のみを伴い、有限系においても明確に認識できることが確認された。",
+  "last_delivered_at": "2026-11-23T14:10:52Z"
+ },
+ {
+  "delivery_id": "main:2611.27295",
+  "id": "2611.27295",
+  "posted_at": "2026-11-23T14:10:54Z",
+  "title": "Consecutive Supersymmetric Quantum Mechanical Algorithms for Resolving the Spectra of Legendre-type Differential Operators",
+  "title_ja": "ルジャンドル型微分演算子のスペクトルを解くための連続超対称量子力学アルゴリズム",
+  "title_translated": "ルジャンドル型微分演算子のスペクトルを解くための連続超対称量子力学アルゴリズム",
+  "translation_language": "ja",
+  "authors": "Tianchun Zhou",
+  "link": "https://arxiv.org/abs/2611.27295",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph",
+   "math-ph",
+   "math.MP"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "foundations"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "target_genre_ids": [
+   "foundations"
+  ],
+  "target_genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "foundations"
+   ],
+   "final_genre_ids": [
+    "foundations"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Quite comprehensive iterative algorithms based on consecutive supersymmetric quantum mechanics (SUSYQM) have been constructed heuristically, for resolving the eigenspectra of the Legendre operator and its associates parametrized in various coordinates, \\emph{without receiving any input from traditional analytical methods}. On building these algorithms, the two symmetries \\text{--} supersymmetry and shape invariance symmetry \\text{--} hidden in these operators are brought to the fore as the only two governing principles, with the aids of the newly devised algebraic techniques such as the \\emph{active supersymmetrization transformations}, \\emph{momentum operator maps} as well as plain and \\emph{higher-order spin matrix maps}. In view of their algebraic simplicity and elegance, high efficiency, as well as independence of traditional methods, some of these algorithms become the promising candidates to supplant the popular power series approach to the eigenspectra of Legendre-type operators.",
+  "abstract_ja": "連続超対称量子力学（SUSYQM）に基づく、非常に包括的な反復アルゴリズムが、様々な座標でパラメータ化されたルジャンドル演算子およびその関連演算子の固有スペクトルを解くために、\\emph{従来の解析的手法からのいかなる入力も受けずに}、経験的に構築された。 これらのアルゴリズムの構築にあたっては、新たに考案された代数的手法（\\emph{能動的超対称化変換}、 \\emph{運動量演算子写像}、さらには単純なスピン行列写像および\\emph{高次スピン行列写像}といった新たに考案された代数的手法を駆使することで、これらの演算子に潜む2つの対称性——超対称性と形状不変対称性——が、唯一の支配原理として浮き彫りにされる。 その代数的な単純さと優雅さ、高い効率性、そして従来の方法からの独立性を考慮すると、これらのアルゴリズムの一部は、ルジャンドル型演算子の固有スペクトルに対する一般的な冪級数法を置き換える有望な候補となっている。",
+  "abstract_translated": "連続超対称量子力学（SUSYQM）に基づく、非常に包括的な反復アルゴリズムが、様々な座標でパラメータ化されたルジャンドル演算子およびその関連演算子の固有スペクトルを解くために、\\emph{従来の解析的手法からのいかなる入力も受けずに}、経験的に構築された。 これらのアルゴリズムの構築にあたっては、新たに考案された代数的手法（\\emph{能動的超対称化変換}、 \\emph{運動量演算子写像}、さらには単純なスピン行列写像および\\emph{高次スピン行列写像}といった新たに考案された代数的手法を駆使することで、これらの演算子に潜む2つの対称性——超対称性と形状不変対称性——が、唯一の支配原理として浮き彫りにされる。 その代数的な単純さと優雅さ、高い効率性、そして従来の方法からの独立性を考慮すると、これらのアルゴリズムの一部は、ルジャンドル型演算子の固有スペクトルに対する一般的な冪級数法を置き換える有望な候補となっている。",
+  "last_delivered_at": "2026-11-23T14:10:54Z"
+ },
+ {
+  "delivery_id": "main:2611.27884",
+  "id": "2611.27884",
+  "posted_at": "2026-11-23T14:10:56Z",
+  "title": "Thermo-electric Response Bound on Fluctuations in Coherent Transport",
+  "title_ja": "コヒーレント輸送における揺らぎに起因する熱電応答",
+  "title_translated": "コヒーレント輸送における揺らぎに起因する熱電応答",
+  "translation_language": "ja",
+  "authors": "Gianmichele Blasi, Rosa L\\'opez, Mykhailo Moskalets, Sungguen Ryu",
+  "link": "https://arxiv.org/abs/2611.27884",
+  "primary": "cond-mat.mes-hall",
+  "categories": [
+   "cond-mat.mes-hall",
+   "cond-mat.stat-mech",
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "cross",
+  "genre_ids": [
+   "foundations"
+  ],
+  "genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "target_genre_ids": [
+   "foundations"
+  ],
+  "target_genre_names": [
+   "量子基礎・測定理論"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "foundations"
+   ],
+   "final_genre_ids": [
+    "foundations"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "We establish an accessible lower bound on current noise in coherent electron transport, expressed in terms of responses to reservoir temperatures and chemical potentials. Derived within the Floquet-Nambu scattering formalism using a Cram\\'er-Rao-type inequality, it holds for arbitrary linear combinations of charge and heat currents in normal terminals, including those of hybrid superconducting systems, under static or periodic driving. The bound is tight in experimentally relevant regimes, notably in quantum point contacts with static or oscillating voltages and normal-superconductor junctions, often providing stronger constraints than thermodynamic uncertainty relations. It can be evaluated via experimentally accessible response coefficients, without inferring entropy production or dynamical activity, and provides useful constraints on the precision of nanoscale thermal and quantum devices.",
+  "abstract_ja": "我々は、コヒーレント電子輸送における電流ノイズについて、リザーバーの温度および化学ポテンシャルに対する応答を用いて表現される、求めて容易な下限を確立する。 これは、フロケ・南武散乱形式においてクラマー・ラオ型の不等式を用いて導出されたものであり、静的または周期的な駆動下にある通常の端子における電荷電流と熱電流の任意の線形結合（ハイブリッド超伝導系のものを含む）に対して成立する。 この下限は、実験的に関連性の高い領域、特に静的または振動する電圧が印加された量子点接触や常伝導体-超伝導体接合において厳密であり、多くの場合、熱力学的不確定性関係よりも強い制約を与える。 この上限は、エントロピー生成や動的活性を推定することなく、実験的に測定可能な応答係数を用いて評価することができ、ナノスケールの熱デバイスや量子デバイスの精度に関する有用な制約条件を提供する。",
+  "abstract_translated": "我々は、コヒーレント電子輸送における電流ノイズについて、リザーバーの温度および化学ポテンシャルに対する応答を用いて表現される、求めて容易な下限を確立する。 これは、フロケ・南武散乱形式においてクラマー・ラオ型の不等式を用いて導出されたものであり、静的または周期的な駆動下にある通常の端子における電荷電流と熱電流の任意の線形結合（ハイブリッド超伝導系のものを含む）に対して成立する。 この下限は、実験的に関連性の高い領域、特に静的または振動する電圧が印加された量子点接触や常伝導体-超伝導体接合において厳密であり、多くの場合、熱力学的不確定性関係よりも強い制約を与える。 この上限は、エントロピー生成や動的活性を推定することなく、実験的に測定可能な応答係数を用いて評価することができ、ナノスケールの熱デバイスや量子デバイスの精度に関する有用な制約条件を提供する。",
+  "last_delivered_at": "2026-11-23T14:10:56Z"
+ },
+ {
+  "delivery_id": "main:2611.26724",
+  "id": "2611.26724",
+  "posted_at": "2026-11-23T14:10:58Z",
+  "title": "Cavity-Controlled Hysteresis and Multilevel Molecular Switching in Hybrid Optomechanics",
+  "title_ja": "ハイブリッド光機械系における空洞制御によるヒステリシスと多段階分子スイッチング",
+  "title_translated": "ハイブリッド光機械系における空洞制御によるヒステリシスと多段階分子スイッチング",
+  "translation_language": "ja",
+  "authors": "Hugo Molinares, Ra\\'ul Coto, Vitalie Eremeev, Eduardo Chamorro",
+  "link": "https://arxiv.org/abs/2611.26724",
+  "primary": "physics.optics",
+  "categories": [
+   "physics.optics",
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "cross",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "target_genre_ids": [
+   "other"
+  ],
+  "target_genre_names": [
+   "その他・異分野"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "other"
+   ],
+   "final_genre_ids": [
+    "other"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "We investigate cavity-controlled hysteresis and multilevel molecular switching in a hybrid molecular optomechanical system composed of a plasmonic nanocavity, a Fabry-P\\'erot cavity, and an ensemble of molecular vibrations. Molecular-plasmonic optomechanical interaction together with cavity-plasmon hybridization produce bistability and dynamical hysteresis, leading to a history-dependent optical and molecular response. An analytical treatment of the steady-state equations shows that the auxiliary cavity renormalizes the effective optical linewidth and detuning, while the collective molecular interaction generates an effective nonlinearity. Together, these effects enable control of the hysteretic regime through optical detuning, cavity-plasmon coupling, and molecular ensemble size. Beyond bistability, pulsed excitation generates staircase-like molecular dynamics, with ascending or descending vibrational populations depending on the optical driving configuration. In particular, the FP cavity controls the buildup of vibrational excitation, while simultaneous driving of both optical modes enables stepwise vibrational depletion. These results establish hybrid molecular optomechanical systems as a tunable platform for history-dependent and pulse-driven molecular dynamics, with potential applications in nanoscale memory, multilevel information processing, and optically controlled molecular switching.",
+  "abstract_ja": "我々は、プラズモンナノキャビティ、ファブリ・ペロー共振器、および分子振動の集合体から構成されるハイブリッド分子光機械系において、キャビティ制御によるヒステリシスおよび多段階分子スイッチングを調査する。 分子・プラズモン間の光機械的相互作用と、共振器・プラズモンのハイブリッド化が相まって、双安定性と動的ヒステリシスを生じさせ、履歴依存的な光学的および分子的応答をもたらす。 定常状態方程式の解析的考察により、補助共振器が有効光線幅とデチューニングを再正規化することが示され、一方、集団的な分子相互作用が有効非線形性を生じさせることが明らかになった。これらの効果を組み合わせることで、光デチューニング、共振器-プラズモン結合、および分子アンサンブルのサイズを通じて、ヒステリシス領域を制御することが可能となる。 双安定性に加え、パルス励起により、光駆動構成に応じて振動状態の密度が上昇または下降する階段状の分子ダイナミクスが生じる。特に、FP共振器は振動励起の蓄積を制御し、両方の光モードを同時に駆動することで、段階的な振動状態の枯渇が可能となる。 これらの結果により、ハイブリッド分子光機械システムは、履歴依存性およびパルス駆動型の分子ダイナミクスを実現する調整可能なプラットフォームとして確立され、ナノスケールメモリ、多値情報処理、および光制御分子スイッチングへの応用が期待される。",
+  "abstract_translated": "我々は、プラズモンナノキャビティ、ファブリ・ペロー共振器、および分子振動の集合体から構成されるハイブリッド分子光機械系において、キャビティ制御によるヒステリシスおよび多段階分子スイッチングを調査する。 分子・プラズモン間の光機械的相互作用と、共振器・プラズモンのハイブリッド化が相まって、双安定性と動的ヒステリシスを生じさせ、履歴依存的な光学的および分子的応答をもたらす。 定常状態方程式の解析的考察により、補助共振器が有効光線幅とデチューニングを再正規化することが示され、一方、集団的な分子相互作用が有効非線形性を生じさせることが明らかになった。これらの効果を組み合わせることで、光デチューニング、共振器-プラズモン結合、および分子アンサンブルのサイズを通じて、ヒステリシス領域を制御することが可能となる。 双安定性に加え、パルス励起により、光駆動構成に応じて振動状態の密度が上昇または下降する階段状の分子ダイナミクスが生じる。特に、FP共振器は振動励起の蓄積を制御し、両方の光モードを同時に駆動することで、段階的な振動状態の枯渇が可能となる。 これらの結果により、ハイブリッド分子光機械システムは、履歴依存性およびパルス駆動型の分子ダイナミクスを実現する調整可能なプラットフォームとして確立され、ナノスケールメモリ、多値情報処理、および光制御分子スイッチングへの応用が期待される。",
+  "last_delivered_at": "2026-11-23T14:10:58Z"
+ },
+ {
+  "delivery_id": "main:2611.27623",
+  "id": "2611.27623",
+  "posted_at": "2026-11-23T14:10:59Z",
+  "title": "Linear and Quadratic Penalties for Cardinality Constraints in Unconstrained Binary Optimization",
+  "title_ja": "制約なしの二値最適化におけるカーディナリティ制約に対する線形および二次ペナルティ",
+  "title_translated": "制約なしの二値最適化におけるカーディナリティ制約に対する線形および二次ペナルティ",
+  "translation_language": "ja",
+  "authors": "Roman Ku\\v{z}el, M\\'aty\\'as Koniorczyk, Janez Povh",
+  "link": "https://arxiv.org/abs/2611.27623",
+  "primary": "math.OC",
+  "categories": [
+   "math.OC",
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "cross",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "target_genre_ids": [
+   "other"
+  ],
+  "target_genre_names": [
+   "その他・異分野"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "other"
+   ],
+   "final_genre_ids": [
+    "other"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "We study penalty strategies for converting constrained binary optimization problems to quadratic unconstrained binary optimization (QUBO) form on the example of the sparsest $k$-subgraph problem. We adopt an augmented Lagrangian approach involving a linear penalty in addition to the commonly used quadratic one, and show the benefits of this approach. From the constraint structure, we derive sufficient bounds on the penalty coefficients. We conduct extensive experiments comparing combinations of our different penalty strategies with a wide range of classical and quantum QUBO solvers. Our experiments show that to obtain a good-quality solution, the right penalty strategy is almost as important as the quality of the QUBO solver, and iterative approaches appear to be the most efficient. We discuss the mechanisms that lead to a degradation of the solution quality due to large quadratic penalties.",
+  "abstract_ja": "本研究では、最も疎な$k$-部分グラフ問題を例として、制約付き二値最適化問題を二次制約なし二値最適化（QUBO）形式に変換するためのペナルティ戦略について検討する。 我々は、一般的に用いられる二次ペナルティに加え、線形ペナルティを組み込んだ拡張ラグランジュ法を採用し、このアプローチの利点を示す。制約構造から、ペナルティ係数に対する十分な上界を導出する。また、我々が提案する様々なペナルティ戦略の組み合わせと、幅広い古典的および量子QUBOソルバーとの比較を行うための広範な実験を実施した。 実験の結果、高品質な解を得るためには、適切なペナルティ戦略がQUBOソルバーの品質とほぼ同等に重要であり、反復法が最も効率的であることが示された。また、大きな二次ペナルティによって解の品質が低下するメカニズムについても考察する。",
+  "abstract_translated": "本研究では、最も疎な$k$-部分グラフ問題を例として、制約付き二値最適化問題を二次制約なし二値最適化（QUBO）形式に変換するためのペナルティ戦略について検討する。 我々は、一般的に用いられる二次ペナルティに加え、線形ペナルティを組み込んだ拡張ラグランジュ法を採用し、このアプローチの利点を示す。制約構造から、ペナルティ係数に対する十分な上界を導出する。また、我々が提案する様々なペナルティ戦略の組み合わせと、幅広い古典的および量子QUBOソルバーとの比較を行うための広範な実験を実施した。 実験の結果、高品質な解を得るためには、適切なペナルティ戦略がQUBOソルバーの品質とほぼ同等に重要であり、反復法が最も効率的であることが示された。また、大きな二次ペナルティによって解の品質が低下するメカニズムについても考察する。",
+  "last_delivered_at": "2026-11-23T14:10:59Z"
+ },
+ {
+  "delivery_id": "main:2611.27707",
+  "id": "2611.27707",
+  "posted_at": "2026-11-23T14:11:01Z",
+  "title": "Comparing weakly interacting and free quantum dynamics locally",
+  "title_ja": "局所的な観点から、弱く相互作用する量子ダイナミクスと自由な量子ダイナミクスを比較する",
+  "title_translated": "局所的な観点から、弱く相互作用する量子ダイナミクスと自由な量子ダイナミクスを比較する",
+  "translation_language": "ja",
+  "authors": "Jorge Acu\\~na Flores, Joscha Henheik, Marius Lemm, Daniele Toniolo",
+  "link": "https://arxiv.org/abs/2611.27707",
+  "primary": "math-ph",
+  "categories": [
+   "math-ph",
+   "cond-mat.dis-nn",
+   "cond-mat.str-el",
+   "math.MP",
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "cross",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "target_genre_ids": [
+   "other"
+  ],
+  "target_genre_names": [
+   "その他・異分野"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "other"
+   ],
+   "final_genre_ids": [
+    "other"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Lieb-Robinson bounds (LRBs) have become a standard tool for perturbative results in quantum many-body physics, including gap stability and many-body adiabatic theory. Here, we use LRBs to locally approximate weakly interacting many-body dynamics with one-body dynamics on large, perturbative time scales. This allows us to use one-body transport results to establish the expected many-body transport behavior on finite time scales in the following two illustrative settings: (i) We prove quantum diffusion, as quantified by a certain operator spreading diagnostic, in weakly interacting and weakly disordered Fermi systems in dimensions $D\\geq2$ on large finite time scales based on the non-interacting diffusion result of Black, Drogin, and Hern\\'andez [arXiv:2506.06468]. (ii) We show for Fermi-Hubbard models with initially low spin-down density, that all local multi-time spin-up correlation functions are approximated by their free counterparts. In particular, we obtain an OTOC (out-of-time-ordered correlator) counterpart to the patterns of short-time entanglement related to lattice path counts observed numerically by Bippus et al. [Phys. Rev. B 113, 035152 (2026)].",
+  "abstract_ja": "リーブ・ロビンソン境界（LRB）は、ギャップ安定性や多体アディアバティック理論など、量子多体物理学における摂動論的結果を得るための標準的な手法となっている。 本稿では、LRBを用いて、大きな摂動的時間スケールにおいて、弱く相互作用する多体ダイナミクスを単一粒子ダイナミクスで局所的に近似する。これにより、単一粒子の輸送結果を用いて、以下の2つの例示的な設定において、有限の時間スケールでの予想される多体輸送挙動を確立することができる： (i) 次元 $D\\geq2$ の弱相互作用かつ弱無秩序なフェルミ系において、Black、 Drogin、およびHernández [arXiv:2506.06468]による非相互作用拡散の結果に基づき、$D\\geq2$次元における弱相互作用かつ弱無秩序なフェルミ系において、大規模な有限時間スケールでの量子拡散を証明する。(ii) 初期のスピンダウン密度が低いフェルミ・ハバードモデルについて、すべての局所的な多時間スピンアップ相関関数が、その自由系における対応する関数によって近似されることを示す。 特に、Bippusらによって数値的に観測された格子経路数に関連する短時間のエンタングルメントのパターンに対応するOTOC（時間外相関関数）の対応物を導出する。 [Phys. Rev. B 113, 035152 (2026)]。",
+  "abstract_translated": "リーブ・ロビンソン境界（LRB）は、ギャップ安定性や多体アディアバティック理論など、量子多体物理学における摂動論的結果を得るための標準的な手法となっている。 本稿では、LRBを用いて、大きな摂動的時間スケールにおいて、弱く相互作用する多体ダイナミクスを単一粒子ダイナミクスで局所的に近似する。これにより、単一粒子の輸送結果を用いて、以下の2つの例示的な設定において、有限の時間スケールでの予想される多体輸送挙動を確立することができる： (i) 次元 $D\\geq2$ の弱相互作用かつ弱無秩序なフェルミ系において、Black、 Drogin、およびHernández [arXiv:2506.06468]による非相互作用拡散の結果に基づき、$D\\geq2$次元における弱相互作用かつ弱無秩序なフェルミ系において、大規模な有限時間スケールでの量子拡散を証明する。(ii) 初期のスピンダウン密度が低いフェルミ・ハバードモデルについて、すべての局所的な多時間スピンアップ相関関数が、その自由系における対応する関数によって近似されることを示す。 特に、Bippusらによって数値的に観測された格子経路数に関連する短時間のエンタングルメントのパターンに対応するOTOC（時間外相関関数）の対応物を導出する。 [Phys. Rev. B 113, 035152 (2026)]。",
+  "last_delivered_at": "2026-11-23T14:11:01Z"
+ },
+ {
+  "delivery_id": "main:2611.27975",
+  "id": "2611.27975",
+  "posted_at": "2026-11-23T14:11:03Z",
+  "title": "Nonperturbative Bounds on the Ground-State Energy of Lattice QED",
+  "title_ja": "格子QEDの基底状態エネルギーに関する非摂動的な上界",
+  "title_translated": "格子QEDの基底状態エネルギーに関する非摂動的な上界",
+  "translation_language": "ja",
+  "authors": "Pawe{\\l} Zin, Andrzej Veitia",
+  "link": "https://arxiv.org/abs/2611.27975",
+  "primary": "quant-ph",
+  "categories": [
+   "quant-ph"
+  ],
+  "source_feed": "quant-ph",
+  "classification_context": "quant-ph",
+  "announce_type": "new",
+  "genre_ids": [
+   "other"
+  ],
+  "genre_names": [
+   "その他・異分野"
+  ],
+  "target_genre_ids": [
+   "other"
+  ],
+  "target_genre_names": [
+   "その他・異分野"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "other"
+   ],
+   "final_genre_ids": [
+    "other"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "We establish nonperturbative bounds on the ground-state energy of lattice quantum electrodynamics with naive fermions in Coulomb gauge, within the Gaussian photon approximation. Our central result is a spectral comparison theorem showing that, in the thermodynamic limit, the minimum fermionic energy density over all link configurations coincides with that of the trivial gauge configuration. The proof exploits a logarithmic determinant representation and dimensional reduction, without relying on reflection positivity, and applies to lattices of either parity. Combining this result with the positivity of the electromagnetic and Coulomb Hamiltonians, we derive an explicit lower bound on the interacting ground-state energy. Finite-lattice counterexamples show that the thermodynamic limit is essential.",
+  "abstract_ja": "我々は、ガウス光子近似の下で、クーロンゲージにおける単純フェルミオンを用いた格子量子電磁力学の基底状態エネルギーに対する非摂動的な上界を確立する。 本論文の中心的な結果は、スペクトル比較定理であり、熱力学的極限において、すべてのリンク構成にわたるフェルミオンエネルギー密度の最小値が、自明なゲージ構成のそれと同一であることを示している。この証明では、反射正値性に依存することなく、対数行列式表現と次元削減を利用しており、いずれのパリティを持つ格子にも適用される。 この結果を、電磁ハミルトニアンおよびクーロンハミルトニアンの正値性との組み合わせにより、相互作用のある基底状態エネルギーに対する明示的な下限を導出する。有限格子における反例は、熱力学的極限が不可欠であることを示している。",
+  "abstract_translated": "我々は、ガウス光子近似の下で、クーロンゲージにおける単純フェルミオンを用いた格子量子電磁力学の基底状態エネルギーに対する非摂動的な上界を確立する。 本論文の中心的な結果は、スペクトル比較定理であり、熱力学的極限において、すべてのリンク構成にわたるフェルミオンエネルギー密度の最小値が、自明なゲージ構成のそれと同一であることを示している。この証明では、反射正値性に依存することなく、対数行列式表現と次元削減を利用しており、いずれのパリティを持つ格子にも適用される。 この結果を、電磁ハミルトニアンおよびクーロンハミルトニアンの正値性との組み合わせにより、相互作用のある基底状態エネルギーに対する明示的な下限を導出する。有限格子における反例は、熱力学的極限が不可欠であることを示している。",
+  "last_delivered_at": "2026-11-23T14:11:03Z"
+ },
+ {
+  "delivery_id": "main:2611.27735",
+  "id": "2611.27735",
+  "posted_at": "2026-11-23T14:11:05Z",
+  "title": "Post-Quantum Migration in Brownfield 5G Core Networks: Verified Hybrid Key Establishment, Performance, and Rollback",
+  "title_ja": "ブラウンフィールド5Gコアネットワークにおけるポスト量子移行：検証済みのハイブリッド鍵確立、性能、およびロールバック",
+  "title_translated": "ブラウンフィールド5Gコアネットワークにおけるポスト量子移行：検証済みのハイブリッド鍵確立、性能、およびロールバック",
+  "translation_language": "ja",
+  "authors": "Shubham Verma",
+  "link": "https://arxiv.org/abs/2611.27735",
+  "primary": "cs.CR",
+  "categories": [
+   "cs.CR"
+  ],
+  "source_feed": "cs.CR",
+  "classification_context": "external",
+  "announce_type": "external",
+  "genre_ids": [
+   "pqc"
+  ],
+  "genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "target_genre_ids": [
+   "pqc"
+  ],
+  "target_genre_names": [
+   "耐量子計算機暗号"
+  ],
+  "classifier": "gemini-3.5-flash-lite",
+  "classification": {
+   "policy": "48df5a31f4519d520c54",
+   "base_genre_ids": [
+    "pqc"
+   ],
+   "final_genre_ids": [
+    "pqc"
+   ],
+   "postprocess": []
+  },
+  "abstract_en": "Migrating brownfield 5G Core networks to post-quantum cryptography (PQC) is difficult because deployed network functions, base images, and TLS libraries evolve under different upgrade constraints. This paper evaluates a deployment-controlled migration strategy that enables hybrid post-quantum/traditional key establishment through externally deployed Boundary Cryptographic Execution Entities (BCEEs), without modifying participating network function source code. The approach is evaluated using the Open5GS AMF-NRF Service-Based Interface as a representative 5G Core scenario. Classical and hybrid configurations are compared under an unchanged mediation topology. Packet-level analysis confirms successful negotiation of X25519MLKEM768, and functional validation demonstrates that representative SBI procedures remain operational through the mediated path. In 120 NF-registration transactions, the median AMF-facing registration latency increased from 22.968 ms under the classical state to 26.351 ms under the hybrid state, reflecting a 3.383 ms (14.73 percent) increase, with a whole-block 95 percent confidence interval of [1.193, 7.872] ms. At the mediated TLS boundary, the hybrid configuration shows a 4.599 ms higher median segment-local TLS-establishment time than the classical configuration. These two reported differences reflect system-level runtime effects and do not isolate key-encapsulation cost. Packet evidence verifies rollback from hybrid-mediated operation to classical mediated operation and, separately, restoration of the native direct path. NF-facing compatibility legs remained plaintext and outside the hybrid post-quantum scope. The results demonstrate a packet-verifiable and manually reversible brownfield mechanism for introducing hybrid post-quantum key establishment on a controlled 5G SBI segment.",
+  "abstract_ja": "ブラウンフィールドの5Gコアネットワークをポスト量子暗号（PQC）へ移行することは、導入済みのネットワーク機能、ベースイメージ、およびTLSライブラリが、それぞれ異なるアップグレードの制約の下で進化しているため、困難である。 本論文では、参加するネットワーク機能のソースコードを変更することなく、外部に展開された境界暗号実行エンティティ（BCEE）を通じて、ポスト量子暗号と従来の暗号を併用した鍵確立を可能にする、展開制御型の移行戦略を評価する。 このアプローチは、代表的な5GコアシナリオとしてOpen5GS AMF-NRFサービスベースインターフェースを用いて評価される。 仲介トポロジーを変更しない条件下で、従来型構成とハイブリッド構成を比較した。パケットレベルの分析により、X25519MLKEM768のネゴシエーションが成功したことが確認され、機能検証により、代表的なSBI手順が仲介経路を通じて引き続き動作することが実証された。 120件のNF登録トランザクションにおいて、AMFに対する登録遅延の中央値は、従来型状態の22.968 msからハイブリッド状態の26.351 msへと増加し、3.383 ms （14.73％）の増加を示しており、ブロック全体の95％信頼区間は[1.193, 7.872] msである。 仲介された TLS 境界において、ハイブリッド構成は、従来構成と比較して、セグメントローカルな TLS 確立時間の中央値が 4.599 ms 長いことが示された。これら 2 つの報告された差異は、システムレベルの実行時間への影響を反映しており、鍵カプセル化のコストのみを特定するものではない。 パケットの証拠により、ハイブリッド媒介型動作から従来型媒介型動作へのロールバック、およびそれとは別にネイティブのダイレクトパスの復元が確認された。NF側への互換性レッグは平文のままであり、ハイブリッド型ポスト量子スコープの範囲外であった。 これらの結果は、制御された5G SBIセグメント上でハイブリッド型ポスト量子鍵確立を導入するための、パケットによって検証可能かつ手動で元に戻せるブラウンフィールドメカニズムを実証している。",
+  "abstract_translated": "ブラウンフィールドの5Gコアネットワークをポスト量子暗号（PQC）へ移行することは、導入済みのネットワーク機能、ベースイメージ、およびTLSライブラリが、それぞれ異なるアップグレードの制約の下で進化しているため、困難である。 本論文では、参加するネットワーク機能のソースコードを変更することなく、外部に展開された境界暗号実行エンティティ（BCEE）を通じて、ポスト量子暗号と従来の暗号を併用した鍵確立を可能にする、展開制御型の移行戦略を評価する。 このアプローチは、代表的な5GコアシナリオとしてOpen5GS AMF-NRFサービスベースインターフェースを用いて評価される。 仲介トポロジーを変更しない条件下で、従来型構成とハイブリッド構成を比較した。パケットレベルの分析により、X25519MLKEM768のネゴシエーションが成功したことが確認され、機能検証により、代表的なSBI手順が仲介経路を通じて引き続き動作することが実証された。 120件のNF登録トランザクションにおいて、AMFに対する登録遅延の中央値は、従来型状態の22.968 msからハイブリッド状態の26.351 msへと増加し、3.383 ms （14.73％）の増加を示しており、ブロック全体の95％信頼区間は[1.193, 7.872] msである。 仲介された TLS 境界において、ハイブリッド構成は、従来構成と比較して、セグメントローカルな TLS 確立時間の中央値が 4.599 ms 長いことが示された。これら 2 つの報告された差異は、システムレベルの実行時間への影響を反映しており、鍵カプセル化のコストのみを特定するものではない。 パケットの証拠により、ハイブリッド媒介型動作から従来型媒介型動作へのロールバック、およびそれとは別にネイティブのダイレクトパスの復元が確認された。NF側への互換性レッグは平文のままであり、ハイブリッド型ポスト量子スコープの範囲外であった。 これらの結果は、制御された5G SBIセグメント上でハイブリッド型ポスト量子鍵確立を導入するための、パケットによって検証可能かつ手動で元に戻せるブラウンフィールドメカニズムを実証している。",
+  "last_delivered_at": "2026-11-23T14:11:05Z"
  }
 ]

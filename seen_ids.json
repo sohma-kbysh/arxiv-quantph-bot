@@ -10221,6 +10221,7 @@
   "2611.26005",
   "2611.26006",
   "2611.26066",
+  "2611.26071",
   "2611.26123",
   "2611.26126",
   "2611.26139",
@@ -10265,6 +10266,7 @@
   "2611.26626",
   "2611.26659",
   "2611.26693",
+  "2611.26695",
   "2611.26705",
   "2611.26720",
   "2611.26724",
@@ -10272,45 +10274,67 @@
   "2611.26740",
   "2611.26755",
   "2611.26762",
+  "2611.26816",
+  "2611.26884",
+  "2611.26889",
   "2611.26925",
   "2611.26960",
+  "2611.27019",
+  "2611.27034",
+  "2611.27140",
   "2611.27200",
   "2611.27250",
   "2611.27251",
+  "2611.27256",
   "2611.27267",
   "2611.27295",
   "2611.27300",
+  "2611.27328",
   "2611.27359",
   "2611.27402",
+  "2611.27408",
   "2611.27413",
   "2611.27417",
+  "2611.27458",
   "2611.27466",
   "2611.27486",
+  "2611.27507",
   "2611.27523",
   "2611.27535",
+  "2611.27548",
+  "2611.27584",
   "2611.27587",
   "2611.27600",
+  "2611.27609",
   "2611.27623",
   "2611.27626",
+  "2611.27632",
   "2611.27634",
+  "2611.27637",
   "2611.27640",
   "2611.27650",
+  "2611.27660",
   "2611.27702",
   "2611.27703",
   "2611.27707",
   "2611.27724",
   "2611.27735",
   "2611.27769",
+  "2611.27779",
   "2611.27787",
   "2611.27815",
+  "2611.27846",
   "2611.27851",
   "2611.27871",
   "2611.27873",
   "2611.27884",
   "2611.27896",
+  "2611.27909",
   "2611.27914",
+  "2611.27927",
   "2611.27942",
-  "2611.27975"
+  "2611.27975",
+  "2611.27982"
  ],
  "external_reviews": {
   "cs.CR:2607.23614": {
@@ -23426,6 +23450,7 @@
   "2611.26005",
   "2611.26006",
   "2611.26066",
+  "2611.26071",
   "2611.26123",
   "2611.26126",
   "2611.26139",
@@ -23470,6 +23495,7 @@
   "2611.26626",
   "2611.26659",
   "2611.26693",
+  "2611.26695",
   "2611.26705",
   "2611.26720",
   "2611.26724",
@@ -23477,1065 +23503,69 @@
   "2611.26740",
   "2611.26755",
   "2611.26762",
+  "2611.26816",
+  "2611.26884",
+  "2611.26889",
   "2611.26925",
   "2611.26960",
+  "2611.27019",
+  "2611.27034",
+  "2611.27140",
   "2611.27200",
   "2611.27250",
   "2611.27251",
+  "2611.27256",
   "2611.27267",
   "2611.27295",
   "2611.27300",
+  "2611.27328",
   "2611.27359",
   "2611.27402",
+  "2611.27408",
   "2611.27413",
   "2611.27417",
+  "2611.27458",
   "2611.27466",
   "2611.27486",
+  "2611.27507",
   "2611.27523",
   "2611.27535",
+  "2611.27548",
+  "2611.27584",
   "2611.27587",
   "2611.27600",
+  "2611.27609",
   "2611.27623",
   "2611.27626",
+  "2611.27632",
   "2611.27634",
+  "2611.27637",
   "2611.27640",
   "2611.27650",
+  "2611.27660",
   "2611.27702",
   "2611.27703",
   "2611.27707",
   "2611.27724",
   "2611.27735",
   "2611.27769",
+  "2611.27779",
   "2611.27787",
   "2611.27815",
+  "2611.27846",
   "2611.27851",
   "2611.27871",
   "2611.27873",
   "2611.27884",
   "2611.27896",
+  "2611.27909",
   "2611.27914",
+  "2611.27927",
   "2611.27942",
-  "2611.27975"
+  "2611.27975",
+  "2611.27982"
  ],
- "deliveries": {
-  "2611.26695": {
-   "paper": {
-    "id": "2611.26695",
-    "title": "Thermalization and quantum chaos in a pure gauge discrete non-Abelian lattice gauge theory",
-    "link": "https://arxiv.org/abs/2611.26695",
-    "authors": "Marco Vaia, Edoardo Ballini, Alberto Bottarelli, Matteo M. Wauters, Philipp Hauke",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "cond-mat.stat-mech",
-     "hep-lat"
-    ],
-    "primary": "quant-ph",
-    "abstract": "Gauge theories constitute the basis of our microscopic description of fundamental physical laws, and they are a cornerstone of contemporary scientific research. Yet, how such systems thermalize far from equilibrium remains a fundamental open question at the crossroads of statistical, high-energy, and condensed-matter physics. In this work, we investigate the thermalization properties of non-Abelian lattice gauge theories, focusing on the discrete gauge group $D_3$, which is ideally suited for current qudit-based quantum simulators. Specifically, we study a linear plaquette chain in a gauge-fixed formulation that removes unphysical degrees of freedom. A numerical analysis of the Hamiltonian spectrum and expectation values of local operators shows a behavior broadly aligned with the Eigenstate Thermalization Hypothesis (ETH). We also study thermalization through the real-time dynamics of the entanglement spectrum, confirming the emergence of random-matrix level statistics after an initial transient. Our results expand the rich phenomenology of dihedral non-Abelian gauge systems. Once the relevant symmetry structure is properly resolved, the model displays the same qualitative ETH-based thermalization scenario observed in Abelian gauge models and generic non-integrable quantum many-body systems.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "sim",
-    "other"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "sim",
-     "other"
-    ],
-    "final_genre_ids": [
-     "sim",
-     "other"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u30b2\u30fc\u30b8\u7406\u8ad6\u306f\u3001\u57fa\u790e\u7684\u306a\u7269\u7406\u6cd5\u5247\u3092\u5fae\u8996\u7684\u306b\u8a18\u8ff0\u3059\u308b\u305f\u3081\u306e\u57fa\u76e4\u3092\u6210\u3057\u3066\u304a\u308a\u3001\u73fe\u4ee3\u306e\u79d1\u5b66\u7814\u7a76\u306e\u790e\u3068\u306a\u3063\u3066\u3044\u307e\u3059\u3002\u3057\u304b\u3057\u3001\u975e\u5e73\u8861\u72b6\u614b\u306b\u304a\u3044\u3066\u3053\u3046\u3057\u305f\u7cfb\u304c\u3069\u306e\u3088\u3046\u306b\u71b1\u5e73\u8861\u5316\u3059\u308b\u304b\u306f\u3001\u7d71\u8a08\u7269\u7406\u5b66\u3001\u9ad8\u30a8\u30cd\u30eb\u30ae\u30fc\u7269\u7406\u5b66\u3001\u304a\u3088\u3073\u51dd\u7e2e\u7cfb\u7269\u7406\u5b66\u306e\u4ea4\u5dee\u70b9\u306b\u4f4d\u7f6e\u3059\u308b\u3001\u6839\u672c\u7684\u306a\u672a\u89e3\u6c7a\u554f\u984c\u3068\u3057\u3066\u6b8b\u3055\u308c\u3066\u3044\u307e\u3059\u3002 \u672c\u7814\u7a76\u3067\u306f\u3001\u975e\u30a2\u30d9\u30eb\u683c\u5b50\u30b2\u30fc\u30b8\u7406\u8ad6\u306e\u71b1\u5316\u7279\u6027\u3092\u8abf\u67fb\u3057\u3001\u7279\u306b\u73fe\u5728\u306e\u30af\u30c7\u30a3\u30c3\u30c8\u30d9\u30fc\u30b9\u306e\u91cf\u5b50\u30b7\u30df\u30e5\u30ec\u30fc\u30bf\u306b\u7406\u60f3\u7684\u306b\u9069\u3057\u305f\u96e2\u6563\u30b2\u30fc\u30b8\u7fa4 $D_3$ \u306b\u7126\u70b9\u3092\u5f53\u3066\u308b\u3002\u5177\u4f53\u7684\u306b\u306f\u3001\u975e\u7269\u7406\u7684\u306a\u81ea\u7531\u5ea6\u3092\u9664\u53bb\u3059\u308b\u30b2\u30fc\u30b8\u56fa\u5b9a\u5f62\u5f0f\u306b\u304a\u3051\u308b\u7dda\u5f62\u30d7\u30e9\u30b1\u30c3\u30c8\u9396\u3092\u7814\u7a76\u3059\u308b\u3002 \u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u306e\u30b9\u30da\u30af\u30c8\u30eb\u304a\u3088\u3073\u5c40\u6240\u6f14\u7b97\u5b50\u306e\u671f\u5f85\u5024\u306b\u95a2\u3059\u308b\u6570\u5024\u89e3\u6790\u306b\u3088\u308a\u3001\u305d\u306e\u6319\u52d5\u304c\u300c\u56fa\u6709\u72b6\u614b\u71b1\u5316\u4eee\u8aac\uff08ETH\uff09\u300d\u3068\u6982\u306d\u4e00\u81f4\u3059\u308b\u3053\u3068\u304c\u793a\u3055\u308c\u305f\u3002\u307e\u305f\u3001\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u30b9\u30da\u30af\u30c8\u30eb\u306e\u30ea\u30a2\u30eb\u30bf\u30a4\u30e0\u30c0\u30a4\u30ca\u30df\u30af\u30b9\u3092\u901a\u3058\u3066\u71b1\u5316\u3092\u7814\u7a76\u3057\u3001\u521d\u671f\u306e\u904e\u6e21\u72b6\u614b\u3092\u7d4c\u305f\u5f8c\u306b\u30e9\u30f3\u30c0\u30e0\u884c\u5217\u306e\u30ec\u30d9\u30eb\u7d71\u8a08\u304c\u73fe\u308c\u308b\u3053\u3068\u3092\u78ba\u8a8d\u3057\u305f\u3002 \u6211\u3005\u306e\u7d50\u679c\u306f\u3001\u30c0\u30a4\u30d8\u30c9\u30e9\u30eb\u975e\u30a2\u30fc\u30d9\u30eb\u30b2\u30fc\u30b8\u7cfb\u306e\u8c4a\u304b\u306a\u73fe\u8c61\u8ad6\u3092\u3055\u3089\u306b\u5e83\u3052\u308b\u3082\u306e\u3067\u3042\u308b\u3002\u95a2\u9023\u3059\u308b\u5bfe\u79f0\u6027\u69cb\u9020\u304c\u9069\u5207\u306b\u89e3\u660e\u3055\u308c\u308c\u3070\u3001\u3053\u306e\u30e2\u30c7\u30eb\u306f\u3001\u30a2\u30fc\u30d9\u30eb\u30b2\u30fc\u30b8\u30e2\u30c7\u30eb\u3084\u4e00\u822c\u7684\u306a\u975e\u53ef\u7a4d\u5206\u91cf\u5b50\u591a\u4f53\u7cfb\u3067\u89b3\u6e2c\u3055\u308c\u308b\u306e\u3068\u540c\u3058\u3001ETH\u306b\u57fa\u3065\u304f\u5b9a\u6027\u7684\u306a\u71b1\u5316\u30b7\u30ca\u30ea\u30aa\u3092\u793a\u3059\u3002",
-   "title_translated": "\u7d14\u7c8b\u30b2\u30fc\u30b8\u96e2\u6563\u975e\u30a2\u30fc\u30d9\u30eb\u683c\u5b50\u30b2\u30fc\u30b8\u7406\u8ad6\u306b\u304a\u3051\u308b\u71b1\u5316\u3068\u91cf\u5b50\u30ab\u30aa\u30b9",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "sim": {
-     "status": "pending"
-    },
-    "other": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.26816": {
-   "paper": {
-    "id": "2611.26816",
-    "title": "Frequency-bin-encoded quantum secret sharing with fast basis switching",
-    "link": "https://arxiv.org/abs/2611.26816",
-    "authors": "Chen-You Su, Suparna Seshadri, Hsuan-Hao Lu, Jason D. McKinney, Andrew M. Weiner, Joseph M. Lukens",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "physics.optics"
-    ],
-    "primary": "quant-ph",
-    "abstract": "Frequency-bin encoding offers unique opportunities for fiber-native quantum information processing, yet its full potential has been hampered by challenges in rapid state control and protocol scaling. Leveraging high-speed microwave processing, we overcome several extant hurdles and unlock new fundamental capabilities in frequency-based quantum communications. First, we demonstrate three-party quantum secret sharing, representing, to our knowledge, the first multiparty ($N\\geq 3$ users) quantum communication protocol implemented entirely with frequency encoding. Second, we demonstrate active, pseudorandom switching of frequency-bin quantum states and measurement bases at 20 MHz symbol rates, enabling real-time protocol operation without relying on hardware-intensive passive basis-selection schemes. Even under fast switching, we preserve high-contrast three-party correlations ($\\geq 0.91$) and low quantum bit error rates ($\\leq 4.5\\%$). Our work extends frequency-bin quantum communication beyond static, two-party protocols, opening a pathway toward scalable, reconfigurable, and real-time spectrally encoded quantum networking.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "network",
-    "crypto"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "network",
-     "crypto"
-    ],
-    "final_genre_ids": [
-     "network",
-     "crypto"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u5468\u6ce2\u6570\u30d3\u30f3\u7b26\u53f7\u5316\u306f\u3001\u5149\u30d5\u30a1\u30a4\u30d0\u30fc\u30cd\u30a4\u30c6\u30a3\u30d6\u306a\u91cf\u5b50\u60c5\u5831\u51e6\u7406\u306b\u72ec\u81ea\u306e\u53ef\u80fd\u6027\u3092\u3082\u305f\u3089\u3059\u3082\u306e\u306e\u3001\u305d\u306e\u6f5c\u5728\u80fd\u529b\u3092\u5341\u5206\u306b\u767a\u63ee\u3059\u308b\u306b\u306f\u3001\u9ad8\u901f\u306a\u72b6\u614b\u5236\u5fa1\u3084\u30d7\u30ed\u30c8\u30b3\u30eb\u306e\u30b9\u30b1\u30fc\u30e9\u30d3\u30ea\u30c6\u30a3\u306b\u95a2\u3059\u308b\u8ab2\u984c\u304c\u969c\u58c1\u3068\u306a\u3063\u3066\u3044\u307e\u3057\u305f\u3002\u6211\u3005\u306f\u3001\u9ad8\u901f\u30de\u30a4\u30af\u30ed\u6ce2\u51e6\u7406\u3092\u6d3b\u7528\u3059\u308b\u3053\u3068\u3067\u3001\u65e2\u5b58\u306e\u3044\u304f\u3064\u304b\u306e\u8ab2\u984c\u3092\u514b\u670d\u3057\u3001\u5468\u6ce2\u6570\u30d9\u30fc\u30b9\u306e\u91cf\u5b50\u901a\u4fe1\u306b\u304a\u3044\u3066\u65b0\u305f\u306a\u57fa\u790e\u7684\u306a\u6a5f\u80fd\u3092\u5b9f\u73fe\u3057\u307e\u3057\u305f\u3002 \u307e\u305a\u30013\u8005\u9593\u306e\u91cf\u5b50\u79d8\u5bc6\u5206\u6563\u3092\u5b9f\u8a3c\u3057\u305f\u3002\u6211\u3005\u306e\u77e5\u308b\u9650\u308a\u3001\u3053\u308c\u306f\u5468\u6ce2\u6570\u7b26\u53f7\u5316\u306e\u307f\u3092\u7528\u3044\u3066\u5b8c\u5168\u306b\u5b9f\u88c5\u3055\u308c\u305f\u521d\u306e\u591a\u8005\u9593\uff08$N\\geq 3$ \u30e6\u30fc\u30b6\u30fc\uff09\u91cf\u5b50\u901a\u4fe1\u30d7\u30ed\u30c8\u30b3\u30eb\u3067\u3042\u308b\u3002 \u6b21\u306b\u300120 MHz\u306e\u30b7\u30f3\u30dc\u30eb\u30ec\u30fc\u30c8\u3067\u5468\u6ce2\u6570\u30d3\u30f3\u91cf\u5b50\u72b6\u614b\u304a\u3088\u3073\u6e2c\u5b9a\u57fa\u5e95\u306e\u80fd\u52d5\u7684\u304b\u3064\u64ec\u4f3c\u30e9\u30f3\u30c0\u30e0\u306a\u5207\u308a\u66ff\u3048\u3092\u5b9f\u8a3c\u3057\u3001\u30cf\u30fc\u30c9\u30a6\u30a7\u30a2\u8ca0\u8377\u306e\u9ad8\u3044\u53d7\u52d5\u7684\u306a\u57fa\u5e95\u9078\u629e\u65b9\u5f0f\u306b\u4f9d\u5b58\u3059\u308b\u3053\u3068\u306a\u304f\u3001\u30d7\u30ed\u30c8\u30b3\u30eb\u306e\u30ea\u30a2\u30eb\u30bf\u30a4\u30e0\u52d5\u4f5c\u3092\u53ef\u80fd\u306b\u3057\u305f\u3002 \u9ad8\u901f\u306a\u5207\u308a\u66ff\u3048\u4e0b\u3067\u3042\u3063\u3066\u3082\u3001\u9ad8\u30b3\u30f3\u30c8\u30e9\u30b9\u30c8\u306e3\u8005\u9593\u76f8\u95a2\uff08$\\geq 0.91$\uff09\u3068\u4f4e\u3044\u91cf\u5b50\u30d3\u30c3\u30c8\u8aa4\u308a\u7387\uff08$\\leq 4.5\\%$\uff09\u3092\u7dad\u6301\u3057\u3066\u3044\u308b\u3002 \u672c\u7814\u7a76\u306f\u3001\u5468\u6ce2\u6570\u30d3\u30f3\u91cf\u5b50\u901a\u4fe1\u3092\u9759\u7684\u306a\u4e8c\u8005\u9593\u30d7\u30ed\u30c8\u30b3\u30eb\u304b\u3089\u62e1\u5f35\u3057\u3001\u30b9\u30b1\u30fc\u30e9\u30d6\u30eb\u3067\u518d\u69cb\u6210\u53ef\u80fd\u3001\u304b\u3064\u30ea\u30a2\u30eb\u30bf\u30a4\u30e0\u306a\u30b9\u30da\u30af\u30c8\u30eb\u7b26\u53f7\u5316\u91cf\u5b50\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u3078\u306e\u9053\u3092\u958b\u304f\u3082\u306e\u3067\u3042\u308b\u3002",
-   "title_translated": "\u9ad8\u901f\u57fa\u5e95\u5207\u308a\u66ff\u3048\u3092\u4f34\u3046\u5468\u6ce2\u6570\u30d3\u30f3\u7b26\u53f7\u5316\u91cf\u5b50\u79d8\u5bc6\u5206\u6563",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "network": {
-     "status": "pending"
-    },
-    "crypto": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.26884": {
-   "paper": {
-    "id": "2611.26884",
-    "title": "Scheduling the quantum implementation of the Trotter decomposition for Hamiltonian simulation",
-    "link": "https://arxiv.org/abs/2611.26884",
-    "authors": "Augustin Ho (Graduate School of Science and Technology, Keio University, \\'Ecole des Mines de Saint-\\'Etienne), Naoki Yamamoto (Graduate School of Science and Technology, Keio University, Quantum Computing Center, Keio University)",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph"
-    ],
-    "primary": "quant-ph",
-    "abstract": "For the quantum computational task for Hamiltonian simulation, the arrangement in which sub-Hamiltonians appear in the Trotter decomposition may have a large influence on the precision, under a given circuit complexity. In this paper, we design several scheduling strategies by combining two methods; that is, the existing simultaneous diagonalization scheme leveraged in order to guarantee the performance in a relatively short circuit depth, with a method inspired from a Trotter-Suzuki decomposition of the second or the fourth order for a better accuracy. By conducting numerical simulations on various Hamiltonian instances, we confirm a systematic advantage over previous methods. Thus, our proposal may eliminate the need of dealing with several Hamiltonian-dependent scheduling strategies.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "sim"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "sim"
-    ],
-    "final_genre_ids": [
-     "sim"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u30b7\u30df\u30e5\u30ec\u30fc\u30b7\u30e7\u30f3\u3068\u3044\u3046\u91cf\u5b50\u8a08\u7b97\u30bf\u30b9\u30af\u306b\u304a\u3044\u3066\u3001\u6240\u5b9a\u306e\u56de\u8def\u8907\u96d1\u5ea6\u306e\u4e0b\u3067\u306f\u3001\u30c8\u30ed\u30c3\u30bf\u30fc\u5206\u89e3\u306b\u304a\u3051\u308b\u30b5\u30d6\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u306e\u51fa\u73fe\u9806\u5e8f\u304c\u7cbe\u5ea6\u306b\u5927\u304d\u306a\u5f71\u97ff\u3092\u53ca\u307c\u3059\u53ef\u80fd\u6027\u304c\u3042\u308b\u3002 \u672c\u8ad6\u6587\u3067\u306f\u30012\u3064\u306e\u624b\u6cd5\u3092\u7d44\u307f\u5408\u308f\u305b\u308b\u3053\u3068\u3067\u3001\u3044\u304f\u3064\u304b\u306e\u30b9\u30b1\u30b8\u30e5\u30fc\u30ea\u30f3\u30b0\u6226\u7565\u3092\u8a2d\u8a08\u3059\u308b\u3002\u3059\u306a\u308f\u3061\u3001\u6bd4\u8f03\u7684\u6d45\u3044\u56de\u8def\u6df1\u5ea6\u3067\u306e\u6027\u80fd\u3092\u4fdd\u8a3c\u3059\u308b\u305f\u3081\u306b\u6d3b\u7528\u3055\u308c\u308b\u65e2\u5b58\u306e\u540c\u6642\u5bfe\u89d2\u5316\u30b9\u30ad\u30fc\u30e0\u3068\u3001\u7cbe\u5ea6\u5411\u4e0a\u306e\u305f\u3081\u306b2\u6b21\u307e\u305f\u306f4\u6b21\u306e\u30c8\u30ed\u30c3\u30bf\u30fc\u30fb\u9234\u6728\u5206\u89e3\u306b\u7740\u60f3\u3092\u5f97\u305f\u624b\u6cd5\u3092\u7d44\u307f\u5408\u308f\u305b\u305f\u3082\u306e\u3067\u3042\u308b\u3002 \u69d8\u3005\u306a\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u4f8b\u306b\u5bfe\u3059\u308b\u6570\u5024\u30b7\u30df\u30e5\u30ec\u30fc\u30b7\u30e7\u30f3\u3092\u5b9f\u65bd\u3057\u305f\u7d50\u679c\u3001\u5f93\u6765\u306e\u65b9\u6cd5\u306b\u6bd4\u3079\u3066\u4f53\u7cfb\u7684\u306a\u512a\u4f4d\u6027\u304c\u78ba\u8a8d\u3055\u308c\u305f\u3002\u3057\u305f\u304c\u3063\u3066\u3001\u672c\u63d0\u6848\u306b\u3088\u308a\u3001\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u306b\u4f9d\u5b58\u3059\u308b\u8907\u6570\u306e\u30b9\u30b1\u30b8\u30e5\u30fc\u30ea\u30f3\u30b0\u6226\u7565\u3092\u500b\u5225\u306b\u691c\u8a0e\u3059\u308b\u5fc5\u8981\u304c\u306a\u304f\u306a\u308b\u53ef\u80fd\u6027\u304c\u3042\u308b\u3002",
-   "title_translated": "\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u30b7\u30df\u30e5\u30ec\u30fc\u30b7\u30e7\u30f3\u306e\u305f\u3081\u306e\u30c8\u30ed\u30c3\u30bf\u30fc\u5206\u89e3\u306e\u91cf\u5b50\u5b9f\u88c5\u306e\u30b9\u30b1\u30b8\u30e5\u30fc\u30ea\u30f3\u30b0",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "sim": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.26889": {
-   "paper": {
-    "id": "2611.26889",
-    "title": "Analog Explorations of Quantum State Measurement",
-    "link": "https://arxiv.org/abs/2611.26889",
-    "authors": "Benjamin Krawciw, James P. Crutchfield",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "nlin.CD"
-    ],
-    "primary": "quant-ph",
-    "abstract": "The awkward disconnect in the postulates of quantum mechanics between the continuous, deterministic, linear, and unitary evolution governed by Schr\\\"odinger's equation and the discontinuous, stochastic, nonlinear, and nonunitary measurement process has vexed physicists for decades. Intuition from classical mechanics, statistical mechanics, and dynamical systems theory suggests that such a process might be modeled with a nonlinear system of differential equations. We explore such approaches by designing a deterministic model of an ideal projective measurement on a single qubit and constructing an analog computer that simulates it by manipulating voltages in an electrical circuit. The model reduces to Schr\\\"odinger evolution when no measurement is taking place. During a measurement, a hidden variable that the observer does not resolve selects the outcome, and the model is constructed so that a uniformly distributed hidden variable yields Born-rule frequencies. We do not derive the Born rule; rather, we show that a deterministic dynamical system with no intrinsic noise can implement it. Over 300 trials, the circuit reproduces the ideal model's individual outcomes to within one percent of the decision threshold, and its outcome frequencies match the Born rule to within about 0.02 in probability. These results are a small but provocative step towards modeling quantum measurement with macro-scale machines---a step of interest for both the foundations of physics and the alternatives to digital computing it suggests.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "foundations"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "foundations"
-    ],
-    "final_genre_ids": [
-     "foundations"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u91cf\u5b50\u529b\u5b66\u306e\u516c\u7406\u306b\u304a\u3044\u3066\u3001\u30b7\u30e5\u30ec\u30fc\u30c7\u30a3\u30f3\u30ac\u30fc\u65b9\u7a0b\u5f0f\u306b\u3088\u3063\u3066\u652f\u914d\u3055\u308c\u308b\u9023\u7d9a\u7684\u3001\u6c7a\u5b9a\u8ad6\u7684\u3001\u7dda\u5f62\u3001\u304b\u3064\u30e6\u30cb\u30bf\u30ea\u306a\u9032\u5316\u3068\u3001\u4e0d\u9023\u7d9a\u7684\u3001\u78ba\u7387\u7684\u3001\u975e\u7dda\u5f62\u3001\u304b\u3064\u975e\u30e6\u30cb\u30bf\u30ea\u306a\u6e2c\u5b9a\u904e\u7a0b\u3068\u306e\u9593\u306b\u751f\u3058\u308b\u4e0d\u81ea\u7136\u306a\u4e56\u96e2\u306f\u3001\u4f55\u5341\u5e74\u306b\u3082\u308f\u305f\u3063\u3066\u7269\u7406\u5b66\u8005\u305f\u3061\u3092\u60a9\u307e\u305b\u3066\u304d\u305f\u3002 \u53e4\u5178\u529b\u5b66\u3001\u7d71\u8a08\u529b\u5b66\u3001\u304a\u3088\u3073\u529b\u5b66\u7cfb\u7406\u8ad6\u304b\u3089\u306e\u76f4\u611f\u306b\u3088\u308c\u3070\u3001\u3053\u306e\u3088\u3046\u306a\u904e\u7a0b\u306f\u975e\u7dda\u5f62\u5fae\u5206\u65b9\u7a0b\u5f0f\u7cfb\u3092\u7528\u3044\u3066\u30e2\u30c7\u30eb\u5316\u3067\u304d\u308b\u53ef\u80fd\u6027\u304c\u3042\u308b\u3002\u6211\u3005\u306f\u3001\u5358\u4e00\u91cf\u5b50\u30d3\u30c3\u30c8\u306b\u5bfe\u3059\u308b\u7406\u60f3\u7684\u306a\u5c04\u5f71\u6e2c\u5b9a\u306e\u6c7a\u5b9a\u8ad6\u7684\u30e2\u30c7\u30eb\u3092\u8a2d\u8a08\u3057\u3001\u96fb\u6c17\u56de\u8def\u306e\u96fb\u5727\u3092\u64cd\u4f5c\u3059\u308b\u3053\u3068\u3067\u305d\u308c\u3092\u30b7\u30df\u30e5\u30ec\u30fc\u30c8\u3059\u308b\u30a2\u30ca\u30ed\u30b0\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u3092\u69cb\u7bc9\u3059\u308b\u3053\u3068\u306b\u3088\u308a\u3001\u3053\u3046\u3057\u305f\u30a2\u30d7\u30ed\u30fc\u30c1\u3092\u63a2\u6c42\u3059\u308b\u3002 \u3053\u306e\u30e2\u30c7\u30eb\u306f\u3001\u6e2c\u5b9a\u304c\u884c\u308f\u308c\u3066\u3044\u306a\u3044\u5834\u5408\u306b\u306f\u30b7\u30e5\u30ec\u30fc\u30c7\u30a3\u30f3\u30ac\u30fc\u306e\u9032\u5316\u306b\u9084\u5143\u3055\u308c\u308b\u3002\u6e2c\u5b9a\u4e2d\u3001\u89b3\u6e2c\u8005\u304c\u89e3\u660e\u3067\u304d\u306a\u3044\u96a0\u308c\u5909\u6570\u304c\u7d50\u679c\u3092\u9078\u629e\u3057\u3001\u3053\u306e\u30e2\u30c7\u30eb\u306f\u3001\u4e00\u69d8\u5206\u5e03\u3057\u305f\u96a0\u308c\u5909\u6570\u304c\u30dc\u30fc\u30f3\u306e\u6cd5\u5247\u306e\u983b\u5ea6\u3092\u751f\u3058\u3055\u305b\u308b\u3088\u3046\u306b\u69cb\u7bc9\u3055\u308c\u3066\u3044\u308b\u3002 \u6211\u3005\u306f\u30dc\u30fc\u30f3\u5247\u3092\u5c0e\u51fa\u3059\u308b\u306e\u3067\u306f\u306a\u304f\u3001\u56fa\u6709\u306e\u30ce\u30a4\u30ba\u3092\u6301\u305f\u306a\u3044\u6c7a\u5b9a\u8ad6\u7684\u52d5\u529b\u7cfb\u304c\u305d\u308c\u3092\u5b9f\u73fe\u3067\u304d\u308b\u3053\u3068\u3092\u793a\u3059\u3002300\u56de\u4ee5\u4e0a\u306e\u8a66\u884c\u306b\u304a\u3044\u3066\u3001\u3053\u306e\u56de\u8def\u306f\u7406\u60f3\u30e2\u30c7\u30eb\u306e\u500b\u3005\u306e\u7d50\u679c\u3092\u5224\u5b9a\u95be\u5024\u306e1\u30d1\u30fc\u30bb\u30f3\u30c8\u4ee5\u5185\u306e\u8aa4\u5dee\u3067\u518d\u73fe\u3057\u3001\u305d\u306e\u7d50\u679c\u306e\u983b\u5ea6\u306f\u78ba\u7387\u3067\u7d040.02\u4ee5\u5185\u306e\u8aa4\u5dee\u3067\u30dc\u30fc\u30f3\u5247\u3068\u4e00\u81f4\u3057\u305f\u3002 \u3053\u308c\u3089\u306e\u7d50\u679c\u306f\u3001\u30de\u30af\u30ed\u30b9\u30b1\u30fc\u30eb\u306e\u6a5f\u68b0\u3092\u7528\u3044\u305f\u91cf\u5b50\u6e2c\u5b9a\u306e\u30e2\u30c7\u30eb\u5316\u306b\u5411\u3051\u305f\u3001\u3055\u3055\u3084\u304b\u306a\u304c\u3089\u3082\u793a\u5506\u306b\u5bcc\u3080\u4e00\u6b69\u3067\u3042\u308b\u3002\u3053\u308c\u306f\u3001\u7269\u7406\u5b66\u306e\u57fa\u790e\u7406\u8ad6\u3068\u3001\u305d\u308c\u304c\u793a\u5506\u3059\u308b\u30c7\u30b8\u30bf\u30eb\u8a08\u7b97\u306e\u4ee3\u66ff\u624b\u6bb5\u306e\u53cc\u65b9\u306b\u3068\u3063\u3066\u8208\u5473\u6df1\u3044\u4e00\u6b69\u3067\u3042\u308b\u3002",
-   "title_translated": "\u91cf\u5b50\u72b6\u614b\u306e\u6e2c\u5b9a\u306b\u95a2\u3059\u308b\u30a2\u30ca\u30ed\u30b0\u7684\u63a2\u6c42",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "foundations": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27019": {
-   "paper": {
-    "id": "2611.27019",
-    "title": "Augmenting Quantum Neural Networks with Contractive Layers",
-    "link": "https://arxiv.org/abs/2611.27019",
-    "authors": "Bolin Huang, Pengfei Zhang",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "cond-mat.quant-gas"
-    ],
-    "primary": "quant-ph",
-    "abstract": "Classical neural networks combine diverse layers with complementary roles to achieve rich expressive capabilities across complex learning tasks. Rapid advances in quantum science and technology have motivated growing interest in their quantum counterparts, quantum neural networks, raising the question of how their expressivity can be enhanced through the design of new quantum layers. Of particular interest are layers that enrich the accessible function space while introducing only a small number of additional trainable parameters. In this Letter, we introduce the contractive layer as a promising building block for quantum neural networks. This layer comprises all-to-all couplings governed by a single trainable parameter, enabling efficient control of quantum information flow while maintaining experimental relevance to Rydberg atom arrays. Using observable learning as a benchmark, we show that contractive layers enhance expressivity more efficiently than simply increasing the depth of conventional brick-wall circuits. This advantage stems from a systematic increase in the accessible target-space dimension per trainable parameter. We further demonstrate similar improvements in image recognition tasks. These results highlight contractive layers as a practical route to expressive quantum neural networks on near-term quantum devices.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "qml",
-    "nisq"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "qml",
-     "nisq"
-    ],
-    "final_genre_ids": [
-     "qml",
-     "nisq"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u5f93\u6765\u306e\u30cb\u30e5\u30fc\u30e9\u30eb\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u306f\u3001\u4e92\u3044\u306b\u88dc\u5b8c\u7684\u306a\u5f79\u5272\u3092\u6301\u3064\u591a\u69d8\u306a\u5c64\u3092\u7d44\u307f\u5408\u308f\u305b\u308b\u3053\u3068\u3067\u3001\u8907\u96d1\u306a\u5b66\u7fd2\u8ab2\u984c\u306b\u304a\u3044\u3066\u8c4a\u304b\u306a\u8868\u73fe\u80fd\u529b\u3092\u5b9f\u73fe\u3057\u3066\u3044\u307e\u3059\u3002\u91cf\u5b50\u79d1\u5b66\u30fb\u6280\u8853\u306e\u6025\u901f\u306a\u9032\u6b69\u306b\u4f34\u3044\u3001\u305d\u306e\u91cf\u5b50\u7248\u3067\u3042\u308b\u91cf\u5b50\u30cb\u30e5\u30fc\u30e9\u30eb\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u3078\u306e\u95a2\u5fc3\u304c\u9ad8\u307e\u3063\u3066\u304a\u308a\u3001\u65b0\u3057\u3044\u91cf\u5b50\u5c64\u306e\u8a2d\u8a08\u3092\u901a\u3058\u3066\u305d\u306e\u8868\u73fe\u80fd\u529b\u3092\u3069\u306e\u3088\u3046\u306b\u5411\u4e0a\u3055\u305b\u308b\u3053\u3068\u304c\u3067\u304d\u308b\u304b\u3068\u3044\u3046\u8ab2\u984c\u304c\u6d6e\u4e0a\u3057\u3066\u3044\u307e\u3059\u3002 \u7279\u306b\u6ce8\u76ee\u3055\u308c\u3066\u3044\u308b\u306e\u306f\u3001\u8ffd\u52a0\u3067\u5b66\u7fd2\u53ef\u80fd\u306a\u30d1\u30e9\u30e1\u30fc\u30bf\u3092\u308f\u305a\u304b\u3057\u304b\u5c0e\u5165\u305b\u305a\u306b\u3001\u5229\u7528\u53ef\u80fd\u306a\u95a2\u6570\u7a7a\u9593\u3092\u8c4a\u304b\u306b\u3059\u308b\u5c64\u3067\u3042\u308b\u3002\u672c\u30ec\u30bf\u30fc\u3067\u306f\u3001\u91cf\u5b50\u30cb\u30e5\u30fc\u30e9\u30eb\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u306e\u6709\u671b\u306a\u69cb\u6210\u8981\u7d20\u3068\u3057\u3066\u3001\u300c\u53ce\u7e2e\u5c64\uff08contractive layer\uff09\u300d\u3092\u7d39\u4ecb\u3059\u308b\u3002 \u3053\u306e\u5c64\u306f\u3001\u5358\u4e00\u306e\u5b66\u7fd2\u53ef\u80fd\u30d1\u30e9\u30e1\u30fc\u30bf\u306b\u3088\u3063\u3066\u5236\u5fa1\u3055\u308c\u308b\u5168\u5bfe\u5168\u7d50\u5408\u3067\u69cb\u6210\u3055\u308c\u3066\u304a\u308a\u3001\u30ea\u30c9\u30d0\u30fc\u30b0\u539f\u5b50\u30a2\u30ec\u30a4\u306b\u5bfe\u3059\u308b\u5b9f\u9a13\u7684\u95a2\u9023\u6027\u3092\u7dad\u6301\u3057\u3064\u3064\u3001\u91cf\u5b50\u60c5\u5831\u30d5\u30ed\u30fc\u3092\u52b9\u7387\u7684\u306b\u5236\u5fa1\u3059\u308b\u3053\u3068\u3092\u53ef\u80fd\u306b\u3059\u308b\u3002\u89b3\u6e2c\u91cf\u5b66\u7fd2\u3092\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u3068\u3057\u3066\u7528\u3044\u308b\u3053\u3068\u3067\u3001\u53ce\u7e2e\u5c64\u304c\u3001\u5f93\u6765\u306e\u30d6\u30ea\u30c3\u30af\u30a6\u30a9\u30fc\u30eb\u56de\u8def\u306e\u6df1\u3055\u3092\u5358\u7d14\u306b\u5897\u3084\u3059\u3088\u308a\u3082\u52b9\u7387\u7684\u306b\u8868\u73fe\u529b\u3092\u9ad8\u3081\u308b\u3053\u3068\u3092\u793a\u3059\u3002 \u3053\u306e\u5229\u70b9\u306f\u3001\u5b66\u7fd2\u53ef\u80fd\u306a\u30d1\u30e9\u30e1\u30fc\u30bf1\u3064\u3042\u305f\u308a\u306b\u30a2\u30af\u30bb\u30b9\u53ef\u80fd\u306a\u76ee\u6a19\u7a7a\u9593\u306e\u6b21\u5143\u304c\u4f53\u7cfb\u7684\u306b\u5897\u52a0\u3059\u308b\u3053\u3068\u306b\u8d77\u56e0\u3059\u308b\u3002\u3055\u3089\u306b\u3001\u753b\u50cf\u8a8d\u8b58\u30bf\u30b9\u30af\u306b\u304a\u3044\u3066\u3082\u540c\u69d8\u306e\u6539\u5584\u304c\u8a8d\u3081\u3089\u308c\u308b\u3053\u3068\u3092\u5b9f\u8a3c\u3057\u305f\u3002\u3053\u308c\u3089\u306e\u7d50\u679c\u306f\u3001\u53ce\u7e2e\u5c64\u304c\u3001\u8fd1\u3044\u5c06\u6765\u306e\u91cf\u5b50\u30c7\u30d0\u30a4\u30b9\u4e0a\u3067\u8868\u73fe\u529b\u8c4a\u304b\u306a\u91cf\u5b50\u30cb\u30e5\u30fc\u30e9\u30eb\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u3092\u5b9f\u73fe\u3059\u308b\u305f\u3081\u306e\u5b9f\u7528\u7684\u306a\u9053\u7b4b\u3067\u3042\u308b\u3053\u3068\u3092\u6d6e\u304d\u5f6b\u308a\u306b\u3057\u3066\u3044\u308b\u3002",
-   "title_translated": "\u53ce\u7e2e\u5c64\u3092\u7528\u3044\u305f\u91cf\u5b50\u30cb\u30e5\u30fc\u30e9\u30eb\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u306e\u62e1\u5f35",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "qml": {
-     "status": "pending"
-    },
-    "nisq": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27034": {
-   "paper": {
-    "id": "2611.27034",
-    "title": "Generalized Wigner-Yanase Uncertainty Bounds for Multiple Quantum Channels",
-    "link": "https://arxiv.org/abs/2611.27034",
-    "authors": "Jianming Zhou, Xiaoli Hu, Naihuan Jing",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph"
-    ],
-    "primary": "quant-ph",
-    "abstract": "We derive uncertainty relations for quantum channels based on the generalized Wigner-Yanase skew information. For three channels, we obtain a product lower bound by optimizing over permutations of commutator and anticommutator pairings. For an arbitrary number of channels, we establish a lower bound on the sum of squared uncertainties and construct a hierarchy of bounds using the partial Cauchy-Schwarz inequality. These bounds are invariant under changes of Kraus representation for a fixed operator basis. The first two levels of the hierarchy coincide with the elementary arithmetic-geometric mean bound, while the intermediate levels generally depend on the ordering of the operator basis. Examples involving three and four qubit channels demonstrate the bounds and compare their performance with an earlier pairing inequality under fixed channel representations.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "qit"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "qit"
-    ],
-    "final_genre_ids": [
-     "qit"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u4e00\u822c\u5316\u3055\u308c\u305f\u30a6\u30a3\u30b0\u30ca\u30fc\u30fb\u30e4\u30ca\u30bb\u306e\u30b9\u30ad\u30e5\u30fc\u60c5\u5831\u306b\u57fa\u3065\u3044\u3066\u3001\u91cf\u5b50\u30c1\u30e3\u30cd\u30eb\u306e\u4e0d\u78ba\u5b9a\u6027\u95a2\u4fc2\u3092\u5c0e\u51fa\u3059\u308b\u30023\u3064\u306e\u30c1\u30e3\u30cd\u30eb\u306b\u3064\u3044\u3066\u3001\u30b3\u30df\u30e5\u30fc\u30c6\u30fc\u30bf\u30fc\u304a\u3088\u3073\u30a2\u30f3\u30c1\u30b3\u30df\u30e5\u30fc\u30c6\u30fc\u30bf\u30fc\u306e\u7d44\u307f\u5408\u308f\u305b\u306e\u9806\u5217\u3092\u6700\u9069\u5316\u3059\u308b\u3053\u3068\u306b\u3088\u308a\u3001\u7a4d\u306e\u4e0b\u9650\u3092\u5c0e\u51fa\u3059\u308b\u3002 \u4efb\u610f\u306e\u6570\u306e\u30c1\u30e3\u30cd\u30eb\u306b\u3064\u3044\u3066\u306f\u3001\u4e0d\u78ba\u5b9f\u6027\u306e\u4e8c\u4e57\u548c\u306e\u4e0b\u9650\u3092\u78ba\u7acb\u3057\u3001\u90e8\u5206\u30b3\u30fc\u30b7\u30fc\u30fb\u30b7\u30e5\u30ef\u30eb\u30c4\u306e\u4e0d\u7b49\u5f0f\u3092\u7528\u3044\u3066\u4e0b\u9650\u306e\u968e\u5c64\u3092\u69cb\u7bc9\u3059\u308b\u3002\u3053\u308c\u3089\u306e\u4e0b\u9650\u306f\u3001\u56fa\u5b9a\u3055\u308c\u305f\u6f14\u7b97\u5b50\u57fa\u5e95\u306b\u304a\u3044\u3066\u3001\u30af\u30e9\u30a6\u30b9\u8868\u73fe\u306e\u5909\u66f4\u306b\u5bfe\u3057\u3066\u4e0d\u5909\u3067\u3042\u308b\u3002 \u968e\u5c64\u69cb\u9020\u306e\u6700\u521d\u306e2\u3064\u306e\u30ec\u30d9\u30eb\u306f\u3001\u57fa\u672c\u7684\u306a\u7b97\u8853\u30fb\u5e7e\u4f55\u5e73\u5747\u306e\u4e0d\u7b49\u5f0f\u3068\u4e00\u81f4\u3059\u308b\u304c\u3001\u4e2d\u9593\u30ec\u30d9\u30eb\u306f\u4e00\u822c\u306b\u6f14\u7b97\u5b50\u57fa\u5e95\u306e\u9806\u5e8f\u306b\u4f9d\u5b58\u3059\u308b\u30023\u91cf\u5b50\u30d3\u30c3\u30c8\u304a\u3088\u30734\u91cf\u5b50\u30d3\u30c3\u30c8\u30c1\u30e3\u30cd\u30eb\u3092\u7528\u3044\u305f\u4f8b\u3092\u7528\u3044\u3066\u3001\u3053\u308c\u3089\u306e\u4e0b\u9650\u3092\u5b9f\u8a3c\u3057\u3001\u56fa\u5b9a\u3055\u308c\u305f\u30c1\u30e3\u30cd\u30eb\u8868\u73fe\u306e\u4e0b\u3067\u306e\u4ee5\u524d\u306e\u30da\u30a2\u30ea\u30f3\u30b0\u4e0d\u7b49\u5f0f\u3068\u306e\u6027\u80fd\u3092\u6bd4\u8f03\u3059\u308b\u3002",
-   "title_translated": "\u8907\u6570\u306e\u91cf\u5b50\u30c1\u30e3\u30cd\u30eb\u306b\u5bfe\u3059\u308b\u4e00\u822c\u5316\u3055\u308c\u305f\u30a6\u30a3\u30b0\u30ca\u30fc\u30fb\u30e4\u30ca\u30bb\u4e0d\u78ba\u5b9a\u6027\u9650\u754c",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "qit": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27140": {
-   "paper": {
-    "id": "2611.27140",
-    "title": "Physical Learning for Autonomous Tuning of Spin Qubits in Electrostatically Defined Quantum Dots",
-    "link": "https://arxiv.org/abs/2611.27140",
-    "authors": "Leonardo Gaytan, Bradley Lloyd, Paul Kliewer, Chandler Wilburn, Lincoln D. Carr, Adam McCaughan, Sonia Buckley, Meenakshi Singh",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "cond-mat.mes-hall"
-    ],
-    "primary": "quant-ph",
-    "abstract": "Tuning electrostatically defined quantum dots remains a primary bottleneck in the scalability of semiconductor spin qubits. While existing solutions rely on machine learning algorithms, these approaches require global information, introduce latency bottlenecks, and tax the limited cooling power available at cryogenic stages. Here, we demonstrate an FPGA-in-the-loop learning paradigm that bypasses digital computing overhead by utilizing multiplexed gradient descent (MGD) for tuning. Implemented on an FPGA and an emulated quantum dot device, our system autonomously tracks environmental drift, dynamically recovers from discrete charge jumps, and maintains steady-state stabilization in low signal-to-noise ratio regimes, without prior knowledge of the device's cross-capacitance matrix. The system also navigates the charge-stability landscape to stabilize the quantum dot around optimal operating points. These results demonstrate a ``compute-in-place'' platform, with a logic and power footprint suited to future cryo-CMOS integration, that provides autonomous stabilization of quantum dots at desired operating points, creating an auto-tuning system for spin qubits that is resilient to electrostatic drifts, changing noise profiles, and two-level fluctuations.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "hardware"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "hardware"
-    ],
-    "final_genre_ids": [
-     "hardware"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u9759\u96fb\u7684\u306b\u5b9a\u7fa9\u3055\u308c\u305f\u91cf\u5b50\u30c9\u30c3\u30c8\u306e\u30c1\u30e5\u30fc\u30cb\u30f3\u30b0\u306f\u3001\u534a\u5c0e\u4f53\u30b9\u30d4\u30f3\u91cf\u5b50\u30d3\u30c3\u30c8\u306e\u30b9\u30b1\u30fc\u30e9\u30d3\u30ea\u30c6\u30a3\u306b\u304a\u3051\u308b\u4e3b\u8981\u306a\u30dc\u30c8\u30eb\u30cd\u30c3\u30af\u3067\u3042\u308a\u7d9a\u3051\u3066\u3044\u308b\u3002\u65e2\u5b58\u306e\u89e3\u6c7a\u7b56\u306f\u6a5f\u68b0\u5b66\u7fd2\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u306b\u4f9d\u5b58\u3057\u3066\u3044\u308b\u304c\u3001\u3053\u308c\u3089\u306e\u30a2\u30d7\u30ed\u30fc\u30c1\u306f\u30b0\u30ed\u30fc\u30d0\u30eb\u306a\u60c5\u5831\u3092\u5fc5\u8981\u3068\u3057\u3001\u30ec\u30a4\u30c6\u30f3\u30b7\u306e\u30dc\u30c8\u30eb\u30cd\u30c3\u30af\u3092\u5f15\u304d\u8d77\u3053\u3057\u3001\u6975\u4f4e\u6e29\u30b9\u30c6\u30fc\u30b8\u3067\u5229\u7528\u53ef\u80fd\u306a\u9650\u3089\u308c\u305f\u51b7\u5374\u80fd\u529b\u306b\u8ca0\u62c5\u3092\u304b\u3051\u308b\u3002 \u305d\u3053\u3067\u672c\u7814\u7a76\u3067\u306f\u3001\u8abf\u6574\u306b\u591a\u91cd\u5316\u52fe\u914d\u964d\u4e0b\u6cd5\uff08MGD\uff09\u3092\u6d3b\u7528\u3059\u308b\u3053\u3068\u3067\u3001\u30c7\u30b8\u30bf\u30eb\u6f14\u7b97\u306e\u30aa\u30fc\u30d0\u30fc\u30d8\u30c3\u30c9\u3092\u56de\u907f\u3059\u308b\u300cFPGA-in-the-loop\u300d\u5b66\u7fd2\u30d1\u30e9\u30c0\u30a4\u30e0\u3092\u5b9f\u8a3c\u3059\u308b\u3002 FPGA\u304a\u3088\u3073\u30a8\u30df\u30e5\u30ec\u30fc\u30c8\u3055\u308c\u305f\u91cf\u5b50\u30c9\u30c3\u30c8\u30c7\u30d0\u30a4\u30b9\u4e0a\u306b\u5b9f\u88c5\u3055\u308c\u305f\u5f53\u30b7\u30b9\u30c6\u30e0\u306f\u3001\u30c7\u30d0\u30a4\u30b9\u306e\u4ea4\u5dee\u5bb9\u91cf\u884c\u5217\u306b\u95a2\u3059\u308b\u4e8b\u524d\u306e\u77e5\u8b58\u304c\u306a\u304f\u3066\u3082\u3001\u74b0\u5883\u30c9\u30ea\u30d5\u30c8\u3092\u81ea\u5f8b\u7684\u306b\u8ffd\u8de1\u3057\u3001\u96e2\u6563\u7684\u306a\u96fb\u8377\u30b8\u30e3\u30f3\u30d7\u304b\u3089\u52d5\u7684\u306b\u56de\u5fa9\u3057\u3001\u4f4eS/N\u6bd4\u9818\u57df\u306b\u304a\u3044\u3066\u5b9a\u5e38\u72b6\u614b\u306e\u5b89\u5b9a\u5316\u3092\u7dad\u6301\u3059\u308b\u3002 \u307e\u305f\u3001\u672c\u30b7\u30b9\u30c6\u30e0\u306f\u96fb\u8377\u5b89\u5b9a\u6027\u30e9\u30f3\u30c9\u30b9\u30b1\u30fc\u30d7\u3092\u30ca\u30d3\u30b2\u30fc\u30c8\u3057\u3001\u91cf\u5b50\u30c9\u30c3\u30c8\u3092\u6700\u9069\u306a\u52d5\u4f5c\u70b9\u4ed8\u8fd1\u3067\u5b89\u5b9a\u5316\u3055\u305b\u308b\u3002 \u3053\u308c\u3089\u306e\u7d50\u679c\u306f\u3001\u5c06\u6765\u306e\u6975\u4f4e\u6e29CMOS\u96c6\u7a4d\u306b\u9069\u3057\u305f\u30ed\u30b8\u30c3\u30af\u304a\u3088\u3073\u6d88\u8cbb\u96fb\u529b\u306e\u30d5\u30c3\u30c8\u30d7\u30ea\u30f3\u30c8\u3092\u5099\u3048\u305f\u300c\u30b3\u30f3\u30d4\u30e5\u30fc\u30c8\u30fb\u30a4\u30f3\u30fb\u30d7\u30ec\u30a4\u30b9\u300d\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u3092\u5b9f\u8a3c\u3059\u308b\u3082\u306e\u3067\u3042\u308a\u3001\u91cf\u5b50\u30c9\u30c3\u30c8\u3092\u6240\u671b\u306e\u52d5\u4f5c\u70b9\u3067\u81ea\u5f8b\u7684\u306b\u5b89\u5b9a\u5316\u3055\u305b\u3001\u9759\u96fb\u30c9\u30ea\u30d5\u30c8\u3001\u5909\u52d5\u3059\u308b\u30ce\u30a4\u30ba\u30d7\u30ed\u30d5\u30a1\u30a4\u30eb\u3001 \u304a\u3088\u30732\u6e96\u4f4d\u30d5\u30e9\u30af\u30c1\u30e5\u30a8\u30fc\u30b7\u30e7\u30f3\u306b\u5bfe\u3057\u3066\u8010\u6027\u3092\u6301\u3064\u30b9\u30d4\u30f3\u91cf\u5b50\u30d3\u30c3\u30c8\u306e\u81ea\u52d5\u8abf\u6574\u30b7\u30b9\u30c6\u30e0\u3092\u69cb\u7bc9\u3057\u3066\u3044\u308b\u3002",
-   "title_translated": "\u9759\u96fb\u7684\u306b\u5b9a\u7fa9\u3055\u308c\u305f\u91cf\u5b50\u30c9\u30c3\u30c8\u306b\u304a\u3051\u308b\u30b9\u30d4\u30f3\u91cf\u5b50\u30d3\u30c3\u30c8\u306e\u81ea\u5f8b\u7684\u30c1\u30e5\u30fc\u30cb\u30f3\u30b0\u306e\u305f\u3081\u306e\u7269\u7406\u7684\u5b66\u7fd2",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "hardware": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27408": {
-   "paper": {
-    "id": "2611.27408",
-    "title": "Structure-preserving compression of Matrix Product States",
-    "link": "https://arxiv.org/abs/2611.27408",
-    "authors": "Pouriya Ghadimi, Maximilian Fr\\\"ohlich, Aaron Sander, Martin Eigel, Richard M. Milbradt",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "cs.NA",
-     "math.NA"
-    ],
-    "primary": "quant-ph",
-    "abstract": "Matrix product state time evolution relies on compression to control the growth of bond dimensions, but compression can break the conservation laws of the equation being solved. A truncation is not the flow of a Hermitian generator, so even a small truncation error can violate exact algebraic identities of the Schr\\\"odinger equation. For any matrix product state integrator that leaves the state in canonical form with an orthogonality center, a scalar correction restores an admissible global invariant after compression whenever the resulting scalar quadratic constraint equation admits a real root, without enlarging any bond dimension. Rank-preserving recovery searches other canonical centers when that correction fails. The geometry of the low-rank manifold provides sufficient conditions for conservation by the fixed-rank projected flow and bounds what corrections within a frozen center frame can achieve. Numerical experiments demonstrate that recovery can be required even along accurate truncated trajectories.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "sim"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "sim"
-    ],
-    "final_genre_ids": [
-     "sim"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u884c\u5217\u7a4d\u72b6\u614b\u306e\u6642\u9593\u767a\u5c55\u306f\u3001\u7d50\u5408\u6b21\u5143\u306e\u5897\u5927\u3092\u6291\u5236\u3059\u308b\u305f\u3081\u306b\u5727\u7e2e\u306b\u4f9d\u5b58\u3057\u3066\u3044\u308b\u304c\u3001\u5727\u7e2e\u3092\u884c\u3046\u3068\u3001\u89e3\u304b\u308c\u308b\u65b9\u7a0b\u5f0f\u306e\u4fdd\u5b58\u5247\u304c\u7834\u3089\u308c\u308b\u53ef\u80fd\u6027\u304c\u3042\u308b\u3002\u5207\u308a\u6368\u3066\u306f\u30cf\u30fc\u30df\u30c6\u30a3\u30a2\u30f3\u751f\u6210\u5b50\u306e\u6d41\u308c\u3067\u306f\u306a\u3044\u305f\u3081\u3001\u308f\u305a\u304b\u306a\u5207\u308a\u6368\u3066\u8aa4\u5dee\u3067\u3042\u3063\u3066\u3082\u3001\u30b7\u30e5\u30ec\u30fc\u30c7\u30a3\u30f3\u30ac\u30fc\u65b9\u7a0b\u5f0f\u306e\u53b3\u5bc6\u306a\u4ee3\u6570\u7684\u6052\u7b49\u5f0f\u306b\u9055\u53cd\u3059\u308b\u53ef\u80fd\u6027\u304c\u3042\u308b\u3002 \u76f4\u4ea4\u4e2d\u5fc3\u3092\u6301\u3064\u6b63\u6e96\u5f62\u5f0f\u306e\u72b6\u614b\u3092\u6b8b\u3059\u4efb\u610f\u306e\u884c\u5217\u7a4d\u72b6\u614b\u7a4d\u5206\u6cd5\u306b\u304a\u3044\u3066\u3001\u7d50\u679c\u3068\u3057\u3066\u5f97\u3089\u308c\u308b\u30b9\u30ab\u30e9\u30fc\u4e8c\u6b21\u5236\u7d04\u65b9\u7a0b\u5f0f\u304c\u5b9f\u6839\u3092\u6301\u3064\u5834\u5408\u3001\u30b9\u30ab\u30e9\u30fc\u88dc\u6b63\u3092\u884c\u3046\u3053\u3068\u3067\u3001\u7d50\u5408\u6b21\u5143\u3092\u62e1\u5927\u3059\u308b\u3053\u3068\u306a\u304f\u3001\u5727\u7e2e\u5f8c\u306e\u8a31\u5bb9\u3055\u308c\u308b\u30b0\u30ed\u30fc\u30d0\u30eb\u4e0d\u5909\u91cf\u3092\u5fa9\u5143\u3067\u304d\u308b\u3002\u30e9\u30f3\u30af\u4fdd\u5b58\u578b\u56de\u5fa9\u6cd5\u306f\u3001\u305d\u306e\u88dc\u6b63\u304c\u5931\u6557\u3057\u305f\u5834\u5408\u306b\u3001\u4ed6\u306e\u6b63\u6e96\u4e2d\u5fc3\u3092\u63a2\u7d22\u3059\u308b\u3002 \u4f4e\u30e9\u30f3\u30af\u591a\u69d8\u4f53\u306e\u5e7e\u4f55\u5b66\u7684\u6027\u8cea\u306f\u3001\u56fa\u5b9a\u30e9\u30f3\u30af\u306e\u5c04\u5f71\u6d41\u308c\u306b\u3088\u308b\u4fdd\u5b58\u6027\u306e\u5341\u5206\u6761\u4ef6\u3092\u63d0\u4f9b\u3057\u3001\u56fa\u5b9a\u3055\u308c\u305f\u4e2d\u5fc3\u30d5\u30ec\u30fc\u30e0\u5185\u3067\u306e\u88dc\u6b63\u306b\u3088\u3063\u3066\u9054\u6210\u53ef\u80fd\u306a\u4e0a\u9650\u3092\u5b9a\u3081\u307e\u3059\u3002\u6570\u5024\u5b9f\u9a13\u306b\u3088\u308a\u3001\u6b63\u78ba\u306a\u5207\u308a\u6368\u3066\u3089\u308c\u305f\u8ecc\u9053\u306b\u6cbf\u3063\u3066\u3055\u3048\u3082\u3001\u5fa9\u5143\u304c\u5fc5\u8981\u3068\u306a\u308b\u5834\u5408\u304c\u3042\u308b\u3053\u3068\u304c\u793a\u3055\u308c\u3066\u3044\u307e\u3059\u3002",
-   "title_translated": "\u884c\u5217\u7a4d\u72b6\u614b\u306e\u69cb\u9020\u3092\u4fdd\u6301\u3059\u308b\u5727\u7e2e",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "sim": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27458": {
-   "paper": {
-    "id": "2611.27458",
-    "title": "The inverted harmonic oscillator in Segal-Bargmann space: Time-asymmetric propagator reconstruction and bi-coherent states",
-    "link": "https://arxiv.org/abs/2611.27458",
-    "authors": "Hongze Ding, Ni Liu, J. -Q. Liang",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "math-ph",
-     "math.MP"
-    ],
-    "primary": "quant-ph",
-    "abstract": "We investigate the real-time dynamics and resonance quantization of the inverted harmonic oscillator (IHO). Its self-adjoint Hamiltonian on $L^2(\\mathbb{R})$ has a real continuous spectrum, while generalized resonance states outside $L^2(\\mathbb{R})$ have purely imaginary energies $\\pm i\\hbar\\omega(n+1/2)$. In coordinate space, these states are expressed in terms of complex Hermite polynomials and are biorthonormal under the Fresnel Gaussian pairing. Adapting Moriconi's coordinate-time transformation to the real-time path integral, we derive the exact Feynman propagator. Using Mehler's formula, we show that each discrete expansion alone reconstructs the full unitary kernel on its time half-axis, with the decaying Gamow-Siegert branch converging for $T>0$ and the growing antiresonant branch converging for $T<0$. In the complex-scaled Segal-Bargmann representation, the two Hamiltonians take the form $\\pm i\\hbar\\omega(z(d/dz)+1/2)$, and their monomial eigenfunctions map back to the dual complex Hermite states. The two convergence domains correspond to one-sided contraction semigroups of dilations. Finally, we construct bi-coherent states whose biorthogonal position and momentum second cumulants are purely imaginary and complex conjugate, with product $\\hbar^2/4$. The corresponding Heisenberg expectation values follow the exact classical hyperbolic trajectories for arbitrary real initial positions and momenta.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "foundations"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "foundations"
-    ],
-    "final_genre_ids": [
-     "foundations"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u672c\u7a3f\u3067\u306f\u3001\u53cd\u8ee2\u8abf\u548c\u632f\u52d5\u5b50\uff08IHO\uff09\u306e\u30ea\u30a2\u30eb\u30bf\u30a4\u30e0\u30c0\u30a4\u30ca\u30df\u30af\u30b9\u304a\u3088\u3073\u5171\u9cf4\u91cf\u5b50\u5316\u306b\u3064\u3044\u3066\u691c\u8a0e\u3059\u308b\u3002 $L^2(\\mathbb{R})$ \u4e0a\u306e\u305d\u306e\u81ea\u5df1\u5171\u5f79\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u306f\u5b9f\u9023\u7d9a\u30b9\u30da\u30af\u30c8\u30eb\u3092\u6301\u3064\u4e00\u65b9\u3001$L^2(\\mathbb{R})$ \u306e\u5916\u5074\u306b\u3042\u308b\u4e00\u822c\u5316\u3055\u308c\u305f\u5171\u9cf4\u72b6\u614b\u306f\u3001\u7d14\u865a\u6570\u30a8\u30cd\u30eb\u30ae\u30fc $\\pm i\\hbar\\omega(n+1/2)$ \u3092\u6301\u3064\u3002 \u5ea7\u6a19\u7a7a\u9593\u306b\u304a\u3044\u3066\u3001\u3053\u308c\u3089\u306e\u72b6\u614b\u306f\u8907\u7d20\u30a8\u30eb\u30df\u30fc\u30c8\u591a\u9805\u5f0f\u3092\u7528\u3044\u3066\u8868\u3055\u308c\u3001\u30d5\u30ec\u30cd\u30eb\u30fb\u30ac\u30a6\u30b9\u5bfe\u5408\u306e\u4e0b\u3067\u53cc\u76f4\u4ea4\u6b63\u898f\u5316\u3055\u308c\u3066\u3044\u308b\u3002\u30e2\u30ea\u30b3\u30fc\u30cb\u306e\u5ea7\u6a19-\u6642\u9593\u5909\u63db\u3092\u5b9f\u6642\u9593\u7d4c\u8def\u7a4d\u5206\u306b\u9069\u7528\u3059\u308b\u3053\u3068\u3067\u3001\u6b63\u78ba\u306a\u30d5\u30a1\u30a4\u30f3\u30de\u30f3\u4f1d\u64ad\u95a2\u6570\u3092\u5c0e\u51fa\u3059\u308b\u3002 \u30e1\u30fc\u30e9\u30fc\u306e\u516c\u5f0f\u3092\u7528\u3044\u3066\u3001\u5404\u96e2\u6563\u5c55\u958b\u304c\u5358\u72ec\u3067\u3001\u305d\u306e\u6642\u9593\u534a\u8ef8\u4e0a\u306e\u5b8c\u5168\u306a\u30e6\u30cb\u30bf\u30ea\u30fc\u30ab\u30fc\u30cd\u30eb\u3092\u518d\u69cb\u6210\u3059\u308b\u3053\u3068\u3092\u793a\u3059\u3002\u3059\u306a\u308f\u3061\u3001$T>0$ \u3067\u306f\u6e1b\u8870\u3059\u308b\u30ac\u30e2\u30d5\u30fb\u30b8\u30fc\u30ac\u30fc\u30c8\u5206\u679d\u304c\u53ce\u675f\u3057\u3001$T<0$ \u3067\u306f\u5897\u5927\u3059\u308b\u53cd\u5171\u9cf4\u5206\u679d\u304c\u53ce\u675f\u3059\u308b\u3002 \u8907\u7d20\u30b9\u30b1\u30fc\u30ea\u30f3\u30b0\u3055\u308c\u305f\u30bb\u30ac\u30eb\u30fb\u30d0\u30fc\u30b0\u30de\u30f3\u8868\u73fe\u306b\u304a\u3044\u3066\u30012\u3064\u306e\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u306f $\\pm i\\hbar\\omega(z(d/dz)+1/2)$ \u306e\u5f62\u3092\u3068\u3063\u3066\u304a\u308a\u3001\u305d\u308c\u3089\u306e\u5358\u9805\u5f0f\u56fa\u6709\u95a2\u6570\u306f\u53cc\u5bfe\u306a\u8907\u7d20\u30a8\u30eb\u30df\u30fc\u30c8\u72b6\u614b\u306b\u5199\u50cf\u3055\u308c\u308b\u3002 \u3053\u308c\u30892\u3064\u306e\u53ce\u675f\u9818\u57df\u306f\u3001\u62e1\u5927\u306e\u7247\u5074\u53ce\u7e2e\u534a\u7fa4\u306b\u5bfe\u5fdc\u3059\u308b\u3002 \u6700\u5f8c\u306b\u3001\u4f4d\u7f6e\u3068\u904b\u52d5\u91cf\u306e\u7b2c\u4e8c\u7d2f\u7a4d\u91cf\u304c\u305d\u308c\u305e\u308c\u7d14\u865a\u6570\u3067\u3042\u308a\u3001\u4e92\u3044\u306b\u8907\u7d20\u5171\u5f79\u3067\u3042\u308a\u3001\u305d\u306e\u7a4d\u304c $\\hbar^2/4$ \u3068\u306a\u308b\u53cc\u5171\u5f79\u72b6\u614b\u3092\u69cb\u7bc9\u3059\u308b\u3002\u5bfe\u5fdc\u3059\u308b\u30cf\u30a4\u30bc\u30f3\u30d9\u30eb\u30b0\u671f\u5f85\u5024\u306f\u3001\u4efb\u610f\u306e\u5b9f\u6570\u306e\u521d\u671f\u4f4d\u7f6e\u304a\u3088\u3073\u521d\u671f\u904b\u52d5\u91cf\u306b\u5bfe\u3057\u3066\u3001\u53b3\u5bc6\u306a\u53e4\u5178\u7684\u306a\u53cc\u66f2\u7dda\u8ecc\u9053\u306b\u5f93\u3046\u3002",
-   "title_translated": "\u30bb\u30ac\u30eb\u30fb\u30d0\u30fc\u30b0\u30de\u30f3\u7a7a\u9593\u306b\u304a\u3051\u308b\u53cd\u8ee2\u8abf\u548c\u632f\u52d5\u5b50\uff1a\u6642\u9593\u975e\u5bfe\u79f0\u306a\u4f1d\u64ad\u95a2\u6570\u306e\u518d\u69cb\u6210\u3068\u53cc\u30b3\u30d2\u30fc\u30ec\u30f3\u30c8\u72b6\u614b",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "foundations": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27507": {
-   "paper": {
-    "id": "2611.27507",
-    "title": "Classical simulability and hardware diagnostics for QAOA on geographic coverage benchmarks",
-    "link": "https://arxiv.org/abs/2611.27507",
-    "authors": "F. S. Luiz, D Abreu, A. J. G. Abel\\'em, J. E. Da Fonseca, A. F. P. Santos, M. C. de Oliveira",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph"
-    ],
-    "primary": "quant-ph",
-    "abstract": "Quantum-optimization benchmarks can show reduced energy while concealing local loss of weighted covariance. We combine encoding checks with exact structural references to select informative circuit diagnostics for static geographic coverage instances. The executed 24-qubit surrogate has infeasible ground states, whereas a faithful 51-qubit slack encoding preserves its 13 support-graph components and remains exactly simulable blockwise. At the executed angles, the total ideal optimum probability is $5.47\\times10^{-20}$, making optimum counts uninformative at the executed budget of $10^5$ shots. A product distribution with the measured bit marginals accounts for about $90\\%$ of the observed energy reduction. In three fixed-circuit jobs, the global weighted-covariance ratio is approximately $0.50$, while a five-variable block has ratios between $0.12$ and $0.28$ and contributes only $3.7\\%$ of the ideal global denominator. Simultaneous bands resolve its deficit relative to the global ratio under an exploratory conditional counting model. The exact block reference thus reveals a local discrepancy concealed by the aggregate, without identifying an error mechanism or establishing device stability. The procedure links benchmark structure to the resolution and limitations of its observables.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "nisq"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "nisq"
-    ],
-    "final_genre_ids": [
-     "nisq"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u91cf\u5b50\u6700\u9069\u5316\u306e\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u3067\u306f\u3001\u91cd\u307f\u4ed8\u304d\u5171\u5206\u6563\u306e\u5c40\u6240\u7684\u306a\u640d\u5931\u3092\u96a0\u853d\u3057\u3064\u3064\u3001\u30a8\u30cd\u30eb\u30ae\u30fc\u4f4e\u6e1b\u3092\u793a\u3059\u3053\u3068\u304c\u3067\u304d\u308b\u3002 \u6211\u3005\u306f\u3001\u7b26\u53f7\u5316\u30c1\u30a7\u30c3\u30af\u3068\u53b3\u5bc6\u306a\u69cb\u9020\u53c2\u7167\u3092\u7d44\u307f\u5408\u308f\u305b\u308b\u3053\u3068\u3067\u3001\u9759\u7684\u306a\u5730\u7406\u7684\u30ab\u30d0\u30ec\u30c3\u30b8\u306e\u30a4\u30f3\u30b9\u30bf\u30f3\u30b9\u306b\u5bfe\u3057\u3066\u6709\u76ca\u306a\u56de\u8def\u8a3a\u65ad\u3092\u9078\u629e\u3059\u308b\u3002\u5b9f\u884c\u3055\u308c\u305f24\u91cf\u5b50\u30d3\u30c3\u30c8\u306e\u4ee3\u7406\u56de\u8def\u306f\u5b9f\u73fe\u4e0d\u53ef\u80fd\u306a\u57fa\u5e95\u72b6\u614b\u3092\u6301\u3064\u4e00\u65b9\u3001\u5fe0\u5b9f\u306a51\u91cf\u5b50\u30d3\u30c3\u30c8\u306e\u30b9\u30e9\u30c3\u30af\u7b26\u53f7\u5316\u306f13\u306e\u30b5\u30dd\u30fc\u30c8\u30b0\u30e9\u30d5\u6210\u5206\u3092\u4fdd\u6301\u3057\u3001\u30d6\u30ed\u30c3\u30af\u5358\u4f4d\u3067\u53b3\u5bc6\u306b\u30b7\u30df\u30e5\u30ec\u30fc\u30b7\u30e7\u30f3\u53ef\u80fd\u3067\u3042\u308b\u3002 \u5b9f\u884c\u3055\u308c\u305f\u89d2\u5ea6\u306b\u304a\u3044\u3066\u3001\u7406\u60f3\u7684\u306a\u6700\u9069\u78ba\u7387\u306e\u5408\u8a08\u306f $5.47\\times10^{-20}$ \u3067\u3042\u308a\u3001\u5b9f\u884c\u3055\u308c\u305f $10^5$ \u30b7\u30e7\u30c3\u30c8\u306e\u4e88\u7b97\u3067\u306f\u3001\u6700\u9069\u30ab\u30a6\u30f3\u30c8\u306f\u60c5\u5831\u4fa1\u5024\u3092\u6301\u305f\u306a\u3044\u3002\u6e2c\u5b9a\u3055\u308c\u305f\u30d3\u30c3\u30c8\u306e\u5468\u8fba\u5206\u5e03\u3092\u6301\u3064\u7a4d\u5206\u5e03\u304c\u3001\u89b3\u6e2c\u3055\u308c\u305f\u30a8\u30cd\u30eb\u30ae\u30fc\u4f4e\u6e1b\u306e\u7d04 $90\\%$ \u3092\u8aac\u660e\u3057\u3066\u3044\u308b\u3002 3\u3064\u306e\u56fa\u5b9a\u56de\u8def\u30b8\u30e7\u30d6\u306b\u304a\u3044\u3066\u3001\u30b0\u30ed\u30fc\u30d0\u30eb\u306a\u52a0\u91cd\u5171\u5206\u6563\u6bd4\u306f\u7d04$0.50$\u3067\u3042\u308b\u306e\u306b\u5bfe\u3057\u30015\u5909\u6570\u306e\u30d6\u30ed\u30c3\u30af\u306e\u6bd4\u306f$0.12$\u304b\u3089$0.28$\u306e\u9593\u3067\u3042\u308a\u3001\u7406\u60f3\u7684\u306a\u30b0\u30ed\u30fc\u30d0\u30eb\u5206\u6bcd\u306e\u308f\u305a\u304b$3.7\\%$\u3057\u304b\u5360\u3081\u3066\u3044\u306a\u3044\u3002 \u63a2\u7d22\u7684\u306a\u6761\u4ef6\u4ed8\u304d\u8a08\u6570\u30e2\u30c7\u30eb\u306e\u4e0b\u3067\u306f\u3001\u540c\u6642\u30d0\u30f3\u30c9\u89e3\u6790\u306b\u3088\u3063\u3066\u3001\u30b0\u30ed\u30fc\u30d0\u30eb\u6bd4\u7387\u306b\u5bfe\u3059\u308b\u305d\u306e\u4e0d\u8db3\u5206\u304c\u89e3\u6d88\u3055\u308c\u308b\u3002\u3057\u305f\u304c\u3063\u3066\u3001\u6b63\u78ba\u306a\u30d6\u30ed\u30c3\u30af\u53c2\u7167\u306b\u3088\u308a\u3001\u30a8\u30e9\u30fc\u30e1\u30ab\u30cb\u30ba\u30e0\u3092\u7279\u5b9a\u3057\u305f\u308a\u30c7\u30d0\u30a4\u30b9\u306e\u5b89\u5b9a\u6027\u3092\u78ba\u7acb\u3057\u305f\u308a\u3059\u308b\u3053\u3068\u306a\u304f\u3001\u96c6\u8a08\u5024\u306b\u3088\u3063\u3066\u96a0\u3055\u308c\u3066\u3044\u305f\u5c40\u6240\u7684\u306a\u4e0d\u4e00\u81f4\u304c\u660e\u3089\u304b\u306b\u306a\u308b\u3002\u3053\u306e\u624b\u9806\u306f\u3001\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u306e\u69cb\u9020\u3068\u3001\u305d\u306e\u89b3\u6e2c\u91cf\u306e\u5206\u89e3\u80fd\u304a\u3088\u3073\u9650\u754c\u3068\u3092\u7d50\u3073\u3064\u3051\u308b\u3082\u306e\u3067\u3042\u308b\u3002",
-   "title_translated": "\u5730\u7406\u7684\u30ab\u30d0\u30ec\u30c3\u30b8\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u306b\u304a\u3051\u308bQAOA\u306e\u53e4\u5178\u7684\u30b7\u30df\u30e5\u30e9\u30d3\u30ea\u30c6\u30a3\u3068\u30cf\u30fc\u30c9\u30a6\u30a7\u30a2\u8a3a\u65ad",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "nisq": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27548": {
-   "paper": {
-    "id": "2611.27548",
-    "title": "Communication advantages of a quantum switch of two pure-loss channels",
-    "link": "https://arxiv.org/abs/2611.27548",
-    "authors": "Carlo Marconi",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph"
-    ],
-    "primary": "quant-ph",
-    "abstract": "The quantum switch can enable communication through otherwise unusable channels, a phenomenon known as causal activation. We show that a switch of two identical pure-loss channels can achieve strictly greater energy-constrained classical and quantum capacities than their sequential use, even when two-way classical communication is available. Remarkably, the switch also activates quantum communication over a range of transmissivities for which the sequential channel has zero quantum capacity.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "network",
-    "qit"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "network",
-     "qit"
-    ],
-    "final_genre_ids": [
-     "network",
-     "qit"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u3053\u306e\u91cf\u5b50\u30b9\u30a4\u30c3\u30c1\u306f\u3001\u901a\u5e38\u306f\u5229\u7528\u3067\u304d\u306a\u3044\u30c1\u30e3\u30cd\u30eb\u3092\u901a\u3058\u305f\u901a\u4fe1\u3092\u53ef\u80fd\u306b\u3059\u308b\u3082\u306e\u3067\u3042\u308a\u3001\u3053\u306e\u73fe\u8c61\u306f\u300c\u56e0\u679c\u7684\u6d3b\u6027\u5316\u300d\u3068\u3057\u3066\u77e5\u3089\u308c\u3066\u3044\u308b\u3002 \u6211\u3005\u306f\u30012\u3064\u306e\u540c\u4e00\u306e\u7d14\u640d\u5931\u30c1\u30e3\u30cd\u30eb\u304b\u3089\u306a\u308b\u30b9\u30a4\u30c3\u30c1\u304c\u3001\u53cc\u65b9\u5411\u306e\u53e4\u5178\u901a\u4fe1\u304c\u5229\u7528\u53ef\u80fd\u306a\u5834\u5408\u3067\u3082\u3001\u305d\u308c\u3089\u3092\u9806\u6b21\u4f7f\u7528\u3059\u308b\u3088\u308a\u3082\u3001\u30a8\u30cd\u30eb\u30ae\u30fc\u5236\u7d04\u4e0b\u306b\u304a\u3044\u3066\u53b3\u5bc6\u306b\u5927\u304d\u306a\u53e4\u5178\u5bb9\u91cf\u304a\u3088\u3073\u91cf\u5b50\u5bb9\u91cf\u3092\u9054\u6210\u3067\u304d\u308b\u3053\u3068\u3092\u793a\u3057\u305f\u3002\u6ce8\u76ee\u3059\u3079\u304d\u3053\u3068\u306b\u3001\u3053\u306e\u30b9\u30a4\u30c3\u30c1\u306f\u3001\u9806\u6b21\u30c1\u30e3\u30cd\u30eb\u306e\u91cf\u5b50\u5bb9\u91cf\u304c\u30bc\u30ed\u3068\u306a\u308b\u4e00\u9023\u306e\u900f\u904e\u7387\u306e\u7bc4\u56f2\u306b\u304a\u3044\u3066\u3082\u3001\u91cf\u5b50\u901a\u4fe1\u3092\u6d3b\u6027\u5316\u3055\u305b\u308b\u3002",
-   "title_translated": "2\u3064\u306e\u7d14\u640d\u5931\u30c1\u30e3\u30cd\u30eb\u304b\u3089\u306a\u308b\u91cf\u5b50\u30b9\u30a4\u30c3\u30c1\u306e\u901a\u4fe1\u4e0a\u306e\u5229\u70b9",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "network": {
-     "status": "pending"
-    },
-    "qit": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27637": {
-   "paper": {
-    "id": "2611.27637",
-    "title": "Quadratic unconstrained binary optimization benchmark problems from mixed Hamming packings",
-    "link": "https://arxiv.org/abs/2611.27637",
-    "authors": "P\\'{e}ter Naszvadi, Marcell Tukora, Roman Ku\\v{z}el, M\\'{a}ty\\'{a}s Koniorczyk",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "math.OC"
-    ],
-    "primary": "quant-ph",
-    "abstract": "Benchmarking exact solvers and noisy intermediate-scale quantum devices for quadratic unconstrained binary optimization (QUBO) requires small yet challenging instances, preferably coming from actual applications. We propose such a benchmark set derived from mixed Hamming packing, a hard problem in coding theory. Starting from its mixed-integer linear programming formulation, we provide a generator for the equivalent QUBO models and study 133 instances whose optima are certified by that formulation. In the feature space of the MQLib library, we position a broad range of existing quantum-oriented benchmarks relative to the classical ones: they lie along a narrow, sparse border of the region covered by MQLib, whereas our instances form a coherent family in a region that both collections leave almost empty. Classical heuristics and a simulated bifurcation machine find the optimum of most instances quickly, in several cases sooner than an exact mixed-integer solver first encounters it, suggesting heuristic warm starts for exact solvers; for an exact QUBO solver, in turn, it appears challenging to prove optimality. In Ising form, the instances are densely connected antiferromagnets whose large local fields are almost exactly balanced by the couplings, so that the decision on each variable rests on a small remainder. This makes them hard to embed and to represent accurately on current quantum annealers, in line with our D-Wave experiments.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "nisq",
-    "qec"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "nisq",
-     "qec"
-    ],
-    "final_genre_ids": [
-     "nisq",
-     "qec"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u4e8c\u6b21\u5236\u7d04\u306a\u3057\u4e8c\u5024\u6700\u9069\u5316\uff08QUBO\uff09\u554f\u984c\u306b\u5bfe\u3059\u308b\u53b3\u5bc6\u89e3\u6cd5\u3068\u30ce\u30a4\u30ba\u3092\u542b\u3080\u4e2d\u898f\u6a21\u91cf\u5b50\u30c7\u30d0\u30a4\u30b9\u306e\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u3092\u884c\u3046\u306b\u306f\u3001\u5c0f\u898f\u6a21\u3067\u3042\u308a\u306a\u304c\u3089\u96e3\u6613\u5ea6\u306e\u9ad8\u3044\u30a4\u30f3\u30b9\u30bf\u30f3\u30b9\u304c\u5fc5\u8981\u3067\u3042\u308a\u3001\u3067\u304d\u308c\u3070\u5b9f\u969b\u306e\u5fdc\u7528\u4f8b\u306b\u7531\u6765\u3059\u308b\u3082\u306e\u304c\u671b\u307e\u3057\u3044\u3002 \u6211\u3005\u306f\u3001\u7b26\u53f7\u7406\u8ad6\u306b\u304a\u3051\u308b\u96e3\u554f\u3067\u3042\u308b\u6df7\u5408\u30cf\u30df\u30f3\u30b0\u30d1\u30c3\u30ad\u30f3\u30b0\u304b\u3089\u5c0e\u51fa\u3055\u308c\u305f\u3001\u305d\u306e\u3088\u3046\u306a\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u30bb\u30c3\u30c8\u3092\u63d0\u6848\u3059\u308b\u3002\u6df7\u5408\u6574\u6570\u7dda\u5f62\u8a08\u753b\u6cd5\uff08MIP\uff09\u306b\u3088\u308b\u5b9a\u5f0f\u5316\u3092\u8d77\u70b9\u3068\u3057\u3066\u3001\u540c\u7b49\u306eQUBO\u30e2\u30c7\u30eb\u306e\u751f\u6210\u6cd5\u3092\u63d0\u793a\u3057\u3001\u305d\u306e\u5b9a\u5f0f\u5316\u306b\u3088\u3063\u3066\u6700\u9069\u89e3\u304c\u4fdd\u8a3c\u3055\u308c\u3066\u3044\u308b133\u306e\u30a4\u30f3\u30b9\u30bf\u30f3\u30b9\u3092\u8abf\u67fb\u3059\u308b\u3002 MQLib\u30e9\u30a4\u30d6\u30e9\u30ea\u306e\u7279\u5fb4\u7a7a\u9593\u306b\u304a\u3044\u3066\u3001\u6211\u3005\u306f\u65e2\u5b58\u306e\u91cf\u5b50\u6307\u5411\u306e\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u3092\u53e4\u5178\u7684\u306a\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u3068\u6bd4\u8f03\u3057\u3066\u4f4d\u7f6e\u3065\u3051\u305f\u3002\u305d\u308c\u3089\u306fMQLib\u304c\u30ab\u30d0\u30fc\u3059\u308b\u9818\u57df\u306e\u72ed\u304f\u758e\u306a\u5883\u754c\u7dda\u4e0a\u306b\u4f4d\u7f6e\u3057\u3066\u3044\u308b\u306e\u306b\u5bfe\u3057\u3001\u6211\u3005\u306e\u30a4\u30f3\u30b9\u30bf\u30f3\u30b9\u306f\u3001\u4e21\u65b9\u306e\u30b3\u30ec\u30af\u30b7\u30e7\u30f3\u304c\u307b\u307c\u7a7a\u767d\u306e\u307e\u307e\u6b8b\u3057\u3066\u3044\u308b\u9818\u57df\u306b\u304a\u3044\u3066\u3001\u4e00\u8cab\u6027\u306e\u3042\u308b\u30d5\u30a1\u30df\u30ea\u30fc\u3092\u5f62\u6210\u3057\u3066\u3044\u308b\u3002 \u53e4\u5178\u7684\u306a\u30d2\u30e5\u30fc\u30ea\u30b9\u30c6\u30a3\u30c3\u30af\u6cd5\u3084\u30b7\u30df\u30e5\u30ec\u30fc\u30c8\u3055\u308c\u305f\u5206\u5c90\u30de\u30b7\u30f3\u306f\u3001\u307b\u3068\u3093\u3069\u306e\u30a4\u30f3\u30b9\u30bf\u30f3\u30b9\u306e\u6700\u9069\u89e3\u3092\u8fc5\u901f\u306b\u898b\u3064\u3051\u51fa\u3057\u3001\u3044\u304f\u3064\u304b\u306e\u30b1\u30fc\u30b9\u3067\u306f\u3001\u53b3\u5bc6\u306a\u6df7\u5408\u6574\u6570\u30bd\u30eb\u30d0\u30fc\u304c\u6700\u521d\u306b\u6700\u9069\u89e3\u306b\u5230\u9054\u3059\u308b\u3088\u308a\u3082\u65e9\u304f\u898b\u3064\u3051\u308b\u3053\u3068\u304c\u3067\u304d\u308b\u3002\u3053\u308c\u306f\u3001\u53b3\u5bc6\u306a\u30bd\u30eb\u30d0\u30fc\u306b\u5bfe\u3059\u308b\u30d2\u30e5\u30fc\u30ea\u30b9\u30c6\u30a3\u30c3\u30af\u306a\u30a6\u30a9\u30fc\u30e0\u30b9\u30bf\u30fc\u30c8\u306e\u53ef\u80fd\u6027\u3092\u793a\u5506\u3057\u3066\u3044\u308b\u3002\u4e00\u65b9\u3001\u53b3\u5bc6\u306aQUBO\u30bd\u30eb\u30d0\u30fc\u306b\u3068\u3063\u3066\u306f\u3001\u6700\u9069\u6027\u3092\u8a3c\u660e\u3059\u308b\u3053\u3068\u304c\u56f0\u96e3\u3067\u3042\u308b\u3088\u3046\u306b\u601d\u308f\u308c\u308b\u3002 \u30a4\u30b8\u30f3\u30b0\u5f62\u5f0f\u306b\u304a\u3044\u3066\u3001\u3053\u308c\u3089\u306e\u30a4\u30f3\u30b9\u30bf\u30f3\u30b9\u306f\u5bc6\u7d50\u5408\u306e\u53cd\u5f37\u78c1\u6027\u4f53\u3067\u3042\u308a\u3001\u305d\u306e\u5927\u304d\u306a\u5c40\u6240\u78c1\u5834\u306f\u7d50\u5408\u306b\u3088\u3063\u3066\u307b\u307c\u5b8c\u5168\u306b\u76f8\u6bba\u3055\u308c\u3066\u3044\u308b\u305f\u3081\u3001\u5404\u5909\u6570\u306e\u6c7a\u5b9a\u306f\u308f\u305a\u304b\u306a\u6b8b\u5dee\u306b\u4f9d\u5b58\u3059\u308b\u3002\u3053\u306e\u305f\u3081\u3001D-Wave\u3092\u7528\u3044\u305f\u5b9f\u9a13\u7d50\u679c\u3068\u3082\u4e00\u81f4\u3059\u308b\u3088\u3046\u306b\u3001\u73fe\u5728\u306e\u91cf\u5b50\u30a2\u30cb\u30fc\u30ea\u30f3\u30b0\u88c5\u7f6e\u3067\u306f\u3001\u3053\u308c\u3089\u3092\u57cb\u3081\u8fbc\u3093\u3060\u308a\u6b63\u78ba\u306b\u8868\u73fe\u3057\u305f\u308a\u3059\u308b\u3053\u3068\u304c\u56f0\u96e3\u3067\u3042\u308b\u3002",
-   "title_translated": "\u6df7\u5408\u30cf\u30df\u30f3\u30b0\u30d1\u30c3\u30ad\u30f3\u30b0\u306b\u57fa\u3065\u304f\u3001\u5236\u7d04\u306a\u3057\u306e\u4e8c\u5024\u4e8c\u6b21\u6700\u9069\u5316\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u554f\u984c",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "nisq": {
-     "status": "pending"
-    },
-    "qec": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27660": {
-   "paper": {
-    "id": "2611.27660",
-    "title": "Detection of genuine multipartite entanglement by means of entanglement monotones",
-    "link": "https://arxiv.org/abs/2611.27660",
-    "authors": "Sylvain Carrozza, Johann Chevrier, Luca Lionni",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "math-ph",
-     "math.MP"
-    ],
-    "primary": "quant-ph",
-    "abstract": "We look for pure state entanglement monotones that may serve as certificates of a strong form of genuine multipartite entanglement, that we refer to as irreducible entanglement: a $D$-partite state (with $D\\geq 3$) is irreducibly $D$-partite entangled if it cannot be decomposed as a product of states that are at most $(D-1)$-partite entangled. We start by establishing a no-go result proving that no reasonable genuine multipartite entanglement entropy can simultaneously obey LOCC-monotonicity and subadditivity. After relaxing the first condition to LO-monotonicity, we provide a simple method generating genuine multipartite entanglement monotones with the desired properties. Focusing on a subfamily of these monotones, we show that they are able to detect any form of genuine tripartite entanglement in three-qubit systems.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "qit"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "qit"
-    ],
-    "final_genre_ids": [
-     "qit"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u6211\u3005\u306f\u3001\u6211\u3005\u304c\u300c\u65e2\u7d04\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u300d\u3068\u547c\u3076\u3001\u771f\u306e\u591a\u4f53\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u306e\u5f37\u529b\u306a\u5f62\u614b\u306e\u8a3c\u660e\u3068\u306a\u308a\u5f97\u308b\u3001\u7d14\u7c8b\u72b6\u614b\u306e\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u5358\u8abf\u95a2\u6570\u3092\u6c42\u3081\u3066\u3044\u308b\u3002 $D$-\u7c92\u5b50\u72b6\u614b\uff08$D\\geq 3$\uff09\u306f\u3001\u6700\u5927\u3067$(D-1)$-\u7c92\u5b50\u3082\u3064\u308c\u72b6\u614b\u306e\u7a4d\u3068\u3057\u3066\u5206\u89e3\u3067\u304d\u306a\u3044\u5834\u5408\u3001\u4e0d\u53ef\u7d04\u306a$D$-\u7c92\u5b50\u3082\u3064\u308c\u72b6\u614b\u3067\u3042\u308b\u3002 \u307e\u305a\u3001\u5408\u7406\u7684\u306a\u771f\u306e\u591a\u7c92\u5b50\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u30a8\u30f3\u30c8\u30ed\u30d4\u30fc\u304c\u3001LOCC\u5358\u8abf\u6027\u3068\u90e8\u5206\u52a0\u6cd5\u6027\u3092\u540c\u6642\u306b\u6e80\u305f\u3059\u3053\u3068\u306f\u4e0d\u53ef\u80fd\u3067\u3042\u308b\u3053\u3068\u3092\u793a\u3059\u300c\u30ce\u30fc\u30b4\u30fc\u300d\u7d50\u679c\u3092\u78ba\u7acb\u3059\u308b\u3002 \u6700\u521d\u306e\u6761\u4ef6\u3092LO\u5358\u8abf\u6027\u306b\u7de9\u548c\u3057\u305f\u5f8c\u3001\u6240\u671b\u306e\u6027\u8cea\u3092\u6301\u3064\u771f\u306e\u591a\u4f53\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u5358\u8abf\u95a2\u6570\u3092\u751f\u6210\u3059\u308b\u5358\u7d14\u306a\u624b\u6cd5\u3092\u63d0\u793a\u3059\u308b\u3002\u3053\u308c\u3089\u306e\u5358\u8abf\u95a2\u6570\u306e\u90e8\u5206\u65cf\u306b\u7126\u70b9\u3092\u5f53\u3066\u3001\u305d\u308c\u3089\u304c3\u91cf\u5b50\u30d3\u30c3\u30c8\u7cfb\u306b\u304a\u3051\u308b\u3042\u3089\u3086\u308b\u5f62\u614b\u306e\u771f\u306e3\u4f53\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u3092\u691c\u51fa\u3067\u304d\u308b\u3053\u3068\u3092\u793a\u3059\u3002",
-   "title_translated": "\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u5358\u8abf\u95a2\u6570\u3092\u7528\u3044\u305f\u771f\u306e\u591a\u7c92\u5b50\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u306e\u691c\u51fa",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "qit": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27779": {
-   "paper": {
-    "id": "2611.27779",
-    "title": "Complex chaotic Boltzmann machines as deterministic representations of quantum states",
-    "link": "https://arxiv.org/abs/2611.27779",
-    "authors": "J. Montes",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph",
-     "math-ph",
-     "math.MP",
-     "nlin.CD"
-    ],
-    "primary": "quant-ph",
-    "abstract": "Neural networks and tensor networks have opened new ways to explore quantum systems by parameterizing families of wave functions through the structure and parameters of a network. Here we extend this perspective to a dynamical representation: we introduce a complex chaotic Boltzmann machine that assigns a deterministic system to a pure quantum state. We extend Suzuki's construction to incorporate both Born probabilities and relative phases. The probabilities set the trajectory velocities in a hypercube, while the phases define a complex field that lifts its Poincare sections. The evolution is determined by the network parameters and initial conditions, without random choices during flights or configuration changes. Our analysis of two qubits and study of three-qubit families show how relations between probabilities organize regular curves, islands, and unstable regions, and how phases distinguish states that share the same Born dynamics. This architecture turns a wave-function parameterization into a geometry of trajectories, providing a tool to explore probabilities, phases, and symmetries together across families of states.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "other"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "other"
-    ],
-    "final_genre_ids": [
-     "other"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u30cb\u30e5\u30fc\u30e9\u30eb\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u3084\u30c6\u30f3\u30bd\u30eb\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u306f\u3001\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u306e\u69cb\u9020\u3084\u30d1\u30e9\u30e1\u30fc\u30bf\u3092\u901a\u3058\u3066\u6ce2\u52d5\u95a2\u6570\u306e\u65cf\u3092\u30d1\u30e9\u30e1\u30fc\u30bf\u5316\u3059\u308b\u3053\u3068\u3067\u3001\u91cf\u5b50\u7cfb\u3092\u63a2\u6c42\u3059\u308b\u65b0\u305f\u306a\u9053\u3092\u5207\u308a\u958b\u304d\u307e\u3057\u305f\u3002\u3053\u3053\u3067\u306f\u3001\u3053\u306e\u8996\u70b9\u3092\u52d5\u7684\u8868\u73fe\u3078\u3068\u62e1\u5f35\u3057\u3001\u6c7a\u5b9a\u8ad6\u7684\u7cfb\u3092\u7d14\u7c8b\u306a\u91cf\u5b50\u72b6\u614b\u306b\u5272\u308a\u5f53\u3066\u308b\u8907\u7d20\u30ab\u30aa\u30b9\u30fb\u30dc\u30eb\u30c4\u30de\u30f3\u30de\u30b7\u30f3\u3092\u5c0e\u5165\u3057\u307e\u3059\u3002 \u6211\u3005\u306f\u3001\u30dc\u30eb\u30f3\u78ba\u7387\u3068\u76f8\u5bfe\u4f4d\u76f8\u306e\u4e21\u65b9\u3092\u7d44\u307f\u8fbc\u3080\u305f\u3081\u306b\u3001\u9234\u6728\u306e\u69cb\u6210\u6cd5\u3092\u62e1\u5f35\u3057\u305f\u3002\u78ba\u7387\u306f\u30cf\u30a4\u30d1\u30fc\u30ad\u30e5\u30fc\u30d6\u5185\u306e\u8ecc\u9053\u901f\u5ea6\u3092\u6c7a\u5b9a\u3057\u3001\u4f4d\u76f8\u306f\u305d\u306e\u30dd\u30a2\u30f3\u30ab\u30ec\u65ad\u9762\u3092\u6301\u3061\u4e0a\u3052\u308b\u8907\u7d20\u5834\u3092\u5b9a\u7fa9\u3059\u308b\u3002\u9032\u5316\u306f\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u306e\u30d1\u30e9\u30e1\u30fc\u30bf\u3068\u521d\u671f\u6761\u4ef6\u306b\u3088\u3063\u3066\u6c7a\u5b9a\u3055\u308c\u3001\u98db\u884c\u4e2d\u3084\u69cb\u6210\u5909\u66f4\u6642\u306e\u30e9\u30f3\u30c0\u30e0\u306a\u9078\u629e\u306f\u884c\u308f\u308c\u306a\u3044\u3002 2\u91cf\u5b50\u30d3\u30c3\u30c8\u306b\u95a2\u3059\u308b\u89e3\u6790\u304a\u3088\u30733\u91cf\u5b50\u30d3\u30c3\u30c8\u306e\u30d5\u30a1\u30df\u30ea\u30fc\u306b\u95a2\u3059\u308b\u7814\u7a76\u3092\u901a\u3058\u3066\u3001\u78ba\u7387\u9593\u306e\u95a2\u4fc2\u304c\u3069\u306e\u3088\u3046\u306b\u898f\u5247\u7684\u306a\u66f2\u7dda\u3001\u5cf6\u3001\u304a\u3088\u3073\u4e0d\u5b89\u5b9a\u9818\u57df\u3092\u5f62\u6210\u3059\u308b\u304b\u3001\u307e\u305f\u4f4d\u76f8\u304c\u3069\u306e\u3088\u3046\u306b\u3057\u3066\u540c\u3058\u30dc\u30fc\u30f3\u529b\u5b66\u3092\u5171\u6709\u3059\u308b\u72b6\u614b\u3092\u533a\u5225\u3059\u308b\u304b\u3092\u660e\u3089\u304b\u306b\u3059\u308b\u3002 \u3053\u306e\u30a2\u30fc\u30ad\u30c6\u30af\u30c1\u30e3\u306f\u3001\u6ce2\u52d5\u95a2\u6570\u306e\u30d1\u30e9\u30e1\u30fc\u30bf\u5316\u3092\u8ecc\u9053\u306e\u5e7e\u4f55\u5b66\u3078\u3068\u5909\u63db\u3057\u3001\u72b6\u614b\u306e\u30d5\u30a1\u30df\u30ea\u30fc\u5168\u4f53\u306b\u308f\u305f\u3063\u3066\u78ba\u7387\u3001\u4f4d\u76f8\u3001\u5bfe\u79f0\u6027\u3092\u4e00\u4f53\u3068\u3057\u3066\u63a2\u6c42\u3059\u308b\u305f\u3081\u306e\u30c4\u30fc\u30eb\u3092\u63d0\u4f9b\u3059\u308b\u3002",
-   "title_translated": "\u91cf\u5b50\u72b6\u614b\u306e\u6c7a\u5b9a\u8ad6\u7684\u8868\u73fe\u3068\u3057\u3066\u306e\u8907\u96d1\u306a\u30ab\u30aa\u30b9\u7684\u30dc\u30eb\u30c4\u30de\u30f3\u30de\u30b7\u30f3",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "other": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27927": {
-   "paper": {
-    "id": "2611.27927",
-    "title": "Transpilation-Aware Multi-Vendor QPU Scheduling with Predicted Post-Transpilation Fidelity",
-    "link": "https://arxiv.org/abs/2611.27927",
-    "authors": "Ana Paula Appel",
-    "announce_type": "new",
-    "categories": [
-     "quant-ph"
-    ],
-    "primary": "quant-ph",
-    "abstract": "Cluster schedulers already choose nodes, GPUs and accelerators for submitted workloads, enforce quotas and spread load. QPUs from several vendors are now schedulable resources in the same clusters, yet the user still names the device, usually the one with the best average fidelity. For a given circuit that choice is often wrong: compiling onto each device's qubit connectivity adds gates, so a job can meet its required success probability on one device and miss it on another with similar error rates, and checking this exactly by compiling for every candidate is too slow for a scheduling decision. We let the scheduler choose the QPU in two stages. A training-free estimate predicts, in milliseconds and without compiling, the success probability on every candidate and filters out those that would miss the requirement; only the chosen device then compiles the circuit, re-checks it, and binds the job or rolls back. The estimate matches compiling every candidate at about 25x lower latency in simulation, ranks measured success on IBM hardware as well as the post-compilation estimate (Spearman rho = 0.95), reduces requirement violations from tens of jobs to a few, and avoids them under contention without piling jobs onto one device. Across vendors it works when error rates are comparable (IBM and IQM) and fails when published figures overstate a device.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "hardware"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "hardware"
-    ],
-    "final_genre_ids": [
-     "hardware"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u30af\u30e9\u30b9\u30bf\u30b9\u30b1\u30b8\u30e5\u30fc\u30e9\u306f\u3001\u3059\u3067\u306b\u63d0\u51fa\u3055\u308c\u305f\u30ef\u30fc\u30af\u30ed\u30fc\u30c9\u306b\u5bfe\u3057\u3066\u30ce\u30fc\u30c9\u3001GPU\u3001\u30a2\u30af\u30bb\u30e9\u30ec\u30fc\u30bf\u3092\u9078\u629e\u3057\u3001\u30af\u30a9\u30fc\u30bf\u3092\u9069\u7528\u3057\u3001\u8ca0\u8377\u3092\u5206\u6563\u3055\u305b\u3066\u3044\u307e\u3059\u3002\u73fe\u5728\u3001\u8907\u6570\u306e\u30d9\u30f3\u30c0\u30fc\u88fd\u306eQPU\u304c\u540c\u3058\u30af\u30e9\u30b9\u30bf\u5185\u3067\u30b9\u30b1\u30b8\u30e5\u30fc\u30ea\u30f3\u30b0\u53ef\u80fd\u306a\u30ea\u30bd\u30fc\u30b9\u3068\u3057\u3066\u6271\u308f\u308c\u308b\u3088\u3046\u306b\u306a\u308a\u307e\u3057\u305f\u304c\u3001\u30e6\u30fc\u30b6\u30fc\u306f\u4f9d\u7136\u3068\u3057\u3066\u30c7\u30d0\u30a4\u30b9\uff08\u901a\u5e38\u306f\u5e73\u5747\u5fe0\u5b9f\u5ea6\u304c\u6700\u3082\u9ad8\u3044\u3082\u306e\uff09\u3092\u6307\u5b9a\u3057\u3066\u3044\u307e\u3059\u3002 \u7279\u5b9a\u306e\u56de\u8def\u306b\u5bfe\u3057\u3066\u3001\u305d\u306e\u9078\u629e\u306f\u3057\u3070\u3057\u3070\u8aa4\u308a\u3068\u306a\u308b\u3002\u5404\u30c7\u30d0\u30a4\u30b9\u306e\u91cf\u5b50\u30d3\u30c3\u30c8\u63a5\u7d9a\u6027\u306b\u5408\u308f\u305b\u3066\u30b3\u30f3\u30d1\u30a4\u30eb\u3059\u308b\u3068\u30b2\u30fc\u30c8\u6570\u304c\u5897\u52a0\u3059\u308b\u305f\u3081\u3001\u3042\u308b\u30c7\u30d0\u30a4\u30b9\u3067\u306f\u5fc5\u8981\u306a\u6210\u529f\u78ba\u7387\u3092\u6e80\u305f\u3057\u3066\u3082\u3001\u540c\u69d8\u306e\u30a8\u30e9\u30fc\u7387\u3092\u6301\u3064\u5225\u306e\u30c7\u30d0\u30a4\u30b9\u3067\u306f\u6e80\u305f\u305b\u306a\u3044\u5834\u5408\u304c\u3042\u308a\u3001\u3059\u3079\u3066\u306e\u5019\u88dc\u30c7\u30d0\u30a4\u30b9\u306b\u5bfe\u3057\u3066\u30b3\u30f3\u30d1\u30a4\u30eb\u3057\u3066\u3053\u308c\u3092\u6b63\u78ba\u306b\u78ba\u8a8d\u3059\u308b\u306e\u306f\u3001\u30b9\u30b1\u30b8\u30e5\u30fc\u30ea\u30f3\u30b0\u306e\u6c7a\u5b9a\u3092\u884c\u3046\u306b\u306f\u6642\u9593\u304c\u304b\u304b\u308a\u3059\u304e\u308b\u3002 \u305d\u3053\u3067\u3001\u30b9\u30b1\u30b8\u30e5\u30fc\u30e9\u306b2\u6bb5\u968e\u306e\u30d7\u30ed\u30bb\u30b9\u3067QPU\u3092\u9078\u5b9a\u3055\u305b\u308b\u3002\u30c8\u30ec\u30fc\u30cb\u30f3\u30b0\u4e0d\u8981\u306e\u63a8\u5b9a\u30a2\u30eb\u30b4\u30ea\u30ba\u30e0\u304c\u3001\u30b3\u30f3\u30d1\u30a4\u30eb\u3092\u884c\u308f\u305a\u306b\u30df\u30ea\u79d2\u5358\u4f4d\u3067\u5404\u5019\u88dc\u30c7\u30d0\u30a4\u30b9\u306b\u304a\u3051\u308b\u6210\u529f\u78ba\u7387\u3092\u4e88\u6e2c\u3057\u3001\u8981\u4ef6\u3092\u6e80\u305f\u3055\u306a\u3044\u3068\u601d\u308f\u308c\u308b\u5019\u88dc\u3092\u30d5\u30a3\u30eb\u30bf\u30ea\u30f3\u30b0\u3059\u308b\u3002\u305d\u306e\u5f8c\u3001\u9078\u3070\u308c\u305f\u30c7\u30d0\u30a4\u30b9\u3060\u3051\u304c\u56de\u8def\u3092\u30b3\u30f3\u30d1\u30a4\u30eb\u3057\u3001\u518d\u691c\u8a3c\u3092\u884c\u3063\u305f\u4e0a\u3067\u3001\u30b8\u30e7\u30d6\u3092\u30d0\u30a4\u30f3\u30c9\u3059\u308b\u304b\u30ed\u30fc\u30eb\u30d0\u30c3\u30af\u3059\u308b\u3002 \u3053\u306e\u63a8\u5b9a\u624b\u6cd5\u306f\u3001\u30b7\u30df\u30e5\u30ec\u30fc\u30b7\u30e7\u30f3\u306b\u304a\u3044\u3066\u3059\u3079\u3066\u306e\u5019\u88dc\u3092\u30b3\u30f3\u30d1\u30a4\u30eb\u3059\u308b\u5834\u5408\u3068\u6bd4\u8f03\u3057\u3066\u7d0425\u5206\u306e1\u306e\u30ec\u30a4\u30c6\u30f3\u30b7\u3067\u540c\u7b49\u306e\u7cbe\u5ea6\u3092\u5b9f\u73fe\u3057\u3001IBM\u30cf\u30fc\u30c9\u30a6\u30a7\u30a2\u4e0a\u3067\u6e2c\u5b9a\u3055\u308c\u305f\u6210\u529f\u7387\u3068\u30b3\u30f3\u30d1\u30a4\u30eb\u5f8c\u306e\u63a8\u5b9a\u5024\u3068\u306e\u76f8\u95a2\u3082\u826f\u597d\uff08\u30b9\u30d4\u30a2\u30de\u30f3\u306e\u76f8\u95a2\u4fc2\u6570 rho = 0.95\uff09\u3067\u3042\u308a\u3001\u8981\u4ef6\u9055\u53cd\u3092\u6570\u5341\u4ef6\u304b\u3089\u6570\u4ef6\u306b\u524a\u6e1b\u3057\u3001\u7af6\u5408\u72b6\u6cc1\u4e0b\u3067\u3082\u7279\u5b9a\u306e\u30c7\u30d0\u30a4\u30b9\u306b\u30b8\u30e7\u30d6\u3092\u96c6\u4e2d\u3055\u305b\u308b\u3053\u3068\u306a\u304f\u9055\u53cd\u3092\u56de\u907f\u3057\u307e\u3059\u3002 \u30d9\u30f3\u30c0\u30fc\u3092\u554f\u308f\u305a\u3001\u30a8\u30e9\u30fc\u7387\u304c\u540c\u7a0b\u5ea6\u306e\u5834\u5408\uff08IBM\u304a\u3088\u3073IQM\uff09\u306b\u306f\u3053\u306e\u624b\u6cd5\u304c\u6709\u52b9\u3067\u3059\u304c\u3001\u516c\u8868\u3055\u308c\u305f\u6570\u5024\u304c\u30c7\u30d0\u30a4\u30b9\u306e\u6027\u80fd\u3092\u904e\u5927\u8a55\u4fa1\u3057\u3066\u3044\u308b\u5834\u5408\u306b\u306f\u5931\u6557\u3057\u307e\u3059\u3002",
-   "title_translated": "\u30c8\u30e9\u30f3\u30b9\u30d1\u30a4\u30ec\u30fc\u30b7\u30e7\u30f3\u3092\u8003\u616e\u3057\u305f\u30de\u30eb\u30c1\u30d9\u30f3\u30c0\u30fcQPU\u30b9\u30b1\u30b8\u30e5\u30fc\u30ea\u30f3\u30b0\uff1a\u30c8\u30e9\u30f3\u30b9\u30d1\u30a4\u30ec\u30fc\u30b7\u30e7\u30f3\u5f8c\u306e\u5fe0\u5b9f\u5ea6\u306e\u4e88\u6e2c",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "hardware": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.26071": {
-   "paper": {
-    "id": "2611.26071",
-    "title": "Rigid triaxial roto-vibrator in a finite system",
-    "link": "https://arxiv.org/abs/2611.26071",
-    "authors": "A. Leviatan",
-    "announce_type": "cross",
-    "categories": [
-     "nucl-th",
-     "quant-ph"
-    ],
-    "primary": "nucl-th",
-    "abstract": "We investigate the emergence of rigid triaxiality in a finite system, within the framework of the interacting boson model of nuclei. Appropriate Hamiltonians for a maximally-triaxial rigid shape are constructed. Closed expressions for wave functions, energies and E2 rates for states of the ground band are derived. Classical and quantum analyses reveal that for a fixed Hamiltonian, the system evolves from a $\\gamma$-soft SO(6) structure for small $N$, to a $\\gamma$-rigid structure for large $N$. Attention is paid to symmetry and spectral properties of both rotational and vibrational states.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "other"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "other"
-    ],
-    "final_genre_ids": [
-     "other"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u6211\u3005\u306f\u3001\u539f\u5b50\u6838\u306e\u76f8\u4e92\u4f5c\u7528\u30dc\u30bd\u30f3\u30e2\u30c7\u30eb\u306e\u67a0\u7d44\u307f\u306b\u304a\u3044\u3066\u3001\u6709\u9650\u7cfb\u306b\u304a\u3051\u308b\u525b\u6027\u4e09\u8ef8\u6027\u306e\u73fe\u308c\u306b\u3064\u3044\u3066\u8abf\u67fb\u3059\u308b\u3002\u6700\u5927\u4e09\u8ef8\u6027\u306e\u525b\u4f53\u5f62\u72b6\u306b\u5bfe\u3059\u308b\u9069\u5207\u306a\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u3092\u69cb\u7bc9\u3059\u308b\u3002\u57fa\u5e95\u30d0\u30f3\u30c9\u306e\u72b6\u614b\u306b\u95a2\u3059\u308b\u6ce2\u52d5\u95a2\u6570\u3001\u30a8\u30cd\u30eb\u30ae\u30fc\u3001\u304a\u3088\u3073E2\u7387\u306e\u9589\u5f62\u5f0f\u3092\u5c0e\u51fa\u3059\u308b\u3002 \u53e4\u5178\u7684\u304a\u3088\u3073\u91cf\u5b50\u7684\u306a\u89e3\u6790\u306b\u3088\u308a\u3001\u56fa\u5b9a\u3055\u308c\u305f\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u306b\u304a\u3044\u3066\u3001\u7cfb\u306f$N$\u304c\u5c0f\u3055\u3044\u5834\u5408\u306b\u306f$\\gamma$-\u30bd\u30d5\u30c8\u306aSO(6)\u69cb\u9020\u304b\u3089\u3001$N$\u304c\u5927\u304d\u3044\u5834\u5408\u306b\u306f$\\gamma$-\u525b\u4f53\u69cb\u9020\u3078\u3068\u9077\u79fb\u3059\u308b\u3053\u3068\u304c\u660e\u3089\u304b\u306b\u306a\u3063\u305f\u3002\u56de\u8ee2\u72b6\u614b\u304a\u3088\u3073\u632f\u52d5\u72b6\u614b\u306e\u4e21\u65b9\u306b\u3064\u3044\u3066\u3001\u5bfe\u79f0\u6027\u304a\u3088\u3073\u30b9\u30da\u30af\u30c8\u30eb\u7279\u6027\u306b\u7126\u70b9\u3092\u5f53\u3066\u3066\u3044\u308b\u3002",
-   "title_translated": "\u6709\u9650\u7cfb\u306b\u304a\u3051\u308b\u525b\u6027\u4e09\u8ef8\u56de\u8ee2\u632f\u52d5\u5b50",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "other": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27256": {
-   "paper": {
-    "id": "2611.27256",
-    "title": "Quantum-Chaos-Assisted Measure Synchronization in a Double-Well Ultracold Bose Gas",
-    "link": "https://arxiv.org/abs/2611.27256",
-    "authors": "Xianchao Le, Jiaxin Peng, Weiping Zhang, Keye Zhang",
-    "announce_type": "cross",
-    "categories": [
-     "cond-mat.quant-gas",
-     "quant-ph"
-    ],
-    "primary": "cond-mat.quant-gas",
-    "abstract": "This paper investigates measure synchronization (MS) in a two-component ultracold atomic system confined in a double-well potential, which realizes a quantum many-body bosonic Josephson junction. Through spectral-statistics analysis, we identify the quantum chaotic parameter regime and confirm that the system achieves MS within this regime with weak dependence on the initial energy imbalance. We further show that chaotic dynamics not only significantly shortens the time scale for establishing synchronization but is also accompanied by entanglement entropy approaching the random-state prediction. These results reveal close connections among quantum chaos, MS, and quantum entanglement in conservative quantum many-body systems and may motivate further studies on the underlying mechanisms of chaos-assisted synchronization.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "other"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "other"
-    ],
-    "final_genre_ids": [
-     "other"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u672c\u8ad6\u6587\u3067\u306f\u3001\u91cf\u5b50\u591a\u4f53\u30dc\u30bd\u30f3\u578b\u30b8\u30e7\u30bb\u30d5\u30bd\u30f3\u63a5\u5408\u3092\u5b9f\u73fe\u3059\u308b\u3001\u4e8c\u91cd\u4e95\u6238\u30dd\u30c6\u30f3\u30b7\u30e3\u30eb\u306b\u9589\u3058\u8fbc\u3081\u3089\u308c\u305f2\u6210\u5206\u8d85\u51b7\u539f\u5b50\u7cfb\u306b\u304a\u3051\u308b\u6e2c\u5b9a\u540c\u671f\uff08MS\uff09\u306b\u3064\u3044\u3066\u691c\u8a0e\u3059\u308b\u3002 \u30b9\u30da\u30af\u30c8\u30eb\u7d71\u8a08\u5b66\u7684\u89e3\u6790\u3092\u901a\u3058\u3066\u3001\u6211\u3005\u306f\u91cf\u5b50\u30ab\u30aa\u30b9\u7684\u30d1\u30e9\u30e1\u30fc\u30bf\u9818\u57df\u3092\u7279\u5b9a\u3057\u3001\u3053\u306e\u9818\u57df\u5185\u306b\u304a\u3044\u3066\u3001\u7cfb\u304c\u521d\u671f\u306e\u30a8\u30cd\u30eb\u30ae\u30fc\u4e0d\u5747\u8861\u3078\u306e\u4f9d\u5b58\u6027\u304c\u5f31\u3044\u72b6\u614b\u3067MS\u3092\u9054\u6210\u3059\u308b\u3053\u3068\u3092\u78ba\u8a8d\u3057\u305f\u3002\u3055\u3089\u306b\u3001\u30ab\u30aa\u30b9\u7684\u30c0\u30a4\u30ca\u30df\u30af\u30b9\u306f\u540c\u671f\u304c\u78ba\u7acb\u3055\u308c\u308b\u307e\u3067\u306e\u6642\u9593\u30b9\u30b1\u30fc\u30eb\u3092\u8457\u3057\u304f\u77ed\u7e2e\u3059\u308b\u3060\u3051\u3067\u306a\u304f\u3001\u30e9\u30f3\u30c0\u30e0\u72b6\u614b\u306e\u4e88\u6e2c\u5024\u306b\u8fd1\u3065\u304f\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u30a8\u30f3\u30c8\u30ed\u30d4\u30fc\u3092\u4f34\u3046\u3053\u3068\u3082\u793a\u3057\u305f\u3002 \u3053\u308c\u3089\u306e\u7d50\u679c\u306f\u3001\u4fdd\u5b58\u7684\u306a\u91cf\u5b50\u591a\u4f53\u7cfb\u306b\u304a\u3051\u308b\u91cf\u5b50\u30ab\u30aa\u30b9\u3001MS\u3001\u304a\u3088\u3073\u91cf\u5b50\u30a8\u30f3\u30bf\u30f3\u30b0\u30eb\u30e1\u30f3\u30c8\u306e\u9593\u306e\u5bc6\u63a5\u306a\u95a2\u9023\u6027\u3092\u660e\u3089\u304b\u306b\u3057\u3066\u304a\u308a\u3001\u30ab\u30aa\u30b9\u306b\u52a9\u3051\u3089\u308c\u305f\u540c\u671f\u306e\u6839\u5e95\u306b\u3042\u308b\u30e1\u30ab\u30cb\u30ba\u30e0\u306b\u95a2\u3059\u308b\u3055\u3089\u306a\u308b\u7814\u7a76\u3092\u4fc3\u9032\u3059\u308b\u53ef\u80fd\u6027\u304c\u3042\u308b\u3002",
-   "title_translated": "\u4e8c\u91cd\u4e95\u6238\u578b\u8d85\u4f4e\u6e29\u30dc\u30fc\u30ba\u30ac\u30b9\u306b\u304a\u3051\u308b\u91cf\u5b50\u30ab\u30aa\u30b9\u3092\u5229\u7528\u3057\u305f\u6e2c\u5b9a\u540c\u671f",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "other": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27328": {
-   "paper": {
-    "id": "2611.27328",
-    "title": "60-cm-long In-vacuum Zerodur Optical Cavity for Optical Lattice Atom Interferometry",
-    "link": "https://arxiv.org/abs/2611.27328",
-    "authors": "Philip Wondrak, Paola Luna, Kenneth Nakasone, Andrei Zhukov, Michael Grisham, Garrett D. Cole, Po-han Chen, Cristian D. Panda",
-    "announce_type": "cross",
-    "categories": [
-     "physics.atom-ph",
-     "physics.ins-det",
-     "physics.optics",
-     "quant-ph"
-    ],
-    "primary": "physics.atom-ph",
-    "abstract": "Optical cavities are widely used in atomic physics experiments to control the spatial geometry and spectral properties of atom-light interactions. Recently, an optical lattice generated by the pristine mode of an optical cavity was utilized to hold and extend the quantum coherence of atomic spatial superpositions. Here, we describe an in-vacuum optical cavity designed to enhance the spatial and temporal coherence of optical lattice atom interferometers to one millimeter wavepacket separations and one minute measurement durations. The cavity uses a rigid Zerodur spacer to suppress the negative effects of thermal drift and mechanical-acoustic vibrations on the atomic motional state. The 60 cm-long cavity spacer provides ample optical access for the laser beams and imaging optics necessary for the preparation, quantum control, and read-out of the atomic state, as well as room for various source mass configurations for localized gravitational measurements. An integrated differential pumping structure enables compatibility with ultrahigh-vacuum operation and optical interferometry allows for in-situ vibration monitoring. The performance of the optical cavity is methodically characterized: we measure mirror vibration noise with amplitude below 5 nm/$\\sqrt{\\rm Hz}$ in a wide frequency range of 2 Hz - 100 kHz and a slow 15 MHz thermal drift of the cavity resonance over 47 hours, which can be readily stabilized with an integrated piezo. The optical cavity supports both 852-nm light for Raman transitions and 1064-nm light for the optical lattice, with a free spectral range matched to an integer divisor of the cesium ground-state hyperfine splitting.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "hardware"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "hardware"
-    ],
-    "final_genre_ids": [
-     "hardware"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u5149\u5171\u632f\u5668\u306f\u3001\u539f\u5b50\u3068\u5149\u306e\u76f8\u4e92\u4f5c\u7528\u306e\u7a7a\u9593\u7684\u5f62\u72b6\u3084\u5206\u5149\u7279\u6027\u3092\u5236\u5fa1\u3059\u308b\u305f\u3081\u306b\u3001\u539f\u5b50\u7269\u7406\u5b66\u306e\u5b9f\u9a13\u3067\u5e83\u304f\u5229\u7528\u3055\u308c\u3066\u3044\u308b\u3002\u6700\u8fd1\u3067\u306f\u3001\u5149\u5171\u632f\u5668\u306e\u30d7\u30ea\u30b9\u30c6\u30a3\u30f3\u30e2\u30fc\u30c9\u306b\u3088\u3063\u3066\u751f\u6210\u3055\u308c\u305f\u5149\u683c\u5b50\u304c\u3001\u539f\u5b50\u306e\u7a7a\u9593\u91cd\u306d\u5408\u308f\u305b\u72b6\u614b\u306e\u91cf\u5b50\u30b3\u30d2\u30fc\u30ec\u30f3\u30b9\u3092\u7dad\u6301\u30fb\u5ef6\u9577\u3059\u308b\u305f\u3081\u306b\u5229\u7528\u3055\u308c\u305f\u3002 \u672c\u7a3f\u3067\u306f\u3001\u5149\u683c\u5b50\u539f\u5b50\u5e72\u6e09\u8a08\u306e\u7a7a\u9593\u7684\u304a\u3088\u3073\u6642\u9593\u7684\u30b3\u30d2\u30fc\u30ec\u30f3\u30b9\u3092\u3001\u6ce2\u675f\u9593\u96941\u30df\u30ea\u30e1\u30fc\u30c8\u30eb\u3001\u6e2c\u5b9a\u6642\u95931\u5206\u9593\u307e\u3067\u9ad8\u3081\u308b\u3088\u3046\u306b\u8a2d\u8a08\u3055\u308c\u305f\u771f\u7a7a\u5185\u5149\u5b66\u5171\u632f\u5668\u306b\u3064\u3044\u3066\u8ff0\u3079\u308b\u3002\u3053\u306e\u5171\u632f\u5668\u3067\u306f\u3001\u539f\u5b50\u904b\u52d5\u72b6\u614b\u306b\u5bfe\u3059\u308b\u71b1\u30c9\u30ea\u30d5\u30c8\u3084\u6a5f\u68b0\u7684\u30fb\u97f3\u97ff\u7684\u632f\u52d5\u306e\u60aa\u5f71\u97ff\u3092\u6291\u5236\u3059\u308b\u305f\u3081\u306b\u3001\u525b\u6027\u306eZerodur\u88fd\u30b9\u30da\u30fc\u30b5\u30fc\u3092\u63a1\u7528\u3057\u3066\u3044\u308b\u3002 \u5168\u957760 cm\u306e\u5171\u632f\u5668\u30b9\u30da\u30fc\u30b5\u30fc\u306f\u3001\u539f\u5b50\u72b6\u614b\u306e\u751f\u6210\u3001\u91cf\u5b50\u5236\u5fa1\u3001\u304a\u3088\u3073\u8aad\u307f\u51fa\u3057\u306b\u5fc5\u8981\u306a\u30ec\u30fc\u30b6\u30fc\u30d3\u30fc\u30e0\u3084\u64ae\u50cf\u5149\u5b66\u7cfb\u306e\u305f\u3081\u306e\u5341\u5206\u306a\u5149\u5b66\u30a2\u30af\u30bb\u30b9\u30b9\u30da\u30fc\u30b9\u3092\u63d0\u4f9b\u3059\u308b\u3068\u3068\u3082\u306b\u3001\u5c40\u6240\u7684\u306a\u91cd\u529b\u6e2c\u5b9a\u306e\u305f\u3081\u306e\u69d8\u3005\u306a\u5149\u6e90\u8cea\u91cf\u69cb\u6210\u306e\u305f\u3081\u306e\u30b9\u30da\u30fc\u30b9\u3082\u78ba\u4fdd\u3057\u3066\u3044\u308b\u3002 \u4e00\u4f53\u578b\u306e\u5dee\u52d5\u30dd\u30f3\u30d4\u30f3\u30b0\u69cb\u9020\u306b\u3088\u308a\u3001\u8d85\u9ad8\u771f\u7a7a\u904b\u8ee2\u3068\u306e\u4e92\u63db\u6027\u304c\u78ba\u4fdd\u3055\u308c\u3066\u304a\u308a\u3001\u5149\u5b66\u5e72\u6e09\u6cd5\u306b\u3088\u3063\u3066\u305d\u306e\u5834\u3067\u306e\u632f\u52d5\u30e2\u30cb\u30bf\u30ea\u30f3\u30b0\u304c\u53ef\u80fd\u3068\u306a\u3063\u3066\u3044\u308b\u3002\u5149\u5b66\u5171\u632f\u5668\u306e\u6027\u80fd\u306f\u4f53\u7cfb\u7684\u306b\u8a55\u4fa1\u3055\u308c\u3066\u304a\u308a\uff1a 2 Hz\uff5e100 kHz\u306e\u5e83\u3044\u5468\u6ce2\u6570\u7bc4\u56f2\u306b\u304a\u3044\u3066\u3001\u632f\u5e45\u304c5 nm/$\\sqrt{\\rm Hz}$\u672a\u6e80\u306e\u30df\u30e9\u30fc\u632f\u52d5\u30ce\u30a4\u30ba\u3092\u6e2c\u5b9a\u3057\u300147\u6642\u9593\u306b\u308f\u305f\u308b\u5171\u632f\u5668\u306e\u71b1\u30c9\u30ea\u30d5\u30c8\u306f15 MHz\u3068\u7de9\u3084\u304b\u3067\u3042\u308a\u3001\u5185\u8535\u306e\u30d4\u30a8\u30be\u7d20\u5b50\u3092\u7528\u3044\u3066\u5bb9\u6613\u306b\u5b89\u5b9a\u5316\u3067\u304d\u308b\u3002 \u3053\u306e\u5149\u5b66\u5171\u632f\u5668\u306f\u3001\u30e9\u30de\u30f3\u9077\u79fb\u7528\u306e852 nm\u5149\u3068\u5149\u683c\u5b50\u7528\u306e1064 nm\u5149\u306e\u4e21\u65b9\u3092\u30b5\u30dd\u30fc\u30c8\u3057\u3066\u304a\u308a\u3001\u305d\u306e\u81ea\u7531\u30b9\u30da\u30af\u30c8\u30eb\u7bc4\u56f2\u306f\u30bb\u30b7\u30a6\u30e0\u57fa\u5e95\u72b6\u614b\u306e\u8d85\u5fae\u7d30\u5206\u88c2\u306e\u6574\u6570\u500d\u306b\u4e00\u81f4\u3057\u3066\u3044\u308b\u3002",
-   "title_translated": "\u5149\u683c\u5b50\u539f\u5b50\u5e72\u6e09\u6cd5\u7528\u3001\u9577\u305560 cm\u306e\u771f\u7a7a\u5185Zerodur\u5149\u5b66\u5171\u632f\u5668",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "hardware": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27584": {
-   "paper": {
-    "id": "2611.27584",
-    "title": "Bayesian Quantum Thermometry of Ultracold Gases with Non-Equilibrium Single-Atom Probes",
-    "link": "https://arxiv.org/abs/2611.27584",
-    "authors": "Julian Fe{\\ss}, Luca Granert, Sabrina Burgardt, Silvia Hiebel, Alexander Guthmann, Mohammad Mehboudi, Mart\\'i Perarnau-Llobet, Artur Widera",
-    "announce_type": "cross",
-    "categories": [
-     "cond-mat.quant-gas",
-     "cond-mat.stat-mech",
-     "physics.data-an",
-     "quant-ph"
-    ],
-    "primary": "cond-mat.quant-gas",
-    "abstract": "Precise thermometry is essential for experiments with ultracold quantum gases, but conventional techniques such as time-of-flight thermometry are destructive and lose sensitivity at low atomic densities. Quantum probes provide an alternative route by encoding temperature information in accessible internal degrees of freedom. Here, we implement Bayesian thermometry with non-equilibrium spin-based single-atom probes immersed in an ultracold atomic bath. Temperature-dependent spin-exchange collisions map the bath temperature onto the internal spin populations of the probe atoms. Measurements of these populations are then used to iteratively update a Bayesian temperature estimate. We connect the information gained at different measurement settings to the underlying spin dynamics, identifying intersections of temperature-dependent population trajectories as a source of thermometric ambiguity. Using the expected information gain to optimize measurement settings, we experimentally compare unoptimized, a priori optimized, and adaptively optimized protocols. Both optimized protocols accelerate convergence, with the adaptive protocol reducing the average number of measurements required to reach a prescribed precision by a factor of 2.5 compared with the unoptimized protocol. In the many-measurement regime, we further characterize the protocols through their asymptotic error scaling and the accumulation of Fisher information, while testing consistency with the expected Cram\\'er-Rao bound (ECRB) and the Bernstein-von Mises theorem. These results connect the microscopic dynamics of a quantum probe to efficient measurement design and establish Bayesian spin thermometry as a practical approach for ultracold-gas experiments.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "sensing"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "sensing"
-    ],
-    "final_genre_ids": [
-     "sensing"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u8d85\u4f4e\u6e29\u91cf\u5b50\u30ac\u30b9\u3092\u7528\u3044\u305f\u5b9f\u9a13\u306b\u304a\u3044\u3066\u3001\u9ad8\u7cbe\u5ea6\u306a\u6e29\u5ea6\u6e2c\u5b9a\u306f\u4e0d\u53ef\u6b20\u3067\u3042\u308b\u304c\u3001\u98db\u884c\u6642\u9593\u6cd5\u306a\u3069\u306e\u5f93\u6765\u306e\u624b\u6cd5\u306f\u7834\u58ca\u7684\u3067\u3042\u308a\u3001\u539f\u5b50\u5bc6\u5ea6\u304c\u4f4e\u3044\u3068\u611f\u5ea6\u304c\u4f4e\u4e0b\u3057\u3066\u3057\u307e\u3046\u3002 \u91cf\u5b50\u30d7\u30ed\u30fc\u30d6\u306f\u3001\u6e29\u5ea6\u60c5\u5831\u3092\u30a2\u30af\u30bb\u30b9\u53ef\u80fd\u306a\u5185\u90e8\u81ea\u7531\u5ea6\u306b\u30a8\u30f3\u30b3\u30fc\u30c9\u3059\u308b\u3053\u3068\u3067\u3001\u4ee3\u66ff\u624b\u6bb5\u3092\u63d0\u4f9b\u3059\u308b\u3002\u672c\u7814\u7a76\u3067\u306f\u3001\u8d85\u4f4e\u6e29\u539f\u5b50\u6d74\u306b\u6d78\u6f2c\u3055\u308c\u305f\u975e\u5e73\u8861\u30b9\u30d4\u30f3\u30d9\u30fc\u30b9\u306e\u5358\u4e00\u539f\u5b50\u30d7\u30ed\u30fc\u30d6\u3092\u7528\u3044\u3066\u3001\u30d9\u30a4\u30ba\u6cd5\u306b\u57fa\u3065\u304f\u6e29\u5ea6\u6e2c\u5b9a\u6cd5\u3092\u5b9f\u88c5\u3057\u305f\u3002 \u6e29\u5ea6\u4f9d\u5b58\u6027\u306e\u30b9\u30d4\u30f3\u4ea4\u63db\u885d\u7a81\u306b\u3088\u308a\u3001\u6d74\u306e\u6e29\u5ea6\u304c\u30d7\u30ed\u30fc\u30d6\u539f\u5b50\u306e\u5185\u90e8\u30b9\u30d4\u30f3\u5206\u5e03\u306b\u5199\u50cf\u3055\u308c\u308b\u3002\u6b21\u306b\u3001\u3053\u308c\u3089\u306e\u5206\u5e03\u306e\u6e2c\u5b9a\u7d50\u679c\u3092\u7528\u3044\u3066\u3001\u30d9\u30a4\u30ba\u6e29\u5ea6\u63a8\u5b9a\u5024\u3092\u53cd\u5fa9\u7684\u306b\u66f4\u65b0\u3059\u308b\u3002\u6211\u3005\u306f\u3001\u7570\u306a\u308b\u6e2c\u5b9a\u8a2d\u5b9a\u3067\u5f97\u3089\u308c\u305f\u60c5\u5831\u3092\u57fa\u790e\u3068\u306a\u308b\u30b9\u30d4\u30f3\u30c0\u30a4\u30ca\u30df\u30af\u30b9\u3068\u95a2\u9023\u4ed8\u3051\u3001\u6e29\u5ea6\u4f9d\u5b58\u6027\u306e\u5206\u5e03\u8ecc\u8de1\u306e\u4ea4\u70b9\u3092\u6e29\u5ea6\u6e2c\u5b9a\u306e\u4e0d\u78ba\u5b9f\u6027\u306e\u8981\u56e0\u3068\u3057\u3066\u7279\u5b9a\u3057\u305f\u3002 \u671f\u5f85\u60c5\u5831\u5229\u5f97\u3092\u7528\u3044\u3066\u6e2c\u5b9a\u8a2d\u5b9a\u3092\u6700\u9069\u5316\u3057\u3001\u6700\u9069\u5316\u3055\u308c\u3066\u3044\u306a\u3044\u30d7\u30ed\u30c8\u30b3\u30eb\u3001\u4e8b\u524d\u306e\u6700\u9069\u5316\u304c\u65bd\u3055\u308c\u305f\u30d7\u30ed\u30c8\u30b3\u30eb\u3001\u304a\u3088\u3073\u9069\u5fdc\u7684\u306b\u6700\u9069\u5316\u3055\u308c\u305f\u30d7\u30ed\u30c8\u30b3\u30eb\u3092\u5b9f\u9a13\u7684\u306b\u6bd4\u8f03\u3057\u305f\u3002\u4e21\u65b9\u306e\u6700\u9069\u5316\u30d7\u30ed\u30c8\u30b3\u30eb\u306f\u53ce\u675f\u3092\u52a0\u901f\u3055\u305b\u3001\u9069\u5fdc\u578b\u30d7\u30ed\u30c8\u30b3\u30eb\u3067\u306f\u3001\u6240\u5b9a\u306e\u7cbe\u5ea6\u306b\u5230\u9054\u3059\u308b\u305f\u3081\u306b\u5fc5\u8981\u306a\u5e73\u5747\u6e2c\u5b9a\u56de\u6570\u304c\u3001\u6700\u9069\u5316\u3055\u308c\u3066\u3044\u306a\u3044\u30d7\u30ed\u30c8\u30b3\u30eb\u3068\u6bd4\u8f03\u3057\u30662.5\u5206\u306e1\u306b\u6e1b\u5c11\u3057\u305f\u3002 \u591a\u6e2c\u5b9a\u9818\u57df\u306b\u304a\u3044\u3066\u306f\u3001\u6f38\u8fd1\u7684\u306a\u8aa4\u5dee\u306e\u30b9\u30b1\u30fc\u30ea\u30f3\u30b0\u3068\u30d5\u30a3\u30c3\u30b7\u30e3\u30fc\u60c5\u5831\u306e\u84c4\u7a4d\u3092\u901a\u3058\u3066\u30d7\u30ed\u30c8\u30b3\u30eb\u3092\u3055\u3089\u306b\u7279\u5fb4\u3065\u3051\u308b\u3068\u3068\u3082\u306b\u3001\u671f\u5f85\u3055\u308c\u308b\u30af\u30e9\u30de\u30fc\u30fb\u30e9\u30aa\u306e\u5883\u754c\uff08ECRB\uff09\u304a\u3088\u3073\u30d9\u30eb\u30f3\u30b7\u30e5\u30bf\u30a4\u30f3\u30fb\u30d5\u30a9\u30f3\u30fb\u30df\u30fc\u30bc\u30b9\u306e\u5b9a\u7406\u3068\u306e\u6574\u5408\u6027\u3092\u691c\u8a3c\u3057\u305f\u3002 \u3053\u308c\u3089\u306e\u7d50\u679c\u306f\u3001\u91cf\u5b50\u30d7\u30ed\u30fc\u30d6\u306e\u5fae\u8996\u7684\u30c0\u30a4\u30ca\u30df\u30af\u30b9\u3068\u52b9\u7387\u7684\u306a\u6e2c\u5b9a\u8a2d\u8a08\u3092\u7d50\u3073\u3064\u3051\u3001\u30d9\u30a4\u30b8\u30a2\u30f3\u30fb\u30b9\u30d4\u30f3\u71b1\u6e2c\u5b9a\u6cd5\u3092\u6975\u4f4e\u6e29\u30ac\u30b9\u5b9f\u9a13\u306b\u304a\u3051\u308b\u5b9f\u7528\u7684\u306a\u30a2\u30d7\u30ed\u30fc\u30c1\u3068\u3057\u3066\u78ba\u7acb\u3059\u308b\u3082\u306e\u3067\u3042\u308b\u3002",
-   "title_translated": "\u975e\u5e73\u8861\u5358\u4e00\u539f\u5b50\u30d7\u30ed\u30fc\u30d6\u3092\u7528\u3044\u305f\u8d85\u4f4e\u6e29\u30ac\u30b9\u306e\u30d9\u30a4\u30ba\u91cf\u5b50\u71b1\u6e2c\u5b9a",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "sensing": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27609": {
-   "paper": {
-    "id": "2611.27609",
-    "title": "Quantum-Informed Regularized Poisson Learning for Graph-Based Semi-Supervised Classification",
-    "link": "https://arxiv.org/abs/2611.27609",
-    "authors": "Hamed Gholipour, Farid Bozorgnia, Hamzeh Mohammadigheymasi, Joao Neves, Moharram Challenger",
-    "announce_type": "cross",
-    "categories": [
-     "cs.LG",
-     "quant-ph"
-    ],
-    "primary": "cs.LG",
-    "abstract": "We introduce IPQSSL, a quantum-informed regularized Poisson framework for graph-based semi-supervised classification under scarce labels. Local graph feature contexts are QR factorized, lifted to unitary encodings, and processed by a shared variational circuit whose measurements yield node wise diagonal weights that stabilize a symmetrized Poisson system. We establish positive definiteness of the symmetrized, regularized operator under explicit spectral conditions and derive a Hermitian, block encoding compatible formulation that separates the classical NISQ oriented implementation from a future fault-tolerant pathway. Across seven benchmarks spanning tabular data and a citation network, the effect of regularization is dataset- and budget-dependent: IPQSSL improves over the Poisson baselines on Iris and Wine at all but the single-label budget, reaching 0.946 accuracy on Iris at ten labels per class and at every budget on German Credit, where, however, all methods remain below the majority class rate. Original Poisson remains preferable on Breast Cancer, Heart Disease, Optdigits, and Cora, with the deficit narrowing as the label budget grows on the two largest graphs. Ablations attribute the gains to diagonal stabilization rather than variational training. The result is a resource transparent bridge between Poisson graph learning and quantum linear algebra, with an explicit empirical delineation of when diagonal regularization helps.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "qml",
-    "nisq"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "qml",
-     "nisq"
-    ],
-    "final_genre_ids": [
-     "qml",
-     "nisq"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u672c\u7a3f\u3067\u306f\u3001\u30e9\u30d9\u30eb\u304c\u4e4f\u3057\u3044\u72b6\u6cc1\u4e0b\u306b\u304a\u3051\u308b\u30b0\u30e9\u30d5\u30d9\u30fc\u30b9\u306e\u534a\u6559\u5e2b\u3042\u308a\u5206\u985e\u306e\u305f\u3081\u306e\u3001\u91cf\u5b50\u60c5\u5831\u3092\u6d3b\u7528\u3057\u305f\u6b63\u5247\u5316\u30dd\u30a2\u30bd\u30f3\u30d5\u30ec\u30fc\u30e0\u30ef\u30fc\u30af\u300cIPQSSL\u300d\u3092\u63d0\u6848\u3059\u308b\u3002\u5c40\u6240\u7684\u306a\u30b0\u30e9\u30d5\u7279\u5fb4\u30b3\u30f3\u30c6\u30ad\u30b9\u30c8\u306fQR\u5206\u89e3\u3055\u308c\u3001\u30e6\u30cb\u30bf\u30ea\u30a8\u30f3\u30b3\u30fc\u30c7\u30a3\u30f3\u30b0\u3078\u3068\u6607\u683c\u3055\u308c\u305f\u5f8c\u3001\u5171\u6709\u306e\u5909\u5206\u56de\u8def\u306b\u3088\u3063\u3066\u51e6\u7406\u3055\u308c\u308b\u3002\u3053\u306e\u56de\u8def\u306e\u6e2c\u5b9a\u7d50\u679c\u304b\u3089\u5f97\u3089\u308c\u308b\u30ce\u30fc\u30c9\u3054\u3068\u306e\u5bfe\u89d2\u91cd\u307f\u306f\u3001\u5bfe\u79f0\u5316\u3055\u308c\u305f\u30dd\u30a2\u30bd\u30f3\u7cfb\u3092\u5b89\u5b9a\u5316\u3055\u305b\u308b\u3002 \u6211\u3005\u306f\u3001\u660e\u793a\u7684\u306a\u30b9\u30da\u30af\u30c8\u30eb\u6761\u4ef6\u4e0b\u306b\u304a\u3044\u3066\u3001\u5bfe\u79f0\u5316\u30fb\u6b63\u5247\u5316\u3055\u308c\u305f\u6f14\u7b97\u5b50\u306e\u6b63\u5b9a\u6027\u3092\u78ba\u7acb\u3057\u3001\u53e4\u5178\u7684\u306aNISQ\u6307\u5411\u306e\u5b9f\u88c5\u3068\u5c06\u6765\u306e\u8010\u6545\u969c\u6027\u3078\u306e\u9053\u7b4b\u3092\u5206\u96e2\u3059\u308b\u3001\u30cf\u30fc\u30df\u30c6\u30a3\u30a2\u30f3\u304b\u3064\u30d6\u30ed\u30c3\u30af\u30a8\u30f3\u30b3\u30fc\u30c7\u30a3\u30f3\u30b0\u3068\u4e92\u63db\u6027\u306e\u3042\u308b\u5b9a\u5f0f\u5316\u3092\u5c0e\u51fa\u3059\u308b\u3002\u8868\u5f62\u5f0f\u30c7\u30fc\u30bf\u3084\u5f15\u7528\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u306b\u53ca\u30767\u3064\u306e\u30d9\u30f3\u30c1\u30de\u30fc\u30af\u306b\u304a\u3044\u3066\u3001\u6b63\u5247\u5316\u306e\u52b9\u679c\u306f\u30c7\u30fc\u30bf\u30bb\u30c3\u30c8\u304a\u3088\u3073\u4e88\u7b97\u306b\u4f9d\u5b58\u3059\u308b\uff1a IPQSSL\u306f\u3001Iris\u304a\u3088\u3073Wine\u306b\u304a\u3044\u3066\u3001\u30b7\u30f3\u30b0\u30eb\u30e9\u30d9\u30eb\u306e\u4e88\u7b97\u3092\u9664\u304f\u3059\u3079\u3066\u306e\u4e88\u7b97\u3067\u30dd\u30a2\u30bd\u30f3\u30d9\u30fc\u30b9\u30e9\u30a4\u30f3\u3092\u4e0a\u56de\u308a\u3001Iris\u3067\u306f\u30af\u30e9\u30b9\u3042\u305f\u308a10\u30e9\u30d9\u30eb\u30670.946\u306e\u7cbe\u5ea6\u3092\u9054\u6210\u3057\u3001German Credit\u3067\u306f\u3059\u3079\u3066\u306e\u4e88\u7b97\u3067\u7cbe\u5ea6\u3092\u9054\u6210\u3057\u305f\u3002\u305f\u3060\u3057\u3001German Credit\u3067\u306f\u3001\u3069\u306e\u624b\u6cd5\u3082\u591a\u6570\u6d3e\u30af\u30e9\u30b9\u306e\u7cbe\u5ea6\u3092\u4e0b\u56de\u3063\u3066\u3044\u308b\u3002 Breast Cancer\u3001Heart Disease\u3001Optdigits\u3001\u304a\u3088\u3073Cora\u3067\u306f\u3001\u30aa\u30ea\u30b8\u30ca\u30eb\u306e\u30dd\u30a2\u30bd\u30f3\u6cd5\u304c\u4f9d\u7136\u3068\u3057\u3066\u512a\u308c\u3066\u304a\u308a\u30012\u3064\u306e\u6700\u5927\u898f\u6a21\u306e\u30b0\u30e9\u30d5\u3067\u306f\u3001\u30e9\u30d9\u30eb\u4e88\u7b97\u306e\u5897\u52a0\u306b\u4f34\u3044\u305d\u306e\u5dee\u306f\u7e2e\u5c0f\u3057\u3066\u3044\u308b\u3002\u30a2\u30d6\u30ec\u30fc\u30b7\u30e7\u30f3\u5b9f\u9a13\u306e\u7d50\u679c\u3001\u3053\u306e\u6027\u80fd\u5411\u4e0a\u306f\u5909\u5206\u5b66\u7fd2\u3067\u306f\u306a\u304f\u3001\u5bfe\u89d2\u5b89\u5b9a\u5316\u306b\u8d77\u56e0\u3059\u308b\u3053\u3068\u304c\u793a\u3055\u308c\u305f\u3002 \u305d\u306e\u7d50\u679c\u3001\u30dd\u30a2\u30bd\u30f3\u30b0\u30e9\u30d5\u5b66\u7fd2\u3068\u91cf\u5b50\u7dda\u5f62\u4ee3\u6570\u306e\u9593\u306b\u306f\u3001\u30ea\u30bd\u30fc\u30b9\u306b\u4f9d\u5b58\u3057\u306a\u3044\u6a4b\u6e21\u3057\u304c\u53ef\u80fd\u3068\u306a\u308a\u3001\u5bfe\u89d2\u6b63\u898f\u5316\u304c\u6709\u52b9\u3068\u306a\u308b\u6761\u4ef6\u306b\u3064\u3044\u3066\u3001\u7d4c\u9a13\u7684\u306b\u660e\u78ba\u306a\u533a\u5225\u304c\u793a\u3055\u308c\u305f\u3002",
-   "title_translated": "\u30b0\u30e9\u30d5\u30d9\u30fc\u30b9\u306e\u534a\u6559\u5e2b\u3042\u308a\u5206\u985e\u306e\u305f\u3081\u306e\u3001\u91cf\u5b50\u60c5\u5831\u306b\u57fa\u3065\u304f\u6b63\u5247\u5316\u30dd\u30a2\u30bd\u30f3\u5b66\u7fd2",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "qml": {
-     "status": "pending"
-    },
-    "nisq": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27632": {
-   "paper": {
-    "id": "2611.27632",
-    "title": "Navigating Quantum Education at the University level: Pedagogical Pathways and a Roadmap for Textbook Selection",
-    "link": "https://arxiv.org/abs/2611.27632",
-    "authors": "Yajie Liang, Menno Poot, Carsten Schuck, Stefan Heusler",
-    "announce_type": "cross",
-    "categories": [
-     "physics.ed-ph",
-     "quant-ph"
-    ],
-    "primary": "physics.ed-ph",
-    "abstract": "Instruction in quantum mechanics (QM) is often categorized by its entry point as 'wave-first' or 'spin-first', yet these labels lack consistent definitions and overlook other established or emerging approaches. Moreover, while capturing broad differences in topic selection and sequencing, this binary framing obscures critical differences in contextualization--how three dimensions (mathematical tools, phenomena and experiments, and theoretical concepts) are framed and connected to support student sensemaking. Research also rarely examines how such pedagogical choices unfold across the undergraduate-to-graduate trajectory. Using textbooks as an analytical lens to map these choices and characterize overarching pathways, encompassing entry points and overall orientations, we comparatively analyze the selection, sequencing, and contextualization of core topics across these 3 dimensions, alongside prefaces and introductions, in 36 university QM textbooks spanning countries and eras. At the topic level, we show that identical topics occupy widely different curricular roles depending on their contextualization. Synthesizing these findings into pathways, we identify three additional entry-point archetypes (labeled path-, qubit-, and axiom-first) and characterize all 5 approaches, showing that most textbooks combine multiple archetypes in their opening chapters. Extending this synthesis beyond entry points, we map textbooks' overall orientations relative to mathematics, experiment and application, and theoretical physics. Interpreting these profiles alongside authors' rationales reveals how educators navigate competing trade-offs among mathematical accessibility, theoretical generality, physical motivation, and modern developments. This study provides a multidimensional framework, substantive examples, and a practical roadmap for textbook selection and curriculum design in QM education.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "other"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "other"
-    ],
-    "final_genre_ids": [
-     "other"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u91cf\u5b50\u529b\u5b66\uff08QM\uff09\u306e\u6307\u5c0e\u306f\u3001\u305d\u306e\u5c0e\u5165\u70b9\u306b\u3088\u3063\u3066\u300c\u6ce2\u52d5\u512a\u5148\u300d\u307e\u305f\u306f\u300c\u30b9\u30d4\u30f3\u512a\u5148\u300d\u306b\u5206\u985e\u3055\u308c\u308b\u3053\u3068\u304c\u591a\u3044\u304c\u3001\u3053\u308c\u3089\u306e\u547c\u79f0\u306b\u306f\u4e00\u8cab\u3057\u305f\u5b9a\u7fa9\u304c\u6b20\u3051\u3066\u304a\u308a\u3001\u4ed6\u306e\u78ba\u7acb\u3055\u308c\u305f\u30a2\u30d7\u30ed\u30fc\u30c1\u3084\u65b0\u305f\u306a\u30a2\u30d7\u30ed\u30fc\u30c1\u304c\u898b\u904e\u3054\u3055\u308c\u3066\u3044\u308b\u3002 \u3055\u3089\u306b\u3001\u3053\u306e\u4e8c\u5206\u6cd5\u306f\u3001\u30c8\u30d4\u30c3\u30af\u306e\u9078\u629e\u3084\u9806\u5e8f\u4ed8\u3051\u306b\u304a\u3051\u308b\u5e83\u7bc4\u306a\u9055\u3044\u3092\u6349\u3048\u3066\u3044\u308b\u4e00\u65b9\u3067\u3001\u6587\u8108\u5316\u306b\u304a\u3051\u308b\u91cd\u8981\u306a\u9055\u3044\u2015\u2015\u3059\u306a\u308f\u3061\u3001\u5b66\u751f\u306e\u300c\u610f\u5473\u3065\u3051\u300d\u3092\u652f\u63f4\u3059\u308b\u305f\u3081\u306b\u30013\u3064\u306e\u6b21\u5143\uff08\u6570\u5b66\u7684\u30c4\u30fc\u30eb\u3001\u73fe\u8c61\u3068\u5b9f\u9a13\u3001\u7406\u8ad6\u7684\u6982\u5ff5\uff09\u304c\u3069\u306e\u3088\u3046\u306b\u67a0\u7d44\u307f\u5316\u3055\u308c\u3001\u7d50\u3073\u3064\u3051\u3089\u308c\u3066\u3044\u308b\u304b\u2015\u2015\u3092\u8986\u3044\u96a0\u3057\u3066\u3057\u307e\u3063\u3066\u3044\u308b\u3002\u307e\u305f\u3001\u3053\u3046\u3057\u305f\u6559\u80b2\u4e0a\u306e\u9078\u629e\u304c\u3001\u5b66\u90e8\u304b\u3089\u5927\u5b66\u9662\u3078\u3068\u7d9a\u304f\u5b66\u7fd2\u904e\u7a0b\u306b\u304a\u3044\u3066\u3069\u306e\u3088\u3046\u306b\u5c55\u958b\u3055\u308c\u308b\u304b\u306b\u3064\u3044\u3066\u691c\u8a3c\u3057\u305f\u7814\u7a76\u3082\u307b\u3068\u3093\u3069\u306a\u3044\u3002 \u672c\u7814\u7a76\u3067\u306f\u3001\u6559\u79d1\u66f8\u3092\u5206\u6790\u306e\u30ec\u30f3\u30ba\u3068\u3057\u3066\u7528\u3044\u3001\u3053\u308c\u3089\u306e\u9078\u629e\u3092\u53ef\u8996\u5316\u3057\u3001\u5c0e\u5165\u70b9\u3084\u5168\u4f53\u7684\u306a\u65b9\u5411\u6027\u3092\u5305\u542b\u3059\u308b\u5305\u62ec\u7684\u306a\u7d4c\u8def\u3092\u7279\u5fb4\u3065\u3051\u308b\u3053\u3068\u3067\u3001\u56fd\u3084\u6642\u4ee3\u3092\u8de8\u305036\u518a\u306e\u5927\u5b66\u7528\u91cf\u5b50\u529b\u5b66\uff08QM\uff09\u6559\u79d1\u66f8\u306b\u304a\u3044\u3066\u3001\u5e8f\u6587\u3084\u5c0e\u5165\u90e8\u3068\u3068\u3082\u306b\u3001\u3053\u308c\u30893\u3064\u306e\u6b21\u5143\u306b\u308f\u305f\u308b\u4e2d\u6838\u30c8\u30d4\u30c3\u30af\u306e\u9078\u629e\u3001\u9806\u5e8f\u4ed8\u3051\u3001\u6587\u8108\u5316\u3092\u6bd4\u8f03\u5206\u6790\u3059\u308b\u3002 \u30c8\u30d4\u30c3\u30af\u30ec\u30d9\u30eb\u3067\u306f\u3001\u540c\u4e00\u306e\u30c8\u30d4\u30c3\u30af\u3067\u3042\u3063\u3066\u3082\u3001\u305d\u306e\u6587\u8108\u5316\u306e\u4ed5\u65b9\u306b\u3088\u3063\u3066\u30ab\u30ea\u30ad\u30e5\u30e9\u30e0\u4e0a\u3067\u306e\u5f79\u5272\u304c\u5927\u304d\u304f\u7570\u306a\u308b\u3053\u3068\u3092\u793a\u3057\u305f\u3002 \u3053\u308c\u3089\u306e\u77e5\u898b\u3092\u5b66\u7fd2\u7d4c\u8def\u3068\u3057\u3066\u7d71\u5408\u3057\u30013\u3064\u306e\u8ffd\u52a0\u7684\u306a\u5c0e\u5165\u70b9\u306e\u30a2\u30fc\u30ad\u30bf\u30a4\u30d7\uff08\u300c\u7d4c\u8def\u512a\u5148\u578b\u300d\u3001\u300c\u91cf\u5b50\u30d3\u30c3\u30c8\u512a\u5148\u578b\u300d\u3001\u300c\u516c\u7406\u512a\u5148\u578b\u300d\u3068\u547d\u540d\uff09\u3092\u7279\u5b9a\u3057\u3001\u3053\u308c\u30895\u3064\u306e\u30a2\u30d7\u30ed\u30fc\u30c1\u3059\u3079\u3066\u3092\u7279\u5fb4\u3065\u3051\u3001\u307b\u3068\u3093\u3069\u306e\u6559\u79d1\u66f8\u304c\u5192\u982d\u306e\u7ae0\u3067\u8907\u6570\u306e\u30a2\u30fc\u30ad\u30bf\u30a4\u30d7\u3092\u7d44\u307f\u5408\u308f\u305b\u3066 \u3044\u308b\u3053\u3068\u3092\u793a\u3057\u305f\u3002 \u3053\u306e\u7d71\u5408\u3092\u5c0e\u5165\u70b9\u3092\u8d85\u3048\u3066\u62e1\u5f35\u3057\u3001\u6570\u5b66\u3001\u5b9f\u9a13\u30fb\u5fdc\u7528\u3001\u7406\u8ad6\u7269\u7406\u5b66\u306b\u5bfe\u3059\u308b\u6559\u79d1\u66f8\u306e\u5168\u4f53\u7684\u306a\u65b9\u5411\u6027\u3092\u30de\u30c3\u30d4\u30f3\u30b0\u3057\u305f\u3002 \u3053\u308c\u3089\u306e\u30d7\u30ed\u30d5\u30a1\u30a4\u30eb\u3092\u8457\u8005\u306e\u610f\u56f3\u3068\u4f75\u305b\u3066\u89e3\u91c8\u3059\u308b\u3053\u3068\u3067\u3001\u6559\u80b2\u8005\u304c\u3001\u6570\u5b66\u7684\u306a\u7406\u89e3\u3057\u3084\u3059\u3055\u3001\u7406\u8ad6\u7684\u306a\u4e00\u822c\u6027\u3001\u7269\u7406\u7684\u306a\u52d5\u6a5f\u4ed8\u3051\u3001\u305d\u3057\u3066\u73fe\u4ee3\u7684\u306a\u9032\u5c55\u3068\u3044\u3046\u3001\u76f8\u53cd\u3059\u308b\u8981\u7d20\u9593\u306e\u30c8\u30ec\u30fc\u30c9\u30aa\u30d5\u3092\u3069\u306e\u3088\u3046\u306b\u8abf\u6574\u3057\u3066\u3044\u308b\u304b\u304c\u660e\u3089\u304b\u306b\u306a\u308b\u3002\u672c\u7814\u7a76\u306f\u3001\u91cf\u5b50\u529b\u5b66\u6559\u80b2\u306b\u304a\u3051\u308b\u6559\u79d1\u66f8\u306e\u9078\u5b9a\u3068\u30ab\u30ea\u30ad\u30e5\u30e9\u30e0\u8a2d\u8a08\u306e\u305f\u3081\u306e\u3001\u591a\u6b21\u5143\u7684\u306a\u67a0\u7d44\u307f\u3001\u5177\u4f53\u7684\u306a\u4e8b\u4f8b\u3001\u304a\u3088\u3073\u5b9f\u8df5\u7684\u306a\u30ed\u30fc\u30c9\u30de\u30c3\u30d7\u3092\u63d0\u4f9b\u3059\u308b\u3082\u306e\u3067\u3042\u308b\u3002",
-   "title_translated": "\u5927\u5b66\u306b\u304a\u3051\u308b\u91cf\u5b50\u6559\u80b2\u306e\u3042\u308a\u65b9\uff1a\u6559\u80b2\u624b\u6cd5\u3068\u6559\u79d1\u66f8\u9078\u5b9a\u306e\u30ed\u30fc\u30c9\u30de\u30c3\u30d7",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "other": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27846": {
-   "paper": {
-    "id": "2611.27846",
-    "title": "Pseudo-entropy in Thouless Pumps and Majorana Topological Phases",
-    "link": "https://arxiv.org/abs/2611.27846",
-    "authors": "Nabaraj Khatri, Shuvam Chudal, Ashish Khanal",
-    "announce_type": "cross",
-    "categories": [
-     "cond-mat.stat-mech",
-     "quant-ph"
-    ],
-    "primary": "cond-mat.stat-mech",
-    "abstract": "We study the average excess pseudo entropy, $\\Delta S_{12}$, in the Rice-Mele model under Thouless pumping. We compute it for two driving schemes, the control-freak and smooth pumps, under open and periodic boundary conditions. We find that $\\Delta S_{12}$ distinguishes the trivial, monomer, and topological stages of the pump, and that it depends on the boundary condition, the driving scheme, and the reference time. We also find that a nonzero staggered potential breaks chiral symmetry and gaps out the SSH critical point, thereby flattening the pseudo-entropy peak at the phase boundary. We also study reference-state dependence in the open Kitaev chain, comparing a fixed even-parity target with five reference families: even free-fermion, pairing-only, vacuum, and two fixed gapped states. We find that the pseudo-entropy response depends on the reference and on the parity of the subsystem size, even when the reference remains gapped. At $\\mu=0$, the pairing-only reference gives the exact result $S_{\\mathrm{pr}}=\\ln 2$ for $L=4m+2$, while the $L=4m$ sequence has analytically determined finite-size corrections. These results show that, in both models, pseudo entropy is a property of the reference-target pair and the subsystem partition, rather than a reference-independent signature of the topological phase.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "qit"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "qit"
-    ],
-    "final_genre_ids": [
-     "qit"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u672c\u7814\u7a76\u3067\u306f\u3001\u30c8\u30a5\u30fc\u30ec\u30b9\u30fb\u30dd\u30f3\u30d4\u30f3\u30b0\u4e0b\u306b\u304a\u3051\u308b\u30e9\u30a4\u30b9\u30fb\u30e1\u30ec\u30e2\u30c7\u30eb\u306e\u5e73\u5747\u904e\u5270\u64ec\u30a8\u30f3\u30c8\u30ed\u30d4\u30fc $\\Delta S_{12}$ \u306b\u3064\u3044\u3066\u691c\u8a0e\u3059\u308b\u3002\u958b\u653e\u5883\u754c\u6761\u4ef6\u304a\u3088\u3073\u5468\u671f\u7684\u5883\u754c\u6761\u4ef6\u4e0b\u306b\u304a\u3044\u3066\u3001\u300c\u30b3\u30f3\u30c8\u30ed\u30fc\u30eb\u30d5\u30ea\u30fc\u30af\u300d\u304a\u3088\u3073\u300c\u30b9\u30e0\u30fc\u30ba\u300d\u306e2\u3064\u306e\u99c6\u52d5\u30b9\u30ad\u30fc\u30e0\u306b\u3064\u3044\u3066\u3001\u3053\u308c\u3092\u8a08\u7b97\u3057\u305f\u3002 \u305d\u306e\u7d50\u679c\u3001$\\Delta S_{12}$\u306f\u30dd\u30f3\u30d7\u306e\u81ea\u660e\u6bb5\u968e\u3001\u30e2\u30ce\u30de\u30fc\u6bb5\u968e\u3001\u304a\u3088\u3073\u30c8\u30dd\u30ed\u30b8\u30ab\u30eb\u6bb5\u968e\u3092\u533a\u5225\u3057\u3001\u304b\u3064\u5883\u754c\u6761\u4ef6\u3001\u99c6\u52d5\u65b9\u5f0f\u3001\u304a\u3088\u3073\u57fa\u6e96\u6642\u9593\u306b\u4f9d\u5b58\u3059\u308b\u3053\u3068\u304c\u308f\u304b\u3063\u305f\u3002 \u307e\u305f\u3001\u30bc\u30ed\u3067\u306a\u3044\u30b9\u30bf\u30c3\u30ac\u30fc\u30c9\u30dd\u30c6\u30f3\u30b7\u30e3\u30eb\u306f\u30ad\u30e9\u30eb\u5bfe\u79f0\u6027\u3092\u7834\u308a\u3001SSH\u81e8\u754c\u70b9\u3092\u30ae\u30e3\u30c3\u30d7\u5316\u3059\u308b\u3053\u3068\u3067\u3001\u76f8\u5883\u754c\u306b\u304a\u3051\u308b\u64ec\u30a8\u30f3\u30c8\u30ed\u30d4\u30fc\u306e\u30d4\u30fc\u30af\u3092\u5e73\u5766\u5316\u3059\u308b\u3053\u3068\u3082\u660e\u3089\u304b\u306b\u306a\u3063\u305f\u3002 \u3055\u3089\u306b\u3001\u958b\u653e\u30ad\u30bf\u30a8\u30d5\u9396\u306b\u304a\u3051\u308b\u57fa\u6e96\u72b6\u614b\u4f9d\u5b58\u6027\u3092\u691c\u8a0e\u3057\u3001\u56fa\u5b9a\u3055\u308c\u305f\u5076\u6570\u30d1\u30ea\u30c6\u30a3\u306e\u30bf\u30fc\u30b2\u30c3\u30c8\u72b6\u614b\u3068\u30015\u3064\u306e\u57fa\u6e96\u7cfb\uff08\u5076\u6570\u81ea\u7531\u30d5\u30a7\u30eb\u30df\u30aa\u30f3\u3001\u30da\u30a2\u30ea\u30f3\u30b0\u306e\u307f\u3001\u771f\u7a7a\u3001\u304a\u3088\u30732\u3064\u306e\u56fa\u5b9a\u30ae\u30e3\u30c3\u30d7\u72b6\u614b\uff09\u3092\u6bd4\u8f03\u3057\u305f\u3002 \u53c2\u7167\u72b6\u614b\u304c\u30ae\u30e3\u30c3\u30d7\u72b6\u614b\u306e\u307e\u307e\u3067\u3042\u3063\u3066\u3082\u3001\u64ec\u30a8\u30f3\u30c8\u30ed\u30d4\u30fc\u306e\u5fdc\u7b54\u306f\u53c2\u7167\u72b6\u614b\u304a\u3088\u3073\u90e8\u5206\u7cfb\u306e\u30b5\u30a4\u30ba\u306e\u30d1\u30ea\u30c6\u30a3\u306b\u4f9d\u5b58\u3059\u308b\u3053\u3068\u304c\u308f\u304b\u3063\u305f\u3002 $\\mu=0$ \u306b\u304a\u3044\u3066\u3001$L=4m+2$ \u306e\u5834\u5408\u3001\u30da\u30a2\u30ea\u30f3\u30b0\u306e\u307f\u306e\u53c2\u7167\u7cfb\u306f\u6b63\u78ba\u306a\u7d50\u679c $S_{\\mathrm{pr}}=\\ln 2$ \u3092\u4e0e\u3048\u308b\u4e00\u65b9\u3001$L=4m$ \u306e\u7cfb\u5217\u306b\u306f\u89e3\u6790\u7684\u306b\u6c7a\u5b9a\u3055\u308c\u305f\u6709\u9650\u30b5\u30a4\u30ba\u88dc\u6b63\u304c\u5b58\u5728\u3059\u308b\u3002 \u3053\u308c\u3089\u306e\u7d50\u679c\u306f\u3001\u3069\u3061\u3089\u306e\u30e2\u30c7\u30eb\u306b\u304a\u3044\u3066\u3082\u3001\u64ec\u30a8\u30f3\u30c8\u30ed\u30d4\u30fc\u304c\u30c8\u30dd\u30ed\u30b8\u30ab\u30eb\u76f8\u306e\u53c2\u7167\u7cfb\u306b\u4f9d\u5b58\u3057\u306a\u3044\u7279\u5fb4\u3068\u3044\u3046\u3088\u308a\u306f\u3001\u53c2\u7167\u7cfb-\u30bf\u30fc\u30b2\u30c3\u30c8\u5bfe\u304a\u3088\u3073\u90e8\u5206\u7cfb\u306e\u5206\u5272\u306e\u6027\u8cea\u3067\u3042\u308b\u3053\u3068\u3092\u793a\u3057\u3066\u3044\u308b\u3002",
-   "title_translated": "\u30c8\u30a5\u30fc\u30ec\u30b9\u30fb\u30dd\u30f3\u30d7\u304a\u3088\u3073\u30de\u30b8\u30e7\u30e9\u30ca\u4f4d\u76f8\u306b\u304a\u3051\u308b\u64ec\u30a8\u30f3\u30c8\u30ed\u30d4\u30fc",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "qit": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27982": {
-   "paper": {
-    "id": "2611.27982",
-    "title": "Quantum Many-Body Scars from Operator Size",
-    "link": "https://arxiv.org/abs/2611.27982",
-    "authors": "Debarghya Chakraborty, Dario Rosa",
-    "announce_type": "cross",
-    "categories": [
-     "cond-mat.str-el",
-     "hep-th",
-     "quant-ph"
-    ],
-    "primary": "cond-mat.str-el",
-    "abstract": "We present a general construction of approximate many-body scar states in two copies of a system using a bilocal size interaction that couples one site to its partner on the other copy. For an uncoupled two-sided Hamiltonian whose terms have fixed size in an operator basis, we identify polynomially many Krylov basis states that it annihilates and that, in the thermodynamic limit, become concentrated on a single size sector. The size operator splits them into a tower of equally spaced levels that gives rise to coherent revivals characterized by collective oscillations of energy across the two copies. We provide a concrete realization of this construction in two copies of a general $q$-body nearest-neighbor spin chain, and the SYK model.",
-    "source_feed": "quant-ph"
-   },
-   "genre_ids": [
-    "other"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "other"
-    ],
-    "final_genre_ids": [
-     "other"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u672c\u7a3f\u3067\u306f\u3001\u3042\u308b\u30b7\u30b9\u30c6\u30e0\u306e2\u3064\u306e\u30b3\u30d4\u30fc\u306b\u304a\u3044\u3066\u3001\u4e00\u65b9\u306e\u30b5\u30a4\u30c8\u306e\u30d1\u30fc\u30c8\u30ca\u30fc\u3068\u306a\u308b\u4ed6\u65b9\u306e\u30b3\u30d4\u30fc\u4e0a\u306e\u30b5\u30a4\u30c8\u3068\u7d50\u5408\u3059\u308b\u53cc\u5c40\u6240\u30b5\u30a4\u30ba\u76f8\u4e92\u4f5c\u7528\u3092\u7528\u3044\u3066\u3001\u8fd1\u4f3c\u7684\u306a\u591a\u4f53\u30b9\u30ab\u30fc\u72b6\u614b\u306e\u4e00\u822c\u7684\u306a\u69cb\u6210\u6cd5\u3092\u63d0\u793a\u3059\u308b\u3002 \u6f14\u7b97\u5b50\u57fa\u5e95\u306b\u304a\u3044\u3066\u9805\u306e\u30b5\u30a4\u30ba\u304c\u56fa\u5b9a\u3055\u308c\u3066\u3044\u308b\u975e\u7d50\u5408\u306e\u53cc\u5074\u30cf\u30df\u30eb\u30c8\u30cb\u30a2\u30f3\u306b\u3064\u3044\u3066\u3001\u305d\u308c\u304c\u6d88\u6ec5\u3055\u305b\u3001\u304b\u3064\u71b1\u529b\u5b66\u7684\u6975\u9650\u306b\u304a\u3044\u3066\u5358\u4e00\u306e\u30b5\u30a4\u30ba\u30bb\u30af\u30bf\u30fc\u306b\u96c6\u4e2d\u3059\u308b\u591a\u9805\u5f0f\u500b\u306e\u30af\u30ea\u30ed\u30d5\u57fa\u5e95\u72b6\u614b\u3092\u540c\u5b9a\u3059\u308b\u3002 \u30b5\u30a4\u30ba\u6f14\u7b97\u5b50\u306f\u3001\u3053\u308c\u3089\u3092\u7b49\u9593\u9694\u306e\u6e96\u4f4d\u304b\u3089\u306a\u308b\u30bf\u30ef\u30fc\u306b\u5206\u5272\u3057\u30012\u3064\u306e\u30b3\u30d4\u30fc\u306b\u308f\u305f\u308b\u30a8\u30cd\u30eb\u30ae\u30fc\u306e\u96c6\u56e3\u7684\u632f\u52d5\u306b\u3088\u3063\u3066\u7279\u5fb4\u3065\u3051\u3089\u308c\u308b\u30b3\u30d2\u30fc\u30ec\u30f3\u30c8\u306a\u5fa9\u6d3b\u3092\u5f15\u304d\u8d77\u3053\u3059\u3002\u6211\u3005\u306f\u3001\u4e00\u822c\u7684\u306a$q$\u4f53\u6700\u8fd1\u63a5\u30b9\u30d4\u30f3\u9396\u306e2\u3064\u306e\u30b3\u30d4\u30fc\u304a\u3088\u3073SYK\u30e2\u30c7\u30eb\u306b\u304a\u3044\u3066\u3001\u3053\u306e\u69cb\u6210\u6cd5\u306e\u5177\u4f53\u7684\u306a\u5b9f\u73fe\u4f8b\u3092\u793a\u3059\u3002",
-   "title_translated": "\u6f14\u7b97\u5b50\u306e\u5927\u304d\u3055\u306b\u3088\u308b\u91cf\u5b50\u591a\u4f53\u7cfb\u306e\u75d5\u8de1",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "other": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  },
-  "2611.27909": {
-   "paper": {
-    "id": "2611.27909",
-    "title": "Metadata-Private Voice Communication over Tor using Post-Quantum Key Encapsulation",
-    "link": "https://arxiv.org/abs/2611.27909",
-    "authors": "Noah Zeinali Yazdi, Samuel Zeinali Yazdi",
-    "categories": [
-     "cs.CR"
-    ],
-    "primary": "cs.CR",
-    "abstract": "Encrypted voice communication systems commonly protect call content but expose significant metadata, including the network identities of both parties, call timing, and traffic patterns. Simultaneously, advances in quantum computing threaten the asymmetric primitives underlying conventional key exchange, creating a harvest-now, decrypt-later risk for long-lived sensitive communications. Existing systems address at most one of these concerns: secure VoIP applications such as Signal and Wire rely on centralized infrastructure and classical cryptography, while anonymous communication tools built on the Tor network support only text messaging and lack post-quantum key encapsulation. This paper presents SAPEC (Secure Anonymous Peer Exchange Communicator), a peer-to-peer voice communication system that simultaneously addresses anonymity, decentralization, and quantum resistance. SAPEC routes all traffic exclusively through Tor hidden services, concealing the IP addresses of both parties, and augments the standard TLS handshake with a custom protocol layer that performs ML-KEM-1024 key establishment, a settle on AES-256 symmetrical keys and mutual Dilithium identity verification before any audio is transmitted. All audio is subsequently encrypted under AES-256. A removable Crypto Ignition Key prevents identity key material from being stored on the device. Empirical evaluation across 45 independently circuit-rebuilt test runs yielded a median one-way audio delay of 355 milliseconds and a median connection setup time of 7.61 seconds on same-region Tor circuits, demonstrating that interactive voice communication over onion routing is practically achievable.",
-    "published": "2026-11-20T17:47:48Z",
-    "updated": "2026-11-20T17:47:48Z",
-    "source_feed": "cs.CR",
-    "announce_type": "external",
-    "external_genre_ids": [
-     "pqc"
-    ],
-    "external_classifier": "gemini-3.5-flash-lite",
-    "external_classification": {
-     "policy": "48df5a31f4519d520c54",
-     "base_genre_ids": [
-      "pqc"
-     ],
-     "final_genre_ids": [
-      "pqc"
-     ],
-     "postprocess": []
-    }
-   },
-   "genre_ids": [
-    "pqc"
-   ],
-   "classifier": "gemini-3.5-flash-lite",
-   "classification": {
-    "policy": "48df5a31f4519d520c54",
-    "base_genre_ids": [
-     "pqc"
-    ],
-    "final_genre_ids": [
-     "pqc"
-    ],
-    "postprocess": []
-   },
-   "abstract_translated": "\u6697\u53f7\u5316\u3055\u308c\u305f\u97f3\u58f0\u901a\u4fe1\u30b7\u30b9\u30c6\u30e0\u306f\u3001\u901a\u5e38\u3001\u901a\u8a71\u5185\u5bb9\u3092\u4fdd\u8b77\u3059\u308b\u4e00\u65b9\u3067\u3001\u901a\u8a71\u53cc\u65b9\u306e\u30cd\u30c3\u30c8\u30ef\u30fc\u30afID\u3001\u901a\u8a71\u6642\u523b\u3001\u30c8\u30e9\u30d5\u30a3\u30c3\u30af\u30d1\u30bf\u30fc\u30f3\u306a\u3069\u3001\u91cd\u8981\u306a\u30e1\u30bf\u30c7\u30fc\u30bf\u3092\u9732\u5448\u3055\u305b\u3066\u3057\u307e\u3044\u307e\u3059\u3002\u540c\u6642\u306b\u3001\u91cf\u5b50\u30b3\u30f3\u30d4\u30e5\u30fc\u30c6\u30a3\u30f3\u30b0\u306e\u9032\u6b69\u306b\u3088\u308a\u3001\u5f93\u6765\u306e\u9375\u4ea4\u63db\u306e\u57fa\u76e4\u3068\u306a\u3063\u3066\u3044\u308b\u975e\u5bfe\u79f0\u6697\u53f7\u30d7\u30ea\u30df\u30c6\u30a3\u30d6\u304c\u8105\u304b\u3055\u308c\u3066\u304a\u308a\u3001\u9577\u671f\u306b\u308f\u305f\u308b\u6a5f\u5bc6\u901a\u4fe1\u306b\u304a\u3044\u3066\u3001\u300c\u4eca\u53ce\u96c6\u3057\u3001\u5f8c\u3067\u5fa9\u53f7\u3059\u308b\u300d\u3068\u3044\u3046\u30ea\u30b9\u30af\u304c\u751f\u3058\u3066\u3044\u307e\u3059\u3002 \u65e2\u5b58\u306e\u30b7\u30b9\u30c6\u30e0\u306f\u3001\u3053\u308c\u3089\u306e\u61f8\u5ff5\u306e\u3046\u3061\u305b\u3044\u305c\u30441\u3064\u3057\u304b\u5bfe\u51e6\u3067\u304d\u3066\u3044\u306a\u3044\u3002Signal\u3084Wire\u306e\u3088\u3046\u306a\u30bb\u30ad\u30e5\u30a2\u306aVoIP\u30a2\u30d7\u30ea\u30b1\u30fc\u30b7\u30e7\u30f3\u306f\u3001\u96c6\u4e2d\u578b\u30a4\u30f3\u30d5\u30e9\u3068\u53e4\u5178\u6697\u53f7\u306b\u4f9d\u5b58\u3057\u3066\u3044\u308b\u4e00\u65b9\u3001Tor\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u4e0a\u306b\u69cb\u7bc9\u3055\u308c\u305f\u533f\u540d\u901a\u4fe1\u30c4\u30fc\u30eb\u306f\u30c6\u30ad\u30b9\u30c8\u30e1\u30c3\u30bb\u30fc\u30b8\u306e\u307f\u3092\u30b5\u30dd\u30fc\u30c8\u3057\u3066\u304a\u308a\u3001\u30dd\u30b9\u30c8\u91cf\u5b50\u9375\u306e\u30ab\u30d7\u30bb\u30eb\u5316\u6a5f\u80fd\u3092\u5099\u3048\u3066\u3044\u306a\u3044\u3002 \u672c\u8ad6\u6587\u3067\u306f\u3001\u533f\u540d\u6027\u3001\u5206\u6563\u5316\u3001\u91cf\u5b50\u8010\u6027\u3092\u540c\u6642\u306b\u5b9f\u73fe\u3059\u308b\u30d4\u30a2\u30c4\u30fc\u30d4\u30a2\u97f3\u58f0\u901a\u4fe1\u30b7\u30b9\u30c6\u30e0\u300cSAPEC\uff08Secure Anonymous Peer Exchange Communicator\uff09\u300d\u3092\u63d0\u6848\u3059\u308b\u3002 SAPEC\u306f\u3001\u3059\u3079\u3066\u306e\u30c8\u30e9\u30d5\u30a3\u30c3\u30af\u3092Tor\u306e\u96a0\u3057\u30b5\u30fc\u30d3\u30b9\u7d4c\u7531\u3067\u306e\u307f\u30eb\u30fc\u30c6\u30a3\u30f3\u30b0\u3057\u3001\u53cc\u65b9\u306eIP\u30a2\u30c9\u30ec\u30b9\u3092\u96a0\u853d\u3059\u308b\u3068\u3068\u3082\u306b\u3001\u6a19\u6e96\u7684\u306aTLS\u30cf\u30f3\u30c9\u30b7\u30a7\u30a4\u30af\u306b\u30ab\u30b9\u30bf\u30e0\u30d7\u30ed\u30c8\u30b3\u30eb\u5c64\u3092\u8ffd\u52a0\u3057\u3066\u3044\u307e\u3059\u3002\u3053\u306e\u5c64\u3067\u306f\u3001\u97f3\u58f0\u306e\u9001\u4fe1\u524d\u306bML-KEM-1024\u306b\u3088\u308b\u9375\u78ba\u7acb\u3001AES-256\u5bfe\u79f0\u9375\u306e\u6c7a\u5b9a\u3001\u304a\u3088\u3073\u76f8\u4e92\u306e\u30c7\u30a3\u30ea\u30c1\u30a6\u30e0\u306b\u3088\u308b\u8eab\u5143\u78ba\u8a8d\u3092\u884c\u3044\u307e\u3059\u3002 \u305d\u306e\u5f8c\u3001\u3059\u3079\u3066\u306e\u97f3\u58f0\u306fAES-256\u3067\u6697\u53f7\u5316\u3055\u308c\u308b\u3002\u53d6\u308a\u5916\u3057\u53ef\u80fd\u306a\u300cCrypto Ignition Key\u300d\u306b\u3088\u308a\u3001\u8eab\u5143\u8a8d\u8a3c\u7528\u306e\u9375\u7d20\u6750\u304c\u30c7\u30d0\u30a4\u30b9\u4e0a\u306b\u4fdd\u5b58\u3055\u308c\u308b\u306e\u3092\u9632\u3050\u3002 45\u56de\u306e\u72ec\u7acb\u3057\u305f\u56de\u8def\u518d\u69cb\u7bc9\u30c6\u30b9\u30c8\u306b\u3088\u308b\u5b9f\u8a3c\u8a55\u4fa1\u306e\u7d50\u679c\u3001\u540c\u4e00\u30ea\u30fc\u30b8\u30e7\u30f3\u306eTor\u56de\u8def\u306b\u304a\u3044\u3066\u3001\u7247\u65b9\u5411\u306e\u97f3\u58f0\u9045\u5ef6\u306e\u4e2d\u592e\u5024\u306f355\u30df\u30ea\u79d2\u3001\u63a5\u7d9a\u78ba\u7acb\u6642\u9593\u306e\u4e2d\u592e\u5024\u306f7.61\u79d2\u3068\u306a\u308a\u3001\u30aa\u30cb\u30aa\u30f3\u30eb\u30fc\u30c6\u30a3\u30f3\u30b0\u3092\u4ecb\u3057\u305f\u53cc\u65b9\u5411\u97f3\u58f0\u901a\u4fe1\u304c\u5b9f\u7528\u7684\u306b\u5b9f\u73fe\u53ef\u80fd\u3067\u3042\u308b\u3053\u3068\u304c\u5b9f\u8a3c\u3055\u308c\u307e\u3057\u305f\u3002",
-   "title_translated": "\u30dd\u30b9\u30c8\u91cf\u5b50\u9375\u30ab\u30d7\u30bb\u30eb\u5316\u3092\u7528\u3044\u305fTor\u7d4c\u7531\u306e\u30e1\u30bf\u30c7\u30fc\u30bf\u975e\u516c\u958b\u97f3\u58f0\u901a\u4fe1",
-   "need_translation": true,
-   "allow_untranslated": false,
-   "channels": {
-    "pqc": {
-     "status": "pending"
-    }
-   },
-   "queued_at": "2026-11-23T08:56:14Z"
-  }
- },
+ "deliveries": {},
  "external_cursors": {
   "cs.CR": "2026-11-23T19:05:26Z",
   "cs.CC": "2026-11-23T19:05:30Z",
@@ -24586,6 +23616,6 @@
  "source_failure_streaks": {},
  "delivery_spread": {
   "date": "2026-11-23",
-  "runs": 2
+  "runs": 3
  }
 }

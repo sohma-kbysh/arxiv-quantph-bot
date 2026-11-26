@@ -27389,22 +27389,12 @@
  },
  "translation_alerts": {},
  "translation_status": {
-  "at": "2026-11-26T09:28:59Z",
-  "translated": {
-   "deepl": 41,
-   "google": 6,
-   "apps_script": 163
-  },
-  "dead": [
-   "deepl",
-   "azure",
-   "google"
-  ],
+  "at": "2026-11-26T13:40:09Z",
+  "translated": {},
+  "dead": [],
   "unconfigured": [],
   "waiting": 0,
-  "budget_exhausted": [
-   "google"
-  ],
+  "budget_exhausted": [],
   "free_tier": {
    "google": {
     "period": "2026-11",
